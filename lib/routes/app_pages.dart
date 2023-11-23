@@ -1,0 +1,25 @@
+// ignore_for_file: constant_identifier_names
+
+import 'package:attendance_app/feature/login/login_binding.dart';
+import 'package:attendance_app/feature/login/view/index.dart';
+import 'package:attendance_app/feature/splash/splash_binding.dart';
+import 'package:attendance_app/feature/splash/view/index.dart';
+import 'package:get/get.dart';
+part 'app_routes.dart';
+
+class AppPages {
+  static const INITIAL = Routes.SPLASH;
+
+  static final routes = [
+    GetPage(
+      name: Routes.SPLASH,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => const LoginView(),
+      binding: LoginBinding(),
+    ),
+  ];
+}

@@ -2,12 +2,11 @@ import 'package:attendance_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
-  String title = 'splash';
+  final double frameRate = 70;
 
   @override
   void onInit() {
     super.onInit();
-    print('SplashController');
     init();
   }
 

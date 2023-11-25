@@ -1,17 +1,28 @@
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:attendance_app/theme/font/font.dart';
+import 'package:attendance_app/config/font.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MyTextFieldForm extends StatelessWidget {
   final String label;
+  final TextEditingController textController;
+  final bool? filled;
+  final double? borderRadius;
+  final TextStyle? style;
+  final TextStyle? errorStyle;
 
-  const MyTextFieldForm({super.key, required this.label});
+  const MyTextFieldForm({
+    super.key,
+    required this.label,
+    required this.textController,
+    this.filled,
+    this.borderRadius,
+    this.style,
+    this.errorStyle,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final isBiggerScreen = MediaQuery.of(context).size.width > 640;
     final controller = MyTextFieldFormController.findController(label);
     return GetBuilder<MyTextFieldFormController>(
       init: controller,
@@ -19,35 +30,38 @@ class MyTextFieldForm extends StatelessWidget {
         key: controller.formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: TextFormField(
-          controller: controller.textFieldController,
+          controller: textController,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(
-              left: 20.w,
-              right: 20.w,
-              top: isBiggerScreen ? 12.h : 15.h,
-              bottom: isBiggerScreen ? 12.h : 15.h,
-            ),
+            filled: filled ?? false,
             isDense: true,
             errorMaxLines: 2,
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.r),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.r),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.r),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.r),
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
               borderSide: BorderSide(
-                width: 1,
-                color: Theme.of(context).colorScheme.error,
+                color: Theme.of(context).colorScheme.outlineVariant,
               ),
             ),
-            errorStyle: isBiggerScreen ? BodyXXSmallMedium : BodyMediumMedium,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
+            ),
+            errorStyle: errorStyle ?? BodyXSmallMedium,
           ),
-          style: isBiggerScreen ? BodyXSmallMedium : BodyMediumMedium,
+          style: style ?? BodyMediumMedium,
           onChanged: (value) {
             controller.formKey.currentState?.validate();
           },

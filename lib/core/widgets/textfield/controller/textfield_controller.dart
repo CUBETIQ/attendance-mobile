@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyTextFieldFormController extends GetxController {
-  late TextEditingController textFieldController;
   late GlobalKey<FormState> formKey;
 
   bool get isValid => formKey.currentState?.validate() ?? false;
@@ -10,14 +9,7 @@ class MyTextFieldFormController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    textFieldController = TextEditingController();
     formKey = GlobalKey<FormState>();
-  }
-
-  @override
-  void onClose() {
-    textFieldController.dispose();
-    super.onClose();
   }
 
   static MyTextFieldFormController get to =>

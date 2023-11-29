@@ -9,6 +9,30 @@ class AppSize {
   static const double paddingHorizontalMedium = 16.0;
   static const double paddingHorizontalLarge = 24.0;
 
+  // Padding for title
+  static const double paddingTitleSmall = 30.0;
+  static const double paddingTitleMedium = 40.0;
+  static const double paddingTitleLarge = 50.0;
+
+  // Padding for body
+  static const double paddingS1 = 4.0;
+  static const double paddingS2 = 5.0;
+  static const double paddingS3 = 6.0;
+  static const double paddingS4 = 8.0;
+  static const double paddingS5 = 10.0;
+  static const double paddingS6 = 12.0;
+  static const double paddingS7 = 14.0;
+  static const double paddingS8 = 15.0;
+  static const double paddingS9 = 16.0;
+  static const double paddingS10 = 18.0;
+  static const double paddingS11 = 20.0;
+  static const double paddingS12 = 22.0;
+  static const double paddingS13 = 24.0;
+  static const double paddingS14 = 25.0;
+  static const double paddingS15 = 26.0;
+  static const double paddingS16 = 28.0;
+  static const double paddingS17 = 30.0;
+
   // Margin
   static const double marginSmall = 8.0;
   static const double marginMedium = 16.0;
@@ -56,6 +80,29 @@ class AppSize {
 
   // Spacing
   static const double spacingSmall = 8.0;
-  static const double spacingMedium = 15.0;
-  static const double spacingLarge = 25.0;
+  static const double spacingMedium = 16.0;
+  static const double spacingLarge = 20.0;
+  static const double spacingXLarge = 24.0;
+
+  // Spcing for body
+  static const double spacingS1 = 4.0;
+  static const double spacingS2 = 5.0;
+  static const double spacingS3 = 6.0;
+  static const double spacingS4 = 8.0;
+  static const double spacingS5 = 10.0;
+  static const double spacingS6 = 12.0;
+  static const double spacingS7 = 14.0;
+  static const double spacingS8 = 15.0;
+  static const double spacingS9 = 16.0;
+  static const double spacingS10 = 18.0;
+  static const double spacingS11 = 20.0;
+  static const double spacingS12 = 22.0;
+  static const double spacingS13 = 24.0;
+  static const double spacingS14 = 25.0;
+  static const double spacingS15 = 26.0;
+  static const double spacingS16 = 28.0;
+  static const double spacingS17 = 30.0;
+  static const double spacingS18 = 40.0;
+  static const double spacingS19 = 50.0;
+  static const double spacingS20 = 60.0;
 }

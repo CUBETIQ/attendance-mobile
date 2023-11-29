@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:attendance_app/feature/login/login_binding.dart';
-import 'package:attendance_app/feature/login/view/index.dart';
+import 'package:attendance_app/feature/auth/login/login_binding.dart';
+import 'package:attendance_app/feature/auth/login/view/index.dart';
 import 'package:attendance_app/feature/splash/splash_binding.dart';
 import 'package:attendance_app/feature/splash/view/index.dart';
 import 'package:get/get.dart';

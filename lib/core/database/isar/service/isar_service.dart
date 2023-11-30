@@ -20,11 +20,14 @@ class IsarService extends GetxService {
     await _localStorage.clear();
   }
 
-  Future<void> saveData(
-      {bool? isFirstTime,
-      String? accessToken,
-      bool? darkTheme,
-      String? language}) async {
+  Future<void> saveLocalData({
+    bool? isFirstTime,
+    String? accessToken,
+    bool? darkTheme,
+    String? language,
+    bool? isRememberMe,
+    String? username,
+  }) async {
     try {
       final appConfig = await _localStorage.get();
       final app = LocalStorage();
@@ -33,6 +36,8 @@ class IsarService extends GetxService {
       app.accessToken = accessToken ?? appConfig?.accessToken;
       app.darkTheme = darkTheme ?? appConfig?.darkTheme;
       app.language = language ?? appConfig?.language;
+      app.isRememberMe = isRememberMe ?? appConfig?.isRememberMe;
+      app.username = username ?? appConfig?.username;
       await _localStorage.insert(app);
     } catch (e) {
       rethrow;

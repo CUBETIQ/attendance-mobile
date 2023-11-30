@@ -13,6 +13,7 @@ class AppSize {
   static const double paddingTitleSmall = 30.0;
   static const double paddingTitleMedium = 40.0;
   static const double paddingTitleLarge = 50.0;
+  static const double paddingTitleXLarge = 60.0;
 
   // Padding for body
   static const double paddingS1 = 4.0;

@@ -9,5 +9,7 @@ class LocalStorage {
   String? accessToken;
   String? language;
   bool? darkTheme;
-  bool? isFirstTime;
+  bool? isFirstTime = true;
+  bool? isRememberMe;
+  String? username;
 }

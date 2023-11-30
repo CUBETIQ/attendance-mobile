@@ -1,7 +1,7 @@
 import 'package:attendance_app/config/time.dart';
-import 'package:attendance_app/network/endpoint.dart';
-import 'package:attendance_app/network/interceptor/auth_interceptor.dart';
-import 'package:attendance_app/network/interceptor/logger_interceptor.dart';
+import 'package:attendance_app/core/network/endpoint.dart';
+import 'package:attendance_app/core/network/interceptor/auth_interceptor.dart';
+import 'package:attendance_app/core/network/interceptor/logger_interceptor.dart';
 import 'package:dio/dio.dart';
 
 import 'interceptor/error_interceptor.dart';

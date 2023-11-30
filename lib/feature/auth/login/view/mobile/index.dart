@@ -2,12 +2,12 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/config/svg.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
-import 'package:attendance_app/core/widgets/button/outline_button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
 import 'package:attendance_app/feature/auth/login/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class LoginViewMobile extends StatelessWidget {
   const LoginViewMobile({super.key});
@@ -54,6 +54,7 @@ class LoginViewMobile extends StatelessWidget {
                   color: Theme.of(context).colorScheme.outline,
                 ),
               ),
+              const SizedBox(height: AppSize.spacingS19),
               MyTextFieldForm(
                 label: "Username",
                 hintText: "Enter your username",
@@ -65,16 +66,49 @@ class LoginViewMobile extends StatelessWidget {
                 hintText: "Enter your password  ",
                 textController: controller.passwordController,
               ),
-              const SizedBox(height: AppSize.spacingS9),
+              const SizedBox(height: AppSize.spacingS11),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Obx(
+                        () => SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: Checkbox(
+                            value: controller.isRememberMe.value,
+                            onChanged: controller.onCheck,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            splashRadius: 14,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: AppSize.spacingS2),
+                      MyText(
+                        text: "Remember me",
+                        style: BodyMediumMedium,
+                      ),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: controller.forgetPassword,
+                    child: MyText(
+                      text: "Forgot Password?",
+                      style: BodyMediumMedium.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSize.spacingS17),
               MyButton(
                 title: "Login",
                 onTap: controller.login,
               ),
-              const SizedBox(height: AppSize.spacingS9),
-              MyOutLineButton(
-                title: "Sign in With",
-                onTap: controller.loginWithGoogle,
-              )
             ],
           ),
         ),

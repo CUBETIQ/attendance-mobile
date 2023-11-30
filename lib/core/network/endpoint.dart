@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class Endpoints {
   Endpoints._();
 
@@ -8,4 +10,5 @@ class Endpoints {
   static const String baseUrl = "http://localhost:3000/api";
 
   String get login => "/auth/login";
+  String get get_own_profile => "/app/profile/me";
 }

@@ -1,4 +1,5 @@
 import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
+import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:dio/dio.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -7,6 +8,7 @@ class AuthInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     final LocalStorageController localDataService = LocalStorageController();
     final localData = await localDataService.get();
+    Console.log("data", localData?.accessToken);
     if (localData?.accessToken != null && localData?.accessToken != "") {
       options.headers.addAll({
         'content-type': 'application/json',

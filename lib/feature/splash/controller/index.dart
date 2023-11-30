@@ -1,3 +1,4 @@
+import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class SplashController extends GetxController
 
   late AnimationController controller;
   late Animation<double> animation;
+  final LocalStorageController localDataService = LocalStorageController();
 
   @override
   void onInit() {
@@ -27,7 +29,14 @@ class SplashController extends GetxController
   }
 
   Future<void> init() async {
+    final localData = await localDataService.get();
     await Future.delayed(const Duration(seconds: 3));
-    Get.offNamed(Routes.LOGIN);
+    if (localData?.isFirstTime != true && localData?.isFirstTime != null) {
+      Get.offNamed(Routes.LOGIN);
+    } else if (localData?.accessToken != null && localData?.accessToken != "") {
+      Get.offNamed(Routes.LOGIN);
+    } else {
+      Get.offNamed(Routes.ONBOARD);
+    }
   }
 }

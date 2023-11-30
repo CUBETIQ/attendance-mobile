@@ -5,5 +5,6 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   static const SPLASH = '/splash';
+  static const ONBOARD = '/onboard';
   static const LOGIN = '/login';
 }

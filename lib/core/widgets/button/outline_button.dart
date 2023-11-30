@@ -18,19 +18,19 @@ class MyOutLineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width ?? double.infinity,
-      height: height ?? 50,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outlineVariant,
-          width: 1.5,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: width ?? double.infinity,
+        height: height ?? 50,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.outlineVariant,
+            width: 1.5,
+          ),
         ),
-      ),
-      child: GestureDetector(
-        onTap: onTap,
         child: MyText(
           text: title,
           style: BodyLargeMedium,

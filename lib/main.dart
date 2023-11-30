@@ -1,7 +1,7 @@
 import 'package:attendance_app/app.dart';
 import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
-import 'package:attendance_app/network/dio_util.dart';
+import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';

@@ -1,3 +1,4 @@
+import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/network/dio_exception.dart';
 import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
@@ -13,6 +14,7 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   Dio dioInstance = DioUtil.dio;
+  RxBool isRememberMe = false.obs;
 
   Future<void> login() async {
     validate();
@@ -28,9 +30,10 @@ class LoginController extends GetxController {
         );
 
         if (response.statusCode == 200) {
-          Console.log(response.data, response.data["data"]["accessToken"]);
+          await IsarService()
+              .saveLocalData(accessToken: response.data["data"]["accessToken"]);
         } else {
-          Console.log("Login failed", "hello");
+          Console.log("Login failed", "Login failed");
         }
       } on DioException catch (e) {
         var errorMessage = DioExceptionHandler.fromDioError(e);
@@ -39,16 +42,18 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> loginWithGoogle() async {
-    Console.log("Login with google", "hello");
-  }
-
-  Future<void> loginWithApple() async {
-    Console.log("Login with apple", "hello");
-  }
-
   void validate() {
     MyTextFieldFormController.findController('Username').isValid;
     MyTextFieldFormController.findController('Password').isValid;
+  }
+
+  Future<void> onCheck(bool? value) async {
+    isRememberMe.value = value!;
+    await IsarService().saveLocalData(
+        isRememberMe: isRememberMe.value, username: usernameController.text);
+  }
+
+  void forgetPassword() {
+    Console.log("Forget password", "Forget password");
   }
 }

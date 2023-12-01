@@ -10,11 +10,9 @@ class OnBoardView extends GetView<OnBoardController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ResponsiveLayout(
-        tablet: OnBoardViewTablet(),
-        mobile: OnBoardViewMobile(),
-      ),
+    return const ResponsiveLayout(
+      tablet: OnBoardViewTablet(),
+      mobile: OnBoardViewMobile(),
     );
   }
 }

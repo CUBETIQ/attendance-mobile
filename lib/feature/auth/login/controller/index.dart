@@ -1,9 +1,10 @@
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
-import 'package:attendance_app/core/network/dio_exception.dart';
 import 'package:attendance_app/core/widgets/console/console.dart';
+import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
+import 'package:attendance_app/feature/auth/login/model/index.dart';
+import 'package:attendance_app/feature/auth/login/service/index.dart';
+import 'package:attendance_app/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,6 @@ class LoginController extends GetxController {
   String title = 'login';
   TextEditingController passwordController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
-  Dio dioInstance = DioUtil.dio;
   RxBool isRememberMe = false.obs;
 
   Future<void> login() async {
@@ -21,23 +21,16 @@ class LoginController extends GetxController {
     if (MyTextFieldFormController.findController('Username').isValid &&
         MyTextFieldFormController.findController('Password').isValid) {
       try {
-        var response = await dioInstance.post(
-          Endpoints.instance.login,
-          data: {
-            "username": usernameController.text,
-            "password": passwordController.text
-          },
+        LoginModel input = LoginModel(
+          username: usernameController.text,
+          password: passwordController.text,
         );
-
-        if (response.statusCode == 200) {
-          await IsarService()
-              .saveLocalData(accessToken: response.data["data"]["accessToken"]);
-        } else {
-          Console.log("Login failed", "Login failed");
-        }
+        var accessToken = await LoginService().login(input);
+        await IsarService().saveLocalData(accessToken: accessToken);
+        Get.offNamed(Routes.NAVIGATION);
       } on DioException catch (e) {
-        var errorMessage = DioExceptionHandler.fromDioError(e);
-        Console.log(errorMessage, errorMessage);
+        Console.error("Error", e.response?.data["message"]);
+        showErrorSnackBar("Error", e.response?.data["message"]);
       }
     }
   }

@@ -1,5 +1,6 @@
 import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
 import 'package:attendance_app/core/database/isar/repository/isar_repo.dart';
+import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -35,7 +36,7 @@ class LocalStorageController extends LocalStorage implements IsarRepository {
     if (Isar.instanceNames.isEmpty) {
       final dir = await getApplicationDocumentsDirectory();
       return await Isar.open([LocalStorageSchema],
-          inspector: true, directory: dir.path);
+          inspector: kDebugMode ? true : false, directory: dir.path);
     }
     return await Future.value(Isar.getInstance());
   }

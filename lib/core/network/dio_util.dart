@@ -7,18 +7,23 @@ import 'package:dio/dio.dart';
 import 'interceptor/error_interceptor.dart';
 
 class DioUtil {
-  static final Dio _dio = Dio();
+  late Dio _dio;
+  static final DioUtil _singleton = DioUtil._internal();
 
-  // Default headers
-  static const Map<String, String> defaultHeaders = {
-    'Content-Type': 'application/json'
-  };
+  factory DioUtil() {
+    return _singleton;
+  }
 
   // Singleton pattern
-  static Dio get dio => _dio;
+  DioUtil._internal() {
+    _dio = Dio();
+    _initialize();
+  }
+
+  Dio get dio => _dio;
 
   // Method for initializing Dio settings
-  static void initialize() {
+  void _initialize() {
     //Interceptors
     final interceptors = <Interceptor>[
       LoggerInterceptor(),

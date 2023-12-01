@@ -31,9 +31,9 @@ class SplashController extends GetxController
   Future<void> init() async {
     final localData = await localDataService.get();
     await Future.delayed(const Duration(seconds: 3));
-    if (localData?.isFirstTime != true && localData?.isFirstTime != null) {
-      Get.offNamed(Routes.LOGIN);
-    } else if (localData?.accessToken != null && localData?.accessToken != "") {
+    if (localData?.accessToken != null) {
+      Get.offNamed(Routes.NAVIGATION);
+    } else if (localData?.isFirstTime == false) {
       Get.offNamed(Routes.LOGIN);
     } else {
       Get.offNamed(Routes.ONBOARD);

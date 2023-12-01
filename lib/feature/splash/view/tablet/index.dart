@@ -11,27 +11,29 @@ class SplashViewTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = SplashController.to;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FadeTransition(
-            opacity: controller.animation,
-            child: SizedBox(
-              width: 400,
-              height: 250,
-              child: SvgPicture.asset(
-                logo,
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FadeTransition(
+              opacity: controller.animation,
+              child: SizedBox(
+                width: 400,
+                height: 250,
+                child: SvgPicture.asset(
+                  logo,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 30),
-          AnimatedText(
-            title: controller.title,
-            textStyle: BodyXXlargeMedium,
-          )
-        ],
+            const SizedBox(height: 30),
+            AnimatedText(
+              title: controller.title,
+              textStyle: BodyXXlargeMedium,
+            )
+          ],
+        ),
       ),
     );
   }

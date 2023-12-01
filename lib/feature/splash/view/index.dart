@@ -10,11 +10,9 @@ class SplashView extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ResponsiveLayout(
-        tablet: SplashViewTablet(),
-        mobile: SplashViewMobile(),
-      ),
+    return const ResponsiveLayout(
+      tablet: SplashViewTablet(),
+      mobile: SplashViewMobile(),
     );
   }
 }

@@ -10,26 +10,28 @@ class SplashViewMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = SplashController.to;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FadeTransition(
-            opacity: controller.animation,
-            child: SizedBox(
-              width: 300,
-              height: 150,
-              child: SvgPicture.asset(
-                logo,
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FadeTransition(
+              opacity: controller.animation,
+              child: SizedBox(
+                width: 300,
+                height: 150,
+                child: SvgPicture.asset(
+                  logo,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          AnimatedText(
-            title: controller.title,
-          )
-        ],
+            const SizedBox(height: 20),
+            AnimatedText(
+              title: controller.title,
+            )
+          ],
+        ),
       ),
     );
   }

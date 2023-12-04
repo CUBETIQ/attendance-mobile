@@ -7,6 +7,7 @@ class LocalStorage {
   @Index(unique: true, replace: true)
   Id? id;
   String? accessToken;
+  String? refreshToken;
   String? language;
   bool? darkTheme;
   bool? isFirstTime = true;

@@ -26,7 +26,8 @@ class LoginController extends GetxController {
           password: passwordController.text,
         );
         var accessToken = await LoginService().login(input);
-        await IsarService().saveLocalData(accessToken: accessToken);
+        await IsarService().saveLocalData(
+            accessToken: accessToken.first, refreshToken: accessToken.last);
         Get.offNamed(Routes.NAVIGATION);
       } on DioException catch (e) {
         Console.error("Error", e.response?.data["message"]);

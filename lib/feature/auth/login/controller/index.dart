@@ -30,8 +30,8 @@ class LoginController extends GetxController {
             accessToken: accessToken.first, refreshToken: accessToken.last);
         Get.offNamed(Routes.NAVIGATION);
       } on DioException catch (e) {
-        Console.error("Error", e.response?.data["message"]);
         showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
     }
   }

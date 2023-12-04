@@ -6,6 +6,7 @@ part 'local_storage.g.dart';
 class LocalStorage {
   @Index(unique: true, replace: true)
   Id? id;
+  bool? isActivated = false;
   String? accessToken;
   String? refreshToken;
   String? language;

@@ -1,12 +1,8 @@
 import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
 import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
-import 'package:attendance_app/feature/splash/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-
-import '../../../core/database/isar/service/isar_service.dart';
 
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -40,24 +36,16 @@ class SplashController extends GetxController
 
   Future<void> init() async {
     await Future.delayed(const Duration(seconds: 2));
-    if (localData.value.accessToken != null) {
-      await checkExpiredToken();
+
+    if (localData.value.isActivated == false ||
+        localData.value.isActivated == null) {
+      Get.offNamed(Routes.ACTIVATION);
+    } else if (localData.value.accessToken != null) {
       Get.offNamed(Routes.NAVIGATION);
     } else if (localData.value.isFirstTime == false) {
       Get.offNamed(Routes.LOGIN);
     } else {
       Get.offNamed(Routes.ONBOARD);
-    }
-  }
-
-  Future<void> checkExpiredToken() async {
-    final token = localData.value.accessToken ?? "1234567@qwerty ";
-    final refreshToken = localData.value.refreshToken ?? "1234567@qwerty";
-    bool hasExpired = JwtDecoder.isExpired(token);
-    if (hasExpired) {
-      final newToken = await SplashService().refreshToken(refreshToken);
-      await IsarService().saveLocalData(
-          accessToken: newToken.first, refreshToken: newToken.last);
     }
   }
 }

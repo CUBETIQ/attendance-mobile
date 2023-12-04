@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:attendance_app/feature/auth/activation/activation_binding.dart';
+import 'package:attendance_app/feature/auth/activation/view/index.dart';
 import 'package:attendance_app/feature/auth/login/login_binding.dart';
 import 'package:attendance_app/feature/auth/login/view/index.dart';
 import 'package:attendance_app/feature/home/home_binding.dart';
@@ -20,6 +22,11 @@ class AppPages {
       name: Routes.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: Routes.ACTIVATION,
+      page: () => const ActivationView(),
+      binding: ActivationBinding(),
     ),
     GetPage(
       name: Routes.ONBOARD,

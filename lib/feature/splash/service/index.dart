@@ -1,26 +1,24 @@
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/feature/auth/login/model/index.dart';
 import 'package:dio/dio.dart';
 
-class LoginService {
+class SplashService {
   DioUtil dioInstance = DioUtil();
 
-  Future<Set<String>> login(LoginModel input) async {
+  Future<Set<String>> refreshToken(String token) async {
     final String accessToken;
     final String refreshToken;
     Response response = await dioInstance.dio.post(
-      Endpoints.instance.login,
+      Endpoints.instance.refreshToken,
       data: {
-        "username": input.username,
-        "password": input.password,
+        "refreshToken": token,
       },
     );
     if (response.statusCode == 200) {
       accessToken = response.data["data"]["accessToken"];
       refreshToken = response.data["data"]["refreshToken"];
     } else {
-      throw Exception("Login failed");
+      throw Exception(response.data["message"]);
     }
     return {accessToken, refreshToken};
   }

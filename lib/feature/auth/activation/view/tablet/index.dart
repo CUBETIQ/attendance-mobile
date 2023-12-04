@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeViewTablet extends StatelessWidget {
-  const HomeViewTablet({super.key});
+class ActivationViewTablet extends StatelessWidget {
+  const ActivationViewTablet({super.key});
 
   @override
   Widget build(BuildContext context) {

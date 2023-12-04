@@ -57,12 +57,14 @@ class LoginViewMobile extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSize.spacingS19),
                 MyTextFieldForm(
+                  hasLabel: true,
                   label: "Username",
                   hintText: "Enter your username",
                   textController: controller.usernameController,
                 ),
                 const SizedBox(height: AppSize.spacingS11),
                 MyTextFieldForm(
+                  hasLabel: true,
                   label: "Password",
                   hintText: "Enter your password  ",
                   textController: controller.passwordController,

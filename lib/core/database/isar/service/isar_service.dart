@@ -27,13 +27,17 @@ class IsarService extends GetxService {
     String? language,
     bool? isRememberMe,
     String? username,
+    String? refreshToken,
+    bool? isActivated,
   }) async {
     try {
       final appConfig = await _localStorage.get();
       final app = LocalStorage();
       app.id = 1;
+      app.isActivated = isActivated ?? appConfig?.isActivated;
       app.isFirstTime = isFirstTime ?? appConfig?.isFirstTime;
       app.accessToken = accessToken ?? appConfig?.accessToken;
+      app.refreshToken = refreshToken ?? appConfig?.refreshToken;
       app.darkTheme = darkTheme ?? appConfig?.darkTheme;
       app.language = language ?? appConfig?.language;
       app.isRememberMe = isRememberMe ?? appConfig?.isRememberMe;

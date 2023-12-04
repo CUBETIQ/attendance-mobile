@@ -1,9 +1,11 @@
 import 'package:attendance_app/config/time.dart';
+import 'package:attendance_app/core/database/local_path/app_path_controller.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:attendance_app/core/network/interceptor/auth_interceptor.dart';
 import 'package:attendance_app/core/network/interceptor/logger_interceptor.dart';
 import 'package:dio/dio.dart';
-
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'interceptor/error_interceptor.dart';
 
 class DioUtil {
@@ -28,7 +30,18 @@ class DioUtil {
     final interceptors = <Interceptor>[
       LoggerInterceptor(),
       AuthInterceptor(),
-      ErrorInterceptor(),
+      ErrorInterceptor(_dio),
+      DioCacheInterceptor(
+        options: CacheOptions(
+          store: HiveCacheStore(AppPathController.path),
+          policy: CachePolicy.refreshForceCache,
+          hitCacheOnErrorExcept: [],
+          maxStale: const Duration(
+            days: 7,
+          ),
+          priority: CachePriority.high,
+        ),
+      ),
     ];
 
     _dio

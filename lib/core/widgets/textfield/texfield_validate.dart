@@ -14,6 +14,7 @@ class MyTextFieldForm extends StatelessWidget {
   final String? hintText;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
+  final bool? hasLabel;
 
   const MyTextFieldForm({
     super.key,
@@ -25,6 +26,7 @@ class MyTextFieldForm extends StatelessWidget {
     this.errorStyle,
     this.hintText,
     this.hintStyle,
+    this.hasLabel = false,
     this.labelStyle,
   });
 
@@ -39,10 +41,12 @@ class MyTextFieldForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MyText(
-              text: label,
-              style: labelStyle ?? BodyMediumMedium,
-            ),
+            hasLabel == false
+                ? const SizedBox.shrink()
+                : MyText(
+                    text: label,
+                    style: labelStyle ?? BodyMediumMedium,
+                  ),
             const SizedBox(height: 8),
             TextFormField(
               controller: textController,

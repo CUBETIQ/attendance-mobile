@@ -10,5 +10,6 @@ class Endpoints {
   static const String baseUrl = "http://localhost:3000/api";
 
   String get login => "/auth/login";
+  String get refreshToken => "/auth/token";
   String get get_own_profile => "/app/profile/me";
 }

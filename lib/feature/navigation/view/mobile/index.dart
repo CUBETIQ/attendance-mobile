@@ -19,7 +19,6 @@ class NavigationViewMobile extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        bottom: false,
         child: Obx(
           () => IndexedStack(
             index: controller.selectedIndex.value,

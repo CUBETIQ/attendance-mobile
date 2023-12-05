@@ -2,6 +2,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class MyTextFieldForm extends StatelessWidget {
@@ -15,6 +16,8 @@ class MyTextFieldForm extends StatelessWidget {
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
   final bool? hasLabel;
+  final TextCapitalization? textCapitalization;
+  final List<TextInputFormatter>? inputFormatters;
 
   const MyTextFieldForm({
     super.key,
@@ -28,6 +31,8 @@ class MyTextFieldForm extends StatelessWidget {
     this.hintStyle,
     this.hasLabel = false,
     this.labelStyle,
+    this.textCapitalization,
+    this.inputFormatters,
   });
 
   @override
@@ -50,6 +55,8 @@ class MyTextFieldForm extends StatelessWidget {
             const SizedBox(height: 8),
             TextFormField(
               controller: textController,
+              textCapitalization: textCapitalization ?? TextCapitalization.none,
+              inputFormatters: inputFormatters,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: hintStyle ?? BodyMediumMedium,

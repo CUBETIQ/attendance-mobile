@@ -1,4 +1,4 @@
-import 'package:attendance_app/config/svg.dart';
+import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/feature/onboard/model/onboard_model.dart';
 import 'package:flutter/material.dart';

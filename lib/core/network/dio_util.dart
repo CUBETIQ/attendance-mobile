@@ -1,4 +1,4 @@
-import 'package:attendance_app/config/time.dart';
+import 'package:attendance_app/constants/time.dart';
 import 'package:attendance_app/core/database/local_path/app_path_controller.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:attendance_app/core/network/interceptor/auth_interceptor.dart';

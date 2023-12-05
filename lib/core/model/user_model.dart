@@ -1,18 +1,19 @@
 import 'package:attendance_app/core/repositories/base_model.dart';
 
 class UserModel extends BaseModel<UserModel> {
-  String? id;
-  String? username;
-  String? organizationId;
-  String? role;
-  String? name;
-  String? positionId;
-  String? departmentId;
-  String? firstName;
-  String? lastName;
-  int? dateOfBirth;
-  String? address;
-  bool? enabled;
+  final String? id;
+  final String? username;
+  final String? organizationId;
+  final String? role;
+  final String? name;
+  final String? positionId;
+  final String? departmentId;
+  final String? firstName;
+  final String? lastName;
+  final int? dateOfBirth;
+  final String? address;
+  final String? image;
+  final bool? enabled;
 
   UserModel({
     this.id,
@@ -26,6 +27,7 @@ class UserModel extends BaseModel<UserModel> {
     this.lastName,
     this.dateOfBirth,
     this.address,
+    this.image,
     this.enabled,
   });
 
@@ -46,6 +48,7 @@ class UserModel extends BaseModel<UserModel> {
       lastName: json['lastName'],
       dateOfBirth: json['dateOfBirth'],
       address: json['address'],
+      image: json['image'],
       enabled: json['enabled'],
     );
   }
@@ -72,6 +75,7 @@ class UserModel extends BaseModel<UserModel> {
       'lastName': lastName,
       'dateOfBirth': dateOfBirth,
       'address': address,
+      'image': image,
       'enabled': enabled,
     };
   }

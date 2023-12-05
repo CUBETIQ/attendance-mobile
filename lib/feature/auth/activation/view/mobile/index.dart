@@ -1,8 +1,9 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/config/lotties.dart';
+import 'package:attendance_app/constants/lotties.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/text_formater.dart';
 import 'package:attendance_app/feature/auth/activation/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -17,7 +18,6 @@ class ActivationViewMobile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-        bottom: false,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -30,13 +30,13 @@ class ActivationViewMobile extends StatelessWidget {
               children: [
                 SizedBox(
                   width: double.infinity,
-                  height: size.height * 0.75,
+                  height: size.height * 0.83,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: AppSize.spacingS15),
                       SizedBox(
-                        width: double.infinity,
+                        width: size.width * 0.8,
                         child: Lottie.asset(
                           lottieActivation,
                           fit: BoxFit.cover,
@@ -56,16 +56,19 @@ class ActivationViewMobile extends StatelessWidget {
                       const SizedBox(height: AppSize.spacingS8),
                       MyTextFieldForm(
                         hasLabel: false,
+                        textCapitalization: TextCapitalization.characters,
                         label: "Activation",
                         hintText: "Enter your activation code",
                         textController: controller.activationController,
+                        inputFormatters: [UpperCaseTextFormatter()],
+                      ),
+                      const Spacer(),
+                      MyButton(
+                        title: "Activate",
+                        onTap: controller.activation,
                       ),
                     ],
                   ),
-                ),
-                MyButton(
-                  title: "Activate",
-                  onTap: controller.activation,
                 ),
               ],
             ),

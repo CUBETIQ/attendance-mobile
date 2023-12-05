@@ -1,3 +1,4 @@
+import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
@@ -5,21 +6,16 @@ import 'package:dio/dio.dart';
 class SplashService {
   DioUtil dioInstance = DioUtil();
 
-  Future<Set<String>> refreshToken(String token) async {
-    final String accessToken;
-    final String refreshToken;
-    Response response = await dioInstance.dio.post(
-      Endpoints.instance.refreshToken,
-      data: {
-        "refreshToken": token,
-      },
+  Future<UserModel> fetchMe() async {
+    final UserModel user;
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_own_profile,
     );
     if (response.statusCode == 200) {
-      accessToken = response.data["data"]["accessToken"];
-      refreshToken = response.data["data"]["refreshToken"];
+      user = UserModel().fromJson(response.data["data"]);
     } else {
-      throw Exception(response.data["message"]);
+      throw Exception("Login failed");
     }
-    return {accessToken, refreshToken};
+    return user;
   }
 }

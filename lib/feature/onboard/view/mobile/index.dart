@@ -14,7 +14,6 @@ class OnBoardViewMobile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-        bottom: false,
         child: SingleChildScrollView(
           child: Column(
             children: [

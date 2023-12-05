@@ -1,6 +1,6 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/config/svg.dart';
+import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
@@ -17,7 +17,6 @@ class LoginViewMobile extends StatelessWidget {
     final controller = LoginController.to;
     return Scaffold(
       body: SafeArea(
-        bottom: false,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -97,7 +96,7 @@ class LoginViewMobile extends StatelessWidget {
                       ],
                     ),
                     GestureDetector(
-                      onTap: controller.forgetPassword,
+                      onTap: null,
                       child: MyText(
                         text: "Forgot Password?",
                         style: BodyMediumMedium.copyWith(

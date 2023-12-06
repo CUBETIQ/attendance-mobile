@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
+import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/auth/activation/model/activation_model.dart';
 import 'package:attendance_app/feature/auth/activation/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
@@ -27,19 +28,22 @@ class ActivationController extends GetxController {
   }
 
   Future<void> activation() async {
-    try {
-      ActivationModel input = ActivationModel(
-        code: activationController.text.toUpperCase(),
-        device: device.value,
-      );
-      isActivated.value = await ActivationService().activate(input);
-      if (isActivated.value == true) {
-        Get.offNamed(Routes.ONBOARD);
-        await IsarService().saveLocalData(isActivated: isActivated.value);
+    validate();
+    if (MyTextFieldFormController.findController('Activation').isValid) {
+      try {
+        ActivationModel input = ActivationModel(
+          code: activationController.text.toUpperCase(),
+          device: device.value,
+        );
+        isActivated.value = await ActivationService().activate(input);
+        if (isActivated.value == true) {
+          Get.offNamed(Routes.ONBOARD);
+          await IsarService().saveLocalData(isActivated: isActivated.value);
+        }
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
     }
   }
 
@@ -60,5 +64,9 @@ class ActivationController extends GetxController {
         "Version": iosInfo.value!.systemVersion,
       }.toString();
     }
+  }
+
+  void validate() {
+    MyTextFieldFormController.findController('Activation').isValid;
   }
 }

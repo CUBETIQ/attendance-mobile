@@ -18,6 +18,7 @@ class MyTextFieldForm extends StatelessWidget {
   final bool? hasLabel;
   final TextCapitalization? textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
+  final bool? isPassword;
 
   const MyTextFieldForm({
     super.key,
@@ -33,6 +34,7 @@ class MyTextFieldForm extends StatelessWidget {
     this.labelStyle,
     this.textCapitalization,
     this.inputFormatters,
+    this.isPassword,
   });
 
   @override
@@ -57,6 +59,7 @@ class MyTextFieldForm extends StatelessWidget {
               controller: textController,
               textCapitalization: textCapitalization ?? TextCapitalization.none,
               inputFormatters: inputFormatters,
+              obscureText: isPassword ?? false,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: hintStyle ?? BodyMediumMedium,

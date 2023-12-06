@@ -3,10 +3,13 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/controller/index.dart';
+import 'package:attendance_app/feature/home/widget/attendance_card.dart';
+import 'package:attendance_app/feature/home/widget/overview_card.dart';
+import 'package:attendance_app/feature/home/widget/record_card.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class HomeStaffMobileView extends StatelessWidget {
   const HomeStaffMobileView({super.key});
@@ -16,6 +19,7 @@ class HomeStaffMobileView extends StatelessWidget {
     final controller = HomeController.to;
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.only(
           left: AppSize.paddingHorizontalLarge,
@@ -23,6 +27,7 @@ class HomeStaffMobileView extends StatelessWidget {
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 70,
@@ -38,9 +43,9 @@ class HomeStaffMobileView extends StatelessWidget {
                             "Hey ${NavigationController.to.user.value.username}",
                         style: BodyXlargeMedium,
                       ),
-                      const SizedBox(height: AppSize.spacingS1),
+                      SizedBox(height: size.height * 0.007),
                       MyText(
-                        text: TimeFormatter().formatDate(
+                        text: DateFormatter().formatDate(
                           controller.date,
                         ),
                       )
@@ -62,66 +67,76 @@ class HomeStaffMobileView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSize.spacingS10),
+            SizedBox(height: size.height * 0.01),
             Row(
               children: [
-                Container(
-                  alignment: Alignment.topCenter,
-                  clipBehavior: Clip.antiAlias,
-                  width: size.width * 0.43,
-                  height: size.height * 0.3,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.spacingS7,
-                      vertical: AppSize.spacingS7,
-                    ),
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.25),
-                    width: double.infinity,
-                    height: size.height * 0.13,
-                    child: SvgPicture.asset(
-                      checkIn,
-                      fit: BoxFit.contain,
-                    ),
+                Obx(
+                  () => AttendanceCard(
+                    title: "Check In",
+                    time: controller.checkInTime.value,
+                    buttonText: "Check In",
+                    image: checkIn,
+                    isCheckedIn: controller.isCheckedIn.value,
+                    onPressed: controller.checkIn,
                   ),
                 ),
                 const Spacer(),
-                Container(
-                  alignment: Alignment.topCenter,
-                  clipBehavior: Clip.antiAlias,
-                  width: size.width * 0.43,
-                  height: size.height * 0.3,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.027),
-                        spreadRadius: 1,
-                        blurRadius: 2,
-                        offset:
-                            const Offset(0, 0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.spacingS7,
-                      vertical: AppSize.spacingS7,
-                    ),
-                    width: double.infinity,
-                    height: size.height * 0.13,
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.25),
-                    child: SvgPicture.asset(
-                      checkOut,
-                      fit: BoxFit.contain,
-                    ),
+                Obx(
+                  () => AttendanceCard(
+                    title: "Check Out",
+                    time: controller.checkOutTime.value,
+                    buttonText: "Check Out",
+                    image: checkOut,
+                    buttonDisable: controller.disableCheckOut.value,
+                    onPressed: controller.checkOut,
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: size.height * 0.03),
+            MyText(
+              text: "Overview",
+              style: BodyXlarge,
+            ),
+            SizedBox(height: size.height * 0.02),
+            Row(
+              children: [
+                const Expanded(
+                    child: OverviewCard(
+                  image: present,
+                  title: "Attendance",
+                  number: "65",
+                )),
+                SizedBox(width: size.width * 0.02),
+                const Expanded(
+                    child: OverviewCard(
+                  image: absent,
+                  title: "Absent",
+                  number: "1",
+                )),
+                SizedBox(width: size.width * 0.02),
+                const Expanded(
+                    child: OverviewCard(
+                  image: onLeave,
+                  number: "2",
+                  title: "On Leave",
+                )),
+              ],
+            ),
+            SizedBox(height: size.height * 0.03),
+            MyText(
+              text: "Today Record",
+              style: BodyXlarge,
+            ),
+            SizedBox(height: size.height * 0.02),
+            ListView.separated(
+              itemCount: 5,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              separatorBuilder: (context, index) => SizedBox(height: 15),
+              itemBuilder: (context, index) {
+                return RecordCard();
+              },
             )
           ],
         ),

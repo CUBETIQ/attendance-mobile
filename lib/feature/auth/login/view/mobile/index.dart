@@ -15,6 +15,7 @@ class LoginViewMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = LoginController.to;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -43,7 +44,7 @@ class LoginViewMobile extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: AppSize.spacingS20),
+                SizedBox(height: size.height * 0.04),
                 MyText(
                   text: "Access your account",
                   style: BodyXXlarge,
@@ -54,21 +55,22 @@ class LoginViewMobile extends StatelessWidget {
                     color: Theme.of(context).colorScheme.outline,
                   ),
                 ),
-                const SizedBox(height: AppSize.spacingS19),
+                SizedBox(height: size.height * 0.05),
                 MyTextFieldForm(
                   hasLabel: true,
                   label: "Username",
                   hintText: "Enter your username",
                   textController: controller.usernameController,
                 ),
-                const SizedBox(height: AppSize.spacingS11),
+                SizedBox(height: size.height * 0.02),
                 MyTextFieldForm(
                   hasLabel: true,
+                  isPassword: true,
                   label: "Password",
                   hintText: "Enter your password  ",
                   textController: controller.passwordController,
                 ),
-                const SizedBox(height: AppSize.spacingS11),
+                SizedBox(height: size.height * 0.02),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -88,7 +90,7 @@ class LoginViewMobile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSize.spacingS2),
+                        SizedBox(width: size.width * 0.01),
                         MyText(
                           text: "Remember me",
                           style: BodyMediumMedium,
@@ -106,7 +108,7 @@ class LoginViewMobile extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.spacingS17),
+                SizedBox(height: size.height * 0.08),
                 MyButton(
                   title: "Login",
                   onTap: controller.login,

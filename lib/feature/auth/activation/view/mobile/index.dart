@@ -21,7 +21,6 @@ class ActivationViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
-              top: AppSize.paddingTitleLarge,
               left: AppSize.paddingHorizontalLarge,
               right: AppSize.paddingHorizontalLarge,
             ),
@@ -34,7 +33,7 @@ class ActivationViewMobile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: AppSize.spacingS15),
+                      SizedBox(height: size.height * 0.1),
                       SizedBox(
                         width: size.width * 0.8,
                         child: Lottie.asset(
@@ -47,13 +46,13 @@ class ActivationViewMobile extends StatelessWidget {
                         maxLines: 1,
                         style: BodyXlarge,
                       ),
-                      const SizedBox(height: AppSize.spacingS3),
+                      SizedBox(height: size.height * 0.01),
                       MyText(
                         text: controller.description,
                         maxLines: 5,
                         style: BodySmallMedium,
                       ),
-                      const SizedBox(height: AppSize.spacingS8),
+                      SizedBox(height: size.height * 0.01),
                       MyTextFieldForm(
                         hasLabel: false,
                         textCapitalization: TextCapitalization.characters,
@@ -62,13 +61,12 @@ class ActivationViewMobile extends StatelessWidget {
                         textController: controller.activationController,
                         inputFormatters: [UpperCaseTextFormatter()],
                       ),
-                      const Spacer(),
-                      MyButton(
-                        title: "Activate",
-                        onTap: controller.activation,
-                      ),
                     ],
                   ),
+                ),
+                MyButton(
+                  title: "Activate",
+                  onTap: controller.activation,
                 ),
               ],
             ),

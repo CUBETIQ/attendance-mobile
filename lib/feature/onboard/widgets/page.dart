@@ -26,6 +26,7 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -36,7 +37,6 @@ class MyPage extends StatelessWidget {
             image ?? "",
           ),
         ),
-        const SizedBox(height: AppSize.spacingS5),
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSize.paddingHorizontalLarge,
@@ -49,7 +49,7 @@ class MyPage extends StatelessWidget {
                 style: titleStyle ?? BodyXXlargeMedium,
                 maxLines: 2,
               ),
-              const SizedBox(height: AppSize.spacingS8),
+              SizedBox(height: size.height * 0.01),
               MyText(
                 text: description ?? "Description",
                 style: descriptionStyle ?? BodyMediumMedium,

@@ -21,6 +21,7 @@ final TextStyle HeadingH3 = generateTextStyle(fontSize: 32);
 final TextStyle HeadingH4 = generateTextStyle(fontSize: 24);
 final TextStyle HeadingH5 = generateTextStyle(fontSize: 20);
 
+final TextStyle BodyXXXlarge = generateTextStyle(fontSize: 26);
 final TextStyle BodyXXlarge = generateTextStyle(fontSize: 24);
 final TextStyle BodyXlarge = generateTextStyle(fontSize: 18);
 final TextStyle BodyLarge = generateTextStyle(fontSize: 16);
@@ -29,8 +30,10 @@ final TextStyle BodySmall = generateTextStyle(fontSize: 12);
 final TextStyle BodyXSmall = generateTextStyle(fontSize: 10);
 final TextStyle BodyXXSmall = generateTextStyle(fontSize: 8);
 
-final TextStyle BodyXXlargeSemi =
+final TextStyle BodyXXXlargeSemi =
     generateTextStyle(fontSize: 24, fontWeight: FontWeight.w600);
+final TextStyle BodyXXlargeSemi =
+    generateTextStyle(fontSize: 22, fontWeight: FontWeight.w600);
 final TextStyle BodyXlargeSemi =
     generateTextStyle(fontSize: 18, fontWeight: FontWeight.w600);
 final TextStyle BodyLargeSemi =
@@ -44,8 +47,10 @@ final TextStyle BodyXSmallSemi =
 final TextStyle BodyXXSmallSemi =
     generateTextStyle(fontSize: 8, fontWeight: FontWeight.w600);
 
-final TextStyle BodyXXlargeMedium =
+final TextStyle BodyXXXlargeMedium =
     generateTextStyle(fontSize: 24, fontWeight: FontWeight.w500);
+final TextStyle BodyXXlargeMedium =
+    generateTextStyle(fontSize: 22, fontWeight: FontWeight.w500);
 final TextStyle BodyXlargeMedium =
     generateTextStyle(fontSize: 18, fontWeight: FontWeight.w500);
 final TextStyle BodyLargeMedium =
@@ -59,8 +64,10 @@ final TextStyle BodyXSmallMedium =
 final TextStyle BodyXXSmallMedium =
     generateTextStyle(fontSize: 8, fontWeight: FontWeight.w500);
 
-final TextStyle BodyXXlargeRegular =
+final TextStyle BodyXXXlargeRegular =
     generateTextStyle(fontSize: 24, fontWeight: FontWeight.w400);
+final TextStyle BodyXXlargeRegular =
+    generateTextStyle(fontSize: 22, fontWeight: FontWeight.w400);
 final TextStyle BodyXlargeRegular =
     generateTextStyle(fontSize: 18, fontWeight: FontWeight.w400);
 final TextStyle BodyLargeRegular =

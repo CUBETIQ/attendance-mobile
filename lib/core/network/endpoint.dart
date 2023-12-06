@@ -14,4 +14,6 @@ class Endpoints {
   String get activation => "/auth/activation/activate";
   String get deactivation => "/auth/activation/deactivate";
   String get get_own_profile => "/app/profile/me";
+  String get check_in => "/app/attendances/checkin";
+  String get check_out => "/app/attendances/checkout";
 }

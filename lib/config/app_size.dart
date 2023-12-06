@@ -63,47 +63,5 @@ class AppSize {
   static const double borderRadiusSmall = 8.0;
   static const double borderRadiusMedium = 16.0;
   static const double borderRadiusLarge = 24.0;
-
-  // Border Width
-  static const double borderWidthSmall = 1.0;
-  static const double borderWidthMedium = 2.0;
-  static const double borderWidthLarge = 3.0;
-
-  // Elevation
-  static const double elevationSmall = 1.0;
-  static const double elevationMedium = 2.0;
-  static const double elevationLarge = 3.0;
-
-  // Opacity
-  static const double opacitySmall = 0.5;
-  static const double opacityMedium = 0.7;
-  static const double opacityLarge = 0.9;
-
-  // Spacing
-  static const double spacingSmall = 8.0;
-  static const double spacingMedium = 16.0;
-  static const double spacingLarge = 20.0;
-  static const double spacingXLarge = 24.0;
-
-  // Spcing for body
-  static const double spacingS1 = 4.0;
-  static const double spacingS2 = 5.0;
-  static const double spacingS3 = 6.0;
-  static const double spacingS4 = 8.0;
-  static const double spacingS5 = 10.0;
-  static const double spacingS6 = 12.0;
-  static const double spacingS7 = 14.0;
-  static const double spacingS8 = 15.0;
-  static const double spacingS9 = 16.0;
-  static const double spacingS10 = 18.0;
-  static const double spacingS11 = 20.0;
-  static const double spacingS12 = 22.0;
-  static const double spacingS13 = 24.0;
-  static const double spacingS14 = 25.0;
-  static const double spacingS15 = 26.0;
-  static const double spacingS16 = 28.0;
-  static const double spacingS17 = 30.0;
-  static const double spacingS18 = 40.0;
-  static const double spacingS19 = 50.0;
-  static const double spacingS20 = 60.0;
+  static const double borderRadiusXLarge = 32.0;
 }

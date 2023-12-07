@@ -13,7 +13,11 @@ class Endpoints {
   String get refreshToken => "/auth/token";
   String get activation => "/auth/activation/activate";
   String get deactivation => "/auth/activation/deactivate";
-  String get get_own_profile => "/app/profile/me";
+  String get get_profile => "/app/profile/me";
   String get check_in => "/app/attendances/checkin";
   String get check_out => "/app/attendances/checkout";
+  String get get_position => "/app/positions/";
+  String get get_department => "/app/departments/";
+  String get get_attendance => "/app/attendances/me";
+  String get get_organization => "/app/organizations/";
 }

@@ -37,4 +37,20 @@ class HomeService {
     }
     return checkIn;
   }
+
+  Future<List<AttendanceModel>> getAttendance(
+      {int? startDate, int? endDate}) async {
+    List<AttendanceModel> attendanceList = [];
+    final response = await dioInstance.dio
+        .get(Endpoints.instance.get_attendance, queryParameters: {
+      "startDate": startDate,
+      "endDate": endDate,
+    });
+    if (response.statusCode == 200) {
+      attendanceList = AttendanceModel().fromListJson(response.data["data"]);
+    } else {
+      throw Exception("Get attendance failed");
+    }
+    return attendanceList;
+  }
 }

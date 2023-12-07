@@ -10,7 +10,7 @@ class RecordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? double.infinity,
-      height: height ?? 80,
+      height: height ?? 90,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Theme.of(context).colorScheme.surface,

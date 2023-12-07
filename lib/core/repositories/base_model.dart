@@ -3,7 +3,7 @@ abstract class BaseModel<T> {
 
   Map<String, dynamic> toJson();
 
-  List<T?> fromListJson(List<dynamic>? listJson);
+  List<T> fromListJson(List<dynamic>? listJson);
 
   @override
   String toString() => toJson().toString();

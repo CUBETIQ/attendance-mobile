@@ -1,16 +1,33 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 const String fontFamily = 'Inter';
+
+double calculateFontSize(BuildContext context, double baseSize) {
+  double screenWidth = MediaQuery.of(context).size.width;
+
+  // Adjust the base size based on the screen width
+  if (screenWidth >= 414) {
+    // Larger than iPhone 12 Pro Max
+    return baseSize * 1;
+  } else if (screenWidth <= 375) {
+    // Smaller than iPhone 11
+    return baseSize * 0.85;
+  } else {
+    return baseSize;
+  }
+}
 
 TextStyle generateTextStyle({
   FontWeight fontWeight = FontWeight.bold,
   double fontSize = 16,
 }) {
+  double adjustedFontSize = calculateFontSize(Get.context!, fontSize);
   return TextStyle(
     fontFamily: fontFamily,
     fontWeight: fontWeight,
-    fontSize: fontSize,
+    fontSize: adjustedFontSize,
     letterSpacing: 0.2,
   );
 }

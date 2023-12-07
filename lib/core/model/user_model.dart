@@ -7,6 +7,7 @@ class UserModel extends BaseModel<UserModel> {
   final String? role;
   final String? name;
   final String? positionId;
+  final String? status;
   final String? departmentId;
   final String? firstName;
   final String? lastName;
@@ -23,6 +24,7 @@ class UserModel extends BaseModel<UserModel> {
     this.name,
     this.positionId,
     this.departmentId,
+    this.status,
     this.firstName,
     this.lastName,
     this.dateOfBirth,
@@ -43,6 +45,7 @@ class UserModel extends BaseModel<UserModel> {
       role: json['role'],
       name: json['name'],
       positionId: json['positionId'],
+      status: json['status'],
       departmentId: json['departmentId'],
       firstName: json['firstName'],
       lastName: json['lastName'],

@@ -1,13 +1,15 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/svg.dart';
+import 'package:attendance_app/core/widgets/async_widget/async_base_widget.dart';
+import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/controller/index.dart';
 import 'package:attendance_app/feature/home/widget/attendance_card.dart';
 import 'package:attendance_app/feature/home/widget/overview_card.dart';
 import 'package:attendance_app/feature/home/widget/record_card.dart';
+import 'package:attendance_app/feature/home/widget/statuc_dot.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/utils/time_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,44 +32,50 @@ class HomeStaffMobileView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 70,
+              height: 55,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Stack(
                     children: [
-                      MyText(
-                        text:
-                            "Hey ${NavigationController.to.user.value.username}",
-                        style: BodyXlargeMedium,
+                      MyCacheImage(
+                        imageUrl:
+                            NavigationController.to.user.value.image ?? "",
+                        width: 55,
+                        height: 55,
                       ),
-                      SizedBox(height: size.height * 0.007),
-                      MyText(
-                        text: DateFormatter().formatDate(
-                          controller.date,
+                      Positioned(
+                        bottom: 0,
+                        right: 2,
+                        child: Obx(
+                          () => StatusDot(
+                            status: NavigationController.to.user.value.status,
+                          ),
                         ),
                       )
                     ],
                   ),
-                  Container(
-                    width: 55,
-                    height: 55,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey,
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          NavigationController.to.user.value.image!,
-                        ),
+                  const SizedBox(width: AppSize.paddingS5),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MyText(
+                        text: NavigationController.to.user.value.username ??
+                            "-----",
+                        style: BodyXlargeMedium,
                       ),
-                    ),
+                      MyText(
+                        text: NavigationController.to.position.value.name ??
+                            "-----",
+                        style: BodyMediumRegular,
+                      )
+                    ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: size.height * 0.01),
+            SizedBox(height: size.height * 0.03),
             Row(
               children: [
                 Obx(
@@ -129,15 +137,22 @@ class HomeStaffMobileView extends StatelessWidget {
               style: BodyXlarge,
             ),
             SizedBox(height: size.height * 0.02),
-            ListView.separated(
-              itemCount: 5,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              separatorBuilder: (context, index) => SizedBox(height: 15),
-              itemBuilder: (context, index) {
-                return RecordCard();
-              },
-            )
+            Obx(
+              () => MyAsyncWidget(
+                isLoading: controller.isLoadingList.value,
+                list: controller.attendanceList,
+                builderWidget: ListView.separated(
+                  itemCount: controller.attendanceList.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                  itemBuilder: (context, index) {
+                    return RecordCard();
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

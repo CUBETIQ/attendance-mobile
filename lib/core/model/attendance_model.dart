@@ -57,7 +57,7 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
   }
 
   @override
-  List<AttendanceModel?> fromListJson(List? listJson) {
+  List<AttendanceModel> fromListJson(List? listJson) {
     if (listJson == null) {
       return [];
     }
@@ -108,7 +108,7 @@ class Location extends BaseModel<Location> {
   }
 
   @override
-  List<Location?> fromListJson(List? listJson) {
+  List<Location> fromListJson(List? listJson) {
     if (listJson == null) {
       return [];
     }

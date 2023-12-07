@@ -1,9 +1,10 @@
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
+import 'package:attendance_app/core/model/department_model.dart';
+import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/auth/login/model/index.dart';
 import 'package:attendance_app/feature/auth/login/service/index.dart';
-import 'package:attendance_app/feature/splash/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class LoginController extends GetxController {
   TextEditingController usernameController = TextEditingController();
   RxBool isRememberMe = false.obs;
   Rx<UserModel> user = UserModel().obs;
+  Rx<PositionModel> position = PositionModel().obs;
+  Rx<DepartmentModel> department = DepartmentModel().obs;
 
   Future<void> login() async {
     validate();
@@ -31,7 +34,17 @@ class LoginController extends GetxController {
         await IsarService().saveLocalData(
             accessToken: accessToken.first, refreshToken: accessToken.last);
         await fetchMe();
-        Get.offNamed(Routes.NAVIGATION, arguments: user.value);
+        if (user.value.positionId != null && user.value.positionId != "") {
+          await getPosition();
+        }
+        if (user.value.departmentId != null && user.value.departmentId != "") {
+          await getDepartment();
+        }
+        Get.offNamed(Routes.NAVIGATION, arguments: {
+          "user": user.value,
+          "position": position.value,
+          "department": department.value
+        });
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
@@ -52,7 +65,26 @@ class LoginController extends GetxController {
 
   Future<void> fetchMe() async {
     try {
-      user.value = await SplashService().fetchMe();
+      user.value = await LoginService().fetchMe();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
+  Future<void> getPosition() async {
+    try {
+      position.value = await LoginService().getPosition(user.value.positionId!);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
+  Future<void> getDepartment() async {
+    try {
+      department.value =
+          await LoginService().getDepartment(user.value.departmentId!);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

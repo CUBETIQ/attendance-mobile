@@ -9,3 +9,4 @@ const String leaving = 'assets/svgs/leaving.svg';
 const String absent = 'assets/svgs/absent.svg';
 const String onLeave = 'assets/svgs/onLeave.svg';
 const String present = 'assets/svgs/present.svg';
+const String empty = 'assets/svgs/empty.svg';

@@ -43,7 +43,6 @@ class DioUtil {
         ),
       ),
     ];
-
     _dio
       ..options = BaseOptions(
         baseUrl: Endpoints.baseUrl,

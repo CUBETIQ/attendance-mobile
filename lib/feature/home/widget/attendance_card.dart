@@ -1,125 +1,131 @@
 import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/config/color.dart';
 import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/widgets/button/button.dart';
+import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AttendanceCard extends StatelessWidget {
-  final String image;
-  final String title;
-  final String? time;
-  final String buttonText;
-  final Function() onPressed;
-  final bool? buttonDisable;
-  final double? width;
-  final double? height;
-  final double? imageWidth;
-  final double? imageHeight;
-  final double? contentSpacing;
-  final double? borderRadius;
-  final TextStyle? buttonStyle;
-  final TextStyle? titleStyle;
-  final TextStyle? timeStyle;
-  final double? buttonWidth;
-  final double? buttonHeight;
-  final double? contentpadding;
   final bool? isCheckedIn;
+  final String currentDate;
+  final Function()? onCheckIn;
+  final Function()? onCheckOut;
+  final Animation<double> scale;
 
   const AttendanceCard({
     super.key,
-    required this.image,
-    required this.title,
-    this.time,
-    required this.buttonText,
-    required this.onPressed,
-    this.buttonDisable,
-    this.width,
-    this.height,
-    this.imageWidth,
-    this.imageHeight,
-    this.contentSpacing,
-    this.borderRadius,
-    this.buttonStyle,
-    this.titleStyle,
-    this.timeStyle,
-    this.buttonWidth,
-    this.buttonHeight,
-    this.contentpadding,
     this.isCheckedIn,
+    required this.currentDate,
+    this.onCheckIn,
+    this.onCheckOut,
+    required this.scale,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      alignment: Alignment.topCenter,
-      clipBehavior: Clip.antiAlias,
-      width: width ?? size.width * 0.42,
-      height: height ?? size.height * 0.30,
+      width: double.infinity,
+      height: size.height * 0.30,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius ?? 25),
+        borderRadius: BorderRadius.circular(25),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.12),
+            color: Colors.grey.withOpacity(0.17),
             spreadRadius: 1.2,
-            blurRadius: 2,
+            blurRadius: 1.2,
             offset: const Offset(0, 0),
           ),
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            padding:
-                EdgeInsets.all(contentpadding ?? AppSize.paddingVerticalSmall),
-            width: imageWidth ?? double.infinity,
-            height: imageHeight ?? size.height * 0.12,
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
-            child: SvgPicture.asset(
-              image,
-              fit: BoxFit.contain,
-            ),
-          ),
-          SizedBox(height: contentSpacing ?? size.height * 0.015),
           MyText(
-            text: title,
-            style: titleStyle ?? BodyLargeMedium,
+            text: "Today's Date",
+            style: BodyLargeMedium,
           ),
-          SizedBox(height: contentSpacing ?? size.height * 0.015),
           MyText(
-            text: time ?? "--:--",
-            style: timeStyle ?? BodyLargeMedium,
+            text: currentDate,
+            style: BodyMediumRegular,
           ),
-          SizedBox(height: contentSpacing ?? size.height * 0.015),
-          MyButton(
-            onTap: isCheckedIn == true
-                ? null
-                : buttonDisable == true
-                    ? null
-                    : onPressed,
-            title: buttonText,
-            style: BodySmallMedium.copyWith(
-              color: isCheckedIn == true
-                  ? const Color(MyColor.darkSuccess)
-                  : buttonDisable == true
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.surface,
+          SizedBox(height: size.height * 0.01),
+          GestureDetector(
+            onTap: isCheckedIn != null
+                ? isCheckedIn == true
+                    ? onCheckOut
+                    : onCheckIn
+                : null,
+            child: ScaleTransition(
+              scale: scale,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: size.height * 0.16,
+                height: size.height * 0.16,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 1,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                  gradient: LinearGradient(
+                    colors: isCheckedIn != null
+                        ? isCheckedIn == true
+                            ? [
+                                const Color(0XFFe83371),
+                                const Color(0XFF9b3092),
+                              ]
+                            : [
+                                const Color(0xFF4049E0),
+                                const Color(0XFF7653C9),
+                              ]
+                        : [
+                            const Color.fromARGB(255, 122, 122, 122),
+                            const Color.fromARGB(255, 122, 122, 122),
+                          ],
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      tap,
+                      width: size.height * 0.05,
+                      height: size.height * 0.05,
+                    ),
+                    const SizedBox(height: AppSize.paddingS4),
+                    MyText(
+                      text: isCheckedIn == true ? "Check Out" : "Check In",
+                      style: BodyLargeMedium.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            margin: const EdgeInsets.symmetric(
-              horizontal: AppSize.paddingHorizontalMedium,
-            ),
-            height: size.height * 0.05,
-            isIconButton: isCheckedIn,
-            borderRadius: 25,
-            backgroundColor: isCheckedIn == true
-                ? const Color(MyColor.success).withOpacity(0.2)
-                : buttonDisable == true
-                    ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-                    : Theme.of(context).colorScheme.primary,
           ),
+          SizedBox(height: size.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Icon(
+                Icons.location_on,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              SizedBox(width: size.width * 0.01),
+              MyText(
+                text: "Location: You are in Office reach.",
+                style: BodyMediumRegular,
+              ),
+            ],
+          )
         ],
       ),
     );

@@ -11,6 +11,7 @@ import 'package:attendance_app/feature/home/widget/record_card.dart';
 import 'package:attendance_app/feature/home/widget/statuc_dot.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class HomeStaffMobileView extends StatelessWidget {
@@ -75,36 +76,113 @@ class HomeStaffMobileView extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: size.height * 0.03),
-            Row(
-              children: [
-                Obx(
-                  () => AttendanceCard(
-                    title: "Check In",
-                    time: controller.checkInTime.value,
-                    buttonText: "Check In",
-                    image: checkIn,
-                    isCheckedIn: controller.isCheckedIn.value,
-                    onPressed: controller.checkIn,
+            SizedBox(height: size.height * 0.02),
+            MyText(
+              text: "Attendance ",
+              style: BodyXlargeMedium,
+            ),
+            SizedBox(height: size.height * 0.015),
+            Obx(
+              () => AttendanceCard(
+                scale: controller.scaleAnimation,
+                onCheckIn: controller.checkIn,
+                onCheckOut: controller.checkOut,
+                currentDate: controller.currentDate.value,
+                isCheckedIn: controller.isCheckedIn.value,
+              ),
+            ),
+            SizedBox(height: size.height * 0.02),
+            Container(
+              width: double.infinity,
+              height: size.height * 0.12,
+              padding: EdgeInsets.symmetric(
+                vertical: size.height * 0.01,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: Theme.of(context).colorScheme.surface,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.17),
+                    spreadRadius: 1.2,
+                    blurRadius: 1.2,
+                    offset: const Offset(0, 0),
                   ),
-                ),
-                const Spacer(),
-                Obx(
-                  () => AttendanceCard(
-                    title: "Check Out",
-                    time: controller.checkOutTime.value,
-                    buttonText: "Check Out",
-                    image: checkOut,
-                    buttonDisable: controller.disableCheckOut.value,
-                    onPressed: controller.checkOut,
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SvgPicture.asset(
+                        clockBack,
+                        width: size.height * 0.03,
+                        height: size.height * 0.03,
+                      ),
+                      Obx(
+                        () => MyText(
+                          text: controller.checkInTime.value ?? "--:--",
+                          style: BodyMediumRegular,
+                        ),
+                      ),
+                      MyText(
+                        text: "Check In",
+                        style: BodyMediumRegular,
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SvgPicture.asset(
+                        clockForward,
+                        width: size.height * 0.025,
+                        height: size.height * 0.025,
+                      ),
+                      Obx(
+                        () => MyText(
+                          text: controller.checkOutTime.value ?? "--:--",
+                          style: BodyMediumRegular,
+                        ),
+                      ),
+                      MyText(
+                        text: "Check In",
+                        style: BodyMediumRegular,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SvgPicture.asset(
+                        clock,
+                        width: size.height * 0.03,
+                        height: size.height * 0.03,
+                      ),
+                      Obx(
+                        () => MyText(
+                          text: controller.totalHour.value != null &&
+                                  controller.totalHour.value != "null"
+                              ? controller.totalHour.value ?? "--:--"
+                              : "--:--",
+                          style: BodyMediumRegular,
+                        ),
+                      ),
+                      MyText(
+                        text: "Working Hour",
+                        style: BodyMediumRegular,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: size.height * 0.03),
             MyText(
               text: "Overview",
-              style: BodyXlarge,
+              style: BodyXlargeMedium,
             ),
             SizedBox(height: size.height * 0.02),
             Row(

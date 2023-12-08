@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
 class RecordCard extends StatelessWidget {
+  final String? checkInTime;
+  final String? checkOutTime;
   final double? width;
   final double? height;
 
-  const RecordCard({super.key, this.width, this.height});
+  const RecordCard({
+    super.key,
+    this.width,
+    this.height,
+    this.checkInTime,
+    this.checkOutTime,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +30,9 @@ class RecordCard extends StatelessWidget {
             offset: const Offset(0, 0),
           ),
         ],
+      ),
+      child: Row(
+        children: [],
       ),
     );
   }

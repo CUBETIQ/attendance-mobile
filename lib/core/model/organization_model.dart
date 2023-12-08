@@ -89,9 +89,9 @@ class Location {
 }
 
 class Configs {
-  final int? startHour;
-  final int? endHour;
-  final int? breakTime;
+  final String? startHour;
+  final String? endHour;
+  final String? breakTime;
 
   Configs({this.startHour, this.endHour, this.breakTime});
 

@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.topLevel,
       title: "Tracker",
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       theme: lightThemeData(),

@@ -1,4 +1,4 @@
-import 'package:attendance_app/config/color.dart';
+import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';

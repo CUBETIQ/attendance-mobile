@@ -11,6 +11,10 @@ class AttendanceCard extends StatelessWidget {
   final Function()? onCheckIn;
   final Function()? onCheckOut;
   final Animation<double> scale;
+  final double? height;
+  final double? width;
+  final double? buttonSize;
+  final double? iconSize;
 
   const AttendanceCard({
     super.key,
@@ -19,14 +23,18 @@ class AttendanceCard extends StatelessWidget {
     this.onCheckIn,
     this.onCheckOut,
     required this.scale,
+    this.height,
+    this.width,
+    this.buttonSize,
+    this.iconSize,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      width: double.infinity,
-      height: size.height * 0.30,
+      width: width ?? double.infinity,
+      height: height ?? size.height * 0.30,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         color: Theme.of(context).colorScheme.surface,
@@ -61,8 +69,8 @@ class AttendanceCard extends StatelessWidget {
               scale: scale,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                width: size.height * 0.16,
-                height: size.height * 0.16,
+                width: buttonSize ?? size.height * 0.16,
+                height: buttonSize ?? size.height * 0.16,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   boxShadow: [
@@ -95,8 +103,8 @@ class AttendanceCard extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       tap,
-                      width: size.height * 0.05,
-                      height: size.height * 0.05,
+                      width: iconSize ?? size.height * 0.05,
+                      height: iconSize ?? size.height * 0.05,
                     ),
                     const SizedBox(height: AppSize.paddingS4),
                     MyText(

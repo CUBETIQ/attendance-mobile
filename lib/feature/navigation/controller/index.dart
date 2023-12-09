@@ -1,3 +1,4 @@
+import 'package:attendance_app/config/app_config.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
@@ -5,9 +6,11 @@ import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
 import 'package:attendance_app/feature/navigation/service/index.dart';
+import 'package:attendance_app/utils/location_util.dart';
 import 'package:attendance_app/utils/types/role.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
@@ -36,6 +39,10 @@ class NavigationController extends GetxController {
       selectedIcon: Icons.person_rounded,
     ),
   ];
+  Rxn<OranizationLocationModel> organizationLocation =
+      Rxn<OranizationLocationModel>(null);
+  Rxn<Position> userLocation = Rxn<Position>(null);
+  RxBool isInRange = false.obs;
 
   @override
   void onInit() {
@@ -55,8 +62,21 @@ class NavigationController extends GetxController {
     try {
       organization.value = await NavigationService()
           .getOrganization(id: user.value.organizationId!);
+      organizationLocation.value = organization.value.location;
+      getUserLocation();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
+  Future<void> getUserLocation() async {
+    try {
+      userLocation.value = await NavigationService().getCurrentLocation();
+      isInRange.value = isWithinRadius(userLocation.value!,
+          organizationLocation.value!, AppConfig.DEFAULT_LOCATION_RADIUS);
+    } on Exception catch (e) {
+      showErrorSnackBar("Error", e.toString());
       rethrow;
     }
   }

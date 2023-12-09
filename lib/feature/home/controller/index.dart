@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/home/model/check_in_model.dart';
 import 'package:attendance_app/feature/home/model/check_out_model.dart';
@@ -37,6 +36,7 @@ class HomeController extends GetxController
   RxString currentDate = "".obs;
   late AnimationController controller;
   late Animation<double> scaleAnimation;
+  RxBool isInRange = false.obs;
 
   @override
   void onInit() {
@@ -75,11 +75,19 @@ class HomeController extends GetxController
     checkOutTime.value = null;
     totalHour.value = null;
     try {
+      LocationModel location = LocationModel(
+        lat: NavigationController.to.userLocation.value?.latitude,
+        lng: NavigationController.to.userLocation.value?.longitude,
+        inOffice: NavigationController.to.isInRange.value,
+      );
+
       CheckInModel input = CheckInModel(
         checkInDateTime: now.millisecondsSinceEpoch,
         checkInType: AttendanceMethod.manual,
         checkInStatus: CheckInStatusValidator().getStatus(startHour.value, now),
+        checkInLocation: location,
       );
+
       AttendanceModel checkIn = await HomeService().checkIn(input);
       checkInTime.value = DateFormatter().formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
@@ -97,10 +105,17 @@ class HomeController extends GetxController
     controller.forward();
     DateTime now = DateTime.now();
     try {
+      LocationModel location = LocationModel(
+        lat: NavigationController.to.userLocation.value?.latitude,
+        lng: NavigationController.to.userLocation.value?.longitude,
+        inOffice: NavigationController.to.isInRange.value,
+      );
+
       CheckOutModel input = CheckOutModel(
         checkOutDateTime: now.millisecondsSinceEpoch,
         checkOutType: AttendanceMethod.manual,
         checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
+        checkOutLocation: location,
       );
       AttendanceModel checkOut = await HomeService().checkOut(input);
       checkOutTime.value = DateFormatter().formatTime(
@@ -145,7 +160,6 @@ class HomeController extends GetxController
         totalHour.value = null;
         isCheckedIn.value = false;
       }
-      Console.log(totalHour.value, totalHour.value.runtimeType);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

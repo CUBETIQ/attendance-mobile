@@ -2,7 +2,7 @@ import 'package:attendance_app/core/repositories/base_model.dart';
 
 class OrganizationModel extends BaseModel<OrganizationModel> {
   final String? name;
-  final Location? location;
+  final OranizationLocationModel? location;
   final String? address;
   final String? description;
   final String? image;
@@ -30,7 +30,7 @@ class OrganizationModel extends BaseModel<OrganizationModel> {
     }
     return OrganizationModel(
         name: json['name'],
-        location: Location().fromJson(json['location']),
+        location: OranizationLocationModel().fromJson(json['location']),
         address: json['address'],
         description: json['description'],
         image: json['image'],
@@ -64,17 +64,17 @@ class OrganizationModel extends BaseModel<OrganizationModel> {
   }
 }
 
-class Location {
+class OranizationLocationModel {
   final double? lat;
   final double? lng;
 
-  Location({this.lat, this.lng});
+  OranizationLocationModel({this.lat, this.lng});
 
-  Location fromJson(Map<String, dynamic>? json) {
+  OranizationLocationModel fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return Location();
+      return OranizationLocationModel();
     }
-    return Location(
+    return OranizationLocationModel(
       lat: json['lat'],
       lng: json['lng'],
     );

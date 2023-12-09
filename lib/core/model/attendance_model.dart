@@ -13,8 +13,10 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
   final int? checkOutDateTime;
   final String? checkOutType;
   final String? checkOutStatus;
-  final Location? location;
+  final LocationModel? checkInLocation;
+  final LocationModel? checkOutLocation;
   final int? duration;
+  final List<dynamic>? attachment;
 
   AttendanceModel({
     this.id,
@@ -29,8 +31,10 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
     this.checkOutDateTime,
     this.checkOutType,
     this.checkOutStatus,
-    this.location,
+    this.checkInLocation,
+    this.checkOutLocation,
     this.duration,
+    this.attachment,
   });
 
   @override
@@ -51,7 +55,9 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
       checkOutDateTime: json['checkOutDateTime'],
       checkOutType: json['checkOutType'],
       checkOutStatus: json['checkOutStatus'],
-      location: Location().fromJson(json['location']),
+      attachment: json['attachment'],
+      checkInLocation: LocationModel().fromJson(json['checkInLocation']),
+      checkOutLocation: LocationModel().fromJson(json['checkOutLocation']),
       duration: json['duration'],
     );
   }
@@ -81,38 +87,45 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
       'checkOutDateTime': checkOutDateTime,
       'checkOutType': checkOutType,
       'checkOutStatus': checkOutStatus,
-      'location': location,
+      'attachment': attachment,
+      'checkInLocation': checkInLocation?.toJson(),
+      'checkOutLocation': checkOutLocation?.toJson(),
       'duration': duration,
     };
   }
 }
 
-class Location extends BaseModel<Location> {
+class LocationModel extends BaseModel<LocationModel> {
   final double? lat;
   final double? lng;
+  final bool? inOffice;
 
-  Location({
+  LocationModel({
     this.lat,
     this.lng,
+    this.inOffice,
   });
 
   @override
-  Location fromJson(Map<String, dynamic>? json) {
+  LocationModel fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return Location();
+      return LocationModel();
     }
-    return Location(
+    return LocationModel(
       lat: json['lat'],
       lng: json['lng'],
+      inOffice: json['inOffice'],
     );
   }
 
   @override
-  List<Location> fromListJson(List? listJson) {
+  List<LocationModel> fromListJson(List? listJson) {
     if (listJson == null) {
       return [];
     }
-    return listJson.map<Location>((e) => Location().fromJson(e)).toList();
+    return listJson
+        .map<LocationModel>((e) => LocationModel().fromJson(e))
+        .toList();
   }
 
   @override
@@ -120,6 +133,7 @@ class Location extends BaseModel<Location> {
     return {
       'lat': lat,
       'lng': lng,
+      'inOffice': inOffice,
     };
   }
 }

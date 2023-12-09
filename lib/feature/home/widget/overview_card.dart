@@ -7,14 +7,24 @@ class OverviewCard extends StatelessWidget {
   final String image;
   final String? number;
   final String? title;
+  final double? height;
 
-  const OverviewCard({super.key, required this.image, this.number, this.title});
+  const OverviewCard({
+    super.key,
+    required this.image,
+    this.number,
+    this.title,
+    this.height,
+  });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: size.width * 0.25,
+      height: height ?? size.width * 0.25,
+      padding: EdgeInsets.symmetric(
+        horizontal: size.width * 0.02,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Theme.of(context).colorScheme.surface,

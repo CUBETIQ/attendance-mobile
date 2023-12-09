@@ -13,6 +13,7 @@ class HomeService {
       "checkInDateTime": input.checkInDateTime,
       "checkInStatus": input.checkInStatus,
       "checkInType": input.checkInType,
+      "checkInLocation": input.checkInLocation?.toJson(),
     });
     if (response.statusCode == 200) {
       checkIn = AttendanceModel().fromJson(response.data["data"]);
@@ -29,6 +30,7 @@ class HomeService {
       "checkOutDateTime": input.checkOutDateTime,
       "checkOutType": input.checkOutType,
       "checkOutStatus": input.checkOutStatus,
+      "checkOutLocation": input.checkOutLocation?.toJson(),
     });
     if (response.statusCode == 200) {
       checkIn = AttendanceModel().fromJson(response.data["data"]);

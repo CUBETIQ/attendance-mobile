@@ -96,7 +96,7 @@ class HomeStaffMobileView extends StatelessWidget {
               width: double.infinity,
               height: size.height * 0.12,
               padding: EdgeInsets.symmetric(
-                vertical: size.height * 0.01,
+                vertical: size.height * 0.018,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
@@ -118,7 +118,7 @@ class HomeStaffMobileView extends StatelessWidget {
                     children: [
                       SvgPicture.asset(
                         clockBack,
-                        width: size.height * 0.03,
+                        width: size.height * 0.025,
                         height: size.height * 0.03,
                       ),
                       Obx(

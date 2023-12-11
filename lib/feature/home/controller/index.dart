@@ -16,8 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class HomeController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class HomeController extends GetxController with GetTickerProviderStateMixin {
   static HomeController get to => Get.find();
   late TabController? tabController;
   RxString getUserRole = "WWWWW".obs;
@@ -138,7 +137,11 @@ class HomeController extends GetxController
         endDate: endOfDay.value,
       );
       if (attendanceList.isNotEmpty) {
-        totalHour.value = attendanceList.last.duration.toString();
+        if (attendanceList.last.checkOutDateTime != null) {
+          totalHour.value = DateFormatter().formatMinutes(
+            attendanceList.last.duration!,
+          );
+        }
         checkInTime.value = DateFormatter().formatTime(
           DateTime.fromMillisecondsSinceEpoch(
             attendanceList.last.checkInDateTime!,

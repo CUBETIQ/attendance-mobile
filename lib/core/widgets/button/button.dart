@@ -1,3 +1,4 @@
+import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
@@ -34,11 +35,13 @@ class MyButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? double.infinity,
-        height: height ?? 50,
+        height: height ?? size.width * 0.12,
         margin: margin,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius ?? 8),
+          borderRadius: BorderRadius.circular(
+            (borderRadius ?? AppSize.borderRadiusLarge) * (size.width / 375.0),
+          ),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),
         child: isIconButton == true

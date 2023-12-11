@@ -43,6 +43,8 @@ class NavigationController extends GetxController {
       Rxn<OranizationLocationModel>(null);
   Rxn<Position> userLocation = Rxn<Position>(null);
   RxBool isInRange = false.obs;
+  Rxn<String> startBreakTime = Rxn<String>(null);
+  Rxn<String> endBreakTime = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -63,6 +65,9 @@ class NavigationController extends GetxController {
       organization.value = await NavigationService()
           .getOrganization(id: user.value.organizationId!);
       organizationLocation.value = organization.value.location;
+      startBreakTime.value =
+          organization.value.configs?.breakTime?.split("-")[0];
+      endBreakTime.value = organization.value.configs?.breakTime?.split("-")[1];
       getUserLocation();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

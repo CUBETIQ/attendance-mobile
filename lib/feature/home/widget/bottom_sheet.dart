@@ -68,10 +68,10 @@ void getCheckOutBottomSheet(BuildContext context,
     {bool? isDismissible, required String image}) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
+        topLeft: Radius.circular(50),
+        topRight: Radius.circular(50),
       ),
     ),
     isDismissible: isDismissible ?? true,

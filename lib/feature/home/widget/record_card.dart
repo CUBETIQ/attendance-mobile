@@ -1,10 +1,23 @@
+import 'package:attendance_app/config/app_size.dart';
+import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/constants/color.dart';
+import 'package:attendance_app/constants/svg.dart';
+import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/feature/home/widget/record_data_card.dart';
+import 'package:attendance_app/feature/navigation/controller/index.dart';
+import 'package:attendance_app/utils/time_formater.dart';
 import 'package:flutter/material.dart';
 
 class RecordCard extends StatelessWidget {
-  final String? checkInTime;
-  final String? checkOutTime;
+  final int? checkInTime;
+  final String? checkInStatus;
+  final int? checkOutTime;
+  final String? checkOutStatus;
+  final String? breakTime;
+  final String? onNullBreakTime;
   final double? width;
   final double? height;
+  final DateTime date;
 
   const RecordCard({
     super.key,
@@ -12,15 +25,24 @@ class RecordCard extends StatelessWidget {
     this.height,
     this.checkInTime,
     this.checkOutTime,
+    this.breakTime,
+    required this.date,
+    this.onNullBreakTime,
+    this.checkInStatus,
+    this.checkOutStatus,
   });
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       width: width ?? double.infinity,
-      height: height ?? 90,
+      height: height ?? size.width * 0.66,
+      padding: const EdgeInsets.all(AppSize.paddingS8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(
+          AppSize.borderRadiusMedium * (size.width / 375.0),
+        ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
@@ -31,8 +53,64 @@ class RecordCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        children: [],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MyText(
+            text: DateFormatter().formatDate(date),
+            style: BodyMediumSemi.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+          SizedBox(height: AppSize.paddingS5 * (size.width / 375.0)),
+          RecordDataCard(
+            time: checkInTime,
+            timeString:
+                NavigationController.to.organization.value.configs?.startHour ??
+                    "00:00",
+            svgIcon: checkIcon,
+            firstTitle: "Actual check in",
+            onNullTitle: "Check in schedule",
+            secondTitle: "Check in",
+            status: checkInStatus,
+            iconColor: const Color(MyColor.success),
+            icon: Icons.login,
+          ),
+          SizedBox(height: AppSize.paddingS5 * (size.width / 375.0)),
+          RecordDataCard(
+            time: null,
+            timeString:
+                NavigationController.to.organization.value.configs?.breakTime ??
+                    "00:00",
+            svgIcon: location,
+            firstTitle: "Break Time",
+            onNullTitle: "Break Time",
+            secondTitle: "Break Time",
+            isBreakTime: true,
+            icon: Icons.coffee,
+            iconColor: Colors.white,
+            status: null,
+            gradient: const LinearGradient(
+              colors: [
+                Color(0xFF4049E0),
+                Color(0XFF7653C9),
+              ],
+            ),
+          ),
+          SizedBox(height: AppSize.paddingS5 * (size.width / 375.0)),
+          RecordDataCard(
+            time: checkOutTime,
+            timeString:
+                NavigationController.to.organization.value.configs?.endHour,
+            svgIcon: checkIcon,
+            firstTitle: "Actual check in",
+            onNullTitle: "Check out schedule",
+            secondTitle: "Check out",
+            icon: Icons.logout,
+            iconColor: const Color(MyColor.error),
+            status: checkOutStatus,
+          ),
+        ],
       ),
     );
   }

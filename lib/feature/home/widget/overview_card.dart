@@ -1,3 +1,4 @@
+import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,9 @@ class OverviewCard extends StatelessWidget {
         horizontal: size.width * 0.02,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(
+          AppSize.borderRadiusMedium * (size.width / 375.0),
+        ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(

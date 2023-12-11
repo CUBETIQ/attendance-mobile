@@ -28,7 +28,7 @@ class OnBoardViewMobile extends StatelessWidget {
                         (e) => MyPage(
                           image: e.image,
                           width: size.width,
-                          height: size.height * 0.60,
+                          height: size.height * 0.55,
                           title: e.title,
                           description: e.description,
                         ),
@@ -39,7 +39,6 @@ class OnBoardViewMobile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSize.paddingHorizontalLarge,
-                  vertical: AppSize.paddingVerticalSmall,
                 ),
                 child: Obx(
                   () => MyButton(

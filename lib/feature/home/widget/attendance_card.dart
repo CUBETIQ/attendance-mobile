@@ -36,7 +36,9 @@ class AttendanceCard extends StatelessWidget {
       width: width ?? double.infinity,
       height: height ?? size.height * 0.30,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(
+          AppSize.borderRadiusLarge * (size.width / 375.0),
+        ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
@@ -129,7 +131,7 @@ class AttendanceCard extends StatelessWidget {
               ),
               SizedBox(width: size.width * 0.01),
               MyText(
-                text: "Location: You are in Office reach.",
+                text: "Location: You are in office reach.",
                 style: BodyMediumRegular,
               ),
             ],

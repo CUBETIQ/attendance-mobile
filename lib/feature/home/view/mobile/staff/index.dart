@@ -6,12 +6,12 @@ import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/controller/index.dart';
 import 'package:attendance_app/feature/home/widget/attendance_card.dart';
+import 'package:attendance_app/feature/home/widget/attendance_detail_card.dart';
 import 'package:attendance_app/feature/home/widget/overview_card.dart';
 import 'package:attendance_app/feature/home/widget/record_card.dart';
-import 'package:attendance_app/feature/home/widget/statuc_dot.dart';
+import 'package:attendance_app/feature/home/widget/status_dot.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class HomeStaffMobileView extends StatelessWidget {
@@ -99,7 +99,9 @@ class HomeStaffMobileView extends StatelessWidget {
                 vertical: size.height * 0.018,
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(
+                  AppSize.borderRadiusLarge * (size.width / 375.0),
+                ),
                 color: Theme.of(context).colorScheme.surface,
                 boxShadow: [
                   BoxShadow(
@@ -113,68 +115,26 @@ class HomeStaffMobileView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SvgPicture.asset(
-                        clockBack,
-                        width: size.height * 0.025,
-                        height: size.height * 0.03,
-                      ),
-                      Obx(
-                        () => MyText(
-                          text: controller.checkInTime.value ?? "--:--",
-                          style: BodyMediumRegular,
-                        ),
-                      ),
-                      MyText(
-                        text: "Check In",
-                        style: BodyMediumRegular,
-                      ),
-                    ],
+                  Obx(
+                    () => AttendanceDetailCard(
+                      image: clockBack,
+                      time: controller.checkInTime.value ?? "--:--",
+                      title: "Check In",
+                    ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SvgPicture.asset(
-                        clockForward,
-                        width: size.height * 0.025,
-                        height: size.height * 0.025,
-                      ),
-                      Obx(
-                        () => MyText(
-                          text: controller.checkOutTime.value ?? "--:--",
-                          style: BodyMediumRegular,
-                        ),
-                      ),
-                      MyText(
-                        text: "Check In",
-                        style: BodyMediumRegular,
-                      ),
-                    ],
+                  Obx(
+                    () => AttendanceDetailCard(
+                      image: clockForward,
+                      time: controller.checkOutTime.value ?? "--:--",
+                      title: "Check Out",
+                    ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SvgPicture.asset(
-                        clock,
-                        width: size.height * 0.03,
-                        height: size.height * 0.03,
-                      ),
-                      Obx(
-                        () => MyText(
-                          text: controller.totalHour.value != null &&
-                                  controller.totalHour.value != "null"
-                              ? controller.totalHour.value ?? "--:--"
-                              : "--:--",
-                          style: BodyMediumRegular,
-                        ),
-                      ),
-                      MyText(
-                        text: "Working Hour",
-                        style: BodyMediumRegular,
-                      ),
-                    ],
+                  Obx(
+                    () => AttendanceDetailCard(
+                      image: clock,
+                      time: controller.totalHour.value ?? "--:--",
+                      title: "Total Hour",
+                    ),
                   ),
                 ],
               ),
@@ -226,7 +186,19 @@ class HomeStaffMobileView extends StatelessWidget {
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 10),
                   itemBuilder: (context, index) {
-                    return RecordCard();
+                    return Obx(
+                      () => RecordCard(
+                        date: controller.date,
+                        checkInStatus:
+                            controller.attendanceList[index].checkInStatus,
+                        checkInTime:
+                            controller.attendanceList[index].checkInDateTime,
+                        checkOutTime:
+                            controller.attendanceList[index].checkOutDateTime,
+                        checkOutStatus:
+                            controller.attendanceList[index].checkOutStatus,
+                      ),
+                    );
                   },
                 ),
               ),

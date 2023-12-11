@@ -1,3 +1,4 @@
+import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/config/font.dart';
@@ -40,6 +41,7 @@ class MyTextFieldForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = MyTextFieldFormController.findController(label);
+    final size = MediaQuery.of(context).size;
     return GetBuilder<MyTextFieldFormController>(
       init: controller,
       builder: (_) => Form(
@@ -67,25 +69,37 @@ class MyTextFieldForm extends StatelessWidget {
                 isDense: true,
                 errorMaxLines: 2,
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderRadius: BorderRadius.circular(
+                    (borderRadius ?? AppSize.borderRadiusLarge) *
+                        (size.width / 375.0),
+                  ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.outlineVariant,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderRadius: BorderRadius.circular(
+                    (borderRadius ?? AppSize.borderRadiusLarge) *
+                        (size.width / 375.0),
+                  ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.outlineVariant,
                   ),
                 ),
                 errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderRadius: BorderRadius.circular(
+                    (borderRadius ?? AppSize.borderRadiusLarge) *
+                        (size.width / 375.0),
+                  ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderRadius: BorderRadius.circular(
+                    (borderRadius ?? AppSize.borderRadiusLarge) *
+                        (size.width / 375.0),
+                  ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.error,
                   ),

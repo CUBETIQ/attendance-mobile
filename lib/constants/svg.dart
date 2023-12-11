@@ -14,3 +14,5 @@ const String tap = 'assets/svgs/tap.svg';
 const String clock = 'assets/svgs/clock.svg';
 const String clockBack = 'assets/svgs/clock_back.svg';
 const String clockForward = 'assets/svgs/clock_forward.svg';
+const String checkIcon = 'assets/svgs/check_icon.svg';
+const String location = 'assets/svgs/location.svg';

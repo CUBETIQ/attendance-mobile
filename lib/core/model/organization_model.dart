@@ -92,8 +92,14 @@ class Configs {
   final String? startHour;
   final String? endHour;
   final String? breakTime;
+  final String? breakDuration;
 
-  Configs({this.startHour, this.endHour, this.breakTime});
+  Configs({
+    this.startHour,
+    this.endHour,
+    this.breakTime,
+    this.breakDuration,
+  });
 
   Configs fromJson(Map<String, dynamic>? json) {
     if (json == null) {
@@ -103,6 +109,7 @@ class Configs {
       startHour: json['startHour'],
       endHour: json['endHour'],
       breakTime: json['breakTime'],
+      breakDuration: json['breakDuration'],
     );
   }
 
@@ -111,6 +118,7 @@ class Configs {
       "startHour": startHour,
       "endHour": endHour,
       "breakTime": breakTime,
+      "breakDuration": breakDuration,
     };
   }
 }

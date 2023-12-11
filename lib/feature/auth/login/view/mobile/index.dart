@@ -84,7 +84,9 @@ class LoginViewMobile extends StatelessWidget {
                               value: controller.isRememberMe.value,
                               onChanged: controller.onCheck,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
+                                borderRadius: BorderRadius.circular(
+                                  5 * (size.width / 375.0),
+                                ),
                               ),
                               splashRadius: 14,
                             ),

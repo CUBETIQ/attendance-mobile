@@ -148,25 +148,28 @@ class HomeStaffMobileView extends StatelessWidget {
             Row(
               children: [
                 const Expanded(
-                    child: OverviewCard(
-                  image: present,
-                  title: "Attendance",
-                  number: "65",
-                )),
+                  child: OverviewCard(
+                    image: present,
+                    title: "Attendance",
+                    number: "65",
+                  ),
+                ),
                 SizedBox(width: size.width * 0.02),
                 const Expanded(
-                    child: OverviewCard(
-                  image: absent,
-                  title: "Absent",
-                  number: "1",
-                )),
+                  child: OverviewCard(
+                    image: absent,
+                    title: "Absent",
+                    number: "1",
+                  ),
+                ),
                 SizedBox(width: size.width * 0.02),
                 const Expanded(
-                    child: OverviewCard(
-                  image: onLeave,
-                  number: "2",
-                  title: "On Leave",
-                )),
+                  child: OverviewCard(
+                    image: onLeave,
+                    number: "2",
+                    title: "On Leave",
+                  ),
+                ),
               ],
             ),
             SizedBox(height: size.height * 0.03),
@@ -179,6 +182,14 @@ class HomeStaffMobileView extends StatelessWidget {
               () => MyAsyncWidget(
                 isLoading: controller.isLoadingList.value,
                 list: controller.attendanceList,
+                noDataWidget: RecordCard(
+                  date: controller.date,
+                  checkInStatus: null,
+                  checkInTime: null,
+                  checkOutTime: null,
+                  checkOutStatus: null,
+                  isBreakTime: false,
+                ),
                 builderWidget: ListView.separated(
                   itemCount: controller.attendanceList.length,
                   shrinkWrap: true,
@@ -197,6 +208,8 @@ class HomeStaffMobileView extends StatelessWidget {
                             controller.attendanceList[index].checkOutDateTime,
                         checkOutStatus:
                             controller.attendanceList[index].checkOutStatus,
+                        isBreakTime: controller.isBreakTime.value,
+                        breakTimeTitle: controller.breakTimeTitle.value,
                       ),
                     );
                   },

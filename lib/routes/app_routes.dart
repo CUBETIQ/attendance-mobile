@@ -9,4 +9,5 @@ abstract class Routes {
   static const ONBOARD = '/onboard';
   static const LOGIN = '/login';
   static const NAVIGATION = '/navigation';
+  static const PROFILE = '/profile';
 }

@@ -16,3 +16,4 @@ const String clockBack = 'assets/svgs/clock_back.svg';
 const String clockForward = 'assets/svgs/clock_forward.svg';
 const String checkIcon = 'assets/svgs/check_icon.svg';
 const String location = 'assets/svgs/location.svg';
+const String defaultUser = 'assets/svgs/default_user.svg';

@@ -9,6 +9,7 @@ import 'package:attendance_app/feature/navigation/naviation_binding.dart';
 import 'package:attendance_app/feature/navigation/view/index.dart';
 import 'package:attendance_app/feature/onboard/onboard_binding.dart';
 import 'package:attendance_app/feature/onboard/view/index.dart';
+import 'package:attendance_app/feature/profile/profile_binding.dart';
 import 'package:attendance_app/feature/splash/splash_binding.dart';
 import 'package:attendance_app/feature/splash/view/index.dart';
 import 'package:get/get.dart';
@@ -44,6 +45,7 @@ class AppPages {
       bindings: [
         NavigationBinding(),
         HomeBinding(),
+        ProfileBinding(),
       ],
     ),
   ];

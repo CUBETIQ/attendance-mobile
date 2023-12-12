@@ -31,8 +31,8 @@ class OnBoardController extends GetxController {
 
   @override
   void onInit() {
-    pageController = PageController();
     super.onInit();
+    pageController = PageController();
   }
 
   void onTapButton() async {

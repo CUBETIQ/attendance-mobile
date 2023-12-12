@@ -1,4 +1,7 @@
+import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/controller/index.dart';
+import 'package:attendance_app/feature/home/view/mobile/staff/index.dart';
 import 'package:flutter/material.dart';
 
 class HomeAdminMobileView extends StatelessWidget {
@@ -12,12 +15,17 @@ class HomeAdminMobileView extends StatelessWidget {
         TabBar(
           controller: controller.tabController,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
+          labelStyle: BodyLargeMedium,
+          unselectedLabelStyle: BodyLargeMedium,
+          unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
+          labelColor: Theme.of(context).colorScheme.onBackground,
+          dividerColor: Colors.transparent,
           tabs: [
             Tab(
-              text: 'Dashboard',
+              text: 'Dashboard'.trString,
             ),
             Tab(
-              text: 'Attendance',
+              text: 'Attendance'.trString,
             ),
           ],
         ),
@@ -39,9 +47,7 @@ class HomeAdminMobileView extends StatelessWidget {
                   ],
                 ),
               ),
-              Center(
-                child: Text('DashBoard'),
-              ),
+              const HomeStaffMobileView(),
             ],
           ),
         ),

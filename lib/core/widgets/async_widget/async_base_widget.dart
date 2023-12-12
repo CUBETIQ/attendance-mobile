@@ -6,12 +6,14 @@ class MyAsyncWidget extends StatelessWidget {
   final List<dynamic> list;
   final bool isLoading;
   final Widget builderWidget;
+  final Widget? noDataWidget;
 
   const MyAsyncWidget({
     super.key,
     required this.list,
     required this.isLoading,
     required this.builderWidget,
+    this.noDataWidget,
   });
 
   @override
@@ -19,7 +21,7 @@ class MyAsyncWidget extends StatelessWidget {
     if (isLoading) {
       return const MyLoading();
     } else if (list.isEmpty) {
-      return const MyNoData();
+      return noDataWidget ?? const MyNoData();
     } else {
       return builderWidget;
     }

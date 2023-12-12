@@ -13,11 +13,11 @@ class RecordCard extends StatelessWidget {
   final String? checkInStatus;
   final int? checkOutTime;
   final String? checkOutStatus;
-  final String? breakTime;
-  final String? onNullBreakTime;
   final double? width;
   final double? height;
   final DateTime date;
+  final bool? isBreakTime;
+  final String? breakTimeTitle;
 
   const RecordCard({
     super.key,
@@ -25,11 +25,11 @@ class RecordCard extends StatelessWidget {
     this.height,
     this.checkInTime,
     this.checkOutTime,
-    this.breakTime,
     required this.date,
-    this.onNullBreakTime,
     this.checkInStatus,
     this.checkOutStatus,
+    this.isBreakTime,
+    this.breakTimeTitle,
   });
 
   @override
@@ -86,7 +86,8 @@ class RecordCard extends StatelessWidget {
             firstTitle: "Break Time",
             onNullTitle: "Break Time",
             secondTitle: "Break Time",
-            isBreakTime: true,
+            breakTimeTitle: breakTimeTitle,
+            isBreakTime: isBreakTime,
             icon: Icons.coffee,
             iconColor: Colors.white,
             status: null,

@@ -22,7 +22,7 @@ class StatusCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return isBreakTime == true
         ? MyText(
-            text: "Ongoing",
+            text: breakTimeTitle ?? "Ongoing",
             style: BodySmallMedium.copyWith(
               color: Colors.white,
             ),

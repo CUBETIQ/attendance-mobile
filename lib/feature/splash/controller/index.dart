@@ -1,6 +1,7 @@
 import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
 import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
 import 'package:attendance_app/core/model/department_model.dart';
+import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
@@ -22,6 +23,7 @@ class SplashController extends GetxController
   final LocalStorageController localDataService = LocalStorageController();
   Rx<LocalStorage> localData = LocalStorage().obs;
   Rx<DepartmentModel> department = DepartmentModel().obs;
+  Rx<OrganizationModel> organization = OrganizationModel().obs;
 
   @override
   void onInit() {
@@ -41,6 +43,7 @@ class SplashController extends GetxController
     localData.value = data ?? LocalStorage();
     if (localData.value.accessToken != null) {
       await fetchMe();
+      await getOrganization();
       if (user.value.positionId != null && user.value.positionId != "") {
         await getPosition();
       }
@@ -59,7 +62,8 @@ class SplashController extends GetxController
       Get.offNamed(Routes.NAVIGATION, arguments: {
         "user": user.value,
         "position": position.value,
-        "department": department.value
+        "department": department.value,
+        "organization": organization.value,
       });
     } else if (localData.value.isFirstTime == false) {
       Get.offNamed(Routes.LOGIN);
@@ -91,6 +95,16 @@ class SplashController extends GetxController
     try {
       department.value =
           await SplashService().getDepartment(user.value.departmentId!);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
+  Future<void> getOrganization() async {
+    try {
+      organization.value =
+          await SplashService().getOrganization(id: user.value.organizationId!);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

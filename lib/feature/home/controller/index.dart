@@ -36,6 +36,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> scaleAnimation;
   RxBool isInRange = false.obs;
+  RxBool isBreakTime = false.obs;
+  Rxn<String> breakTimeTitle = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -44,6 +46,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     initTabWithRole();
     initDate();
     getAttendance();
+    checkBreakTime();
   }
 
   void initAnimation() {
@@ -183,5 +186,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         NavigationController.to.organization.value.configs?.endHour ?? "17:00";
 
     currentDate.value = DateFormat('E, MMM dd').format(date);
+  }
+
+  void checkBreakTime() {
+    final time = DateTime.now().hour;
+    final startBreakHour =
+        NavigationController.to.startBreakTime.split(":")?.first;
+    final endBreakHour = NavigationController.to.endBreakTime.split(":")?.first;
+    if (time >= int.parse(startBreakHour!) && time < int.parse(endBreakHour!)) {
+      isBreakTime.value = true;
+      breakTimeTitle.value = "Ongoing";
+    } else {
+      isBreakTime.value = true;
+      breakTimeTitle.value = "Finished";
+    }
   }
 }

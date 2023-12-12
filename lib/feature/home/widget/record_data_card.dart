@@ -19,6 +19,7 @@ class RecordDataCard extends StatelessWidget {
   final bool? noStatus;
   final Gradient? gradient;
   final bool? isBreakTime;
+  final String? breakTimeTitle;
 
   const RecordDataCard({
     super.key,
@@ -34,6 +35,7 @@ class RecordDataCard extends StatelessWidget {
     this.noStatus,
     this.gradient,
     this.isBreakTime,
+    this.breakTimeTitle,
   });
 
   @override
@@ -135,6 +137,7 @@ class RecordDataCard extends StatelessWidget {
                   StatusCard(
                     status: status,
                     isBreakTime: isBreakTime,
+                    breakTimeTitle: breakTimeTitle,
                   ),
                 ],
               ),

@@ -8,7 +8,6 @@ import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
 import 'package:attendance_app/feature/navigation/service/index.dart';
 import 'package:attendance_app/utils/location_util.dart';
 import 'package:attendance_app/utils/types/role.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -21,7 +20,6 @@ class NavigationController extends GetxController {
   Rx<DepartmentModel> department = DepartmentModel().obs;
   RxString getUserRole = "".obs;
   List<String> titles = ['Home', 'Report', 'Profile'];
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
   List<BottomBarModel> items = [
     BottomBarModel(
       title: 'Home',
@@ -45,6 +43,7 @@ class NavigationController extends GetxController {
   RxBool isInRange = false.obs;
   Rxn<String> startBreakTime = Rxn<String>(null);
   Rxn<String> endBreakTime = Rxn<String>(null);
+  Rx<OrganizationModel> organization = OrganizationModel().obs;
 
   @override
   void onInit() {
@@ -52,30 +51,19 @@ class NavigationController extends GetxController {
     user.value = Get.arguments["user"];
     position.value = Get.arguments["position"];
     department.value = Get.arguments["department"];
+    organization.value = Get.arguments["organization"];
     getUserRole.value = user.value.role ?? Role.staff;
-    getOrganization();
+    getUserLocation();
   }
 
   void onDestinationSelected(int index) {
     selectedIndex.value = index;
   }
 
-  Future<void> getOrganization() async {
-    try {
-      organization.value = await NavigationService()
-          .getOrganization(id: user.value.organizationId!);
-      organizationLocation.value = organization.value.location;
-      startBreakTime.value =
-          organization.value.configs?.breakTime?.split("-")[0];
-      endBreakTime.value = organization.value.configs?.breakTime?.split("-")[1];
-      getUserLocation();
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
-  }
-
   Future<void> getUserLocation() async {
+    organizationLocation.value = organization.value.location;
+    startBreakTime.value = organization.value.configs?.breakTime?.split("-")[0];
+    endBreakTime.value = organization.value.configs?.breakTime?.split("-")[1];
     try {
       userLocation.value = await NavigationService().getCurrentLocation();
       isInRange.value = isWithinRadius(userLocation.value!,

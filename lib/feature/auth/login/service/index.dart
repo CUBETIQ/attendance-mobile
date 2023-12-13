@@ -12,13 +12,16 @@ class LoginService {
 
   Future<Set<String>> login(LoginModel input) async {
     final String accessToken;
+
     final String refreshToken;
+
+    final data = {
+      "username": input.username,
+      "password": input.password,
+    };
     Response response = await dioInstance.dio.post(
       Endpoints.instance.login,
-      data: {
-        "username": input.username,
-        "password": input.password,
-      },
+      data: data,
     );
     if (response.statusCode == 200) {
       accessToken = response.data["data"]["accessToken"];

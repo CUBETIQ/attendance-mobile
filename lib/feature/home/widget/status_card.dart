@@ -2,7 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/utils/types/attendance_status.dart';
+import 'package:attendance_app/utils/types_helper/attendance_status.dart';
 import 'package:flutter/material.dart';
 
 class StatusCard extends StatelessWidget {

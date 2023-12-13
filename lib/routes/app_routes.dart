@@ -10,4 +10,5 @@ abstract class Routes {
   static const LOGIN = '/login';
   static const NAVIGATION = '/navigation';
   static const PROFILE = '/profile';
+  static const EDIT_PROFILE = '/edit_profile';
 }

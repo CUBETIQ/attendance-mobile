@@ -1,4 +1,4 @@
-import 'package:attendance_app/utils/types/attendance_status.dart';
+import 'package:attendance_app/utils/types_helper/attendance_status.dart';
 
 class CheckInStatusValidator {
   String getStatus(String hour, DateTime checkInTime) {

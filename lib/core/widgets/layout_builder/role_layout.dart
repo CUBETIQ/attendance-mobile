@@ -1,4 +1,4 @@
-import 'package:attendance_app/utils/types/role.dart';
+import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

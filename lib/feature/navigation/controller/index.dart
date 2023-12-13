@@ -7,7 +7,7 @@ import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
 import 'package:attendance_app/feature/navigation/service/index.dart';
 import 'package:attendance_app/utils/location_util.dart';
-import 'package:attendance_app/utils/types/role.dart';
+import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';

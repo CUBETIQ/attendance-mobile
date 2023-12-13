@@ -9,7 +9,8 @@ import 'package:attendance_app/feature/navigation/naviation_binding.dart';
 import 'package:attendance_app/feature/navigation/view/index.dart';
 import 'package:attendance_app/feature/onboard/onboard_binding.dart';
 import 'package:attendance_app/feature/onboard/view/index.dart';
-import 'package:attendance_app/feature/profile/profile_binding.dart';
+import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
+import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
 import 'package:attendance_app/feature/splash/splash_binding.dart';
 import 'package:attendance_app/feature/splash/view/index.dart';
 import 'package:get/get.dart';
@@ -47,6 +48,11 @@ class AppPages {
         HomeBinding(),
         ProfileBinding(),
       ],
+    ),
+    GetPage(
+      name: Routes.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

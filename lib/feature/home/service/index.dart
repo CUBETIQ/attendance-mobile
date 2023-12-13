@@ -8,13 +8,16 @@ class HomeService {
   DioUtil dioInstance = DioUtil();
   Future<AttendanceModel> checkIn(CheckInModel input) async {
     final AttendanceModel checkIn;
-    final response =
-        await dioInstance.dio.post(Endpoints.instance.check_in, data: {
+
+    final data = {
       "checkInDateTime": input.checkInDateTime,
       "checkInStatus": input.checkInStatus,
       "checkInType": input.checkInType,
       "checkInLocation": input.checkInLocation?.toJson(),
-    });
+    };
+
+    final response =
+        await dioInstance.dio.post(Endpoints.instance.check_in, data: data);
     if (response.statusCode == 200) {
       checkIn = AttendanceModel().fromJson(response.data["data"]);
     } else {
@@ -25,13 +28,16 @@ class HomeService {
 
   Future<AttendanceModel> checkOut(CheckOutModel input) async {
     final AttendanceModel checkIn;
-    final response =
-        await dioInstance.dio.post(Endpoints.instance.check_out, data: {
+
+    final data = {
       "checkOutDateTime": input.checkOutDateTime,
       "checkOutType": input.checkOutType,
       "checkOutStatus": input.checkOutStatus,
       "checkOutLocation": input.checkOutLocation?.toJson(),
-    });
+    };
+
+    final response =
+        await dioInstance.dio.post(Endpoints.instance.check_out, data: data);
     if (response.statusCode == 200) {
       checkIn = AttendanceModel().fromJson(response.data["data"]);
     } else {
@@ -43,11 +49,16 @@ class HomeService {
   Future<List<AttendanceModel>> getAttendance(
       {int? startDate, int? endDate}) async {
     List<AttendanceModel> attendanceList = [];
-    final response = await dioInstance.dio
-        .get(Endpoints.instance.get_attendance, queryParameters: {
+
+    final query = {
       "startDate": startDate,
       "endDate": endDate,
-    });
+    };
+
+    final response = await dioInstance.dio.get(
+      Endpoints.instance.get_attendance,
+      queryParameters: query,
+    );
     if (response.statusCode == 200) {
       attendanceList = AttendanceModel().fromListJson(response.data["data"]);
     } else {

@@ -3,10 +3,13 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/profile/controller/index.dart';
-import 'package:attendance_app/feature/profile/widget/attendance_profile_card.dart';
-import 'package:attendance_app/feature/profile/widget/job_company_title.dart';
-import 'package:attendance_app/feature/profile/widget/kpi_score_card.dart';
+import 'package:attendance_app/feature/profile/profile/controller/index.dart';
+import 'package:attendance_app/feature/profile/profile/widget/attendance_profile_card.dart';
+import 'package:attendance_app/feature/profile/profile/widget/job_company_title.dart';
+import 'package:attendance_app/feature/profile/profile/widget/kpi_score_card.dart';
+import 'package:attendance_app/feature/profile/profile/widget/option_button.dart';
+import 'package:attendance_app/feature/profile/profile/widget/profile_detail_row.dart';
+import 'package:attendance_app/utils/time_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -56,9 +59,11 @@ class ProfileViewMobile extends StatelessWidget {
                           constraints: BoxConstraints(
                             maxWidth: size.width * 0.7,
                           ),
-                          child: MyText(
-                            text: controller.name.value ?? "--------",
-                            style: BodyXlargeMedium,
+                          child: Obx(
+                            () => MyText(
+                              text: controller.name.value ?? "--------",
+                              style: BodyXlargeMedium,
+                            ),
                           ),
                         ),
                         SizedBox(height: size.height * 0.005),
@@ -72,7 +77,29 @@ class ProfileViewMobile extends StatelessWidget {
                                     "Position",
                           ),
                         ),
-                        SizedBox(height: size.height * 0.04),
+                        SizedBox(height: size.height * 0.015),
+                        Obx(
+                          () => ProfileDetailRow(
+                            title: "Department",
+                            value:
+                                NavigationController.to.department.value.name,
+                          ),
+                        ),
+                        Obx(
+                          () => ProfileDetailRow(
+                            title: "Dob",
+                            value: DateFormatter().formatMillisecondsToDOB(
+                              controller.user.value.dateOfBirth,
+                            ),
+                          ),
+                        ),
+                        Obx(
+                          () => ProfileDetailRow(
+                            title: "Address",
+                            value: controller.user.value.address,
+                          ),
+                        ),
+                        SizedBox(height: size.height * 0.02),
                         const KpiScoreCard(
                           score: "87",
                         ),
@@ -116,21 +143,11 @@ class ProfileViewMobile extends StatelessWidget {
             const SizedBox(height: AppSize.paddingS11),
             ...List.generate(
               controller.options.length,
-              (index) => Container(
-                width: size.width,
-                height: size.width * 0.15,
-                margin: const EdgeInsets.only(
-                  bottom: AppSize.paddingS5,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    AppSize.borderRadiusLarge * (size.width / 375),
-                  ),
-                  color:
-                      Theme.of(context).colorScheme.primary.withOpacity(0.065),
-                ),
+              (index) => OptionButton(
+                option: controller.options[index],
+                size: size,
               ),
-            )
+            ),
           ],
         ),
       ),

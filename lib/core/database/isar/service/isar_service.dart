@@ -47,4 +47,23 @@ class IsarService extends GetxService {
       rethrow;
     }
   }
+
+  Future<void> clearLocalData() async {
+    try {
+      final appConfig = await _localStorage.get();
+      final app = LocalStorage();
+      app.id = 1;
+      app.isActivated = appConfig?.isActivated;
+      app.isFirstTime = appConfig?.isFirstTime;
+      app.accessToken = null;
+      app.refreshToken = null;
+      app.darkTheme = appConfig?.darkTheme;
+      app.language = appConfig?.language;
+      app.isRememberMe = appConfig?.isRememberMe;
+      app.username = appConfig?.username;
+      await _localStorage.insert(app);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

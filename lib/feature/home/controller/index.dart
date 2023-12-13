@@ -8,8 +8,8 @@ import 'package:attendance_app/feature/home/model/check_out_model.dart';
 import 'package:attendance_app/feature/home/service/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/utils/attendance_status_validator.dart';
-import 'package:attendance_app/utils/types/attendance_method.dart';
-import 'package:attendance_app/utils/types/role.dart';
+import 'package:attendance_app/utils/types_helper/attendance_method.dart';
+import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -193,12 +193,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     final startBreakHour =
         NavigationController.to.startBreakTime.split(":")?.first;
     final endBreakHour = NavigationController.to.endBreakTime.split(":")?.first;
-    if (time >= int.parse(startBreakHour!) && time < int.parse(endBreakHour!)) {
+    if (time >= int.parse(startBreakHour ?? "0") &&
+        time < int.parse(endBreakHour ?? "0")) {
       isBreakTime.value = true;
       breakTimeTitle.value = "Ongoing";
-    } else {
+    } else if (time >= int.parse(endBreakHour ?? "0")) {
       isBreakTime.value = true;
       breakTimeTitle.value = "Finished";
+    } else {
+      isBreakTime.value = false;
+      breakTimeTitle.value = null;
     }
   }
 }

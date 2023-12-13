@@ -42,7 +42,7 @@ class AttendanceProfileCard extends StatelessWidget {
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAttendance ?? "0",
-                    style: BodyLargeRegular,
+                    style: BodyXlargeMedium,
                   ),
                 ],
               ),
@@ -60,7 +60,7 @@ class AttendanceProfileCard extends StatelessWidget {
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAbsent ?? "0",
-                    style: BodyLargeRegular,
+                    style: BodyXlargeMedium,
                   ),
                 ],
               ),
@@ -78,7 +78,7 @@ class AttendanceProfileCard extends StatelessWidget {
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalLeave ?? "0",
-                    style: BodyLargeRegular,
+                    style: BodyXlargeMedium,
                   ),
                 ],
               ),

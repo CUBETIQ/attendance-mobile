@@ -36,4 +36,14 @@ class DateFormatter {
 
     return formattedTime;
   }
+
+  String formatMillisecondsToDOB(int? milliseconds) {
+    if (milliseconds == null) {
+      return "N/A";
+    }
+    // Cover milliseconds to DateTime
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds);
+    // Format the result as a string
+    return DateFormat('yyyy-MM-dd').format(dateTime);
+  }
 }

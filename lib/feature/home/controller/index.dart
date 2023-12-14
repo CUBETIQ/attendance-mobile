@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
+import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/home/model/check_in_model.dart';
@@ -38,6 +39,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxBool isInRange = false.obs;
   RxBool isBreakTime = false.obs;
   Rxn<String> breakTimeTitle = Rxn<String>(null);
+  Rx<UserModel> user = UserModel().obs;
+  Rxn<String> name = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -45,6 +48,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     initAnimation();
     initTabWithRole();
     initDate();
+    getAttendance();
+    checkBreakTime();
+    getUsername();
+  }
+
+  void onRefresh() {
     getAttendance();
     checkBreakTime();
   }
@@ -203,6 +212,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     } else {
       isBreakTime.value = false;
       breakTimeTitle.value = null;
+    }
+  }
+
+  void getUsername() {
+    user.value = NavigationController.to.user.value;
+    if (user.value.firstName != null ||
+        user.value.firstName != "" ||
+        user.value.lastName != null ||
+        user.value.lastName != "") {
+      name.value = "${user.value.firstName} ${user.value.lastName}";
+    } else {
+      name.value = user.value.username;
     }
   }
 }

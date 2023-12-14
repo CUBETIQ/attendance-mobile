@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
@@ -5,8 +7,9 @@ import 'package:attendance_app/config/font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-class MyTextFieldForm extends StatelessWidget {
+class MyDatePickerField extends StatelessWidget {
   final String label;
   final TextEditingController textController;
   final bool? filled;
@@ -20,9 +23,9 @@ class MyTextFieldForm extends StatelessWidget {
   final TextCapitalization? textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
   final bool? isPassword;
-  final IconData? prefixIcon;
+  final void Function(int?)? onDateResult;
 
-  const MyTextFieldForm({
+  const MyDatePickerField({
     super.key,
     required this.label,
     required this.textController,
@@ -37,7 +40,7 @@ class MyTextFieldForm extends StatelessWidget {
     this.textCapitalization,
     this.inputFormatters,
     this.isPassword,
-    this.prefixIcon,
+    this.onDateResult,
   });
 
   @override
@@ -60,6 +63,20 @@ class MyTextFieldForm extends StatelessWidget {
                   ),
             const SizedBox(height: 8),
             TextFormField(
+              readOnly: true,
+              onTap: () async {
+                final DateTime? picked = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime(2100),
+                );
+                if (picked != null) {
+                  // Throw back the data through the function
+                  onDateResult?.call(picked.millisecondsSinceEpoch);
+                  textController.text = DateFormat('dd/MM/yyyy').format(picked);
+                }
+              },
               controller: textController,
               textCapitalization: textCapitalization ?? TextCapitalization.none,
               inputFormatters: inputFormatters,
@@ -70,9 +87,9 @@ class MyTextFieldForm extends StatelessWidget {
                   vertical: (AppSize.paddingS7) * (size.width / 375.0),
                 ),
                 hintText: hintText,
-                isDense: true,
                 hintStyle: hintStyle ?? BodyMediumMedium,
                 filled: filled ?? false,
+                isDense: true,
                 errorMaxLines: 2,
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(

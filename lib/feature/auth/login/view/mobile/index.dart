@@ -58,6 +58,7 @@ class LoginViewMobile extends StatelessWidget {
                 SizedBox(height: size.height * 0.05),
                 MyTextFieldForm(
                   hasLabel: true,
+                  prefixIcon: Icons.person_rounded,
                   label: "Username",
                   hintText: "Enter your username",
                   textController: controller.usernameController,
@@ -66,6 +67,7 @@ class LoginViewMobile extends StatelessWidget {
                 MyTextFieldForm(
                   hasLabel: true,
                   isPassword: true,
+                  prefixIcon: Icons.lock_rounded,
                   label: "Password",
                   hintText: "Enter your password  ",
                   textController: controller.passwordController,

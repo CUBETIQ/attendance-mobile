@@ -38,12 +38,12 @@ class DateFormatter {
   }
 
   String formatMillisecondsToDOB(int? milliseconds) {
-    if (milliseconds == null) {
+    if (milliseconds == null || milliseconds.toString().length < 5) {
       return "N/A";
     }
     // Cover milliseconds to DateTime
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds);
     // Format the result as a string
-    return DateFormat('yyyy-MM-dd').format(dateTime);
+    return DateFormat('dd/MM/yyyy').format(dateTime);
   }
 }

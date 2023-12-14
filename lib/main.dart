@@ -12,11 +12,11 @@ Rx<LocalStorage?>? storageConfig = Rx<LocalStorage?>(null);
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await initDBService();
   await AppPathController.initPath();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
   runApp(const MyApp());
   FlutterNativeSplash.remove();

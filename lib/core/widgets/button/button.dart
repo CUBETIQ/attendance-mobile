@@ -35,7 +35,7 @@ class MyButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? double.infinity,
-        height: height ?? size.width * 0.13,
+        height: height ?? 48 * (size.width / 375.0),
         margin: margin,
         alignment: Alignment.center,
         decoration: BoxDecoration(

@@ -8,6 +8,7 @@ import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
 import 'package:attendance_app/feature/navigation/service/index.dart';
 import 'package:attendance_app/utils/location_util.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -70,6 +71,15 @@ class NavigationController extends GetxController {
           organizationLocation.value!, AppConfig.DEFAULT_LOCATION_RADIUS);
     } on Exception catch (e) {
       showErrorSnackBar("Error", e.toString());
+      rethrow;
+    }
+  }
+
+  Future<void> fetchMe() async {
+    try {
+      user.value = await NavigationService().fetchMe();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
   }

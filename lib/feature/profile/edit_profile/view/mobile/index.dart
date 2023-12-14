@@ -1,7 +1,10 @@
 import 'package:attendance_app/config/app_size.dart';
+import 'package:attendance_app/core/widgets/button/back_button.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
-import 'package:attendance_app/core/widgets/image/cache_image.dart';
+import 'package:attendance_app/core/widgets/dropdown_button/dropdown_button.dart';
+import 'package:attendance_app/core/widgets/profile_image/profile_image.dart';
 import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
+import 'package:attendance_app/core/widgets/textfield/date_picker_field.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
 import 'package:attendance_app/feature/profile/edit_profile/controller/index.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,7 @@ class EditProfileViewMobile extends StatelessWidget {
         title: const MyAppBarTitle(
           title: "Edit Profile",
         ),
+        leading: const MyBackButton(),
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
@@ -29,10 +33,16 @@ class EditProfileViewMobile extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: AppSize.paddingS17),
-              MyCacheImage(
-                imageUrl: controller.user.value.image ?? "",
-                width: size.width * 0.25,
-                height: size.width * 0.25,
+              GestureDetector(
+                onTap: controller.pickImage,
+                child: Obx(
+                  () => MyProfileImage(
+                    imageFile: controller.imageFile.value,
+                    imageUrl: controller.user.value.image ?? "",
+                    width: size.width * 0.25,
+                    height: size.width * 0.25,
+                  ),
+                ),
               ),
               const SizedBox(height: AppSize.paddingS17),
               MyTextFieldForm(
@@ -49,11 +59,12 @@ class EditProfileViewMobile extends StatelessWidget {
                 textController: controller.lastnameController,
               ),
               const SizedBox(height: AppSize.paddingS5),
-              MyTextFieldForm(
+              MyDatePickerField(
                 hasLabel: true,
-                label: "Dob",
+                label: "Date of birth",
                 hintText: "Enter your date of birth",
                 textController: controller.dobController,
+                onDateResult: controller.getDateInMilliSecond,
               ),
               const SizedBox(height: AppSize.paddingS5),
               MyTextFieldForm(
@@ -62,11 +73,29 @@ class EditProfileViewMobile extends StatelessWidget {
                 hintText: "Enter your address",
                 textController: controller.addressController,
               ),
+              const SizedBox(height: AppSize.paddingS5),
+              Obx(
+                () => MyDropDownButton<String>(
+                  label: "Status",
+                  value: controller.selectedStatus.value,
+                  dropdownItems: controller.status
+                      .map(
+                        (e) => DropdownMenuItem<String>(
+                          value: e,
+                          child: Text(e.capitalizeFirst ?? ""),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) =>
+                      controller.selectedStatus.value = value!,
+                ),
+              ),
               SizedBox(height: size.height * 0.06),
               MyButton(
                 title: "Save",
                 onTap: controller.updateProfile,
-              )
+              ),
+              const SizedBox(height: 10)
             ],
           ),
         ),

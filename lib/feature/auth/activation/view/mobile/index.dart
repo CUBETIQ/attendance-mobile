@@ -55,6 +55,7 @@ class ActivationViewMobile extends StatelessWidget {
                       SizedBox(height: size.height * 0.01),
                       MyTextFieldForm(
                         hasLabel: false,
+                        prefixIcon: Icons.vpn_key_rounded,
                         textCapitalization: TextCapitalization.characters,
                         label: "Activation",
                         hintText: "Enter your activation code",

@@ -1,5 +1,6 @@
 import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
 import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
+import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
@@ -28,22 +29,24 @@ class SplashController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    initLocalDb();
+    validateOrganization();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
     );
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
     controller.forward();
-    init();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    controller.dispose();
   }
 
   Future<void> initLocalDb() async {
-    final data = await localDataService.get();
-    localData.value = data ?? LocalStorage();
     if (localData.value.accessToken != null) {
       await fetchMe();
-      await getOrganization();
       if (user.value.positionId != null && user.value.positionId != "") {
         await getPosition();
       }
@@ -54,7 +57,6 @@ class SplashController extends GetxController
   }
 
   Future<void> init() async {
-    await Future.delayed(const Duration(seconds: 2));
     if (localData.value.isActivated == false ||
         localData.value.isActivated == null) {
       Get.offNamed(Routes.ACTIVATION);
@@ -101,11 +103,22 @@ class SplashController extends GetxController
     }
   }
 
-  Future<void> getOrganization() async {
+  Future<void> validateOrganization() async {
+    final data = await localDataService.get();
+    localData.value = data ?? LocalStorage();
+    await Future.delayed(const Duration(seconds: 2));
     try {
+      if (data?.organizationId == null) {
+        Get.offNamed(Routes.ACTIVATION);
+        return;
+      }
       organization.value =
-          await SplashService().getOrganization(id: user.value.organizationId!);
+          await SplashService().validateOrganization(id: data!.organizationId!);
+      await IsarService().saveLocalData(organizationId: organization.value.id);
+      initLocalDb();
+      init();
     } on DioException catch (e) {
+      Get.offNamed(Routes.ACTIVATION);
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }

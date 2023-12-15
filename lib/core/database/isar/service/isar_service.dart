@@ -29,6 +29,7 @@ class IsarService extends GetxService {
     String? username,
     String? refreshToken,
     bool? isActivated,
+    String? organizationId,
   }) async {
     try {
       final appConfig = await _localStorage.get();
@@ -42,21 +43,25 @@ class IsarService extends GetxService {
       app.language = language ?? appConfig?.language;
       app.isRememberMe = isRememberMe ?? appConfig?.isRememberMe;
       app.username = username ?? appConfig?.username;
+      app.organizationId = organizationId ?? appConfig?.organizationId;
       await _localStorage.insert(app);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> clearLocalData() async {
+  Future<void> clearLocalData(
+      {bool? deleteToken, bool? unactivate, bool? deleteOrgID}) async {
     try {
       final appConfig = await _localStorage.get();
       final app = LocalStorage();
       app.id = 1;
-      app.isActivated = appConfig?.isActivated;
+      app.isActivated = unactivate == true ? null : appConfig?.isActivated;
       app.isFirstTime = appConfig?.isFirstTime;
-      app.accessToken = null;
-      app.refreshToken = null;
+      app.accessToken = deleteToken == true ? null : appConfig?.accessToken;
+      app.refreshToken = deleteToken == true ? null : appConfig?.refreshToken;
+      app.organizationId =
+          deleteOrgID == true ? null : appConfig?.organizationId;
       app.darkTheme = appConfig?.darkTheme;
       app.language = appConfig?.language;
       app.isRememberMe = appConfig?.isRememberMe;

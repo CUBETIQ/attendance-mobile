@@ -1,5 +1,9 @@
 import 'dart:io';
+import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
+import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
+import 'package:attendance_app/core/model/activation_model.dart';
+import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/auth/activation/model/activation_model.dart';
@@ -16,10 +20,13 @@ class ActivationController extends GetxController {
   final String title = "Please enter the activation code";
   final String description =
       "To unlock the flow of time with Time Glitch: Where every moment counts, and attendance becomes a seamless journey through the fabric of efficiency.";
-  RxBool isActivated = false.obs;
+  Rxn<ActivationModel> activate = Rxn<ActivationModel>(null);
   Rxn<AndroidDeviceInfo> androidInfo = Rxn<AndroidDeviceInfo>(null);
   Rxn<IosDeviceInfo> iosInfo = Rxn<IosDeviceInfo>(null);
   Rxn<String> device = Rxn<String>(null);
+  final LocalStorageController localDataService = LocalStorageController();
+  Rx<LocalStorage> localData = LocalStorage().obs;
+  Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
 
   @override
   void onInit() {
@@ -31,15 +38,16 @@ class ActivationController extends GetxController {
     validate();
     if (MyTextFieldFormController.findController('Activation').isValid) {
       try {
-        ActivationModel input = ActivationModel(
+        ActivateModel input = ActivateModel(
           code: activationController.text.toUpperCase(),
           device: device.value,
         );
-        isActivated.value = await ActivationService().activate(input);
-        if (isActivated.value == true) {
-          Get.offNamed(Routes.ONBOARD);
-          await IsarService().saveLocalData(isActivated: isActivated.value);
-        }
+        activate.value = await ActivationService().activate(input);
+        await IsarService().saveLocalData(
+          isActivated: true,
+          organizationId: activate.value!.organizationId,
+        );
+        Get.offNamed(Routes.ONBOARD);
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;

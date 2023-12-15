@@ -47,13 +47,18 @@ const LocalStorageSchema = CollectionSchema(
       name: r'language',
       type: IsarType.string,
     ),
-    r'refreshToken': PropertySchema(
+    r'organizationId': PropertySchema(
       id: 6,
+      name: r'organizationId',
+      type: IsarType.string,
+    ),
+    r'refreshToken': PropertySchema(
+      id: 7,
       name: r'refreshToken',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'username',
       type: IsarType.string,
     )
@@ -91,6 +96,12 @@ int _localStorageEstimateSize(
     }
   }
   {
+    final value = object.organizationId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.refreshToken;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -117,8 +128,9 @@ void _localStorageSerialize(
   writer.writeBool(offsets[3], object.isFirstTime);
   writer.writeBool(offsets[4], object.isRememberMe);
   writer.writeString(offsets[5], object.language);
-  writer.writeString(offsets[6], object.refreshToken);
-  writer.writeString(offsets[7], object.username);
+  writer.writeString(offsets[6], object.organizationId);
+  writer.writeString(offsets[7], object.refreshToken);
+  writer.writeString(offsets[8], object.username);
 }
 
 LocalStorage _localStorageDeserialize(
@@ -135,8 +147,9 @@ LocalStorage _localStorageDeserialize(
   object.isFirstTime = reader.readBoolOrNull(offsets[3]);
   object.isRememberMe = reader.readBoolOrNull(offsets[4]);
   object.language = reader.readStringOrNull(offsets[5]);
-  object.refreshToken = reader.readStringOrNull(offsets[6]);
-  object.username = reader.readStringOrNull(offsets[7]);
+  object.organizationId = reader.readStringOrNull(offsets[6]);
+  object.refreshToken = reader.readStringOrNull(offsets[7]);
+  object.username = reader.readStringOrNull(offsets[8]);
   return object;
 }
 
@@ -162,6 +175,8 @@ P _localStorageDeserializeProp<P>(
     case 6:
       return (reader.readStringOrNull(offset)) as P;
     case 7:
+      return (reader.readStringOrNull(offset)) as P;
+    case 8:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -753,6 +768,160 @@ extension LocalStorageQueryFilter
   }
 
   QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'organizationId',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'organizationId',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'organizationId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'organizationId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'organizationId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'organizationId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'organizationId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'organizationId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'organizationId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'organizationId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'organizationId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      organizationIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'organizationId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
       refreshTokenIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1145,6 +1314,20 @@ extension LocalStorageQuerySortBy
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      sortByOrganizationId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'organizationId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      sortByOrganizationIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'organizationId', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByRefreshToken() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'refreshToken', Sort.asc);
@@ -1261,6 +1444,20 @@ extension LocalStorageQuerySortThenBy
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      thenByOrganizationId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'organizationId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      thenByOrganizationIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'organizationId', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenByRefreshToken() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'refreshToken', Sort.asc);
@@ -1327,6 +1524,14 @@ extension LocalStorageQueryWhereDistinct
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByOrganizationId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'organizationId',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByRefreshToken(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1383,6 +1588,13 @@ extension LocalStorageQueryProperty
   QueryBuilder<LocalStorage, String?, QQueryOperations> languageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'language');
+    });
+  }
+
+  QueryBuilder<LocalStorage, String?, QQueryOperations>
+      organizationIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'organizationId');
     });
   }
 

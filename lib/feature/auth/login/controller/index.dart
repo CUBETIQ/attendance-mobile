@@ -1,7 +1,9 @@
+import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
+import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/auth/login/model/index.dart';
@@ -21,7 +23,8 @@ class LoginController extends GetxController {
   Rx<UserModel> user = UserModel().obs;
   Rx<PositionModel> position = PositionModel().obs;
   Rx<DepartmentModel> department = DepartmentModel().obs;
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
+  Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
+  final LocalStorageController localDataService = LocalStorageController();
 
   Future<void> login() async {
     validate();
@@ -33,22 +36,27 @@ class LoginController extends GetxController {
           password: passwordController.text,
         );
         var accessToken = await LoginService().login(input);
-        await IsarService().saveLocalData(
-            accessToken: accessToken.first, refreshToken: accessToken.last);
-        await fetchMe();
         await getOrganization();
-        if (user.value.positionId != null && user.value.positionId != "") {
-          await getPosition();
+        if (organization.value == null) {
+          Get.offNamed(Routes.ACTIVATION);
+        } else {
+          await IsarService().saveLocalData(
+              accessToken: accessToken.first, refreshToken: accessToken.last);
+          await fetchMe();
+          if (user.value.positionId != null && user.value.positionId != "") {
+            await getPosition();
+          }
+          if (user.value.departmentId != null &&
+              user.value.departmentId != "") {
+            await getDepartment();
+          }
+          Get.offNamed(Routes.NAVIGATION, arguments: {
+            "user": user.value,
+            "position": position.value,
+            "department": department.value,
+            "organization": organization.value,
+          });
         }
-        if (user.value.departmentId != null && user.value.departmentId != "") {
-          await getDepartment();
-        }
-        Get.offNamed(Routes.NAVIGATION, arguments: {
-          "user": user.value,
-          "position": position.value,
-          "department": department.value,
-          "organization": organization.value,
-        });
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
@@ -86,9 +94,15 @@ class LoginController extends GetxController {
   }
 
   Future<void> getOrganization() async {
+    final data = await localDataService.get();
+    Console.log("", data!.organizationId!);
     try {
       organization.value =
-          await LoginService().getOrganization(id: user.value.organizationId!);
+          await LoginService().getOrganization(id: data.organizationId!);
+      if (organization.value != null) {
+        await IsarService()
+            .saveLocalData(organizationId: organization.value?.id);
+      }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -100,6 +114,7 @@ class LoginController extends GetxController {
       department.value =
           await LoginService().getDepartment(user.value.departmentId!);
     } on DioException catch (e) {
+      Get.offNamed(Routes.ACTIVATION);
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }

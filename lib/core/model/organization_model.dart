@@ -1,6 +1,7 @@
 import 'package:attendance_app/core/repositories/base_model.dart';
 
 class OrganizationModel extends BaseModel<OrganizationModel> {
+  final String? id;
   final String? name;
   final OranizationLocationModel? location;
   final String? address;
@@ -12,6 +13,7 @@ class OrganizationModel extends BaseModel<OrganizationModel> {
   final Configs? configs;
 
   OrganizationModel({
+    this.id,
     this.name,
     this.location,
     this.address,
@@ -29,6 +31,7 @@ class OrganizationModel extends BaseModel<OrganizationModel> {
       return OrganizationModel();
     }
     return OrganizationModel(
+        id: json['id'],
         name: json['name'],
         location: OranizationLocationModel().fromJson(json['location']),
         address: json['address'],
@@ -51,6 +54,7 @@ class OrganizationModel extends BaseModel<OrganizationModel> {
   @override
   Map<String, dynamic> toJson() {
     return {
+      "id": id,
       "name": name,
       "location": location?.toJson(),
       "address": address,

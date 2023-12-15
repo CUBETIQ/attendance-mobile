@@ -1,6 +1,6 @@
-class ActivationModel {
+class ActivateModel {
   String? code;
   String? device;
 
-  ActivationModel({this.code, this.device});
+  ActivateModel({this.code, this.device});
 }

@@ -24,7 +24,6 @@ class SplashService {
       await IsarService().clearLocalData(
         unactivate: true,
         deleteToken: true,
-        deleteOrgID: true,
       );
       return Future.error(response.data["message"]);
     }
@@ -34,7 +33,7 @@ class SplashService {
   Future<UserModel> fetchMe() async {
     final UserModel user;
     dio.Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_profile,
+      Endpoints.instance.get_own_profile,
     );
     if (response.statusCode == 200) {
       user = UserModel().fromJson(response.data["data"]);

@@ -3,7 +3,6 @@ import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/auth/login/model/index.dart';
@@ -36,13 +35,16 @@ class LoginController extends GetxController {
           password: passwordController.text,
         );
         var accessToken = await LoginService().login(input);
-        await getOrganization();
+        await IsarService().saveLocalData(
+          accessToken: accessToken.first,
+          refreshToken: accessToken.last,
+          organizationId: organization.value?.id,
+        );
+        await fetchMe();
+        await getOrganization(user.value.organizationId!);
         if (organization.value == null) {
           Get.offNamed(Routes.ACTIVATION);
         } else {
-          await IsarService().saveLocalData(
-              accessToken: accessToken.first, refreshToken: accessToken.last);
-          await fetchMe();
           if (user.value.positionId != null && user.value.positionId != "") {
             await getPosition();
           }
@@ -93,12 +95,9 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> getOrganization() async {
-    final data = await localDataService.get();
-    Console.log("", data!.organizationId!);
+  Future<void> getOrganization(String id) async {
     try {
-      organization.value =
-          await LoginService().getOrganization(id: data.organizationId!);
+      organization.value = await LoginService().getOrganization(id: id);
       if (organization.value != null) {
         await IsarService()
             .saveLocalData(organizationId: organization.value?.id);

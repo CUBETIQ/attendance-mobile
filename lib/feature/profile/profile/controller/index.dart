@@ -53,7 +53,6 @@ class ProfileController extends GetxController {
         onTapLogOut: () async {
           await IsarService().clearLocalData(
             deleteToken: true,
-            deleteOrgID: true,
           );
           Get.offNamed(Routes.LOGIN);
         },

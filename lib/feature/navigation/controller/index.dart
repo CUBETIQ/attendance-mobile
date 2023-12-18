@@ -20,7 +20,7 @@ class NavigationController extends GetxController {
   Rx<PositionModel> position = PositionModel().obs;
   Rx<DepartmentModel> department = DepartmentModel().obs;
   RxString getUserRole = "".obs;
-  List<String> titles = ['Home', 'Report', 'Profile'];
+  List<String> titles = ['Home', 'Task', 'Profile'];
   List<BottomBarModel> items = [
     BottomBarModel(
       title: 'Home',
@@ -28,9 +28,9 @@ class NavigationController extends GetxController {
       selectedIcon: Icons.home_rounded,
     ),
     BottomBarModel(
-      title: 'Report',
-      icon: Icons.bar_chart_outlined,
-      selectedIcon: Icons.bar_chart_rounded,
+      title: 'Task',
+      icon: Icons.task_outlined,
+      selectedIcon: Icons.task_rounded,
     ),
     BottomBarModel(
       title: 'Profile',

@@ -1,4 +1,5 @@
 import 'package:attendance_app/core/model/attendance_model.dart';
+import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:attendance_app/feature/home/model/check_in_model.dart';
@@ -57,7 +58,7 @@ class HomeService {
     };
 
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_attendance,
+      Endpoints.instance.get_own_attendance,
       queryParameters: query,
     );
     if (response.statusCode == 200) {
@@ -66,5 +67,23 @@ class HomeService {
       throw Exception("Get attendance failed");
     }
     return attendanceList;
+  }
+
+  Future<SummaryAttendanceModel> getSummrizeAttendance({int? date}) async {
+    SummaryAttendanceModel summaryAttendance;
+
+    final query = {"date": date};
+
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_own_summary_attendance,
+      queryParameters: query,
+    );
+    if (response.statusCode == 200) {
+      summaryAttendance =
+          SummaryAttendanceModel().fromJson(response.data["data"]);
+    } else {
+      throw Exception("Get attendance failed");
+    }
+    return summaryAttendance;
   }
 }

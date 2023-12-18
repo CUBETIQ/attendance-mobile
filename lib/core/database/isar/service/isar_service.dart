@@ -50,8 +50,7 @@ class IsarService extends GetxService {
     }
   }
 
-  Future<void> clearLocalData(
-      {bool? deleteToken, bool? unactivate, bool? deleteOrgID}) async {
+  Future<void> clearLocalData({bool? deleteToken, bool? unactivate}) async {
     try {
       final appConfig = await _localStorage.get();
       final app = LocalStorage();
@@ -60,8 +59,7 @@ class IsarService extends GetxService {
       app.isFirstTime = appConfig?.isFirstTime;
       app.accessToken = deleteToken == true ? null : appConfig?.accessToken;
       app.refreshToken = deleteToken == true ? null : appConfig?.refreshToken;
-      app.organizationId =
-          deleteOrgID == true ? null : appConfig?.organizationId;
+      app.organizationId = appConfig?.organizationId;
       app.darkTheme = appConfig?.darkTheme;
       app.language = appConfig?.language;
       app.isRememberMe = appConfig?.isRememberMe;

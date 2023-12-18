@@ -57,8 +57,7 @@ class SplashController extends GetxController
   }
 
   Future<void> init() async {
-    if (localData.value.isActivated == false ||
-        localData.value.isActivated == null) {
+    if (localData.value.isActivated != true) {
       Get.offNamed(Routes.ACTIVATION);
     } else if (localData.value.accessToken != null) {
       Get.offNamed(Routes.NAVIGATION, arguments: {
@@ -108,14 +107,14 @@ class SplashController extends GetxController
     localData.value = data ?? LocalStorage();
     await Future.delayed(const Duration(seconds: 2));
     try {
-      if (data?.organizationId == null) {
+      if ((data?.organizationId == null && data?.isActivated != true)) {
         Get.offNamed(Routes.ACTIVATION);
         return;
       }
       organization.value =
           await SplashService().validateOrganization(id: data!.organizationId!);
       await IsarService().saveLocalData(organizationId: organization.value.id);
-      initLocalDb();
+      await initLocalDb();
       init();
     } on DioException catch (e) {
       Get.offNamed(Routes.ACTIVATION);

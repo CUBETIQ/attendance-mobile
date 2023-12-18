@@ -2,6 +2,8 @@ import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/feature/home/view/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/view/index.dart';
+import 'package:attendance_app/feature/task/controller/index.dart';
+import 'package:attendance_app/feature/task/view/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +17,7 @@ class NavigationViewMobile extends StatelessWidget {
       appBar: AppBar(
         title: Obx(
           () => MyAppBarTitle(
-            title: controller.titles[controller.selectedIndex.value],
+            title: controller.items[controller.selectedIndex.value].title,
           ),
         ),
       ),
@@ -25,11 +27,25 @@ class NavigationViewMobile extends StatelessWidget {
             index: controller.selectedIndex.value,
             children: const <Widget>[
               HomeView(),
-              Center(child: Text('Notifications')),
+              TaskView(),
               ProfileView(),
             ],
           ),
         ),
+      ),
+      floatingActionButton: Obx(
+        () => controller.selectedIndex.value != 1
+            ? const SizedBox.shrink()
+            : FloatingActionButton(
+                onPressed: TaskController.to.onTapAddTask,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40),
+                  ),
+                ),
+                elevation: 2,
+                child: const Icon(Icons.add),
+              ),
       ),
       bottomNavigationBar: Obx(
         () => NavigationBar(

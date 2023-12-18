@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
+import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
@@ -41,6 +42,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxBool isBreakTime = false.obs;
   Rxn<String> breakTimeTitle = Rxn<String>(null);
   Rx<UserModel> user = UserModel().obs;
+  Rxn<SummaryAttendanceModel> summaryAttendance =
+      Rxn<SummaryAttendanceModel>(null);
   Rxn<String> name = Rxn<String>(null);
 
   @override
@@ -52,6 +55,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     getAttendance();
     checkBreakTime();
     getUsername();
+    getSummarizeAttendance();
   }
 
   void onRefresh() {
@@ -187,6 +191,17 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       rethrow;
     } finally {
       isLoadingList.value = false;
+    }
+  }
+
+  Future<void> getSummarizeAttendance() async {
+    try {
+      summaryAttendance.value = await HomeService().getSummrizeAttendance(
+        date: date.millisecondsSinceEpoch,
+      );
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
     }
   }
 

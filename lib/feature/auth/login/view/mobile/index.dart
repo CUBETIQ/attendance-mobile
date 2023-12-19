@@ -80,8 +80,8 @@ class LoginViewMobile extends StatelessWidget {
                       children: [
                         Obx(
                           () => SizedBox(
-                            width: 24,
-                            height: 24,
+                            width: 24 * (size.width / 375.0),
+                            height: 24 * (size.width / 375.0),
                             child: Checkbox(
                               value: controller.isRememberMe.value,
                               onChanged: controller.onCheck,

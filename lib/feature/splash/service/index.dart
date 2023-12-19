@@ -25,7 +25,7 @@ class SplashService {
         unactivate: true,
         deleteToken: true,
       );
-      return Future.error(response.data["message"]);
+      return throw Exception(response.data["message"]);
     }
     return organization;
   }
@@ -38,7 +38,7 @@ class SplashService {
     if (response.statusCode == 200) {
       user = UserModel().fromJson(response.data["data"]);
     } else {
-      return Future.error(response.data["message"]);
+      return throw Exception(response.data["message"]);
     }
     return user;
   }
@@ -51,7 +51,7 @@ class SplashService {
     if (response.statusCode == 200) {
       position = PositionModel().fromJson(response.data["data"]);
     } else {
-      return Future.error(response.data["message"]);
+      return throw Exception(response.data["message"]);
     }
     return position;
   }
@@ -64,7 +64,7 @@ class SplashService {
     if (response.statusCode == 200) {
       department = DepartmentModel().fromJson(response.data["data"]);
     } else {
-      return Future.error(response.data["message"]);
+      return throw Exception(response.data["message"]);
     }
     return department;
   }

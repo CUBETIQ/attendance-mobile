@@ -2,8 +2,10 @@ import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/console/console.dart';
+import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/task/task/service/index.dart';
 import 'package:attendance_app/utils/types_helper/task_status.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class TaskController extends GetxController {
@@ -32,8 +34,9 @@ class TaskController extends GetxController {
       percentageCompletedTask.value =
           (totalCompletedTask.value / totalTask.value * 100) / 100;
       percentageUncompletedTask.value = 1 - percentageCompletedTask.value;
-    } catch (e) {
-      Console.log("Error", e.toString());
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
     }
   }
 
@@ -50,8 +53,9 @@ class TaskController extends GetxController {
         },
         image: checkIn,
       );
-    } catch (e) {
-      Console.log("Error", e.toString());
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
     }
   }
 

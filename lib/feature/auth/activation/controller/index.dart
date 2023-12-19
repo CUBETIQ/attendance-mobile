@@ -36,6 +36,7 @@ class ActivationController extends GetxController {
 
   Future<void> activation() async {
     validate();
+    final data = await localDataService.get();
     if (MyTextFieldFormController.findController('Activation').isValid) {
       try {
         ActivateModel input = ActivateModel(
@@ -47,7 +48,11 @@ class ActivationController extends GetxController {
           isActivated: true,
           organizationId: activate.value!.organizationId,
         );
-        Get.offNamed(Routes.ONBOARD);
+        if (data?.isFirstTime == true) {
+          Get.offNamed(Routes.ONBOARD);
+        } else {
+          Get.offNamed(Routes.LOGIN);
+        }
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;

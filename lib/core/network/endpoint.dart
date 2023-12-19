@@ -23,4 +23,7 @@ class Endpoints {
   String get get_own_attendance => "/app/attendances/me";
   String get get_organization => "/app/organizations/";
   String get get_own_summary_attendance => "/app/summarize-attendances/me";
+  String get get_own_task => "/app/tasks/me";
+  String get task => "/app/tasks/";
+  String get complete_task => "/app/tasks/status/";
 }

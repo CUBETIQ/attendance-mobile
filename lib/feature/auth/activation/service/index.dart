@@ -20,7 +20,7 @@ class ActivationService {
     if (response.statusCode == 200) {
       activateModel = ActivationModel().fromJson(response.data["data"]);
     } else {
-      return Future.error("Activation failed");
+      return throw Exception("Activation failed");
     }
     return activateModel;
   }

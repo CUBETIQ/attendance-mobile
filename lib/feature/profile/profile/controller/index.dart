@@ -54,7 +54,7 @@ class ProfileController extends GetxController {
           await IsarService().clearLocalData(
             deleteToken: true,
           );
-          Get.offNamed(Routes.LOGIN);
+          Get.offAllNamed(Routes.LOGIN);
         },
       );
     } catch (e) {

@@ -2,8 +2,8 @@ import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/feature/home/view/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/view/index.dart';
-import 'package:attendance_app/feature/task/controller/index.dart';
-import 'package:attendance_app/feature/task/view/index.dart';
+import 'package:attendance_app/feature/task/task/controller/index.dart';
+import 'package:attendance_app/feature/task/task/view/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +14,9 @@ class NavigationViewMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = NavigationController.to;
     return Scaffold(
+      drawer: Drawer(
+        width: MediaQuery.of(context).size.width * 0.75,
+      ),
       appBar: AppBar(
         title: Obx(
           () => MyAppBarTitle(

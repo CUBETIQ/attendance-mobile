@@ -36,6 +36,7 @@ dependencies:
   fl_chart: ^0.65.0
   dropdown_button2: ^2.3.9
   file_picker: ^6.1.1
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

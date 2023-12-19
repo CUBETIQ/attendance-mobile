@@ -12,7 +12,7 @@ class NavigationService {
   Future<Position> getCurrentLocation() async {
     isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isLocationServiceEnabled) {
-      return Future.error("Please enable location service");
+      return throw Exception("Please enable location service");
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -29,7 +29,7 @@ class NavigationService {
     if (response.statusCode == 200) {
       user = UserModel().fromJson(response.data["data"]);
     } else {
-      throw Exception("Login failed");
+      throw Exception("Get user failed");
     }
     return user;
   }

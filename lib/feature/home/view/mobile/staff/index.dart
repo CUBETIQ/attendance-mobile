@@ -155,27 +155,37 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.02),
               Row(
                 children: [
-                  const Expanded(
-                    child: OverviewCard(
-                      image: present,
-                      title: "Attendance",
-                      number: "65",
+                  Expanded(
+                    child: Obx(
+                      () => OverviewCard(
+                        image: present,
+                        title: "Attendance",
+                        number: controller
+                            .summaryAttendance.value?.totalAttendance
+                            .toString(),
+                      ),
                     ),
                   ),
                   SizedBox(width: size.width * 0.02),
-                  const Expanded(
-                    child: OverviewCard(
-                      image: absent,
-                      title: "Absent",
-                      number: "1",
+                  Expanded(
+                    child: Obx(
+                      () => OverviewCard(
+                        image: absent,
+                        title: "Absent",
+                        number: controller.summaryAttendance.value?.totalAbsent
+                            .toString(),
+                      ),
                     ),
                   ),
                   SizedBox(width: size.width * 0.02),
-                  const Expanded(
-                    child: OverviewCard(
-                      image: onLeave,
-                      number: "2",
-                      title: "On Leave",
+                  Expanded(
+                    child: Obx(
+                      () => OverviewCard(
+                        image: onLeave,
+                        number: controller.summaryAttendance.value?.totalLeave
+                            .toString(),
+                        title: "On Leave",
+                      ),
                     ),
                   ),
                 ],

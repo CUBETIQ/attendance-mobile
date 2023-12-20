@@ -2,7 +2,6 @@ import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/feature/home/view/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/view/index.dart';
-import 'package:attendance_app/feature/task/task/controller/index.dart';
 import 'package:attendance_app/feature/task/task/view/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +39,7 @@ class NavigationViewMobile extends StatelessWidget {
         () => controller.selectedIndex.value != 1
             ? const SizedBox.shrink()
             : FloatingActionButton(
-                onPressed: TaskController.to.onTapAddTask,
+                onPressed: controller.onTapAddTask,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(40),

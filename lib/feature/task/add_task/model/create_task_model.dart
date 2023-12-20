@@ -1,15 +1,17 @@
 class CreateTaskModel {
   final String? taskName;
   final String? taskDescription;
-  final String? taskType;
   final int? startDate;
   final int? endDate;
+  final String? color;
+  final String? icon;
 
   CreateTaskModel({
     this.taskName,
     this.taskDescription,
-    this.taskType,
     this.startDate,
     this.endDate,
+    this.color,
+    this.icon,
   });
 }

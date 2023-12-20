@@ -24,6 +24,8 @@ class MyDatePickerField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool? isPassword;
   final void Function(int?)? onDateResult;
+  final DateTime? initialDate;
+  final DateTime? firstDate;
 
   const MyDatePickerField({
     super.key,
@@ -41,6 +43,8 @@ class MyDatePickerField extends StatelessWidget {
     this.inputFormatters,
     this.isPassword,
     this.onDateResult,
+    this.initialDate,
+    this.firstDate,
   });
 
   @override
@@ -67,8 +71,8 @@ class MyDatePickerField extends StatelessWidget {
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
                   context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(1900),
+                  initialDate: initialDate ?? DateTime.now(),
+                  firstDate: firstDate ?? DateTime(1900),
                   lastDate: DateTime(2100),
                 );
                 if (picked != null) {

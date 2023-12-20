@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
+import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/home/controller/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/model/update_profile_model.dart';
@@ -56,31 +55,28 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> updateProfile() async {
-    isLoading.value = true;
-    try {
-      UpdateProfileModel input = UpdateProfileModel(
-        firstname: firstnameController.text,
-        lastname: lastnameController.text,
-        dob: dob.value,
-        address: addressController.text,
-        image: image.value,
-      );
-      Console.log(dob.value, [
-        input.firstname,
-        input.lastname,
-        input.dob,
-        input.address,
-        input.image
-      ]);
-      await EditProfileService().updateProfile(input);
-      await NavigationController.to.fetchMe();
-      HomeController.to.getUsername();
-      Get.back(closeOverlays: true, result: NavigationController.to.user.value);
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response!.data["message"]);
-      rethrow;
-    } finally {
-      isLoading.value = false;
+    if (MyTextFieldFormController.findController('Firstname').isValid &&
+        MyTextFieldFormController.findController('Lastname').isValid) {
+      isLoading.value = true;
+      try {
+        UpdateProfileModel input = UpdateProfileModel(
+          firstname: firstnameController.text,
+          lastname: lastnameController.text,
+          dob: dob.value,
+          address: addressController.text,
+          image: image.value,
+        );
+        await EditProfileService().updateProfile(input);
+        await NavigationController.to.fetchMe();
+        HomeController.to.getUsername();
+        Get.back(
+            closeOverlays: true, result: NavigationController.to.user.value);
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response!.data["message"]);
+        rethrow;
+      } finally {
+        isLoading.value = false;
+      }
     }
   }
 
@@ -99,5 +95,10 @@ class EditProfileController extends GetxController {
     } catch (e) {
       rethrow;
     }
+  }
+
+  void validate() {
+    MyTextFieldFormController.findController('Firstname').isValid;
+    MyTextFieldFormController.findController('Lastname').isValid;
   }
 }

@@ -5,6 +5,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 void getCheckInBottomSheet(BuildContext context,
     {bool? isDismissible, required String image}) {
@@ -266,6 +267,64 @@ void getConfirmBottomSheet(
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+void getOptionBottomSheet(
+  BuildContext context, {
+  bool? isDismissible,
+  required String image,
+  void Function()? onTapDelete,
+  void Function()? onTapEdit,
+  String? title,
+  String? description,
+}) {
+  final size = MediaQuery.of(context).size;
+  Get.bottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50 * (size.width / 375.0)),
+        topRight: Radius.circular(50 * (size.width / 375.0)),
+      ),
+    ),
+    isDismissible: isDismissible ?? true,
+    Container(
+      width: size.width,
+      height: size.height * 0.5,
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: AppSize.paddingHorizontalLarge,
+          right: AppSize.paddingHorizontalLarge,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width * 0.65,
+              height: size.height * 0.30,
+              child: LottieBuilder.asset(
+                image,
+                repeat: false,
+              ),
+            ),
+            SizedBox(height: size.height * 0.01),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.edit_rounded,
+              title: "Edit",
+              onTap: onTapEdit,
+            ),
+            SizedBox(height: size.height * 0.01),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.delete_rounded,
+              title: "Delete",
+              onTap: onTapDelete,
             ),
           ],
         ),

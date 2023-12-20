@@ -21,6 +21,7 @@ class MyTextFieldForm extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool? isPassword;
   final IconData? prefixIcon;
+  final int? maxlines;
 
   const MyTextFieldForm({
     super.key,
@@ -38,6 +39,7 @@ class MyTextFieldForm extends StatelessWidget {
     this.inputFormatters,
     this.isPassword,
     this.prefixIcon,
+    this.maxlines,
   });
 
   @override
@@ -58,12 +60,13 @@ class MyTextFieldForm extends StatelessWidget {
                     text: label,
                     style: labelStyle ?? BodyMediumMedium,
                   ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSize.paddingS5),
             TextFormField(
               controller: textController,
               textCapitalization: textCapitalization ?? TextCapitalization.none,
               inputFormatters: inputFormatters,
               obscureText: isPassword ?? false,
+              maxLines: maxlines ?? 1,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: (AppSize.paddingS17) * (size.width / 375.0),

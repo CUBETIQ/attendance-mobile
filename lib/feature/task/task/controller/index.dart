@@ -1,9 +1,11 @@
+import 'package:attendance_app/constants/lotties.dart';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/task/task/service/index.dart';
+import 'package:attendance_app/routes/app_pages.dart';
+import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:attendance_app/utils/types_helper/task_status.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -59,7 +61,22 @@ class TaskController extends GetxController {
     }
   }
 
-  void onTapAddTask() {
-    Console.log("Tap", "Add Task");
+  void onTapTask(TaskModel task) {
+    getOptionBottomSheet(
+      Get.context!,
+      image: option,
+      onTapEdit: () {
+        Get.toNamed(
+          Routes.ADD_TASK,
+          arguments: {
+            "state": AppState.Edit,
+            "task": task,
+          },
+        );
+      },
+      onTapDelete: () {
+        Get.back();
+      },
+    );
   }
 }

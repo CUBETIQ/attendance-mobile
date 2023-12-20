@@ -12,4 +12,5 @@ abstract class Routes {
   static const TASK = '/task';
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/edit_profile';
+  static const ADD_TASK = '/add_task';
 }

@@ -8,10 +8,11 @@ class TaskModel extends BaseModel<TaskModel> {
   final String? positionId;
   final String? taskName;
   final String? taskDescription;
-  final String? taskType;
   final String? taskStatus;
   final int? startDate;
   final int? endDate;
+  final String? color;
+  final String? icon;
 
   TaskModel({
     this.id,
@@ -21,10 +22,11 @@ class TaskModel extends BaseModel<TaskModel> {
     this.positionId,
     this.taskName,
     this.taskDescription,
-    this.taskType,
     this.taskStatus,
     this.startDate,
     this.endDate,
+    this.color,
+    this.icon,
   });
 
   @override
@@ -40,10 +42,11 @@ class TaskModel extends BaseModel<TaskModel> {
       positionId: json['positionId'],
       taskName: json['taskName'],
       taskDescription: json['taskDescription'],
-      taskType: json['taskType'],
       taskStatus: json['taskStatus'],
       startDate: json['startDate'],
       endDate: json['endDate'],
+      color: json['color'],
+      icon: json['icon'],
     );
   }
 
@@ -65,10 +68,11 @@ class TaskModel extends BaseModel<TaskModel> {
       "positionId": positionId,
       "taskName": taskName,
       "taskDescription": taskDescription,
-      "taskType": taskType,
       "taskStatus": taskStatus,
       "startDate": startDate,
       "endDate": endDate,
+      "color": color,
+      "icon": icon,
     };
   }
 }

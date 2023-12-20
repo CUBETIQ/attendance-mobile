@@ -6,8 +6,10 @@ import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
 import 'package:attendance_app/feature/navigation/service/index.dart';
+import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/location_util.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
+import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -82,5 +84,9 @@ class NavigationController extends GetxController {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  void onTapAddTask() {
+    Get.toNamed(Routes.ADD_TASK, arguments: {"state": AppState.Create});
   }
 }

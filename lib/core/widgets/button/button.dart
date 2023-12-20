@@ -1,5 +1,4 @@
 import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ class MyButton extends StatelessWidget {
   final double? borderRadius;
   final bool? isIconButton;
   final EdgeInsetsGeometry? margin;
+  final IconData? icon;
 
   const MyButton({
     super.key,
@@ -26,6 +26,7 @@ class MyButton extends StatelessWidget {
     this.borderRadius,
     this.isIconButton = false,
     this.margin,
+    this.icon,
   });
 
   @override
@@ -48,16 +49,17 @@ class MyButton extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.check_circle_outline_rounded,
-                    color: Color(MyColor.darkSuccess),
+                  Icon(
+                    icon ?? Icons.check_circle_outline_rounded,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                   SizedBox(width: size.width * 0.01),
                   MyText(
                     text: title,
-                    style: BodySmallMedium.copyWith(
-                      color: const Color(MyColor.darkSuccess),
-                    ),
+                    style: style ??
+                        BodyLargeMedium.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                   ),
                 ],
               )

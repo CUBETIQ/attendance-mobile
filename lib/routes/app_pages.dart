@@ -13,6 +13,7 @@ import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
 import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
 import 'package:attendance_app/feature/splash/splash_binding.dart';
 import 'package:attendance_app/feature/splash/view/index.dart';
+import 'package:attendance_app/feature/task/add_task/view/index.dart';
 import 'package:attendance_app/feature/task/task/task_binding.dart';
 import 'package:get/get.dart';
 part 'app_routes.dart';
@@ -54,7 +55,10 @@ class AppPages {
     GetPage(
       name: Routes.EDIT_PROFILE,
       page: () => const EditProfileView(),
-      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: Routes.ADD_TASK,
+      page: () => const AddTaskView(),
     ),
   ];
 }

@@ -28,22 +28,4 @@ class TaskService {
       throw Exception("Complete task failed");
     }
   }
-
-  // Future<void> addTask(CreateTaskModel input) async {
-  //   final data = {
-  //     "taskName": input.taskName,
-  //     "taskDescription": input.taskDescription,
-  //     "taskType": input.taskType,
-  //     "startDate": input.startDate,
-  //     "endDate": input.endDate
-  //   };
-
-  //   Response response = await dioInstance.dio.post(
-  //     Endpoints.instance.task,
-  //     data: data,
-  //   );
-  //   if (response.statusCode != 200) {
-  //     throw Exception("Add task failed");
-  //   }
-  // }
 }

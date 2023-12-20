@@ -78,10 +78,14 @@ class TaskViewMobile extends StatelessWidget {
                       SizedBox(height: AppSize.paddingS5 * (size.width / 375)),
                   itemBuilder: (context, index) {
                     return TaskCard(
+                      color: controller.tasks[index].color,
                       task: controller.tasks[index],
-                      onTap: null,
-                      onCheck: (value) =>
-                          controller.completeTask(controller.tasks[index].id!),
+                      onTap: () => controller.onTapTask(
+                        controller.tasks[index],
+                      ),
+                      onCheck: (value) => controller.completeTask(
+                        controller.tasks[index].id!,
+                      ),
                     );
                   },
                 ),

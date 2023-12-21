@@ -5,6 +5,7 @@ class UpdateProfileModel {
   final String? address;
   final String? status;
   final String? image;
+  final String? gender;
 
   UpdateProfileModel({
     this.firstname,
@@ -13,5 +14,6 @@ class UpdateProfileModel {
     this.address,
     this.status,
     this.image,
+    this.gender,
   });
 }

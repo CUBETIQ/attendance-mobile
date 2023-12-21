@@ -22,7 +22,7 @@ class NavigationService {
   }
 
   Future<UserModel> fetchMe() async {
-    final UserModel user;
+    final UserModel? user;
     Response response = await dioInstance.dio.get(
       Endpoints.instance.get_own_profile,
     );

@@ -35,6 +35,11 @@ class NavigationController extends GetxController {
       selectedIcon: Icons.task_rounded,
     ),
     BottomBarModel(
+      title: 'Leave',
+      icon: Icons.work_off_outlined,
+      selectedIcon: Icons.work_off_rounded,
+    ),
+    BottomBarModel(
       title: 'Profile',
       icon: Icons.person_outline_rounded,
       selectedIcon: Icons.person_rounded,

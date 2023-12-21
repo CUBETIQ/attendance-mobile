@@ -25,6 +25,7 @@ class AddTaskViewMobile extends StatelessWidget {
             title: controller.title.value,
           ),
         ),
+        centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
       ),

@@ -28,4 +28,13 @@ class TaskService {
       throw Exception("Complete task failed");
     }
   }
+
+  Future<void> deleteTask(String id) async {
+    Response response = await dioInstance.dio.delete(
+      Endpoints.instance.task + id,
+    );
+    if (response.statusCode != 200) {
+      throw Exception("Delete task failed");
+    }
+  }
 }

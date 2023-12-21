@@ -1,4 +1,3 @@
-import 'package:attendance_app/constants/lotties.dart';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
@@ -48,7 +47,7 @@ class TaskController extends GetxController {
         Get.context!,
         title: "Complete Task",
         description: "Are you sure to complete this task?",
-        onTapLogOut: () async {
+        onTapConfirm: () async {
           await TaskService().completeTask(id);
           getOwnTasks();
           Get.back();
@@ -61,11 +60,35 @@ class TaskController extends GetxController {
     }
   }
 
+  Future<void> onRefresh() async {
+    await getOwnTasks();
+  }
+
+  Future<void> deleteTask(String id) async {
+    try {
+      getConfirmBottomSheet(
+        Get.context!,
+        title: "Delete Task",
+        description: "Are you sure to delete this task?",
+        onTapConfirm: () async {
+          await TaskService().deleteTask(id);
+          getOwnTasks();
+          Get.back();
+        },
+        image: delete,
+      );
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
   void onTapTask(TaskModel task) {
     getOptionBottomSheet(
       Get.context!,
       image: option,
       onTapEdit: () {
+        Get.back();
         Get.toNamed(
           Routes.ADD_TASK,
           arguments: {
@@ -76,6 +99,7 @@ class TaskController extends GetxController {
       },
       onTapDelete: () {
         Get.back();
+        deleteTask(task.id!);
       },
     );
   }

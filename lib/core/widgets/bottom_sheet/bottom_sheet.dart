@@ -5,7 +5,6 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 void getCheckInBottomSheet(BuildContext context,
     {bool? isDismissible, required String image}) {
@@ -202,7 +201,7 @@ void getConfirmBottomSheet(
   BuildContext context, {
   bool? isDismissible,
   required String image,
-  void Function()? onTapLogOut,
+  void Function()? onTapConfirm,
   String? title,
   String? description,
 }) {
@@ -262,7 +261,7 @@ void getConfirmBottomSheet(
                   Expanded(
                     child: MyButton(
                       title: "Confirm",
-                      onTap: onTapLogOut,
+                      onTap: onTapConfirm,
                     ),
                   ),
                 ],
@@ -301,18 +300,18 @@ void getOptionBottomSheet(
         padding: const EdgeInsets.only(
           left: AppSize.paddingHorizontalLarge,
           right: AppSize.paddingHorizontalLarge,
+          top: AppSize.paddingTitleSmall,
         ),
         child: Column(
           children: [
             SizedBox(
               width: size.width * 0.65,
-              height: size.height * 0.30,
-              child: LottieBuilder.asset(
+              height: size.height * 0.22,
+              child: SvgPicture.asset(
                 image,
-                repeat: false,
               ),
             ),
-            SizedBox(height: size.height * 0.01),
+            SizedBox(height: size.height * 0.05),
             MyButton(
               isIconButton: true,
               icon: Icons.edit_rounded,

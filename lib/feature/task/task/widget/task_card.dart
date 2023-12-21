@@ -3,6 +3,7 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/extensions/string.dart';
+import 'package:attendance_app/utils/time_formater.dart';
 import 'package:attendance_app/utils/types_helper/task_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
@@ -27,7 +28,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: onTap,
+      onTap: task.taskStatus == TaskStatus.completed ? null : onTap,
       child: Container(
         width: size.width,
         decoration: BoxDecoration(
@@ -120,9 +121,13 @@ class TaskCard extends StatelessWidget {
                           ),
                     SizedBox(height: AppSize.paddingS1 * (size.width / 375)),
                     MyText(
-                      text: "Due To: 11/11/2023",
+                      text: task.endDate != null
+                          ? "Due To: ${DateFormatter().formatMillisecondsToDOB(task.endDate!)}"
+                          : "Due To: N/A",
                       style: BodyXSmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.error,
+                        color: task.taskStatus == TaskStatus.completed
+                            ? Theme.of(context).colorScheme.outline
+                            : Theme.of(context).colorScheme.error,
                       ),
                     ),
                   ],

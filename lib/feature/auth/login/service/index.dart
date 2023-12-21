@@ -37,7 +37,7 @@ class LoginService {
   }
 
   Future<UserModel> fetchMe() async {
-    final UserModel user;
+    final UserModel? user;
     dio.Response response = await dioInstance.dio.get(
       Endpoints.instance.get_own_profile,
     );
@@ -51,7 +51,7 @@ class LoginService {
   }
 
   Future<PositionModel> getPosition(String id) async {
-    final PositionModel position;
+    final PositionModel? position;
     dio.Response response = await dioInstance.dio.get(
       Endpoints.instance.get_position + id,
     );
@@ -65,7 +65,7 @@ class LoginService {
   }
 
   Future<DepartmentModel> getDepartment(String id) async {
-    final DepartmentModel department;
+    final DepartmentModel? department;
     dio.Response response = await dioInstance.dio.get(
       Endpoints.instance.get_department + id,
     );
@@ -79,7 +79,7 @@ class LoginService {
   }
 
   Future<OrganizationModel> getOrganization({required String id}) async {
-    final OrganizationModel organization;
+    final OrganizationModel? organization;
     dio.Response response = await dioInstance.dio.get(
       Endpoints.instance.validate_organization + id,
     );

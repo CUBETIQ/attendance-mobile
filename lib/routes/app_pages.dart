@@ -5,6 +5,7 @@ import 'package:attendance_app/feature/auth/activation/view/index.dart';
 import 'package:attendance_app/feature/auth/login/login_binding.dart';
 import 'package:attendance_app/feature/auth/login/view/index.dart';
 import 'package:attendance_app/feature/home/home_binding.dart';
+import 'package:attendance_app/feature/leave/leave_binding.dart';
 import 'package:attendance_app/feature/navigation/naviation_binding.dart';
 import 'package:attendance_app/feature/navigation/view/index.dart';
 import 'package:attendance_app/feature/onboard/onboard_binding.dart';
@@ -50,6 +51,7 @@ class AppPages {
         HomeBinding(),
         ProfileBinding(),
         TaskBinding(),
+        LeaveBinding(),
       ],
     ),
     GetPage(

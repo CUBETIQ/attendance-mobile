@@ -42,9 +42,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxBool isBreakTime = false.obs;
   Rxn<String> breakTimeTitle = Rxn<String>(null);
   Rx<UserModel> user = UserModel().obs;
-  Rxn<SummaryAttendanceModel> summaryAttendance =
-      Rxn<SummaryAttendanceModel>(null);
+  RxList<SummaryAttendanceModel> summaryAttendance =
+      <SummaryAttendanceModel>[].obs;
   Rxn<String> name = Rxn<String>(null);
+  var isLoadingSummary = false.obs;
+  Rxn<String> totalAttendance = Rxn<String>(null);
+  Rxn<String> totalAbsent = Rxn<String>(null);
+  Rxn<String> totalLeave = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -199,6 +203,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       summaryAttendance.value = await HomeService().getSummrizeAttendance(
         date: date.millisecondsSinceEpoch,
       );
+      totalAbsent.value = summaryAttendance.first.totalAbsent?.toString();
+      totalLeave.value = summaryAttendance.first.totalLeave?.toString();
+      totalAttendance.value =
+          summaryAttendance.first.totalAttendance?.toString();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

@@ -26,13 +26,7 @@ class AddTaskController extends GetxController {
   Rxn<String> stringIcon = Rxn<String>(null);
   RxString appState = AppState.Create.obs;
   Rxn<TaskModel> task = Rxn<TaskModel>(null);
-  // Color for the picker shown in Card on the screen.
   late Color screenPickerColor;
-  // Color for the picker in a dialog using onChanged.
-  late Color dialogPickerColor;
-  // Color for picker using the color select dialog.
-  late Color dialogSelectColor;
-
   @override
   void onInit() {
     super.onInit();
@@ -102,8 +96,8 @@ class AddTaskController extends GetxController {
         startDate.value = task.value?.startDate ?? 0;
         endDate.value = task.value?.endDate ?? 0;
         descriptionController.text = task.value?.taskDescription ?? '';
-        stringColor.value = task.value?.color ?? '';
-        stringIcon.value = task.value?.icon ?? '';
+        stringColor.value = task.value?.color;
+        stringIcon.value = task.value?.icon;
         if (task.value?.color != null) {
           color.value = Color(task.value!.color!.toInt());
         }
@@ -135,9 +129,7 @@ class AddTaskController extends GetxController {
   }
 
   void onTapPickColor(BuildContext context) {
-    screenPickerColor = Colors.blue; // Material blue.
-    dialogPickerColor = Colors.red; // Material red.
-    dialogSelectColor = const Color(0xFFA239CA); // A purple color
+    screenPickerColor = Colors.blue;
     getColorPickerDialog(
       context: context,
       screenPickerColor: screenPickerColor,

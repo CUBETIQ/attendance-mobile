@@ -202,7 +202,7 @@ void getConfirmBottomSheet(
   BuildContext context, {
   bool? isDismissible,
   required String image,
-  void Function()? onTapLogOut,
+  void Function()? onTapConfirm,
   String? title,
   String? description,
 }) {
@@ -262,7 +262,7 @@ void getConfirmBottomSheet(
                   Expanded(
                     child: MyButton(
                       title: "Confirm",
-                      onTap: onTapLogOut,
+                      onTap: onTapConfirm,
                     ),
                   ),
                 ],

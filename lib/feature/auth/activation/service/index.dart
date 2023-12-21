@@ -9,7 +9,7 @@ class ActivationService {
   DioUtil dioInstance = DioUtil();
   final LocalStorageController localDataService = LocalStorageController();
   Future<ActivationModel> activate(ActivateModel input) async {
-    final ActivationModel activateModel;
+    final ActivationModel? activateModel;
     Response response = await dioInstance.dio.post(
       Endpoints.instance.activation,
       data: {

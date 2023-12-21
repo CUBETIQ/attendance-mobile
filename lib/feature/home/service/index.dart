@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 class HomeService {
   DioUtil dioInstance = DioUtil();
   Future<AttendanceModel> checkIn(CheckInModel input) async {
-    final AttendanceModel checkIn;
+    final AttendanceModel? checkIn;
 
     final data = {
       "checkInDateTime": input.checkInDateTime,
@@ -29,7 +29,7 @@ class HomeService {
   }
 
   Future<AttendanceModel> checkOut(CheckOutModel input) async {
-    final AttendanceModel checkIn;
+    final AttendanceModel? checkIn;
 
     final data = {
       "checkOutDateTime": input.checkOutDateTime,
@@ -50,7 +50,7 @@ class HomeService {
 
   Future<List<AttendanceModel>> getAttendance(
       {int? startDate, int? endDate}) async {
-    List<AttendanceModel> attendanceList = [];
+    List<AttendanceModel>? attendanceList = [];
 
     final query = {
       "startDate": startDate,
@@ -69,8 +69,9 @@ class HomeService {
     return attendanceList;
   }
 
-  Future<SummaryAttendanceModel> getSummrizeAttendance({int? date}) async {
-    SummaryAttendanceModel summaryAttendance;
+  Future<List<SummaryAttendanceModel>> getSummrizeAttendance(
+      {int? date}) async {
+    List<SummaryAttendanceModel>? summaryAttendance;
 
     final query = {"date": date};
 
@@ -80,7 +81,7 @@ class HomeService {
     );
     if (response.statusCode == 200) {
       summaryAttendance =
-          SummaryAttendanceModel().fromJson(response.data["data"]);
+          SummaryAttendanceModel().fromListJson(response.data["data"]);
     } else {
       throw Exception("Get attendance failed");
     }

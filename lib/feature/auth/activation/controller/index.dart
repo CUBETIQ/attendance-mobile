@@ -48,7 +48,7 @@ class ActivationController extends GetxController {
           isActivated: true,
           organizationId: activate.value!.organizationId,
         );
-        if (data?.isFirstTime == true) {
+        if (data?.isFirstTime != false) {
           Get.offNamed(Routes.ONBOARD);
         } else {
           Get.offNamed(Routes.LOGIN);

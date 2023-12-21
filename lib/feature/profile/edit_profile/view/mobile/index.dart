@@ -22,6 +22,7 @@ class EditProfileViewMobile extends StatelessWidget {
         title: const MyAppBarTitle(
           title: "Edit Profile",
         ),
+        centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
       ),
@@ -59,6 +60,24 @@ class EditProfileViewMobile extends StatelessWidget {
                 textController: controller.lastnameController,
               ),
               const SizedBox(height: AppSize.paddingS5),
+              Obx(
+                () => MyDropDownButton<String>(
+                  label: "Gender",
+                  value: controller.selectedGender.value,
+                  hint: "Choose Gender",
+                  dropdownItems: controller.genderList
+                      .map(
+                        (e) => DropdownMenuItem<String>(
+                          value: e,
+                          child: Text(e.capitalizeFirst ?? ""),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) =>
+                      controller.selectedGender.value = value!,
+                ),
+              ),
+              const SizedBox(height: AppSize.paddingS5),
               MyDatePickerField(
                 hasLabel: true,
                 label: "Date of birth",
@@ -77,6 +96,7 @@ class EditProfileViewMobile extends StatelessWidget {
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Status",
+                  hint: "Choose Status",
                   value: controller.selectedStatus.value,
                   dropdownItems: controller.status
                       .map(

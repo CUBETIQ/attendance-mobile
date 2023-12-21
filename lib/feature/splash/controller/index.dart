@@ -107,8 +107,12 @@ class SplashController extends GetxController
     localData.value = data ?? LocalStorage();
     await Future.delayed(const Duration(seconds: 2));
     try {
-      if ((data?.organizationId == null && data?.isActivated != true)) {
+      if (data?.organizationId == null && data?.isActivated != true) {
         Get.offNamed(Routes.ACTIVATION);
+        return;
+      }
+      if (data?.organizationId == null && data?.isActivated == true) {
+        Get.offNamed(Routes.LOGIN);
         return;
       }
       organization.value =

@@ -1,4 +1,3 @@
-import 'package:attendance_app/constants/lotties.dart';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';

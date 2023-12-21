@@ -26,4 +26,5 @@ class Endpoints {
   String get get_own_task => "/app/tasks/me";
   String get task => "/app/tasks/";
   String get complete_task => "/app/tasks/status/";
+  String get get_own_leave => "/app/leaves/me";
 }

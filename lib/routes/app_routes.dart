@@ -13,4 +13,6 @@ abstract class Routes {
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/edit_profile';
   static const ADD_TASK = '/add_task';
+  static const LEAVE = '/leave';
+  static const ADD_LEAVE = '/add_leave';
 }

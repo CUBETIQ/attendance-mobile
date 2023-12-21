@@ -19,7 +19,7 @@ class OnBoardViewMobile extends StatelessWidget {
             children: [
               SizedBox(
                 width: double.infinity,
-                height: size.height * 0.84,
+                height: size.height * 0.83,
                 child: PageView(
                   onPageChanged: controller.onChange,
                   controller: controller.pageController,

@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class AttendanceProfileCard extends StatelessWidget {
   final Size size;
-  final String? totalLeave;
-  final String? totalAbsent;
-  final String? totalAttendance;
+  final int? totalLeave;
+  final int? totalAbsent;
+  final int? totalAttendance;
 
   const AttendanceProfileCard({
     super.key,
@@ -41,7 +41,9 @@ class AttendanceProfileCard extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
-                    text: totalAttendance ?? "0",
+                    text: totalAttendance != null
+                        ? totalAttendance.toString()
+                        : "0",
                     style: BodyXlargeMedium,
                   ),
                 ],
@@ -59,7 +61,7 @@ class AttendanceProfileCard extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
-                    text: totalAbsent ?? "0",
+                    text: totalAbsent != null ? totalAbsent.toString() : "0",
                     style: BodyXlargeMedium,
                   ),
                 ],
@@ -77,7 +79,7 @@ class AttendanceProfileCard extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
-                    text: totalLeave ?? "0",
+                    text: totalLeave != null ? totalLeave.toString() : "0",
                     style: BodyXlargeMedium,
                   ),
                 ],

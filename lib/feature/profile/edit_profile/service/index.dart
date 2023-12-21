@@ -14,6 +14,8 @@ class EditProfileService {
       "dateOfBirth": input.dob,
       "address": input.address,
       "image": input.image,
+      "status": input.status,
+      'gender': input.gender,
     };
     Response response = await dioInstance.dio.put(
       Endpoints.instance.update_profile,

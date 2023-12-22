@@ -12,6 +12,7 @@ class CircleProgressIndicator extends StatelessWidget {
   final Widget? centerWidget;
   final double? height;
   final String? title;
+  final String? textBelow;
 
   const CircleProgressIndicator({
     super.key,
@@ -22,13 +23,14 @@ class CircleProgressIndicator extends StatelessWidget {
     this.centerWidget,
     this.height,
     this.title,
+    this.textBelow,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: 185 * (size.width / 360),
+      height: 210 * (size.width / 360),
       padding: EdgeInsets.symmetric(
         vertical: AppSize.paddingS8 * (size.width / 375),
         horizontal: AppSize.paddingS8 * (size.width / 375),
@@ -51,6 +53,7 @@ class CircleProgressIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MyText(text: title ?? "MyTask", style: BodyLargeMedium),
+          SizedBox(height: 10 * (size.width / 375)),
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
@@ -67,6 +70,8 @@ class CircleProgressIndicator extends StatelessWidget {
             backgroundColor: Colors.grey.withOpacity(0.3),
             circularStrokeCap: CircularStrokeCap.round,
           ),
+          SizedBox(height: 10 * (size.width / 375)),
+          MyText(text: textBelow ?? "MyTask", style: BodyMediumRegular),
         ],
       ),
     );

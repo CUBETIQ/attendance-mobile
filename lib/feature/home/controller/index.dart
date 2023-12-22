@@ -65,6 +65,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void onRefresh() {
     getAttendance();
     checkBreakTime();
+    getSummarizeAttendance();
   }
 
   void initAnimation() {
@@ -118,6 +119,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
         );
         getAttendance();
+        getSummarizeAttendance();
         isCheckedIn.value = true;
         getCheckInBottomSheet(Get.context!, image: working);
       } on DioException catch (e) {

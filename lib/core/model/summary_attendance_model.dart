@@ -2,7 +2,7 @@ import 'package:attendance_app/core/repositories/base_model.dart';
 
 class SummaryAttendanceModel extends BaseModel<SummaryAttendanceModel> {
   final String? id;
-  final String? date;
+  final double? date;
   final int? totalAttendance;
   final int? totalAbsent;
   final int? totalLeave;

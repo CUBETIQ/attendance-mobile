@@ -14,6 +14,7 @@ class LeaveModel extends BaseModel<LeaveModel> {
   final List<String>? leaveAttachment;
   final String? leaveDurationType;
   final int? leaveDuration;
+  final String? updateBy;
 
   LeaveModel({
     this.id,
@@ -29,6 +30,7 @@ class LeaveModel extends BaseModel<LeaveModel> {
     this.leaveAttachment,
     this.leaveDurationType,
     this.leaveDuration,
+    this.updateBy,
   });
 
   @override
@@ -50,6 +52,7 @@ class LeaveModel extends BaseModel<LeaveModel> {
       leaveAttachment: json['leaveAttachment'],
       leaveDurationType: json['leaveDurationType'],
       leaveDuration: json['leaveDuration'],
+      updateBy: json['updateBy'],
     );
   }
 
@@ -77,6 +80,7 @@ class LeaveModel extends BaseModel<LeaveModel> {
       'leaveAttachment': leaveAttachment,
       'leaveDurationType': leaveDurationType,
       'leaveDuration': leaveDuration,
+      'updateBy': updateBy,
     };
   }
 }

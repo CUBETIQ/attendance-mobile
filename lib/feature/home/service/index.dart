@@ -70,7 +70,7 @@ class HomeService {
   }
 
   Future<List<SummaryAttendanceModel>> getSummrizeAttendance(
-      {int? date}) async {
+      {int? date, int? startDate, int? endDate}) async {
     List<SummaryAttendanceModel>? summaryAttendance;
 
     final query = {"date": date};

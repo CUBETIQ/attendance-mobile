@@ -31,6 +31,8 @@ class TaskViewMobile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              MyText(text: "Summary", style: BodyLargeMedium),
+              const SizedBox(height: AppSize.paddingS8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -42,10 +44,12 @@ class TaskViewMobile extends StatelessWidget {
                         radius: 60,
                         centerWidget: MyText(
                           text:
-                              "${controller.totalUncompletedTask}/${controller.totalTask.value}",
+                              "${(controller.percentageUncompletedTask.value * 100).toStringAsFixed(2)}%",
                           style: BodyMediumRegular,
                         ),
                         percent: controller.percentageUncompletedTask.value,
+                        textBelow:
+                            "Task: ${controller.totalUncompletedTask}/${controller.totalTask.value}",
                       ),
                     ),
                   ),
@@ -58,10 +62,12 @@ class TaskViewMobile extends StatelessWidget {
                         radius: 60,
                         centerWidget: MyText(
                           text:
-                              "${controller.totalCompletedTask}/${controller.totalTask.value}",
+                              "${(controller.percentageCompletedTask.value * 100).toStringAsFixed(2)}%",
                           style: BodyMediumRegular,
                         ),
                         percent: controller.percentageCompletedTask.value,
+                        textBelow:
+                            "Task: ${controller.totalCompletedTask}/${controller.totalTask.value}",
                       ),
                     ),
                   ),

@@ -1,6 +1,6 @@
 import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/feature/home/view/index.dart';
-import 'package:attendance_app/feature/leave/view/index.dart';
+import 'package:attendance_app/feature/leave/leave/view/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/view/index.dart';
 import 'package:attendance_app/feature/task/task/view/index.dart';
@@ -45,7 +45,7 @@ class NavigationViewMobile extends StatelessWidget {
             : FloatingActionButton(
                 onPressed: controller.selectedIndex.value == 1
                     ? controller.onTapAddTask
-                    : () {},
+                    : controller.onTapAddLeave,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(40),

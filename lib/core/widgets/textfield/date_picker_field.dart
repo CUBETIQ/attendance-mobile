@@ -26,8 +26,9 @@ class MyDatePickerField extends StatelessWidget {
   final void Function(int?)? onDateResult;
   final DateTime? initialDate;
   final DateTime? firstDate;
+  DateTime? resultDate;
 
-  const MyDatePickerField({
+  MyDatePickerField({
     super.key,
     required this.label,
     required this.textController,
@@ -45,6 +46,7 @@ class MyDatePickerField extends StatelessWidget {
     this.onDateResult,
     this.initialDate,
     this.firstDate,
+    this.resultDate,
   });
 
   @override
@@ -76,8 +78,14 @@ class MyDatePickerField extends StatelessWidget {
                   lastDate: DateTime(2100),
                 );
                 if (picked != null) {
+                  if (label == "Start Date") {
+                    resultDate = picked;
+                  } else {
+                    resultDate = DateTime(
+                        picked.year, picked.month, picked.day, 23, 59, 59);
+                  }
                   // Throw back the data through the function
-                  onDateResult?.call(picked.millisecondsSinceEpoch);
+                  onDateResult?.call(resultDate!.millisecondsSinceEpoch);
                   textController.text = DateFormat('dd/MM/yyyy').format(picked);
                 }
               },

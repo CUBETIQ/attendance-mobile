@@ -94,4 +94,8 @@ class NavigationController extends GetxController {
   void onTapAddTask() {
     Get.toNamed(Routes.ADD_TASK, arguments: {"state": AppState.Create});
   }
+
+  void onTapAddLeave() {
+    Get.toNamed(Routes.ADD_LEAVE, arguments: {"state": AppState.Create});
+  }
 }

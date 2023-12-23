@@ -136,8 +136,11 @@ class MyDropDownButton<T> extends StatelessWidget {
                 width: dropdownWidth ??
                     size.width - (AppSize.paddingHorizontalLarge * 2),
                 padding: dropdownPadding ??
-                    const EdgeInsets.symmetric(
-                      horizontal: AppSize.paddingHorizontalLarge,
+                    EdgeInsets.symmetric(
+                      horizontal:
+                          AppSize.paddingHorizontalLarge * (size.width / 375.0),
+                      vertical:
+                          AppSize.paddingVerticalMedium * (size.width / 375.0),
                     ),
                 decoration: dropdownDecoration ??
                     BoxDecoration(

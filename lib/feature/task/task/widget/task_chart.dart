@@ -4,7 +4,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class CircleProgressIndicator extends StatelessWidget {
+class TaskChart extends StatelessWidget {
   final Size size;
   final double radius;
   final double? lineWidth;
@@ -13,8 +13,9 @@ class CircleProgressIndicator extends StatelessWidget {
   final double? height;
   final String? title;
   final String? textBelow;
+  final double? width;
 
-  const CircleProgressIndicator({
+  const TaskChart({
     super.key,
     required this.size,
     required this.radius,
@@ -24,13 +25,15 @@ class CircleProgressIndicator extends StatelessWidget {
     this.height,
     this.title,
     this.textBelow,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: 210 * (size.width / 360),
+      width: width,
+      height: height ?? 210 * (size.width / 360),
       padding: EdgeInsets.symmetric(
         vertical: AppSize.paddingS8 * (size.width / 375),
         horizontal: AppSize.paddingS8 * (size.width / 375),

@@ -11,7 +11,7 @@ class LeaveModel extends BaseModel<LeaveModel> {
   final int? leaveFrom;
   final int? leaveTo;
   final String? leaveStatus;
-  final List<String>? leaveAttachment;
+  final List<dynamic>? leaveAttachment;
   final String? leaveDurationType;
   final int? leaveDuration;
   final String? updateBy;

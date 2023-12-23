@@ -32,9 +32,16 @@ class TaskController extends GetxController {
           .where((element) => element.taskStatus == TaskStatus.completed)
           .length;
       totalUncompletedTask.value = tasks.length - totalCompletedTask.value;
-      percentageCompletedTask.value =
-          (totalCompletedTask.value / totalTask.value * 100) / 100;
-      percentageUncompletedTask.value = 1 - percentageCompletedTask.value;
+      final percentageCompleted =
+          ((totalCompletedTask.value / totalTask.value * 100) / 100);
+      final percentageUncomplete = 1 - percentageCompleted;
+
+      if (percentageCompleted.isNaN) {
+        percentageCompletedTask.value = 0.0;
+      } else {
+        percentageCompletedTask.value = percentageCompleted;
+        percentageUncompletedTask.value = percentageUncomplete;
+      }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

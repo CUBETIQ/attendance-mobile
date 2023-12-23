@@ -40,7 +40,7 @@ class AddTaskService {
       data: data,
     );
     if (response.statusCode != 200) {
-      throw Exception("Add task failed");
+      throw Exception("Update task failed");
     }
   }
 }

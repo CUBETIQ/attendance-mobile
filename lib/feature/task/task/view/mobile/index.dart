@@ -5,7 +5,7 @@ import 'package:attendance_app/core/widgets/no_data/no_data.dart';
 import 'package:attendance_app/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/task/task/controller/index.dart';
-import 'package:attendance_app/feature/task/task/widget/circle_progress_indicator.dart';
+import 'package:attendance_app/feature/task/task/widget/task_chart.dart';
 import 'package:attendance_app/feature/task/task/widget/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,14 +31,14 @@ class TaskViewMobile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyText(text: "Summary", style: BodyLargeMedium),
+              MyText(text: "Task Summary", style: BodyLargeMedium),
               const SizedBox(height: AppSize.paddingS8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Obx(
-                      () => CircleProgressIndicator(
+                      () => TaskChart(
                         title: "Pending",
                         size: size,
                         radius: 60,
@@ -56,7 +56,7 @@ class TaskViewMobile extends StatelessWidget {
                   SizedBox(width: size.width * 0.03),
                   Expanded(
                     child: Obx(
-                      () => CircleProgressIndicator(
+                      () => TaskChart(
                         title: "Completed",
                         size: size,
                         radius: 60,

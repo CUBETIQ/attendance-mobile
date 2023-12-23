@@ -47,7 +47,7 @@ class LeaveChart extends StatelessWidget {
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 1.1,
-            blurRadius: 1.1,
+            blurRadius: 1.2,
             offset: const Offset(0, 0),
           ),
         ],

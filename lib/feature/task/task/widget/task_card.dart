@@ -3,6 +3,7 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/extensions/string.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:attendance_app/utils/types_helper/task_status.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class TaskCard extends StatelessWidget {
         width: size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize.borderRadiusLarge * (size.width / 375),
+            SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
           ),
           boxShadow: [
             BoxShadow(
@@ -53,10 +54,16 @@ class TaskCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      AppSize.borderRadiusLarge * (size.width / 375),
+                      SizeUtils.scaleWidth(
+                        AppSize.borderRadiusLarge,
+                        size.width,
+                      ),
                     ),
                     bottomLeft: Radius.circular(
-                      AppSize.borderRadiusLarge * (size.width / 375),
+                      SizeUtils.scaleWidth(
+                        AppSize.borderRadiusLarge,
+                        size.width,
+                      ),
                     ),
                   ),
                   color: color != null
@@ -64,13 +71,15 @@ class TaskCard extends StatelessWidget {
                       : Theme.of(context).colorScheme.primary,
                 ),
               ),
-              const SizedBox(width: AppSize.paddingS15),
+              SizedBox(
+                width: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),
+              ),
               Container(
                 constraints: BoxConstraints(
-                  maxWidth: size.width * 0.60,
+                  maxWidth: size.width * 0.67,
                 ),
                 padding: EdgeInsets.symmetric(
-                  vertical: AppSize.paddingS4 * (size.width / 375),
+                  vertical: SizeUtils.scaleWidth(AppSize.paddingS4, size.width),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +88,8 @@ class TaskCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          width: 30 * (size.width / 375),
-                          height: 30 * (size.width / 375),
+                          width: SizeUtils.scaleWidth(30, size.width),
+                          height: SizeUtils.scaleWidth(30, size.width),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: color != null
@@ -96,20 +105,28 @@ class TaskCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: AppSize.paddingS5),
-                        MyText(
-                          text:
-                              (task.taskName ?? "Task Name").capitalizeFirst ??
-                                  "",
-                          maxLines: 1,
-                          style: BodyLarge.copyWith(
-                            color: color != null
-                                ? Color(color!.toInt())
-                                : Theme.of(context).colorScheme.primary,
+                        Container(
+                          constraints: BoxConstraints(
+                            maxWidth: size.width * 0.56,
+                          ),
+                          child: MyText(
+                            text: (task.taskName ?? "Task Name")
+                                    .capitalizeFirst ??
+                                "",
+                            maxLines: 2,
+                            style: BodyLarge.copyWith(
+                              color: color != null
+                                  ? Color(color!.toInt())
+                                  : Theme.of(context).colorScheme.primary,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: AppSize.paddingS1 * (size.width / 375)),
+                    SizedBox(
+                      height:
+                          SizeUtils.scaleWidth(AppSize.paddingS1, size.width),
+                    ),
                     task.taskDescription == null || task.taskDescription == ""
                         ? const SizedBox.shrink()
                         : MyText(
@@ -119,7 +136,10 @@ class TaskCard extends StatelessWidget {
                               color: Theme.of(context).colorScheme.outline,
                             ),
                           ),
-                    SizedBox(height: AppSize.paddingS1 * (size.width / 375)),
+                    SizedBox(
+                      height:
+                          SizeUtils.scaleWidth(AppSize.paddingS1, size.width),
+                    ),
                     MyText(
                       text: task.endDate != null
                           ? "Due To: ${DateFormatter().formatMillisecondsToDOB(task.endDate!)}"
@@ -136,8 +156,10 @@ class TaskCard extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    vertical: AppSize.paddingS5 * (size.width / 375),
-                    horizontal: AppSize.paddingS5 * (size.width / 375),
+                    vertical:
+                        SizeUtils.scaleWidth(AppSize.paddingS5, size.width),
+                    horizontal:
+                        SizeUtils.scaleWidth(AppSize.paddingS5, size.width),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

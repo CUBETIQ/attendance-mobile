@@ -1,6 +1,7 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -35,13 +36,13 @@ class TaskChart extends StatelessWidget {
       width: width,
       height: height ?? 210 * (size.width / 360),
       padding: EdgeInsets.symmetric(
-        vertical: AppSize.paddingS8 * (size.width / 375),
-        horizontal: AppSize.paddingS8 * (size.width / 375),
+        vertical: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),
+        horizontal: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusLarge * (size.width / 375),
+          SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
         ),
         boxShadow: [
           BoxShadow(
@@ -56,7 +57,7 @@ class TaskChart extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MyText(text: title ?? "MyTask", style: BodyLargeMedium),
-          SizedBox(height: 10 * (size.width / 375)),
+          SizedBox(height: SizeUtils.scaleWidth(10, size.width)),
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
@@ -73,7 +74,7 @@ class TaskChart extends StatelessWidget {
             backgroundColor: Colors.grey.withOpacity(0.3),
             circularStrokeCap: CircularStrokeCap.round,
           ),
-          SizedBox(height: 10 * (size.width / 375)),
+          SizedBox(height: SizeUtils.scaleWidth(10, size.width)),
           MyText(text: textBelow ?? "MyTask", style: BodyMediumRegular),
         ],
       ),

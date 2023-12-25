@@ -7,6 +7,7 @@ import 'package:attendance_app/feature/home/controller/index.dart';
 import 'package:attendance_app/feature/home/view/mobile/staff/index.dart';
 import 'package:attendance_app/feature/home/widget/attendance_detail_card.dart';
 import 'package:attendance_app/feature/leave/leave/widget/leave_chart.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -100,8 +101,9 @@ class HomeAdminMobileView extends StatelessWidget {
                               animationDuration: 2000,
                               percent: 0.7,
                               center: const Text("70.0%"),
-                              barRadius:
-                                  Radius.circular(20 * (size.width / 375)),
+                              barRadius: Radius.circular(
+                                SizeUtils.scaleWidth(20, size.width),
+                              ),
                               progressColor: Colors.green,
                             ),
                           ),
@@ -122,8 +124,9 @@ class HomeAdminMobileView extends StatelessWidget {
                               animationDuration: 2000,
                               percent: 0.2,
                               center: const Text("20.0%"),
-                              barRadius:
-                                  Radius.circular(20 * (size.width / 375)),
+                              barRadius: Radius.circular(
+                                SizeUtils.scaleWidth(20, size.width),
+                              ),
                               progressColor:
                                   Theme.of(context).colorScheme.primary,
                             ),
@@ -147,8 +150,9 @@ class HomeAdminMobileView extends StatelessWidget {
                               animationDuration: 2000,
                               percent: 0.1,
                               center: const Text("10.0%"),
-                              barRadius:
-                                  Radius.circular(20 * (size.width / 375)),
+                              barRadius: Radius.circular(
+                                SizeUtils.scaleWidth(20, size.width),
+                              ),
                               progressColor: Colors.red,
                             ),
                           ),
@@ -174,8 +178,9 @@ class HomeAdminMobileView extends StatelessWidget {
                               animationDuration: 2000,
                               percent: 0.7,
                               center: const Text("70.0%"),
-                              barRadius:
-                                  Radius.circular(20 * (size.width / 375)),
+                              barRadius: Radius.circular(
+                                SizeUtils.scaleWidth(20, size.width),
+                              ),
                               progressColor: Colors.green,
                             ),
                           ),
@@ -196,8 +201,9 @@ class HomeAdminMobileView extends StatelessWidget {
                               animationDuration: 2000,
                               percent: 0.2,
                               center: const Text("20.0%"),
-                              barRadius:
-                                  Radius.circular(20 * (size.width / 375)),
+                              barRadius: Radius.circular(
+                                SizeUtils.scaleWidth(20, size.width),
+                              ),
                               progressColor:
                                   Theme.of(context).colorScheme.primary,
                             ),
@@ -221,8 +227,9 @@ class HomeAdminMobileView extends StatelessWidget {
                               animationDuration: 2000,
                               percent: 0.1,
                               center: const Text("10.0%"),
-                              barRadius:
-                                  Radius.circular(20 * (size.width / 375)),
+                              barRadius: Radius.circular(
+                                SizeUtils.scaleWidth(20, size.width),
+                              ),
                               progressColor: Colors.red,
                             ),
                           ),
@@ -236,6 +243,7 @@ class HomeAdminMobileView extends StatelessWidget {
                           shrinkWrap: true,
                           separatorBuilder: (context, index) =>
                               const SizedBox(height: AppSize.paddingS10),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

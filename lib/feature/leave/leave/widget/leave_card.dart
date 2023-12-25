@@ -3,6 +3,7 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/model/leave_model.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:attendance_app/utils/types_helper/leave_status.dart';
 import 'package:attendance_app/utils/types_helper/leave_type.dart';
@@ -21,7 +22,7 @@ class LeaveCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 170 * (size.width / 375),
+        height: SizeUtils.scaleWidth(170, size.width),
         margin:
             EdgeInsets.only(bottom: AppSize.paddingS5 * (size.width / 375.0)),
         padding: EdgeInsets.symmetric(

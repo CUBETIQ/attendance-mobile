@@ -13,7 +13,7 @@ double calculateFontSize(BuildContext context, double baseSize) {
     return baseSize * 1;
   } else if (screenWidth <= 375) {
     // Smaller than iPhone 11
-    return baseSize * 0.85;
+    return baseSize * 0.80;
   } else {
     return baseSize;
   }

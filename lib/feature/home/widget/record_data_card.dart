@@ -69,7 +69,7 @@ class RecordDataCard extends StatelessWidget {
                         )
                       : const SizedBox.shrink(),
             ),
-            const SizedBox(width: AppSize.paddingS11),
+            SizedBox(width: AppSize.paddingS8 * (size.width / 375.0)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

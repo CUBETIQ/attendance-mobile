@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -12,14 +13,14 @@ void getCheckInBottomSheet(BuildContext context,
   Get.bottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
+        topLeft: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
+        topRight: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
       ),
     ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: size.height * 0.8,
+      height: SizeUtils.scaleWidth(size.height * 0.8, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.only(
@@ -68,16 +69,16 @@ void getCheckOutBottomSheet(BuildContext context,
     {bool? isDismissible, required String image}) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: const RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50),
-        topRight: Radius.circular(50),
+        topLeft: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
+        topRight: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
       ),
     ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: size.height * 0.8,
+      height: SizeUtils.scaleWidth(size.height * 0.8, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.only(

@@ -18,7 +18,7 @@ class SplashController extends GetxController
   Rx<UserModel> user = UserModel().obs;
   Rx<PositionModel> position = PositionModel().obs;
   final double frameRate = 70;
-  final String title = 'Time Glitch';
+  final String title = 'TimeSync360';
   late AnimationController controller;
   late Animation<double> animation;
   final LocalStorageController localDataService = LocalStorageController();

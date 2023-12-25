@@ -1,6 +1,7 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class AttendanceProfileCard extends StatelessWidget {
@@ -24,7 +25,7 @@ class AttendanceProfileCard extends StatelessWidget {
       width: size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusLarge * (size.width / 375),
+          SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
         ),
         color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
       ),

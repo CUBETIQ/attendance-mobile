@@ -14,8 +14,8 @@ class Endpoints {
   String get activation => "/auth/activation/activate";
   String get deactivation => "/auth/activation/deactivate";
   String get validate_organization => "/auth/organization/";
-  String get get_own_profile => "/app/profile/me";
-  String get update_profile => "/app/profile/update";
+  String get get_own_profile => "/auth/profile/me";
+  String get update_profile => "/auth/profile/update";
   String get check_in => "/app/attendances/checkin";
   String get check_out => "/app/attendances/checkout";
   String get get_position => "/app/positions/";

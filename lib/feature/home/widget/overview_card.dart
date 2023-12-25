@@ -74,7 +74,7 @@ class OverviewCard extends StatelessWidget {
                 left: size.width * 0.02,
               ),
               child: MyText(
-                text: number ?? "0",
+                text: number != null && number != "null" ? number ?? "0" : "0",
                 style: BodyLargeMedium,
               ),
             ),

@@ -6,6 +6,7 @@ import 'package:attendance_app/core/network/interceptor/logger_interceptor.dart'
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:flutter/foundation.dart';
 import 'interceptor/error_interceptor.dart';
 
 class DioUtil {
@@ -28,7 +29,7 @@ class DioUtil {
   void _initialize() {
     //Interceptors
     final interceptors = <Interceptor>[
-      LoggerInterceptor(),
+      if (kDebugMode) LoggerInterceptor(),
       AuthInterceptor(),
       ErrorInterceptor(_dio),
       DioCacheInterceptor(

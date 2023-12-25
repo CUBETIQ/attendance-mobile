@@ -70,10 +70,13 @@ class HomeService {
   }
 
   Future<List<SummaryAttendanceModel>> getSummrizeAttendance(
-      {int? date, int? startDate, int? endDate}) async {
+      {required int startDate, required int endDate}) async {
     List<SummaryAttendanceModel>? summaryAttendance;
 
-    final query = {"date": date};
+    final query = {
+      "startDate": startDate,
+      "endDate": endDate,
+    };
 
     Response response = await dioInstance.dio.get(
       Endpoints.instance.get_own_summary_attendance,

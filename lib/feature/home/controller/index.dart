@@ -30,6 +30,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Rxn<int> dateInMiliSecond = Rxn<int>(null);
   Rxn<int> startOfDay = Rxn<int>(null);
   Rxn<int> endOfDay = Rxn<int>(null);
+  Rx<int> startOfMonth = 0.obs;
+  Rx<int> endOfMonth = 0.obs;
   RxList<AttendanceModel> attendanceList = <AttendanceModel>[].obs;
   var isLoadingList = false.obs;
   RxString startHour = "8:00".obs;
@@ -46,9 +48,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       <SummaryAttendanceModel>[].obs;
   Rxn<String> name = Rxn<String>(null);
   var isLoadingSummary = false.obs;
-  Rxn<String> totalAttendance = Rxn<String>(null);
-  Rxn<String> totalAbsent = Rxn<String>(null);
-  Rxn<String> totalLeave = Rxn<String>(null);
+  Rxn<int> totalAttendance = Rxn<int>(null);
+  Rxn<int> totalAbsent = Rxn<int>(null);
+  Rxn<int> totalLeave = Rxn<int>(null);
 
   @override
   void onInit() {
@@ -203,12 +205,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Future<void> getSummarizeAttendance() async {
     try {
       summaryAttendance.value = await HomeService().getSummrizeAttendance(
-        date: date.millisecondsSinceEpoch,
+        startDate: startOfMonth.value,
+        endDate: endOfMonth.value,
       );
-      totalAbsent.value = summaryAttendance.first.totalAbsent?.toString();
-      totalLeave.value = summaryAttendance.first.totalLeave?.toString();
-      totalAttendance.value =
-          summaryAttendance.first.totalAttendance?.toString();
+
+      for (var element in summaryAttendance) {
+        totalAbsent.value =
+            ((totalAbsent.value ?? 0) + (element.totalAbsent ?? 0));
+        totalLeave.value =
+            ((totalLeave.value ?? 0) + (element.totalLeave ?? 0));
+        totalAttendance.value =
+            ((totalAttendance.value ?? 0) + (element.totalAttendance ?? 0));
+      }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -219,6 +227,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     startOfDay.value = DateTime(date.year, date.month, date.day, 0, 0, 0)
         .millisecondsSinceEpoch;
     endOfDay.value = DateTime(date.year, date.month, date.day, 23, 59, 59)
+        .millisecondsSinceEpoch;
+
+    startOfMonth.value =
+        DateTime(date.year, date.month, 1, 0, 0, 0).millisecondsSinceEpoch;
+
+    endOfMonth.value = DateTime(date.year, date.month + 1, 0, 23, 59, 59)
         .millisecondsSinceEpoch;
 
     startHour.value =

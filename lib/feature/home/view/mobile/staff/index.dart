@@ -160,7 +160,7 @@ class HomeStaffMobileView extends StatelessWidget {
                       () => OverviewCard(
                         image: present,
                         title: "Attendance",
-                        number: controller.totalAttendance.value,
+                        number: controller.totalAttendance.value.toString(),
                       ),
                     ),
                   ),
@@ -170,7 +170,7 @@ class HomeStaffMobileView extends StatelessWidget {
                       () => OverviewCard(
                         image: absent,
                         title: "Absent",
-                        number: controller.totalAbsent.value,
+                        number: controller.totalAbsent.value.toString(),
                       ),
                     ),
                   ),
@@ -179,7 +179,7 @@ class HomeStaffMobileView extends StatelessWidget {
                     child: Obx(
                       () => OverviewCard(
                         image: onLeave,
-                        number: controller.totalLeave.value,
+                        number: controller.totalLeave.value.toString(),
                         title: "On Leave",
                       ),
                     ),

@@ -7,6 +7,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/task/task/controller/index.dart';
 import 'package:attendance_app/feature/task/task/widget/task_chart.dart';
 import 'package:attendance_app/feature/task/task/widget/task_card.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -86,7 +87,11 @@ class TaskViewMobile extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     separatorBuilder: (context, index) => SizedBox(
-                        height: AppSize.paddingS5 * (size.width / 375)),
+                      height: SizeUtils.scaleWidth(
+                        AppSize.paddingS5,
+                        size.width,
+                      ),
+                    ),
                     itemBuilder: (context, index) {
                       return TaskCard(
                         color: controller.tasks[index].color,

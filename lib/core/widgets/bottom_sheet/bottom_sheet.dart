@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -294,7 +295,7 @@ void getOptionBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: size.height * 0.5,
+      height: SizeUtils.scaleWidth(370, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.only(
@@ -311,14 +312,14 @@ void getOptionBottomSheet(
                 image,
               ),
             ),
-            SizedBox(height: size.height * 0.05),
+            SizedBox(height: SizeUtils.scaleWidth(40, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.edit_rounded,
               title: "Edit",
               onTap: onTapEdit,
             ),
-            SizedBox(height: size.height * 0.01),
+            SizedBox(height: SizeUtils.scaleWidth(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.delete_rounded,

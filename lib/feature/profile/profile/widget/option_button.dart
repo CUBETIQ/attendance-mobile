@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/profile/profile/model/option_model.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class OptionButton extends StatelessWidget {
@@ -25,7 +26,7 @@ class OptionButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize.borderRadiusLarge * (size.width / 375),
+            SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
           ),
           color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
         ),
@@ -34,7 +35,7 @@ class OptionButton extends StatelessWidget {
             Icon(
               option.icon,
               color: Theme.of(context).colorScheme.primary,
-              size: 20 * (size.width / 375),
+              size: SizeUtils.scaleWidth(20, size.width),
             ),
             const SizedBox(width: AppSize.paddingS8),
             MyText(
@@ -45,7 +46,7 @@ class OptionButton extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios,
               color: Theme.of(context).colorScheme.primary,
-              size: 16 * (size.width / 375),
+              size: SizeUtils.scaleWidth(16, size.width),
             ),
           ],
         ),

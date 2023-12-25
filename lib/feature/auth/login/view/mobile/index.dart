@@ -38,7 +38,7 @@ class LoginViewMobile extends StatelessWidget {
                       ),
                       const SizedBox(height: AppSize.paddingS6),
                       MyText(
-                        text: "Time Glitch",
+                        text: "TimeSync360",
                         style: BodyLargeMedium,
                       ),
                     ],

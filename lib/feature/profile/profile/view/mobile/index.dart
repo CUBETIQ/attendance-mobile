@@ -10,6 +10,7 @@ import 'package:attendance_app/feature/profile/profile/widget/job_company_title.
 import 'package:attendance_app/feature/profile/profile/widget/kpi_score_card.dart';
 import 'package:attendance_app/feature/profile/profile/widget/option_button.dart';
 import 'package:attendance_app/feature/profile/profile/widget/profile_detail_row.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,10 +28,12 @@ class ProfileViewMobile extends StatelessWidget {
       },
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: AppSize.paddingHorizontalLarge,
-            right: AppSize.paddingHorizontalLarge,
-            top: AppSize.paddingTitleSmall,
+          padding: EdgeInsets.only(
+            left: SizeUtils.scaleWidth(
+                AppSize.paddingHorizontalLarge, size.width),
+            right: SizeUtils.scaleWidth(
+                AppSize.paddingHorizontalLarge, size.width),
+            top: SizeUtils.scaleWidth(AppSize.paddingTitleSmall, size.width),
           ),
           child: Column(
             children: [
@@ -38,19 +41,24 @@ class ProfileViewMobile extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: size.width * 0.85,
-                    width: size.width,
                   ),
                   Positioned(
-                    top: 65 + (size.width / 375),
+                    top: SizeUtils.scaleWidth(65, size.width),
                     child: Container(
-                      height: size.width * 0.68,
-                      width: size.width - 48,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.paddingHorizontalLarge,
+                      height: size.width * 0.66,
+                      width: size.width - SizeUtils.scaleWidth(48, size.width),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: SizeUtils.scaleWidth(
+                          AppSize.paddingHorizontalLarge,
+                          size.width,
+                        ),
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
-                          AppSize.borderRadiusLarge * (size.width / 375),
+                          SizeUtils.scaleWidth(
+                            AppSize.borderRadiusLarge,
+                            size.width,
+                          ),
                         ),
                         color: Theme.of(context)
                             .colorScheme
@@ -60,8 +68,11 @@ class ProfileViewMobile extends StatelessWidget {
                       child: Column(
                         children: [
                           SizedBox(
-                              height:
-                                  (size.width * 0.105) / (size.width / 375)),
+                            height: SizeUtils.scaleWidth(
+                              size.width * 0.105,
+                              size.width,
+                            ),
+                          ),
                           Container(
                             constraints: BoxConstraints(
                               maxWidth: size.width * 0.7,

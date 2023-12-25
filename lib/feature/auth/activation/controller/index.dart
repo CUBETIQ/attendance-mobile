@@ -19,7 +19,7 @@ class ActivationController extends GetxController {
   TextEditingController activationController = TextEditingController();
   final String title = "Please enter the activation code";
   final String description =
-      "To unlock the flow of time with Time Glitch: Where every moment counts, and attendance becomes a seamless journey through the fabric of efficiency.";
+      "To unlock the flow of time with TimeSync360: Where every moment counts, and attendance becomes a seamless journey through the fabric of efficiency.";
   Rxn<ActivationModel> activate = Rxn<ActivationModel>(null);
   Rxn<AndroidDeviceInfo> androidInfo = Rxn<AndroidDeviceInfo>(null);
   Rxn<IosDeviceInfo> iosInfo = Rxn<IosDeviceInfo>(null);

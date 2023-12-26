@@ -61,7 +61,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                   Expanded(
                     child: MyDatePickerField(
                       hasLabel: true,
-                      label: "Start Date",
+                      label: "From",
                       hintText: "Enter your start date",
                       textController: controller.startDateController,
                       onDateResult: controller.getStartDateInMilliSecond,
@@ -72,7 +72,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                     child: Obx(
                       () => MyDatePickerField(
                         hasLabel: true,
-                        label: "End Date",
+                        label: "To",
                         hintText: "Enter your end date",
                         initialDate: controller.startDate.value != null
                             ? DateTime.fromMillisecondsSinceEpoch(

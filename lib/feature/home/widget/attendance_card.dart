@@ -131,7 +131,7 @@ class AttendanceCard extends StatelessWidget {
               ),
               SizedBox(width: size.width * 0.01),
               MyText(
-                text: "Location: You are in office reach.",
+                text: "Location: You are in office area.",
                 style: BodyMediumRegular,
               ),
             ],

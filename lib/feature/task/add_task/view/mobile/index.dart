@@ -60,7 +60,7 @@ class AddTaskViewMobile extends StatelessWidget {
                     child: Obx(
                       () => MyDatePickerField(
                         hasLabel: true,
-                        label: "End Date",
+                        label: "Due Date",
                         hintText: "Enter your end date",
                         initialDate: controller.startDate.value != null
                             ? DateTime.fromMillisecondsSinceEpoch(

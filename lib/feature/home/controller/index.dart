@@ -203,6 +203,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> getSummarizeAttendance() async {
+    totalAbsent.value = 0;
+    totalLeave.value = 0;
+    totalAttendance.value = 0;
     try {
       summaryAttendance.value = await HomeService().getSummrizeAttendance(
         startDate: startOfMonth.value,

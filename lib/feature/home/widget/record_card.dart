@@ -5,6 +5,7 @@ import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/widget/record_data_card.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,8 @@ class RecordCard extends StatelessWidget {
     return Container(
       width: width ?? double.infinity,
       height: height ?? size.width * 0.66,
-      padding: const EdgeInsets.all(AppSize.paddingS8),
+      padding:
+          EdgeInsets.all(SizeUtils.scaleWidth(AppSize.paddingS8, size.width)),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           AppSize.borderRadiusMedium * (size.width / 375.0),
@@ -83,9 +85,9 @@ class RecordCard extends StatelessWidget {
                 NavigationController.to.organization.value.configs?.breakTime ??
                     "00:00",
             svgIcon: location,
-            firstTitle: "Break Time",
-            onNullTitle: "Break Time",
-            secondTitle: "Break Time",
+            firstTitle: "Lunch Break",
+            onNullTitle: "Lunch Break",
+            secondTitle: "Lunch Break",
             breakTimeTitle: breakTimeTitle,
             isBreakTime: isBreakTime,
             icon: Icons.coffee,

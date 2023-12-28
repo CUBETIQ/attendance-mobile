@@ -38,6 +38,7 @@ class AddTaskController extends GetxController {
     validate();
     if (MyTextFieldFormController.findController('Task').isValid) {
       try {
+        int date = DateTime.now().millisecondsSinceEpoch;
         CreateTaskModel input = CreateTaskModel(
           taskName: taskController.text,
           taskDescription: descriptionController.text,
@@ -46,8 +47,9 @@ class AddTaskController extends GetxController {
           color: stringColor.value,
           icon: stringIcon.value,
         );
-        await AddTaskService().addTask(input);
+        await AddTaskService().addTask(input, date);
         TaskController.to.getOwnTasks();
+        TaskController.to.getOwnSummarizeLeave();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);

@@ -14,8 +14,8 @@ void getColorPickerDialog({
   Color? color;
   String? stringColor;
   Get.dialog(
-    SingleChildScrollView(
-      child: Center(
+    Center(
+      child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSize.paddingHorizontalLarge,

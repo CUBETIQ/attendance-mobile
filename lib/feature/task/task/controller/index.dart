@@ -1,11 +1,11 @@
 import 'package:attendance_app/constants/svg.dart';
+import 'package:attendance_app/core/model/summary_task_model.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/task/task/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
-import 'package:attendance_app/utils/types_helper/task_status.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -17,30 +17,44 @@ class TaskController extends GetxController {
   RxInt totalUncompletedTask = 0.obs;
   RxDouble percentageCompletedTask = 0.0.obs;
   RxDouble percentageUncompletedTask = 0.0.obs;
+  RxList<SummaryTaskModel> summarizeTasks = <SummaryTaskModel>[].obs;
+  Rxn<int> startDate = Rxn<int>();
+  Rxn<int> endDate = Rxn<int>();
 
   @override
   void onInit() {
     super.onInit();
-    getOwnTasks();
+    initFunction();
   }
 
   Future<void> getOwnTasks() async {
     try {
       tasks.value = await TaskService().getUserTasks();
-      totalTask.value = tasks.length;
-      totalCompletedTask.value = tasks
-          .where((element) => element.taskStatus == TaskStatus.completed)
-          .length;
-      totalUncompletedTask.value = tasks.length - totalCompletedTask.value;
-      final percentageCompleted =
-          ((totalCompletedTask.value / totalTask.value * 100) / 100);
-      final percentageUncomplete = 1 - percentageCompleted;
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
 
-      if (percentageCompleted.isNaN) {
-        percentageCompletedTask.value = 0.0;
-      } else {
-        percentageCompletedTask.value = percentageCompleted;
-        percentageUncompletedTask.value = percentageUncomplete;
+  Future<void> getOwnSummarizeLeave() async {
+    clearData();
+    try {
+      summarizeTasks.value = await TaskService().getUserTaskSummarize(
+        startDate: startDate.value,
+        endDate: endDate.value,
+      );
+      for (var element in summarizeTasks) {
+        totalTask.value += element.totalTask!;
+        totalCompletedTask.value += element.totalTaskDone!;
+        totalUncompletedTask.value += element.totalTaskNotDone!;
+      }
+      if (totalCompletedTask.value != 0) {
+        percentageCompletedTask.value =
+            (totalCompletedTask.value / totalTask.value * 100) / 100;
+      }
+      if (totalUncompletedTask.value != 0) {
+        percentageUncompletedTask.value =
+            (totalUncompletedTask.value / totalTask.value * 100) / 100;
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -49,14 +63,16 @@ class TaskController extends GetxController {
   }
 
   Future<void> completeTask(String id) async {
+    int date = DateTime.now().millisecondsSinceEpoch;
     try {
       getConfirmBottomSheet(
         Get.context!,
         title: "Complete Task",
         description: "Are you sure to complete this task?",
         onTapConfirm: () async {
-          await TaskService().completeTask(id);
+          await TaskService().completeTask(id, date);
           getOwnTasks();
+          getOwnSummarizeLeave();
           Get.back();
         },
         image: checkIn,
@@ -67,19 +83,27 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> onRefresh() async {
+  Future<void> initFunction() async {
+    // initDate();
     await getOwnTasks();
+    getOwnSummarizeLeave();
+  }
+
+  void onRefresh() {
+    initFunction();
   }
 
   Future<void> deleteTask(String id) async {
+    int date = DateTime.now().millisecondsSinceEpoch;
     try {
       getConfirmBottomSheet(
         Get.context!,
         title: "Delete Task",
         description: "Are you sure to delete this task?",
         onTapConfirm: () async {
-          await TaskService().deleteTask(id);
+          await TaskService().deleteTask(id, date);
           getOwnTasks();
+          getOwnSummarizeLeave();
           Get.back();
         },
         image: delete,
@@ -109,5 +133,19 @@ class TaskController extends GetxController {
         deleteTask(task.id!);
       },
     );
+  }
+
+  void initDate() {
+    DateTime now = DateTime.now();
+    startDate.value = DateTime(now.year, now.month, 1).millisecondsSinceEpoch;
+    endDate.value = DateTime(now.year, now.month + 1, 0).millisecondsSinceEpoch;
+  }
+
+  void clearData() {
+    totalTask.value = 0;
+    totalCompletedTask.value = 0;
+    totalUncompletedTask.value = 0;
+    percentageCompletedTask.value = 0;
+    percentageUncompletedTask.value = 0;
   }
 }

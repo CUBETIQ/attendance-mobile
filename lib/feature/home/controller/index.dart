@@ -10,6 +10,7 @@ import 'package:attendance_app/feature/home/model/check_in_model.dart';
 import 'package:attendance_app/feature/home/model/check_out_model.dart';
 import 'package:attendance_app/feature/home/service/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
+import 'package:attendance_app/feature/profile/profile/controller/index.dart';
 import 'package:attendance_app/utils/attendance_status_validator.dart';
 import 'package:attendance_app/utils/types_helper/attendance_method.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
@@ -121,7 +122,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
         );
         getAttendance();
-        getSummarizeAttendance();
+        await getSummarizeAttendance();
+        if (Get.isRegistered<ProfileController>()) {
+          ProfileController.to.getSummarizeAttendance();
+        }
         isCheckedIn.value = true;
         getCheckInBottomSheet(Get.context!, image: working);
       } on DioException catch (e) {

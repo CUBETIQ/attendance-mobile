@@ -103,6 +103,7 @@ class AddLeaveController extends GetxController
   }
 
   Future<void> addLeave() async {
+    int date = DateTime.now().millisecondsSinceEpoch;
     try {
       CreateLeaveModel input = CreateLeaveModel(
         leaveType: selectLeaveType.value,
@@ -111,7 +112,7 @@ class AddLeaveController extends GetxController
         leaveTo: endDate.value,
         leaveReason: reasonController.text,
       );
-      await AddLeaveService().addLeave(input);
+      await AddLeaveService().addLeave(input, date);
       LeaveController.to.getOwnLeave();
       Get.back();
     } on DioException catch (e) {

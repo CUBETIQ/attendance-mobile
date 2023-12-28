@@ -27,7 +27,7 @@ class HomeStaffMobileView extends StatelessWidget {
         controller.onRefresh();
       },
       child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.only(
             left: AppSize.paddingHorizontalLarge,

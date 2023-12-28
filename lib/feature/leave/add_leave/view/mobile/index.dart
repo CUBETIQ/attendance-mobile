@@ -47,7 +47,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst ?? ""),
+                          child: Text(e.capitalizeFirst),
                         ),
                       )
                       .toList(),

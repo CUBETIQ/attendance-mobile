@@ -1,7 +1,6 @@
 import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
 import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
 import 'package:attendance_app/main.dart';
-import 'package:attendance_app/theme/theme_data.dart';
 import 'package:get/get.dart';
 
 class IsarService extends GetxService {
@@ -12,8 +11,8 @@ class IsarService extends GetxService {
     final appConfig = await _localStorage.get();
     storageConfig?.value = appConfig;
     isFirstTime = appConfig?.isFirstTime ?? false;
-    Get.changeTheme(
-        appConfig?.darkTheme ?? false ? darkThemeData() : lightThemeData());
+    // Get.changeTheme(
+    //     appConfig?.darkTheme ?? false ? darkThemeData() : lightThemeData());
   }
 
   Future<void> clearDataBase() async {

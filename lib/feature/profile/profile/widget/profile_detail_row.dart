@@ -34,7 +34,7 @@ class ProfileDetailRow extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: MyText(
             text: value != "" && value != null
-                ? (value ?? "N/A").capitalizeFirst!
+                ? (value ?? "N/A").capitalizeFirst
                 : "N/A",
             style: BodyMediumRegular,
           ),

@@ -69,8 +69,7 @@ class LeaveCard extends StatelessWidget {
                   ),
                   child: MyText(
                     text: (leave.leaveStatus ?? LeaveStatus.pending)
-                            .capitalizeFirst ??
-                        LeaveStatus.pending,
+                        .capitalizeFirst,
                     style: BodySmallRegular.copyWith(
                       color: Colors.white,
                     ),

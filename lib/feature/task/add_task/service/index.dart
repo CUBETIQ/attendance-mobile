@@ -6,14 +6,15 @@ import 'package:dio/dio.dart';
 class AddTaskService {
   DioUtil dioInstance = DioUtil();
 
-  Future<void> addTask(CreateTaskModel input) async {
-    final data = {
+  Future<void> addTask(CreateTaskModel input, int date) async {
+    Map<String, dynamic> data = {
       "taskName": input.taskName,
       "taskDescription": input.taskDescription,
       "startDate": input.startDate,
       "endDate": input.endDate,
       "color": input.color,
       "icon": input.icon,
+      "date": date,
     };
 
     Response response = await dioInstance.dio.post(

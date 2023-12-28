@@ -1,3 +1,4 @@
+import 'package:attendance_app/core/model/summary_task_model.dart';
 import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
@@ -7,10 +8,15 @@ import 'package:dio/dio.dart';
 class TaskService {
   DioUtil dioInstance = DioUtil();
 
-  Future<List<TaskModel>> getUserTasks() async {
+  Future<List<TaskModel>> getUserTasks({int? startDate, int? endDate}) async {
     final List<TaskModel> tasks;
+    Map<String, dynamic> queryParameters = {
+      "startDate": startDate,
+      "endDate": endDate,
+    };
     Response response = await dioInstance.dio.get(
       Endpoints.instance.get_own_task,
+      queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {
       tasks = TaskModel().fromListJson(response.data["data"]);
@@ -20,18 +26,47 @@ class TaskService {
     return tasks;
   }
 
-  Future<void> completeTask(String id) async {
+  Future<List<SummaryTaskModel>> getUserTaskSummarize(
+      {int? startDate, int? endDate}) async {
+    final List<SummaryTaskModel> summaryTasks;
+
+    Map<String, dynamic> queryParameters = {
+      "startDate": startDate,
+      "endDate": endDate,
+    };
+
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_own_task_summarize,
+      queryParameters: queryParameters,
+    );
+    if (response.statusCode == 200) {
+      summaryTasks = SummaryTaskModel().fromListJson(response.data["data"]);
+    } else {
+      throw Exception("Get task failed");
+    }
+    return summaryTasks;
+  }
+
+  Future<void> completeTask(String id, int date) async {
+    Map<String, dynamic> data = {
+      "taskStatus": TaskStatus.completed,
+      "date": date
+    };
+
     Response response = await dioInstance.dio.put(
-        Endpoints.instance.complete_task + id,
-        data: {"taskStatus": TaskStatus.completed});
+      Endpoints.instance.complete_task + id,
+      data: data,
+    );
+
     if (response.statusCode != 200) {
       throw Exception("Complete task failed");
     }
   }
 
-  Future<void> deleteTask(String id) async {
+  Future<void> deleteTask(String id, int date) async {
     Response response = await dioInstance.dio.delete(
       Endpoints.instance.task + id,
+      data: {"date": date},
     );
     if (response.statusCode != 200) {
       throw Exception("Delete task failed");

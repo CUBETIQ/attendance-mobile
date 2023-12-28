@@ -88,6 +88,9 @@ class ProfileController extends GetxController {
   }
 
   Future<void> getSummarizeAttendance() async {
+    totalAbsent.value = 0;
+    totalLeave.value = 0;
+    totalAttendance.value = 0;
     try {
       summaryAttendance.value = await ProfileService().getSummrizeAttendance();
       for (int i = 0; i < summaryAttendance.length; i++) {

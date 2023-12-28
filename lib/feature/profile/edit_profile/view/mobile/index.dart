@@ -69,7 +69,7 @@ class EditProfileViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst ?? ""),
+                          child: Text(e.capitalizeFirst),
                         ),
                       )
                       .toList(),
@@ -102,7 +102,7 @@ class EditProfileViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst ?? ""),
+                          child: Text(e.capitalizeFirst),
                         ),
                       )
                       .toList(),

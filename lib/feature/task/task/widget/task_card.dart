@@ -110,9 +110,8 @@ class TaskCard extends StatelessWidget {
                             maxWidth: size.width * 0.56,
                           ),
                           child: MyText(
-                            text: (task.taskName ?? "Task Name")
-                                    .capitalizeFirst ??
-                                "",
+                            text:
+                                (task.taskName ?? "Task Name").capitalizeFirst,
                             maxLines: 2,
                             style: BodyLarge.copyWith(
                               color: color != null

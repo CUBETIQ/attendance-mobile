@@ -11,7 +11,6 @@ class LeaveChart extends StatelessWidget {
   final double radius;
   final double? lineWidth;
   final double? percent;
-  final Widget? centerWidget;
   final String? textBelow;
   final String title;
   final String? centerText;
@@ -23,7 +22,6 @@ class LeaveChart extends StatelessWidget {
     required this.radius,
     this.lineWidth,
     this.percent,
-    this.centerWidget,
     required this.title,
     this.textBelow,
     this.centerText,
@@ -62,9 +60,9 @@ class LeaveChart extends StatelessWidget {
             animationDuration: 500,
             radius: radius * (size.width / 360),
             lineWidth: lineWidth ?? 12.0,
-            percent: percent ?? 0.8,
+            percent: percent ?? 0.0,
             center: MyText(
-              text: centerText ?? "80%",
+              text: centerText ?? "0%",
               style: BodySmallRegular,
             ),
             linearGradient: const LinearGradient(

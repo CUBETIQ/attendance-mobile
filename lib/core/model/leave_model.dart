@@ -6,14 +6,14 @@ class LeaveModel extends BaseModel<LeaveModel> {
   final String? organizationId;
   final String? departmentId;
   final String? positionId;
-  final String? leaveType;
-  final String? leaveReason;
-  final int? leaveFrom;
-  final int? leaveTo;
-  final String? leaveStatus;
-  final List<dynamic>? leaveAttachment;
-  final String? leaveDurationType;
-  final int? leaveDuration;
+  final String? type;
+  final String? reason;
+  final int? from;
+  final int? to;
+  final String? status;
+  final List<dynamic>? attachment;
+  final String? durationType;
+  final int? duration;
   final String? updateBy;
 
   LeaveModel({
@@ -22,14 +22,14 @@ class LeaveModel extends BaseModel<LeaveModel> {
     this.organizationId,
     this.departmentId,
     this.positionId,
-    this.leaveType,
-    this.leaveReason,
-    this.leaveFrom,
-    this.leaveTo,
-    this.leaveStatus,
-    this.leaveAttachment,
-    this.leaveDurationType,
-    this.leaveDuration,
+    this.type,
+    this.reason,
+    this.from,
+    this.to,
+    this.status,
+    this.attachment,
+    this.durationType,
+    this.duration,
     this.updateBy,
   });
 
@@ -44,14 +44,14 @@ class LeaveModel extends BaseModel<LeaveModel> {
       organizationId: json['organizationId'],
       departmentId: json['departmentId'],
       positionId: json['positionId'],
-      leaveType: json['leaveType'],
-      leaveReason: json['leaveReason'],
-      leaveFrom: json['leaveFrom'],
-      leaveTo: json['leaveTo'],
-      leaveStatus: json['leaveStatus'],
-      leaveAttachment: json['leaveAttachment'],
-      leaveDurationType: json['leaveDurationType'],
-      leaveDuration: json['leaveDuration'],
+      type: json['type'],
+      reason: json['reason'],
+      from: json['from'],
+      to: json['to'],
+      status: json['status'],
+      attachment: json['attachment'],
+      durationType: json['durationType'],
+      duration: json['duration'],
       updateBy: json['updateBy'],
     );
   }
@@ -72,14 +72,14 @@ class LeaveModel extends BaseModel<LeaveModel> {
       'organizationId': organizationId,
       'departmentId': departmentId,
       'positionId': positionId,
-      'leaveType': leaveType,
-      'leaveReason': leaveReason,
-      'leaveFrom': leaveFrom,
-      'leaveTo': leaveTo,
-      'leaveStatus': leaveStatus,
-      'leaveAttachment': leaveAttachment,
-      'leaveDurationType': leaveDurationType,
-      'leaveDuration': leaveDuration,
+      'type': type,
+      'reason': reason,
+      'from': from,
+      'to': to,
+      'status': status,
+      'attachment': attachment,
+      'durationType': durationType,
+      'duration': duration,
       'updateBy': updateBy,
     };
   }

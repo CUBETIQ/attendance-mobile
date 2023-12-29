@@ -6,9 +6,9 @@ class TaskModel extends BaseModel<TaskModel> {
   final String? organizationId;
   final String? departmentId;
   final String? positionId;
-  final String? taskName;
-  final String? taskDescription;
-  final String? taskStatus;
+  final String? name;
+  final String? description;
+  final String? status;
   final int? startDate;
   final int? endDate;
   final String? color;
@@ -20,9 +20,9 @@ class TaskModel extends BaseModel<TaskModel> {
     this.organizationId,
     this.departmentId,
     this.positionId,
-    this.taskName,
-    this.taskDescription,
-    this.taskStatus,
+    this.name,
+    this.description,
+    this.status,
     this.startDate,
     this.endDate,
     this.color,
@@ -40,9 +40,9 @@ class TaskModel extends BaseModel<TaskModel> {
       organizationId: json['organizationId'],
       departmentId: json['departmentId'],
       positionId: json['positionId'],
-      taskName: json['taskName'],
-      taskDescription: json['taskDescription'],
-      taskStatus: json['taskStatus'],
+      name: json['name'],
+      description: json['description'],
+      status: json['status'],
       startDate: json['startDate'],
       endDate: json['endDate'],
       color: json['color'],
@@ -66,9 +66,9 @@ class TaskModel extends BaseModel<TaskModel> {
       "organizationId": organizationId,
       "departmentId": departmentId,
       "positionId": positionId,
-      "taskName": taskName,
-      "taskDescription": taskDescription,
-      "taskStatus": taskStatus,
+      "name": name,
+      "description": description,
+      "status": status,
       "startDate": startDate,
       "endDate": endDate,
       "color": color,

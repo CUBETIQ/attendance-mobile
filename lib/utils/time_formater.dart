@@ -25,6 +25,16 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
+  String formatMinutesToDays(int minutes) {
+    // Calculate days
+    int days = minutes ~/ (24 * 60); // Assuming 24 hours in a day
+
+    // Format the time
+    String formattedTime = '$days day${days != 1 ? 's' : ''}';
+
+    return formattedTime;
+  }
+
   String formatMinutes(int minutes) {
     // Calculate hours and remaining minutes
     int hours = minutes ~/ 60;

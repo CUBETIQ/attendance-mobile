@@ -53,12 +53,19 @@ class AddLeaveController extends GetxController
 
   void initStartAndEndDate() {
     DateTime now = DateTime.now();
-    startDateController.text =
-        DateFormatter().formatMillisecondsToDOB(now.millisecondsSinceEpoch);
-    endDateController.text =
-        DateFormatter().formatMillisecondsToDOB(now.millisecondsSinceEpoch);
-    startDate.value = now.millisecondsSinceEpoch;
-    endDate.value = now.millisecondsSinceEpoch;
+
+    // Set startDate to the beginning of the day
+    DateTime startOfDay = DateTime(now.year, now.month, now.day, 0, 0, 0, 0);
+
+    // Set endDate to the end of the day
+    DateTime endOfDay = DateTime(now.year, now.month, now.day, 23, 59, 59, 999);
+
+    startDateController.text = DateFormatter()
+        .formatMillisecondsToDOB(startOfDay.millisecondsSinceEpoch);
+    endDateController.text = DateFormatter()
+        .formatMillisecondsToDOB(endOfDay.millisecondsSinceEpoch);
+    startDate.value = startOfDay.millisecondsSinceEpoch;
+    endDate.value = endOfDay.millisecondsSinceEpoch;
   }
 
   void getStartDateInMilliSecond(int? date) {
@@ -85,16 +92,16 @@ class AddLeaveController extends GetxController
         leave.value = Get.arguments["leave"];
         title.value = "Edit Leave";
         appState.value = AppState.Edit;
-        startDate.value = leave.value?.leaveFrom;
-        endDate.value = leave.value?.leaveTo;
+        startDate.value = leave.value?.from;
+        endDate.value = leave.value?.to;
         startDateController.text =
-            DateFormatter().formatMillisecondsToDOB(leave.value?.leaveFrom);
+            DateFormatter().formatMillisecondsToDOB(leave.value?.from);
         endDateController.text =
-            DateFormatter().formatMillisecondsToDOB(leave.value?.leaveTo);
-        selectLeaveType.value = leave.value?.leaveType ?? LeaveType.annual;
+            DateFormatter().formatMillisecondsToDOB(leave.value?.to);
+        selectLeaveType.value = leave.value?.type ?? LeaveType.annual;
         selectLeaveDurationType.value =
-            leave.value?.leaveDurationType ?? LeaveTypeDuration.fullDay;
-        reasonController.text = leave.value?.leaveReason ?? '';
+            leave.value?.durationType ?? LeaveTypeDuration.fullDay;
+        reasonController.text = leave.value?.reason ?? '';
       } else {
         title.value = "Add Leave";
         appState.value = AppState.Create;
@@ -103,16 +110,15 @@ class AddLeaveController extends GetxController
   }
 
   Future<void> addLeave() async {
-    int date = DateTime.now().millisecondsSinceEpoch;
     try {
       CreateLeaveModel input = CreateLeaveModel(
-        leaveType: selectLeaveType.value,
-        leaveDurationType: selectLeaveDurationType.value,
-        leaveFrom: startDate.value,
-        leaveTo: endDate.value,
-        leaveReason: reasonController.text,
+        type: selectLeaveType.value,
+        durationType: selectLeaveDurationType.value,
+        from: startDate.value,
+        to: endDate.value,
+        reason: reasonController.text,
       );
-      await AddLeaveService().addLeave(input, date);
+      await AddLeaveService().addLeave(input);
       LeaveController.to.getOwnLeave();
       Get.back();
     } on DioException catch (e) {
@@ -124,11 +130,11 @@ class AddLeaveController extends GetxController
   Future<void> updateLeave() async {
     try {
       CreateLeaveModel input = CreateLeaveModel(
-        leaveType: selectLeaveType.value,
-        leaveDurationType: selectLeaveDurationType.value,
-        leaveFrom: startDate.value,
-        leaveTo: endDate.value,
-        leaveReason: reasonController.text,
+        type: selectLeaveType.value,
+        durationType: selectLeaveDurationType.value,
+        from: startDate.value,
+        to: endDate.value,
+        reason: reasonController.text,
       );
       await AddLeaveService().updateLeave(leave.value!.id!, input);
       LeaveController.to.getOwnLeave();

@@ -29,7 +29,11 @@ class TaskController extends GetxController {
 
   Future<void> getOwnTasks() async {
     try {
-      tasks.value = await TaskService().getUserTasks();
+      tasks.value = await TaskService().getUserTasks(
+        startDate: startDate.value,
+        endDate: endDate.value,
+      );
+      totalTask.value = tasks.length;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -44,7 +48,6 @@ class TaskController extends GetxController {
         endDate: endDate.value,
       );
       for (var element in summarizeTasks) {
-        totalTask.value += element.totalTask!;
         totalCompletedTask.value += element.totalTaskDone!;
         totalUncompletedTask.value += element.totalTaskNotDone!;
       }
@@ -63,15 +66,14 @@ class TaskController extends GetxController {
   }
 
   Future<void> completeTask(String id) async {
-    int date = DateTime.now().millisecondsSinceEpoch;
     try {
       getConfirmBottomSheet(
         Get.context!,
         title: "Complete Task",
         description: "Are you sure to complete this task?",
         onTapConfirm: () async {
-          await TaskService().completeTask(id, date);
-          getOwnTasks();
+          await TaskService().completeTask(id);
+          await getOwnTasks();
           getOwnSummarizeLeave();
           Get.back();
         },
@@ -94,15 +96,14 @@ class TaskController extends GetxController {
   }
 
   Future<void> deleteTask(String id) async {
-    int date = DateTime.now().millisecondsSinceEpoch;
     try {
       getConfirmBottomSheet(
         Get.context!,
         title: "Delete Task",
         description: "Are you sure to delete this task?",
         onTapConfirm: () async {
-          await TaskService().deleteTask(id, date);
-          getOwnTasks();
+          await TaskService().deleteTask(id);
+          await getOwnTasks();
           getOwnSummarizeLeave();
           Get.back();
         },
@@ -142,7 +143,6 @@ class TaskController extends GetxController {
   }
 
   void clearData() {
-    totalTask.value = 0;
     totalCompletedTask.value = 0;
     totalUncompletedTask.value = 0;
     percentageCompletedTask.value = 0;

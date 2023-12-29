@@ -39,8 +39,10 @@ void getCheckInBottomSheet(BuildContext context,
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
-              text: "Successfully Checked In!",
-              style: BodyLarge,
+              text: "You Have Checked In!",
+              style: BodyLarge.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
@@ -97,8 +99,10 @@ void getCheckOutBottomSheet(BuildContext context,
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
-              text: "Successfully Checked Out!",
-              style: BodyLarge,
+              text: "You Have Checked Out!",
+              style: BodyLarge.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(

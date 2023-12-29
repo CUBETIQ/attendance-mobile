@@ -1,15 +1,25 @@
 class CreateLeaveModel {
-  final String? leaveType;
-  final String? leaveReason;
-  final int? leaveFrom;
-  final int? leaveTo;
-  final String? leaveDurationType;
+  final String? type;
+  final String? reason;
+  final int? from;
+  final int? to;
+  final String? durationType;
 
   CreateLeaveModel({
-    this.leaveType,
-    this.leaveReason,
-    this.leaveFrom,
-    this.leaveTo,
-    this.leaveDurationType,
+    this.type,
+    this.reason,
+    this.from,
+    this.to,
+    this.durationType,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "type": type,
+      "reason": reason,
+      "from": from,
+      "to": to,
+      "durationType": durationType,
+    };
+  }
 }

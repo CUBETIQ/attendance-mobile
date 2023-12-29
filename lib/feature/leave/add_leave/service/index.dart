@@ -6,15 +6,8 @@ import 'package:dio/dio.dart';
 class AddLeaveService {
   DioUtil dioInstance = DioUtil();
 
-  Future<void> addLeave(CreateLeaveModel input, int date) async {
-    Map<String, dynamic> data = {
-      "leaveType": input.leaveType,
-      "leaveReason": input.leaveReason,
-      "leaveFrom": input.leaveFrom,
-      "leaveTo": input.leaveTo,
-      "leaveDurationType": input.leaveDurationType,
-      "date": date
-    };
+  Future<void> addLeave(CreateLeaveModel input) async {
+    Map<String, dynamic> data = input.toJson();
     Response response = await dioInstance.dio.post(
       Endpoints.instance.leave,
       data: data,
@@ -25,16 +18,9 @@ class AddLeaveService {
   }
 
   Future<void> updateLeave(String id, CreateLeaveModel input) async {
-    final data = {
-      "leaveType": input.leaveType,
-      "leaveReason": input.leaveReason,
-      "leaveFrom": input.leaveFrom,
-      "leaveTo": input.leaveTo,
-      "leaveDurationType": input.leaveDurationType,
-    };
     Response response = await dioInstance.dio.put(
       Endpoints.instance.leave + id,
-      data: data,
+      data: input.toJson(),
     );
     if (response.statusCode != 200) {
       throw Exception("Update leave failed");

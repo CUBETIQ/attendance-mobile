@@ -1,6 +1,6 @@
 import 'package:attendance_app/core/widgets/layout_builder/responsive_layout.dart';
 import 'package:attendance_app/feature/home/controller/index.dart';
-import 'package:attendance_app/feature/home/view/mobile/index.dart';
+import 'package:attendance_app/feature/home/view/mobile/home_view.dart';
 import 'package:attendance_app/feature/home/view/tablet/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

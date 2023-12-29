@@ -47,10 +47,9 @@ class TaskService {
     return summaryTasks;
   }
 
-  Future<void> completeTask(String id, int date) async {
+  Future<void> completeTask(String id) async {
     Map<String, dynamic> data = {
-      "taskStatus": TaskStatus.completed,
-      "date": date
+      "status": TaskStatus.completed,
     };
 
     Response response = await dioInstance.dio.put(
@@ -63,10 +62,9 @@ class TaskService {
     }
   }
 
-  Future<void> deleteTask(String id, int date) async {
+  Future<void> deleteTask(String id) async {
     Response response = await dioInstance.dio.delete(
       Endpoints.instance.task + id,
-      data: {"date": date},
     );
     if (response.statusCode != 200) {
       throw Exception("Delete task failed");

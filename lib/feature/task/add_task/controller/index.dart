@@ -4,7 +4,7 @@ import 'package:attendance_app/core/widgets/icon_picker/icon_picker_dialog.dart'
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/extensions/string.dart';
-import 'package:attendance_app/feature/task/add_task/model/create_task_model.dart';
+import 'package:attendance_app/feature/task/add_task/service/create_task_model.dart';
 import 'package:attendance_app/feature/task/add_task/service/index.dart';
 import 'package:attendance_app/feature/task/task/controller/index.dart';
 import 'package:attendance_app/utils/time_formater.dart';
@@ -38,16 +38,15 @@ class AddTaskController extends GetxController {
     validate();
     if (MyTextFieldFormController.findController('Task').isValid) {
       try {
-        int date = DateTime.now().millisecondsSinceEpoch;
         CreateTaskModel input = CreateTaskModel(
-          taskName: taskController.text,
-          taskDescription: descriptionController.text,
+          name: taskController.text,
+          description: descriptionController.text,
           startDate: startDate.value,
           endDate: endDate.value,
           color: stringColor.value,
           icon: stringIcon.value,
         );
-        await AddTaskService().addTask(input, date);
+        await AddTaskService().addTask(input);
         TaskController.to.getOwnTasks();
         TaskController.to.getOwnSummarizeLeave();
         Get.back();
@@ -63,8 +62,8 @@ class AddTaskController extends GetxController {
     if (MyTextFieldFormController.findController('Task').isValid) {
       try {
         CreateTaskModel input = CreateTaskModel(
-          taskName: taskController.text,
-          taskDescription: descriptionController.text,
+          name: taskController.text,
+          description: descriptionController.text,
           startDate: startDate.value,
           endDate: endDate.value,
           color: stringColor.value,
@@ -90,14 +89,14 @@ class AddTaskController extends GetxController {
         title.value = "Edit Task";
         appState.value = AppState.Edit;
         task.value = Get.arguments["task"];
-        taskController.text = task.value?.taskName ?? '';
+        taskController.text = task.value?.name ?? '';
         startDateController.text =
             DateFormatter().formatMillisecondsToDOB(task.value?.startDate ?? 0);
         endDateController.text =
             DateFormatter().formatMillisecondsToDOB(task.value?.endDate ?? 0);
         startDate.value = task.value?.startDate ?? 0;
         endDate.value = task.value?.endDate ?? 0;
-        descriptionController.text = task.value?.taskDescription ?? '';
+        descriptionController.text = task.value?.description ?? '';
         stringColor.value = task.value?.color;
         stringIcon.value = task.value?.icon;
         if (task.value?.color != null) {

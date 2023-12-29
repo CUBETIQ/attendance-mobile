@@ -25,9 +25,9 @@ class LeaveService {
     return leave;
   }
 
-  Future<void> deleteLeave(String id, int date) async {
-    Response response = await dioInstance.dio
-        .delete(Endpoints.instance.leave + id, data: {"date": date});
+  Future<void> deleteLeave(String id) async {
+    Response response =
+        await dioInstance.dio.delete(Endpoints.instance.leave + id);
     if (response.statusCode != 200) {
       throw Exception("Delete leave failed");
     }

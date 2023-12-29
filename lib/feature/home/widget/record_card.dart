@@ -38,7 +38,7 @@ class RecordCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width ?? double.infinity,
-      height: height ?? size.width * 0.66,
+      height: height ?? size.width * 0.67,
       padding:
           EdgeInsets.all(SizeUtils.scaleWidth(AppSize.paddingS8, size.width)),
       decoration: BoxDecoration(

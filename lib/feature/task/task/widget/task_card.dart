@@ -29,7 +29,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: task.taskStatus == TaskStatus.completed ? null : onTap,
+      onTap: task.status == TaskStatus.completed ? null : onTap,
       child: Container(
         width: size.width,
         decoration: BoxDecoration(
@@ -110,8 +110,7 @@ class TaskCard extends StatelessWidget {
                             maxWidth: size.width * 0.56,
                           ),
                           child: MyText(
-                            text:
-                                (task.taskName ?? "Task Name").capitalizeFirst,
+                            text: (task.name ?? "Task Name").capitalizeFirst,
                             maxLines: 2,
                             style: BodyLarge.copyWith(
                               color: color != null
@@ -126,10 +125,10 @@ class TaskCard extends StatelessWidget {
                       height:
                           SizeUtils.scaleWidth(AppSize.paddingS1, size.width),
                     ),
-                    task.taskDescription == null || task.taskDescription == ""
+                    task.description == null || task.description == ""
                         ? const SizedBox.shrink()
                         : MyText(
-                            text: task.taskDescription ?? "Task Description",
+                            text: task.description ?? "Task Description",
                             maxLines: 5,
                             style: BodyMediumRegular.copyWith(
                               color: Theme.of(context).colorScheme.outline,
@@ -144,7 +143,7 @@ class TaskCard extends StatelessWidget {
                           ? "Due: ${DateFormatter().formatMillisecondsToDOB(task.endDate!)}"
                           : "Due: N/A",
                       style: BodyXSmallRegular.copyWith(
-                        color: task.taskStatus == TaskStatus.completed
+                        color: task.status == TaskStatus.completed
                             ? Theme.of(context).colorScheme.outline
                             : Theme.of(context).colorScheme.error,
                       ),
@@ -165,14 +164,13 @@ class TaskCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       IgnorePointer(
-                        ignoring: task.taskStatus == TaskStatus.completed
-                            ? true
-                            : false,
+                        ignoring:
+                            task.status == TaskStatus.completed ? true : false,
                         child: SizedBox(
                           width: 24 * (size.width / 375.0),
                           height: 24 * (size.width / 375.0),
                           child: Checkbox(
-                            value: task.taskStatus == TaskStatus.completed
+                            value: task.status == TaskStatus.completed
                                 ? true
                                 : false,
                             onChanged: onCheck,

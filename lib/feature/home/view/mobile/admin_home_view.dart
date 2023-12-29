@@ -4,7 +4,7 @@ import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/controller/index.dart';
-import 'package:attendance_app/feature/home/view/mobile/staff/index.dart';
+import 'package:attendance_app/feature/home/view/mobile/staff_home_view.dart';
 import 'package:attendance_app/feature/home/widget/attendance_detail_card.dart';
 import 'package:attendance_app/feature/leave/leave/widget/leave_chart.dart';
 import 'package:attendance_app/utils/size_util.dart';

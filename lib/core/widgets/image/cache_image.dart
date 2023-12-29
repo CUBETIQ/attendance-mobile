@@ -21,6 +21,7 @@ class MyCacheImage extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
+          color: Colors.red,
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,

@@ -1,14 +1,14 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/model/leave_model.dart';
-import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/types_helper/leave_duration_type.dart';
 import 'package:attendance_app/utils/types_helper/leave_status.dart';
 import 'package:attendance_app/utils/types_helper/leave_type.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/string_extensions.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 class LeaveCard extends StatelessWidget {
   final LeaveModel leave;
@@ -58,9 +58,9 @@ class LeaveCard extends StatelessWidget {
                         AppSize.paddingHorizontalSmall * (size.width / 375.0),
                   ),
                   decoration: BoxDecoration(
-                    color: leave.leaveStatus == LeaveStatus.pending
+                    color: leave.status == LeaveStatus.pending
                         ? const Color(0XFFBF9705)
-                        : leave.leaveStatus == LeaveStatus.approved
+                        : leave.status == LeaveStatus.approved
                             ? Colors.green
                             : Colors.red,
                     borderRadius: BorderRadius.circular(
@@ -68,8 +68,7 @@ class LeaveCard extends StatelessWidget {
                     ),
                   ),
                   child: MyText(
-                    text: (leave.leaveStatus ?? LeaveStatus.pending)
-                        .capitalizeFirst,
+                    text: (leave.status ?? LeaveStatus.pending).capitalizeFirst,
                     style: BodySmallRegular.copyWith(
                       color: Colors.white,
                     ),
@@ -80,12 +79,12 @@ class LeaveCard extends StatelessWidget {
                 ),
                 MyText(
                   text:
-                      "${(leave.leaveType ?? LeaveType.annual).capitalize} leave request",
+                      "${(leave.type ?? LeaveType.annual).capitalize} leave request",
                   style: BodyLargeMedium,
                 ),
                 MyText(
                   text:
-                      "${DateFormatter().formatMillisecondsToDOB(leave.leaveFrom)} - ${DateFormatter().formatMillisecondsToDOB(leave.leaveTo)}",
+                      "${DateFormatter().formatMillisecondsToDOB(leave.from)} - ${DateFormatter().formatMillisecondsToDOB(leave.to)}",
                   style: BodySmallRegular.copyWith(
                     color: Theme.of(context).colorScheme.outline,
                   ),
@@ -109,17 +108,72 @@ class LeaveCard extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
-            SizedBox(
-              width: 85 * (size.width / 375.0),
-              height: 35 * (size.width / 375.0),
-              child: MyButton(
-                backgroundColor: Theme.of(context).colorScheme.outline,
-                title: "Cancel",
-              ),
-            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    MyText(
+                      text: "Duration: ",
+                      style: BodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                    MyText(
+                      text: (leave.duration ?? 0) <= 1440
+                          ? leave.durationType == LeaveTypeDuration.fullDay
+                              ? "1 day"
+                              : "0.5 day"
+                          : DateFormatter()
+                              .formatMinutesToDays(leave.duration ?? 0),
+                      style: BodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: SizeUtils.scaleWidth(100, size.width),
+                  height: SizeUtils.scaleWidth(30, size.width),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      AppSize.borderRadiusMedium * (size.width / 375.0),
+                    ),
+                    border: Border.all(
+                      color:
+                          Theme.of(context).colorScheme.error.withOpacity(0.5),
+                      width: 1.5,
+                    ),
+                  ),
+                  child: MyText(
+                    text: "Cancel",
+                    style: BodySmallMedium,
+                  ),
+                ),
+                Container(
+                  width: SizeUtils.scaleWidth(100, size.width),
+                  height: SizeUtils.scaleWidth(30, size.width),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      AppSize.borderRadiusMedium * (size.width / 375.0),
+                    ),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  child: MyText(
+                    text: "View",
+                    style: BodySmallMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

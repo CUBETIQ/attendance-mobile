@@ -38,24 +38,39 @@ class LeaveViewMobile extends StatelessWidget {
                 const SizedBox(height: AppSize.paddingS10),
                 Row(
                   children: [
-                    const Expanded(
-                      child: LeaveChart(
-                        title: "Pending",
-                        radius: 35,
+                    Expanded(
+                      child: Obx(
+                        () => LeaveChart(
+                          title: "Pending",
+                          radius: 35,
+                          centerText:
+                              "${(controller.percentagePendingLeave.value * 100).toStringAsFixed(2)} %",
+                          percent: controller.percentagePendingLeave.value,
+                        ),
                       ),
                     ),
                     SizedBox(width: size.width * 0.03),
-                    const Expanded(
-                      child: LeaveChart(
-                        title: "Approved",
-                        radius: 35,
+                    Expanded(
+                      child: Obx(
+                        () => LeaveChart(
+                          title: "Approved",
+                          radius: 35,
+                          centerText:
+                              "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(2)} %",
+                          percent: controller.percentageApprovedLeave.value,
+                        ),
                       ),
                     ),
                     SizedBox(width: size.width * 0.03),
-                    const Expanded(
-                      child: LeaveChart(
-                        title: "Declined",
-                        radius: 35,
+                    Expanded(
+                      child: Obx(
+                        () => LeaveChart(
+                          title: "Declined",
+                          radius: 35,
+                          centerText:
+                              "${(controller.percentageDeclinedLeave.value * 100).toStringAsFixed(2)} %",
+                          percent: controller.percentageDeclinedLeave.value,
+                        ),
                       ),
                     ),
                   ],

@@ -34,11 +34,13 @@ class ActivationViewMobile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: size.height * 0.1),
-                      SizedBox(
-                        width: size.width * 0.8,
-                        child: Lottie.asset(
-                          lottieActivation,
-                          fit: BoxFit.cover,
+                      Center(
+                        child: SizedBox(
+                          width: size.width * 0.8,
+                          child: Lottie.asset(
+                            lottieActivation,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       MyText(

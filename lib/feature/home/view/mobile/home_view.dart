@@ -1,6 +1,6 @@
 import 'package:attendance_app/core/widgets/layout_builder/role_layout.dart';
-import 'package:attendance_app/feature/home/view/mobile/admin/index.dart';
-import 'package:attendance_app/feature/home/view/mobile/staff/index.dart';
+import 'package:attendance_app/feature/home/view/mobile/admin_home_view.dart';
+import 'package:attendance_app/feature/home/view/mobile/staff_home_view.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:flutter/material.dart';
 

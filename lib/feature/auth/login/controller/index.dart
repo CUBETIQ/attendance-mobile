@@ -23,7 +23,8 @@ class LoginController extends GetxController {
   Rx<PositionModel> position = PositionModel().obs;
   Rx<DepartmentModel> department = DepartmentModel().obs;
   Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
-  final LocalStorageController localDataService = LocalStorageController();
+  final LocalStorageController localDataService =
+      LocalStorageController.getInstance();
 
   Future<void> login() async {
     validate();

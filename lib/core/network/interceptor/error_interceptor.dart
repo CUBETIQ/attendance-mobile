@@ -6,7 +6,8 @@ import 'package:dio/dio.dart';
 
 class ErrorInterceptor extends Interceptor {
   final Dio _dio;
-  final LocalStorageController localDataService = LocalStorageController();
+  final LocalStorageController localDataService =
+      LocalStorageController.getInstance();
   ErrorInterceptor(this._dio);
 
   @override

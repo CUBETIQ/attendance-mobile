@@ -1,9 +1,9 @@
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:get/get.dart';
 
-class NavigationBinding extends Bindings {
+class NavigationBinding extends Binding {
   @override
-  void dependencies() {
-    Get.lazyPut<NavigationController>(() => NavigationController());
-  }
+  List<Bind> dependencies() => [
+        Bind.lazyPut(() => NavigationController()),
+      ];
 }

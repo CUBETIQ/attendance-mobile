@@ -7,6 +7,8 @@ import 'package:attendance_app/feature/auth/login/view/index.dart';
 import 'package:attendance_app/feature/home/home_binding.dart';
 import 'package:attendance_app/feature/leave/add_leave/view/index.dart';
 import 'package:attendance_app/feature/leave/leave/leave_binding.dart';
+import 'package:attendance_app/feature/leave/leave_detail/leave_detail_binding.dart';
+import 'package:attendance_app/feature/leave/leave_detail/view/index.dart';
 import 'package:attendance_app/feature/navigation/naviation_binding.dart';
 import 'package:attendance_app/feature/navigation/view/index.dart';
 import 'package:attendance_app/feature/onboard/onboard_binding.dart';
@@ -66,6 +68,11 @@ class AppPages {
     GetPage(
       name: Routes.ADD_LEAVE,
       page: () => const AddLeaveView(),
+    ),
+    GetPage(
+      name: Routes.LEAVE_DETAIL,
+      page: () => const LeaveDetailView(),
+      binding: LeaveDetailBinding(),
     ),
   ];
 }

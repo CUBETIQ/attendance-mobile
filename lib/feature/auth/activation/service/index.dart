@@ -7,7 +7,8 @@ import 'package:dio/dio.dart';
 
 class ActivationService {
   DioUtil dioInstance = DioUtil();
-  final LocalStorageController localDataService = LocalStorageController();
+  final LocalStorageController localDataService =
+      LocalStorageController.getInstance();
   Future<ActivationModel> activate(ActivateModel input) async {
     final ActivationModel? activateModel;
     Response response = await dioInstance.dio.post(

@@ -119,7 +119,8 @@ class AddLeaveController extends GetxController
         reason: reasonController.text,
       );
       await AddLeaveService().addLeave(input);
-      LeaveController.to.getOwnLeave();
+      await LeaveController.to.getOwnLeave();
+      LeaveController.to.getOwnSummarizeLeave();
       Get.back();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response!.data["message"]);

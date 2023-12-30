@@ -13,8 +13,16 @@ import 'package:get/get_utils/get_utils.dart';
 class LeaveCard extends StatelessWidget {
   final LeaveModel leave;
   final void Function()? onTap;
+  final void Function()? onTapCancel;
+  final void Function()? onTapView;
 
-  const LeaveCard({super.key, required this.leave, this.onTap});
+  const LeaveCard({
+    super.key,
+    required this.leave,
+    this.onTap,
+    this.onTapCancel,
+    this.onTapView,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +34,10 @@ class LeaveCard extends StatelessWidget {
         margin:
             EdgeInsets.only(bottom: AppSize.paddingS5 * (size.width / 375.0)),
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.paddingHorizontalLarge * (size.width / 375.0),
-          vertical: AppSize.paddingVerticalLarge * (size.width / 375.0),
+          horizontal:
+              SizeUtils.scaleWidth(AppSize.paddingHorizontalLarge, size.width),
+          vertical:
+              SizeUtils.scaleWidth(AppSize.paddingVerticalMedium, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -89,6 +99,27 @@ class LeaveCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.outline,
                   ),
                 ),
+                Row(
+                  children: [
+                    MyText(
+                      text: "Duration: ",
+                      style: BodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                    MyText(
+                      text: (leave.duration ?? 0) <= 1440
+                          ? leave.durationType == LeaveTypeDuration.fullDay
+                              ? "1 day"
+                              : "0.5 day"
+                          : DateFormatter()
+                              .formatMinutesToDays(leave.duration ?? 0),
+                      style: BodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                  ],
+                ),
                 const Spacer(),
                 Column(
                   children: [
@@ -115,60 +146,50 @@ class LeaveCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    MyText(
-                      text: "Duration: ",
-                      style: BodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
+                GestureDetector(
+                  onTap: onTapCancel,
+                  child: Container(
+                    width: SizeUtils.scaleWidth(100, size.width),
+                    height: SizeUtils.scaleWidth(30, size.width),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        AppSize.borderRadiusMedium * (size.width / 375.0),
+                      ),
+                      border: Border.all(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .error
+                            .withOpacity(0.5),
+                        width: 1.5,
                       ),
                     ),
-                    MyText(
-                      text: (leave.duration ?? 0) <= 1440
-                          ? leave.durationType == LeaveTypeDuration.fullDay
-                              ? "1 day"
-                              : "0.5 day"
-                          : DateFormatter()
-                              .formatMinutesToDays(leave.duration ?? 0),
-                      style: BodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
+                    child: MyText(
+                      text: "Cancel",
+                      style: BodySmallMedium,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: SizeUtils.scaleWidth(AppSize.paddingS4, size.width),
+                ),
+                GestureDetector(
+                  onTap: onTapView,
+                  child: Container(
+                    width: SizeUtils.scaleWidth(100, size.width),
+                    height: SizeUtils.scaleWidth(30, size.width),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        AppSize.borderRadiusMedium * (size.width / 375.0),
                       ),
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                  ],
-                ),
-                Container(
-                  width: SizeUtils.scaleWidth(100, size.width),
-                  height: SizeUtils.scaleWidth(30, size.width),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      AppSize.borderRadiusMedium * (size.width / 375.0),
-                    ),
-                    border: Border.all(
-                      color:
-                          Theme.of(context).colorScheme.error.withOpacity(0.5),
-                      width: 1.5,
-                    ),
-                  ),
-                  child: MyText(
-                    text: "Cancel",
-                    style: BodySmallMedium,
-                  ),
-                ),
-                Container(
-                  width: SizeUtils.scaleWidth(100, size.width),
-                  height: SizeUtils.scaleWidth(30, size.width),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      AppSize.borderRadiusMedium * (size.width / 375.0),
-                    ),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  child: MyText(
-                    text: "View",
-                    style: BodySmallMedium.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                    child: MyText(
+                      text: "View",
+                      style: BodySmallMedium.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                     ),
                   ),
                 ),

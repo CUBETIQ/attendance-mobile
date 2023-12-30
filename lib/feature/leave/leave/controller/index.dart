@@ -7,6 +7,7 @@ import 'package:attendance_app/feature/leave/leave/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LeaveController extends GetxController {
@@ -65,17 +66,19 @@ class LeaveController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      for (var element in summarizeLeaves) {
-        totalPendingLeave.value += element.totalPendingLeave!;
-        totalApprovedLeave.value += element.totalApprovedLeave!;
-        totalDeclinedLeave.value += element.totalRejectedLeave!;
+      if (totalLeave.value != 0) {
+        for (var element in summarizeLeaves) {
+          totalPendingLeave.value += element.totalPendingLeave!;
+          totalApprovedLeave.value += element.totalApprovedLeave!;
+          totalDeclinedLeave.value += element.totalRejectedLeave!;
+        }
+        percentageApprovedLeave.value =
+            (totalApprovedLeave.value / totalLeave.value * 100) / 100;
+        percentagePendingLeave.value =
+            (totalPendingLeave.value / totalLeave.value * 100) / 100;
+        percentageDeclinedLeave.value =
+            (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
       }
-      percentageApprovedLeave.value =
-          (totalApprovedLeave.value / totalLeave.value * 100) / 100;
-      percentagePendingLeave.value =
-          (totalPendingLeave.value / totalLeave.value * 100) / 100;
-      percentageDeclinedLeave.value =
-          (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -87,7 +90,8 @@ class LeaveController extends GetxController {
       getConfirmBottomSheet(
         Get.context!,
         title: "Delete Leave Request",
-        description: "Are you sure to delete this Leave Request?",
+        titleColor: Theme.of(Get.context!).colorScheme.error,
+        description: "Are you sure that you want to delete this Leave Request?",
         onTapConfirm: () async {
           await LeaveService().deleteLeave(id);
           await getOwnLeave();
@@ -136,5 +140,30 @@ class LeaveController extends GetxController {
     percentagePendingLeave.value = 0.0;
     percentageApprovedLeave.value = 0.0;
     percentageDeclinedLeave.value = 0.0;
+  }
+
+  void onTapView() {
+    Get.toNamed(Routes.LEAVE_DETAIL);
+  }
+
+  void onTapCancel(String id) {
+    try {
+      getConfirmBottomSheet(
+        Get.context!,
+        title: "Cancel Leave Request",
+        titleColor: Theme.of(Get.context!).colorScheme.error,
+        description: "Are you sure that you want to cancel this Leave Request?",
+        onTapConfirm: () async {
+          await LeaveService().deleteLeave(id);
+          await getOwnLeave();
+          getOwnSummarizeLeave();
+          Get.back();
+        },
+        image: cancel,
+      );
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 }

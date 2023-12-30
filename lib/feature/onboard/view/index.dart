@@ -1,11 +1,9 @@
 import 'package:attendance_app/core/widgets/layout_builder/responsive_layout.dart';
-import 'package:attendance_app/feature/onboard/controller/index.dart';
 import 'package:attendance_app/feature/onboard/view/mobile/index.dart';
 import 'package:attendance_app/feature/onboard/view/tablet/index.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class OnBoardView extends GetView<OnBoardController> {
+class OnBoardView extends StatelessWidget {
   const OnBoardView({super.key});
 
   @override

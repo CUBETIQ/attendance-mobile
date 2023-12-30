@@ -13,8 +13,16 @@ import 'package:get/get_utils/get_utils.dart';
 class LeaveCard extends StatelessWidget {
   final LeaveModel leave;
   final void Function()? onTap;
+  final void Function()? onTapCancel;
+  final void Function()? onTapView;
 
-  const LeaveCard({super.key, required this.leave, this.onTap});
+  const LeaveCard({
+    super.key,
+    required this.leave,
+    this.onTap,
+    this.onTapCancel,
+    this.onTapView,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -136,39 +144,47 @@ class LeaveCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  width: SizeUtils.scaleWidth(100, size.width),
-                  height: SizeUtils.scaleWidth(30, size.width),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      AppSize.borderRadiusMedium * (size.width / 375.0),
+                GestureDetector(
+                  onTap: onTapCancel,
+                  child: Container(
+                    width: SizeUtils.scaleWidth(100, size.width),
+                    height: SizeUtils.scaleWidth(30, size.width),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        AppSize.borderRadiusMedium * (size.width / 375.0),
+                      ),
+                      border: Border.all(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .error
+                            .withOpacity(0.5),
+                        width: 1.5,
+                      ),
                     ),
-                    border: Border.all(
-                      color:
-                          Theme.of(context).colorScheme.error.withOpacity(0.5),
-                      width: 1.5,
+                    child: MyText(
+                      text: "Cancel",
+                      style: BodySmallMedium,
                     ),
-                  ),
-                  child: MyText(
-                    text: "Cancel",
-                    style: BodySmallMedium,
                   ),
                 ),
-                Container(
-                  width: SizeUtils.scaleWidth(100, size.width),
-                  height: SizeUtils.scaleWidth(30, size.width),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      AppSize.borderRadiusMedium * (size.width / 375.0),
+                GestureDetector(
+                  onTap: onTapView,
+                  child: Container(
+                    width: SizeUtils.scaleWidth(100, size.width),
+                    height: SizeUtils.scaleWidth(30, size.width),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        AppSize.borderRadiusMedium * (size.width / 375.0),
+                      ),
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  child: MyText(
-                    text: "View",
-                    style: BodySmallMedium.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                    child: MyText(
+                      text: "View",
+                      style: BodySmallMedium.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                     ),
                   ),
                 ),

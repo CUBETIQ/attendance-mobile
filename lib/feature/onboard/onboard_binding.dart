@@ -1,9 +1,9 @@
 import 'package:attendance_app/feature/onboard/controller/index.dart';
 import 'package:get/get.dart';
 
-class OnBoardBinding extends Bindings {
+class OnBoardBinding extends Binding {
   @override
-  void dependencies() {
-    Get.lazyPut<OnBoardController>(() => OnBoardController());
-  }
+  List<Bind> dependencies() => [
+        Bind.lazyPut(() => OnBoardController()),
+      ];
 }

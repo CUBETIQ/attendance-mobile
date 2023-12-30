@@ -1,4 +1,3 @@
-import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
@@ -21,10 +20,6 @@ class SplashService {
       organization = OrganizationModel().fromJson(response.data["data"]);
     } else {
       Get.offNamed(Routes.ACTIVATION);
-      await IsarService().clearLocalData(
-        unactivate: true,
-        deleteToken: true,
-      );
       return throw Exception(response.data["message"]);
     }
     return organization;

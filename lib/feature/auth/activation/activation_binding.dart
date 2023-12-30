@@ -1,9 +1,9 @@
 import 'package:attendance_app/feature/auth/activation/controller/index.dart';
 import 'package:get/get.dart';
 
-class ActivationBinding extends Bindings {
+class ActivationBinding extends Binding {
   @override
-  void dependencies() {
-    Get.lazyPut<ActivationController>(() => ActivationController());
-  }
+  List<Bind> dependencies() => [
+        Bind.lazyPut(() => ActivationController()),
+      ];
 }

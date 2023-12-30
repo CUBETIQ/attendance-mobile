@@ -36,46 +36,19 @@ class ProfileViewMobile extends StatelessWidget {
                   AppSize.paddingHorizontalLarge, size.width),
               right: SizeUtils.scaleWidth(
                   AppSize.paddingHorizontalLarge, size.width),
-              top: SizeUtils.scaleWidth(AppSize.paddingTitleSmall, size.width),
+              top: SizeUtils.scaleWidth(AppSize.paddingS11, size.width),
             ),
             child: Column(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 3,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        offset: const Offset(0, 0),
-                        blurRadius: 1,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
-                  child: MyCacheImage(
-                    imageUrl: controller.user.value.image ?? "",
-                    width: 100,
-                    height: 100,
-                  ),
-                ),
-                SizedBox(height: size.height * 0.02),
-                Container(
                   width: size.width - SizeUtils.scaleWidth(48, size.width),
-                  padding: EdgeInsets.only(
-                    left: SizeUtils.scaleWidth(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeUtils.scaleWidth(
                       AppSize.paddingHorizontalLarge,
                       size.width,
                     ),
-                    right: SizeUtils.scaleWidth(
-                      AppSize.paddingHorizontalLarge,
-                      size.width,
-                    ),
-                    bottom: SizeUtils.scaleWidth(
-                      AppSize.paddingHorizontalLarge,
+                    vertical: SizeUtils.scaleWidth(
+                      AppSize.paddingS11,
                       size.width,
                     ),
                   ),
@@ -91,12 +64,29 @@ class ProfileViewMobile extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: SizeUtils.scaleWidth(
-                          size.width * 0.105,
-                          size.width,
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 3,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              offset: const Offset(0, 0),
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: MyCacheImage(
+                          imageUrl: controller.user.value.image ?? "",
+                          width: 100,
+                          height: 100,
                         ),
                       ),
+                      SizedBox(height: size.height * 0.01),
                       Container(
                         constraints: BoxConstraints(
                           maxWidth: size.width * 0.7,

@@ -24,7 +24,8 @@ class ActivationController extends GetxController {
   Rxn<AndroidDeviceInfo> androidInfo = Rxn<AndroidDeviceInfo>(null);
   Rxn<IosDeviceInfo> iosInfo = Rxn<IosDeviceInfo>(null);
   Rxn<String> device = Rxn<String>(null);
-  final LocalStorageController localDataService = LocalStorageController();
+  final LocalStorageController localDataService =
+      LocalStorageController.getInstance();
   Rx<LocalStorage> localData = LocalStorage().obs;
   Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
 

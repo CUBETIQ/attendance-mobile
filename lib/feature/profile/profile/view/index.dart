@@ -1,11 +1,9 @@
 import 'package:attendance_app/core/widgets/layout_builder/responsive_layout.dart';
-import 'package:attendance_app/feature/profile/profile/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/view/mobile/index.dart';
 import 'package:attendance_app/feature/profile/profile/view/tablet/index.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class ProfileView extends GetView<ProfileController> {
+class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override

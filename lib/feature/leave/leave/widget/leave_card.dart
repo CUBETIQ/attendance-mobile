@@ -34,8 +34,10 @@ class LeaveCard extends StatelessWidget {
         margin:
             EdgeInsets.only(bottom: AppSize.paddingS5 * (size.width / 375.0)),
         padding: EdgeInsets.symmetric(
-          horizontal: AppSize.paddingHorizontalLarge * (size.width / 375.0),
-          vertical: AppSize.paddingVerticalLarge * (size.width / 375.0),
+          horizontal:
+              SizeUtils.scaleWidth(AppSize.paddingHorizontalLarge, size.width),
+          vertical:
+              SizeUtils.scaleWidth(AppSize.paddingVerticalMedium, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -97,6 +99,27 @@ class LeaveCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.outline,
                   ),
                 ),
+                Row(
+                  children: [
+                    MyText(
+                      text: "Duration: ",
+                      style: BodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                    MyText(
+                      text: (leave.duration ?? 0) <= 1440
+                          ? leave.durationType == LeaveTypeDuration.fullDay
+                              ? "1 day"
+                              : "0.5 day"
+                          : DateFormatter()
+                              .formatMinutesToDays(leave.duration ?? 0),
+                      style: BodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                  ],
+                ),
                 const Spacer(),
                 Column(
                   children: [
@@ -123,27 +146,6 @@ class LeaveCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    MyText(
-                      text: "Duration: ",
-                      style: BodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
-                    ),
-                    MyText(
-                      text: (leave.duration ?? 0) <= 1440
-                          ? leave.durationType == LeaveTypeDuration.fullDay
-                              ? "1 day"
-                              : "0.5 day"
-                          : DateFormatter()
-                              .formatMinutesToDays(leave.duration ?? 0),
-                      style: BodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
-                    ),
-                  ],
-                ),
                 GestureDetector(
                   onTap: onTapCancel,
                   child: Container(
@@ -167,6 +169,9 @@ class LeaveCard extends StatelessWidget {
                       style: BodySmallMedium,
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: SizeUtils.scaleWidth(AppSize.paddingS4, size.width),
                 ),
                 GestureDetector(
                   onTap: onTapView,

@@ -32,7 +32,7 @@ class LeaveChart extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width,
-      height: height ?? 155 * (MediaQuery.of(context).size.width / 360),
+      height: height ?? 158 * (MediaQuery.of(context).size.width / 360),
       padding: EdgeInsets.symmetric(
         vertical: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),
         horizontal: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),

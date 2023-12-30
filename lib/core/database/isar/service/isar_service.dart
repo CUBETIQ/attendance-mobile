@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 
 class IsarService extends GetxService {
   static IsarService get to => Get.find();
-  final LocalStorageController _localStorage = LocalStorageController();
+  final LocalStorageController _localStorage =
+      LocalStorageController.getInstance();
 
   Future<void> initDataBase() async {
     final appConfig = await _localStorage.get();

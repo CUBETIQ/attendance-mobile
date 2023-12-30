@@ -42,10 +42,12 @@ class LeaveViewMobile extends StatelessWidget {
                       child: Obx(
                         () => LeaveChart(
                           title: "Pending",
-                          radius: 35,
+                          radius: 38,
                           centerText:
                               "${(controller.percentagePendingLeave.value * 100).toStringAsFixed(2)} %",
                           percent: controller.percentagePendingLeave.value,
+                          textBelow: "${controller.totalPendingLeave.value}/"
+                              "${controller.totalLeave.value}",
                         ),
                       ),
                     ),
@@ -54,10 +56,12 @@ class LeaveViewMobile extends StatelessWidget {
                       child: Obx(
                         () => LeaveChart(
                           title: "Approved",
-                          radius: 35,
+                          radius: 38,
                           centerText:
                               "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(2)} %",
                           percent: controller.percentageApprovedLeave.value,
+                          textBelow: "${controller.totalApprovedLeave.value}/"
+                              "${controller.totalLeave.value}",
                         ),
                       ),
                     ),
@@ -66,10 +70,12 @@ class LeaveViewMobile extends StatelessWidget {
                       child: Obx(
                         () => LeaveChart(
                           title: "Declined",
-                          radius: 35,
+                          radius: 38,
                           centerText:
                               "${(controller.percentageDeclinedLeave.value * 100).toStringAsFixed(2)} %",
                           percent: controller.percentageDeclinedLeave.value,
+                          textBelow: "${controller.totalDeclinedLeave.value}/"
+                              "${controller.totalLeave.value}",
                         ),
                       ),
                     ),
@@ -100,6 +106,9 @@ class LeaveViewMobile extends StatelessWidget {
                             controller.leave[index],
                           ),
                           leave: controller.leave[index],
+                          onTapView: controller.onTapView,
+                          onTapCancel: () => controller
+                              .onTapCancel(controller.leave[index].id!),
                         );
                       },
                     ),

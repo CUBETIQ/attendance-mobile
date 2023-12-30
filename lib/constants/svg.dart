@@ -19,3 +19,4 @@ const String location = 'assets/svgs/location.svg';
 const String defaultUser = 'assets/svgs/default_user.svg';
 const String delete = 'assets/svgs/delete.svg';
 const String option = 'assets/svgs/option.svg';
+const String cancel = 'assets/svgs/cancel.svg';

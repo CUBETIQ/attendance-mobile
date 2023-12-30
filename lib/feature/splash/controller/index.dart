@@ -21,7 +21,8 @@ class SplashController extends GetxController
   final String title = 'TimeSync360';
   late AnimationController controller;
   late Animation<double> animation;
-  final LocalStorageController localDataService = LocalStorageController();
+  final LocalStorageController localDataService =
+      LocalStorageController.getInstance();
   Rx<LocalStorage> localData = LocalStorage().obs;
   Rx<DepartmentModel> department = DepartmentModel().obs;
   Rx<OrganizationModel> organization = OrganizationModel().obs;

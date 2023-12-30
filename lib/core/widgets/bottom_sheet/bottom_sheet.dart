@@ -209,6 +209,7 @@ void getConfirmBottomSheet(
   void Function()? onTapConfirm,
   String? title,
   String? description,
+  Color? titleColor,
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
@@ -221,7 +222,7 @@ void getConfirmBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: size.height * 0.5,
+      height: SizeUtils.scaleWidth(400, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.only(
@@ -241,7 +242,9 @@ void getConfirmBottomSheet(
             SizedBox(height: size.height * 0.01),
             MyText(
               text: title ?? "Title",
-              style: BodyLarge,
+              style: BodyLarge.copyWith(
+                color: titleColor,
+              ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
@@ -260,6 +263,7 @@ void getConfirmBottomSheet(
                     child: MyButton(
                       title: "Cancel",
                       onTap: () => Get.back(),
+                      backgroundColor: Theme.of(context).colorScheme.error,
                     ),
                   ),
                   SizedBox(width: size.width * 0.02),

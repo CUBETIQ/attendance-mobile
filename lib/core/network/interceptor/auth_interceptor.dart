@@ -5,7 +5,8 @@ class AuthInterceptor extends Interceptor {
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    final LocalStorageController localDataService = LocalStorageController();
+    final LocalStorageController localDataService =
+        LocalStorageController.getInstance();
     final localData = await localDataService.get();
     if (localData?.accessToken != null && localData?.accessToken != "") {
       options.headers.addAll({

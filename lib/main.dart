@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
+// using SizeUits.scaleWidth for make the bigger device and smalller device have same Ui size we need
+
 bool isFirstTime = false;
 Rx<LocalStorage?>? storageConfig = Rx<LocalStorage?>(null);
 

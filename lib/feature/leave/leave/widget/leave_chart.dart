@@ -32,15 +32,15 @@ class LeaveChart extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width,
-      height: height ?? 158 * (MediaQuery.of(context).size.width / 360),
+      height: height ?? SizeUtils.scale(160, size.width),
       padding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),
-        horizontal: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),
+        vertical: SizeUtils.scale(AppSize.paddingS5, size.width),
+        horizontal: SizeUtils.scale(AppSize.paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(
-          SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
+          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
         ),
         boxShadow: [
           BoxShadow(
@@ -54,7 +54,7 @@ class LeaveChart extends StatelessWidget {
       child: Column(
         children: [
           MyText(text: title, style: BodyMediumRegular),
-          SizedBox(height: SizeUtils.scaleWidth(10, size.width)),
+          SizedBox(height: SizeUtils.scale(10, size.width)),
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
@@ -74,7 +74,7 @@ class LeaveChart extends StatelessWidget {
             backgroundColor: Colors.grey.withOpacity(0.3),
             circularStrokeCap: CircularStrokeCap.round,
           ),
-          SizedBox(height: SizeUtils.scaleWidth(10, size.width)),
+          SizedBox(height: SizeUtils.scale(10, size.width)),
           MyText(text: textBelow ?? "0/0", style: BodyMediumRegular),
         ],
       ),

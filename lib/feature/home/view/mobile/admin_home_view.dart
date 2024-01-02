@@ -47,9 +47,15 @@ class HomeAdminMobileView extends StatelessWidget {
             children: [
               SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: AppSize.paddingHorizontalLarge,
-                    right: AppSize.paddingHorizontalLarge,
+                  padding: EdgeInsets.only(
+                    left: SizeUtils.scale(
+                      AppSize.paddingHorizontalLarge,
+                      MediaQuery.of(context).size.width,
+                    ),
+                    right: SizeUtils.scale(
+                      AppSize.paddingHorizontalLarge,
+                      MediaQuery.of(context).size.width,
+                    ),
                     top: AppSize.paddingVerticalLarge,
                   ),
                   child: Column(
@@ -102,7 +108,7 @@ class HomeAdminMobileView extends StatelessWidget {
                               percent: 0.7,
                               center: const Text("70.0%"),
                               barRadius: Radius.circular(
-                                SizeUtils.scaleWidth(20, size.width),
+                                SizeUtils.scale(20, size.width),
                               ),
                               progressColor: Colors.green,
                             ),
@@ -125,7 +131,7 @@ class HomeAdminMobileView extends StatelessWidget {
                               percent: 0.2,
                               center: const Text("20.0%"),
                               barRadius: Radius.circular(
-                                SizeUtils.scaleWidth(20, size.width),
+                                SizeUtils.scale(20, size.width),
                               ),
                               progressColor:
                                   Theme.of(context).colorScheme.primary,
@@ -151,7 +157,7 @@ class HomeAdminMobileView extends StatelessWidget {
                               percent: 0.1,
                               center: const Text("10.0%"),
                               barRadius: Radius.circular(
-                                SizeUtils.scaleWidth(20, size.width),
+                                SizeUtils.scale(20, size.width),
                               ),
                               progressColor: Colors.red,
                             ),
@@ -179,7 +185,7 @@ class HomeAdminMobileView extends StatelessWidget {
                               percent: 0.7,
                               center: const Text("70.0%"),
                               barRadius: Radius.circular(
-                                SizeUtils.scaleWidth(20, size.width),
+                                SizeUtils.scale(20, size.width),
                               ),
                               progressColor: Colors.green,
                             ),
@@ -202,7 +208,7 @@ class HomeAdminMobileView extends StatelessWidget {
                               percent: 0.2,
                               center: const Text("20.0%"),
                               barRadius: Radius.circular(
-                                SizeUtils.scaleWidth(20, size.width),
+                                SizeUtils.scale(20, size.width),
                               ),
                               progressColor:
                                   Theme.of(context).colorScheme.primary,
@@ -228,7 +234,7 @@ class HomeAdminMobileView extends StatelessWidget {
                               percent: 0.1,
                               center: const Text("10.0%"),
                               barRadius: Radius.circular(
-                                SizeUtils.scaleWidth(20, size.width),
+                                SizeUtils.scale(20, size.width),
                               ),
                               progressColor: Colors.red,
                             ),

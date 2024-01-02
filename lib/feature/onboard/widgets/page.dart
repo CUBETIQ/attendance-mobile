@@ -1,6 +1,7 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -38,23 +39,27 @@ class MyPage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.paddingHorizontalLarge,
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeUtils.scale(
+              AppSize.paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               MyText(
                 text: title ?? "Title",
                 style: titleStyle ?? BodyXXlargeMedium,
                 maxLines: 2,
+                textAlign: TextAlign.center,
               ),
-              SizedBox(height: size.height * 0.01),
+              SizedBox(height: size.height * 0.02),
               MyText(
                 text: description ?? "Description",
                 style: descriptionStyle ?? BodyMediumMedium,
                 maxLines: 8,
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
               ),
             ],
           ),

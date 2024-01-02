@@ -20,10 +20,10 @@ Future<void> main() async {
   await initDBService();
   await AppPathController.initPath();
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: [SystemUiOverlay.top],
-  );
+  // SystemChrome.setEnabledSystemUIMode(
+  //   SystemUiMode.manual,
+  //   overlays: [SystemUiOverlay.top],
+  // );
   runApp(const MyApp());
   FlutterNativeSplash.remove();
 }

@@ -25,7 +25,7 @@ class AttendanceProfileCard extends StatelessWidget {
       width: size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
+          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
         ),
         color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
       ),

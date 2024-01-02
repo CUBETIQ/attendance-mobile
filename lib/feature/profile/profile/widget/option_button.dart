@@ -18,15 +18,18 @@ class OptionButton extends StatelessWidget {
       child: Container(
         width: size.width,
         height: size.width * 0.15,
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            MediaQuery.of(context).size.width,
+          ),
         ),
         margin: const EdgeInsets.only(
           bottom: AppSize.paddingS5,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
+            SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
           ),
           color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
         ),
@@ -35,7 +38,7 @@ class OptionButton extends StatelessWidget {
             Icon(
               option.icon,
               color: Theme.of(context).colorScheme.primary,
-              size: SizeUtils.scaleWidth(20, size.width),
+              size: SizeUtils.scale(20, size.width),
             ),
             const SizedBox(width: AppSize.paddingS8),
             MyText(
@@ -46,7 +49,7 @@ class OptionButton extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios,
               color: Theme.of(context).colorScheme.primary,
-              size: SizeUtils.scaleWidth(16, size.width),
+              size: SizeUtils.scale(16, size.width),
             ),
           ],
         ),

@@ -7,6 +7,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/leave/leave/controller/index.dart';
 import 'package:attendance_app/feature/leave/leave/widget/leave_card.dart';
 import 'package:attendance_app/feature/leave/leave/widget/leave_chart.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,9 +27,15 @@ class LeaveViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: AppSize.paddingHorizontalLarge,
-              right: AppSize.paddingHorizontalLarge,
+            padding: EdgeInsets.only(
+              left: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
+              right: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
               top: AppSize.paddingVerticalLarge,
             ),
             child: Column(
@@ -106,7 +113,7 @@ class LeaveViewMobile extends StatelessWidget {
                             controller.leave[index],
                           ),
                           leave: controller.leave[index],
-                          onTapView: controller.onTapView,
+                          onTapView: () => controller.onTapView(index),
                           onTapCancel: () => controller
                               .onTapCancel(controller.leave[index].id!),
                         );

@@ -39,8 +39,7 @@ class RecordCard extends StatelessWidget {
     return Container(
       width: width ?? double.infinity,
       height: height ?? size.width * 0.67,
-      padding:
-          EdgeInsets.all(SizeUtils.scaleWidth(AppSize.paddingS8, size.width)),
+      padding: EdgeInsets.all(SizeUtils.scale(AppSize.paddingS8, size.width)),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           AppSize.borderRadiusMedium * (size.width / 375.0),

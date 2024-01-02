@@ -23,9 +23,15 @@ void getCheckInBottomSheet(BuildContext context,
       height: size.height * 0.8,
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppSize.paddingHorizontalLarge,
-          right: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(
@@ -83,9 +89,15 @@ void getCheckOutBottomSheet(BuildContext context,
       height: size.height * 0.8,
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppSize.paddingHorizontalLarge,
-          right: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(
@@ -147,9 +159,15 @@ void getLogOutBottomSheet(
       height: size.height * 0.5,
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppSize.paddingHorizontalLarge,
-          right: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(
@@ -164,7 +182,9 @@ void getLogOutBottomSheet(
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "Log Out",
-              style: BodyLarge,
+              style: BodyLarge.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
@@ -183,6 +203,7 @@ void getLogOutBottomSheet(
                     child: MyButton(
                       title: "Cancel",
                       onTap: () => Get.back(),
+                      backgroundColor: Theme.of(context).colorScheme.error,
                     ),
                   ),
                   SizedBox(width: size.width * 0.02),
@@ -222,12 +243,18 @@ void getConfirmBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scaleWidth(400, size.width),
+      height: SizeUtils.scale(400, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppSize.paddingHorizontalLarge,
-          right: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(
@@ -303,12 +330,18 @@ void getOptionBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scaleWidth(370, size.width),
+      height: SizeUtils.scale(370, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppSize.paddingHorizontalLarge,
-          right: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(
@@ -320,14 +353,14 @@ void getOptionBottomSheet(
                 image,
               ),
             ),
-            SizedBox(height: SizeUtils.scaleWidth(40, size.width)),
+            SizedBox(height: SizeUtils.scale(40, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.edit_rounded,
               title: "Edit",
               onTap: onTapEdit,
             ),
-            SizedBox(height: SizeUtils.scaleWidth(10, size.width)),
+            SizedBox(height: SizeUtils.scale(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.delete_rounded,

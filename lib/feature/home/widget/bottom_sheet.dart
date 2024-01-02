@@ -13,19 +13,25 @@ void getCheckInBottomSheet(BuildContext context,
   Get.bottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
-        topRight: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
+        topLeft: Radius.circular(SizeUtils.scale(50, size.width)),
+        topRight: Radius.circular(SizeUtils.scale(50, size.width)),
       ),
     ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scaleWidth(size.height * 0.8, size.width),
+      height: SizeUtils.scale(size.height * 0.8, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppSize.paddingHorizontalLarge,
-          right: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            MediaQuery.of(context).size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            MediaQuery.of(context).size.width,
+          ),
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(
@@ -71,19 +77,25 @@ void getCheckOutBottomSheet(BuildContext context,
   Get.bottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
-        topRight: Radius.circular(SizeUtils.scaleWidth(50, size.width)),
+        topLeft: Radius.circular(SizeUtils.scale(50, size.width)),
+        topRight: Radius.circular(SizeUtils.scale(50, size.width)),
       ),
     ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scaleWidth(size.height * 0.8, size.width),
+      height: SizeUtils.scale(size.height * 0.8, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: AppSize.paddingHorizontalLarge,
-          right: AppSize.paddingHorizontalLarge,
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            MediaQuery.of(context).size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            MediaQuery.of(context).size.width,
+          ),
           top: AppSize.paddingTitleSmall,
         ),
         child: Column(

@@ -1,12 +1,12 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/constants/svg.dart';
+import 'package:attendance_app/constants/image.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
 import 'package:attendance_app/feature/auth/login/controller/index.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class LoginViewMobile extends StatelessWidget {
@@ -20,10 +20,16 @@ class LoginViewMobile extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(
+            padding: EdgeInsets.only(
               top: AppSize.paddingTitleLarge,
-              left: AppSize.paddingHorizontalLarge,
-              right: AppSize.paddingHorizontalLarge,
+              left: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
+              right: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,10 +37,18 @@ class LoginViewMobile extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      SizedBox(
-                        width: 70,
+                      Container(
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            SizeUtils.scale(
+                              AppSize.borderRadiusMedium,
+                              size.width,
+                            ),
+                          ),
+                        ),
                         height: 70,
-                        child: SvgPicture.asset(logo),
+                        child: Image.asset(logoTimeSync360),
                       ),
                       const SizedBox(height: AppSize.paddingS6),
                       MyText(

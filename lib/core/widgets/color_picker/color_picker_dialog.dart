@@ -1,5 +1,6 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,8 +18,11 @@ void getColorPickerDialog({
     Center(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.paddingHorizontalLarge,
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeUtils.scale(
+              AppSize.paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
           ),
           child: Container(
             decoration: BoxDecoration(
@@ -73,8 +77,11 @@ void getColorPickerDialog({
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.paddingHorizontalLarge,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeUtils.scale(
+                      AppSize.paddingHorizontalLarge,
+                      MediaQuery.of(context).size.width,
+                    ),
                     vertical: AppSize.paddingS4,
                   ),
                   child: Row(

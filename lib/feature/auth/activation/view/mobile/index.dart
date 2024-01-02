@@ -3,6 +3,7 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/lotties.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/text_formater.dart';
 import 'package:attendance_app/feature/auth/activation/controller/index.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,15 @@ class ActivationViewMobile extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: AppSize.paddingHorizontalLarge,
-              right: AppSize.paddingHorizontalLarge,
+            padding: EdgeInsets.only(
+              left: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
+              right: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -32,29 +32,28 @@ class ProfileViewMobile extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scaleWidth(
-                  AppSize.paddingHorizontalLarge, size.width),
-              right: SizeUtils.scaleWidth(
-                  AppSize.paddingHorizontalLarge, size.width),
-              top: SizeUtils.scaleWidth(AppSize.paddingS11, size.width),
+              left: SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
+              right:
+                  SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
+              top: SizeUtils.scale(AppSize.paddingS11, size.width),
             ),
             child: Column(
               children: [
                 Container(
-                  width: size.width - SizeUtils.scaleWidth(48, size.width),
+                  width: size.width - SizeUtils.scale(48, size.width),
                   padding: EdgeInsets.symmetric(
-                    horizontal: SizeUtils.scaleWidth(
+                    horizontal: SizeUtils.scale(
                       AppSize.paddingHorizontalLarge,
                       size.width,
                     ),
-                    vertical: SizeUtils.scaleWidth(
+                    vertical: SizeUtils.scale(
                       AppSize.paddingS11,
                       size.width,
                     ),
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      SizeUtils.scaleWidth(
+                      SizeUtils.scale(
                         AppSize.borderRadiusLarge,
                         size.width,
                       ),

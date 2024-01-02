@@ -7,6 +7,7 @@ import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/core/widgets/textfield/date_picker_field.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
 import 'package:attendance_app/feature/task/add_task/controller/index.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,8 +32,11 @@ class AddTaskViewMobile extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.paddingHorizontalLarge,
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeUtils.scale(
+              AppSize.paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
           ),
           child: Column(
             children: [

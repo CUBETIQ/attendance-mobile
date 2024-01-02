@@ -12,6 +12,7 @@ import 'package:attendance_app/feature/home/widget/overview_card.dart';
 import 'package:attendance_app/feature/home/widget/record_card.dart';
 import 'package:attendance_app/feature/home/widget/status_dot.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,9 +30,15 @@ class HomeStaffMobileView extends StatelessWidget {
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: AppSize.paddingHorizontalLarge,
-            right: AppSize.paddingHorizontalLarge,
+          padding: EdgeInsets.only(
+            left: SizeUtils.scale(
+              AppSize.paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
+            right: SizeUtils.scale(
+              AppSize.paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
             top: AppSize.paddingTitleSmall,
           ),
           child: Column(

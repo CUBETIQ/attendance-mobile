@@ -17,16 +17,16 @@ class KpiScoreCard extends StatelessWidget {
       children: [
         Container(
           width: size.width - 48,
-          height: SizeUtils.scaleWidth(50, size.width),
+          height: SizeUtils.scale(50, size.width),
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleWidth(
+            horizontal: SizeUtils.scale(
               AppSize.paddingHorizontalMedium,
               size.width,
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
+              SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
             ),
             color: Theme.of(context).colorScheme.outline.darken(),
           ),
@@ -37,7 +37,7 @@ class KpiScoreCard extends StatelessWidget {
                 color: Colors.white,
                 size: size.width * 0.1,
               ),
-              SizedBox(width: SizeUtils.scaleWidth(10, size.width)),
+              SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
                 text: "Performance Score: $score",
                 style: BodyLargeSemi.copyWith(
@@ -48,21 +48,21 @@ class KpiScoreCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: SizeUtils.scaleWidth(10, size.width),
-          top: SizeUtils.scaleWidth(10, size.width),
+          right: SizeUtils.scale(10, size.width),
+          top: SizeUtils.scale(10, size.width),
           child: Icon(
             Icons.star_rounded,
             color: Colors.grey.darken(),
-            size: SizeUtils.scaleWidth(25, size.width),
+            size: SizeUtils.scale(25, size.width),
           ),
         ),
         Positioned(
-          right: SizeUtils.scaleWidth(22, size.width),
-          top: SizeUtils.scaleWidth(22, size.width),
+          right: SizeUtils.scale(22, size.width),
+          top: SizeUtils.scale(22, size.width),
           child: Icon(
             Icons.star_rounded,
             color: Colors.grey.darken(),
-            size: SizeUtils.scaleWidth(48, size.width),
+            size: SizeUtils.scale(48, size.width),
           ),
         ),
       ],

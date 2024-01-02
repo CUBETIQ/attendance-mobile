@@ -14,7 +14,7 @@ class LeaveModel extends BaseModel<LeaveModel> {
   final List<dynamic>? attachment;
   final String? durationType;
   final int? duration;
-  final String? updateBy;
+  final Map<String, dynamic>? updateBy;
 
   LeaveModel({
     this.id,
@@ -81,6 +81,43 @@ class LeaveModel extends BaseModel<LeaveModel> {
       'durationType': durationType,
       'duration': duration,
       'updateBy': updateBy,
+    };
+  }
+}
+
+class UpdateByModel extends BaseModel<UpdateByModel> {
+  final String? name;
+  final String? image;
+
+  UpdateByModel({
+    this.name,
+    this.image,
+  });
+
+  @override
+  UpdateByModel fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return UpdateByModel();
+    }
+    return UpdateByModel(
+      name: json['name'],
+      image: json['image'],
+    );
+  }
+
+  @override
+  List<UpdateByModel> fromListJson(List? listJson) {
+    if (listJson == null) {
+      return <UpdateByModel>[];
+    }
+    return listJson.map((e) => fromJson(e)).toList();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'image': image,
     };
   }
 }

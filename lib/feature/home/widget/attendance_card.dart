@@ -15,6 +15,7 @@ class AttendanceCard extends StatelessWidget {
   final double? width;
   final double? buttonSize;
   final double? iconSize;
+  final bool? isLoading;
 
   const AttendanceCard({
     super.key,
@@ -27,6 +28,7 @@ class AttendanceCard extends StatelessWidget {
     this.width,
     this.buttonSize,
     this.iconSize,
+    this.isLoading,
   });
 
   @override
@@ -62,11 +64,13 @@ class AttendanceCard extends StatelessWidget {
           ),
           SizedBox(height: size.height * 0.01),
           GestureDetector(
-            onTap: isCheckedIn != null
-                ? isCheckedIn == true
-                    ? onCheckOut
-                    : onCheckIn
-                : null,
+            onTap: isLoading == true
+                ? null
+                : isCheckedIn != null
+                    ? isCheckedIn == true
+                        ? onCheckOut
+                        : onCheckIn
+                    : null,
             child: ScaleTransition(
               scale: scale,
               child: AnimatedContainer(

@@ -34,7 +34,7 @@ class TaskCard extends StatelessWidget {
         width: size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scaleWidth(AppSize.borderRadiusLarge, size.width),
+            SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
           ),
           boxShadow: [
             BoxShadow(
@@ -54,13 +54,13 @@ class TaskCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      SizeUtils.scaleWidth(
+                      SizeUtils.scale(
                         AppSize.borderRadiusLarge,
                         size.width,
                       ),
                     ),
                     bottomLeft: Radius.circular(
-                      SizeUtils.scaleWidth(
+                      SizeUtils.scale(
                         AppSize.borderRadiusLarge,
                         size.width,
                       ),
@@ -72,14 +72,14 @@ class TaskCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: SizeUtils.scaleWidth(AppSize.paddingS8, size.width),
+                width: SizeUtils.scale(AppSize.paddingS8, size.width),
               ),
               Container(
                 constraints: BoxConstraints(
                   maxWidth: size.width * 0.67,
                 ),
                 padding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scaleWidth(AppSize.paddingS4, size.width),
+                  vertical: SizeUtils.scale(AppSize.paddingS4, size.width),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,8 +88,8 @@ class TaskCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          width: SizeUtils.scaleWidth(30, size.width),
-                          height: SizeUtils.scaleWidth(30, size.width),
+                          width: SizeUtils.scale(30, size.width),
+                          height: SizeUtils.scale(30, size.width),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: color != null
@@ -122,8 +122,7 @@ class TaskCard extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height:
-                          SizeUtils.scaleWidth(AppSize.paddingS1, size.width),
+                      height: SizeUtils.scale(AppSize.paddingS1, size.width),
                     ),
                     task.description == null || task.description == ""
                         ? const SizedBox.shrink()
@@ -135,8 +134,7 @@ class TaskCard extends StatelessWidget {
                             ),
                           ),
                     SizedBox(
-                      height:
-                          SizeUtils.scaleWidth(AppSize.paddingS1, size.width),
+                      height: SizeUtils.scale(AppSize.paddingS1, size.width),
                     ),
                     MyText(
                       text: task.endDate != null
@@ -154,10 +152,8 @@ class TaskCard extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    vertical:
-                        SizeUtils.scaleWidth(AppSize.paddingS5, size.width),
-                    horizontal:
-                        SizeUtils.scaleWidth(AppSize.paddingS5, size.width),
+                    vertical: SizeUtils.scale(AppSize.paddingS5, size.width),
+                    horizontal: SizeUtils.scale(AppSize.paddingS5, size.width),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

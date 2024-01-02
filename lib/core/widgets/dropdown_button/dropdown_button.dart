@@ -1,6 +1,7 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -137,10 +138,14 @@ class MyDropDownButton<T> extends StatelessWidget {
                     size.width - (AppSize.paddingHorizontalLarge * 2),
                 padding: dropdownPadding ??
                     EdgeInsets.symmetric(
-                      horizontal:
-                          AppSize.paddingHorizontalLarge * (size.width / 375.0),
-                      vertical:
-                          AppSize.paddingVerticalMedium * (size.width / 375.0),
+                      horizontal: SizeUtils.scale(
+                        AppSize.paddingHorizontalLarge,
+                        size.width,
+                      ),
+                      vertical: SizeUtils.scale(
+                        AppSize.paddingVerticalMedium,
+                        MediaQuery.of(context).size.width,
+                      ),
                     ),
                 decoration: dropdownDecoration ??
                     BoxDecoration(

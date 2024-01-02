@@ -4,6 +4,7 @@ import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
 import 'package:attendance_app/feature/auth/activation/controller/index.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/text_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -21,10 +22,16 @@ class ActivationViewTablet extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(
+            padding: EdgeInsets.only(
               top: AppSize.paddingTitleLarge,
-              left: AppSize.paddingHorizontalLarge,
-              right: AppSize.paddingHorizontalLarge,
+              left: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
+              right: SizeUtils.scale(
+                AppSize.paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

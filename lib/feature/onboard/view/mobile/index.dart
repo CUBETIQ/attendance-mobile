@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/feature/onboard/controller/index.dart';
 import 'package:attendance_app/feature/onboard/widgets/page.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,8 +38,11 @@ class OnBoardViewMobile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.paddingHorizontalLarge,
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeUtils.scale(
+                    AppSize.paddingHorizontalLarge,
+                    MediaQuery.of(context).size.width,
+                  ),
                 ),
                 child: Obx(
                   () => MyButton(

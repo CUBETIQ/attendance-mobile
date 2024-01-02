@@ -142,8 +142,8 @@ class LeaveController extends GetxController {
     percentageDeclinedLeave.value = 0.0;
   }
 
-  void onTapView() {
-    Get.toNamed(Routes.LEAVE_DETAIL);
+  void onTapView(int index) {
+    Get.toNamed(Routes.LEAVE_DETAIL, arguments: leave[index]);
   }
 
   void onTapCancel(String id) {

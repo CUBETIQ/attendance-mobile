@@ -4,6 +4,7 @@ import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/types_helper/attendance_status.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 
 class StatusCard extends StatelessWidget {
   final String? status;
@@ -48,7 +49,7 @@ class StatusCard extends StatelessWidget {
                   ),
                 ),
                 child: MyText(
-                  text: status ?? "No Status",
+                  text: (status ?? "No Status").capitalizeFirst,
                   style: BodySmallMedium.copyWith(
                     color: status != null
                         ? status == AttendanceStatus.early

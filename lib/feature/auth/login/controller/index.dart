@@ -3,6 +3,7 @@ import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
+import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/auth/login/model/index.dart';
@@ -25,46 +26,49 @@ class LoginController extends GetxController {
   Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
   final LocalStorageController localDataService =
       LocalStorageController.getInstance();
+  final _debouncer = Debouncer(milliseconds: 500);
 
-  Future<void> login() async {
-    validate();
-    if (MyTextFieldFormController.findController('Username').isValid &&
-        MyTextFieldFormController.findController('Password').isValid) {
-      try {
-        LoginModel input = LoginModel(
-          username: usernameController.text,
-          password: passwordController.text,
-        );
-        var accessToken = await LoginService().login(input);
-        await IsarService().saveLocalData(
-          accessToken: accessToken.first,
-          refreshToken: accessToken.last,
-          organizationId: organization.value?.id,
-        );
-        await fetchMe();
-        await getOrganization(user.value.organizationId!);
-        if (organization.value == null) {
-          Get.offNamed(Routes.ACTIVATION);
-        } else {
-          if (user.value.positionId != null && user.value.positionId != "") {
-            await getPosition();
+  void login() {
+    _debouncer.run(() async {
+      validate();
+      if (MyTextFieldFormController.findController('Username').isValid &&
+          MyTextFieldFormController.findController('Password').isValid) {
+        try {
+          LoginModel input = LoginModel(
+            username: usernameController.text,
+            password: passwordController.text,
+          );
+          var accessToken = await LoginService().login(input);
+          await IsarService().saveLocalData(
+            accessToken: accessToken.first,
+            refreshToken: accessToken.last,
+            organizationId: organization.value?.id,
+          );
+          await fetchMe();
+          await getOrganization(user.value.organizationId!);
+          if (organization.value == null) {
+            Get.offNamed(Routes.ACTIVATION);
+          } else {
+            if (user.value.positionId != null && user.value.positionId != "") {
+              await getPosition();
+            }
+            if (user.value.departmentId != null &&
+                user.value.departmentId != "") {
+              await getDepartment();
+            }
+            Get.offNamed(Routes.NAVIGATION, arguments: {
+              "user": user.value,
+              "position": position.value,
+              "department": department.value,
+              "organization": organization.value,
+            });
           }
-          if (user.value.departmentId != null &&
-              user.value.departmentId != "") {
-            await getDepartment();
-          }
-          Get.offNamed(Routes.NAVIGATION, arguments: {
-            "user": user.value,
-            "position": position.value,
-            "department": department.value,
-            "organization": organization.value,
-          });
+        } on DioException catch (e) {
+          showErrorSnackBar("Error", e.response?.data["message"]);
+          rethrow;
         }
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
       }
-    }
+    });
   }
 
   void validate() {

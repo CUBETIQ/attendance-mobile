@@ -155,33 +155,37 @@ class LeaveCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: onTapCancel,
-                  child: Container(
-                    width: SizeUtils.scale(100, size.width),
-                    height: SizeUtils.scale(30, size.width),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        AppSize.borderRadiusMedium * (size.width / 375.0),
-                      ),
-                      border: Border.all(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .error
-                            .withOpacity(0.5),
-                        width: 1.5,
-                      ),
-                    ),
-                    child: MyText(
-                      text: "Cancel",
-                      style: BodySmallMedium,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: SizeUtils.scale(AppSize.paddingS4, size.width),
-                ),
+                leave.status == LeaveStatus.pending
+                    ? GestureDetector(
+                        onTap: onTapCancel,
+                        child: Container(
+                          width: SizeUtils.scale(100, size.width),
+                          height: SizeUtils.scale(30, size.width),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              AppSize.borderRadiusMedium * (size.width / 375.0),
+                            ),
+                            border: Border.all(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .error
+                                  .withOpacity(0.5),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: MyText(
+                            text: "Cancel",
+                            style: BodySmallMedium,
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                leave.status == LeaveStatus.pending
+                    ? SizedBox(
+                        height: SizeUtils.scale(AppSize.paddingS4, size.width),
+                      )
+                    : const SizedBox.shrink(),
                 GestureDetector(
                   onTap: onTapView,
                   child: Container(

@@ -4,6 +4,7 @@ import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/activation_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
+import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/auth/activation/model/activation_model.dart';
@@ -28,6 +29,7 @@ class ActivationController extends GetxController {
       LocalStorageController.getInstance();
   Rx<LocalStorage> localData = LocalStorage().obs;
   Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
+  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -36,6 +38,7 @@ class ActivationController extends GetxController {
   }
 
   Future<void> activation() async {
+    _debouncer.run(() {});
     validate();
     final data = await localDataService.get();
     if (MyTextFieldFormController.findController('Activation').isValid) {

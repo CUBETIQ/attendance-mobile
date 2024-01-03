@@ -8,6 +8,7 @@ import 'package:attendance_app/feature/home/view/mobile/staff_home_view.dart';
 import 'package:attendance_app/feature/home/widget/attendance_detail_card.dart';
 import 'package:attendance_app/feature/leave/leave/widget/leave_chart.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -61,6 +62,46 @@ class HomeAdminMobileView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        width: size.width,
+                        height: 200,
+                        child: PieChart(
+                          PieChartData(
+                            sections: [
+                              PieChartSectionData(
+                                color: Colors.green,
+                                value: 40,
+                                title: "Present",
+                                radius: 100,
+                                titleStyle: BodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              PieChartSectionData(
+                                color: Colors.red,
+                                value: 30,
+                                title: "Absent",
+                                radius: 100,
+                                titleStyle: BodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              PieChartSectionData(
+                                color: Colors.yellow,
+                                value: 30,
+                                title: "Leave",
+                                radius: 100,
+                                titleStyle: BodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                          swapAnimationDuration:
+                              const Duration(milliseconds: 150),
+                          swapAnimationCurve: Curves.linear,
+                        ),
+                      ),
                       MyText(
                           text: "Attendance Summary", style: BodyLargeMedium),
                       const SizedBox(height: AppSize.paddingS10),

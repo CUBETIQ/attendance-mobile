@@ -18,13 +18,14 @@ class ErrorInterceptor extends Interceptor {
       final data = await localDataService.get();
       final token = data?.refreshToken ?? "1234567@qwerty";
       try {
+        await Future.delayed(const Duration(seconds: 20));
         final newToken = await refreshToken(token);
 
         // Replace the expired token with the new one in the original request headers
         err.requestOptions.headers['Authorization'] =
             'Bearer ${newToken.first}}';
 
-        // Retry the original request with the new token
+        // Retry the original request with the new token]
         return _dio.fetch(err.requestOptions);
       } catch (refreshError) {
         rethrow;
@@ -38,12 +39,14 @@ class ErrorInterceptor extends Interceptor {
 
     final String accessToken;
     final String refreshToken;
+
     Response response = await dioInstance.dio.post(
       Endpoints.instance.refreshToken,
       data: {
         "refreshToken": token,
       },
     );
+
     if (response.statusCode == 200) {
       accessToken = response.data["data"]["accessToken"];
       refreshToken = response.data["data"]["refreshToken"];

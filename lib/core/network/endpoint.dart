@@ -30,4 +30,5 @@ class Endpoints {
   String get get_own_leave => "/app/leaves/me";
   String get get_own_leave_summarize => "/app/summarize-leaves/me";
   String get leave => "/app/leaves/";
+  String get get_dashboard_chart => "/app/attendance-charts";
 }

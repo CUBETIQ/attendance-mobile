@@ -1,3 +1,4 @@
+import 'package:attendance_app/core/model/attendance_chart_model.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
@@ -89,5 +90,28 @@ class HomeService {
       throw Exception("Get attendance failed");
     }
     return summaryAttendance;
+  }
+
+  Future<List<AttendanceChartModel>> getAttendanceChart(
+      {int? startDate, int? endDate, required String organizationId}) async {
+    List<AttendanceChartModel>? attendanceChart;
+
+    Map<String, dynamic> query = {
+      "startDate": startDate,
+      "endDate": endDate,
+      "organizationId": organizationId,
+    };
+
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_dashboard_chart,
+      queryParameters: query,
+    );
+    if (response.statusCode == 200) {
+      attendanceChart =
+          AttendanceChartModel().fromListJson(response.data["data"]);
+    } else {
+      throw Exception("Get attendance failed");
+    }
+    return attendanceChart;
   }
 }

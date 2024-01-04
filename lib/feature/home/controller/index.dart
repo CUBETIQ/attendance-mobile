@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:attendance_app/constants/svg.dart';
+import 'package:attendance_app/core/model/attendance_chart_model.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
@@ -52,6 +53,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Rxn<int> totalAttendance = Rxn<int>(null);
   Rxn<int> totalAbsent = Rxn<int>(null);
   Rxn<int> totalLeave = Rxn<int>(null);
+  RxList<AttendanceChartModel> attendanceChart = <AttendanceChartModel>[].obs;
 
   @override
   void onInit() {
@@ -90,6 +92,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       tabController = null;
     } else {
       tabController = TabController(length: 2, vsync: this);
+      initaAdminFunction();
+    }
+  }
+
+  void initaAdminFunction() {
+    if (NavigationController.to.getUserRole.value == Role.admin) {
+      getDashboardChart();
     }
   }
 
@@ -203,6 +212,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       rethrow;
     } finally {
       isLoadingList.value = false;
+    }
+  }
+
+  Future<void> getDashboardChart() async {
+    try {
+      attendanceChart.value = await HomeService().getAttendanceChart(
+        startDate: startOfMonth.value,
+        endDate: endOfMonth.value,
+        organizationId: NavigationController.to.organization.value.id ?? "",
+      );
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
     }
   }
 

@@ -4,7 +4,7 @@ import 'package:attendance_app/feature/auth/activation/activation_binding.dart';
 import 'package:attendance_app/feature/auth/activation/view/index.dart';
 import 'package:attendance_app/feature/auth/login/login_binding.dart';
 import 'package:attendance_app/feature/auth/login/view/index.dart';
-import 'package:attendance_app/feature/home/home_binding.dart';
+import 'package:attendance_app/feature/home/home/home_binding.dart';
 import 'package:attendance_app/feature/leave/add_leave/view/index.dart';
 import 'package:attendance_app/feature/leave/leave/leave_binding.dart';
 import 'package:attendance_app/feature/leave/leave_detail/leave_detail_binding.dart';

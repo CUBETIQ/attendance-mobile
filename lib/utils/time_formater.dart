@@ -1,7 +1,19 @@
 import 'package:intl/intl.dart';
 
 class DateFormatter {
-  String formatDate(DateTime dateTime) {
+  String formatDateTime(DateTime dateTime) {
+    return DateFormat('E, d MMMM y').format(dateTime);
+  }
+
+  String formatShortDate(DateTime dateTime) {
+    // Define the desired format
+    final DateFormat formatter = DateFormat('d MMMM, y');
+
+    // Format the DateTime
+    return formatter.format(dateTime);
+  }
+
+  String formatFullDate(DateTime dateTime) {
     // Define the desired format
     final DateFormat formatter = DateFormat('EEEE d MMMM, y');
 
@@ -19,7 +31,7 @@ class DateFormatter {
 
   String formatTimeNoTrailing(DateTime dateTime) {
     // Define the desired time format
-    final DateFormat formatter = DateFormat('h:mm');
+    final DateFormat formatter = DateFormat('h:mm a');
 
     // Format the DateTime
     return formatter.format(dateTime);

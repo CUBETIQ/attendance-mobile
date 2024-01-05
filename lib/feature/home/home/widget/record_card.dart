@@ -3,7 +3,7 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/feature/home/widget/record_data_card.dart';
+import 'package:attendance_app/feature/home/home/widget/record_data_card.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/time_formater.dart';
@@ -58,7 +58,7 @@ class RecordCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MyText(
-            text: DateFormatter().formatDate(date),
+            text: DateFormatter().formatFullDate(date),
             style: BodyMediumSemi.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),

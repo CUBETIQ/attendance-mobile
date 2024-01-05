@@ -7,9 +7,9 @@ import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/extensions/string.dart';
-import 'package:attendance_app/feature/home/model/check_in_model.dart';
-import 'package:attendance_app/feature/home/model/check_out_model.dart';
-import 'package:attendance_app/feature/home/service/index.dart';
+import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
+import 'package:attendance_app/feature/home/home/model/check_out_model.dart';
+import 'package:attendance_app/feature/home/home/service/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/controller/index.dart';
 import 'package:attendance_app/utils/attendance_status_validator.dart';
@@ -54,13 +54,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Rxn<int> totalAbsent = Rxn<int>(null);
   Rxn<int> totalLeave = Rxn<int>(null);
   RxList<AttendanceChartModel> attendanceChart = <AttendanceChartModel>[].obs;
+  Rx<int> totalChartPresent = 0.obs;
+  Rx<int> totalChartAbsent = 0.obs;
+  Rx<int> totalChartLeave = 0.obs;
+  RxDouble presentPercentage = 0.0.obs;
+  RxDouble absentPercentage = 0.0.obs;
+  RxDouble onLeavePercentage = 0.0.obs;
+  RxInt totalStaff = 0.obs;
+  Rx<DateTime> selectDate = DateTime.now().obs;
+  RxBool haveNoData = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+    initDate();
     initAnimation();
     initTabWithRole();
-    initDate();
     getAttendance();
     checkBreakTime();
     getUsername();
@@ -87,19 +96,46 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     ));
   }
 
+  Future<void> onTapDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: Get.context!,
+      initialDate: date,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      selectDate.value = picked;
+      startOfDay.value = DateTime(
+        picked.year,
+        picked.month,
+        picked.day,
+        0,
+        0,
+        0,
+      ).millisecondsSinceEpoch;
+      endOfDay.value = DateTime(
+        picked.year,
+        picked.month,
+        picked.day,
+        23,
+        59,
+        59,
+      ).millisecondsSinceEpoch;
+      initAdminFunction();
+    }
+  }
+
   void initTabWithRole() {
     if (NavigationController.to.getUserRole.value == Role.staff) {
       tabController = null;
     } else {
       tabController = TabController(length: 2, vsync: this);
-      initaAdminFunction();
+      initAdminFunction();
     }
   }
 
-  void initaAdminFunction() {
-    if (NavigationController.to.getUserRole.value == Role.admin) {
-      getDashboardChart();
-    }
+  void initAdminFunction() {
+    getDashboardChart();
   }
 
   Future<void> checkIn() async {
@@ -216,16 +252,43 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> getDashboardChart() async {
+    clearChartData();
     try {
       attendanceChart.value = await HomeService().getAttendanceChart(
-        startDate: startOfMonth.value,
-        endDate: endOfMonth.value,
+        startDate: startOfDay.value,
+        endDate: endOfDay.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
+      if (attendanceChart.isNotEmpty) {
+        totalStaff.value = attendanceChart.first.totalStaff ?? 0;
+        haveNoData.value = false;
+        for (var element in attendanceChart) {
+          totalChartPresent.value += element.totalAttendance ?? 0;
+          totalChartAbsent.value += element.totalAbsent ?? 0;
+          totalChartLeave.value += element.totalLeave ?? 0;
+        }
+        presentPercentage.value =
+            (totalChartPresent.value / totalStaff.value) * 100;
+        absentPercentage.value =
+            (totalChartAbsent.value / totalStaff.value) * 100;
+        onLeavePercentage.value =
+            (totalChartLeave.value / totalStaff.value) * 100;
+      } else {
+        haveNoData.value = true;
+      }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  void clearChartData() {
+    totalChartPresent.value = 0;
+    totalChartAbsent.value = 0;
+    totalChartLeave.value = 0;
+    presentPercentage.value = 0;
+    absentPercentage.value = 0;
+    onLeavePercentage.value = 0;
   }
 
   Future<void> getSummarizeAttendance() async {

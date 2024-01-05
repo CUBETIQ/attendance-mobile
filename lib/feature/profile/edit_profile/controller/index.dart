@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:attendance_app/feature/home/controller/index.dart';
+import 'package:attendance_app/feature/home/home/controller/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/model/update_profile_model.dart';
 import 'package:attendance_app/feature/profile/edit_profile/service/index.dart';

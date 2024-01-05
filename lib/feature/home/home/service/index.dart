@@ -3,8 +3,8 @@ import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/feature/home/model/check_in_model.dart';
-import 'package:attendance_app/feature/home/model/check_out_model.dart';
+import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
+import 'package:attendance_app/feature/home/home/model/check_out_model.dart';
 import 'package:dio/dio.dart';
 
 class HomeService {

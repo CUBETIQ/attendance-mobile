@@ -1,10 +1,14 @@
+import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/feature/home/home/view/index.dart';
 import 'package:attendance_app/feature/leave/leave/view/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
+import 'package:attendance_app/feature/navigation/widget/side_drawer.dart';
 import 'package:attendance_app/feature/profile/profile/view/index.dart';
 import 'package:attendance_app/feature/task/task/view/index.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 
 class NavigationViewMobile extends StatelessWidget {
@@ -13,14 +17,48 @@ class NavigationViewMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = NavigationController.to;
+    return ZoomDrawer(
+      controller: controller.zoomDrawerController,
+      menuScreen: SideDrawer(
+        imageUrl: controller.user.value.image,
+      ),
+      mainScreen: const MainScreen(),
+      borderRadius: SizeUtils.scale(AppSize.borderRadiusLarge, context.width),
+      showShadow: false,
+      angle: -10.0,
+      androidCloseOnBackTap: true,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.25),
+          spreadRadius: 4,
+          blurRadius: 4,
+          offset: const Offset(-5, 10),
+        ),
+      ],
+      menuBackgroundColor: Theme.of(context).colorScheme.background,
+      duration: 300.milliseconds,
+      reverseDuration: 200.milliseconds,
+      mainScreenTapClose: true,
+      slideWidth: MediaQuery.of(context).size.width * 0.65,
+    );
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = NavigationController.to;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      drawer: Drawer(
-        width: MediaQuery.of(context).size.width * 0.75,
-      ),
       appBar: AppBar(
         centerTitle: true,
         elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: controller.toggleDrawer,
+        ),
         title: Obx(
           () => MyAppBarTitle(
             title: controller.items[controller.selectedIndex.value].title,

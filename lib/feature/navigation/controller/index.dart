@@ -12,6 +12,7 @@ import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
@@ -52,6 +53,12 @@ class NavigationController extends GetxController {
   Rxn<String> startBreakTime = Rxn<String>(null);
   Rxn<String> endBreakTime = Rxn<String>(null);
   Rx<OrganizationModel> organization = OrganizationModel().obs;
+  Rxn<String> fullname = Rxn<String>(null);
+  final zoomDrawerController = ZoomDrawerController();
+
+  void toggleDrawer() {
+    zoomDrawerController.toggle?.call();
+  }
 
   @override
   void onInit() {
@@ -61,6 +68,8 @@ class NavigationController extends GetxController {
     department.value = Get.arguments["department"];
     organization.value = Get.arguments["organization"];
     getUserRole.value = user.value.role ?? Role.staff;
+    fullname.value =
+        "${user.value.firstName ?? user.value.username!} ${user.value.lastName ?? ""}";
     getUserLocation();
   }
 

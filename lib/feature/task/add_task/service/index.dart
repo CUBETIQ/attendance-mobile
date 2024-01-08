@@ -1,6 +1,6 @@
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/feature/task/add_task/service/create_task_model.dart';
+import 'package:attendance_app/feature/task/add_task/model/create_task_model.dart';
 import 'package:dio/dio.dart';
 
 class AddTaskService {

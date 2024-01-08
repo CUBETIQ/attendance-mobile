@@ -1,7 +1,8 @@
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
+import 'package:attendance_app/utils/size_util.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProfileDetailRow extends StatelessWidget {
   final String? title;
@@ -17,7 +18,7 @@ class ProfileDetailRow extends StatelessWidget {
       children: [
         Container(
           constraints: BoxConstraints(
-            maxWidth: size.width * 0.30,
+            maxWidth: SizeUtils.scale(80, size.width),
           ),
           padding: const EdgeInsets.only(left: 10),
           alignment: Alignment.centerLeft,
@@ -28,13 +29,13 @@ class ProfileDetailRow extends StatelessWidget {
         ),
         Container(
           constraints: BoxConstraints(
-            maxWidth: size.width * 0.42,
+            maxWidth: SizeUtils.scale(170, size.width),
           ),
-          padding: const EdgeInsets.only(right: 10),
+          padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
           alignment: Alignment.centerRight,
           child: MyText(
             text: value != "" && value != null
-                ? (value ?? "N/A").capitalizeFirst
+                ? value.capitalizeMaybeNull ?? "N/A"
                 : "N/A",
             style: BodyMediumRegular,
           ),

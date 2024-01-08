@@ -4,7 +4,7 @@ import 'package:attendance_app/core/widgets/icon_picker/icon_picker_dialog.dart'
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/extensions/string.dart';
-import 'package:attendance_app/feature/task/add_task/service/create_task_model.dart';
+import 'package:attendance_app/feature/task/add_task/model/create_task_model.dart';
 import 'package:attendance_app/feature/task/add_task/service/index.dart';
 import 'package:attendance_app/feature/task/task/controller/index.dart';
 import 'package:attendance_app/utils/time_formater.dart';

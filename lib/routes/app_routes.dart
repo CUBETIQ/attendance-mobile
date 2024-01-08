@@ -17,4 +17,6 @@ abstract class Routes {
   static const ADD_LEAVE = '/add_leave';
   static const LEAVE_DETAIL = '/leave_detail';
   static const STAFF = '/staff';
+  static const STAFF_DETAIL = '/staff_detail';
+  static const ADD_STAFF = '/add_staff';
 }

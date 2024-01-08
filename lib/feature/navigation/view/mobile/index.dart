@@ -39,7 +39,10 @@ class NavigationViewMobile extends StatelessWidget {
       duration: 300.milliseconds,
       reverseDuration: 200.milliseconds,
       mainScreenTapClose: true,
-      slideWidth: MediaQuery.of(context).size.width * 0.65,
+      slideWidth: SizeUtils.scale(
+        MediaQuery.of(context).size.width * 0.65,
+        context.width,
+      ),
     );
   }
 }

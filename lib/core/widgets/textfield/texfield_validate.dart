@@ -72,6 +72,12 @@ class MyTextFieldForm extends StatelessWidget {
                   horizontal: (AppSize.paddingS17) * (size.width / 375.0),
                   vertical: (AppSize.paddingS7) * (size.width / 375.0),
                 ),
+                prefixIcon: prefixIcon == null
+                    ? null
+                    : Icon(
+                        prefixIcon,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 hintText: hintText,
                 isDense: true,
                 hintStyle: hintStyle ?? BodyMediumMedium,

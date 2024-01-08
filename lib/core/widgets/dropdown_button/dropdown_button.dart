@@ -94,7 +94,6 @@ class MyDropDownButton<T> extends StatelessWidget {
               style: BodyMediumMedium.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
-
               hint: Container(
                 alignment: hintAlignment,
                 child: MyText(

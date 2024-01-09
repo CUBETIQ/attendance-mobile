@@ -1,8 +1,5 @@
-import 'package:attendance_app/constants/svg.dart';
-import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/model/option_model.dart';
@@ -36,9 +33,9 @@ class ProfileController extends GetxController {
         onTap: editProfile,
       ),
       OptionModel(
-        title: "Logout",
-        icon: Icons.logout,
-        onTap: logout,
+        title: "Change Password",
+        icon: Icons.key_rounded,
+        onTap: changePassword,
       ),
     ];
     getSummarizeAttendance();
@@ -62,19 +59,11 @@ class ProfileController extends GetxController {
     }
   }
 
-  void logout() {
-    try {
-      getLogOutBottomSheet(
-        Get.context!,
-        image: leaving,
-        onTapLogOut: () async {
-          await IsarService().clearLocalData(deleteToken: true);
-          Get.offAllNamed(Routes.LOGIN);
-        },
-      );
-    } catch (e) {
-      rethrow;
-    }
+  void changePassword() {
+    Get.toNamed(
+      Routes.CHANGE_PASSWORD,
+      arguments: {"data": user.value, "isStaff": false},
+    );
   }
 
   Future<void> editProfile() async {

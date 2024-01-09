@@ -107,7 +107,7 @@ class LeaveController extends GetxController {
   }
 
   void onTapLeave(LeaveModel leave) {
-    getOptionBottomSheet(
+    getEditAndDeleteBottomSheet(
       Get.context!,
       image: option,
       onTapEdit: () {

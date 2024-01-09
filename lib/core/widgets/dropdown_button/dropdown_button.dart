@@ -39,6 +39,8 @@ class MyDropDownButton<T> extends StatelessWidget {
     this.labelStyle,
     required this.label,
     super.key,
+    this.width,
+    this.height,
   });
 
   final String? hint;
@@ -70,6 +72,8 @@ class MyDropDownButton<T> extends StatelessWidget {
   final bool? hasLabel;
   final TextStyle? labelStyle;
   final String label;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +89,8 @@ class MyDropDownButton<T> extends StatelessWidget {
               ),
         const SizedBox(height: 8),
         SizedBox(
-          width: double.infinity,
-          height: 48 * (size.width / 375.0),
+          width: width ?? double.infinity,
+          height: height ?? SizeUtils.scale(47.7, size.width),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.

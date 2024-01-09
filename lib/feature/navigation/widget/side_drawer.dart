@@ -1,9 +1,9 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/navigation/model/drawer_model.dart';
-import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +12,16 @@ import 'package:get/get.dart';
 
 class SideDrawer extends StatelessWidget {
   final String? imageUrl;
+  final String? userRole;
+  final List<DrawerModel> drawerItems;
+  final UserModel user;
 
   const SideDrawer({
     super.key,
     this.imageUrl,
+    this.userRole,
+    required this.drawerItems,
+    required this.user,
   });
 
   @override
@@ -42,7 +48,7 @@ class SideDrawer extends StatelessWidget {
               ),
               SizedBox(height: SizeUtils.scale(5, size.height)),
               MyText(
-                text: "Username",
+                text: "${user.firstName} ${user.lastName}",
                 style: BodyLarge.copyWith(
                   color: Theme.of(context).colorScheme.secondary,
                 ),
@@ -55,7 +61,7 @@ class SideDrawer extends StatelessWidget {
               ),
               SizedBox(height: SizeUtils.scale(10, size.height)),
               ...List.generate(
-                item.length,
+                drawerItems.length,
                 (index) => ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
@@ -64,14 +70,14 @@ class SideDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     ZoomDrawer.of(context)?.close();
-                    item[index].onTap!();
+                    drawerItems[index].onTap!();
                   },
                   leading: Icon(
-                    item[index].icon,
+                    drawerItems[index].icon,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                   title: MyText(
-                    text: item[index].title,
+                    text: drawerItems[index].title,
                     style: BodyMediumMedium.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
@@ -106,28 +112,3 @@ class SideDrawer extends StatelessWidget {
     );
   }
 }
-
-List<DrawerModel> item = [
-  DrawerModel(
-    title: "Organization",
-    icon: Icons.home_rounded,
-    onTap: () {},
-  ),
-  DrawerModel(
-    title: "Staff",
-    icon: Icons.person_rounded,
-    onTap: () {
-      Get.toNamed(Routes.STAFF);
-    },
-  ),
-  DrawerModel(
-    title: "Setting",
-    icon: Icons.settings_rounded,
-    onTap: () {},
-  ),
-  DrawerModel(
-    title: "Support",
-    icon: Icons.headset_mic_rounded,
-    onTap: () {},
-  ),
-];

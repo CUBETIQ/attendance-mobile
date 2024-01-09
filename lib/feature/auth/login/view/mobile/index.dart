@@ -78,13 +78,17 @@ class LoginViewMobile extends StatelessWidget {
                   textController: controller.usernameController,
                 ),
                 SizedBox(height: size.height * 0.02),
-                MyTextFieldForm(
-                  hasLabel: true,
-                  isPassword: true,
-                  prefixIcon: Icons.lock_rounded,
-                  label: "Password",
-                  hintText: "Enter your password  ",
-                  textController: controller.passwordController,
+                Obx(
+                  () => MyTextFieldForm(
+                    hasLabel: true,
+                    isPassword: controller.showPassword.value,
+                    prefixIcon: Icons.lock_rounded,
+                    label: "Password",
+                    hintText: "Enter your password ",
+                    textController: controller.passwordController,
+                    haveSuffixIcon: true,
+                    onTapShowPassword: controller.onTapShowPassword,
+                  ),
                 ),
                 SizedBox(height: size.height * 0.02),
                 Row(

@@ -1,4 +1,6 @@
 import 'package:attendance_app/config/app_size.dart';
+import 'package:attendance_app/core/model/department_model.dart';
+import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/widgets/button/back_button.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/dropdown_button/dropdown_button.dart';
@@ -8,6 +10,8 @@ import 'package:attendance_app/core/widgets/textfield/date_picker_field.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
 import 'package:attendance_app/feature/staff/add_staff/controller/index.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/types_helper/state.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,13 +63,22 @@ class AddStaffViewMobile extends StatelessWidget {
                 hintText: "Enter your username",
                 textController: controller.usernameController,
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
-              MyTextFieldForm(
-                hasLabel: true,
-                label: "Password",
-                hintText: "Enter your password",
-                textController: controller.passwordController,
+              SizedBox(
+                height: SizeUtils.scale(
+                  controller.appState.value == AppState.Edit
+                      ? 0
+                      : AppSize.paddingS5,
+                  size.width,
+                ),
               ),
+              controller.appState.value == AppState.Edit
+                  ? const SizedBox.shrink()
+                  : MyTextFieldForm(
+                      hasLabel: true,
+                      label: "Password",
+                      hintText: "Enter your password",
+                      textController: controller.passwordController,
+                    ),
               SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
@@ -81,6 +94,42 @@ class AddStaffViewMobile extends StatelessWidget {
                       )
                       .toList(),
                   onChanged: (value) => controller.selectedRole.value = value!,
+                ),
+              ),
+              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              Obx(
+                () => MyDropDownButton<PositionModel>(
+                  label: "Position",
+                  value: controller.selectedPosition.value,
+                  hint: "Choose position",
+                  dropdownItems: controller.positionList
+                      .map(
+                        (e) => DropdownMenuItem<PositionModel>(
+                          value: e,
+                          child: Text(e.name.capitalizeMaybeNull ?? ""),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) =>
+                      controller.selectedPosition.value = value!,
+                ),
+              ),
+              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              Obx(
+                () => MyDropDownButton<DepartmentModel>(
+                  label: "Department",
+                  value: controller.selectedDepartment.value,
+                  hint: "Choose department",
+                  dropdownItems: controller.departmentList
+                      .map(
+                        (e) => DropdownMenuItem<DepartmentModel>(
+                          value: e,
+                          child: Text(e.name.capitalizeMaybeNull ?? ""),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) =>
+                      controller.selectedDepartment.value = value!,
                 ),
               ),
               SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
@@ -159,10 +208,15 @@ class AddStaffViewMobile extends StatelessWidget {
                       controller.selectedStatus.value = value!,
                 ),
               ),
-              SizedBox(height: size.height * 0.05),
+              SizedBox(height: SizeUtils.scale(30, size.width)),
               MyButton(
                 title: "Save",
-                onTap: null,
+                margin: EdgeInsets.only(
+                  bottom: SizeUtils.scale(30, size.width),
+                ),
+                onTap: controller.appState.value == AppState.Edit
+                    ? controller.onTapUpdateStaff
+                    : controller.onTapAddStaff,
               ),
             ],
           ),

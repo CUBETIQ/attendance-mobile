@@ -116,7 +116,7 @@ class TaskController extends GetxController {
   }
 
   void onTapTask(TaskModel task) {
-    getOptionBottomSheet(
+    getEditAndDeleteBottomSheet(
       Get.context!,
       image: option,
       onTapEdit: () {

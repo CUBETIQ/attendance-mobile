@@ -20,6 +20,7 @@ class StaffController extends GetxController {
   RxString organizationId = "".obs;
   RxBool isLoading = false.obs;
   TextEditingController searchController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
 
   @override
   void onInit() {
@@ -95,27 +96,46 @@ class StaffController extends GetxController {
   }
 
   void onTapStaff(UserModel staff) {
-    getOptionBottomSheet(
+    getOptionsBottomSheet(
       Get.context!,
       image: option,
       onTapEdit: () {
+        Get.toNamed(
+          Routes.ADD_STAFF,
+          arguments: {
+            "state": AppState.Edit,
+            "positions": positions,
+            "departments": departments,
+            "staff": staff,
+          },
+        );
         Get.back();
       },
       onTapDelete: () {
         Get.back();
         deleteStaff(staff.id!);
       },
+      onTapChangePassword: () {
+        Get.back();
+        Get.toNamed(
+          Routes.CHANGE_PASSWORD,
+          arguments: {"data": staff, "isStaff": true},
+        );
+      },
     );
   }
 
   void onTapViewDetail(
-      UserModel staff, PositionModel position, DepartmentModel department) {
+    UserModel staff,
+    PositionModel position,
+    DepartmentModel department,
+  ) {
     Get.toNamed(
       Routes.STAFF_DETAIL,
       arguments: {
         "staff": staff,
         "position": position,
-        "department": department
+        "department": department,
       },
     );
   }
@@ -123,7 +143,11 @@ class StaffController extends GetxController {
   void onTapAddStaff() {
     Get.toNamed(
       Routes.ADD_STAFF,
-      arguments: {"state": AppState.Create},
+      arguments: {
+        "state": AppState.Create,
+        "positions": positions,
+        "departments": departments
+      },
     );
   }
 }

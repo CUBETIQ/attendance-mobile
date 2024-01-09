@@ -1,10 +1,14 @@
 import 'package:attendance_app/config/app_config.dart';
+import 'package:attendance_app/constants/svg.dart';
+import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
+import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
+import 'package:attendance_app/feature/navigation/model/drawer_model.dart';
 import 'package:attendance_app/feature/navigation/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/location_util.dart';
@@ -23,6 +27,7 @@ class NavigationController extends GetxController {
   Rx<PositionModel> position = PositionModel().obs;
   Rx<DepartmentModel> department = DepartmentModel().obs;
   RxString getUserRole = "".obs;
+  late List<DrawerModel> drawerItems;
   List<String> titles = ['Home', 'Task', 'Profile'];
   List<BottomBarModel> items = [
     BottomBarModel(
@@ -70,6 +75,7 @@ class NavigationController extends GetxController {
     getUserRole.value = user.value.role ?? Role.staff;
     fullname.value =
         "${user.value.firstName ?? user.value.username!} ${user.value.lastName ?? ""}";
+    initSideBarMenu();
     getUserLocation();
   }
 
@@ -106,5 +112,75 @@ class NavigationController extends GetxController {
 
   void onTapAddLeave() {
     Get.toNamed(Routes.ADD_LEAVE, arguments: {"state": AppState.Create});
+  }
+
+  void initSideBarMenu() {
+    if (getUserRole.value == Role.admin) {
+      drawerItems = [
+        DrawerModel(
+          title: "Organization",
+          icon: Icons.home_rounded,
+          onTap: () {},
+        ),
+        DrawerModel(
+          title: "Staff",
+          icon: Icons.person_rounded,
+          onTap: () {
+            Get.toNamed(Routes.STAFF);
+          },
+        ),
+        DrawerModel(
+          title: "Setting",
+          icon: Icons.settings_rounded,
+          onTap: () {},
+        ),
+        DrawerModel(
+          title: "Support",
+          icon: Icons.headset_mic_rounded,
+          onTap: () {},
+        ),
+        DrawerModel(
+          title: "Log out",
+          icon: Icons.logout_rounded,
+          onTap: () {
+            getLogOutBottomSheet(
+              Get.context!,
+              image: leaving,
+              onTapLogOut: () async {
+                await IsarService().clearLocalData(deleteToken: true);
+                Get.offNamed(Routes.LOGIN);
+              },
+            );
+          },
+        ),
+      ];
+    } else {
+      drawerItems = [
+        DrawerModel(
+          title: "Setting",
+          icon: Icons.settings_rounded,
+          onTap: () {},
+        ),
+        DrawerModel(
+          title: "Support",
+          icon: Icons.headset_mic_rounded,
+          onTap: () {},
+        ),
+        DrawerModel(
+          title: "Log out",
+          icon: Icons.logout_rounded,
+          onTap: () async {
+            getLogOutBottomSheet(
+              Get.context!,
+              image: leaving,
+              onTapLogOut: () async {
+                await IsarService().clearLocalData(deleteToken: true);
+                Get.offNamed(Routes.LOGIN);
+              },
+            );
+          },
+        ),
+      ];
+    }
   }
 }

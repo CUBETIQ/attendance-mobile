@@ -2,6 +2,7 @@
 
 import 'package:attendance_app/feature/auth/activation/activation_binding.dart';
 import 'package:attendance_app/feature/auth/activation/view/index.dart';
+import 'package:attendance_app/feature/auth/change_password/view/index.dart';
 import 'package:attendance_app/feature/auth/login/login_binding.dart';
 import 'package:attendance_app/feature/auth/login/view/index.dart';
 import 'package:attendance_app/feature/home/home/home_binding.dart';
@@ -90,6 +91,10 @@ class AppPages {
     GetPage(
       name: Routes.ADD_STAFF,
       page: () => const AddStaffView(),
+    ),
+    GetPage(
+      name: Routes.CHANGE_PASSWORD,
+      page: () => const ChangePasswordView(),
     ),
   ];
 }

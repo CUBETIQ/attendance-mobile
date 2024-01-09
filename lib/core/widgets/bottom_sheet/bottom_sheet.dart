@@ -310,7 +310,7 @@ void getConfirmBottomSheet(
   );
 }
 
-void getOptionBottomSheet(
+void getEditAndDeleteBottomSheet(
   BuildContext context, {
   bool? isDismissible,
   required String image,
@@ -354,6 +354,78 @@ void getOptionBottomSheet(
               ),
             ),
             SizedBox(height: SizeUtils.scale(40, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.edit_rounded,
+              title: "Edit",
+              onTap: onTapEdit,
+            ),
+            SizedBox(height: SizeUtils.scale(10, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.delete_rounded,
+              title: "Delete",
+              onTap: onTapDelete,
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+void getOptionsBottomSheet(
+  BuildContext context, {
+  bool? isDismissible,
+  required String image,
+  void Function()? onTapChangePassword,
+  void Function()? onTapDelete,
+  void Function()? onTapEdit,
+  String? title,
+  String? description,
+}) {
+  final size = MediaQuery.of(context).size;
+  Get.bottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50 * (size.width / 375.0)),
+        topRight: Radius.circular(50 * (size.width / 375.0)),
+      ),
+    ),
+    isDismissible: isDismissible ?? true,
+    Container(
+      width: size.width,
+      height: SizeUtils.scale(430, size.width),
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          top: SizeUtils.scale(AppSize.paddingTitleSmall, size.width),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: SizeUtils.scale(200, size.width),
+              height: SizeUtils.scale(140, size.width),
+              child: SvgPicture.asset(
+                image,
+              ),
+            ),
+            SizedBox(height: SizeUtils.scale(40, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.key_rounded,
+              title: "Change Password",
+              onTap: onTapChangePassword,
+            ),
+            SizedBox(height: SizeUtils.scale(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.edit_rounded,

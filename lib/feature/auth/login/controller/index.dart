@@ -27,6 +27,7 @@ class LoginController extends GetxController {
   final LocalStorageController localDataService =
       LocalStorageController.getInstance();
   final _debouncer = Debouncer(milliseconds: 500);
+  RxBool showPassword = true.obs;
 
   void login() {
     _debouncer.run(() async {
@@ -122,5 +123,9 @@ class LoginController extends GetxController {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  void onTapShowPassword() {
+    showPassword.value = !showPassword.value;
   }
 }

@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,8 @@ class MyTextFieldForm extends StatelessWidget {
   final bool? isPassword;
   final IconData? prefixIcon;
   final int? maxlines;
+  final bool? haveSuffixIcon;
+  final void Function()? onTapShowPassword;
 
   const MyTextFieldForm({
     super.key,
@@ -40,6 +43,8 @@ class MyTextFieldForm extends StatelessWidget {
     this.isPassword,
     this.prefixIcon,
     this.maxlines,
+    this.onTapShowPassword,
+    this.haveSuffixIcon,
   });
 
   @override
@@ -53,6 +58,7 @@ class MyTextFieldForm extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             hasLabel == false
                 ? const SizedBox.shrink()
@@ -69,8 +75,8 @@ class MyTextFieldForm extends StatelessWidget {
               maxLines: maxlines ?? 1,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: (AppSize.paddingS17) * (size.width / 375.0),
-                  vertical: (AppSize.paddingS7) * (size.width / 375.0),
+                  horizontal: SizeUtils.scale(AppSize.paddingS17, size.width),
+                  vertical: SizeUtils.scale(AppSize.paddingS7, size.width),
                 ),
                 prefixIcon: prefixIcon == null
                     ? null
@@ -78,6 +84,23 @@ class MyTextFieldForm extends StatelessWidget {
                         prefixIcon,
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
+                suffixIcon: haveSuffixIcon == true
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          right: SizeUtils.scale(10, size.width),
+                        ),
+                        child: GestureDetector(
+                          onTap: onTapShowPassword,
+                          child: Icon(
+                            isPassword == false
+                                ? Icons.visibility_off_rounded
+                                : Icons.visibility_rounded,
+                            color: Theme.of(context).colorScheme.onBackground,
+                            size: SizeUtils.scale(20, size.width),
+                          ),
+                        ),
+                      )
+                    : null,
                 hintText: hintText,
                 isDense: true,
                 hintStyle: hintStyle ?? BodyMediumMedium,

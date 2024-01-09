@@ -16,6 +16,7 @@ class Endpoints {
   String get validate_organization => "/auth/organization/";
   String get get_own_profile => "/auth/profile/me";
   String get update_profile => "/auth/profile/update";
+  String get change_password => "/auth/profile/password";
   String get check_in => "/app/attendances/checkin";
   String get check_out => "/app/attendances/checkout";
   String get get_position => "/app/positions/";
@@ -32,4 +33,5 @@ class Endpoints {
   String get leave => "/app/leaves/";
   String get get_dashboard_chart => "/app/attendance-charts";
   String get staff => "/app/staffs/";
+  String get change_staff_password => "/app/staffs/password/";
 }

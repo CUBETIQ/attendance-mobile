@@ -44,7 +44,9 @@ class InfoDetailCard extends StatelessWidget {
           ),
           alignment: Alignment.centerLeft,
           child: MyText(
-            text: value.capitalizeMaybeNull ?? "N/A",
+            text: value != null && value != ""
+                ? value.capitalizeMaybeNull ?? "N/A"
+                : "N/A",
             style: BodyLargeRegular,
           ),
         ),

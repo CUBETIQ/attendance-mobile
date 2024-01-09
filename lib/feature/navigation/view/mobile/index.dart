@@ -21,6 +21,8 @@ class NavigationViewMobile extends StatelessWidget {
       controller: controller.zoomDrawerController,
       menuScreen: SideDrawer(
         imageUrl: controller.user.value.image,
+        drawerItems: controller.drawerItems,
+        user: controller.user.value,
       ),
       mainScreen: const MainScreen(),
       borderRadius: SizeUtils.scale(AppSize.borderRadiusLarge, context.width),

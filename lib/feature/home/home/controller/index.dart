@@ -63,6 +63,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxInt totalStaff = 0.obs;
   Rx<DateTime> selectDate = DateTime.now().obs;
   RxBool haveNoData = false.obs;
+  RxList<String> tabs = <String>[].obs;
 
   @override
   void onInit() {
@@ -129,6 +130,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     if (NavigationController.to.getUserRole.value == Role.staff) {
       tabController = null;
     } else {
+      tabs.value = ["Dashboard", "Attendance"];
       tabController = TabController(length: 2, vsync: this);
       initAdminFunction();
     }

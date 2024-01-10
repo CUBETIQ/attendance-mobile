@@ -5,7 +5,7 @@ import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/staff/staff/service/index.dart';
+import 'package:attendance_app/feature/employee/employee/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:dio/dio.dart';

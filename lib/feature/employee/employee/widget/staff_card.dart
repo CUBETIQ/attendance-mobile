@@ -66,8 +66,7 @@ class StaffCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyText(
-                  text:
-                      "${staff.firstName ?? staff.username ?? "Fullname"} ${staff.lastName ?? ""}",
+                  text: "${staff.firstName} ${staff.lastName}",
                   style: BodyMediumSemi,
                 ),
                 MyText(

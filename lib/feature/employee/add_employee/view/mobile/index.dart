@@ -8,7 +8,7 @@ import 'package:attendance_app/core/widgets/profile_image/profile_image.dart';
 import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/core/widgets/textfield/date_picker_field.dart';
 import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
-import 'package:attendance_app/feature/staff/add_staff/controller/index.dart';
+import 'package:attendance_app/feature/employee/add_employee/controller/index.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';

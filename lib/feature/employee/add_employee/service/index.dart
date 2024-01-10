@@ -1,8 +1,8 @@
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/feature/staff/add_staff/model/create_staff_model.dart';
-import 'package:attendance_app/feature/staff/add_staff/model/update_staff_model.dart';
+import 'package:attendance_app/feature/employee/add_employee/model/create_staff_model.dart';
+import 'package:attendance_app/feature/employee/add_employee/model/update_staff_model.dart';
 import 'package:dio/dio.dart';
 
 class AddStaffService {

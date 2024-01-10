@@ -6,10 +6,10 @@ import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/staff/add_staff/model/create_staff_model.dart';
-import 'package:attendance_app/feature/staff/add_staff/model/update_staff_model.dart';
-import 'package:attendance_app/feature/staff/add_staff/service/index.dart';
-import 'package:attendance_app/feature/staff/staff/controller/index.dart';
+import 'package:attendance_app/feature/employee/add_employee/model/create_staff_model.dart';
+import 'package:attendance_app/feature/employee/add_employee/model/update_staff_model.dart';
+import 'package:attendance_app/feature/employee/add_employee/service/index.dart';
+import 'package:attendance_app/feature/employee/employee/controller/index.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:attendance_app/utils/types_helper/gender.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
@@ -21,7 +21,7 @@ import 'package:get/get.dart';
 import '../../../../utils/types_helper/state.dart';
 
 class AddStaffController extends GetxController {
-  RxString title = "Add Staff".obs;
+  RxString title = "Add Employee".obs;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController firstnameController = TextEditingController();
@@ -127,7 +127,7 @@ class AddStaffController extends GetxController {
       positionList.value = Get.arguments["positions"];
       departmentList.value = Get.arguments["departments"];
       if (appState.value == AppState.Edit) {
-        title.value = "Edit Staff";
+        title.value = "Edit Employee";
         staff.value = Get.arguments["staff"];
         usernameController.text = staff.value.username ?? "";
         firstnameController.text = staff.value.firstName ?? "";
@@ -151,7 +151,7 @@ class AddStaffController extends GetxController {
           );
         }
       } else {
-        title.value = "Add Staff";
+        title.value = "Add Employee";
       }
     }
   }

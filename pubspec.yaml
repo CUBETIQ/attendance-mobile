@@ -39,6 +39,7 @@ dependencies:
   percent_indicator: ^4.2.3
   flex_color_picker: ^3.3.0
   flutter_zoom_drawer: ^3.1.1
+  ntp: ^2.0.0
 
 dev_dependencies:
   flutter_test:

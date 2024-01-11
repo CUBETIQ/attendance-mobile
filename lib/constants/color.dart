@@ -7,6 +7,6 @@ class MyColor {
   static const int warning = 0xFFE0A800;
 
   static const Color pendingColor = Color(0XFFBF9705);
-  static const Color successColor = Colors.green;
-  static const Color errorColor = Colors.red;
+  static const Color successColor = Color(0xFF08B80E);
+  static const Color errorColor = Color(0xFFD72E08);
 }

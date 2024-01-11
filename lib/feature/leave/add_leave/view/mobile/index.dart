@@ -30,6 +30,7 @@ class AddLeaveViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
+        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -123,7 +123,7 @@ class NavigationController extends GetxController {
           onTap: () {},
         ),
         DrawerModel(
-          title: "Staff",
+          title: "Employee",
           icon: Icons.person_rounded,
           onTap: () {
             Get.toNamed(Routes.STAFF);
@@ -132,7 +132,9 @@ class NavigationController extends GetxController {
         DrawerModel(
           title: "Setting",
           icon: Icons.settings_rounded,
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.SETTING);
+          },
         ),
         DrawerModel(
           title: "Support",
@@ -159,7 +161,9 @@ class NavigationController extends GetxController {
         DrawerModel(
           title: "Setting",
           icon: Icons.settings_rounded,
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.SETTING);
+          },
         ),
         DrawerModel(
           title: "Support",

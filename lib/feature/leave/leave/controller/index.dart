@@ -66,7 +66,7 @@ class LeaveController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      if (summarizeLeaves.isNotEmpty) {
+      if (summarizeLeaves.isNotEmpty && totalLeave.value != 0) {
         for (var element in summarizeLeaves) {
           totalPendingLeave.value += element.totalPendingLeave!;
           totalApprovedLeave.value += element.totalApprovedLeave!;

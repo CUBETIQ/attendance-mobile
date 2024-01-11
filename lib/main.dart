@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 // using SizeUits.scaleWidth for make the bigger device and smalller device have same Ui size we need
 
 bool isFirstTime = false;
+bool isDarkMode = false;
 Rx<LocalStorage?>? storageConfig = Rx<LocalStorage?>(null);
 
 Future<void> main() async {
@@ -20,10 +21,6 @@ Future<void> main() async {
   await initDBService();
   await AppPathController.initPath();
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
-  // SystemChrome.setEnabledSystemUIMode(
-  //   SystemUiMode.manual,
-  //   overlays: [SystemUiOverlay.top],
-  // );
   runApp(const MyApp());
   FlutterNativeSplash.remove();
 }

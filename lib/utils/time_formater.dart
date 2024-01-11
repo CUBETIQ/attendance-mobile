@@ -29,6 +29,21 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
+  String formatTimeWithDate(int? dateTime) {
+    if (dateTime == null || dateTime.toString().length < 5) {
+      return "N/A";
+    }
+
+    // Cover milliseconds to DateTime
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(dateTime);
+
+    // Define the desired time format
+    final DateFormat formatter = DateFormat('h:mm a');
+
+    // Format the DateTime
+    return formatter.format(date);
+  }
+
   String formatTimeNoTrailing(DateTime dateTime) {
     // Define the desired time format
     final DateFormat formatter = DateFormat('h:mm a');

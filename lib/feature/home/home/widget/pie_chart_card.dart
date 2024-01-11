@@ -1,6 +1,6 @@
-import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/color.dart';
+import 'package:attendance_app/core/widgets/card/my_card.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/home/widget/attendance_info_widget.dart';
 import 'package:attendance_app/utils/size_util.dart';
@@ -40,32 +40,26 @@ class AttendancePieChartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
+    return MyCard(
       width: cardWidth ?? size.width,
       height: cardHeight ?? SizeUtils.scale(150, size.width),
-      padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scale(AppSize.paddingS1, size.width),
-        vertical: SizeUtils.scale(AppSize.paddingVerticalMedium, size.width),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
-        ),
-        color: Theme.of(context).colorScheme.background,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.15),
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: const Offset(0, 0),
-          ),
-        ],
-      ),
       child: Row(
         children: [
-          SizedBox(
+          Container(
             width: cardWidth ?? SizeUtils.scale(150, size.width),
             height: cardHeight ?? SizeUtils.scale(150, size.width),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Theme.of(context).colorScheme.background,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 3,
+                  blurRadius: 2,
+                  offset: const Offset(0, 0),
+                ),
+              ],
+            ),
             child: PieChart(
               haveNoData == true
                   ? PieChartData(

@@ -19,4 +19,6 @@ abstract class Routes {
   static const STAFF_DETAIL = '/staff_detail';
   static const ADD_STAFF = '/add_staff';
   static const CHANGE_PASSWORD = '/change_password';
+  static const SETTING = '/setting';
+  static const ADMIN_LEAVE_REQUEST = '/admin_leave_request';
 }

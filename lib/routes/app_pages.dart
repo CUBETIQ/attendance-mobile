@@ -5,6 +5,8 @@ import 'package:attendance_app/feature/auth/activation/view/index.dart';
 import 'package:attendance_app/feature/auth/change_password/view/index.dart';
 import 'package:attendance_app/feature/auth/login/login_binding.dart';
 import 'package:attendance_app/feature/auth/login/view/index.dart';
+import 'package:attendance_app/feature/home/admin_leave_request/admin_leave_binding.dart';
+import 'package:attendance_app/feature/home/admin_leave_request/view/index.dart';
 import 'package:attendance_app/feature/home/home/home_binding.dart';
 import 'package:attendance_app/feature/leave/add_leave/view/index.dart';
 import 'package:attendance_app/feature/leave/leave/leave_binding.dart';
@@ -16,12 +18,14 @@ import 'package:attendance_app/feature/onboard/onboard_binding.dart';
 import 'package:attendance_app/feature/onboard/view/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
 import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
+import 'package:attendance_app/feature/setting/setting_binding.dart';
+import 'package:attendance_app/feature/setting/view/index.dart';
 import 'package:attendance_app/feature/splash/splash_binding.dart';
 import 'package:attendance_app/feature/splash/view/index.dart';
-import 'package:attendance_app/feature/staff/add_staff/view/index.dart';
-import 'package:attendance_app/feature/staff/staff/staff_binding.dart';
-import 'package:attendance_app/feature/staff/staff/view/index.dart';
-import 'package:attendance_app/feature/staff/staff_detail/view/index.dart';
+import 'package:attendance_app/feature/employee/add_employee/view/index.dart';
+import 'package:attendance_app/feature/employee/employee/staff_binding.dart';
+import 'package:attendance_app/feature/employee/employee/view/index.dart';
+import 'package:attendance_app/feature/employee/employee_detail/view/index.dart';
 import 'package:attendance_app/feature/task/add_task/view/index.dart';
 import 'package:attendance_app/feature/task/task/task_binding.dart';
 import 'package:get/get.dart';
@@ -95,6 +99,16 @@ class AppPages {
     GetPage(
       name: Routes.CHANGE_PASSWORD,
       page: () => const ChangePasswordView(),
+    ),
+    GetPage(
+      name: Routes.SETTING,
+      page: () => const SettingView(),
+      binding: SettingBinding(),
+    ),
+    GetPage(
+      name: Routes.ADMIN_LEAVE_REQUEST,
+      page: () => const AdminLeaveRequestView(),
+      binding: AdminLeaveRequestBinding(),
     ),
   ];
 }

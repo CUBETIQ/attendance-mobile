@@ -33,16 +33,16 @@ class LinearIndicator extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(80, size.width),
+      height: SizeUtils.scale(85, size.width),
       padding: EdgeInsets.symmetric(
         horizontal: SizeUtils.scale(20, size.width),
         vertical: SizeUtils.scale(10, size.width),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           MyText(text: title ?? "Title", style: BodyMedium),
-          SizedBox(height: SizeUtils.scale(5, size.width)),
           Row(
             children: [
               Expanded(
@@ -72,7 +72,6 @@ class LinearIndicator extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: SizeUtils.scale(5, size.width)),
           Align(
             child: MyText(
               text:

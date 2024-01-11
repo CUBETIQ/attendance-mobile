@@ -5,6 +5,12 @@ class AttendanceChartModel extends BaseModel<AttendanceChartModel> {
   final int? totalAttendance;
   final int? totalLeave;
   final int? totalAbsent;
+  final int? totalCheckinLate;
+  final int? totalCheckinEarly;
+  final int? totalCheckinOnTime;
+  final int? totalCheckoutLate;
+  final int? totalCheckoutEarly;
+  final int? totalCheckoutOnTime;
   final List<dynamic>? users;
 
   AttendanceChartModel({
@@ -12,6 +18,12 @@ class AttendanceChartModel extends BaseModel<AttendanceChartModel> {
     this.totalAttendance,
     this.totalLeave,
     this.totalAbsent,
+    this.totalCheckinLate,
+    this.totalCheckinEarly,
+    this.totalCheckinOnTime,
+    this.totalCheckoutLate,
+    this.totalCheckoutEarly,
+    this.totalCheckoutOnTime,
     this.users,
   });
 
@@ -25,6 +37,12 @@ class AttendanceChartModel extends BaseModel<AttendanceChartModel> {
       totalAttendance: json['totalAttendance'],
       totalLeave: json['totalLeave'],
       totalAbsent: json['totalAbsent'],
+      totalCheckinLate: json['totalCheckinLate'],
+      totalCheckinEarly: json['totalCheckinEarly'],
+      totalCheckinOnTime: json['totalCheckinOnTime'],
+      totalCheckoutLate: json['totalCheckoutLate'],
+      totalCheckoutEarly: json['totalCheckoutEarly'],
+      totalCheckoutOnTime: json['totalCheckoutOnTime'],
       users: json['users'],
     );
   }
@@ -44,6 +62,12 @@ class AttendanceChartModel extends BaseModel<AttendanceChartModel> {
       "totalAttendance": totalAttendance,
       "totalLeave": totalLeave,
       "totalAbsent": totalAbsent,
+      "totalCheckinLate": totalCheckinLate,
+      "totalCheckinEarly": totalCheckinEarly,
+      "totalCheckinOnTime": totalCheckinOnTime,
+      "totalCheckoutLate": totalCheckoutLate,
+      "totalCheckoutEarly": totalCheckoutEarly,
+      "totalCheckoutOnTime": totalCheckoutOnTime,
       "users": users,
     };
   }

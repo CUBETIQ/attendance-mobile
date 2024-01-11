@@ -14,7 +14,6 @@ import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/controller/index.dart';
 import 'package:attendance_app/utils/attendance_status_validator.dart';
 import 'package:attendance_app/utils/types_helper/attendance_method.dart';
-import 'package:attendance_app/utils/types_helper/attendance_status.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:attendance_app/utils/time_formater.dart';
 import 'package:dio/dio.dart';
@@ -39,6 +38,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxList<AttendanceModel> attendanceList = <AttendanceModel>[].obs;
   RxList<AttendanceModel> staffAttendanceList = <AttendanceModel>[].obs;
   var isLoadingList = false.obs;
+  var isLoadingStaffAttendance = false.obs;
   RxString startHour = "8:00".obs;
   RxString endHour = "17:00".obs;
   Rxn<String> totalHour = Rxn<String>(null);
@@ -144,6 +144,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         59,
       ).millisecondsSinceEpoch;
       getDashboardChart();
+      getAllStaffAttendance();
     }
   }
 
@@ -158,7 +159,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> initAdminFunction() async {
-    getDashboardChart();
+    await getDashboardChart();
     await getAllStaffs();
     getAllStaffAttendance();
   }
@@ -288,41 +289,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> getAllStaffAttendance() async {
+    isLoadingStaffAttendance.value = true;
     try {
       staffAttendanceList.value = await HomeService().getAllStaffAttendance(
         startDate: startOfDay.value,
         endDate: endOfDay.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
-      if (staffAttendanceList.isNotEmpty) {
-        totalCheckInEarly.value = staffAttendanceList
-            .where((p0) => p0.checkInStatus == AttendanceStatus.early)
-            .length;
-        totalCheckInOnTime.value = staffAttendanceList
-            .where((p0) => p0.checkInStatus == AttendanceStatus.onTime)
-            .length;
-        totalCheckInLate.value = staffAttendanceList
-            .where((p0) => p0.checkInStatus == AttendanceStatus.late)
-            .length;
-        totalCheckOutEarly.value = staffAttendanceList
-            .where((p0) => p0.checkOutStatus == AttendanceStatus.early)
-            .length;
-        totalCheckOutOnTime.value = staffAttendanceList
-            .where((p0) => p0.checkOutStatus == AttendanceStatus.onTime)
-            .length;
-        totalCheckOutLate.value = staffAttendanceList
-            .where((p0) => p0.checkOutStatus == AttendanceStatus.late)
-            .length;
-        latePercentage.value =
-            ((totalCheckInLate.value / totalStaffs.value) * 100) / 100;
-        onTimePercentage.value =
-            ((totalCheckInOnTime.value / totalStaffs.value) * 100) / 100;
-        earlyPercentage.value =
-            ((totalCheckInEarly.value / totalStaffs.value) * 100) / 100;
-      }
     } on DioException catch (e) {
+      isLoadingStaffAttendance.value = false;
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
+    } finally {
+      isLoadingStaffAttendance.value = false;
     }
   }
 
@@ -341,6 +320,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           totalChartPresent.value += element.totalAttendance ?? 0;
           totalChartAbsent.value += element.totalAbsent ?? 0;
           totalChartLeave.value += element.totalLeave ?? 0;
+          totalCheckInLate.value += element.totalCheckinLate ?? 0;
+          totalCheckInOnTime.value += element.totalCheckinOnTime ?? 0;
+          totalCheckInEarly.value += element.totalCheckinEarly ?? 0;
+          totalCheckOutLate.value += element.totalCheckoutLate ?? 0;
+          totalCheckOutOnTime.value += element.totalCheckoutOnTime ?? 0;
+          totalCheckOutEarly.value += element.totalCheckoutEarly ?? 0;
         }
         presentPercentage.value =
             (totalChartPresent.value / totalStaff.value) * 100;
@@ -348,6 +333,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             (totalChartAbsent.value / totalStaff.value) * 100;
         onLeavePercentage.value =
             (totalChartLeave.value / totalStaff.value) * 100;
+        latePercentage.value =
+            ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
+        onTimePercentage.value =
+            ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
+        earlyPercentage.value =
+            ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
       } else {
         haveNoData.value = true;
       }
@@ -378,6 +369,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void clearChartData() {
+    totalCheckInEarly.value = 0;
+    totalCheckInOnTime.value = 0;
+    totalCheckInLate.value = 0;
+    totalCheckOutEarly.value = 0;
+    totalCheckOutOnTime.value = 0;
+    totalCheckOutLate.value = 0;
+    latePercentage.value = 0;
+    onTimePercentage.value = 0;
+    earlyPercentage.value = 0;
     totalChartPresent.value = 0;
     totalChartAbsent.value = 0;
     totalChartLeave.value = 0;
@@ -466,11 +466,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       isCheckIn.value = !isCheckIn.value;
       if (selectedAttendanceType.value == "Check In") {
         latePercentage.value =
-            ((totalCheckInLate.value / totalStaffs.value) * 100) / 100;
+            ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
         onTimePercentage.value =
-            ((totalCheckInOnTime.value / totalStaffs.value) * 100) / 100;
+            ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
         earlyPercentage.value =
-            ((totalCheckInEarly.value / totalStaffs.value) * 100) / 100;
+            ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
       } else {
         latePercentage.value =
             ((totalCheckOutLate.value / totalStaffs.value) * 100) / 100;

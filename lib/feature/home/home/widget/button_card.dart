@@ -33,9 +33,9 @@ class ButtonCard extends StatelessWidget {
           color: Theme.of(context).colorScheme.background,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.15),
-              spreadRadius: 3,
-              blurRadius: 3,
+              color: Colors.grey.withOpacity(0.18),
+              spreadRadius: 1.7,
+              blurRadius: 1.7,
               offset: const Offset(0, 0),
             ),
           ],

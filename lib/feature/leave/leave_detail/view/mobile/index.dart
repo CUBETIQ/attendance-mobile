@@ -28,6 +28,7 @@ class LeaveDetailViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
+        elevation: 2,
       ),
       body: SizedBox(
         height: size.height,

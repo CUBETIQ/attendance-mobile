@@ -21,6 +21,7 @@ class ChangePasswordViewMobile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        elevation: 2,
         title: const MyAppBarTitle(
           title: "Change Password",
         ),

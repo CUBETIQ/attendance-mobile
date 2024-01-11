@@ -12,8 +12,7 @@ class IsarService extends GetxService {
     final appConfig = await _localStorage.get();
     storageConfig?.value = appConfig;
     isFirstTime = appConfig?.isFirstTime ?? false;
-    // Get.changeTheme(
-    //     appConfig?.darkTheme ?? false ? darkThemeData() : lightThemeData());
+    isDarkMode = appConfig?.darkTheme ?? false;
   }
 
   Future<void> clearDataBase() async {

@@ -23,7 +23,7 @@ class MyCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width ?? size.width,
-      height: height ?? SizeUtils.scale(150, size.width),
+      height: height,
       padding: padding ??
           EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(AppSize.paddingS1, size.width),
@@ -38,8 +38,8 @@ class MyCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.15),
-            spreadRadius: 2,
-            blurRadius: 2,
+            spreadRadius: 1.5,
+            blurRadius: 1.5,
             offset: const Offset(0, 0),
           ),
         ],

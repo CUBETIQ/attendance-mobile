@@ -75,6 +75,7 @@ class MainScreen extends StatelessWidget {
           index: controller.selectedIndex.value,
           children: const <Widget>[
             HomeView(),
+            Center(child: Text('Report')),
             TaskView(),
             LeaveView(),
             ProfileView(),
@@ -82,11 +83,11 @@ class MainScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: Obx(
-        () => controller.selectedIndex.value != 1 &&
-                controller.selectedIndex.value != 2
+        () => controller.selectedIndex.value != 2 &&
+                controller.selectedIndex.value != 3
             ? const SizedBox.shrink()
             : FloatingActionButton(
-                onPressed: controller.selectedIndex.value == 1
+                onPressed: controller.selectedIndex.value == 2
                     ? controller.onTapAddTask
                     : controller.onTapAddLeave,
                 shape: const RoundedRectangleBorder(

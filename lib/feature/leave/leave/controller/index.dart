@@ -2,6 +2,7 @@ import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/leave_model.dart';
 import 'package:attendance_app/core/model/summary_leave_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/leave/leave/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
@@ -78,6 +79,16 @@ class LeaveController extends GetxController {
             (totalPendingLeave.value / totalLeave.value * 100) / 100;
         percentageDeclinedLeave.value =
             (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
+
+        Console.log([
+          totalPendingLeave,
+          totalApprovedLeave,
+          totalDeclinedLeave
+        ], [
+          percentageApprovedLeave.value,
+          percentagePendingLeave.value,
+          percentageDeclinedLeave.value
+        ]);
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

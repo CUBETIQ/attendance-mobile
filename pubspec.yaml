@@ -43,6 +43,7 @@ dependencies:
   flex_color_picker: ^3.3.0
   flutter_zoom_drawer: ^3.1.1
   ntp: ^2.0.0
+  month_picker_dialog: ^2.4.0
 
 dev_dependencies:
   flutter_test:

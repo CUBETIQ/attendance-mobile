@@ -19,7 +19,7 @@ class AttendancePieChartCard extends StatelessWidget {
   final int? totalAbsent;
   final int? totalOnLeave;
   final double? chartRadius;
-  final bool? haveNoData;
+  final bool haveNoData;
 
   const AttendancePieChartCard({
     super.key,
@@ -34,7 +34,7 @@ class AttendancePieChartCard extends StatelessWidget {
     this.totalPresent,
     this.totalAbsent,
     this.totalOnLeave,
-    this.haveNoData,
+    this.haveNoData = true,
   });
 
   @override

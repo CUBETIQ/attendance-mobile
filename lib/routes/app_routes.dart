@@ -21,4 +21,5 @@ abstract class Routes {
   static const CHANGE_PASSWORD = '/change_password';
   static const SETTING = '/setting';
   static const ADMIN_LEAVE_REQUEST = '/admin_leave_request';
+  static const WORKING_HOUR = '/working_hour';
 }

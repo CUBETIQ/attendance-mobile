@@ -13,6 +13,14 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
+  String formatShortDateWithoutDay(DateTime dateTime) {
+    // Define the desired format
+    final DateFormat formatter = DateFormat('MMMM, y');
+
+    // Format the DateTime
+    return formatter.format(dateTime);
+  }
+
   String formatFullDate(DateTime dateTime) {
     // Define the desired format
     final DateFormat formatter = DateFormat('EEEE d MMMM, y');

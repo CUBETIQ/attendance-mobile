@@ -3,7 +3,6 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/async_widget/async_base_widget.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:attendance_app/core/widgets/no_data/no_data.dart';
 import 'package:attendance_app/core/widgets/pull_refresh/refresh_indicator.dart';
@@ -12,7 +11,7 @@ import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/home/controller/index.dart';
 import 'package:attendance_app/feature/home/home/view/mobile/staff_home_view.dart';
 import 'package:attendance_app/feature/home/home/widget/button_card.dart';
-import 'package:attendance_app/feature/home/home/widget/date_dropdown.dart';
+import 'package:attendance_app/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:attendance_app/feature/home/home/widget/linear_indicator.dart';
 import 'package:attendance_app/feature/home/home/widget/pie_chart_card.dart';
 import 'package:attendance_app/feature/home/home/widget/staff_attendance_card.dart';
@@ -98,8 +97,10 @@ class HomeAdminMobileView extends StatelessWidget {
                               child: ButtonCard(
                                 icon: Icons.edit_document,
                                 title: "Leave",
-                                onTap: () =>
-                                    Get.toNamed(Routes.ADMIN_LEAVE_REQUEST),
+                                onTap: () => Get.toNamed(
+                                  Routes.ADMIN_LEAVE_REQUEST,
+                                  arguments: controller.staffs.value,
+                                ),
                               ),
                             ),
                             SizedBox(width: SizeUtils.scale(20, size.width)),
@@ -107,9 +108,14 @@ class HomeAdminMobileView extends StatelessWidget {
                               child: ButtonCard(
                                 icon: Icons.timer_rounded,
                                 title: "Work Hour",
-                                onTap: () {
-                                  Console.log("Task", "Go to admin task page");
-                                },
+                                onTap: () => Get.toNamed(
+                                  Routes.WORKING_HOUR,
+                                  arguments: {
+                                    "staffs": controller.staffs.value,
+                                    "attendances":
+                                        controller.staffAttendanceList.value,
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -219,7 +225,6 @@ class HomeAdminMobileView extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final attendance =
                                     controller.staffAttendanceList.value[index];
-                                Console.log("Staff Attendance", attendance);
                                 final staff = controller.staffs.firstWhere(
                                     (element) =>
                                         element.id == attendance.userId,

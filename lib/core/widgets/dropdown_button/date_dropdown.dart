@@ -11,11 +11,13 @@ class DateDropDown extends StatelessWidget {
     required this.date,
     required this.size,
     this.onTap,
+    this.isShowday = true,
   });
 
   final DateTime date;
   final Size size;
   final void Function()? onTap;
+  final bool isShowday;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,9 @@ class DateDropDown extends StatelessWidget {
         child: Row(
           children: [
             MyText(
-              text: DateFormatter().formatShortDate(date),
+              text: isShowday == true
+                  ? DateFormatter().formatShortDate(date)
+                  : DateFormatter().formatShortDateWithoutDay(date),
               style: BodySmall.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),

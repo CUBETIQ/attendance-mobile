@@ -8,6 +8,8 @@ import 'package:attendance_app/feature/auth/login/view/index.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/admin_leave_binding.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/view/index.dart';
 import 'package:attendance_app/feature/home/home/home_binding.dart';
+import 'package:attendance_app/feature/home/work_hour/view/index.dart';
+import 'package:attendance_app/feature/home/work_hour/work_hour_binding.dart';
 import 'package:attendance_app/feature/leave/add_leave/view/index.dart';
 import 'package:attendance_app/feature/leave/leave/leave_binding.dart';
 import 'package:attendance_app/feature/leave/leave_detail/leave_detail_binding.dart';
@@ -109,6 +111,11 @@ class AppPages {
       name: Routes.ADMIN_LEAVE_REQUEST,
       page: () => const AdminLeaveRequestView(),
       binding: AdminLeaveRequestBinding(),
+    ),
+    GetPage(
+      name: Routes.WORKING_HOUR,
+      page: () => const WorkingHourView(),
+      binding: WorkingHourBinding(),
     ),
   ];
 }

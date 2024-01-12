@@ -32,22 +32,27 @@ class NavigationController extends GetxController {
   List<BottomBarModel> items = [
     BottomBarModel(
       title: 'Home',
-      icon: Icons.home_outlined,
+      icon: Icons.home_rounded,
       selectedIcon: Icons.home_rounded,
     ),
     BottomBarModel(
+      title: 'Report',
+      icon: Icons.bar_chart_outlined,
+      selectedIcon: Icons.bar_chart_rounded,
+    ),
+    BottomBarModel(
       title: 'Task',
-      icon: Icons.task_outlined,
+      icon: Icons.task_rounded,
       selectedIcon: Icons.task_rounded,
     ),
     BottomBarModel(
       title: 'Leave',
-      icon: Icons.work_off_outlined,
+      icon: Icons.work_off_rounded,
       selectedIcon: Icons.work_off_rounded,
     ),
     BottomBarModel(
       title: 'Profile',
-      icon: Icons.person_outline_rounded,
+      icon: Icons.person_rounded,
       selectedIcon: Icons.person_rounded,
     ),
   ];

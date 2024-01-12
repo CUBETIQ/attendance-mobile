@@ -76,7 +76,7 @@ class AddStaffController extends GetxController {
           role: selectedRole.value,
           gender: selectedGender.value,
           status: selectedStatus.value,
-          name: "${firstnameController.text} ${lastnameController.text}",
+          name: null,
           image: image.value,
           departmentId: selectedDepartment.value?.id,
           organizationId: NavigationController.to.organization.value.id,

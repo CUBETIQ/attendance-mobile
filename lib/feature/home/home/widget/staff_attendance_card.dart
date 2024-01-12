@@ -45,22 +45,16 @@ class StaffAttendanceCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    staff.firstName != null && staff.firstName != "" ||
+                  MyText(
+                    text: staff.firstName != null && staff.firstName != "" ||
                             staff.lastName != null && staff.lastName != ""
                         ? "${staff.firstName} ${staff.lastName}"
                         : staff.username ?? "N/A",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: BodyLargeSemi,
                   ),
-                  Text(
-                    staff.gender ?? "Other",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  MyText(
+                    text: staff.gender ?? "Other",
+                    style: BodyMediumRegular,
                   ),
                 ],
               ),
@@ -76,10 +70,31 @@ class StaffAttendanceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyText(
+                    text: "Attendance",
+                    style: BodyMediumSemi,
+                  ),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
+                  MyText(
                     text: "Check In",
-                    style: BodyMediumSemi.copyWith(
+                    style: BodySmallMedium.copyWith(
                       color: MyColor.successColor,
                     ),
+                  ),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
+                  MyText(
+                    text: "Check Out",
+                    style: BodySmallMedium.copyWith(
+                      color: MyColor.errorColor,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText(
+                    text: "Time",
+                    style: BodyMediumSemi,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
@@ -87,6 +102,24 @@ class StaffAttendanceCard extends StatelessWidget {
                       attendance.checkInDateTime,
                     ),
                     style: BodySmallRegular,
+                  ),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
+                  MyText(
+                    text: DateFormatter().formatTimeWithDate(
+                      attendance.checkOutDateTime,
+                    ),
+                    style: BodySmallRegular,
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText(
+                    text: "Status",
+                    style: BodyMediumSemi.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
@@ -101,24 +134,6 @@ class StaffAttendanceCard extends StatelessWidget {
                                   : Colors.orange
                           : Theme.of(context).colorScheme.onBackground,
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(
-                    text: "Check Out",
-                    style: BodyMediumSemi.copyWith(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
-                  SizedBox(height: SizeUtils.scale(2, size.width)),
-                  MyText(
-                    text: DateFormatter().formatTimeWithDate(
-                      attendance.checkOutDateTime,
-                    ),
-                    style: BodySmallRegular,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
@@ -135,27 +150,6 @@ class StaffAttendanceCard extends StatelessWidget {
                           : Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(
-                    text: "Total Hours",
-                    style: BodyMediumSemi.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  SizedBox(height: SizeUtils.scale(2, size.width)),
-                  MyText(
-                    text: attendance.duration != null
-                        ? DateFormatter().formatMinutes(
-                            attendance.duration!,
-                          )
-                        : "N/A",
-                    style: BodySmallRegular,
-                  ),
-                  const MyText(text: ""),
                 ],
               ),
             ],

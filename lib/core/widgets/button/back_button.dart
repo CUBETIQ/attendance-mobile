@@ -8,7 +8,7 @@ class MyBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: Get.back,
+      onTap: () => Get.back(closeOverlays: true),
       child: Icon(
         Icons.arrow_back_ios_rounded,
         color: Theme.of(context).colorScheme.onBackground,

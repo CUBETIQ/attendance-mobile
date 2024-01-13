@@ -1,6 +1,7 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/color.dart';
+import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/async_widget/async_base_widget.dart';
 import 'package:attendance_app/core/widgets/dropdown_button/dropdown_button.dart';
@@ -114,6 +115,7 @@ class HomeAdminMobileView extends StatelessWidget {
                                     "staffs": controller.staffs.value,
                                     "attendances":
                                         controller.staffAttendanceList.value,
+                                    "positions": controller.positionList.value,
                                   },
                                 ),
                               ),
@@ -229,9 +231,15 @@ class HomeAdminMobileView extends StatelessWidget {
                                     (element) =>
                                         element.id == attendance.userId,
                                     orElse: () => UserModel());
+                                final position = controller.positionList
+                                    .firstWhere(
+                                        (element) =>
+                                            element.id == staff.positionId,
+                                        orElse: () => PositionModel());
                                 return StaffAttendanceCard(
                                   staff: staff,
                                   attendance: attendance,
+                                  position: position,
                                 );
                               },
                             ),

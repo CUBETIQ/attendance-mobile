@@ -10,6 +10,7 @@ class MyCard extends StatelessWidget {
     this.child,
     this.backgroundColor,
     this.padding,
+    this.margin,
   });
 
   final double? width;
@@ -17,11 +18,13 @@ class MyCard extends StatelessWidget {
   final Widget? child;
   final Color? backgroundColor;
   final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
+      margin: margin,
       width: width ?? size.width,
       height: height,
       padding: padding ??

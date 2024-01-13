@@ -74,9 +74,14 @@ class HomeStaffMobileView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Obx(
-                          () => MyText(
-                            text: controller.name.value ?? "-----",
-                            style: BodyXlargeMedium,
+                          () => Container(
+                            constraints: BoxConstraints(
+                              maxWidth: SizeUtils.scale(240, size.width),
+                            ),
+                            child: MyText(
+                              text: controller.name.value ?? "-----",
+                              style: BodyXlargeMedium,
+                            ),
                           ),
                         ),
                         Obx(

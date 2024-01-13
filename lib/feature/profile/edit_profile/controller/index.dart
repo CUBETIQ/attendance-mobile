@@ -6,7 +6,7 @@ import 'package:attendance_app/feature/home/home/controller/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/model/update_profile_model.dart';
 import 'package:attendance_app/feature/profile/edit_profile/service/index.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/gender.dart';
 import 'package:attendance_app/utils/types_helper/user_status.dart';
 import 'package:dio/dio.dart';

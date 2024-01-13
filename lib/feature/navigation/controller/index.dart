@@ -12,6 +12,7 @@ import 'package:attendance_app/feature/navigation/model/drawer_model.dart';
 import 'package:attendance_app/feature/navigation/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/location_util.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
 import 'package:dio/dio.dart';
@@ -60,11 +61,12 @@ class NavigationController extends GetxController {
       Rxn<OranizationLocationModel>(null);
   Rxn<Position> userLocation = Rxn<Position>(null);
   RxBool isInRange = false.obs;
-  Rxn<String> startBreakTime = Rxn<String>(null);
-  Rxn<String> endBreakTime = Rxn<String>(null);
+  RxString startBreakTime = "".obs;
+  RxString endBreakTime = "".obs;
   Rx<OrganizationModel> organization = OrganizationModel().obs;
   Rxn<String> fullname = Rxn<String>(null);
   final zoomDrawerController = ZoomDrawerController();
+  RxInt totalWorkMinutes = 0.obs;
 
   void toggleDrawer() {
     zoomDrawerController.toggle?.call();
@@ -80,6 +82,7 @@ class NavigationController extends GetxController {
     getUserRole.value = user.value.role ?? Role.staff;
     fullname.value =
         "${user.value.firstName ?? user.value.username!} ${user.value.lastName ?? ""}";
+    getOrganizationTotalWorkHour();
     initSideBarMenu();
     getUserLocation();
   }
@@ -88,10 +91,25 @@ class NavigationController extends GetxController {
     selectedIndex.value = index;
   }
 
+  void getOrganizationTotalWorkHour() {
+    String startHour = organization.value.configs?.startHour ?? "08:00";
+    String endHour = organization.value.configs?.endHour ?? "17:00";
+
+    startBreakTime.value =
+        organization.value.configs?.breakTime?.split("-")[0] ?? "12:00";
+    endBreakTime.value =
+        organization.value.configs?.breakTime?.split("-")[1] ?? "13:00";
+
+    int totalMinuteBreakTime = DateTimeUtil()
+        .calculateTotalMinutes(startBreakTime.value, endBreakTime.value);
+
+    totalWorkMinutes.value =
+        DateTimeUtil().calculateTotalMinutes(startHour, endHour) -
+            totalMinuteBreakTime;
+  }
+
   Future<void> getUserLocation() async {
     organizationLocation.value = organization.value.location;
-    startBreakTime.value = organization.value.configs?.breakTime?.split("-")[0];
-    endBreakTime.value = organization.value.configs?.breakTime?.split("-")[1];
     try {
       userLocation.value = await NavigationService().getCurrentLocation();
       isInRange.value = isWithinRadius(userLocation.value!,

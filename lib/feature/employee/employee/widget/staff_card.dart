@@ -65,15 +65,20 @@ class StaffCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MyText(
-                  text: staff.firstName != null && staff.firstName != "" ||
-                          staff.lastName != null && staff.lastName != ""
-                      ? "${staff.firstName} ${staff.lastName}"
-                      : staff.username ?? "N/A",
-                  style: BodyMediumSemi,
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: SizeUtils.scale(140, size.width),
+                  ),
+                  child: MyText(
+                    text: staff.firstName != null && staff.firstName != "" ||
+                            staff.lastName != null && staff.lastName != ""
+                        ? "${staff.firstName} ${staff.lastName}"
+                        : staff.username ?? "N/A",
+                    style: BodyMediumSemi,
+                  ),
                 ),
                 MyText(
-                  text: position ?? "Position",
+                  text: position ?? "N/A",
                   style: BodyMediumRegular,
                 ),
               ],

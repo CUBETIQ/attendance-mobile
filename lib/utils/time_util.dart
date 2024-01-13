@@ -91,4 +91,66 @@ class DateFormatter {
     // Format the result as a string
     return DateFormat('dd/MM/yyyy').format(dateTime);
   }
+
+  int calculateDurationInMinutes(
+      int startDateMilliseconds, int? endDateMilliseconds) {
+    // Convert start date from milliseconds to DateTime
+    DateTime startDate =
+        DateTime.fromMillisecondsSinceEpoch(startDateMilliseconds);
+
+    // Convert end date from milliseconds to DateTime, or use DateTime.now() if end date is null
+    DateTime endDate = endDateMilliseconds != null
+        ? DateTime.fromMillisecondsSinceEpoch(endDateMilliseconds)
+        : DateTime.now();
+
+    // Calculate the duration in minutes
+    Duration duration = endDate.difference(startDate);
+    return duration.inMinutes;
+  }
+}
+
+/////////////////////////////////
+
+class DateTimeUtil {
+  int? getStartOfDayInMilisecond(DateTime? picked) {
+    if (picked != null) {
+      DateTime startOfDayDateTime = DateTime(
+        picked.year,
+        picked.month,
+        picked.day,
+        0,
+        0,
+        0,
+      );
+      return startOfDayDateTime.millisecondsSinceEpoch;
+    }
+
+    return null;
+  }
+
+  int? getEndOfDayInMilisecond(DateTime? picked) {
+    if (picked != null) {
+      DateTime endOfDayDateTime = DateTime(
+        picked.year,
+        picked.month,
+        picked.day,
+        23,
+        59,
+        59,
+      );
+      return endOfDayDateTime.millisecondsSinceEpoch;
+    }
+
+    return null;
+  }
+
+  int calculateTotalMinutes(String startHour, String endHour) {
+    DateTime startTime = DateTime(2022, 1, 1,
+        int.parse(startHour.split(":")[0]), int.parse(startHour.split(":")[1]));
+    DateTime endTime = DateTime(2022, 1, 1, int.parse(endHour.split(":")[0]),
+        int.parse(endHour.split(":")[1]));
+
+    Duration difference = endTime.difference(startTime);
+    return difference.inMinutes;
+  }
 }

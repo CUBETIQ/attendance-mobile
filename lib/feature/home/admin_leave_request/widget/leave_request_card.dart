@@ -6,7 +6,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/widget/small_button.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/widget/small_outline_button.dart';
 import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/leave_duration_type.dart';
 import 'package:attendance_app/utils/types_helper/leave_status.dart';
 import 'package:attendance_app/utils/types_helper/leave_type.dart';
@@ -36,7 +36,6 @@ class LeaveRequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: height ?? SizeUtils.scale(180, size.width),
       margin: EdgeInsets.only(bottom: AppSize.paddingS4 * (size.width / 375.0)),
       padding: EdgeInsets.symmetric(
         horizontal: SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
@@ -44,7 +43,7 @@ class LeaveRequestCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusMedium * (size.width / 375.0),
+          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
         ),
         color: Theme.of(context).colorScheme.background,
         boxShadow: [
@@ -64,11 +63,19 @@ class LeaveRequestCard extends StatelessWidget {
               Row(
                 children: [
                   MyCacheImage(imageUrl: staff.image),
-                  SizedBox(
-                    width: 10 * (size.width / 375.0),
+                  SizedBox(width: SizeUtils.scale(10, size.width)),
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: SizeUtils.scale(130, size.width),
+                    ),
+                    child: MyText(
+                      text: staff.firstName != null && staff.firstName != "" ||
+                              staff.lastName != null && staff.lastName != ""
+                          ? "${staff.firstName} ${staff.lastName}"
+                          : staff.username ?? "N/A",
+                      style: BodyMediumRegular,
+                    ),
                   ),
-                  MyText(
-                      text: staff.name ?? "Username", style: BodyMediumRegular),
                 ],
               ),
               Container(
@@ -155,15 +162,14 @@ class LeaveRequestCard extends StatelessWidget {
                       color: Theme.of(context).colorScheme.outline,
                     ),
                   ),
-                  SizedBox(
-                    height: 5 * (size.width / 375.0),
-                  ),
+                  SizedBox(height: SizeUtils.scale(5, size.width)),
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scale(160, size.width),
+                      maxWidth: SizeUtils.scale(90, size.width),
                     ),
                     child: MyText(
                       text: leave.updateBy?["name"] ?? "-----",
+                      maxLines: 2,
                       style: BodyMediumRegular.copyWith(
                         color: Theme.of(context).colorScheme.primary,
                       ),
@@ -173,9 +179,7 @@ class LeaveRequestCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 10 * (size.width / 375.0),
-          ),
+          SizedBox(height: SizeUtils.scale(10, size.width)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

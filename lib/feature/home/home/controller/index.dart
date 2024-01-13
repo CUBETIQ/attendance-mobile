@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/model/attendance_chart_model.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
+import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
@@ -15,7 +16,7 @@ import 'package:attendance_app/feature/profile/profile/controller/index.dart';
 import 'package:attendance_app/utils/attendance_status_validator.dart';
 import 'package:attendance_app/utils/types_helper/attendance_method.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +38,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Rx<int> endOfMonth = 0.obs;
   RxList<AttendanceModel> attendanceList = <AttendanceModel>[].obs;
   RxList<AttendanceModel> staffAttendanceList = <AttendanceModel>[].obs;
+  RxList<PositionModel> positionList = <PositionModel>[].obs;
   var isLoadingList = false.obs;
   var isLoadingStaffAttendance = false.obs;
   RxString startHour = "8:00".obs;
@@ -127,22 +129,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
     if (picked != null) {
       selectDate.value = picked;
-      startOfDay.value = DateTime(
-        picked.year,
-        picked.month,
-        picked.day,
-        0,
-        0,
-        0,
-      ).millisecondsSinceEpoch;
-      endOfDay.value = DateTime(
-        picked.year,
-        picked.month,
-        picked.day,
-        23,
-        59,
-        59,
-      ).millisecondsSinceEpoch;
+      startOfDay.value = DateTimeUtil().getStartOfDayInMilisecond(picked);
+      endOfDay.value = DateTimeUtil().getEndOfDayInMilisecond(picked);
       getDashboardChart();
       getAllStaffAttendance();
     }
@@ -159,9 +147,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> initAdminFunction() async {
+    getAllPositions();
     await getDashboardChart();
     await getAllStaffs();
     getAllStaffAttendance();
+  }
+
+  Future<void> getAllPositions() async {
+    try {
+      positionList.value = await HomeService().getAllPosition(
+          organizationId: NavigationController.to.organization.value.id ?? "");
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> getAllStaffs() async {

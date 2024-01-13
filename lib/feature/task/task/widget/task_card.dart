@@ -4,7 +4,7 @@ import 'package:attendance_app/core/model/task_model.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/task_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';

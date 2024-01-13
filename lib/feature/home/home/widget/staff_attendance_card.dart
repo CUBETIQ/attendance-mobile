@@ -1,12 +1,13 @@
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
+import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/card/my_card.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,12 @@ class StaffAttendanceCard extends StatelessWidget {
     super.key,
     required this.staff,
     required this.attendance,
+    required this.position,
   });
 
   final UserModel staff;
   final AttendanceModel attendance;
+  final PositionModel position;
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +48,20 @@ class StaffAttendanceCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyText(
-                    text: staff.firstName != null && staff.firstName != "" ||
-                            staff.lastName != null && staff.lastName != ""
-                        ? "${staff.firstName} ${staff.lastName}"
-                        : staff.username ?? "N/A",
-                    style: BodyLargeSemi,
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: SizeUtils.scale(200, size.width),
+                    ),
+                    child: MyText(
+                      text: staff.firstName != null && staff.firstName != "" ||
+                              staff.lastName != null && staff.lastName != ""
+                          ? "${staff.firstName} ${staff.lastName}"
+                          : staff.username ?? "N/A",
+                      style: BodyLargeSemi,
+                    ),
                   ),
                   MyText(
-                    text: staff.gender ?? "Other",
+                    text: position.name ?? "N/A",
                     style: BodyMediumRegular,
                   ),
                 ],

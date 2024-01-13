@@ -10,7 +10,7 @@ import 'package:attendance_app/feature/employee/add_employee/model/create_staff_
 import 'package:attendance_app/feature/employee/add_employee/model/update_staff_model.dart';
 import 'package:attendance_app/feature/employee/add_employee/service/index.dart';
 import 'package:attendance_app/feature/employee/employee/controller/index.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/gender.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:attendance_app/utils/types_helper/user_status.dart';

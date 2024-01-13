@@ -5,7 +5,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/leave/leave_detail/controller/index.dart';
 import 'package:attendance_app/feature/leave/leave_detail/widget/leave_detail_card.dart';
 import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/leave_duration_type.dart';
 import 'package:attendance_app/utils/types_helper/leave_status.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +115,7 @@ class LeaveDetailViewMobile extends StatelessWidget {
                     title: controller.leave.value.status == LeaveStatus.approved
                         ? "Approved By: "
                         : controller.leave.value.status == LeaveStatus.rejected
-                            ? "Declined By: "
+                            ? "Rejected By: "
                             : "Pending Approval: ",
                     child: Row(
                       children: [

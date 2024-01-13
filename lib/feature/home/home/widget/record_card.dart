@@ -6,7 +6,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/home/widget/record_data_card.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:flutter/material.dart';
 
 class RecordCard extends StatelessWidget {

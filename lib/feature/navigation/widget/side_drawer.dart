@@ -33,7 +33,7 @@ class SideDrawer extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Padding(
           padding: EdgeInsets.only(
-            left: SizeUtils.scale(28, size.width),
+            left: SizeUtils.scale(20, size.width),
             top: SizeUtils.scale(40, size.height),
           ),
           child: Column(

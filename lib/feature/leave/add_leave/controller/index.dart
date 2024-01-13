@@ -3,7 +3,7 @@ import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/leave/add_leave/model/create_leave_model.dart';
 import 'package:attendance_app/feature/leave/add_leave/service/index.dart';
 import 'package:attendance_app/feature/leave/leave/controller/index.dart';
-import 'package:attendance_app/utils/time_formater.dart';
+import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/leave_duration_type.dart';
 import 'package:attendance_app/utils/types_helper/leave_type.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';

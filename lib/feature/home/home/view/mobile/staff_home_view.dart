@@ -33,11 +33,11 @@ class HomeStaffMobileView extends StatelessWidget {
           padding: EdgeInsets.only(
             left: SizeUtils.scale(
               AppSize.paddingHorizontalLarge,
-              MediaQuery.of(context).size.width,
+              size.width,
             ),
             right: SizeUtils.scale(
               AppSize.paddingHorizontalLarge,
-              MediaQuery.of(context).size.width,
+              size.width,
             ),
             top: AppSize.paddingTitleSmall,
           ),

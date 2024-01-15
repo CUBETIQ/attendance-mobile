@@ -5,6 +5,7 @@ import 'package:attendance_app/feature/leave/leave/view/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/navigation/widget/side_drawer.dart';
 import 'package:attendance_app/feature/profile/profile/view/index.dart';
+import 'package:attendance_app/feature/report/view/index.dart';
 import 'package:attendance_app/feature/task/task/view/index.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,7 @@ class MainScreen extends StatelessWidget {
           index: controller.selectedIndex.value,
           children: const <Widget>[
             HomeView(),
-            Center(child: Text('Report')),
+            ReportView(),
             TaskView(),
             LeaveView(),
             ProfileView(),

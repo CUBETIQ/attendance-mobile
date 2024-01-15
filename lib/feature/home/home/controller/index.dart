@@ -432,13 +432,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void checkBreakTime() {
     final time = DateTime.now().hour;
     final startBreakHour =
-        NavigationController.to.startBreakTime.split(":")?.first;
-    final endBreakHour = NavigationController.to.endBreakTime.split(":")?.first;
-    if (time >= int.parse(startBreakHour ?? "0") &&
-        time < int.parse(endBreakHour ?? "0")) {
+        NavigationController.to.startBreakTime.split(":").first;
+    final endBreakHour = NavigationController.to.endBreakTime.split(":").first;
+    if (time >= int.parse(startBreakHour) && time < int.parse(endBreakHour)) {
       isBreakTime.value = true;
       breakTimeTitle.value = "Ongoing";
-    } else if (time >= int.parse(endBreakHour ?? "0")) {
+    } else if (time >= int.parse(endBreakHour)) {
       isBreakTime.value = true;
       breakTimeTitle.value = "Finished";
     } else {

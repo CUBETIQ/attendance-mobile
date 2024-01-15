@@ -20,6 +20,7 @@ import 'package:attendance_app/feature/onboard/onboard_binding.dart';
 import 'package:attendance_app/feature/onboard/view/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
 import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
+import 'package:attendance_app/feature/report/report_binding.dart';
 import 'package:attendance_app/feature/setting/setting_binding.dart';
 import 'package:attendance_app/feature/setting/view/index.dart';
 import 'package:attendance_app/feature/splash/splash_binding.dart';
@@ -66,6 +67,7 @@ class AppPages {
         ProfileBinding(),
         TaskBinding(),
         LeaveBinding(),
+        ReportBinding(),
       ],
     ),
     GetPage(

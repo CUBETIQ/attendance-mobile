@@ -62,7 +62,7 @@ class HomeAdminMobileView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MyText(
-                              text: 'Overall Attendance'.trString,
+                              text: 'Overall Attendance',
                               style: BodyLargeMedium.copyWith(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -116,6 +116,7 @@ class HomeAdminMobileView extends StatelessWidget {
                                     "attendances":
                                         controller.staffAttendanceList.value,
                                     "positions": controller.positionList.value,
+                                    "date": controller.selectDate.value,
                                   },
                                 ),
                               ),
@@ -244,7 +245,7 @@ class HomeAdminMobileView extends StatelessWidget {
                               },
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

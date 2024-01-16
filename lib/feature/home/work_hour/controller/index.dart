@@ -9,8 +9,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/widgets/console/console.dart';
-
 class WorkHourController extends GetxController {
   static WorkHourController get to => Get.find();
   RxList<UserModel> staffs = <UserModel>[].obs;
@@ -87,6 +85,5 @@ class WorkHourController extends GetxController {
     startOfDay.value =
         DateTimeUtil().getStartOfDayInMilisecond(selectDate.value);
     endOfDay.value = DateTimeUtil().getEndOfDayInMilisecond(selectDate.value);
-    Console.log("Data", [startOfDay.value, endOfDay.value]);
   }
 }

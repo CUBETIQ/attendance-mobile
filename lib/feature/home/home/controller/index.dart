@@ -6,6 +6,7 @@ import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
@@ -13,7 +14,7 @@ import 'package:attendance_app/feature/home/home/model/check_out_model.dart';
 import 'package:attendance_app/feature/home/home/service/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/controller/index.dart';
-import 'package:attendance_app/utils/attendance_status_validator.dart';
+import 'package:attendance_app/utils/attendance_util.dart';
 import 'package:attendance_app/utils/types_helper/attendance_method.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:attendance_app/utils/time_util.dart';
@@ -189,25 +190,26 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           lng: NavigationController.to.userLocation.value?.longitude,
           inOffice: NavigationController.to.isInRange.value,
         );
-
         CheckInModel input = CheckInModel(
           checkInDateTime: now.millisecondsSinceEpoch,
           checkInType: AttendanceMethod.manual,
           checkInStatus:
               CheckInStatusValidator().getStatus(startHour.value, now),
+          checkInEarly: GetMinute().checkEarlyMinute(startHour.value, now),
+          checkInLate: GetMinute().checkLateMinute(startHour.value, now),
           checkInLocation: location,
         );
-
+        Console.log("test", input);
         AttendanceModel checkIn = await HomeService().checkIn(input);
         checkInTime.value = DateFormatter().formatTime(
           DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
         );
         getAttendance();
+        isCheckedIn.value = true;
         await getSummarizeAttendance();
         if (Get.isRegistered<ProfileController>()) {
           ProfileController.to.getSummarizeAttendance();
         }
-        isCheckedIn.value = true;
         getCheckInBottomSheet(Get.context!, image: working);
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
@@ -230,14 +232,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         checkOutDateTime: now.millisecondsSinceEpoch,
         checkOutType: AttendanceMethod.manual,
         checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
+        checkOutEarly: GetMinute().checkEarlyMinute(endHour.value, now),
+        checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
         checkOutLocation: location,
       );
       AttendanceModel checkOut = await HomeService().checkOut(input);
       checkOutTime.value = DateFormatter().formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
       );
-      getAttendance();
       isCheckedIn.value = false;
+      getAttendance();
       getCheckOutBottomSheet(Get.context!, image: leaving);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

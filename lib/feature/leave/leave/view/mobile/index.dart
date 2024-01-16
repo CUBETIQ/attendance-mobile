@@ -76,7 +76,7 @@ class LeaveViewMobile extends StatelessWidget {
                     Expanded(
                       child: Obx(
                         () => LeaveChart(
-                          title: "Declined",
+                          title: "Rejected",
                           radius: 38,
                           centerText:
                               "${(controller.percentageDeclinedLeave.value * 100).toStringAsFixed(2)} %",

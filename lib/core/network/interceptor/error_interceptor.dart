@@ -2,16 +2,19 @@ import 'package:attendance_app/core/database/isar/controller/local_storage_contr
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:dio/dio.dart';
+import 'package:attendance_app/routes/app_pages.dart';
+import 'package:dio/dio.dart' as Dio;
+import 'package:get/get.dart';
 
-class ErrorInterceptor extends Interceptor {
-  final Dio _dio;
+class ErrorInterceptor extends Dio.Interceptor {
+  final Dio.Dio _dio;
   final LocalStorageController localDataService =
       LocalStorageController.getInstance();
   ErrorInterceptor(this._dio);
 
   @override
-  Future onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future onError(
+      Dio.DioException err, Dio.ErrorInterceptorHandler handler) async {
     if (err.response != null &&
         err.response!.statusCode == 401 &&
         err.response?.data["message"] == "Token expired") {
@@ -40,7 +43,7 @@ class ErrorInterceptor extends Interceptor {
     final String accessToken;
     final String refreshToken;
 
-    Response response = await dioInstance.dio.post(
+    Dio.Response response = await dioInstance.dio.post(
       Endpoints.instance.refreshToken,
       data: {
         "refreshToken": token,
@@ -53,6 +56,8 @@ class ErrorInterceptor extends Interceptor {
       await IsarService()
           .saveLocalData(accessToken: accessToken, refreshToken: refreshToken);
     } else {
+      await IsarService().clearLocalData(deleteToken: true);
+      Get.offNamed(Routes.LOGIN);
       throw Exception(response.data["message"]);
     }
     return {accessToken, refreshToken};

@@ -171,7 +171,7 @@ class HomeStaffMobileView extends StatelessWidget {
                     child: Obx(
                       () => OverviewCard(
                         image: present,
-                        title: "Attendance",
+                        title: "Present",
                         number: controller.totalAttendance.value.toString(),
                       ),
                     ),

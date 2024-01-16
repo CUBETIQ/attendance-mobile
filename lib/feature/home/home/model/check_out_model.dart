@@ -4,12 +4,16 @@ class CheckOutModel {
   final int? checkOutDateTime;
   final String? checkOutStatus;
   final String? checkOutType;
+  final int? checkOutEarly;
+  final int? checkOutLate;
   final LocationModel? checkOutLocation;
 
   CheckOutModel({
     this.checkOutDateTime,
     this.checkOutStatus,
     this.checkOutType,
+    this.checkOutEarly,
+    this.checkOutLate,
     this.checkOutLocation,
   });
 }

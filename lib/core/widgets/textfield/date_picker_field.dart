@@ -32,7 +32,7 @@ class MyDatePickerField extends StatelessWidget {
     super.key,
     required this.label,
     required this.textController,
-    this.filled,
+    this.filled = true,
     this.borderRadius,
     this.style,
     this.errorStyle,
@@ -101,39 +101,66 @@ class MyDatePickerField extends StatelessWidget {
                 hintText: hintText,
                 hintStyle: hintStyle ?? BodyMediumMedium,
                 filled: filled ?? false,
+                fillColor: filled == true
+                    ? Theme.of(context).colorScheme.secondaryContainer
+                    : null,
                 isDense: true,
                 errorMaxLines: 2,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    (borderRadius ?? AppSize.borderRadiusLarge) *
-                        (size.width / 375.0),
+                focusedBorder: UnderlineInputBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
+                    topRight: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
                   ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.outlineVariant,
                   ),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    (borderRadius ?? AppSize.borderRadiusLarge) *
-                        (size.width / 375.0),
+                enabledBorder: UnderlineInputBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
+                    topRight: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
                   ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.outlineVariant,
                   ),
                 ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    (borderRadius ?? AppSize.borderRadiusLarge) *
-                        (size.width / 375.0),
+                errorBorder: UnderlineInputBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
+                    topRight: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
                   ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    (borderRadius ?? AppSize.borderRadiusLarge) *
-                        (size.width / 375.0),
+                focusedErrorBorder: UnderlineInputBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
+                    topRight: Radius.circular(
+                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                          (size.width / 375.0),
+                    ),
                   ),
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.error,

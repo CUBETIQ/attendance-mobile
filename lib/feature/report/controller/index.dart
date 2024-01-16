@@ -3,6 +3,7 @@ import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/report/service/index.dart';
 import 'package:attendance_app/utils/time_util.dart';
+import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,11 +19,17 @@ class ReportController extends GetxController {
   void onInit() {
     super.onInit();
     initDate();
-    getStaffReport();
+    initAdminFunction();
   }
 
   Future<void> onRefresh() async {
-    await getStaffReport();
+    initAdminFunction();
+  }
+
+  Future<void> initAdminFunction() async {
+    if (NavigationController.to.getUserRole.value == Role.admin) {
+      await getStaffReport();
+    }
   }
 
   Future<void> getStaffReport() async {
@@ -54,6 +61,7 @@ class ReportController extends GetxController {
       selectedDate.value = picked;
       startDate.value = DateTimeUtil().getStartOfDayInMilisecond(picked);
       endDate.value = DateTimeUtil().getEndOfDayInMilisecond(picked);
+      await getStaffReport();
     }
   }
 

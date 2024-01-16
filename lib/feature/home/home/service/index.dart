@@ -18,9 +18,10 @@ class HomeService {
       "checkInDateTime": input.checkInDateTime,
       "checkInStatus": input.checkInStatus,
       "checkInType": input.checkInType,
+      "checkInEarly": input.checkInEarly,
+      "checkInLate": input.checkInLate,
       "checkInLocation": input.checkInLocation?.toJson(),
     };
-
     Response response =
         await dioInstance.dio.post(Endpoints.instance.check_in, data: data);
     if (response.statusCode == 200) {
@@ -73,6 +74,8 @@ class HomeService {
       "checkOutDateTime": input.checkOutDateTime,
       "checkOutType": input.checkOutType,
       "checkOutStatus": input.checkOutStatus,
+      "checkOutEarly": input.checkOutEarly,
+      "checkOutLate": input.checkOutLate,
       "checkOutLocation": input.checkOutLocation?.toJson(),
     };
 

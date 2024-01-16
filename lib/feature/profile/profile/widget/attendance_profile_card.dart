@@ -37,7 +37,7 @@ class AttendanceProfileCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   MyText(
-                    text: "Attendance",
+                    text: "Present",
                     style: BodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),

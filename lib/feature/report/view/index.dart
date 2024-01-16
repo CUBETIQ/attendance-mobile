@@ -1,5 +1,5 @@
 import 'package:attendance_app/core/widgets/layout_builder/responsive_layout.dart';
-import 'package:attendance_app/feature/report/view/mobile/index.dart';
+import 'package:attendance_app/feature/report/view/mobile/report_view.dart';
 import 'package:attendance_app/feature/report/view/tablet/index.dart';
 import 'package:flutter/material.dart';
 

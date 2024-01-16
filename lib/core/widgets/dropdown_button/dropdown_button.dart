@@ -101,9 +101,10 @@ class MyDropDownButton<T> extends StatelessWidget {
               hint: Container(
                 alignment: hintAlignment,
                 child: MyText(
-                    text: hint ?? "",
-                    overflow: TextOverflow.ellipsis,
-                    style: BodyMediumMedium),
+                  text: hint ?? "",
+                  overflow: TextOverflow.ellipsis,
+                  style: BodyMediumMedium,
+                ),
               ),
               value: value,
               items: dropdownItems,
@@ -118,12 +119,22 @@ class MyDropDownButton<T> extends StatelessWidget {
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        (borderRadius ?? AppSize.borderRadiusLarge) *
-                            (size.width / 375.0),
+                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                          (borderRadius ?? AppSize.borderRadiusSmall) *
+                              (size.width / 375.0),
+                        ),
+                        topRight: Radius.circular(
+                          (borderRadius ?? AppSize.borderRadiusSmall) *
+                              (size.width / 375.0),
+                        ),
                       ),
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.outlineVariant,
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Theme.of(context).colorScheme.outlineVariant,
+                          width: 1.0,
+                        ),
                       ),
                     ),
                 elevation: buttonElevation,
@@ -138,7 +149,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                 //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
                 maxHeight: dropdownHeight ?? 200,
                 width: dropdownWidth ??
-                    size.width - (AppSize.paddingHorizontalLarge * 2),
+                    SizeUtils.scale(size.width - 105, size.width),
                 padding: dropdownPadding ??
                     EdgeInsets.symmetric(
                       horizontal: SizeUtils.scale(
@@ -147,11 +158,12 @@ class MyDropDownButton<T> extends StatelessWidget {
                       ),
                       vertical: SizeUtils.scale(
                         AppSize.paddingVerticalMedium,
-                        MediaQuery.of(context).size.width,
+                        size.width,
                       ),
                     ),
                 decoration: dropdownDecoration ??
                     BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(
                         AppSize.borderRadiusLarge * (size.width / 375.0),
                       ),

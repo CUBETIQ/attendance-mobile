@@ -2,11 +2,11 @@ import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RoleLayOut extends StatelessWidget {
+class RoleBaseLayOut extends StatelessWidget {
   final Widget admin;
   final Widget staff;
   final RxString role;
-  const RoleLayOut({
+  const RoleBaseLayOut({
     super.key,
     required this.admin,
     required this.staff,

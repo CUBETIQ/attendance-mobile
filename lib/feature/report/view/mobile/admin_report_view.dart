@@ -1,20 +1,18 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/async_widget/async_base_widget.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/dropdown_button/date_dropdown.dart';
-import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/no_data/no_data.dart';
 import 'package:attendance_app/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/report/controller/index.dart';
+import 'package:attendance_app/feature/report/widget/attendance_report_card.dart';
 import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-class ReportViewMobile extends StatelessWidget {
-  const ReportViewMobile({super.key});
+class AdminReportViewMobile extends StatelessWidget {
+  const AdminReportViewMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,49 +72,27 @@ class ReportViewMobile extends StatelessWidget {
                         final staff = controller.staffReports.value[index];
                         int? checkInDateTime;
                         int? checkOutDateTime;
-                        // Console.log(staff.attendance, "");
-                        // if (staff.attendance != [] &&
-                        //     staff.attendance != null) {
-                        //   checkInDateTime =
-                        //       staff.attendance?.first.checkInDateTime;
-                        //   if ((staff.attendance?.length ?? 0) > 1 &&
-                        //       staff.attendance?.last.checkOutDateTime != null) {
-                        //     checkOutDateTime =
-                        //         staff.attendance?.last.checkOutDateTime;
-                        //   } else {
-                        //     checkOutDateTime =
-                        //         staff.attendance?.first.checkOutDateTime;
-                        //   }
-                        // }
-                        return ExpansionTile(
-                          title: Row(
-                            children: [
-                              MyCacheImage(imageUrl: staff.image ?? ""),
-                              SizedBox(width: SizeUtils.scale(20, size.width)),
-                              MyText(text: staff.username ?? ""),
-                            ],
-                          ),
-                          expandedAlignment: Alignment.centerLeft,
-                          children: [
-                            Row(
-                              children: [
-                                const MyText(text: "Check In: "),
-                                MyText(
-                                  text: DateFormatter()
-                                      .formatTimeWithDate(checkInDateTime),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const MyText(text: "Check Out: "),
-                                MyText(
-                                  text: DateFormatter()
-                                      .formatTimeWithDate(checkOutDateTime),
-                                )
-                              ],
-                            ),
-                          ],
+                        int totalWorkMinute = 0;
+                        if (staff.attendance?.isNotEmpty == true) {
+                          for (final attendance in staff.attendance!) {
+                            totalWorkMinute += attendance.duration ?? 0;
+                          }
+                          checkInDateTime =
+                              staff.attendance?.first.checkInDateTime;
+                          if ((staff.attendance?.length ?? 0) > 1 &&
+                              staff.attendance?.last.checkOutDateTime != null) {
+                            checkOutDateTime =
+                                staff.attendance?.last.checkOutDateTime;
+                          } else {
+                            checkOutDateTime =
+                                staff.attendance?.first.checkOutDateTime;
+                          }
+                        }
+                        return AttendanceReportCard(
+                          data: staff,
+                          totalWorkMinute: totalWorkMinute,
+                          checkInDateTime: checkInDateTime,
+                          checkOutDateTime: checkOutDateTime,
                         );
                       },
                     ),

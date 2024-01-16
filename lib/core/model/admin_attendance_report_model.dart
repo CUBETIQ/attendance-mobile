@@ -72,15 +72,27 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
 class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
   final int? checkInDateTime;
   final String? checkInStatus;
+  final String? checkInType;
+  final int? checkInEarly;
+  final int? checkInLate;
   final int? checkOutDateTime;
   final String? checkOutStatus;
+  final String? checkOutType;
+  final int? checkOutEarly;
+  final int? checkOutLate;
   final int? duration;
 
   AdminAttendanceReportModel({
     this.checkInDateTime,
     this.checkInStatus,
+    this.checkInType,
+    this.checkInEarly,
+    this.checkInLate,
     this.checkOutDateTime,
     this.checkOutStatus,
+    this.checkOutType,
+    this.checkOutEarly,
+    this.checkOutLate,
     this.duration,
   });
 
@@ -92,8 +104,14 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
     return AdminAttendanceReportModel(
       checkInDateTime: json['checkInDateTime'],
       checkInStatus: json['checkInStatus'],
+      checkInType: json['checkInType'],
+      checkInEarly: json['checkInEarly'],
+      checkInLate: json['checkInLate'],
       checkOutDateTime: json['checkOutDateTime'],
       checkOutStatus: json['checkOutStatus'],
+      checkOutType: json['checkOutType'],
+      checkOutEarly: json['checkOutEarly'],
+      checkOutLate: json['checkOutLate'],
       duration: json['duration'],
     );
   }
@@ -111,8 +129,14 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
     return {
       'checkInDateTime': checkInDateTime,
       'checkInStatus': checkInStatus,
+      'checkInType': checkInType,
+      'checkInEarly': checkInEarly,
+      'checkInLate': checkInLate,
       'checkOutDateTimel': checkOutDateTime,
       'checkOutStatus': checkOutStatus,
+      'checkOutType': checkOutType,
+      'checkOutEarly': checkOutEarly,
+      'checkOutLate': checkOutLate,
       'duration': duration,
     };
   }

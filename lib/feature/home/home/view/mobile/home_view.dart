@@ -9,7 +9,7 @@ class HomeViewMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RoleLayOut(
+    return RoleBaseLayOut(
       role: NavigationController.to.getUserRole,
       admin: const HomeAdminMobileView(),
       staff: const HomeStaffMobileView(),

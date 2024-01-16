@@ -54,7 +54,7 @@ class SideDrawer extends StatelessWidget {
                 ),
               ),
               MyText(
-                text: Role.admin.capitalizeFirst,
+                text: (user.role ?? Role.admin).capitalizeFirst,
                 style: BodyMediumRegular.copyWith(
                   color: Theme.of(context).colorScheme.secondary,
                 ),

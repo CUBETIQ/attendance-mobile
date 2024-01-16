@@ -72,6 +72,11 @@ class DateFormatter {
 
   String formatMinutes(int minutes) {
     // Calculate hours and remaining minutes
+
+    if (minutes == 0) {
+      return "N/A";
+    }
+
     int hours = minutes ~/ 60;
     int remainingMinutes = minutes % 60;
 
@@ -107,6 +112,25 @@ class DateFormatter {
     Duration duration = endDate.difference(startDate);
     return duration.inMinutes;
   }
+
+  String getHourMinuteSecondFromMinute(int? minutes) {
+    if (minutes == null || minutes == 0) {
+      return "N/A";
+    }
+
+    int hours = minutes ~/ 60; // Integer division to get hours
+    int remainingMinutes = minutes % 60;
+
+    // Construct the formatted string
+    String result = '';
+    result += '$hours h ';
+
+    if (remainingMinutes > 0 || hours == 0) {
+      result += '$remainingMinutes min';
+    }
+
+    return result.isNotEmpty ? result : 'N/A';
+  }
 }
 
 /////////////////////////////////
@@ -128,12 +152,12 @@ class DateTimeUtil {
     return null;
   }
 
-  int? getEndOfDayInMilisecond(DateTime? picked) {
-    if (picked != null) {
+  int? getEndOfDayInMilisecond(DateTime? date) {
+    if (date != null) {
       DateTime endOfDayDateTime = DateTime(
-        picked.year,
-        picked.month,
-        picked.day,
+        date.year,
+        date.month,
+        date.day,
         23,
         59,
         59,

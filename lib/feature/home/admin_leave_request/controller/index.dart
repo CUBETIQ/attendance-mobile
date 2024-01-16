@@ -1,6 +1,5 @@
 import 'package:attendance_app/core/model/leave_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/service/index.dart';
@@ -100,6 +99,5 @@ class AdminLeaveRequestController extends GetxController {
         .millisecondsSinceEpoch;
     endDate.value = DateTime(DateTime.now().year, DateTime.now().month + 1, 0)
         .millisecondsSinceEpoch;
-    Console.log("Data", [startDate.value, endDate.value, staffList.value]);
   }
 }

@@ -10,7 +10,7 @@ class ProfileService {
   Future<List<SummaryAttendanceModel>> getSummrizeAttendance() async {
     List<SummaryAttendanceModel>? summaryAttendance;
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_summary_attendance,
+      Endpoints.instance.get_user_summary_attendance,
     );
     if (response.statusCode == 200) {
       summaryAttendance =

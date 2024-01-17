@@ -1,5 +1,6 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/size_util.dart';
@@ -366,6 +367,67 @@ void getEditAndDeleteBottomSheet(
               icon: Icons.delete_rounded,
               title: "Delete",
               onTap: onTapDelete,
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+void getPickImageButtomSheet(
+  BuildContext context, {
+  bool? isDismissible,
+  void Function()? onTapGallery,
+  void Function()? onTapAvatar,
+}) {
+  final size = MediaQuery.of(context).size;
+  Get.bottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50 * (size.width / 375.0)),
+        topRight: Radius.circular(50 * (size.width / 375.0)),
+      ),
+    ),
+    isDismissible: isDismissible ?? true,
+    Container(
+      width: size.width,
+      height: SizeUtils.scale(370, size.width),
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          top: AppSize.paddingTitleSmall,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width * 0.65,
+              height: size.height * 0.22,
+              child: SvgPicture.asset(
+                gallery,
+              ),
+            ),
+            SizedBox(height: SizeUtils.scale(40, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.photo_rounded,
+              title: "Open Gallery",
+              onTap: onTapGallery,
+            ),
+            SizedBox(height: SizeUtils.scale(10, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.person_rounded,
+              title: "Default Avatar",
+              onTap: onTapAvatar,
             ),
           ],
         ),

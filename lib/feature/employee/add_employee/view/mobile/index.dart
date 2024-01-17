@@ -156,7 +156,6 @@ class AddStaffViewMobile extends StatelessWidget {
                         label: "Gender",
                         value: controller.selectedGender.value,
                         hint: "Select gender",
-                        dropdownWidth: SizeUtils.scale(165, size.width),
                         dropdownItems: controller.genderList
                             .map(
                               (e) => DropdownMenuItem<String>(

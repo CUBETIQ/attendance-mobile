@@ -28,10 +28,27 @@ class MyProfileImage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           )
-        : MyCacheImage(
-            imageUrl: imageUrl ?? "",
-            width: width ?? 100,
-            height: height ?? 100,
-          );
+        : imageUrl?.startsWith('assets') == true
+            ? Container(
+                width: width ?? 100,
+                height: height ?? 100,
+                clipBehavior: Clip.antiAlias,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                ),
+                child: Image.asset(
+                  imageUrl ?? "",
+                  width: width ?? 90,
+                  height: height ?? 90,
+                  fit: BoxFit.cover,
+                ),
+              )
+            : MyCacheImage(
+                imageUrl: imageUrl ?? "",
+                width: width ?? 100,
+                height: height ?? 100,
+              );
   }
 }

@@ -47,8 +47,8 @@ class AddTaskController extends GetxController {
           icon: stringIcon.value,
         );
         await AddTaskService().addTask(input);
-        TaskController.to.getOwnTasks();
-        TaskController.to.getOwnSummarizeLeave();
+        TaskController.to.getUserTasks();
+        TaskController.to.getUserSummarizeLeave();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
@@ -70,7 +70,7 @@ class AddTaskController extends GetxController {
           icon: stringIcon.value,
         );
         await AddTaskService().updateTask(task.value!.id!, input);
-        TaskController.to.getOwnTasks();
+        TaskController.to.getUserTasks();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);

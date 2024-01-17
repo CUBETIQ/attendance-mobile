@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:attendance_app/core/model/user_model.dart';
+import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/home/home/controller/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/model/update_profile_model.dart';
 import 'package:attendance_app/feature/profile/edit_profile/service/index.dart';
+import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/gender.dart';
 import 'package:attendance_app/utils/types_helper/user_status.dart';
@@ -23,6 +25,7 @@ class EditProfileController extends GetxController {
   TextEditingController addressController = TextEditingController();
   var isLoading = false.obs;
   Rxn<String> image = Rxn<String>(null);
+  Rxn<String> backUpImage = Rxn<String>(null);
   Rxn<int> dob = Rxn<int>(null);
   Rxn<File> imageFile = Rxn<File>(null);
   List<String> status = [
@@ -50,6 +53,7 @@ class EditProfileController extends GetxController {
     lastnameController.text = user.value.lastName ?? "";
     addressController.text = user.value.address ?? "";
     image.value = user.value.image;
+    backUpImage.value = user.value.image;
     selectedGender.value = user.value.gender;
     selectedStatus.value = user.value.status;
     if (user.value.dateOfBirth != null &&
@@ -81,7 +85,9 @@ class EditProfileController extends GetxController {
         await NavigationController.to.fetchMe();
         HomeController.to.getUsername();
         Get.back(
-            closeOverlays: true, result: NavigationController.to.user.value);
+          closeOverlays: true,
+          result: NavigationController.to.user.value,
+        );
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
         rethrow;
@@ -92,6 +98,24 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> pickImage() async {
+    getPickImageButtomSheet(
+      Get.context!,
+      onTapGallery: onTapGallery,
+      onTapAvatar: onTapAvatar,
+    );
+  }
+
+  Future<void> onTapAvatar() async {
+    Get.back();
+    final resultImage = await Get.toNamed(Routes.AVATAR);
+    if (resultImage != null) {
+      image.value = resultImage;
+      imageFile.value = null;
+    }
+  }
+
+  Future<void> onTapGallery() async {
+    Get.back();
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.image,

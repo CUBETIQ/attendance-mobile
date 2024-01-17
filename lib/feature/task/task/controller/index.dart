@@ -27,7 +27,7 @@ class TaskController extends GetxController {
     initFunction();
   }
 
-  Future<void> getOwnTasks() async {
+  Future<void> getUserTasks() async {
     try {
       tasks.value = await TaskService().getUserTasks(
         startDate: startDate.value,
@@ -40,7 +40,7 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> getOwnSummarizeLeave() async {
+  Future<void> getUserSummarizeLeave() async {
     clearData();
     try {
       summarizeTasks.value = await TaskService().getUserTaskSummarize(
@@ -73,8 +73,8 @@ class TaskController extends GetxController {
         description: "Are you sure to complete this task?",
         onTapConfirm: () async {
           await TaskService().completeTask(id);
-          await getOwnTasks();
-          getOwnSummarizeLeave();
+          await getUserTasks();
+          getUserSummarizeLeave();
           Get.back();
         },
         image: checkIn,
@@ -87,8 +87,8 @@ class TaskController extends GetxController {
 
   Future<void> initFunction() async {
     // initDate();
-    await getOwnTasks();
-    getOwnSummarizeLeave();
+    await getUserTasks();
+    getUserSummarizeLeave();
   }
 
   void onRefresh() {
@@ -103,8 +103,8 @@ class TaskController extends GetxController {
         description: "Are you sure to delete this task?",
         onTapConfirm: () async {
           await TaskService().deleteTask(id);
-          await getOwnTasks();
-          getOwnSummarizeLeave();
+          await getUserTasks();
+          getUserSummarizeLeave();
           Get.back();
         },
         image: delete,

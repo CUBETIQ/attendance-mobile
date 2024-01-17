@@ -13,14 +13,10 @@ class AttendanceReportCard extends StatelessWidget {
   const AttendanceReportCard({
     super.key,
     required this.data,
-    this.checkInDateTime,
-    this.checkOutDateTime,
     required this.totalWorkMinute,
   });
 
   final AdminReportModel data;
-  final int? checkInDateTime;
-  final int? checkOutDateTime;
   final int? totalWorkMinute;
 
   @override
@@ -66,122 +62,86 @@ class AttendanceReportCard extends StatelessWidget {
       children: [
         DataRowReport(
           title: "Check In: ",
-          value: DateFormatter().formatTimeWithDate(checkInDateTime),
+          value: DateFormatter().formatTimeWithDate(
+            data.attendance?.checkInDateTime,
+          ),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         DataRowReport(
           title: "Check In Status: ",
-          value: data.attendance?.isNotEmpty == true
-              ? data.attendance?.first.checkInStatus!.capitalizeFirst
+          value: data.attendance.isBlank == false &&
+                  data.attendance?.checkInStatus != null
+              ? data.attendance?.checkInStatus!.capitalizeFirst
               : "N/A",
-          textColor: data.attendance?.isNotEmpty == true &&
-                  data.attendance?.first.checkInStatus != null
-              ? data.attendance?.first.checkInStatus == AttendanceStatus.early
-                  ? Colors.green
-                  : data.attendance?.first.checkInStatus ==
-                          AttendanceStatus.late
-                      ? Colors.red
-                      : Colors.orange
-              : Theme.of(context).colorScheme.onBackground,
+          textColor:
+              data.attendance != null && data.attendance?.checkInStatus != null
+                  ? data.attendance?.checkInStatus == AttendanceStatus.early
+                      ? Colors.green
+                      : data.attendance?.checkInStatus == AttendanceStatus.late
+                          ? Colors.red
+                          : Colors.orange
+                  : Theme.of(context).colorScheme.onBackground,
         ),
         SizedBox(
           height: SizeUtils.scale(
-            data.attendance?.isNotEmpty == true ? 2 : 0,
+            data.attendance != null ? 2 : 0,
             size.width,
           ),
         ),
-        data.attendance?.isNotEmpty == true &&
-                data.attendance?.first.checkInEarly != null
+        data.attendance != null && data.attendance?.checkInEarly != null
             ? DataRowReport(
                 title: "Check In Early: ",
                 value: DateFormatter().getHourMinuteSecondFromMinute(
-                  data.attendance?.first.checkInEarly,
+                  data.attendance?.checkInEarly,
                 ),
               )
-            : data.attendance?.isNotEmpty == true &&
-                    data.attendance?.first.checkInLate != null
+            : data.attendance != null && data.attendance?.checkInLate != null
                 ? DataRowReport(
                     title: "Check In Late: ",
                     value: DateFormatter().getHourMinuteSecondFromMinute(
-                      data.attendance?.first.checkInLate,
+                      data.attendance?.checkInLate,
                     ),
                   )
                 : const SizedBox.shrink(),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         DataRowReport(
           title: "Check Out: ",
-          value: DateFormatter().formatTimeWithDate(checkOutDateTime),
+          value: DateFormatter().formatTimeWithDate(
+            data.attendance?.checkOutDateTime,
+          ),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         DataRowReport(
-          title: "Check Out Status: ",
-          value: data.attendance?.isNotEmpty == true
-              ? (data.attendance?.length ?? 0) > 1
-                  ? data.attendance?.last.checkOutStatus!.capitalizeFirst
-                  : data.attendance?.first.checkOutStatus!.capitalizeFirst
-              : "N/A",
-          textColor: data.attendance?.isNotEmpty == true &&
-                  (data.attendance?.length ?? 0) > 1
-              ? data.attendance?.last.checkOutStatus != null
-                  ? data.attendance?.last.checkOutStatus ==
-                          AttendanceStatus.early
-                      ? Colors.green
-                      : data.attendance?.last.checkOutStatus ==
-                              AttendanceStatus.late
-                          ? Colors.red
-                          : Colors.orange
-                  : Theme.of(context).colorScheme.onBackground
-              : data.attendance?.isNotEmpty == true &&
-                      (data.attendance?.length ?? 0) <= 1
-                  ? data.attendance?.first.checkOutStatus != null
-                      ? data.attendance?.first.checkOutStatus ==
-                              AttendanceStatus.early
-                          ? Colors.green
-                          : data.attendance?.first.checkOutStatus ==
-                                  AttendanceStatus.late
-                              ? Colors.red
-                              : Colors.orange
-                      : Theme.of(context).colorScheme.onBackground
-                  : Theme.of(context).colorScheme.onBackground,
-        ),
+            title: "Check Out Status: ",
+            value: data.attendance != null &&
+                    data.attendance?.checkOutStatus != null
+                ? data.attendance?.checkOutStatus!.capitalizeFirst
+                : "N/A",
+            textColor: data.attendance != null &&
+                    data.attendance?.checkOutStatus != null
+                ? data.attendance?.checkOutStatus == AttendanceStatus.early
+                    ? Colors.green
+                    : data.attendance?.checkOutStatus == AttendanceStatus.late
+                        ? Colors.red
+                        : Colors.orange
+                : Theme.of(context).colorScheme.onBackground),
         SizedBox(
-            height: SizeUtils.scale(
-                data.attendance?.isNotEmpty == true ? 2 : 0, size.width)),
-        data.attendance?.isNotEmpty == true &&
-                (data.attendance?.length ?? 0) > 1
-            ? data.attendance?.last.checkOutEarly != null
+          height: SizeUtils.scale(data.attendance != null ? 2 : 0, size.width),
+        ),
+        data.attendance != null && data.attendance?.checkOutLate != null
+            ? DataRowReport(
+                title: "Check Out Late: ",
+                value: DateFormatter().getHourMinuteSecondFromMinute(
+                  data.attendance?.checkOutLate,
+                ),
+              )
+            : data.attendance != null && data.attendance?.checkOutEarly != null
                 ? DataRowReport(
                     title: "Check Out Early: ",
                     value: DateFormatter().getHourMinuteSecondFromMinute(
-                      data.attendance?.last.checkOutEarly,
+                      data.attendance?.checkOutEarly,
                     ),
                   )
-                : data.attendance?.last.checkOutLate != null
-                    ? DataRowReport(
-                        title: "Check Out Late: ",
-                        value: DateFormatter().getHourMinuteSecondFromMinute(
-                          data.attendance?.last.checkOutLate,
-                        ),
-                      )
-                    : const SizedBox.shrink()
-            : data.attendance?.isNotEmpty == true &&
-                    (data.attendance?.length ?? 0) <= 1
-                ? data.attendance?.first.checkOutEarly != null
-                    ? DataRowReport(
-                        title: "Check Out Early: ",
-                        value: DateFormatter().getHourMinuteSecondFromMinute(
-                          data.attendance?.first.checkOutEarly,
-                        ),
-                      )
-                    : data.attendance?.first.checkOutLate != null
-                        ? DataRowReport(
-                            title: "Check Out Late: ",
-                            value:
-                                DateFormatter().getHourMinuteSecondFromMinute(
-                              data.attendance?.first.checkOutLate,
-                            ),
-                          )
-                        : const SizedBox.shrink()
                 : const SizedBox.shrink(),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         DataRowReport(

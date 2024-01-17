@@ -15,7 +15,7 @@ class TaskService {
       "endDate": endDate,
     };
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_task,
+      Endpoints.instance.get_user_task,
       queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {
@@ -36,7 +36,7 @@ class TaskService {
     };
 
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_task_summarize,
+      Endpoints.instance.get_user_task_summarize,
       queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {

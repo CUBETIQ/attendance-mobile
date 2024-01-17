@@ -6,7 +6,6 @@ import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
 import 'package:attendance_app/feature/navigation/model/drawer_model.dart';
@@ -115,7 +114,6 @@ class NavigationController extends GetxController {
       userLocation.value = await NavigationService().getCurrentLocation();
       isInRange.value = isWithinRadius(userLocation.value!,
           organizationLocation.value!, AppConfig.DEFAULT_LOCATION_RADIUS);
-      Console.log("Location", isInRange.value);
     } on Exception catch (e) {
       showErrorSnackBar("Error", e.toString());
       rethrow;

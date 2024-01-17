@@ -79,10 +79,12 @@ class ProfileViewMobile extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: MyCacheImage(
-                          imageUrl: controller.user.value.image ?? "",
-                          width: 100,
-                          height: 100,
+                        child: Obx(
+                          () => MyCacheImage(
+                            imageUrl: controller.user.value.image ?? "",
+                            width: SizeUtils.scale(100, size.width),
+                            height: SizeUtils.scale(100, size.width),
+                          ),
                         ),
                       ),
                       SizedBox(height: size.height * 0.01),

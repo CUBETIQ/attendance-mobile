@@ -16,4 +16,15 @@ class CheckOutModel {
     this.checkOutLate,
     this.checkOutLocation,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "checkOutDateTime": checkOutDateTime,
+      "checkOutStatus": checkOutStatus,
+      "checkOutType": checkOutType,
+      "checkOutEarly": checkOutEarly,
+      "checkOutLate": checkOutLate,
+      "checkOutLocation": checkOutLocation?.toJson(),
+    };
+  }
 }

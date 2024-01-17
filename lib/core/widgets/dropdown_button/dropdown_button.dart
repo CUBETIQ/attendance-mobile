@@ -26,7 +26,6 @@ class MyDropDownButton<T> extends StatelessWidget {
     this.itemHeight,
     this.itemPadding,
     this.dropdownHeight,
-    this.dropdownWidth,
     this.dropdownPadding,
     this.dropdownDecoration,
     this.dropdownElevation,
@@ -41,6 +40,7 @@ class MyDropDownButton<T> extends StatelessWidget {
     super.key,
     this.width,
     this.height,
+    this.isRoundedCorner = false,
   });
 
   final String? hint;
@@ -60,7 +60,7 @@ class MyDropDownButton<T> extends StatelessWidget {
   final Color? iconDisabledColor;
   final double? itemHeight;
   final EdgeInsetsGeometry? itemPadding;
-  final double? dropdownHeight, dropdownWidth;
+  final double? dropdownHeight;
   final EdgeInsetsGeometry? dropdownPadding;
   final BoxDecoration? dropdownDecoration;
   final int? dropdownElevation;
@@ -74,6 +74,7 @@ class MyDropDownButton<T> extends StatelessWidget {
   final String label;
   final double? width;
   final double? height;
+  final bool isRoundedCorner;
 
   @override
   Widget build(BuildContext context) {
@@ -120,16 +121,21 @@ class MyDropDownButton<T> extends StatelessWidget {
                 decoration: buttonDecoration ??
                     BoxDecoration(
                       color: Theme.of(context).colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(
-                          (borderRadius ?? AppSize.borderRadiusSmall) *
-                              (size.width / 375.0),
-                        ),
-                        topRight: Radius.circular(
-                          (borderRadius ?? AppSize.borderRadiusSmall) *
-                              (size.width / 375.0),
-                        ),
-                      ),
+                      borderRadius: isRoundedCorner == true
+                          ? BorderRadius.circular(
+                              (borderRadius ?? AppSize.borderRadiusLarge) *
+                                  (size.width / 375.0),
+                            )
+                          : BorderRadius.only(
+                              topLeft: Radius.circular(
+                                (borderRadius ?? AppSize.borderRadiusSmall) *
+                                    (size.width / 375.0),
+                              ),
+                              topRight: Radius.circular(
+                                (borderRadius ?? AppSize.borderRadiusSmall) *
+                                    (size.width / 375.0),
+                              ),
+                            ),
                       border: Border(
                         bottom: BorderSide(
                           color: Theme.of(context).colorScheme.outlineVariant,
@@ -148,8 +154,8 @@ class MyDropDownButton<T> extends StatelessWidget {
               dropdownStyleData: DropdownStyleData(
                 //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
                 maxHeight: dropdownHeight ?? 200,
-                width: dropdownWidth ??
-                    SizeUtils.scale(size.width - 105, size.width),
+                isOverButton: false,
+                useRootNavigator: false,
                 padding: dropdownPadding ??
                     EdgeInsets.symmetric(
                       horizontal: SizeUtils.scale(
@@ -168,7 +174,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                         AppSize.borderRadiusLarge * (size.width / 375.0),
                       ),
                     ),
-                elevation: dropdownElevation ?? 8,
+                elevation: dropdownElevation ?? 2,
                 //Null or Offset(0, 0) will open just under the button. You can edit as you want.
                 offset: offset,
                 scrollbarTheme: ScrollbarThemeData(

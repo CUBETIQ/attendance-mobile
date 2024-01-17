@@ -28,7 +28,7 @@ class SplashService {
   Future<UserModel> fetchMe() async {
     final UserModel user;
     dio.Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_profile,
+      Endpoints.instance.get_user_profile,
     );
     if (response.statusCode == 200) {
       user = UserModel().fromJson(response.data["data"]);

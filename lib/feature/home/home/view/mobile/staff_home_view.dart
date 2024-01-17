@@ -45,17 +45,19 @@ class HomeStaffMobileView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 55,
+                height: SizeUtils.scale(55, size.width),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(
                       children: [
-                        MyCacheImage(
-                          imageUrl:
-                              NavigationController.to.user.value.image ?? "",
-                          width: 55,
-                          height: 55,
+                        Obx(
+                          () => MyCacheImage(
+                            imageUrl:
+                                NavigationController.to.user.value.image ?? "",
+                            width: SizeUtils.scale(55, size.width),
+                            height: SizeUtils.scale(55, size.width),
+                          ),
                         ),
                         Positioned(
                           bottom: 0,

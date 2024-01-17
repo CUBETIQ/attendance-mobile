@@ -5,6 +5,7 @@ import 'package:attendance_app/feature/auth/activation/view/index.dart';
 import 'package:attendance_app/feature/auth/change_password/view/index.dart';
 import 'package:attendance_app/feature/auth/login/login_binding.dart';
 import 'package:attendance_app/feature/auth/login/view/index.dart';
+import 'package:attendance_app/feature/avatar/view/index.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/admin_leave_binding.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/view/index.dart';
 import 'package:attendance_app/feature/home/home/home_binding.dart';
@@ -118,6 +119,10 @@ class AppPages {
       name: Routes.WORKING_HOUR,
       page: () => const WorkingHourView(),
       binding: WorkingHourBinding(),
+    ),
+    GetPage(
+      name: Routes.AVATAR,
+      page: () => const AvatarView(),
     ),
   ];
 }

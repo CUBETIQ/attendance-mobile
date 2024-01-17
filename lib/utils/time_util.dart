@@ -168,6 +168,38 @@ class DateTimeUtil {
     return null;
   }
 
+  int? getStartOfMonthInMilliseconds(DateTime? picked) {
+    if (picked != null) {
+      DateTime startOfMonthDateTime = DateTime(
+        picked.year,
+        picked.month,
+        1, // Day 1 represents the start of the month
+        0,
+        0,
+        0,
+      );
+      return startOfMonthDateTime.millisecondsSinceEpoch;
+    }
+
+    return null;
+  }
+
+  int? getEndOfMonthInMilliseconds(DateTime? date) {
+    if (date != null) {
+      DateTime endOfMonthDateTime = DateTime(
+        date.year,
+        date.month + 1, // Move to the next month
+        0, // Day 0 of the next month is the last day of the current month
+        23,
+        59,
+        59,
+      );
+      return endOfMonthDateTime.millisecondsSinceEpoch;
+    }
+
+    return null;
+  }
+
   int calculateTotalMinutes(String startHour, String endHour) {
     DateTime startTime = DateTime(2022, 1, 1,
         int.parse(startHour.split(":")[0]), int.parse(startHour.split(":")[1]));

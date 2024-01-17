@@ -44,6 +44,7 @@ dependencies:
   flutter_zoom_drawer: ^3.1.1
   ntp: ^2.0.0
   month_picker_dialog: ^2.4.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +60,7 @@ flutter:
     - assets/lotties/
     - assets/svgs/
     - assets/images/
+    - assets/images/profile/
 
   fonts:
     - family: Inter

@@ -99,7 +99,7 @@ class HomeService {
     };
 
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_attendance,
+      Endpoints.instance.get_user_attendance,
       queryParameters: query,
     );
     if (response.statusCode == 200) {
@@ -120,7 +120,7 @@ class HomeService {
     };
 
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_summary_attendance,
+      Endpoints.instance.get_user_summary_attendance,
       queryParameters: query,
     );
     if (response.statusCode == 200) {

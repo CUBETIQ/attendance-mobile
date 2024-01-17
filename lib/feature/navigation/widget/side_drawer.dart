@@ -43,8 +43,8 @@ class SideDrawer extends StatelessWidget {
                 imageUrl: imageUrl ?? "",
                 width: SizeUtils.scale(100, size.width),
                 height: SizeUtils.scale(100, size.width),
-                imageHeight: SizeUtils.scale(85, size.width),
-                imageWidth: SizeUtils.scale(85, size.width),
+                imageHeight: SizeUtils.scale(100, size.width),
+                imageWidth: SizeUtils.scale(100, size.width),
               ),
               SizedBox(height: SizeUtils.scale(5, size.height)),
               MyText(

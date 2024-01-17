@@ -20,10 +20,12 @@ class NavigationViewMobile extends StatelessWidget {
     final controller = NavigationController.to;
     return ZoomDrawer(
       controller: controller.zoomDrawerController,
-      menuScreen: SideDrawer(
-        imageUrl: controller.user.value.image,
-        drawerItems: controller.drawerItems,
-        user: controller.user.value,
+      menuScreen: Obx(
+        () => SideDrawer(
+          imageUrl: controller.user.value.image,
+          drawerItems: controller.drawerItems,
+          user: controller.user.value,
+        ),
       ),
       mainScreen: const MainScreen(),
       borderRadius: SizeUtils.scale(AppSize.borderRadiusLarge, context.width),

@@ -6,7 +6,6 @@ import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
@@ -23,6 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
+
+import '../../../../core/widgets/console/console.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   static HomeController get to => Get.find();
@@ -199,7 +200,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           checkInLate: GetMinute().checkLateMinute(startHour.value, now),
           checkInLocation: location,
         );
-        Console.log("test", input);
         AttendanceModel checkIn = await HomeService().checkIn(input);
         checkInTime.value = DateFormatter().formatTime(
           DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
@@ -236,6 +236,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
         checkOutLocation: location,
       );
+      Console.log("data", input.toJson());
       AttendanceModel checkOut = await HomeService().checkOut(input);
       checkOutTime.value = DateFormatter().formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),

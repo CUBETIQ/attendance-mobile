@@ -119,8 +119,8 @@ class AddLeaveController extends GetxController
         reason: reasonController.text,
       );
       await AddLeaveService().addLeave(input);
-      await LeaveController.to.getOwnLeave();
-      LeaveController.to.getOwnSummarizeLeave();
+      await LeaveController.to.getUserLeave();
+      LeaveController.to.getUserSummarizeLeave();
       Get.back();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response!.data["message"]);
@@ -138,7 +138,7 @@ class AddLeaveController extends GetxController
         reason: reasonController.text,
       );
       await AddLeaveService().updateLeave(leave.value!.id!, input);
-      LeaveController.to.getOwnLeave();
+      LeaveController.to.getUserLeave();
       Get.back();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response!.data["message"]);

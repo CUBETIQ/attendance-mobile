@@ -10,7 +10,7 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
   final String? firstName;
   final String? lastName;
   final String? image;
-  final List<AdminAttendanceReportModel>? attendance;
+  final AdminAttendanceReportModel? attendance;
 
   AdminReportModel({
     this.username,
@@ -40,7 +40,7 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
       firstName: json['firstName'],
       lastName: json['lastName'],
       image: json['image'],
-      attendance: AdminAttendanceReportModel().fromListJson(json['attendance']),
+      attendance: AdminAttendanceReportModel().fromJson(json['attendance']),
     );
   }
 
@@ -64,7 +64,7 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
       'firstName': firstName,
       'lastName': lastName,
       'image': image,
-      'attendance': attendance?.map((e) => e.toJson()).toList(),
+      'attendance': attendance?.toJson(),
     };
   }
 }

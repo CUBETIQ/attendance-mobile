@@ -33,19 +33,19 @@ class LeaveController extends GetxController {
 
   Future<void> initFunction() async {
     // initDate();
-    await getOwnLeave();
-    getOwnSummarizeLeave();
+    await getUserLeave();
+    getUserSummarizeLeave();
   }
 
   void onRefresh() {
     initFunction();
   }
 
-  Future<void> getOwnLeave() async {
+  Future<void> getUserLeave() async {
     isLoading.value = true;
     totalLeave.value = 0;
     try {
-      leave.value = await LeaveService().getOwnLeave(
+      leave.value = await LeaveService().getUserLeave(
         startDate: startDate.value,
         endDate: endDate.value,
       );
@@ -58,7 +58,7 @@ class LeaveController extends GetxController {
     }
   }
 
-  Future<void> getOwnSummarizeLeave() async {
+  Future<void> getUserSummarizeLeave() async {
     clearData();
     try {
       summarizeLeaves.value = await LeaveService().getUserLeavSummarize(
@@ -93,8 +93,8 @@ class LeaveController extends GetxController {
         description: "Are you sure that you want to delete this Leave Request?",
         onTapConfirm: () async {
           await LeaveService().deleteLeave(id);
-          await getOwnLeave();
-          getOwnSummarizeLeave();
+          await getUserLeave();
+          getUserSummarizeLeave();
           Get.back();
         },
         image: delete,
@@ -154,8 +154,8 @@ class LeaveController extends GetxController {
         description: "Are you sure that you want to cancel this Leave Request?",
         onTapConfirm: () async {
           await LeaveService().deleteLeave(id);
-          await getOwnLeave();
-          getOwnSummarizeLeave();
+          await getUserLeave();
+          getUserSummarizeLeave();
           Get.back();
         },
         image: cancel,

@@ -1,4 +1,5 @@
 import 'package:attendance_app/core/model/admin_attendance_report_model.dart';
+import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
@@ -25,5 +26,26 @@ class ReportService {
       throw Exception("Failed to get staff report");
     }
     return staffReport;
+  }
+
+  Future<List<AttendanceModel>> getAttendance(
+      {int? startDate, int? endDate}) async {
+    List<AttendanceModel>? attendanceList = [];
+
+    final query = {
+      "startDate": startDate,
+      "endDate": endDate,
+    };
+
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_user_attendance,
+      queryParameters: query,
+    );
+    if (response.statusCode == 200) {
+      attendanceList = AttendanceModel().fromListJson(response.data["data"]);
+    } else {
+      throw Exception("Get attendance failed");
+    }
+    return attendanceList;
   }
 }

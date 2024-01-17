@@ -21,3 +21,4 @@ const String delete = 'assets/svgs/delete.svg';
 const String option = 'assets/svgs/option.svg';
 const String cancel = 'assets/svgs/cancel.svg';
 const String password = 'assets/svgs/password.svg';
+const String gallery = 'assets/svgs/gallery.svg';

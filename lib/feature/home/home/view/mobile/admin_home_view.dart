@@ -139,10 +139,10 @@ class HomeAdminMobileView extends StatelessWidget {
                               () => MyDropDownButton<String>(
                                 width: SizeUtils.scale(130, size.width),
                                 height: SizeUtils.scale(30, size.width),
+                                isRoundedCorner: true,
                                 buttonPadding: EdgeInsets.symmetric(
                                   horizontal: SizeUtils.scale(10, size.width),
                                 ),
-                                dropdownWidth: SizeUtils.scale(130, size.width),
                                 dropdownPadding: EdgeInsets.symmetric(
                                   horizontal: SizeUtils.scale(10, size.width),
                                   vertical: SizeUtils.scale(10, size.width),

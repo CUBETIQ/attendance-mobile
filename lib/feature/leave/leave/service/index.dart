@@ -7,14 +7,14 @@ import 'package:dio/dio.dart';
 class LeaveService {
   DioUtil dioInstance = DioUtil();
 
-  Future<List<LeaveModel>> getOwnLeave({int? startDate, int? endDate}) async {
+  Future<List<LeaveModel>> getUserLeave({int? startDate, int? endDate}) async {
     final List<LeaveModel>? leave;
     Map<String, dynamic> queryParameters = {
       "startDate": startDate,
       "endDate": endDate,
     };
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_leave,
+      Endpoints.instance.get_user_leave,
       queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {
@@ -43,7 +43,7 @@ class LeaveService {
     };
 
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_own_leave_summarize,
+      Endpoints.instance.get_user_leave_summarize,
       queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {

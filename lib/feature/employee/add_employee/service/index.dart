@@ -1,6 +1,5 @@
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/employee/add_employee/model/create_staff_model.dart';
 import 'package:attendance_app/feature/employee/add_employee/model/update_staff_model.dart';
 import 'package:dio/dio.dart';
@@ -14,9 +13,7 @@ class AddStaffService {
       Endpoints.instance.staff,
       data: data,
     );
-    if (response.statusCode == 200) {
-      showSuccessSnackBar("Success", response.data["message"]);
-    } else {
+    if (response.statusCode != 200) {
       throw Exception("Create staff failed");
     }
   }
@@ -30,9 +27,7 @@ class AddStaffService {
       Endpoints.instance.staff + id,
       data: data,
     );
-    if (response.statusCode == 200) {
-      showSuccessSnackBar("Success", response.data["message"]);
-    } else {
+    if (response.statusCode != 200) {
       throw Exception("Create staff failed");
     }
   }

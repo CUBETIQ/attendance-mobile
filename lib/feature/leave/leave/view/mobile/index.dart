@@ -41,7 +41,7 @@ class LeaveViewMobile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MyText(text: "Task Summary", style: BodyLargeMedium),
+                MyText(text: "Leave Summary", style: BodyLargeMedium),
                 const SizedBox(height: AppSize.paddingS10),
                 Row(
                   children: [
@@ -101,21 +101,21 @@ class LeaveViewMobile extends StatelessWidget {
                 Obx(
                   () => MyAsyncWidget(
                     isLoading: controller.isLoading.value,
-                    list: controller.leave,
+                    list: controller.leaves,
                     noDataWidget: const MyNoData(),
                     builderWidget: ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.leave.length,
+                      itemCount: controller.leaves.length,
                       itemBuilder: (context, index) {
                         return LeaveCard(
                           onTap: () => controller.onTapLeave(
-                            controller.leave[index],
+                            controller.leaves[index],
                           ),
-                          leave: controller.leave[index],
+                          leave: controller.leaves[index],
                           onTapView: () => controller.onTapView(index),
                           onTapCancel: () => controller
-                              .onTapCancel(controller.leave[index].id!),
+                              .onTapCancel(controller.leaves[index].id!),
                         );
                       },
                     ),

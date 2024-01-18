@@ -51,9 +51,9 @@ class AddStaffViewMobile extends StatelessWidget {
                 child: Obx(
                   () => MyProfileImage(
                     imageFile: controller.imageFile.value,
-                    imageUrl: controller.staff.value.image ?? "",
-                    width: size.width * 0.25,
-                    height: size.width * 0.25,
+                    imageUrl: controller.image.value,
+                    width: SizeUtils.scale(110, size.width),
+                    height: SizeUtils.scale(110, size.width),
                   ),
                 ),
               ),

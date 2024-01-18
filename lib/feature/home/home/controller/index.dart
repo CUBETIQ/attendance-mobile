@@ -23,8 +23,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
 
-import '../../../../core/widgets/console/console.dart';
-
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   static HomeController get to => Get.find();
   late TabController? tabController;
@@ -236,7 +234,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
         checkOutLocation: location,
       );
-      Console.log("data", input.toJson());
       AttendanceModel checkOut = await HomeService().checkOut(input);
       checkOutTime.value = DateFormatter().formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),

@@ -94,7 +94,7 @@ class SideDrawer extends StatelessWidget {
                     Icon(
                       Icons.copyright_rounded,
                       color: Theme.of(context).colorScheme.secondary,
-                      size: SizeUtils.scale(30, size.width),
+                      size: SizeUtils.scale(24, size.width),
                     ),
                     MyText(
                       text: "TimeSync 360 V1.0.0",

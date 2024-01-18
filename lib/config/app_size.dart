@@ -60,7 +60,7 @@ class AppSize {
   static const double iconSizeLarge = 20.0;
 
   // Border Radius
-  static const double borderRadiusSmall = 8.0;
+  static const double borderRadiusSmall = 10.0;
   static const double borderRadiusMedium = 16.0;
   static const double borderRadiusLarge = 24.0;
   static const double borderRadiusXLarge = 32.0;

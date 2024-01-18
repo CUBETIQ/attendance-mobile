@@ -1,5 +1,10 @@
-import 'package:attendance_app/core/widgets/card/my_card.dart';
+import 'package:attendance_app/core/widgets/no_data/no_data.dart';
 import 'package:attendance_app/feature/report/controller/index.dart';
+import 'package:attendance_app/feature/report/widget/attendance_text_title.dart';
+import 'package:attendance_app/feature/report/widget/leave_text_title.dart';
+import 'package:attendance_app/feature/report/widget/marker_dot.dart';
+import 'package:attendance_app/feature/report/widget/report_attendance_card.dart';
+import 'package:attendance_app/feature/report/widget/report_leave_card.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -17,22 +22,38 @@ class StaffReportViewMobile extends StatelessWidget {
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Obx(
               () => TableCalendar(
+                calendarBuilders: CalendarBuilders(
+                  markerBuilder: (BuildContext context, date, events) {
+                    if (events.isEmpty) return const SizedBox.shrink();
+                    return MarkerDot(
+                      events: events,
+                    );
+                  },
+                ),
                 locale: 'en_US',
                 headerStyle: const HeaderStyle(
                   formatButtonVisible: false,
                   titleCentered: true,
                 ),
                 availableGestures: AvailableGestures.all,
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
+                firstDay: DateTime.utc(2010, 10, 1),
+                lastDay: DateTime.utc(2050, 12, 14),
                 focusedDay: controller.calendarFocusedDay.value,
                 currentDay: controller.calendarFocusedDay.value,
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 calendarStyle: CalendarStyle(
                   outsideDaysVisible: false,
+                  markerMargin: EdgeInsets.only(
+                    top: SizeUtils.scale(6, size.width),
+                  ),
+                  markerDecoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   selectedDecoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: DateTime(
@@ -52,8 +73,43 @@ class StaffReportViewMobile extends StatelessWidget {
                 selectedDayPredicate: (day) =>
                     isSameDay(day, controller.selectedDate.value),
                 onDaySelected: controller.onDaySelected,
+                onPageChanged: controller.onPageChanged,
+                eventLoader: (day) {
+                  return controller.events.value[day] ?? [];
+                },
               ),
             ),
+            AttendanceTextTitle(
+              attendanceList: controller.attendanceList,
+              leaves: controller.leaves,
+            ),
+            Obx(
+              () => controller.attendanceList.value.isEmpty &&
+                      controller.leaves.value.isNotEmpty
+                  ? const SizedBox.shrink()
+                  : controller.attendanceList.value.isEmpty &&
+                          controller.leaves.value.isEmpty
+                      ? MyNoData(paddingTop: SizeUtils.scale(30, size.width))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: SizeUtils.scale(20, size.width),
+                            vertical: SizeUtils.scale(10, size.width),
+                          ),
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.attendanceList.value.length,
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: SizeUtils.scale(10, size.width),
+                          ),
+                          itemBuilder: (context, index) {
+                            return ReportAttendanceCard(
+                              attendance:
+                                  controller.attendanceList.value[index],
+                            );
+                          },
+                        ),
+            ),
+            LeaveTextTitle(leaves: controller.leaves),
             Obx(
               () => ListView.separated(
                 shrinkWrap: true,
@@ -62,16 +118,13 @@ class StaffReportViewMobile extends StatelessWidget {
                   vertical: SizeUtils.scale(10, size.width),
                 ),
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.attendanceList.value.length,
+                itemCount: controller.leaves.value.length,
                 separatorBuilder: (context, index) => SizedBox(
                   height: SizeUtils.scale(10, size.width),
                 ),
                 itemBuilder: (context, index) {
-                  return MyCard(
-                    width: size.width,
-                    height: SizeUtils.scale(100, size.width),
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
+                  return ReportLeaveCard(
+                    leave: controller.leaves.value[index],
                   );
                 },
               ),

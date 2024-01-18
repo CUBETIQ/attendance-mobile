@@ -60,7 +60,7 @@ class LeaveChart extends StatelessWidget {
             animationDuration: 500,
             radius: radius * (size.width / 360),
             lineWidth: lineWidth ?? 12.0,
-            percent: percent ?? 0.0,
+            percent: percent?.isNegative == true ? 0.0 : percent ?? 0.0,
             center: MyText(
               text: centerText ?? "0%",
               style: BodySmallRegular,

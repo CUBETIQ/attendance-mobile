@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 
 class LeaveController extends GetxController {
   static LeaveController get to => Get.find();
-  RxList<LeaveModel> leave = <LeaveModel>[].obs;
+  RxList<LeaveModel> leaves = <LeaveModel>[].obs;
   RxList<SummaryLeaveModel> summarizeLeaves = <SummaryLeaveModel>[].obs;
   var isLoading = false.obs;
   Rxn<int> startDate = Rxn<int>();
@@ -45,11 +45,11 @@ class LeaveController extends GetxController {
     isLoading.value = true;
     totalLeave.value = 0;
     try {
-      leave.value = await LeaveService().getUserLeave(
+      leaves.value = await LeaveService().getUserLeave(
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      totalLeave.value = leave.length;
+      totalLeave.value = leaves.length;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -142,7 +142,7 @@ class LeaveController extends GetxController {
   }
 
   void onTapView(int index) {
-    Get.toNamed(Routes.LEAVE_DETAIL, arguments: leave[index]);
+    Get.toNamed(Routes.LEAVE_DETAIL, arguments: leaves[index]);
   }
 
   void onTapCancel(String id) {

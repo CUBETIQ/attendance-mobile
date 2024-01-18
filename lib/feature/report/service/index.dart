@@ -1,5 +1,6 @@
 import 'package:attendance_app/core/model/admin_attendance_report_model.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
+import 'package:attendance_app/core/model/leave_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
@@ -47,5 +48,23 @@ class ReportService {
       throw Exception("Get attendance failed");
     }
     return attendanceList;
+  }
+
+  Future<List<LeaveModel>> getUserLeave({int? startDate, int? endDate}) async {
+    final List<LeaveModel>? leave;
+    Map<String, dynamic> queryParameters = {
+      "startDate": startDate,
+      "endDate": endDate,
+    };
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_user_leave,
+      queryParameters: queryParameters,
+    );
+    if (response.statusCode == 200) {
+      leave = LeaveModel().fromListJson(response.data["data"]);
+    } else {
+      throw Exception("Get leave failed");
+    }
+    return leave;
   }
 }

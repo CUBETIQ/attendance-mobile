@@ -11,6 +11,7 @@ class MyCard extends StatelessWidget {
     this.backgroundColor,
     this.padding,
     this.margin,
+    this.borderRadius,
   });
 
   final double? width;
@@ -19,6 +20,7 @@ class MyCard extends StatelessWidget {
   final Color? backgroundColor;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final BorderRadiusGeometry? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,13 @@ class MyCard extends StatelessWidget {
                 SizeUtils.scale(AppSize.paddingVerticalMedium, size.width),
           ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
-        ),
+        borderRadius: borderRadius ??
+            BorderRadius.circular(
+              SizeUtils.scale(
+                AppSize.borderRadiusLarge,
+                size.width,
+              ),
+            ),
         color: backgroundColor ?? Theme.of(context).colorScheme.background,
         boxShadow: [
           BoxShadow(

@@ -28,7 +28,7 @@ class LeaveCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: onTap,
+      onTap: leave.status != LeaveStatus.pending ? null : onTap,
       child: Container(
         height: SizeUtils.scale(170, size.width),
         margin:

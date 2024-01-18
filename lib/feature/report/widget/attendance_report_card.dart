@@ -148,6 +148,11 @@ class AttendanceReportCard extends StatelessWidget {
           title: "Work Hour: ",
           value: DateFormatter().getHourMinuteSecondFromMinute(totalWorkMinute),
         ),
+        SizedBox(height: SizeUtils.scale(2, size.width)),
+        DataRowReport(
+          title: "Total Session ",
+          value: (data.attendance?.totalSession ?? 0).toString(),
+        ),
       ],
     );
   }

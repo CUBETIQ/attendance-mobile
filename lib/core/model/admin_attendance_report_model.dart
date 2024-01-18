@@ -81,6 +81,7 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
   final int? checkOutEarly;
   final int? checkOutLate;
   final int? duration;
+  final int? totalSession;
 
   AdminAttendanceReportModel({
     this.checkInDateTime,
@@ -94,6 +95,7 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
     this.checkOutEarly,
     this.checkOutLate,
     this.duration,
+    this.totalSession,
   });
 
   @override
@@ -113,6 +115,7 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
       checkOutEarly: json['checkOutEarly'],
       checkOutLate: json['checkOutLate'],
       duration: json['duration'],
+      totalSession: json['totalSession'],
     );
   }
 
@@ -138,6 +141,7 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
       'checkOutEarly': checkOutEarly,
       'checkOutLate': checkOutLate,
       'duration': duration,
+      'totalSession': totalSession,
     };
   }
 }

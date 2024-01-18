@@ -55,10 +55,6 @@ class AdminLeaveRequestController extends GetxController {
         input: data,
         id: leave?.id ?? "",
       );
-      showSuccessSnackBar(
-        "Success",
-        "You have $status the leave request.",
-      );
       await getAllLeave(haveLoading: false);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

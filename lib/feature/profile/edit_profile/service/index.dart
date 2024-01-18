@@ -1,6 +1,5 @@
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/profile/edit_profile/model/update_profile_model.dart';
 import 'package:dio/dio.dart';
 
@@ -21,9 +20,7 @@ class EditProfileService {
       Endpoints.instance.update_profile,
       data: data,
     );
-    if (response.statusCode == 200) {
-      showSuccessSnackBar("Success", response.data["message"]);
-    } else {
+    if (response.statusCode != 200) {
       throw Exception("Login failed");
     }
   }

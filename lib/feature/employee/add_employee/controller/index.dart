@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
+import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
@@ -10,6 +11,7 @@ import 'package:attendance_app/feature/employee/add_employee/model/create_staff_
 import 'package:attendance_app/feature/employee/add_employee/model/update_staff_model.dart';
 import 'package:attendance_app/feature/employee/add_employee/service/index.dart';
 import 'package:attendance_app/feature/employee/employee/controller/index.dart';
+import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/gender.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
@@ -61,6 +63,40 @@ class AddStaffController extends GetxController {
     getArgument();
   }
 
+  void getArgument() {
+    if (Get.arguments != null) {
+      appState.value = Get.arguments["state"];
+      positionList.value = Get.arguments["positions"];
+      departmentList.value = Get.arguments["departments"];
+      if (appState.value == AppState.Edit) {
+        title.value = "Edit Employee";
+        staff.value = Get.arguments["staff"];
+        image.value = staff.value.image;
+        usernameController.text = staff.value.username ?? "";
+        firstnameController.text = staff.value.firstName ?? "";
+        lastnameController.text = staff.value.lastName ?? "";
+        addressController.text = staff.value.address ?? "";
+        dobController.text =
+            DateFormatter().formatMillisecondsToDOB(staff.value.dateOfBirth);
+        dob.value = staff.value.dateOfBirth;
+        selectedRole.value = staff.value.role ?? Role.staff;
+        if (staff.value.departmentId != null &&
+            staff.value.departmentId != "") {
+          selectedDepartment.value = departmentList.value.firstWhere(
+            (element) => element.id == staff.value.departmentId,
+            orElse: () => DepartmentModel(),
+          );
+        }
+        if (staff.value.positionId != null && staff.value.positionId != "") {
+          selectedPosition.value = positionList.value.firstWhere(
+            (element) => element.id == staff.value.positionId,
+            orElse: () => PositionModel(),
+          );
+        }
+      }
+    }
+  }
+
   Future<void> onTapAddStaff() async {
     validate(true);
     if (MyTextFieldFormController.findController('Username').isValid &&
@@ -76,8 +112,8 @@ class AddStaffController extends GetxController {
           role: selectedRole.value,
           gender: selectedGender.value,
           status: selectedStatus.value,
-          name: null,
           image: image.value,
+          name: "${firstnameController.text} ${lastnameController.text}",
           departmentId: selectedDepartment.value?.id,
           organizationId: NavigationController.to.organization.value.id,
           positionId: selectedPosition.value?.id,
@@ -113,6 +149,9 @@ class AddStaffController extends GetxController {
         );
         await AddStaffService().updateStaff(input: input, id: staff.value.id!);
         await StaffController.to.getAllStaffs();
+        if (NavigationController.to.user.value.id == staff.value.id) {
+          await NavigationController.to.fetchMe();
+        }
         Get.back(closeOverlays: true);
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
@@ -121,42 +160,25 @@ class AddStaffController extends GetxController {
     }
   }
 
-  void getArgument() {
-    if (Get.arguments != null) {
-      appState.value = Get.arguments["state"];
-      positionList.value = Get.arguments["positions"];
-      departmentList.value = Get.arguments["departments"];
-      if (appState.value == AppState.Edit) {
-        title.value = "Edit Employee";
-        staff.value = Get.arguments["staff"];
-        usernameController.text = staff.value.username ?? "";
-        firstnameController.text = staff.value.firstName ?? "";
-        lastnameController.text = staff.value.lastName ?? "";
-        addressController.text = staff.value.address ?? "";
-        dobController.text =
-            DateFormatter().formatMillisecondsToDOB(staff.value.dateOfBirth);
-        dob.value = staff.value.dateOfBirth;
-        selectedRole.value = staff.value.role ?? Role.staff;
-        if (staff.value.departmentId != null &&
-            staff.value.departmentId != "") {
-          selectedDepartment.value = departmentList.value.firstWhere(
-            (element) => element.id == staff.value.departmentId,
-            orElse: () => DepartmentModel(),
-          );
-        }
-        if (staff.value.positionId != null && staff.value.positionId != "") {
-          selectedPosition.value = positionList.value.firstWhere(
-            (element) => element.id == staff.value.positionId,
-            orElse: () => PositionModel(),
-          );
-        }
-      } else {
-        title.value = "Add Employee";
-      }
+  Future<void> pickImage() async {
+    getPickImageButtomSheet(
+      Get.context!,
+      onTapGallery: onTapGallery,
+      onTapAvatar: onTapAvatar,
+    );
+  }
+
+  Future<void> onTapAvatar() async {
+    Get.back();
+    final resultImage = await Get.toNamed(Routes.AVATAR);
+    if (resultImage != null) {
+      image.value = resultImage;
+      imageFile.value = null;
     }
   }
 
-  Future<void> pickImage() async {
+  Future<void> onTapGallery() async {
+    Get.back();
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.image,

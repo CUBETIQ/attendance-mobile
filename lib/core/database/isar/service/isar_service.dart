@@ -1,4 +1,6 @@
+import 'package:attendance_app/core/database/isar/controller/local_language_controller.dart';
 import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
+import 'package:attendance_app/core/database/isar/entities/language.dart';
 import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
 import 'package:attendance_app/main.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,8 @@ class IsarService extends GetxService {
   static IsarService get to => Get.find();
   final LocalStorageController _localStorage =
       LocalStorageController.getInstance();
+  final LanguageLocalStorageController _languageLocalStorage =
+      LanguageLocalStorageController.getInstance();
 
   Future<void> initDataBase() async {
     final appConfig = await _localStorage.get();
@@ -17,6 +21,7 @@ class IsarService extends GetxService {
 
   Future<void> clearDataBase() async {
     await _localStorage.clear();
+    await _languageLocalStorage.clear();
   }
 
   Future<void> saveLocalData({
@@ -29,6 +34,7 @@ class IsarService extends GetxService {
     String? refreshToken,
     bool? isActivated,
     String? organizationId,
+    String? languageCode,
   }) async {
     try {
       final appConfig = await _localStorage.get();
@@ -43,7 +49,21 @@ class IsarService extends GetxService {
       app.isRememberMe = isRememberMe ?? appConfig?.isRememberMe;
       app.username = username ?? appConfig?.username;
       app.organizationId = organizationId ?? appConfig?.organizationId;
+      app.languageCode = languageCode ?? appConfig?.languageCode;
       await _localStorage.insert(app);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> saveLanguage({String? kmLang, String? enLang}) async {
+    try {
+      final appConfig = await _languageLocalStorage.get();
+      final app = Languages();
+      app.id = 1;
+      app.enUS = enLang ?? appConfig?.enUS;
+      app.kmKH = kmLang ?? appConfig?.kmKH;
+      await _languageLocalStorage.insert(app);
     } catch (e) {
       rethrow;
     }

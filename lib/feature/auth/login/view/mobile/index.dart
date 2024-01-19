@@ -84,7 +84,7 @@ class LoginViewMobile extends StatelessWidget {
                     isPassword: controller.showPassword.value,
                     prefixIcon: Icons.lock_rounded,
                     label: "Password",
-                    hintText: "Enter your password ",
+                    hintText: "Enter your password",
                     textController: controller.passwordController,
                     haveSuffixIcon: true,
                     onTapShowPassword: controller.onTapShowPassword,

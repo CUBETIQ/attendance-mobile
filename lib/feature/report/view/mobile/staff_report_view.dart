@@ -50,6 +50,14 @@ class StaffReportViewMobile extends StatelessWidget {
                   markerMargin: EdgeInsets.only(
                     top: SizeUtils.scale(6, size.width),
                   ),
+                  holidayDecoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).colorScheme.background,
+                  ),
+                  holidayTextStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                    fontWeight: FontWeight.w600,
+                  ),
                   markerDecoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Theme.of(context).colorScheme.primary,
@@ -70,6 +78,9 @@ class StaffReportViewMobile extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
+                holidayPredicate: (day) {
+                  return day.weekday > 6;
+                },
                 selectedDayPredicate: (day) =>
                     isSameDay(day, controller.selectedDate.value),
                 onDaySelected: controller.onDaySelected,

@@ -18,13 +18,13 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  await initDBService();
+  await initService();
   await AppPathController.initPath();
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
   runApp(const MyApp());
   FlutterNativeSplash.remove();
 }
 
-Future<void> initDBService() async {
+Future<void> initService() async {
   await IsarService().initDataBase();
 }

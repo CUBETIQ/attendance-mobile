@@ -121,7 +121,8 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
           )
           .toList();
       for (var i = 0; i < leaveResult.length; i++) {
-        if (leaveResult[i].from != null) {
+        if (leaveResult[i].from != null &&
+            leaveResult[i].status == LeaveStatus.approved) {
           DateTime date = DateTime.utc(
             DateTime.fromMillisecondsSinceEpoch(leaveResult[i].from ?? 0).year,
             DateTime.fromMillisecondsSinceEpoch(leaveResult[i].from ?? 0).month,
@@ -212,11 +213,15 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
                 (DateTimeUtil().getEndOfDayInMilisecond(selectedDay) ?? 0))
         .toList();
     leaves.value = leaveResult
-        .where((element) =>
-            (element.from ?? 0) >=
-                (DateTimeUtil().getStartOfDayInMilisecond(selectedDay) ?? 0) &&
-            (element.from ?? 0) <=
-                (DateTimeUtil().getEndOfDayInMilisecond(selectedDay) ?? 0))
+        .where(
+          (element) =>
+              (element.from ?? 0) >=
+                  (DateTimeUtil().getStartOfDayInMilisecond(selectedDay) ??
+                      0) &&
+              (element.from ?? 0) <=
+                  (DateTimeUtil().getEndOfDayInMilisecond(selectedDay) ?? 0) &&
+              element.status == LeaveStatus.approved,
+        )
         .toList();
   }
 

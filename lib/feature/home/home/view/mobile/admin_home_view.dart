@@ -58,6 +58,10 @@ class HomeAdminMobileView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        MyText(
+                            text: "You have @count mails.".trParams({
+                          "count": "5",
+                        })),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

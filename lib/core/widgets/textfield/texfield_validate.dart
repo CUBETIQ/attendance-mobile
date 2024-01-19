@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -101,7 +102,7 @@ class MyTextFieldForm extends StatelessWidget {
                         ),
                       )
                     : null,
-                hintText: hintText,
+                hintText: hintText?.trString,
                 isDense: true,
                 hintStyle: hintStyle ?? BodyMediumMedium,
                 filled: filled ?? false,

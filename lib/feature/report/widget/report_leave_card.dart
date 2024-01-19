@@ -119,11 +119,11 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Type: ",
-                          style: BodyMediumSemi,
+                          style: BodySmallMedium,
                         ),
                         MyText(
-                          text: leave.type ?? "N/A",
-                          style: BodyMediumSemi.copyWith(
+                          text: leave.type?.capitalizeFirst ?? "N/A",
+                          style: BodySmallMedium.copyWith(
                             color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
@@ -133,7 +133,7 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Approver: ",
-                          style: BodyMediumSemi,
+                          style: BodySmallMedium,
                         ),
                         Container(
                           constraints: BoxConstraints(
@@ -142,7 +142,7 @@ class ReportLeaveCard extends StatelessWidget {
                           child: MyText(
                             text: leave.updateBy?["name"] ?? "N/A",
                             overflow: TextOverflow.ellipsis,
-                            style: BodyMediumSemi.copyWith(
+                            style: BodySmallMedium.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                             ),
                           ),

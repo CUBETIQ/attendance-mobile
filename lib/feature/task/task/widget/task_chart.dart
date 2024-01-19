@@ -63,7 +63,11 @@ class TaskChart extends StatelessWidget {
             animationDuration: 500,
             radius: radius * (size.width / 360),
             lineWidth: lineWidth ?? 20.0,
-            percent: percent ?? 0,
+            percent: percent?.isNegative == true
+                ? 0
+                : (percent ?? 0) > 1
+                    ? 1
+                    : percent ?? 0,
             center: centerWidget,
             linearGradient: const LinearGradient(
               colors: [

@@ -1,5 +1,5 @@
-import 'package:attendance_app/feature/setting/controller/index.dart';
 import 'package:get/get.dart';
+import 'controller/index.dart';
 
 class SettingBinding extends Binding {
   @override

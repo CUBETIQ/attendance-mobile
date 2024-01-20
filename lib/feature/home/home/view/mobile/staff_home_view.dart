@@ -139,21 +139,21 @@ class HomeStaffMobileView extends StatelessWidget {
                   children: [
                     Obx(
                       () => AttendanceDetailCard(
-                        image: clockBack,
+                        image: SvgAssets.clockBack,
                         time: controller.checkInTime.value ?? "--:--",
                         title: "Check In",
                       ),
                     ),
                     Obx(
                       () => AttendanceDetailCard(
-                        image: clockForward,
+                        image: SvgAssets.clockForward,
                         time: controller.checkOutTime.value ?? "--:--",
                         title: "Check Out",
                       ),
                     ),
                     Obx(
                       () => AttendanceDetailCard(
-                        image: clock,
+                        image: SvgAssets.clock,
                         time: controller.totalHour.value ?? "--:--",
                         title: "Total Hour",
                       ),
@@ -172,7 +172,7 @@ class HomeStaffMobileView extends StatelessWidget {
                   Expanded(
                     child: Obx(
                       () => OverviewCard(
-                        image: present,
+                        image: SvgAssets.present,
                         title: "Present",
                         number: controller.totalAttendance.value.toString(),
                       ),
@@ -182,7 +182,7 @@ class HomeStaffMobileView extends StatelessWidget {
                   Expanded(
                     child: Obx(
                       () => OverviewCard(
-                        image: absent,
+                        image: SvgAssets.absent,
                         title: "Absent",
                         number: controller.totalAbsent.value.toString(),
                       ),
@@ -192,7 +192,7 @@ class HomeStaffMobileView extends StatelessWidget {
                   Expanded(
                     child: Obx(
                       () => OverviewCard(
-                        image: onLeave,
+                        image: SvgAssets.onLeave,
                         number: controller.totalLeave.value.toString(),
                         title: "On Leave",
                       ),

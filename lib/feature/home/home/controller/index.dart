@@ -208,7 +208,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         if (Get.isRegistered<ProfileController>()) {
           ProfileController.to.getSummarizeAttendance();
         }
-        getCheckInBottomSheet(Get.context!, image: working);
+        getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
@@ -240,7 +240,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       );
       isCheckedIn.value = false;
       getAttendance();
-      getCheckOutBottomSheet(Get.context!, image: leaving);
+      getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

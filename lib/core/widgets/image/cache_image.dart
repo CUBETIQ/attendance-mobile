@@ -83,7 +83,7 @@ class MyCacheImage extends StatelessWidget {
                   ),
                   child: SizedBox(
                     child: SvgPicture.asset(
-                      defaultUser,
+                      SvgAssets.defaultUser,
                     ),
                   ),
                 ),
@@ -101,7 +101,7 @@ class MyCacheImage extends StatelessWidget {
               width: imageWidth ?? width ?? 55,
               height: imageHeight ?? height ?? 55,
               child: SvgPicture.asset(
-                defaultUser,
+                SvgAssets.defaultUser,
               ),
             ),
           );

@@ -97,7 +97,7 @@ class LeaveController extends GetxController {
           getUserSummarizeLeave();
           Get.back();
         },
-        image: delete,
+        image: SvgAssets.delete,
       );
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -108,7 +108,7 @@ class LeaveController extends GetxController {
   void onTapLeave(LeaveModel leave) {
     getEditAndDeleteBottomSheet(
       Get.context!,
-      image: option,
+      image: SvgAssets.option,
       onTapEdit: () {
         Get.back();
         Get.toNamed(
@@ -158,7 +158,7 @@ class LeaveController extends GetxController {
           getUserSummarizeLeave();
           Get.back();
         },
-        image: cancel,
+        image: SvgAssets.cancel,
       );
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

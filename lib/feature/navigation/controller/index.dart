@@ -170,7 +170,7 @@ class NavigationController extends GetxController {
           onTap: () {
             getLogOutBottomSheet(
               Get.context!,
-              image: leaving,
+              image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
                 Get.offNamed(Routes.LOGIN);
@@ -199,7 +199,7 @@ class NavigationController extends GetxController {
           onTap: () async {
             getLogOutBottomSheet(
               Get.context!,
-              image: leaving,
+              image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
                 Get.offNamed(Routes.LOGIN);

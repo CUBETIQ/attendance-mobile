@@ -412,7 +412,7 @@ void getPickImageButtomSheet(
               width: size.width * 0.65,
               height: size.height * 0.22,
               child: SvgPicture.asset(
-                gallery,
+                SvgAssets.gallery,
               ),
             ),
             SizedBox(height: SizeUtils.scale(40, size.width)),

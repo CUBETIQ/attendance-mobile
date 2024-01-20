@@ -77,7 +77,7 @@ class TaskController extends GetxController {
           getUserSummarizeLeave();
           Get.back();
         },
-        image: checkIn,
+        image: SvgAssets.checkIn,
       );
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -107,7 +107,7 @@ class TaskController extends GetxController {
           getUserSummarizeLeave();
           Get.back();
         },
-        image: delete,
+        image: SvgAssets.delete,
       );
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -118,7 +118,7 @@ class TaskController extends GetxController {
   void onTapTask(TaskModel task) {
     getEditAndDeleteBottomSheet(
       Get.context!,
-      image: option,
+      image: SvgAssets.option,
       onTapEdit: () {
         Get.back();
         Get.toNamed(

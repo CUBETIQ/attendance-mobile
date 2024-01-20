@@ -40,7 +40,7 @@ class ChangePasswordViewMobile extends StatelessWidget {
             SizedBox(
               width: SizeUtils.scale(200, size.width),
               height: SizeUtils.scale(140, size.width),
-              child: SvgPicture.asset(password),
+              child: SvgPicture.asset(SvgAssets.password),
             ),
             SizedBox(
               height: SizeUtils.scale(10, size.height),

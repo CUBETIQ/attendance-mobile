@@ -108,7 +108,7 @@ class AttendanceCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      tap,
+                      SvgAssets.tap,
                       width: iconSize ?? size.height * 0.05,
                       height: iconSize ?? size.height * 0.05,
                     ),

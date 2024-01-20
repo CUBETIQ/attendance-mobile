@@ -69,7 +69,7 @@ class RecordCard extends StatelessWidget {
             timeString:
                 NavigationController.to.organization.value.configs?.startHour ??
                     "00:00",
-            svgIcon: checkIcon,
+            svgIcon: SvgAssets.checkIcon,
             firstTitle: "Actual check in",
             onNullTitle: "Check in time",
             secondTitle: "Check in",
@@ -83,7 +83,7 @@ class RecordCard extends StatelessWidget {
             timeString:
                 NavigationController.to.organization.value.configs?.breakTime ??
                     "00:00",
-            svgIcon: location,
+            svgIcon: SvgAssets.location,
             firstTitle: "Lunch Break",
             onNullTitle: "Lunch Break",
             secondTitle: "Lunch Break",
@@ -104,7 +104,7 @@ class RecordCard extends StatelessWidget {
             time: checkOutTime,
             timeString:
                 NavigationController.to.organization.value.configs?.endHour,
-            svgIcon: checkIcon,
+            svgIcon: SvgAssets.checkIcon,
             firstTitle: "Actual check in",
             onNullTitle: "Check out time",
             secondTitle: "Check out",

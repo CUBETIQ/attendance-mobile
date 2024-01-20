@@ -48,7 +48,7 @@ class LoginViewMobile extends StatelessWidget {
                           ),
                         ),
                         height: 70,
-                        child: Image.asset(logoTimeSync360),
+                        child: Image.asset(ImageAssets.logoTimeSync360),
                       ),
                       const SizedBox(height: AppSize.paddingS6),
                       MyText(

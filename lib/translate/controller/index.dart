@@ -51,7 +51,7 @@ class LanguageController extends GetxController {
         kmLang: toJson(langKH.value),
       );
     }
-    final local = Locale(appConfig?.language ?? 'km');
+    final local = Locale(appConfig?.language ?? 'en');
     Get.updateLocale(local);
   }
 }

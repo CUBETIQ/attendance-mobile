@@ -3,11 +3,13 @@ import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/button/back_button.dart';
 import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/feature/setting/controller/index.dart';
-import 'package:attendance_app/feature/setting/widget/theme_switch_button.dart';
+import 'package:attendance_app/feature/setting/setting/controller/index.dart';
+import 'package:attendance_app/feature/setting/setting/widget/setting_card_button.dart';
+import 'package:attendance_app/feature/setting/setting/widget/theme_switch_button.dart';
+import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 
 class SettingViewMobile extends StatelessWidget {
   const SettingViewMobile({super.key});
@@ -51,6 +53,18 @@ class SettingViewMobile extends StatelessWidget {
                   value: controller.isDarkMode.value,
                   onChanged: controller.changeTheme,
                 ),
+              ),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
+              MyText(
+                text: "Preferences",
+                style: BodyXlargeMedium,
+              ),
+              SizedBox(height: SizeUtils.scale(15, size.width)),
+              SettingCardButton(
+                leadingIcon: Icons.language_rounded,
+                title: "Language",
+                description: "Change the language of the application.",
+                onTap: () => Get.toNamed(Routes.LANGUAGE),
               ),
             ],
           ),

@@ -12,19 +12,19 @@ class OnBoardController extends GetxController {
       title: 'Seamless Time Tracking',
       description:
           'Effortlessly track your work hours and manage your time with TimeSync360. Say goodbye to manual record-keeping and welcome a smarter way to log your attendance.',
-      image: onboard1,
+      image: SvgAssets.onboard1,
     ),
     OnBoardModel(
       title: 'Boost Productivity',
       description:
           'TimeSync360 helps you stay organized by providing a user-friendly platform for managing your daily attendance. Enhance your productivity with precise time tracking and insightful reports.',
-      image: onboard2,
+      image: SvgAssets.onboard2,
     ),
     OnBoardModel(
       title: 'Achieve Your Goals',
       description:
           'Set, track, and conquer your time management goals effortlessly with TimeSync360. Whether it\'s meeting project deadlines or achieving personal milestones, we\'ve got your time goals covered.',
-      image: onboard3,
+      image: SvgAssets.onboard3,
     ),
   ];
   RxInt currentIndex = 0.obs;

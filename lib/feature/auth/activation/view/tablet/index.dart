@@ -46,7 +46,7 @@ class ActivationViewTablet extends StatelessWidget {
                       SizedBox(
                         width: size.width * 0.8,
                         child: Lottie.asset(
-                          lottieActivation,
+                          LottieAssets.lottieActivation,
                           fit: BoxFit.cover,
                         ),
                       ),

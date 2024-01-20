@@ -23,4 +23,5 @@ abstract class Routes {
   static const ADMIN_LEAVE_REQUEST = '/admin_leave_request';
   static const WORKING_HOUR = '/working_hour';
   static const AVATAR = '/avatar';
+  static const LANGUAGE = '/language';
 }

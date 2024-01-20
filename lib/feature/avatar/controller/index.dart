@@ -3,18 +3,18 @@ import 'package:get/get.dart';
 
 class AvatarController extends GetxController {
   List<String> avatars = [
-    profileB1,
-    profileB2,
-    profileB3,
-    profileB4,
-    profileB5,
-    profileB6,
-    profileG1,
-    profileG2,
-    profileG3,
-    profileG4,
-    profileG5,
-    profileG6,
+    ProfileImageAssets.profileB1,
+    ProfileImageAssets.profileB2,
+    ProfileImageAssets.profileB3,
+    ProfileImageAssets.profileB4,
+    ProfileImageAssets.profileB5,
+    ProfileImageAssets.profileB6,
+    ProfileImageAssets.profileG1,
+    ProfileImageAssets.profileG2,
+    ProfileImageAssets.profileG3,
+    ProfileImageAssets.profileG4,
+    ProfileImageAssets.profileG5,
+    ProfileImageAssets.profileG6,
   ].obs;
 
   void pickImage(String image) {

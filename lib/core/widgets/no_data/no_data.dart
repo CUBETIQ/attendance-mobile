@@ -22,7 +22,7 @@ class MyNoData extends StatelessWidget {
               width: 85,
               height: 85,
               child: SvgPicture.asset(
-                empty,
+                SvgAssets.empty,
               ),
             ),
             const SizedBox(height: AppSize.paddingS5),

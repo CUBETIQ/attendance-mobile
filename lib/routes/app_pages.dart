@@ -22,8 +22,9 @@ import 'package:attendance_app/feature/onboard/view/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
 import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
 import 'package:attendance_app/feature/report/report_binding.dart';
-import 'package:attendance_app/feature/setting/setting_binding.dart';
-import 'package:attendance_app/feature/setting/view/index.dart';
+import 'package:attendance_app/feature/setting/choose_language/view/index.dart';
+import 'package:attendance_app/feature/setting/setting/setting_binding.dart';
+import 'package:attendance_app/feature/setting/setting/view/index.dart';
 import 'package:attendance_app/feature/splash/splash_binding.dart';
 import 'package:attendance_app/feature/splash/view/index.dart';
 import 'package:attendance_app/feature/employee/add_employee/view/index.dart';
@@ -123,6 +124,10 @@ class AppPages {
     GetPage(
       name: Routes.AVATAR,
       page: () => const AvatarView(),
+    ),
+    GetPage(
+      name: Routes.LANGUAGE,
+      page: () => const ChangeLanguageView(),
     ),
   ];
 }

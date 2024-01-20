@@ -87,7 +87,7 @@ class StaffController extends GetxController {
           getAllStaffs();
           Get.back();
         },
-        image: delete,
+        image: SvgAssets.delete,
       );
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -98,7 +98,7 @@ class StaffController extends GetxController {
   void onTapStaff(UserModel staff) {
     getOptionsBottomSheet(
       Get.context!,
-      image: option,
+      image: SvgAssets.option,
       onTapEdit: () {
         Get.toNamed(
           Routes.ADD_STAFF,

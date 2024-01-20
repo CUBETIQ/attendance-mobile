@@ -45,7 +45,7 @@ class ActivationViewMobile extends StatelessWidget {
                         child: SizedBox(
                           width: size.width * 0.8,
                           child: Lottie.asset(
-                            lottieActivation,
+                            LottieAssets.lottieActivation,
                             fit: BoxFit.cover,
                           ),
                         ),

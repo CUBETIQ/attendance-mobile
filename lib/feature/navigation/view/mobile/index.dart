@@ -111,7 +111,7 @@ class MainScreen extends StatelessWidget {
                 (item) => NavigationDestination(
                   icon: Icon(item.icon),
                   selectedIcon: Icon(item.selectedIcon),
-                  label: item.title,
+                  label: item.title.tr,
                 ),
               )
               .toList(),

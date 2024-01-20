@@ -32,7 +32,7 @@ class SplashViewMobile extends StatelessWidget {
                 ),
                 height: SizeUtils.scale(100, size.width),
                 child: Image.asset(
-                  logoTimeSync360,
+                  ImageAssets.logoTimeSync360,
                 ),
               ),
             ),

@@ -37,8 +37,13 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
     initDate();
     initAdminFunction();
-    getAttendance();
-    getLeave();
+    initFunction();
+  }
+
+  Future<void> initFunction() async {
+    await getAttendance();
+    await getLeave();
+    onDaySelected(DateTime.now(), DateTime.now());
   }
 
   Future<void> onRefresh() async {

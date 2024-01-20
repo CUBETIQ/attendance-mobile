@@ -46,11 +46,11 @@ class HomeAdminMobileView extends StatelessWidget {
                     padding: EdgeInsets.only(
                       left: SizeUtils.scale(
                         AppSize.paddingHorizontalLarge,
-                        MediaQuery.of(context).size.width,
+                        size.width,
                       ),
                       right: SizeUtils.scale(
                         AppSize.paddingHorizontalLarge,
-                        MediaQuery.of(context).size.width,
+                        size.width,
                       ),
                       top: SizeUtils.scale(
                           AppSize.paddingVerticalLarge, size.width),
@@ -58,10 +58,6 @@ class HomeAdminMobileView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MyText(
-                            text: "You have @count mails.".trParams({
-                          "count": "5",
-                        })),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

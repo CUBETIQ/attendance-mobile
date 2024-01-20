@@ -23,7 +23,7 @@ class SplashViewTablet extends StatelessWidget {
                 width: 400,
                 height: 250,
                 child: SvgPicture.asset(
-                  logo,
+                  SvgAssets.logo,
                 ),
               ),
             ),

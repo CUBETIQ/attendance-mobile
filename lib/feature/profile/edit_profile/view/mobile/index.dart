@@ -53,14 +53,14 @@ class EditProfileViewMobile extends StatelessWidget {
               const SizedBox(height: AppSize.paddingS17),
               MyTextFieldForm(
                 hasLabel: true,
-                label: "Firstname",
+                label: "First Name",
                 hintText: "Enter your firstname",
                 textController: controller.firstnameController,
               ),
               const SizedBox(height: AppSize.paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
-                label: "Lastname",
+                label: "Last Name",
                 hintText: "Enter your lastname",
                 textController: controller.lastnameController,
               ),

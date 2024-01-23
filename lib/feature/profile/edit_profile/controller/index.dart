@@ -68,8 +68,9 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> updateProfile() async {
-    if (MyTextFieldFormController.findController('Firstname').isValid &&
-        MyTextFieldFormController.findController('Lastname').isValid) {
+    validate();
+    if (MyTextFieldFormController.findController('First Name').isValid &&
+        MyTextFieldFormController.findController('Last Name').isValid) {
       isLoading.value = true;
       try {
         UpdateProfileModel input = UpdateProfileModel(
@@ -133,7 +134,7 @@ class EditProfileController extends GetxController {
   }
 
   void validate() {
-    MyTextFieldFormController.findController('Firstname').isValid;
-    MyTextFieldFormController.findController('Lastname').isValid;
+    MyTextFieldFormController.findController('First Name').isValid;
+    MyTextFieldFormController.findController('Last Name').isValid;
   }
 }

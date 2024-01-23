@@ -81,6 +81,13 @@ class AddStaffViewMobile extends StatelessWidget {
                       textController: controller.passwordController,
                     ),
               SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              MyTextFieldForm(
+                hasLabel: true,
+                label: "Email",
+                hintText: "Enter your email",
+                textController: controller.emailController,
+              ),
+              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Role",
@@ -136,14 +143,14 @@ class AddStaffViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
-                label: "Firstname",
+                label: "First Name",
                 hintText: "Enter your firstname",
                 textController: controller.firstnameController,
               ),
               SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
-                label: "Lastname",
+                label: "Last Name",
                 hintText: "Enter your lastname",
                 textController: controller.lastnameController,
               ),

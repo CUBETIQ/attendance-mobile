@@ -25,6 +25,7 @@ import '../../../../utils/types_helper/state.dart';
 class AddStaffController extends GetxController {
   RxString title = "Add Employee".obs;
   TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
@@ -76,6 +77,7 @@ class AddStaffController extends GetxController {
         firstnameController.text = staff.value.firstName ?? "";
         lastnameController.text = staff.value.lastName ?? "";
         addressController.text = staff.value.address ?? "";
+        emailController.text = staff.value.email ?? "";
         dobController.text =
             DateFormatter().formatMillisecondsToDOB(staff.value.dateOfBirth);
         dob.value = staff.value.dateOfBirth;
@@ -100,7 +102,8 @@ class AddStaffController extends GetxController {
   Future<void> onTapAddStaff() async {
     validate(true);
     if (MyTextFieldFormController.findController('Username').isValid &&
-        MyTextFieldFormController.findController('Password').isValid) {
+        MyTextFieldFormController.findController('Password').isValid &&
+        MyTextFieldFormController.findController('Email').isValid) {
       try {
         CreateStaffModel input = CreateStaffModel(
           username: usernameController.text,
@@ -117,6 +120,7 @@ class AddStaffController extends GetxController {
           departmentId: selectedDepartment.value?.id,
           organizationId: NavigationController.to.organization.value.id,
           positionId: selectedPosition.value?.id,
+          email: emailController.text,
         );
         await AddStaffService().addStaff(input);
         await StaffController.to.getAllStaffs();
@@ -146,6 +150,7 @@ class AddStaffController extends GetxController {
           departmentId: selectedDepartment.value?.id,
           organizationId: NavigationController.to.organization.value.id,
           positionId: selectedPosition.value?.id,
+          email: emailController.text,
         );
         await AddStaffService().updateStaff(input: input, id: staff.value.id!);
         await StaffController.to.getAllStaffs();
@@ -201,6 +206,7 @@ class AddStaffController extends GetxController {
 
   void validate(bool? validatePassword) {
     MyTextFieldFormController.findController('Username').isValid;
+    MyTextFieldFormController.findController('Email').isValid;
     if (validatePassword != null && validatePassword == true) {
       MyTextFieldFormController.findController('Password').isValid;
     }

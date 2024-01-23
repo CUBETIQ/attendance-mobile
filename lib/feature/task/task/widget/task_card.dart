@@ -13,6 +13,7 @@ class TaskCard extends StatelessWidget {
   final TaskModel task;
   final void Function()? onTap;
   final void Function(bool?)? onCheck;
+  final void Function()? onTapCompleted;
   final String? color;
   final String? icon;
 
@@ -23,13 +24,14 @@ class TaskCard extends StatelessWidget {
     this.onCheck,
     this.color,
     this.icon,
+    this.onTapCompleted,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: task.status == TaskStatus.completed ? null : onTap,
+      onTap: task.status == TaskStatus.completed ? onTapCompleted : onTap,
       child: Container(
         width: size.width,
         decoration: BoxDecoration(
@@ -121,18 +123,6 @@ class TaskCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: SizeUtils.scale(AppSize.paddingS1, size.width),
-                    ),
-                    task.description == null || task.description == ""
-                        ? const SizedBox.shrink()
-                        : MyText(
-                            text: task.description ?? "Task Description",
-                            maxLines: 5,
-                            style: BodyMediumRegular.copyWith(
-                              color: Theme.of(context).colorScheme.outline,
-                            ),
-                          ),
                     SizedBox(
                       height: SizeUtils.scale(AppSize.paddingS1, size.width),
                     ),

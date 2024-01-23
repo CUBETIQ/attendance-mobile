@@ -105,6 +105,9 @@ class TaskViewMobile extends StatelessWidget {
                           onTap: () => controller.onTapTask(
                             controller.tasks[index],
                           ),
+                          onTapCompleted: () => controller.onTapCompleteTask(
+                            controller.tasks[index],
+                          ),
                           onCheck: (value) => controller.completeTask(
                             controller.tasks[index].id!,
                           ),

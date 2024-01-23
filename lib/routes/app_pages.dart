@@ -33,6 +33,8 @@ import 'package:attendance_app/feature/employee/employee/view/index.dart';
 import 'package:attendance_app/feature/employee/employee_detail/view/index.dart';
 import 'package:attendance_app/feature/task/add_task/view/index.dart';
 import 'package:attendance_app/feature/task/task/task_binding.dart';
+import 'package:attendance_app/feature/task/task_detail/task_binding.dart';
+import 'package:attendance_app/feature/task/task_detail/view/index.dart';
 import 'package:get/get.dart';
 part 'app_routes.dart';
 
@@ -71,6 +73,11 @@ class AppPages {
         LeaveBinding(),
         ReportBinding(),
       ],
+    ),
+    GetPage(
+      name: Routes.TASK_DETAIL,
+      page: () => const TaskDetailView(),
+      binding: TaskDetailBinding(),
     ),
     GetPage(
       name: Routes.EDIT_PROFILE,

@@ -12,6 +12,7 @@ class UpdateStaffModel {
   final String? address;
   final String? status;
   final String? image;
+  final String? email;
 
   UpdateStaffModel({
     this.username,
@@ -26,6 +27,7 @@ class UpdateStaffModel {
     this.address,
     this.status,
     this.image,
+    this.email,
     this.gender,
   });
 
@@ -43,6 +45,7 @@ class UpdateStaffModel {
       "address": address,
       "status": status,
       "image": image,
+      "email": email,
       "gender": gender,
     };
   }

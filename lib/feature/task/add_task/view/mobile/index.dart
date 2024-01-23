@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/core/widgets/button/back_button.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/color_picker/rounded_color_picker.dart';
+import 'package:attendance_app/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:attendance_app/core/widgets/icon_picker/rounded_icon_picker.dart';
 import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
 import 'package:attendance_app/core/widgets/textfield/date_picker_field.dart';
@@ -79,6 +80,24 @@ class AddTaskViewMobile extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: AppSize.paddingS5),
+              Obx(
+                () => MyDropDownButton<String>(
+                  label: "Priority",
+                  value: controller.selectPriority.value,
+                  hint: "Choose position",
+                  dropdownItems: controller.priority
+                      .map(
+                        (e) => DropdownMenuItem<String>(
+                          value: e,
+                          child: Text(e.capitalizeFirst),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) =>
+                      controller.selectPriority.value = value!,
+                ),
               ),
               const SizedBox(height: AppSize.paddingS5),
               MyTextFieldForm(

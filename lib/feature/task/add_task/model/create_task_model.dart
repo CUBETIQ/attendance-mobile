@@ -5,6 +5,7 @@ class CreateTaskModel {
   final int? endDate;
   final String? color;
   final String? icon;
+  final String? priority;
 
   CreateTaskModel({
     this.name,
@@ -13,6 +14,7 @@ class CreateTaskModel {
     this.endDate,
     this.color,
     this.icon,
+    this.priority,
   });
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,7 @@ class CreateTaskModel {
       "endDate": endDate,
       "color": color,
       "icon": icon,
+      "priority": priority,
     };
   }
 }

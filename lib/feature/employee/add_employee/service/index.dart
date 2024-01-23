@@ -13,7 +13,7 @@ class AddStaffService {
       Endpoints.instance.staff,
       data: data,
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception("Create staff failed");
     }
   }

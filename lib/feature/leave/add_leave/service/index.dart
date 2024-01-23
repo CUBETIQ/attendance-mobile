@@ -12,7 +12,7 @@ class AddLeaveService {
       Endpoints.instance.leave,
       data: data,
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception("Add leave failed");
     }
   }

@@ -64,6 +64,7 @@ class ChangeLanguageViewMobile extends StatelessWidget {
                   isSelected: controller.isSelected.value[index],
                   onTap: () => controller.changeLanguage(
                     controller.language.value[index],
+                    size,
                   ),
                 ),
               ),

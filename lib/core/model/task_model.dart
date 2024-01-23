@@ -13,6 +13,8 @@ class TaskModel extends BaseModel<TaskModel> {
   final int? endDate;
   final String? color;
   final String? icon;
+  final String? priority;
+  final List<String>? attachment;
 
   TaskModel({
     this.id,
@@ -23,10 +25,12 @@ class TaskModel extends BaseModel<TaskModel> {
     this.name,
     this.description,
     this.status,
+    this.priority,
     this.startDate,
     this.endDate,
     this.color,
     this.icon,
+    this.attachment,
   });
 
   @override
@@ -44,9 +48,13 @@ class TaskModel extends BaseModel<TaskModel> {
       description: json['description'],
       status: json['status'],
       startDate: json['startDate'],
+      priority: json['priority'],
       endDate: json['endDate'],
       color: json['color'],
       icon: json['icon'],
+      attachment: json['attachment'] != null
+          ? List<String>.from(json['attachment'])
+          : null,
     );
   }
 
@@ -69,10 +77,12 @@ class TaskModel extends BaseModel<TaskModel> {
       "name": name,
       "description": description,
       "status": status,
+      "priority": priority,
       "startDate": startDate,
       "endDate": endDate,
       "color": color,
       "icon": icon,
+      "attachment": attachment,
     };
   }
 }

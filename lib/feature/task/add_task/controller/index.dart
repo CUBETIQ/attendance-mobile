@@ -9,6 +9,7 @@ import 'package:attendance_app/feature/task/add_task/service/index.dart';
 import 'package:attendance_app/feature/task/task/controller/index.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/state.dart';
+import 'package:attendance_app/utils/types_helper/task_priority.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,6 +27,12 @@ class AddTaskController extends GetxController {
   Rxn<String> stringIcon = Rxn<String>(null);
   RxString appState = AppState.Create.obs;
   Rxn<TaskModel> task = Rxn<TaskModel>(null);
+  RxList<String> priority = [
+    TaskPriority.low,
+    TaskPriority.medium,
+    TaskPriority.high,
+  ].obs;
+  RxString selectPriority = TaskPriority.low.obs;
   late Color screenPickerColor;
   @override
   void onInit() {
@@ -45,6 +52,7 @@ class AddTaskController extends GetxController {
           endDate: endDate.value,
           color: stringColor.value,
           icon: stringIcon.value,
+          priority: selectPriority.value,
         );
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
@@ -68,6 +76,7 @@ class AddTaskController extends GetxController {
           endDate: endDate.value,
           color: stringColor.value,
           icon: stringIcon.value,
+          priority: selectPriority.value,
         );
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
@@ -90,6 +99,7 @@ class AddTaskController extends GetxController {
         appState.value = AppState.Edit;
         task.value = Get.arguments["task"];
         taskController.text = task.value?.name ?? '';
+        selectPriority.value = task.value?.priority ?? TaskPriority.low;
         startDateController.text =
             DateFormatter().formatMillisecondsToDOB(task.value?.startDate ?? 0);
         endDateController.text =

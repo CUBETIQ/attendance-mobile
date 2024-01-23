@@ -13,6 +13,7 @@ class CreateStaffModel {
   final String? address;
   final String? status;
   final String? image;
+  final String? email;
 
   CreateStaffModel({
     this.username,
@@ -29,6 +30,7 @@ class CreateStaffModel {
     this.status,
     this.image,
     this.gender,
+    this.email,
   });
 
   Map<String, dynamic> toJson() {
@@ -47,6 +49,7 @@ class CreateStaffModel {
       "status": status,
       "image": image,
       "gender": gender,
+      "email": email,
     };
   }
 }

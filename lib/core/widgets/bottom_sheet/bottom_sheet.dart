@@ -375,6 +375,78 @@ void getEditAndDeleteBottomSheet(
   );
 }
 
+void getEditDeleteViewBottomSheet(
+  BuildContext context, {
+  bool? isDismissible,
+  required String image,
+  void Function()? onTapDelete,
+  void Function()? onTapEdit,
+  void Function()? onTapView,
+  String? title,
+  String? description,
+}) {
+  final size = MediaQuery.of(context).size;
+  Get.bottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50 * (size.width / 375.0)),
+        topRight: Radius.circular(50 * (size.width / 375.0)),
+      ),
+    ),
+    isDismissible: isDismissible ?? true,
+    Container(
+      width: size.width,
+      height: SizeUtils.scale(435, size.width),
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+          top: AppSize.paddingTitleSmall,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width * 0.65,
+              height: size.height * 0.22,
+              child: SvgPicture.asset(
+                image,
+              ),
+            ),
+            SizedBox(height: SizeUtils.scale(35, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.visibility_rounded,
+              title: "View Detail",
+              onTap: onTapView,
+            ),
+            SizedBox(height: SizeUtils.scale(5, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.edit_rounded,
+              title: "Edit",
+              onTap: onTapEdit,
+            ),
+            SizedBox(height: SizeUtils.scale(5, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: Icons.delete_rounded,
+              title: "Delete",
+              onTap: onTapDelete,
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 void getPickImageButtomSheet(
   BuildContext context, {
   bool? isDismissible,

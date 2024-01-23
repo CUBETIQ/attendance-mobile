@@ -9,6 +9,7 @@ abstract class Routes {
   static const LOGIN = '/login';
   static const NAVIGATION = '/navigation';
   static const TASK = '/task';
+  static const TASK_DETAIL = '/task_detail';
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/edit_profile';
   static const ADD_TASK = '/add_task';

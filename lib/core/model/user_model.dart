@@ -9,6 +9,7 @@ class UserModel extends BaseModel<UserModel> {
   final String? gender;
   final String? positionId;
   final String? status;
+  final String? email;
   final String? departmentId;
   final String? firstName;
   final String? lastName;
@@ -29,6 +30,7 @@ class UserModel extends BaseModel<UserModel> {
     this.status,
     this.firstName,
     this.lastName,
+    this.email,
     this.dateOfBirth,
     this.address,
     this.image,
@@ -41,21 +43,23 @@ class UserModel extends BaseModel<UserModel> {
       return UserModel();
     }
     return UserModel(
-        id: json['id'],
-        username: json['username'],
-        organizationId: json['organizationId'],
-        role: json['role'],
-        name: json['name'],
-        positionId: json['positionId'],
-        status: json['status'],
-        departmentId: json['departmentId'],
-        firstName: json['firstName'],
-        lastName: json['lastName'],
-        dateOfBirth: json['dateOfBirth'],
-        address: json['address'],
-        image: json['image'],
-        enabled: json['enabled'],
-        gender: json['gender']);
+      id: json['id'],
+      username: json['username'],
+      organizationId: json['organizationId'],
+      role: json['role'],
+      name: json['name'],
+      positionId: json['positionId'],
+      status: json['status'],
+      departmentId: json['departmentId'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      dateOfBirth: json['dateOfBirth'],
+      address: json['address'],
+      image: json['image'],
+      enabled: json['enabled'],
+      gender: json['gender'],
+      email: json['email'],
+    );
   }
 
   @override
@@ -83,6 +87,7 @@ class UserModel extends BaseModel<UserModel> {
       'image': image,
       'enabled': enabled,
       'gender': gender,
+      'email': email,
     };
   }
 }

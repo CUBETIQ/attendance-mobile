@@ -116,9 +116,18 @@ class TaskController extends GetxController {
   }
 
   void onTapTask(TaskModel task) {
-    getEditAndDeleteBottomSheet(
+    getEditDeleteViewBottomSheet(
       Get.context!,
       image: SvgAssets.option,
+      onTapView: () {
+        Get.back();
+        Get.toNamed(
+          Routes.TASK_DETAIL,
+          arguments: {
+            "task": task,
+          },
+        );
+      },
       onTapEdit: () {
         Get.back();
         Get.toNamed(
@@ -132,6 +141,15 @@ class TaskController extends GetxController {
       onTapDelete: () {
         Get.back();
         deleteTask(task.id!);
+      },
+    );
+  }
+
+  void onTapCompleteTask(TaskModel task) {
+    Get.toNamed(
+      Routes.TASK_DETAIL,
+      arguments: {
+        "task": task,
       },
     );
   }

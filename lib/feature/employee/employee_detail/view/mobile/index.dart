@@ -81,6 +81,10 @@ class StaffDetailViewMobile extends StatelessWidget {
                 value: controller.staff.value.lastName,
               ),
               InfoDetailCard(
+                title: "Email",
+                value: controller.staff.value.email,
+              ),
+              InfoDetailCard(
                 title: "Department",
                 value: controller.department.value.name,
               ),

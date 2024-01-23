@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
 import 'package:attendance_app/core/database/isar/service/isar_service.dart';
+import 'package:attendance_app/core/widgets/loading/loading_dialog.dart';
 import 'package:attendance_app/feature/setting/choose_language/model/language_button_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChangeLanguageController extends GetxController {
@@ -40,7 +42,12 @@ class ChangeLanguageController extends GetxController {
     }
   }
 
-  Future<void> changeLanguage(LanguageButtonModel languageButtonModel) async {
+  Future<void> changeLanguage(
+      LanguageButtonModel languageButtonModel, Size size) async {
+    const LoadingDialog().show(
+      size: size,
+      title: "Changing Language",
+    );
     if (selectedLanguage.value == languageButtonModel) return;
     selectedLanguage.value = languageButtonModel;
     isSelected.value = [false, false];
@@ -56,5 +63,7 @@ class ChangeLanguageController extends GetxController {
         language: selectedLanguage.value?.code ?? 'en',
       );
     }
+    await Future.delayed(const Duration(seconds: 1));
+    const LoadingDialog().dismiss();
   }
 }

@@ -34,6 +34,11 @@ class ErrorInterceptor extends dio.Interceptor {
         rethrow;
       }
     }
+
+    if (err.response == null) {
+      Get.offNamed(Routes.ERROR);
+    }
+
     return super.onError(err, handler);
   }
 

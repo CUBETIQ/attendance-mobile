@@ -266,35 +266,4 @@ class HomeStaffMobileView extends StatelessWidget {
       ),
     );
   }
-
-  void _showStatusPopupMenu(BuildContext context) {
-    final List<String> statusOptions = ['Online', 'Away', 'Busy', 'Offline'];
-
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
-    final RenderBox statusDotBox = context.findRenderObject() as RenderBox;
-    final Offset position =
-        statusDotBox.localToGlobal(Offset.zero, ancestor: overlay);
-
-    showMenu(
-      context: context,
-      position: RelativeRect.fromRect(
-        Rect.fromPoints(
-          position,
-          position.translate(statusDotBox.size.width, statusDotBox.size.height),
-        ),
-        Offset.zero & overlay.size,
-      ),
-      items: statusOptions.map((String status) {
-        return PopupMenuItem<String>(
-          value: status,
-          child: Text(status),
-        );
-      }).toList(),
-    ).then((selectedStatus) {
-      if (selectedStatus != null) {
-        // Handle the selected status here, e.g., update the user's status
-      }
-    });
-  }
 }

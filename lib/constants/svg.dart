@@ -33,4 +33,5 @@ class SvgAssets {
   static const String gallery = 'assets/svgs/gallery.svg';
   static const String cambodiaFlag = 'assets/svgs/cambodia.svg';
   static const String usFlag = 'assets/svgs/us.svg';
+  static const String company = 'assets/svgs/company.svg';
 }

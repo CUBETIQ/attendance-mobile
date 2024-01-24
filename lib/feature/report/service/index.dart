@@ -1,4 +1,6 @@
 import 'package:attendance_app/core/model/admin_attendance_report_model.dart';
+import 'package:attendance_app/core/model/admin_leave_report_model.dart';
+import 'package:attendance_app/core/model/admin_task_report_model.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/model/leave_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
@@ -10,21 +12,66 @@ import '../../../core/widgets/console/console.dart';
 class ReportService {
   DioUtil dioInstance = DioUtil();
 
-  Future<List<AdminReportModel>> getStaffReport(
+  Future<List<AdminAttendanceReportModel>> getStaffAttendanceReport(
       {required String organizationId, int? startDate, int? endDate}) async {
-    final List<AdminReportModel>? staffReport;
+    final List<AdminAttendanceReportModel>? staffReport;
     final Map<String, dynamic> queryParameters = {
       "organizationId": organizationId,
       "startDate": startDate,
       "endDate": endDate,
     };
     Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_staff_report,
+      Endpoints.instance.get_staff_attendance_report,
       queryParameters: queryParameters,
     );
 
     if (response.statusCode == 200) {
-      staffReport = AdminReportModel().fromListJson(response.data["data"]);
+      staffReport =
+          AdminAttendanceReportModel().fromListJson(response.data["data"]);
+    } else {
+      Console.log("Failed to get staff report", response.data);
+      throw Exception("Failed to get staff report");
+    }
+    return staffReport;
+  }
+
+  Future<List<AdminTaskReportModel>> getStaffTaskReport(
+      {required String organizationId, int? startDate, int? endDate}) async {
+    final List<AdminTaskReportModel>? staffReport;
+    final Map<String, dynamic> queryParameters = {
+      "organizationId": organizationId,
+      "startDate": startDate,
+      "endDate": endDate,
+    };
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_staff_task_report,
+      queryParameters: queryParameters,
+    );
+
+    if (response.statusCode == 200) {
+      staffReport = AdminTaskReportModel().fromListJson(response.data["data"]);
+    } else {
+      Console.log("Failed to get staff report", response.data);
+      throw Exception("Failed to get staff report");
+    }
+    return staffReport;
+  }
+
+  Future<List<AdminLeaveReportModel>> getStaffLeaveReport(
+      {required String organizationId, int? startDate, int? endDate}) async {
+    final List<AdminLeaveReportModel>? staffReport;
+    final Map<String, dynamic> queryParameters = {
+      "organizationId": organizationId,
+      "startDate": startDate,
+      "endDate": endDate,
+    };
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_staff_leave_report,
+      queryParameters: queryParameters,
+    );
+
+    if (response.statusCode == 200) {
+      staffReport = AdminLeaveReportModel().fromListJson(response.data["data"]);
     } else {
       Console.log("Failed to get staff report", response.data);
       throw Exception("Failed to get staff report");

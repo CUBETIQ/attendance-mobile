@@ -122,7 +122,6 @@ class SplashController extends GetxController
       await initLocalDb();
       init();
     } on DioException catch (e) {
-      Get.offNamed(Routes.ACTIVATION);
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }

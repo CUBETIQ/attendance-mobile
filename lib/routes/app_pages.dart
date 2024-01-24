@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:attendance_app/core/widgets/error_widget/error_view.dart';
 import 'package:attendance_app/feature/auth/activation/activation_binding.dart';
 import 'package:attendance_app/feature/auth/activation/view/index.dart';
 import 'package:attendance_app/feature/auth/change_password/view/index.dart';
@@ -19,6 +20,8 @@ import 'package:attendance_app/feature/navigation/naviation_binding.dart';
 import 'package:attendance_app/feature/navigation/view/index.dart';
 import 'package:attendance_app/feature/onboard/onboard_binding.dart';
 import 'package:attendance_app/feature/onboard/view/index.dart';
+import 'package:attendance_app/feature/organization/organization_binding.dart';
+import 'package:attendance_app/feature/organization/view/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
 import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
 import 'package:attendance_app/feature/report/report_binding.dart';
@@ -119,6 +122,11 @@ class AppPages {
       binding: SettingBinding(),
     ),
     GetPage(
+      name: Routes.ORGANIZATION,
+      page: () => const OrganizationView(),
+      binding: OrganizationBinding(),
+    ),
+    GetPage(
       name: Routes.ADMIN_LEAVE_REQUEST,
       page: () => const AdminLeaveRequestView(),
       binding: AdminLeaveRequestBinding(),
@@ -135,6 +143,10 @@ class AppPages {
     GetPage(
       name: Routes.LANGUAGE,
       page: () => const ChangeLanguageView(),
+    ),
+    GetPage(
+      name: Routes.ERROR,
+      page: () => const ErrorView(),
     ),
   ];
 }

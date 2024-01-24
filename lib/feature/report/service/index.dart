@@ -5,6 +5,8 @@ import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
 
+import '../../../core/widgets/console/console.dart';
+
 class ReportService {
   DioUtil dioInstance = DioUtil();
 
@@ -24,6 +26,7 @@ class ReportService {
     if (response.statusCode == 200) {
       staffReport = AdminReportModel().fromListJson(response.data["data"]);
     } else {
+      Console.log("Failed to get staff report", response.data);
       throw Exception("Failed to get staff report");
     }
     return staffReport;

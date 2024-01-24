@@ -3,7 +3,6 @@ class UpdateProfileModel {
   final String? lastname;
   final int? dob;
   final String? address;
-  final String? status;
   final String? image;
   final String? gender;
 
@@ -12,7 +11,6 @@ class UpdateProfileModel {
     this.lastname,
     this.dob,
     this.address,
-    this.status,
     this.image,
     this.gender,
   });

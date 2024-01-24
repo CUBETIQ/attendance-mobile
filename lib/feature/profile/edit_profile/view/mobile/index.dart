@@ -97,24 +97,6 @@ class EditProfileViewMobile extends StatelessWidget {
                 hintText: "Enter your address",
                 textController: controller.addressController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
-              Obx(
-                () => MyDropDownButton<String>(
-                  label: "Status",
-                  hint: "Choose Status",
-                  value: controller.selectedStatus.value,
-                  dropdownItems: controller.status
-                      .map(
-                        (e) => DropdownMenuItem<String>(
-                          value: e,
-                          child: Text(e.capitalizeFirst),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) =>
-                      controller.selectedStatus.value = value!,
-                ),
-              ),
               SizedBox(height: size.height * 0.06),
               MyButton(
                 title: "Save",

@@ -17,6 +17,7 @@ import 'package:attendance_app/utils/attendance_util.dart';
 import 'package:attendance_app/utils/types_helper/attendance_method.dart';
 import 'package:attendance_app/utils/types_helper/role.dart';
 import 'package:attendance_app/utils/time_util.dart';
+import 'package:attendance_app/utils/types_helper/user_status.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,6 +58,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     "Check In",
     "Check Out",
   ].obs;
+  RxList<String> status = <String>[
+    UserStatus.active,
+    UserStatus.doNotDisturb,
+    UserStatus.idle,
+  ].obs;
+  RxString selectedStatus = UserStatus.active.obs;
   RxString selectedAttendanceType = "Check In".obs;
   Rxn<String> name = Rxn<String>(null);
   var isLoadingSummary = false.obs;
@@ -247,6 +254,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  Future<void> updateUserStatus(String status) async {
+    try {
+      await HomeService().updateUserStatus(status);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
   Future<void> getAttendance() async {
     isLoadingList.value = true;
     try {
@@ -411,6 +427,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  void onSelectStatus(String? value) {
+    if (selectedStatus.value != value) {
+      selectedStatus.value = value!;
+      updateUserStatus(selectedStatus.value);
+    }
+  }
+
   void initDate() {
     startOfDay.value = DateTime(date.year, date.month, date.day, 0, 0, 0)
         .millisecondsSinceEpoch;
@@ -450,6 +473,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   void getUsername() {
     user.value = NavigationController.to.user.value;
+    selectedStatus.value = user.value.status ?? UserStatus.active;
     if (user.value.firstName != null ||
         user.value.firstName != "" ||
         user.value.lastName != null ||

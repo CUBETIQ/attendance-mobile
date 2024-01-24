@@ -10,7 +10,6 @@ import 'package:attendance_app/feature/profile/edit_profile/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/gender.dart';
-import 'package:attendance_app/utils/types_helper/user_status.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +27,11 @@ class EditProfileController extends GetxController {
   Rxn<String> backUpImage = Rxn<String>(null);
   Rxn<int> dob = Rxn<int>(null);
   Rxn<File> imageFile = Rxn<File>(null);
-  List<String> status = [
-    UserStatus.active,
-    UserStatus.doNotDisturb,
-    UserStatus.idle,
-  ];
   RxList<String> genderList = [
     Gender.female,
     Gender.male,
     Gender.other,
   ].obs;
-  Rxn<String> selectedStatus = Rxn<String>(null);
   Rxn<String> selectedGender = Rxn<String>(null);
 
   @override
@@ -55,7 +48,6 @@ class EditProfileController extends GetxController {
     image.value = user.value.image;
     backUpImage.value = user.value.image;
     selectedGender.value = user.value.gender;
-    selectedStatus.value = user.value.status;
     if (user.value.dateOfBirth != null &&
         user.value.dateOfBirth.toString().length > 5) {
       dobController.text =
@@ -79,7 +71,6 @@ class EditProfileController extends GetxController {
           dob: dob.value,
           address: addressController.text,
           image: image.value,
-          status: selectedStatus.value,
           gender: selectedGender.value,
         );
         await EditProfileService().updateProfile(input);

@@ -36,6 +36,6 @@ class Endpoints {
   String get get_dashboard_chart => "/app/attendance-charts";
   String get staff => "/app/staffs/";
   String get change_staff_password => "/app/staffs/password/";
-  String get get_staff_report => "/app/admin-attendance-reports";
+  String get get_staff_report => "/app/admin-reports/attendance-report";
   String get get_translation => "/app/translate";
 }

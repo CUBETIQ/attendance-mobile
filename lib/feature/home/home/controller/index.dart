@@ -6,10 +6,12 @@ import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
 import 'package:attendance_app/feature/home/home/model/check_out_model.dart';
+import 'package:attendance_app/feature/home/home/model/update_user_status_model.dart';
 import 'package:attendance_app/feature/home/home/service/index.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/feature/profile/profile/controller/index.dart';
@@ -256,7 +258,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   Future<void> updateUserStatus(String status) async {
     try {
-      await HomeService().updateUserStatus(status);
+      UpdateUserStatusModel input = UpdateUserStatusModel(
+        status: status,
+        lastUpdatedAt: DateTime.now().toIso8601String(),
+      );
+      await HomeService().updateUserStatus(input);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -473,7 +479,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   void getUsername() {
     user.value = NavigationController.to.user.value;
-    selectedStatus.value = user.value.status ?? UserStatus.active;
+    selectedStatus.value =
+        NavigationController.to.userStatus.value.status ?? UserStatus.active;
+    Console.log(
+        "selectedStatus ", NavigationController.to.userStatus.value.status);
     if (user.value.firstName != null ||
         user.value.firstName != "" ||
         user.value.lastName != null ||

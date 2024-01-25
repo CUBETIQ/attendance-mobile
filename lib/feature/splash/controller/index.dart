@@ -5,6 +5,7 @@ import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
+import 'package:attendance_app/core/model/user_status_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/splash/service/index.dart';
 import 'package:attendance_app/routes/app_pages.dart';
@@ -25,6 +26,7 @@ class SplashController extends GetxController
       LocalStorageController.getInstance();
   Rx<LocalStorage> localData = LocalStorage().obs;
   Rx<DepartmentModel> department = DepartmentModel().obs;
+  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
   Rx<OrganizationModel> organization = OrganizationModel().obs;
 
   @override
@@ -48,6 +50,7 @@ class SplashController extends GetxController
   Future<void> initLocalDb() async {
     if (localData.value.accessToken != null) {
       await fetchMe();
+      await getUserStatus();
       if (user.value.positionId != null && user.value.positionId != "") {
         await getPosition();
       }
@@ -66,11 +69,21 @@ class SplashController extends GetxController
         "position": position.value,
         "department": department.value,
         "organization": organization.value,
+        "userStatus": userStatus.value,
       });
     } else if (localData.value.isFirstTime == false) {
       Get.offNamed(Routes.LOGIN);
     } else {
       Get.offNamed(Routes.ONBOARD);
+    }
+  }
+
+  Future<void> getUserStatus() async {
+    try {
+      userStatus.value = await SplashService().getUserStatus();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
     }
   }
 

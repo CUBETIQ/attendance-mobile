@@ -6,7 +6,6 @@ import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/model/user_status_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
 import 'package:attendance_app/feature/home/home/model/check_out_model.dart';
 import 'package:attendance_app/feature/home/home/model/update_user_status_model.dart';
@@ -202,6 +201,6 @@ class HomeService {
       throw Exception("Get user status failed");
     }
 
-    return UserStatusModel();
+    return status;
   }
 }

@@ -2,6 +2,7 @@ import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
+import 'package:attendance_app/core/model/user_status_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
@@ -91,5 +92,18 @@ class LoginService {
       throw Exception("Get organization failed");
     }
     return organization;
+  }
+
+  Future<UserStatusModel> getUserStatus() async {
+    final UserStatusModel? status;
+    dio.Response response = await dioInstance.dio.get(
+      Endpoints.instance.user_status,
+    );
+    if (response.statusCode == 200) {
+      status = UserStatusModel().fromJson(response.data["data"]);
+    } else {
+      throw Exception("Get user status failed");
+    }
+    return status;
   }
 }

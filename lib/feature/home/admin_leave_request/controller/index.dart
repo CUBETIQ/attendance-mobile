@@ -1,6 +1,5 @@
 import 'package:attendance_app/core/model/leave_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/service/index.dart';
@@ -38,7 +37,6 @@ class AdminLeaveRequestController extends GetxController {
         endDate: endDate.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
-      Console.log("date", [startDate.value, endDate.value]);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

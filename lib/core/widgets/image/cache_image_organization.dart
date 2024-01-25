@@ -10,6 +10,7 @@ class MyCacheImageOrganization extends StatelessWidget {
   final double? height;
   final double? imageWidth;
   final double? imageHeight;
+  final BoxBorder? border;
 
   const MyCacheImageOrganization({
     super.key,
@@ -18,6 +19,7 @@ class MyCacheImageOrganization extends StatelessWidget {
     this.height,
     this.imageWidth,
     this.imageHeight,
+    this.border,
   });
 
   @override
@@ -58,6 +60,7 @@ class MyCacheImageOrganization extends StatelessWidget {
                       image: imageProvider,
                       fit: BoxFit.cover,
                     ),
+                    border: border,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.4),
@@ -68,8 +71,31 @@ class MyCacheImageOrganization extends StatelessWidget {
                     ],
                   ),
                 ),
-                placeholder: (context, url) => CircularProgressIndicator(
-                  color: Theme.of(context).colorScheme.primary,
+                placeholder: (context, url) => Container(
+                  width: width ?? 55,
+                  height: height ?? 55,
+                  clipBehavior: Clip.antiAlias,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.4),
+                        spreadRadius: 2,
+                        blurRadius: 3,
+                        offset: const Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                  child: SizedBox(
+                    width: (width ?? 55) / 4,
+                    height: (height ?? 55) / 4,
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                 ),
                 errorWidget: (context, url, error) => Container(
                   width: width ?? 55,

@@ -14,6 +14,7 @@ class MyButton extends StatelessWidget {
   final bool? isIconButton;
   final EdgeInsetsGeometry? margin;
   final IconData? icon;
+  final double? iconSize;
 
   const MyButton({
     super.key,
@@ -27,6 +28,7 @@ class MyButton extends StatelessWidget {
     this.isIconButton = false,
     this.margin,
     this.icon,
+    this.iconSize,
   });
 
   @override
@@ -52,6 +54,7 @@ class MyButton extends StatelessWidget {
                   Icon(
                     icon ?? Icons.check_circle_outline_rounded,
                     color: Theme.of(context).colorScheme.onPrimary,
+                    size: iconSize,
                   ),
                   SizedBox(width: size.width * 0.01),
                   MyText(

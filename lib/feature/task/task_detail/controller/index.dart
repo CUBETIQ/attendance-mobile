@@ -1,5 +1,4 @@
 import 'package:attendance_app/core/model/task_model.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:get/get.dart';
 
 class TaskDetailController extends GetxController {
@@ -14,6 +13,5 @@ class TaskDetailController extends GetxController {
 
   void getArgument() {
     task.value = Get.arguments["task"];
-    Console.log("Task Detail", task.value);
   }
 }

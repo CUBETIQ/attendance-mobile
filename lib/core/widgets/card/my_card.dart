@@ -12,6 +12,7 @@ class MyCard extends StatelessWidget {
     this.padding,
     this.margin,
     this.borderRadius,
+    this.boxShadow,
   });
 
   final double? width;
@@ -21,6 +22,7 @@ class MyCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final BorderRadiusGeometry? borderRadius;
+  final List<BoxShadow>? boxShadow;
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +46,15 @@ class MyCard extends StatelessWidget {
               ),
             ),
         color: backgroundColor ?? Theme.of(context).colorScheme.background,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.15),
-            spreadRadius: 1.5,
-            blurRadius: 1.5,
-            offset: const Offset(0, 0),
-          ),
-        ],
+        boxShadow: boxShadow ??
+            [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.15),
+                spreadRadius: 1.5,
+                blurRadius: 1.5,
+                offset: const Offset(0, 0),
+              ),
+            ],
       ),
       child: child,
     );

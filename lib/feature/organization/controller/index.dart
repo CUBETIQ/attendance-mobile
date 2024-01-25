@@ -1,4 +1,6 @@
+import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
+import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
@@ -10,11 +12,15 @@ class OrganizationController extends GetxController {
   static OrganizationController get to => Get.find();
   Rx<OrganizationModel> organization = OrganizationModel().obs;
   RxList<UserModel> staffs = <UserModel>[].obs;
+  RxList<PositionModel> positions = <PositionModel>[].obs;
+  RxList<DepartmentModel> departments = <DepartmentModel>[].obs;
 
   @override
   void onInit() {
     super.onInit();
     getOrganization();
+    getAllPositions();
+    getAllDepartments();
     getAllStaffs();
   }
 
@@ -32,6 +38,28 @@ class OrganizationController extends GetxController {
   Future<void> getAllStaffs() async {
     try {
       staffs.value = await OrganizationService().getAllStaffs(
+        organizationId: NavigationController.to.organization.value.id ?? "",
+      );
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
+  Future<void> getAllPositions() async {
+    try {
+      positions.value = await OrganizationService().getAllPosition(
+        organizationId: NavigationController.to.organization.value.id ?? "",
+      );
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
+  Future<void> getAllDepartments() async {
+    try {
+      departments.value = await OrganizationService().getDepartment(
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
     } on DioException catch (e) {

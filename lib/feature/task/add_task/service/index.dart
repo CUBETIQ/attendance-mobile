@@ -1,6 +1,5 @@
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/feature/task/add_task/model/create_task_model.dart';
 import 'package:dio/dio.dart';
 
@@ -14,7 +13,6 @@ class AddTaskService {
       data: data,
     );
     if (response.statusCode != 201) {
-      Console.log("Add Task", response.data);
       throw Exception("Add task failed");
     }
   }

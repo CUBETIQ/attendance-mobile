@@ -5,6 +5,7 @@ import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
+import 'package:attendance_app/core/model/user_status_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
@@ -64,6 +65,7 @@ class NavigationController extends GetxController {
   RxString startBreakTime = "".obs;
   RxString endBreakTime = "".obs;
   Rx<OrganizationModel> organization = OrganizationModel().obs;
+  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
   Rxn<String> fullname = Rxn<String>(null);
   final zoomDrawerController = ZoomDrawerController();
   RxInt totalWorkMinutes = 0.obs;
@@ -79,6 +81,7 @@ class NavigationController extends GetxController {
     position.value = Get.arguments["position"];
     department.value = Get.arguments["department"];
     organization.value = Get.arguments["organization"];
+    userStatus.value = Get.arguments["userStatus"];
     getUserRole.value = user.value.role ?? Role.staff;
     fullname.value =
         "${user.value.firstName ?? user.value.username!} ${user.value.lastName ?? ""}";

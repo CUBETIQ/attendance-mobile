@@ -66,7 +66,6 @@ class StaffController extends GetxController {
   }
 
   Future<void> getAllDepartments() async {
-    isLoading.value = true;
     try {
       departments.value = await StaffService()
           .getDepartment(organizationId: organizationId.value);

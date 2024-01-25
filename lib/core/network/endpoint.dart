@@ -17,6 +17,7 @@ class Endpoints {
   String get get_user_profile => "/auth/profile/me";
   String get update_profile => "/auth/profile/update";
   String get change_password => "/auth/profile/password";
+  String get user_status => "/auth/user-status";
   String get check_in => "/app/attendances/checkin";
   String get check_out => "/app/attendances/checkout";
   String get get_position => "/app/positions/";

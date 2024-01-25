@@ -3,6 +3,7 @@ import 'package:attendance_app/core/database/isar/service/isar_service.dart';
 import 'package:attendance_app/core/model/department_model.dart';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
+import 'package:attendance_app/core/model/user_status_model.dart';
 import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
@@ -28,6 +29,7 @@ class LoginController extends GetxController {
       LocalStorageController.getInstance();
   final _debouncer = Debouncer(milliseconds: 500);
   RxBool showPassword = true.obs;
+  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
 
   void login() {
     _debouncer.run(() async {
@@ -47,6 +49,7 @@ class LoginController extends GetxController {
           );
           await fetchMe();
           await getOrganization(user.value.organizationId!);
+          await getUserStatus();
           if (organization.value == null) {
             Get.offNamed(Routes.ACTIVATION);
           } else {
@@ -62,6 +65,7 @@ class LoginController extends GetxController {
               "position": position.value,
               "department": department.value,
               "organization": organization.value,
+              "userStatus": userStatus.value,
             });
           }
         } on DioException catch (e) {
@@ -95,6 +99,15 @@ class LoginController extends GetxController {
   Future<void> getPosition() async {
     try {
       position.value = await LoginService().getPosition(user.value.positionId!);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
+  Future<void> getUserStatus() async {
+    try {
+      userStatus.value = await LoginService().getUserStatus();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

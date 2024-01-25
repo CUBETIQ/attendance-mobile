@@ -1,4 +1,6 @@
 import 'package:attendance_app/core/model/admin_attendance_report_model.dart';
+import 'package:attendance_app/core/model/admin_leave_report_model.dart';
+import 'package:attendance_app/core/model/admin_task_report_model.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/model/leave_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
@@ -13,7 +15,11 @@ import 'package:get/get.dart';
 
 class ReportController extends GetxController with GetTickerProviderStateMixin {
   static ReportController get to => Get.find();
-  RxList<AdminReportModel> staffReports = <AdminReportModel>[].obs;
+  RxList<AdminAttendanceReportModel> staffReports =
+      <AdminAttendanceReportModel>[].obs;
+  RxList<AdminLeaveReportModel> staffLeaveReports =
+      <AdminLeaveReportModel>[].obs;
+  RxList<AdminTaskReportModel> staffTaskReports = <AdminTaskReportModel>[].obs;
   Rxn<int> startDate = Rxn<int>();
   Rxn<int> endDate = Rxn<int>();
   Rx<DateTime> selectedDate = DateTime.now().obs;
@@ -59,14 +65,46 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     if (NavigationController.to.getUserRole.value == Role.admin) {
       tabs.value = ["Employee", "Report"];
       tabController = TabController(length: 2, vsync: this);
-      await getStaffReport();
+      await getStaffAttendanceReport();
     }
   }
 
-  Future<void> getStaffReport() async {
+  Future<void> getStaffAttendanceReport() async {
     isLoading.value = true;
     try {
-      staffReports.value = await ReportService().getStaffReport(
+      staffReports.value = await ReportService().getStaffAttendanceReport(
+        organizationId: NavigationController.to.user.value.organizationId ?? "",
+        startDate: startDate.value,
+        endDate: endDate.value,
+      );
+    } on Exception catch (e) {
+      showErrorSnackBar("Error", e.toString());
+      rethrow;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> getStaffLeaveReport() async {
+    isLoading.value = true;
+    try {
+      staffLeaveReports.value = await ReportService().getStaffLeaveReport(
+        organizationId: NavigationController.to.user.value.organizationId ?? "",
+        startDate: startDate.value,
+        endDate: endDate.value,
+      );
+    } on Exception catch (e) {
+      showErrorSnackBar("Error", e.toString());
+      rethrow;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> getStaffTaskReport() async {
+    isLoading.value = true;
+    try {
+      staffTaskReports.value = await ReportService().getStaffTaskReport(
         organizationId: NavigationController.to.user.value.organizationId ?? "",
         startDate: startDate.value,
         endDate: endDate.value,
@@ -202,7 +240,7 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
       selectedDate.value = picked;
       startDate.value = DateTimeUtil().getStartOfDayInMilisecond(picked);
       endDate.value = DateTimeUtil().getEndOfDayInMilisecond(picked);
-      await getStaffReport();
+      await getStaffAttendanceReport();
     }
   }
 

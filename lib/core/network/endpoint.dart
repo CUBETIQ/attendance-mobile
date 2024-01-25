@@ -20,6 +20,7 @@ class Endpoints {
   String get check_in => "/app/attendances/checkin";
   String get check_out => "/app/attendances/checkout";
   String get get_position => "/app/positions/";
+  String get organization => "/app/organizations/";
   String get get_department => "/app/departments/";
   String get get_user_attendance => "/app/attendances/me";
   String get get_all_staff_attendance => "/app/attendances";
@@ -36,6 +37,9 @@ class Endpoints {
   String get get_dashboard_chart => "/app/attendance-charts";
   String get staff => "/app/staffs/";
   String get change_staff_password => "/app/staffs/password/";
-  String get get_staff_report => "/app/admin-attendance-reports";
+  String get get_staff_attendance_report =>
+      "/app/admin-reports/attendance-report";
+  String get get_staff_task_report => "/app/admin-reports/attendance-report";
+  String get get_staff_leave_report => "/app/admin-reports/attendance-report";
   String get get_translation => "/app/translate";
 }

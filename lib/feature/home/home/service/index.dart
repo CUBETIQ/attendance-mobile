@@ -67,6 +67,17 @@ class HomeService {
     return staffs;
   }
 
+  Future<void> updateUserStatus(String staus) async {
+    final data = {"status": staus};
+    Response response = await dioInstance.dio.put(
+      Endpoints.instance.update_profile,
+      data: data,
+    );
+    if (response.statusCode != 200) {
+      throw Exception("Login failed");
+    }
+  }
+
   Future<AttendanceModel> checkOut(CheckOutModel input) async {
     final AttendanceModel? checkIn;
 

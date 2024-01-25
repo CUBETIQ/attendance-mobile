@@ -16,7 +16,7 @@ class AttendanceReportCard extends StatelessWidget {
     required this.totalWorkMinute,
   });
 
-  final AdminReportModel data;
+  final AdminAttendanceReportModel data;
   final int? totalWorkMinute;
 
   @override

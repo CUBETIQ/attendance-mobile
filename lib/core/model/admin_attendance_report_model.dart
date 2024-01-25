@@ -1,6 +1,6 @@
 import 'package:attendance_app/core/repositories/base_model.dart';
 
-class AdminReportModel extends BaseModel<AdminReportModel> {
+class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
   final String? username;
   final String? position;
   final String? department;
@@ -10,9 +10,9 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
   final String? firstName;
   final String? lastName;
   final String? image;
-  final AdminAttendanceReportModel? attendance;
+  final AttendanceReportModel? attendance;
 
-  AdminReportModel({
+  AdminAttendanceReportModel({
     this.username,
     this.position,
     this.department,
@@ -26,11 +26,11 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
   });
 
   @override
-  AdminReportModel fromJson(Map<String, dynamic>? json) {
+  AdminAttendanceReportModel fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return AdminReportModel();
+      return AdminAttendanceReportModel();
     }
-    return AdminReportModel(
+    return AdminAttendanceReportModel(
       username: json['username'],
       position: json['position'],
       department: json['department'],
@@ -40,14 +40,14 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
       firstName: json['firstName'],
       lastName: json['lastName'],
       image: json['image'],
-      attendance: AdminAttendanceReportModel().fromJson(json['attendance']),
+      attendance: AttendanceReportModel().fromJson(json['attendance']),
     );
   }
 
   @override
-  List<AdminReportModel> fromListJson(List? listJson) {
+  List<AdminAttendanceReportModel> fromListJson(List? listJson) {
     if (listJson == null) {
-      return <AdminReportModel>[];
+      return <AdminAttendanceReportModel>[];
     }
     return listJson.map((e) => fromJson(e)).toList();
   }
@@ -69,7 +69,7 @@ class AdminReportModel extends BaseModel<AdminReportModel> {
   }
 }
 
-class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
+class AttendanceReportModel extends BaseModel<AttendanceReportModel> {
   final int? checkInDateTime;
   final String? checkInStatus;
   final String? checkInType;
@@ -83,7 +83,7 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
   final int? duration;
   final int? totalSession;
 
-  AdminAttendanceReportModel({
+  AttendanceReportModel({
     this.checkInDateTime,
     this.checkInStatus,
     this.checkInType,
@@ -99,11 +99,11 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
   });
 
   @override
-  AdminAttendanceReportModel fromJson(Map<String, dynamic>? json) {
+  AttendanceReportModel fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return AdminAttendanceReportModel();
+      return AttendanceReportModel();
     }
-    return AdminAttendanceReportModel(
+    return AttendanceReportModel(
       checkInDateTime: json['checkInDateTime'],
       checkInStatus: json['checkInStatus'],
       checkInType: json['checkInType'],
@@ -120,9 +120,9 @@ class AdminAttendanceReportModel extends BaseModel<AdminAttendanceReportModel> {
   }
 
   @override
-  List<AdminAttendanceReportModel> fromListJson(List? listJson) {
+  List<AttendanceReportModel> fromListJson(List? listJson) {
     if (listJson == null) {
-      return <AdminAttendanceReportModel>[];
+      return <AttendanceReportModel>[];
     }
     return listJson.map((e) => fromJson(e)).toList();
   }

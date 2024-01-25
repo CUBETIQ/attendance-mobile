@@ -4,22 +4,19 @@ import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/routes/app_pages.dart';
-import 'package:dio/dio.dart' as dio;
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
 class SplashService {
   DioUtil dioInstance = DioUtil();
 
   Future<OrganizationModel> validateOrganization({required String id}) async {
     final OrganizationModel organization;
-    dio.Response response = await dioInstance.dio.get(
+    Response response = await dioInstance.dio.get(
       Endpoints.instance.validate_organization + id,
     );
     if (response.statusCode == 200) {
       organization = OrganizationModel().fromJson(response.data["data"]);
     } else {
-      Get.offNamed(Routes.ACTIVATION);
       return throw Exception(response.data["message"]);
     }
     return organization;
@@ -27,7 +24,7 @@ class SplashService {
 
   Future<UserModel> fetchMe() async {
     final UserModel user;
-    dio.Response response = await dioInstance.dio.get(
+    Response response = await dioInstance.dio.get(
       Endpoints.instance.get_user_profile,
     );
     if (response.statusCode == 200) {
@@ -40,7 +37,7 @@ class SplashService {
 
   Future<PositionModel> getPosition(String id) async {
     final PositionModel position;
-    dio.Response response = await dioInstance.dio.get(
+    Response response = await dioInstance.dio.get(
       Endpoints.instance.get_position + id,
     );
     if (response.statusCode == 200) {
@@ -53,7 +50,7 @@ class SplashService {
 
   Future<DepartmentModel> getDepartment(String id) async {
     final DepartmentModel department;
-    dio.Response response = await dioInstance.dio.get(
+    Response response = await dioInstance.dio.get(
       Endpoints.instance.get_department + id,
     );
     if (response.statusCode == 200) {

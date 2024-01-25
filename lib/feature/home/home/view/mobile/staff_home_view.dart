@@ -62,9 +62,25 @@ class HomeStaffMobileView extends StatelessWidget {
                         Positioned(
                           bottom: 0,
                           right: 2,
-                          child: Obx(
-                            () => StatusDot(
-                              status: controller.user.value.status,
+                          child: PopupMenuButton<String>(
+                            onSelected: controller.onSelectStatus,
+                            splashRadius: null,
+                            offset: Offset.zero,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (BuildContext context) {
+                              return controller.status.value.map((status) {
+                                return PopupMenuItem<String>(
+                                  value: status,
+                                  child: Text(
+                                    status.capitalizeAllWordsFirstLetter(),
+                                  ),
+                                );
+                              }).toList();
+                            },
+                            child: Obx(
+                              () => StatusDot(
+                                status: controller.selectedStatus.value,
+                              ),
                             ),
                           ),
                         )

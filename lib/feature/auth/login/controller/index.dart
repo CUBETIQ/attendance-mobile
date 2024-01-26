@@ -27,13 +27,13 @@ class LoginController extends GetxController {
   Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
   final LocalStorageController localDataService =
       LocalStorageController.getInstance();
-  final _debouncer = Debouncer(milliseconds: 500);
   RxBool showPassword = true.obs;
   Rx<UserStatusModel> userStatus = UserStatusModel().obs;
+  final _debouncer = Debouncer(milliseconds: 500);
 
-  void login() {
+  Future<void> login() async {
+    validate();
     _debouncer.run(() async {
-      validate();
       if (MyTextFieldFormController.findController('Username').isValid &&
           MyTextFieldFormController.findController('Password').isValid) {
         try {

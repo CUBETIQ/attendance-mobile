@@ -38,8 +38,8 @@ class ActivationController extends GetxController {
   }
 
   Future<void> activation() async {
-    _debouncer.run(() {});
     validate();
+    _debouncer.run(() async {});
     final data = await localDataService.get();
     if (MyTextFieldFormController.findController('Activation').isValid) {
       try {

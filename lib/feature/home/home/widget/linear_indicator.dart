@@ -50,7 +50,7 @@ class LinearIndicator extends StatelessWidget {
                   animation: true,
                   lineHeight:
                       indicatorHeight ?? SizeUtils.scale(15, size.width),
-                  animationDuration: 2000,
+                  animationDuration: 250,
                   padding: EdgeInsets.zero,
                   percent: percent ?? 0,
                   barRadius: Radius.circular(
@@ -62,7 +62,7 @@ class LinearIndicator extends StatelessWidget {
               ),
               SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
-                text: percent != null
+                text: percent != null && percent?.isNaN == false
                     ? '${(percent! * 100).toStringAsFixed(2)}%'
                     : "0.00%",
                 style: BodySmall.copyWith(

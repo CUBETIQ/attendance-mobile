@@ -200,7 +200,7 @@ class OrganizationViewMobile extends StatelessWidget {
                       height: SizeUtils.scale(350, size.width),
                       padding: EdgeInsets.symmetric(
                         horizontal: SizeUtils.scale(
-                          AppSize.paddingHorizontalLarge,
+                          AppSize.paddingHorizontalMedium,
                           size.width,
                         ),
                         vertical: SizeUtils.scale(
@@ -224,6 +224,9 @@ class OrganizationViewMobile extends StatelessWidget {
                                         Icons.login_rounded,
                                         color: MyColor.successColor,
                                       ),
+                                      SizedBox(
+                                        width: SizeUtils.scale(5, size.width),
+                                      ),
                                       MyText(
                                         text: "Start Hour",
                                         style: BodyMediumMedium,
@@ -245,6 +248,9 @@ class OrganizationViewMobile extends StatelessWidget {
                                         Icons.logout_rounded,
                                         color:
                                             Theme.of(context).colorScheme.error,
+                                      ),
+                                      SizedBox(
+                                        width: SizeUtils.scale(5, size.width),
                                       ),
                                       MyText(
                                         text: "End Hour",
@@ -268,6 +274,9 @@ class OrganizationViewMobile extends StatelessWidget {
                                         color: Theme.of(context)
                                             .colorScheme
                                             .primary,
+                                      ),
+                                      SizedBox(
+                                        width: SizeUtils.scale(5, size.width),
                                       ),
                                       MyText(
                                         text: "Break Time",

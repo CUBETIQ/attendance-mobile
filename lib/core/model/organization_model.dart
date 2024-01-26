@@ -10,7 +10,7 @@ class OrganizationModel extends BaseModel<OrganizationModel> {
   final String? createdBy;
   final int? limitStaff;
   final String? parentId;
-  final Configs? configs;
+  final ConfigsModel? configs;
 
   OrganizationModel({
     this.id,
@@ -40,7 +40,7 @@ class OrganizationModel extends BaseModel<OrganizationModel> {
         createdBy: json['createdBy'],
         limitStaff: json['limitStaff'],
         parentId: json['parentId'],
-        configs: Configs().fromJson(json['configs']));
+        configs: ConfigsModel().fromJson(json['configs']));
   }
 
   @override
@@ -92,24 +92,24 @@ class OranizationLocationModel {
   }
 }
 
-class Configs {
+class ConfigsModel {
   final String? startHour;
   final String? endHour;
   final String? breakTime;
   final String? breakDuration;
 
-  Configs({
+  ConfigsModel({
     this.startHour,
     this.endHour,
     this.breakTime,
     this.breakDuration,
   });
 
-  Configs fromJson(Map<String, dynamic>? json) {
+  ConfigsModel fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return Configs();
+      return ConfigsModel();
     }
-    return Configs(
+    return ConfigsModel(
       startHour: json['startHour'],
       endHour: json['endHour'],
       breakTime: json['breakTime'],

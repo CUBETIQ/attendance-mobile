@@ -209,4 +209,19 @@ class DateTimeUtil {
     Duration difference = endTime.difference(startTime);
     return difference.inMinutes;
   }
+
+  String calculateDuration(String startHour, String endHour) {
+    // Parse startHour and endHour strings into DateTime objects
+    DateTime startTime = DateFormat('H:mm').parse(startHour);
+    DateTime endTime = DateFormat('H:mm').parse(endHour);
+
+    // Calculate the duration between startTime and endTime
+    Duration duration = endTime.difference(startTime);
+
+    // Format the duration as "hh:mm"
+    String formattedDuration =
+        '${duration.inHours.toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}';
+
+    return formattedDuration;
+  }
 }

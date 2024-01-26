@@ -3,9 +3,9 @@ import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
+import 'package:attendance_app/core/network/endpoint.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:dio/dio.dart';
-import '../../../core/network/endpoint.dart';
 
 class OrganizationService {
   DioUtil dioInstance = DioUtil();

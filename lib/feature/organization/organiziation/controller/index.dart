@@ -4,7 +4,8 @@ import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/organization/service/index.dart';
+import 'package:attendance_app/feature/organization/organiziation/service/index.dart';
+import 'package:attendance_app/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -65,6 +66,14 @@ class OrganizationController extends GetxController {
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
+    }
+  }
+
+  Future<void> onTabEdit() async {
+    final result = await Get.toNamed(Routes.EDIT_ORGANIZATION,
+        arguments: organization.value);
+    if (result != null) {
+      getOrganization();
     }
   }
 }

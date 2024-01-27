@@ -2,6 +2,7 @@ import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/constants/svg.dart';
 import 'package:attendance_app/core/widgets/async_widget/async_base_widget.dart';
+import 'package:attendance_app/core/widgets/card/my_card.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
@@ -13,6 +14,7 @@ import 'package:attendance_app/feature/home/home/widget/record_card.dart';
 import 'package:attendance_app/feature/home/home/widget/status_dot.dart';
 import 'package:attendance_app/feature/navigation/controller/index.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -97,7 +99,11 @@ class HomeStaffMobileView extends StatelessWidget {
                               maxWidth: SizeUtils.scale(240, size.width),
                             ),
                             child: MyText(
-                              text: controller.name.value ?? "-----",
+                              text: StringUtil().getfullname(
+                                controller.user.value.firstName,
+                                controller.user.value.lastName,
+                                controller.user.value.username,
+                              ),
                               style: BodyXlargeMedium,
                             ),
                           ),
@@ -130,25 +136,11 @@ class HomeStaffMobileView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: size.height * 0.02),
-              Container(
+              MyCard(
                 width: double.infinity,
                 height: size.height * 0.12,
                 padding: EdgeInsets.symmetric(
                   vertical: size.height * 0.018,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    AppSize.borderRadiusLarge * (size.width / 375.0),
-                  ),
-                  color: Theme.of(context).colorScheme.surface,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.17),
-                      spreadRadius: 1.2,
-                      blurRadius: 1.2,
-                      offset: const Offset(0, 0),
-                    ),
-                  ],
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

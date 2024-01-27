@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 
 class StaffController extends GetxController {
   static StaffController get to => Get.find();
+  RxList<UserModel> staffsBackUp = <UserModel>[].obs;
   RxList<UserModel> staffs = <UserModel>[].obs;
   RxList<PositionModel> positions = <PositionModel>[].obs;
   RxList<DepartmentModel> departments = <DepartmentModel>[].obs;
@@ -43,8 +44,9 @@ class StaffController extends GetxController {
 
   Future<void> getAllStaffs() async {
     try {
-      staffs.value = await StaffService()
+      staffsBackUp.value = await StaffService()
           .getAllStaffs(organizationId: organizationId.value);
+      staffs.value = staffsBackUp.value;
     } on DioException catch (e) {
       isLoading.value = false;
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -148,5 +150,27 @@ class StaffController extends GetxController {
         "departments": departments
       },
     );
+  }
+
+  void searchStaff(String value) {
+    if (value.isEmpty) {
+      staffs.value = staffsBackUp.value;
+    } else {
+      staffs.value = staffsBackUp.value.where((element) {
+        return (element.username?.toLowerCase().contains(value.toLowerCase()) ??
+                false) ||
+            (element.firstName?.toLowerCase().contains(value.toLowerCase()) ??
+                false) ||
+            (element.lastName?.toLowerCase().contains(value.toLowerCase()) ??
+                false);
+      }).toList();
+    }
+  }
+
+  void clearSearch() {
+    if (searchController.text.isNotEmpty) {
+      searchController.clear();
+      staffs.value = staffsBackUp.value;
+    }
   }
 }

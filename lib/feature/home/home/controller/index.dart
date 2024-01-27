@@ -6,7 +6,6 @@ import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
@@ -362,11 +361,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
         earlyPercentage.value =
             ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
-        Console.log("latePercentage", [
-          latePercentage.value,
-          onTimePercentage.value,
-          earlyPercentage.value
-        ]);
       } else {
         haveNoData.value = true;
       }

@@ -6,6 +6,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/widget/small_button.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/widget/small_outline_button.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/leave_duration_type.dart';
 import 'package:attendance_app/utils/types_helper/leave_status.dart';
@@ -69,10 +70,11 @@ class LeaveRequestCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(130, size.width),
                     ),
                     child: MyText(
-                      text: staff.firstName != null && staff.firstName != "" ||
-                              staff.lastName != null && staff.lastName != ""
-                          ? "${staff.firstName} ${staff.lastName}"
-                          : staff.username ?? "N/A",
+                      text: StringUtil().getfullname(
+                        staff.firstName,
+                        staff.lastName,
+                        staff.username,
+                      ),
                       style: BodyMediumRegular,
                     ),
                   ),

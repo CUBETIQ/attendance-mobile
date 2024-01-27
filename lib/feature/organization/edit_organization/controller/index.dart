@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/organization/edit_organization/model/update_organization_model.dart';
@@ -12,7 +11,6 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class EditOrganizationController extends GetxController {
   TextEditingController nameController = TextEditingController();
@@ -32,7 +30,6 @@ class EditOrganizationController extends GetxController {
     super.onInit();
     organization.value = Get.arguments;
     initArgument();
-    test();
   }
 
   void initArgument() {
@@ -54,22 +51,6 @@ class EditOrganizationController extends GetxController {
       onTapGallery: onTapGallery,
       onTapAvatar: onTapAvatar,
     );
-  }
-
-  void test() {
-    String startHour = "8:00";
-    String endHour = "15:45";
-
-    // Parse startHour and endHour strings into DateTime objects
-    DateTime startTime = DateFormat('H:mm').parse(startHour);
-    DateTime endTime = DateFormat('H:mm').parse(endHour);
-
-    // Calculate the duration between startTime and endTime
-    Duration duration = endTime.difference(startTime);
-
-    // Print the duration
-    Console.log("Test",
-        "Duration: ${duration.inHours} hours ${duration.inMinutes % 60} minutes");
   }
 
   Future<void> onTapAvatar() async {

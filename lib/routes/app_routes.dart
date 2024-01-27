@@ -28,4 +28,5 @@ abstract class Routes {
   static const EDIT_ORGANIZATION = '/edit_organization';
   static const LANGUAGE = '/language';
   static const ERROR = '/error';
+  static const CUSTOMER_SUPPORT = '/customer_support';
 }

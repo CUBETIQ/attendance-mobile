@@ -34,7 +34,7 @@ class NavigationViewMobile extends StatelessWidget {
       androidCloseOnBackTap: true,
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.withOpacity(0.25),
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.10),
           spreadRadius: 4,
           blurRadius: 4,
           offset: const Offset(-5, 10),

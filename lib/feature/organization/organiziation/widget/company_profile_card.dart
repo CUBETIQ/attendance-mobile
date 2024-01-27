@@ -1,11 +1,13 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/button/button.dart';
 import 'package:attendance_app/core/widgets/card/my_card.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/image/cache_image_organization.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:flutter/material.dart';
 
 class CompanyProfileCard extends StatelessWidget {
@@ -13,15 +15,13 @@ class CompanyProfileCard extends StatelessWidget {
     super.key,
     this.companyName,
     this.companyLogo,
-    this.companyOwnerImage,
-    this.companyOwnerName,
+    this.companyOwner,
     this.onTapEdit,
   });
 
   final String? companyName;
   final String? companyLogo;
-  final String? companyOwnerImage;
-  final String? companyOwnerName;
+  final UserModel? companyOwner;
   final void Function()? onTapEdit;
 
   @override
@@ -112,7 +112,7 @@ class CompanyProfileCard extends StatelessWidget {
                       Row(
                         children: [
                           MyCacheImage(
-                            imageUrl: companyOwnerImage,
+                            imageUrl: companyOwner?.image,
                             width: SizeUtils.scale(22, size.width),
                             height: SizeUtils.scale(22, size.width),
                           ),
@@ -124,7 +124,11 @@ class CompanyProfileCard extends StatelessWidget {
                               maxWidth: SizeUtils.scale(120, size.width),
                             ),
                             child: MyText(
-                              text: companyOwnerName ?? "Owner Name",
+                              text: StringUtil().getfullname(
+                                companyOwner?.firstName,
+                                companyOwner?.lastName,
+                                companyOwner?.username,
+                              ),
                               style: BodySmallRegular.copyWith(
                                 color: Theme.of(context).colorScheme.outline,
                               ),

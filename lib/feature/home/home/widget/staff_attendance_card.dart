@@ -7,6 +7,7 @@ import 'package:attendance_app/core/widgets/card/my_card.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:attendance_app/utils/types_helper/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
@@ -54,10 +55,11 @@ class StaffAttendanceCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(200, size.width),
                     ),
                     child: MyText(
-                      text: staff.firstName != null && staff.firstName != "" ||
-                              staff.lastName != null && staff.lastName != ""
-                          ? "${staff.firstName} ${staff.lastName}"
-                          : staff.username ?? "N/A",
+                      text: StringUtil().getfullname(
+                        staff.firstName,
+                        staff.lastName,
+                        staff.username,
+                      ),
                       style: BodyLargeSemi,
                     ),
                   ),

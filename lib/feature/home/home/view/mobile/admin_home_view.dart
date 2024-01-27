@@ -216,7 +216,7 @@ class HomeAdminMobileView extends StatelessWidget {
                         Obx(
                           () => MyAsyncWidget(
                             isLoading: controller.isLoadingList.value,
-                            list: controller.attendanceList,
+                            list: controller.staffAttendanceList,
                             noDataWidget: const MyNoData(),
                             builderWidget: ListView.separated(
                               shrinkWrap: true,

@@ -36,8 +36,7 @@ class OrganizationViewMobile extends StatelessWidget {
                 () => CompanyProfileCard(
                   companyName: controller.organization.value.name,
                   companyLogo: controller.organization.value.image,
-                  companyOwnerImage: NavigationController.to.user.value.image,
-                  companyOwnerName: NavigationController.to.fullname.value,
+                  companyOwner: NavigationController.to.user.value,
                   onTapEdit: controller.onTabEdit,
                 ),
               ),

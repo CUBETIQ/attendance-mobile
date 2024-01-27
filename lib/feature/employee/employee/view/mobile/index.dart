@@ -53,6 +53,7 @@ class StaffViewMobile extends StatelessWidget {
                   SearchBar(
                     hintText: "Search Employee",
                     elevation: MaterialStateProperty.all<double>(0.8),
+                    onChanged: controller.searchStaff,
                     leading: IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
@@ -61,7 +62,7 @@ class StaffViewMobile extends StatelessWidget {
                     ),
                     trailing: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: controller.clearSearch,
                         icon: const Icon(Icons.cancel_rounded),
                       ),
                     ],

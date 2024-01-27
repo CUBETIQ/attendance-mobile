@@ -1,7 +1,7 @@
 import 'package:attendance_app/config/app_size.dart';
 import 'package:attendance_app/config/font.dart';
 import 'package:attendance_app/core/widgets/async_widget/async_base_widget.dart';
-import 'package:attendance_app/core/widgets/card/my_card.dart';
+// import 'package:attendance_app/core/widgets/card/my_card.dart';
 import 'package:attendance_app/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:attendance_app/core/widgets/no_data/no_data.dart';
 import 'package:attendance_app/core/widgets/pull_refresh/refresh_indicator.dart';

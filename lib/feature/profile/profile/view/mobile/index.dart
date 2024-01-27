@@ -11,6 +11,7 @@ import 'package:attendance_app/feature/profile/profile/widget/kpi_score_card.dar
 import 'package:attendance_app/feature/profile/profile/widget/option_button.dart';
 import 'package:attendance_app/feature/profile/profile/widget/profile_detail_row.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -94,7 +95,11 @@ class ProfileViewMobile extends StatelessWidget {
                         ),
                         child: Obx(
                           () => MyText(
-                            text: controller.name.value ?? "--------",
+                            text: StringUtil().getfullname(
+                              controller.user.value.firstName,
+                              controller.user.value.lastName,
+                              controller.user.value.username,
+                            ),
                             style: BodyXlargeMedium,
                           ),
                         ),

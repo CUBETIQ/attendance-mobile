@@ -7,6 +7,7 @@ import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/employee/employee_detail/controller/index.dart';
 import 'package:attendance_app/feature/employee/employee_detail/widget/info_detail_card.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,9 +55,11 @@ class StaffDetailViewMobile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MyText(
-                        text:
-                            "${controller.staff.value.firstName ?? controller.staff.value.username ?? ""} "
-                            "${controller.staff.value.lastName ?? ""}",
+                        text: StringUtil().getfullname(
+                          controller.staff.value.firstName,
+                          controller.staff.value.lastName,
+                          controller.staff.value.username,
+                        ),
                         style: BodyXlargeSemi.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                         ),

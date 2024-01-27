@@ -4,6 +4,7 @@ import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:attendance_app/utils/types_helper/user_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -70,10 +71,11 @@ class StaffCard extends StatelessWidget {
                     maxWidth: SizeUtils.scale(140, size.width),
                   ),
                   child: MyText(
-                    text: staff.firstName != null && staff.firstName != "" ||
-                            staff.lastName != null && staff.lastName != ""
-                        ? "${staff.firstName} ${staff.lastName}"
-                        : staff.username ?? "N/A",
+                    text: StringUtil().getfullname(
+                      staff.firstName,
+                      staff.lastName,
+                      staff.username,
+                    ),
                     style: BodyMediumSemi,
                   ),
                 ),

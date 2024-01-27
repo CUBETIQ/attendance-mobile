@@ -86,11 +86,15 @@ class LeaveModel extends BaseModel<LeaveModel> {
 }
 
 class UpdateByModel extends BaseModel<UpdateByModel> {
-  final String? name;
+  final String? firstName;
+  final String? lastName;
+  final String? username;
   final String? image;
 
   UpdateByModel({
-    this.name,
+    this.firstName,
+    this.lastName,
+    this.username,
     this.image,
   });
 
@@ -100,7 +104,9 @@ class UpdateByModel extends BaseModel<UpdateByModel> {
       return UpdateByModel();
     }
     return UpdateByModel(
-      name: json['name'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      username: json['username'],
       image: json['image'],
     );
   }
@@ -116,7 +122,9 @@ class UpdateByModel extends BaseModel<UpdateByModel> {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'firstName': firstName,
+      'lastName': lastName,
+      'username': username,
       'image': image,
     };
   }

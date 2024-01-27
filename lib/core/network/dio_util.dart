@@ -41,6 +41,7 @@ class DioUtil {
             days: 7,
           ),
           priority: CachePriority.high,
+          // allowPostMethod: true,
         ),
       ),
     ];

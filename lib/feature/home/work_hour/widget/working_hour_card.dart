@@ -6,6 +6,7 @@ import 'package:attendance_app/core/widgets/card/my_card.dart';
 import 'package:attendance_app/core/widgets/image/cache_image.dart';
 import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/utils/size_util.dart';
+import 'package:attendance_app/utils/string_util.dart';
 import 'package:attendance_app/utils/time_util.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -63,10 +64,11 @@ class WorkHourCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(210, size.width),
                     ),
                     child: MyText(
-                      text: staff.firstName != null && staff.firstName != "" ||
-                              staff.lastName != null && staff.lastName != ""
-                          ? "${staff.firstName} ${staff.lastName}"
-                          : staff.username ?? "N/A",
+                      text: StringUtil().getfullname(
+                        staff.firstName,
+                        staff.lastName,
+                        staff.username,
+                      ),
                       style: BodyMediumMedium,
                     ),
                   ),

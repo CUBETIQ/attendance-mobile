@@ -158,16 +158,18 @@ class NavigationController extends GetxController {
           },
         ),
         DrawerModel(
+          title: "Support",
+          icon: Icons.support_agent_rounded,
+          onTap: () {
+            Get.toNamed(Routes.CUSTOMER_SUPPORT);
+          },
+        ),
+        DrawerModel(
           title: "Setting",
           icon: Icons.settings_rounded,
           onTap: () {
             Get.toNamed(Routes.SETTING);
           },
-        ),
-        DrawerModel(
-          title: "Support",
-          icon: Icons.headset_mic_rounded,
-          onTap: () {},
         ),
         DrawerModel(
           title: "Log out",
@@ -196,7 +198,9 @@ class NavigationController extends GetxController {
         DrawerModel(
           title: "Support",
           icon: Icons.headset_mic_rounded,
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.CUSTOMER_SUPPORT);
+          },
         ),
         DrawerModel(
           title: "Log out",

@@ -1,4 +1,5 @@
 import 'package:attendance_app/core/model/leave_model.dart';
+import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/feature/leave/add_leave/model/create_leave_model.dart';
 import 'package:attendance_app/feature/leave/add_leave/service/index.dart';
@@ -35,6 +36,7 @@ class AddLeaveController extends GetxController
   late Animation<Color?> colorAnimation;
   RxString appState = AppState.Create.obs;
   Rxn<LeaveModel> leave = Rxn<LeaveModel>(null);
+  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -110,39 +112,43 @@ class AddLeaveController extends GetxController
   }
 
   Future<void> addLeave() async {
-    try {
-      CreateLeaveModel input = CreateLeaveModel(
-        type: selectLeaveType.value,
-        durationType: selectLeaveDurationType.value,
-        from: startDate.value,
-        to: endDate.value,
-        reason: reasonController.text,
-      );
-      await AddLeaveService().addLeave(input);
-      await LeaveController.to.getUserLeave();
-      LeaveController.to.getUserSummarizeLeave();
-      Get.back();
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response!.data["message"]);
-      rethrow;
-    }
+    _debouncer.run(() async {
+      try {
+        CreateLeaveModel input = CreateLeaveModel(
+          type: selectLeaveType.value,
+          durationType: selectLeaveDurationType.value,
+          from: startDate.value,
+          to: endDate.value,
+          reason: reasonController.text,
+        );
+        await AddLeaveService().addLeave(input);
+        await LeaveController.to.getUserLeave();
+        LeaveController.to.getUserSummarizeLeave();
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response!.data["message"]);
+        rethrow;
+      }
+    });
   }
 
   Future<void> updateLeave() async {
-    try {
-      CreateLeaveModel input = CreateLeaveModel(
-        type: selectLeaveType.value,
-        durationType: selectLeaveDurationType.value,
-        from: startDate.value,
-        to: endDate.value,
-        reason: reasonController.text,
-      );
-      await AddLeaveService().updateLeave(leave.value!.id!, input);
-      LeaveController.to.getUserLeave();
-      Get.back();
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response!.data["message"]);
-      rethrow;
-    }
+    _debouncer.run(() async {
+      try {
+        CreateLeaveModel input = CreateLeaveModel(
+          type: selectLeaveType.value,
+          durationType: selectLeaveDurationType.value,
+          from: startDate.value,
+          to: endDate.value,
+          reason: reasonController.text,
+        );
+        await AddLeaveService().updateLeave(leave.value!.id!, input);
+        LeaveController.to.getUserLeave();
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response!.data["message"]);
+        rethrow;
+      }
+    });
   }
 }

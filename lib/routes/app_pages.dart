@@ -7,6 +7,8 @@ import 'package:attendance_app/feature/auth/change_password/view/index.dart';
 import 'package:attendance_app/feature/auth/login/login_binding.dart';
 import 'package:attendance_app/feature/auth/login/view/index.dart';
 import 'package:attendance_app/feature/avatar/view/index.dart';
+import 'package:attendance_app/feature/customer_support/customer_support_binding.dart';
+import 'package:attendance_app/feature/customer_support/view/index.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/admin_leave_binding.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/view/index.dart';
 import 'package:attendance_app/feature/home/home/home_binding.dart';
@@ -20,8 +22,9 @@ import 'package:attendance_app/feature/navigation/naviation_binding.dart';
 import 'package:attendance_app/feature/navigation/view/index.dart';
 import 'package:attendance_app/feature/onboard/onboard_binding.dart';
 import 'package:attendance_app/feature/onboard/view/index.dart';
-import 'package:attendance_app/feature/organization/organization_binding.dart';
-import 'package:attendance_app/feature/organization/view/index.dart';
+import 'package:attendance_app/feature/organization/edit_organization/view/index.dart';
+import 'package:attendance_app/feature/organization/organiziation/organization_binding.dart';
+import 'package:attendance_app/feature/organization/organiziation/view/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
 import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
 import 'package:attendance_app/feature/report/report_binding.dart';
@@ -127,6 +130,10 @@ class AppPages {
       binding: OrganizationBinding(),
     ),
     GetPage(
+      name: Routes.EDIT_ORGANIZATION,
+      page: () => const EditOrganizationView(),
+    ),
+    GetPage(
       name: Routes.ADMIN_LEAVE_REQUEST,
       page: () => const AdminLeaveRequestView(),
       binding: AdminLeaveRequestBinding(),
@@ -147,6 +154,11 @@ class AppPages {
     GetPage(
       name: Routes.ERROR,
       page: () => const ErrorView(),
+    ),
+    GetPage(
+      name: Routes.CUSTOMER_SUPPORT,
+      page: () => const CustomerSupportView(),
+      binding: CustomerSupportBinding(),
     ),
   ];
 }

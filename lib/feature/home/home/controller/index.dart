@@ -494,20 +494,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     if (selectedAttendanceType.value != value) {
       selectedAttendanceType.value = value!;
       isCheckIn.value = !isCheckIn.value;
-      if (selectedAttendanceType.value == "Check In") {
-        latePercentage.value =
-            ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
-        onTimePercentage.value =
-            ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
-        earlyPercentage.value =
-            ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
-      } else {
-        latePercentage.value =
-            ((totalCheckOutLate.value / totalStaffs.value) * 100) / 100;
-        onTimePercentage.value =
-            ((totalCheckOutOnTime.value / totalStaffs.value) * 100) / 100;
-        earlyPercentage.value =
-            ((totalCheckOutEarly.value / totalStaffs.value) * 100) / 100;
+      if (attendanceChart.isNotEmpty) {
+        if (selectedAttendanceType.value == "Check In") {
+          latePercentage.value =
+              ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
+          onTimePercentage.value =
+              ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
+          earlyPercentage.value =
+              ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
+        } else {
+          latePercentage.value =
+              ((totalCheckOutLate.value / totalStaffs.value) * 100) / 100;
+          onTimePercentage.value =
+              ((totalCheckOutOnTime.value / totalStaffs.value) * 100) / 100;
+          earlyPercentage.value =
+              ((totalCheckOutEarly.value / totalStaffs.value) * 100) / 100;
+        }
       }
     }
   }

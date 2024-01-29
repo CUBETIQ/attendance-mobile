@@ -231,7 +231,7 @@ class HomeStaffMobileView extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     separatorBuilder: (context, index) =>
-                        const SizedBox(height: 10),
+                        const SizedBox.shrink(),
                     itemBuilder: (context, index) {
                       return Obx(
                         () => RecordCard(

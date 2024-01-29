@@ -1,6 +1,6 @@
 class UpdateUserStatusModel {
   final String? status;
-  final String? lastUpdatedAt;
+  final int? lastUpdatedAt;
 
   UpdateUserStatusModel({
     this.status,

@@ -259,7 +259,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     try {
       UpdateUserStatusModel input = UpdateUserStatusModel(
         status: status,
-        lastUpdatedAt: DateTime.now().toIso8601String(),
+        lastUpdatedAt: DateTime.now().millisecondsSinceEpoch,
       );
       await HomeService().updateUserStatus(input);
     } on DioException catch (e) {

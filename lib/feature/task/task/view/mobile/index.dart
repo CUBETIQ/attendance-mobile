@@ -94,7 +94,7 @@ class TaskViewMobile extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
                         height: SizeUtils.scale(
-                          AppSize.paddingS5,
+                          AppSize.paddingS8,
                           size.width,
                         ),
                       ),

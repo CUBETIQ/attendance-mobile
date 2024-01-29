@@ -37,6 +37,7 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
   List<LeaveModel> leaveResult = <LeaveModel>[];
   RxList<LeaveModel> leaves = <LeaveModel>[].obs;
   Rx<DateTime> savedSelectedDate = DateTime.now().obs;
+  List<String> reportTab = ["Attendance", "Leave"];
 
   @override
   void onInit() {
@@ -66,6 +67,8 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
       tabs.value = ["Employee", "Report"];
       tabController = TabController(length: 2, vsync: this);
       await getStaffAttendanceReport();
+      await getStaffLeaveReport();
+      await getStaffTaskReport();
     }
   }
 

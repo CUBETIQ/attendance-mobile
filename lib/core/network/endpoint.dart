@@ -9,6 +9,8 @@ class Endpoints {
 
   static const String baseUrl = "http://192.168.1.102:3000/api";
 
+  //  "https://attendance-api-devx1.ctdn.dev/api";
+
   String get login => "/auth/login";
   String get refreshToken => "/auth/token";
   String get activation => "/auth/activation/activate";
@@ -40,7 +42,7 @@ class Endpoints {
   String get change_staff_password => "/app/staffs/password/";
   String get get_staff_attendance_report =>
       "/app/admin-reports/attendance-report";
-  String get get_staff_task_report => "/app/admin-reports/attendance-report";
-  String get get_staff_leave_report => "/app/admin-reports/attendance-report";
+  String get get_staff_task_report => "/app/admin-reports/task-report";
+  String get get_staff_leave_report => "/app/admin-reports/leave-report";
   String get get_translation => "/app/translate";
 }

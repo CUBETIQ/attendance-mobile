@@ -1,5 +1,4 @@
 import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/constants/color.dart';
 import 'package:attendance_app/core/model/attendance_model.dart';
 import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
@@ -87,16 +86,12 @@ class StaffAttendanceCard extends StatelessWidget {
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: "Check In",
-                    style: BodySmallMedium.copyWith(
-                      color: MyColor.successColor,
-                    ),
+                    style: BodySmallMedium,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: "Check Out",
-                    style: BodySmallMedium.copyWith(
-                      color: MyColor.errorColor,
-                    ),
+                    style: BodySmallMedium,
                   ),
                 ],
               ),
@@ -128,9 +123,7 @@ class StaffAttendanceCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Status",
-                    style: BodyMediumSemi.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                    style: BodyMediumSemi,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(

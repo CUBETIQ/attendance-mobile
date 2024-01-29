@@ -1,5 +1,8 @@
 import 'package:attendance_app/config/app_size.dart';
+import 'package:attendance_app/config/font.dart';
+import 'package:attendance_app/core/widgets/text/text.dart';
 import 'package:attendance_app/feature/customer_support/model/support_button.dart';
+import 'package:attendance_app/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class SupportButton extends StatelessWidget {
@@ -32,17 +35,44 @@ class SupportButton extends StatelessWidget {
         height: height ?? 48 * (size.width / 375.0),
         margin: margin,
         alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeUtils.scale(
+            AppSize.paddingHorizontalLarge,
+            size.width,
+          ),
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            (borderRadius ?? AppSize.borderRadiusLarge) * (size.width / 375.0),
+            SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
           ),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(),
+            Row(
+              children: [
+                Icon(
+                  buttonModel.leadingIcon,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+                SizedBox(
+                  width: SizeUtils.scale(
+                    AppSize.paddingS8,
+                    size.width,
+                  ),
+                ),
+                MyText(
+                  text: buttonModel.title,
+                  style: BodyMediumMedium.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                )
+              ],
+            ),
             Icon(
-              Icons.arrow_back_ios,
+              buttonModel.trailingIcon,
+              color: Theme.of(context).colorScheme.onPrimary,
             )
           ],
         ),

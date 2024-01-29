@@ -74,11 +74,11 @@ class TaskCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: SizeUtils.scale(AppSize.paddingS8, size.width),
+                width: SizeUtils.scale(AppSize.paddingS5, size.width),
               ),
               Container(
                 constraints: BoxConstraints(
-                  maxWidth: size.width * 0.67,
+                  maxWidth: SizeUtils.scale(260, size.width),
                 ),
                 padding: EdgeInsets.symmetric(
                   vertical: SizeUtils.scale(AppSize.paddingS4, size.width),
@@ -90,8 +90,8 @@ class TaskCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          width: SizeUtils.scale(30, size.width),
-                          height: SizeUtils.scale(30, size.width),
+                          width: SizeUtils.scale(40, size.width),
+                          height: SizeUtils.scale(40, size.width),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: color != null
@@ -104,6 +104,10 @@ class TaskCard extends StatelessWidget {
                                     fontFamily: 'MaterialIcons')
                                 : Icons.task,
                             color: Colors.white,
+                            size: SizeUtils.scale(
+                              16,
+                              size.width,
+                            ),
                           ),
                         ),
                         const SizedBox(width: AppSize.paddingS5),

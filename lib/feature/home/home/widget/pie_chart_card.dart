@@ -20,6 +20,7 @@ class AttendancePieChartCard extends StatelessWidget {
   final int? totalOnLeave;
   final double? chartRadius;
   final bool haveNoData;
+  final void Function()? onTap;
 
   const AttendancePieChartCard({
     super.key,
@@ -34,6 +35,7 @@ class AttendancePieChartCard extends StatelessWidget {
     this.totalPresent,
     this.totalAbsent,
     this.totalOnLeave,
+    this.onTap,
     this.haveNoData = true,
   });
 
@@ -45,80 +47,83 @@ class AttendancePieChartCard extends StatelessWidget {
       height: cardHeight ?? SizeUtils.scale(150, size.width),
       child: Row(
         children: [
-          Container(
-            width: cardWidth ?? SizeUtils.scale(150, size.width),
-            height: cardHeight ?? SizeUtils.scale(150, size.width),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.background,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 3,
-                  blurRadius: 2,
-                  offset: const Offset(0, 0),
-                ),
-              ],
-            ),
-            child: PieChart(
-              haveNoData == true
-                  ? PieChartData(
-                      sections: [
-                        PieChartSectionData(
-                          showTitle: false,
-                          color: Theme.of(context).colorScheme.outlineVariant,
-                          value: 100,
-                          title: "No Data",
-                          radius:
-                              chartRadius ?? SizeUtils.scale(59, size.width),
-                          titleStyle: BodyMediumRegular.copyWith(
-                            color: Colors.white,
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              width: cardWidth ?? SizeUtils.scale(150, size.width),
+              height: cardHeight ?? SizeUtils.scale(150, size.width),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.background,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 3,
+                    blurRadius: 2,
+                    offset: const Offset(0, 0),
+                  ),
+                ],
+              ),
+              child: PieChart(
+                haveNoData == true
+                    ? PieChartData(
+                        sections: [
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: Theme.of(context).colorScheme.outlineVariant,
+                            value: 100,
+                            title: "No Data",
+                            radius:
+                                chartRadius ?? SizeUtils.scale(59, size.width),
+                            titleStyle: BodyMediumRegular.copyWith(
+                              color: Colors.white,
+                            ),
                           ),
+                        ],
+                      )
+                    : PieChartData(
+                        borderData: FlBorderData(
+                          show: false,
                         ),
-                      ],
-                    )
-                  : PieChartData(
-                      borderData: FlBorderData(
-                        show: false,
+                        sections: [
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: MyColor.successColor,
+                            value: presentPercentage ?? 0,
+                            title: "Present",
+                            radius:
+                                chartRadius ?? SizeUtils.scale(59, size.width),
+                            titleStyle: BodyMediumRegular.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: MyColor.pendingColor,
+                            value: onLeavePercentage ?? 0,
+                            title: "On Leave",
+                            radius:
+                                chartRadius ?? SizeUtils.scale(59, size.width),
+                            titleStyle: BodyMediumRegular.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: MyColor.errorColor,
+                            value: absentPercentage ?? 0,
+                            title: "Absent",
+                            radius:
+                                chartRadius ?? SizeUtils.scale(59, size.width),
+                            titleStyle: BodyMediumRegular.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                      sections: [
-                        PieChartSectionData(
-                          showTitle: false,
-                          color: MyColor.successColor,
-                          value: presentPercentage ?? 0,
-                          title: "Present",
-                          radius:
-                              chartRadius ?? SizeUtils.scale(59, size.width),
-                          titleStyle: BodyMediumRegular.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                        PieChartSectionData(
-                          showTitle: false,
-                          color: MyColor.pendingColor,
-                          value: onLeavePercentage ?? 0,
-                          title: "On Leave",
-                          radius:
-                              chartRadius ?? SizeUtils.scale(59, size.width),
-                          titleStyle: BodyMediumRegular.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                        PieChartSectionData(
-                          showTitle: false,
-                          color: MyColor.errorColor,
-                          value: absentPercentage ?? 0,
-                          title: "Absent",
-                          radius:
-                              chartRadius ?? SizeUtils.scale(59, size.width),
-                          titleStyle: BodyMediumRegular.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-              swapAnimationDuration: const Duration(milliseconds: 150),
-              swapAnimationCurve: Curves.linear,
+                swapAnimationDuration: const Duration(milliseconds: 150),
+                swapAnimationCurve: Curves.linear,
+              ),
             ),
           ),
           SizedBox(width: SizeUtils.scale(30, size.width)),

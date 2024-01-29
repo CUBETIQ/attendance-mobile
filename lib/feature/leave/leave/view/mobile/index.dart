@@ -51,7 +51,7 @@ class LeaveViewMobile extends StatelessWidget {
                           title: "Pending",
                           radius: 38,
                           centerText:
-                              "${(controller.percentagePendingLeave.value * 100).toStringAsFixed(2)} %",
+                              "${(controller.percentagePendingLeave.value * 100).toStringAsFixed(controller.percentagePendingLeave.value == 0 ? 0 : 2)}%",
                           percent: controller.percentagePendingLeave.value,
                           textBelow: "${controller.totalPendingLeave.value}/"
                               "${controller.totalLeave.value}",
@@ -65,7 +65,7 @@ class LeaveViewMobile extends StatelessWidget {
                           title: "Approved",
                           radius: 38,
                           centerText:
-                              "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(2)} %",
+                              "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(controller.percentageApprovedLeave.value == 0 ? 0 : 2)}%",
                           percent: controller.percentageApprovedLeave.value,
                           textBelow: "${controller.totalApprovedLeave.value}/"
                               "${controller.totalLeave.value}",
@@ -79,7 +79,7 @@ class LeaveViewMobile extends StatelessWidget {
                           title: "Rejected",
                           radius: 38,
                           centerText:
-                              "${(controller.percentageDeclinedLeave.value * 100).toStringAsFixed(2)} %",
+                              "${(controller.percentageDeclinedLeave.value * 100).toStringAsFixed(controller.percentageDeclinedLeave.value == 0 ? 0 : 2)}%",
                           percent: controller.percentageDeclinedLeave.value,
                           textBelow: "${controller.totalDeclinedLeave.value}/"
                               "${controller.totalLeave.value}",

@@ -32,7 +32,7 @@ class LeaveCard extends StatelessWidget {
       child: Container(
         height: SizeUtils.scale(170, size.width),
         margin:
-            EdgeInsets.only(bottom: AppSize.paddingS5 * (size.width / 375.0)),
+            EdgeInsets.only(bottom: AppSize.paddingS8 * (size.width / 375.0)),
         padding: EdgeInsets.symmetric(
           horizontal:
               SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
@@ -45,9 +45,9 @@ class LeaveCard extends StatelessWidget {
           color: Theme.of(context).colorScheme.background,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 3,
-              blurRadius: 4,
+              color: Colors.grey.withOpacity(0.15),
+              spreadRadius: 1.5,
+              blurRadius: 1.5,
               offset: const Offset(0, 0),
             ),
           ],

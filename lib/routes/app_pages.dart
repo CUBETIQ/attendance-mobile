@@ -12,6 +12,8 @@ import 'package:attendance_app/feature/customer_support/view/index.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/admin_leave_binding.dart';
 import 'package:attendance_app/feature/home/admin_leave_request/view/index.dart';
 import 'package:attendance_app/feature/home/home/home_binding.dart';
+import 'package:attendance_app/feature/home/summary_attendance/summary_attendance_binding.dart';
+import 'package:attendance_app/feature/home/summary_attendance/view/index.dart';
 import 'package:attendance_app/feature/home/work_hour/view/index.dart';
 import 'package:attendance_app/feature/home/work_hour/work_hour_binding.dart';
 import 'package:attendance_app/feature/leave/add_leave/view/index.dart';
@@ -84,6 +86,11 @@ class AppPages {
       name: Routes.TASK_DETAIL,
       page: () => const TaskDetailView(),
       binding: TaskDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.ADMIN_SUMMARY_ATTENDANCE,
+      page: () => const SummaryAttendaceView(),
+      binding: SummaryAttendanceBinding(),
     ),
     GetPage(
       name: Routes.EDIT_PROFILE,

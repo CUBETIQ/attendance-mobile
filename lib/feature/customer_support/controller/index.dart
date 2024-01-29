@@ -7,20 +7,20 @@ class CustomerSupportController extends GetxController {
 
   List<SupportButtonModel> buttons = [
     SupportButtonModel(
-      title: 'Email',
+      title: 'Contact Live Chat',
+      leadingIcon: Icons.support_agent_rounded,
+      trailingIcon: Icons.arrow_forward_ios_rounded,
+      onTap: () {},
+    ),
+    SupportButtonModel(
+      title: 'Send Us An Email',
       leadingIcon: Icons.email_rounded,
       trailingIcon: Icons.arrow_forward_ios_rounded,
       onTap: () {},
     ),
     SupportButtonModel(
-      title: 'Phone',
-      leadingIcon: Icons.phone_rounded,
-      trailingIcon: Icons.arrow_forward_ios_rounded,
-      onTap: () {},
-    ),
-    SupportButtonModel(
-      title: 'Chat',
-      leadingIcon: Icons.chat_rounded,
+      title: 'FAQs',
+      leadingIcon: Icons.help_rounded,
       trailingIcon: Icons.arrow_forward_ios_rounded,
       onTap: () {},
     ),

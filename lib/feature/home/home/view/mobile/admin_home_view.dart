@@ -80,6 +80,14 @@ class HomeAdminMobileView extends StatelessWidget {
                         SizedBox(height: SizeUtils.scale(20, size.width)),
                         Obx(
                           () => AttendancePieChartCard(
+                            onTap: () => Get.toNamed(
+                              Routes.ADMIN_SUMMARY_ATTENDANCE,
+                              arguments: {
+                                "staffs": controller.staffs.value,
+                                "attendances":
+                                    controller.staffAttendanceList.value,
+                              },
+                            ),
                             presentPercentage:
                                 controller.presentPercentage.value,
                             absentPercentage: controller.absentPercentage.value,
@@ -221,8 +229,12 @@ class HomeAdminMobileView extends StatelessWidget {
                             builderWidget: ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.only(
+                                bottom: SizeUtils.scale(20, size.width),
+                              ),
                               separatorBuilder: (context, index) => SizedBox(
-                                  height: SizeUtils.scale(10, size.width)),
+                                height: SizeUtils.scale(10, size.width),
+                              ),
                               itemCount:
                                   controller.staffAttendanceList.value.length,
                               itemBuilder: (context, index) {

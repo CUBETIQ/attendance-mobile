@@ -100,7 +100,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
       status: json['status'],
       startDate: json['startDate'],
       endDate: json['endDate'],
-      attachment: json['attachment'],
+      attachment: json['attachment'].cast<String>(),
       color: json['color'],
       icon: json['icon'],
     );

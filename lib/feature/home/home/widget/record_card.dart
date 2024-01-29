@@ -40,6 +40,9 @@ class RecordCard extends StatelessWidget {
       width: width ?? double.infinity,
       height: height ?? size.width * 0.67,
       padding: EdgeInsets.all(SizeUtils.scale(AppSize.paddingS8, size.width)),
+      margin: EdgeInsets.only(
+        bottom: SizeUtils.scale(AppSize.paddingS8, size.width),
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           AppSize.borderRadiusMedium * (size.width / 375.0),
@@ -47,9 +50,9 @@ class RecordCard extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1.2,
-            blurRadius: 1,
+            color: Colors.grey.withOpacity(0.15),
+            spreadRadius: 1.5,
+            blurRadius: 1.5,
             offset: const Offset(0, 0),
           ),
         ],

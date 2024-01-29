@@ -12,7 +12,7 @@ class LoadingDialog extends StatelessWidget {
     Get.dialog(
       Center(
         child: Container(
-          width: SizeUtils.scale(230, size.width),
+          width: SizeUtils.scale(240, size.width),
           height: SizeUtils.scale(60, size.width),
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(20, size.width),

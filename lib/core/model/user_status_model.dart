@@ -4,7 +4,7 @@ class UserStatusModel extends BaseModel<UserStatusModel> {
   final String? id;
   final String? userId;
   final String? status;
-  final DateTime? lastUpdatedAt;
+  final int? lastUpdatedAt;
   UserStatusModel({
     this.id,
     this.userId,
@@ -18,16 +18,11 @@ class UserStatusModel extends BaseModel<UserStatusModel> {
       return UserStatusModel();
     }
 
-    DateTime? dateTime;
-    if (json['lastUpdatedAt'] != null) {
-      dateTime = DateTime.parse(json['lastUpdatedAt']);
-    }
-
     return UserStatusModel(
       id: json['id'],
       userId: json['userId'],
       status: json['status'],
-      lastUpdatedAt: dateTime,
+      lastUpdatedAt: json['lastUpdatedAt'],
     );
   }
 

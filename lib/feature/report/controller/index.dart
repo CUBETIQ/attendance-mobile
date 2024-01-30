@@ -63,7 +63,7 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> initAdminFunction() async {
-    if (NavigationController.to.getUserRole.value == Role.admin) {
+    if (NavigationController.to.getUserRole.value != Role.staff) {
       tabs.value = ["Employee", "Report"];
       tabController = TabController(length: 2, vsync: this);
       await getStaffAttendanceReport();

@@ -6,6 +6,7 @@ import 'package:attendance_app/core/model/position_model.dart';
 import 'package:attendance_app/core/model/summary_attendance_model.dart';
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
 import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
 import 'package:attendance_app/extensions/string.dart';
 import 'package:attendance_app/feature/home/home/model/check_in_model.dart';
@@ -94,6 +95,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxDouble latePercentage = 0.0.obs;
   RxDouble onTimePercentage = 0.0.obs;
   RxDouble earlyPercentage = 0.0.obs;
+  final _debounce = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -183,76 +185,87 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> checkIn() async {
-    DateTime now = await checkTime();
-    if (now.hour > endHour.value.split(":").first.toInt()) {
-      showErrorSnackBar("Error", "You can't check in after $endHour");
-      return;
-    } else {
+    _debounce.run(() async {
+      if (await checkUserLocation() == false) {
+        return;
+      }
+      DateTime now = await checkTime();
+      if (now.hour > endHour.value.split(":").first.toInt()) {
+        showErrorSnackBar("Error", "You can't check in after $endHour");
+        return;
+      } else {
+        controller.forward();
+        checkOutTime.value = null;
+        totalHour.value = null;
+        try {
+          LocationModel location = LocationModel(
+            lat: NavigationController.to.userLocation.value?.latitude,
+            lng: NavigationController.to.userLocation.value?.longitude,
+            inOffice: NavigationController.to.isInRange.value,
+          );
+          CheckInModel input = CheckInModel(
+            checkInDateTime: now.millisecondsSinceEpoch,
+            checkInType: AttendanceMethod.manual,
+            checkInStatus:
+                CheckInStatusValidator().getStatus(startHour.value, now),
+            checkInEarly: GetMinute().checkEarlyMinute(startHour.value, now),
+            checkInLate: GetMinute().checkLateMinute(startHour.value, now),
+            checkInLocation: location,
+          );
+          AttendanceModel checkIn = await HomeService().checkIn(input);
+          checkInTime.value = DateFormatter().formatTime(
+            DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
+          );
+          await getAttendance();
+          isCheckedIn.value = true;
+          await getSummarizeAttendance();
+          if (Get.isRegistered<ProfileController>()) {
+            ProfileController.to.getSummarizeAttendance();
+          }
+          getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
+        } on DioException catch (e) {
+          showErrorSnackBar("Error", e.response?.data["message"]);
+          rethrow;
+        }
+      }
+    });
+  }
+
+  Future<void> checkOut() async {
+    _debounce.run(() async {
+      if (await checkUserLocation() == false) {
+        return;
+      }
       controller.forward();
-      checkOutTime.value = null;
-      totalHour.value = null;
+      DateTime now = await checkTime();
       try {
         LocationModel location = LocationModel(
           lat: NavigationController.to.userLocation.value?.latitude,
           lng: NavigationController.to.userLocation.value?.longitude,
           inOffice: NavigationController.to.isInRange.value,
         );
-        CheckInModel input = CheckInModel(
-          checkInDateTime: now.millisecondsSinceEpoch,
-          checkInType: AttendanceMethod.manual,
-          checkInStatus:
-              CheckInStatusValidator().getStatus(startHour.value, now),
-          checkInEarly: GetMinute().checkEarlyMinute(startHour.value, now),
-          checkInLate: GetMinute().checkLateMinute(startHour.value, now),
-          checkInLocation: location,
+
+        CheckOutModel input = CheckOutModel(
+          checkOutDateTime: now.millisecondsSinceEpoch,
+          checkOutType: AttendanceMethod.manual,
+          checkOutStatus:
+              CheckOutStatusValidator().getStatus(endHour.value, now),
+          checkOutEarly: GetMinute().checkEarlyMinute(endHour.value, now),
+          checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
+          checkOutLocation: location,
         );
-        AttendanceModel checkIn = await HomeService().checkIn(input);
-        checkInTime.value = DateFormatter().formatTime(
-          DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
+        AttendanceModel checkOut = await HomeService().checkOut(input);
+        checkOutTime.value = DateFormatter().formatTime(
+          DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
         );
-        getAttendance();
-        isCheckedIn.value = true;
-        await getSummarizeAttendance();
-        if (Get.isRegistered<ProfileController>()) {
-          ProfileController.to.getSummarizeAttendance();
-        }
-        getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
+        isCheckedIn.value = false;
+        await getAttendance();
+        getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
       }
-    }
-  }
-
-  Future<void> checkOut() async {
-    controller.forward();
-    DateTime now = await checkTime();
-    try {
-      LocationModel location = LocationModel(
-        lat: NavigationController.to.userLocation.value?.latitude,
-        lng: NavigationController.to.userLocation.value?.longitude,
-        inOffice: NavigationController.to.isInRange.value,
-      );
-
-      CheckOutModel input = CheckOutModel(
-        checkOutDateTime: now.millisecondsSinceEpoch,
-        checkOutType: AttendanceMethod.manual,
-        checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
-        checkOutEarly: GetMinute().checkEarlyMinute(endHour.value, now),
-        checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
-        checkOutLocation: location,
-      );
-      AttendanceModel checkOut = await HomeService().checkOut(input);
-      checkOutTime.value = DateFormatter().formatTime(
-        DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
-      );
-      isCheckedIn.value = false;
-      getAttendance();
-      getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
+    });
   }
 
   Future<void> updateUserStatus(String status) async {
@@ -474,6 +487,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       isBreakTime.value = false;
       breakTimeTitle.value = null;
     }
+  }
+
+  Future<bool> checkUserLocation() async {
+    if (NavigationController.to.userLocation.value == null) {
+      await NavigationController.to.getUserLocation();
+      if (NavigationController.to.userLocation.value != null) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return true;
   }
 
   void getUsername() {

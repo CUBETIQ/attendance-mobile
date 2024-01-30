@@ -10,11 +10,12 @@ class SummaryAttendanceController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    getArgument();
   }
 
   void getArgument() {
-    staffs = Get.arguments[0];
-    staffAttendanceList = Get.arguments[1];
+    staffs.value = Get.arguments["staffs"];
+    staffAttendanceList.value = Get.arguments["attendances"];
   }
 
   // Function to get attendance details for a staff member

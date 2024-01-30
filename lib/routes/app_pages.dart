@@ -27,6 +27,8 @@ import 'package:attendance_app/feature/onboard/view/index.dart';
 import 'package:attendance_app/feature/organization/edit_organization/view/index.dart';
 import 'package:attendance_app/feature/organization/organiziation/organization_binding.dart';
 import 'package:attendance_app/feature/organization/organiziation/view/index.dart';
+import 'package:attendance_app/feature/position/position/position_binding.dart';
+import 'package:attendance_app/feature/position/position/view/index.dart';
 import 'package:attendance_app/feature/profile/edit_profile/view/index.dart';
 import 'package:attendance_app/feature/profile/profile/profile_binding.dart';
 import 'package:attendance_app/feature/report/report_binding.dart';
@@ -166,6 +168,11 @@ class AppPages {
       name: Routes.CUSTOMER_SUPPORT,
       page: () => const CustomerSupportView(),
       binding: CustomerSupportBinding(),
+    ),
+    GetPage(
+      name: Routes.POSITION,
+      page: () => const PositionView(),
+      binding: PositionBinding(),
     ),
   ];
 }

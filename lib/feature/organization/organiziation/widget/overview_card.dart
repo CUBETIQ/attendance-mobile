@@ -60,7 +60,7 @@ class OverViewCard extends StatelessWidget {
           Column(
             children: [
               Icon(
-                Icons.location_city,
+                Icons.location_city_rounded,
                 color: Theme.of(context).colorScheme.onPrimary,
                 size: SizeUtils.scale(25, size.width),
               ),

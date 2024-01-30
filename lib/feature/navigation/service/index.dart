@@ -1,7 +1,6 @@
 import 'package:attendance_app/core/model/user_model.dart';
 import 'package:attendance_app/core/network/dio_util.dart';
 import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/core/widgets/console/console.dart';
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -28,7 +27,6 @@ class NavigationService {
       });
     }
 
-    Console.log("Permission granted", await Geolocator.getCurrentPosition());
     return await Geolocator.getCurrentPosition();
   }
 

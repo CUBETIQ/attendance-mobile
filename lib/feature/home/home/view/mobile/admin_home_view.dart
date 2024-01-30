@@ -86,6 +86,8 @@ class HomeAdminMobileView extends StatelessWidget {
                                 "staffs": controller.staffs.value,
                                 "attendances":
                                     controller.staffAttendanceList.value,
+                                "startDate": controller.startOfDay.value,
+                                "endDate": controller.endOfDay.value,
                               },
                             ),
                             presentPercentage:

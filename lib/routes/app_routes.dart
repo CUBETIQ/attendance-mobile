@@ -30,4 +30,5 @@ abstract class Routes {
   static const LANGUAGE = '/language';
   static const ERROR = '/error';
   static const CUSTOMER_SUPPORT = '/customer_support';
+  static const POSITION = '/position';
 }

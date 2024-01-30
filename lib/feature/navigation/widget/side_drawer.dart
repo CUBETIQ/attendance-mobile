@@ -65,24 +65,27 @@ class SideDrawer extends StatelessWidget {
             SizedBox(height: SizeUtils.scale(10, size.height)),
             ...List.generate(
               drawerItems.length,
-              (index) => ListTile(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+              (index) => SizedBox(
+                height: SizeUtils.scale(22, size.height),
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+                    ),
                   ),
-                ),
-                onTap: () {
-                  ZoomDrawer.of(context)?.close();
-                  drawerItems[index].onTap!();
-                },
-                leading: Icon(
-                  drawerItems[index].icon,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                title: MyText(
-                  text: drawerItems[index].title,
-                  style: BodyMediumMedium.copyWith(
+                  onTap: () {
+                    ZoomDrawer.of(context)?.close();
+                    drawerItems[index].onTap!();
+                  },
+                  leading: Icon(
+                    drawerItems[index].icon,
                     color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: MyText(
+                    text: drawerItems[index].title,
+                    style: BodyMediumMedium.copyWith(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
                 ),
               ),
@@ -99,6 +102,7 @@ class SideDrawer extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                     size: SizeUtils.scale(24, size.width),
                   ),
+                  SizedBox(width: SizeUtils.scale(3, size.width)),
                   MyText(
                     text: "TimeSync 360 V1.0.0",
                     style: BodyMediumMedium.copyWith(

@@ -157,7 +157,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> initAdminFunction() async {
-    getAllPositions();
+    await getAllPositions();
     await getDashboardChart();
     await getAllStaffs();
     getAllStaffAttendance();

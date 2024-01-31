@@ -1,10 +1,10 @@
-import 'package:attendance_app/core/model/leave_model.dart';
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/feature/home/admin_leave_request/model/change_leave_status.dart';
-import 'package:attendance_app/feature/home/admin_leave_request/service/index.dart';
-import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/routes/app_pages.dart';
+import 'package:timesync360/core/model/leave_model.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/feature/home/admin_leave_request/model/change_leave_status.dart';
+import 'package:timesync360/feature/home/admin_leave_request/service/index.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync360/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,7 +49,7 @@ class AdminLeaveRequestController extends GetxController {
     try {
       ChangeLeaveStatusModel data = ChangeLeaveStatusModel(
         status: status,
-        updateDate: leave?.from ?? DateTime.now().millisecondsSinceEpoch,
+        updatedDate: leave?.from ?? DateTime.now().millisecondsSinceEpoch,
       );
       await AdminLeaveRequestService().changeLeaveStatus(
         input: data,

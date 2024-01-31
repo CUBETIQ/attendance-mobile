@@ -19,4 +19,19 @@ class ProfileImageAssets {
   static const String profileG4 = 'assets/images/profile/profileG4.png';
   static const String profileG5 = 'assets/images/profile/profileG5.png';
   static const String profileG6 = 'assets/images/profile/profileG6.png';
+
+  static const List<String> profileList = [
+    profileB1,
+    profileB2,
+    profileB3,
+    profileB4,
+    profileB5,
+    profileB6,
+    profileG1,
+    profileG2,
+    profileG3,
+    profileG4,
+    profileG5,
+    profileG6,
+  ];
 }

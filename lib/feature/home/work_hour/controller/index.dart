@@ -1,10 +1,10 @@
-import 'package:attendance_app/core/model/attendance_model.dart';
-import 'package:attendance_app/core/model/position_model.dart';
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/feature/home/work_hour/service/index.dart';
-import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/utils/time_util.dart';
+import 'package:timesync360/core/model/attendance_model.dart';
+import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/feature/home/work_hour/service/index.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync360/utils/time_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

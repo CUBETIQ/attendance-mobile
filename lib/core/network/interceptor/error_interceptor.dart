@@ -1,8 +1,8 @@
-import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
-import 'package:attendance_app/core/database/isar/service/isar_service.dart';
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/routes/app_pages.dart';
+import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync360/core/database/isar/service/isar_service.dart';
+import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/routes/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 

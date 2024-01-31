@@ -1,4 +1,4 @@
-import 'package:attendance_app/core/model/attendance_model.dart';
+import 'package:timesync360/core/model/attendance_model.dart';
 
 class CheckInModel {
   final int? checkInDateTime;

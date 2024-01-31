@@ -1,4 +1,4 @@
-import 'package:attendance_app/core/model/organization_model.dart';
+import 'package:timesync360/core/model/organization_model.dart';
 
 class UpdateOrganizationModel {
   final String? name;

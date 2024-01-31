@@ -1,12 +1,12 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/core/widgets/button/back_button.dart';
-import 'package:attendance_app/core/widgets/button/button.dart';
-import 'package:attendance_app/core/widgets/profile_image/profile_image.dart';
-import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
-import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
-import 'package:attendance_app/core/widgets/textfield/time_picker_field.dart';
-import 'package:attendance_app/feature/organization/edit_organization/controller/index.dart';
-import 'package:attendance_app/utils/size_util.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
+import 'package:timesync360/core/widgets/text/app_bar_title.dart';
+import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync360/core/widgets/textfield/time_picker_field.dart';
+import 'package:timesync360/feature/organization/edit_organization/controller/index.dart';
+import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

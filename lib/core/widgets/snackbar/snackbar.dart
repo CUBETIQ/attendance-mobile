@@ -1,6 +1,6 @@
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/extensions/string.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

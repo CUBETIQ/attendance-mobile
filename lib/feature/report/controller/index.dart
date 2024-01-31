@@ -1,14 +1,14 @@
-import 'package:attendance_app/core/model/admin_attendance_report_model.dart';
-import 'package:attendance_app/core/model/admin_leave_report_model.dart';
-import 'package:attendance_app/core/model/admin_task_report_model.dart';
-import 'package:attendance_app/core/model/attendance_model.dart';
-import 'package:attendance_app/core/model/leave_model.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/report/service/index.dart';
-import 'package:attendance_app/utils/time_util.dart';
-import 'package:attendance_app/utils/types_helper/leave_status.dart';
-import 'package:attendance_app/utils/types_helper/role.dart';
+import 'package:timesync360/core/model/admin_attendance_report_model.dart';
+import 'package:timesync360/core/model/admin_leave_report_model.dart';
+import 'package:timesync360/core/model/admin_task_report_model.dart';
+import 'package:timesync360/core/model/attendance_model.dart';
+import 'package:timesync360/core/model/leave_model.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync360/feature/report/service/index.dart';
+import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync360/utils/types_helper/leave_status.dart';
+import 'package:timesync360/utils/types_helper/role.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,7 +63,7 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> initAdminFunction() async {
-    if (NavigationController.to.getUserRole.value == Role.admin) {
+    if (NavigationController.to.getUserRole.value != Role.staff) {
       tabs.value = ["Employee", "Report"];
       tabController = TabController(length: 2, vsync: this);
       await getStaffAttendanceReport();

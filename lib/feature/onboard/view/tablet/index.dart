@@ -1,7 +1,7 @@
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/widgets/button/button.dart';
-import 'package:attendance_app/feature/onboard/controller/index.dart';
-import 'package:attendance_app/feature/onboard/widgets/page.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/feature/onboard/controller/index.dart';
+import 'package:timesync360/feature/onboard/widgets/page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 

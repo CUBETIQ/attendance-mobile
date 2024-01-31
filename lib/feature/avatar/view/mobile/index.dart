@@ -1,9 +1,10 @@
-import 'package:attendance_app/core/widgets/button/back_button.dart';
-import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
-import 'package:attendance_app/feature/avatar/controller/index.dart';
-import 'package:attendance_app/utils/size_util.dart';
+import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/text/app_bar_title.dart';
+import 'package:timesync360/feature/avatar/controller/index.dart';
+import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync360/utils/types_helper/avatar_type.dart';
 
 class AvatarViewMobile extends StatelessWidget {
   const AvatarViewMobile({super.key});
@@ -28,34 +29,46 @@ class AvatarViewMobile extends StatelessWidget {
             top: SizeUtils.scale(10, size.height),
           ),
           child: Center(
-            child: Wrap(
-              spacing: SizeUtils.scale(10, size.width),
-              runSpacing: SizeUtils.scale(20, size.width),
-              children: [
-                ...controller.avatars.map(
-                  (e) => GestureDetector(
-                    onTap: () => controller.pickImage(e),
-                    child: Container(
-                      width: SizeUtils.scale(80, size.width),
-                      height: SizeUtils.scale(80, size.width),
-                      alignment: Alignment.center,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.5),
-                      ),
-                      child: Image.asset(
-                        e,
-                        width: SizeUtils.scale(75, size.width),
-                        height: SizeUtils.scale(75, size.width),
+            child: Obx(
+              () => Wrap(
+                spacing: SizeUtils.scale(10, size.width),
+                runSpacing: SizeUtils.scale(20, size.width),
+                children: [
+                  ...controller.avatars.map(
+                    (e) => GestureDetector(
+                      onTap: () => controller.pickImage(e),
+                      child: Container(
+                        width: SizeUtils.scale(80, size.width),
+                        height: SizeUtils.scale(80, size.width),
+                        alignment: Alignment.center,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.5),
+                        ),
+                        child: Image.asset(
+                          e,
+                          width: SizeUtils.scale(
+                            controller.avatarType.value == AvatarType.profile
+                                ? 75
+                                : 60,
+                            size.width,
+                          ),
+                          height: SizeUtils.scale(
+                            controller.avatarType.value == AvatarType.profile
+                                ? 75
+                                : 60,
+                            size.width,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

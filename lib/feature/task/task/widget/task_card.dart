@@ -1,11 +1,11 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/model/task_model.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/extensions/string.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_util.dart';
-import 'package:attendance_app/utils/types_helper/task_status.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/model/task_model.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/extensions/string.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync360/utils/types_helper/task_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 

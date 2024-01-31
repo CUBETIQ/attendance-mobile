@@ -1,10 +1,10 @@
-import 'package:attendance_app/core/model/admin_attendance_report_model.dart';
-import 'package:attendance_app/core/model/admin_leave_report_model.dart';
-import 'package:attendance_app/core/model/admin_task_report_model.dart';
-import 'package:attendance_app/core/model/attendance_model.dart';
-import 'package:attendance_app/core/model/leave_model.dart';
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
+import 'package:timesync360/core/model/admin_attendance_report_model.dart';
+import 'package:timesync360/core/model/admin_leave_report_model.dart';
+import 'package:timesync360/core/model/admin_task_report_model.dart';
+import 'package:timesync360/core/model/attendance_model.dart';
+import 'package:timesync360/core/model/leave_model.dart';
+import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync360/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
 
 class ReportService {

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:attendance_app/core/widgets/image/cache_image.dart';
+import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:flutter/material.dart';
 
 class MyProfileImage extends StatelessWidget {
@@ -7,6 +7,9 @@ class MyProfileImage extends StatelessWidget {
   final File? imageFile;
   final double? width;
   final double? height;
+  final String? defaultImage;
+  final double? imageWidth;
+  final double? imageHeight;
 
   const MyProfileImage({
     super.key,
@@ -14,6 +17,9 @@ class MyProfileImage extends StatelessWidget {
     this.imageFile,
     this.width,
     this.height,
+    this.defaultImage,
+    this.imageWidth,
+    this.imageHeight,
   });
 
   @override
@@ -49,6 +55,9 @@ class MyProfileImage extends StatelessWidget {
                 imageUrl: imageUrl ?? "",
                 width: width ?? 100,
                 height: height ?? 100,
+                imageWidth: imageWidth ?? width ?? 90,
+                imageHeight: imageHeight ?? height ?? 90,
+                defaultImage: defaultImage,
               );
   }
 }

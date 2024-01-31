@@ -1,4 +1,4 @@
-import 'package:attendance_app/constants/svg.dart';
+import 'package:timesync360/constants/svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,6 +10,7 @@ class MyCacheImage extends StatelessWidget {
   final double? height;
   final double? imageWidth;
   final double? imageHeight;
+  final String? defaultImage;
 
   const MyCacheImage({
     super.key,
@@ -18,6 +19,7 @@ class MyCacheImage extends StatelessWidget {
     this.height,
     this.imageWidth,
     this.imageHeight,
+    this.defaultImage,
   });
 
   @override
@@ -83,7 +85,7 @@ class MyCacheImage extends StatelessWidget {
                   ),
                   child: SizedBox(
                     child: SvgPicture.asset(
-                      SvgAssets.defaultUser,
+                      defaultImage ?? SvgAssets.defaultUser,
                     ),
                   ),
                 ),
@@ -101,7 +103,7 @@ class MyCacheImage extends StatelessWidget {
               width: imageWidth ?? width ?? 55,
               height: imageHeight ?? height ?? 55,
               child: SvgPicture.asset(
-                SvgAssets.defaultUser,
+                defaultImage ?? SvgAssets.defaultUser,
               ),
             ),
           );

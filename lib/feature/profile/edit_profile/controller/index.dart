@@ -1,16 +1,17 @@
 import 'dart:io';
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:attendance_app/feature/home/home/controller/index.dart';
-import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/profile/edit_profile/model/update_profile_model.dart';
-import 'package:attendance_app/feature/profile/edit_profile/service/index.dart';
-import 'package:attendance_app/routes/app_pages.dart';
-import 'package:attendance_app/utils/time_util.dart';
-import 'package:attendance_app/utils/types_helper/gender.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync360/feature/home/home/controller/index.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync360/feature/profile/edit_profile/model/update_profile_model.dart';
+import 'package:timesync360/feature/profile/edit_profile/service/index.dart';
+import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync360/utils/types_helper/avatar_type.dart';
+import 'package:timesync360/utils/types_helper/gender.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,10 @@ class EditProfileController extends GetxController {
 
   Future<void> onTapAvatar() async {
     Get.back();
-    final resultImage = await Get.toNamed(Routes.AVATAR);
+    final resultImage = await Get.toNamed(
+      Routes.AVATAR,
+      arguments: AvatarType.profile,
+    );
     if (resultImage != null) {
       image.value = resultImage;
       imageFile.value = null;

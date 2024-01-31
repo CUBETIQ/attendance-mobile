@@ -1,6 +1,6 @@
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/feature/profile/edit_profile/model/update_profile_model.dart';
+import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/feature/profile/edit_profile/model/update_profile_model.dart';
 import 'package:dio/dio.dart';
 
 class EditProfileService {

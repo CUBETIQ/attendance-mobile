@@ -1,5 +1,5 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/utils/size_util.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {

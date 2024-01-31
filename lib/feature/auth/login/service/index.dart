@@ -1,13 +1,13 @@
-import 'package:attendance_app/core/model/department_model.dart';
-import 'package:attendance_app/core/model/organization_model.dart';
-import 'package:attendance_app/core/model/position_model.dart';
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/model/user_status_model.dart';
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/feature/auth/login/model/index.dart';
-import 'package:attendance_app/routes/app_pages.dart';
+import 'package:timesync360/core/model/department_model.dart';
+import 'package:timesync360/core/model/organization_model.dart';
+import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/model/user_status_model.dart';
+import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/feature/auth/login/model/index.dart';
+import 'package:timesync360/routes/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 

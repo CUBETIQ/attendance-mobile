@@ -1,6 +1,6 @@
-import 'package:attendance_app/core/model/department_model.dart';
-import 'package:attendance_app/core/model/position_model.dart';
-import 'package:attendance_app/core/model/user_model.dart';
+import 'package:timesync360/core/model/department_model.dart';
+import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/model/user_model.dart';
 import 'package:get/get.dart';
 
 class StaffDetailController extends GetxController {

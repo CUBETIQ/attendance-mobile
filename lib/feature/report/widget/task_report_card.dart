@@ -1,10 +1,10 @@
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/model/admin_task_report_model.dart';
-import 'package:attendance_app/core/widgets/image/cache_image.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/feature/report/widget/task_data_row.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/string_util.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/model/admin_task_report_model.dart';
+import 'package:timesync360/core/widgets/image/cache_image.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/feature/report/widget/task_data_row.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/string_util.dart';
 import 'package:flutter/material.dart';
 
 class TaskReportCard extends StatelessWidget {

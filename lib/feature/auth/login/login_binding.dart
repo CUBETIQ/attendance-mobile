@@ -1,4 +1,4 @@
-import 'package:attendance_app/feature/auth/login/controller/index.dart';
+import 'package:timesync360/feature/auth/login/controller/index.dart';
 import 'package:get/get.dart';
 
 class LoginBinding extends Binding {

@@ -1,8 +1,8 @@
-import 'package:attendance_app/core/database/isar/controller/local_language_controller.dart';
-import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
-import 'package:attendance_app/core/database/isar/entities/language.dart';
-import 'package:attendance_app/core/database/isar/entities/local_storage.dart';
-import 'package:attendance_app/main.dart';
+import 'package:timesync360/core/database/isar/controller/local_language_controller.dart';
+import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync360/core/database/isar/entities/language.dart';
+import 'package:timesync360/core/database/isar/entities/local_storage.dart';
+import 'package:timesync360/main.dart';
 import 'package:get/get.dart';
 
 class IsarService extends GetxService {

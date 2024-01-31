@@ -1,12 +1,12 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/image/cache_image.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/feature/navigation/model/drawer_model.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/string_util.dart';
-import 'package:attendance_app/utils/types_helper/role.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/widgets/image/cache_image.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/feature/navigation/model/drawer_model.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/string_util.dart';
+import 'package:timesync360/utils/types_helper/role.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
@@ -65,24 +65,27 @@ class SideDrawer extends StatelessWidget {
             SizedBox(height: SizeUtils.scale(10, size.height)),
             ...List.generate(
               drawerItems.length,
-              (index) => ListTile(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+              (index) => SizedBox(
+                height: SizeUtils.scale(22, size.height),
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+                    ),
                   ),
-                ),
-                onTap: () {
-                  ZoomDrawer.of(context)?.close();
-                  drawerItems[index].onTap!();
-                },
-                leading: Icon(
-                  drawerItems[index].icon,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                title: MyText(
-                  text: drawerItems[index].title,
-                  style: BodyMediumMedium.copyWith(
+                  onTap: () {
+                    ZoomDrawer.of(context)?.close();
+                    drawerItems[index].onTap!();
+                  },
+                  leading: Icon(
+                    drawerItems[index].icon,
                     color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: MyText(
+                    text: drawerItems[index].title,
+                    style: BodyMediumMedium.copyWith(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
                 ),
               ),
@@ -99,6 +102,7 @@ class SideDrawer extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                     size: SizeUtils.scale(24, size.width),
                   ),
+                  SizedBox(width: SizeUtils.scale(3, size.width)),
                   MyText(
                     text: "TimeSync 360 V1.0.0",
                     style: BodyMediumMedium.copyWith(

@@ -1,21 +1,21 @@
-import 'package:attendance_app/config/app_config.dart';
-import 'package:attendance_app/constants/svg.dart';
-import 'package:attendance_app/core/database/isar/service/isar_service.dart';
-import 'package:attendance_app/core/model/department_model.dart';
-import 'package:attendance_app/core/model/organization_model.dart';
-import 'package:attendance_app/core/model/position_model.dart';
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/model/user_status_model.dart';
-import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/feature/navigation/model/bottom_bar_model.dart';
-import 'package:attendance_app/feature/navigation/model/drawer_model.dart';
-import 'package:attendance_app/feature/navigation/service/index.dart';
-import 'package:attendance_app/routes/app_pages.dart';
-import 'package:attendance_app/utils/location_util.dart';
-import 'package:attendance_app/utils/time_util.dart';
-import 'package:attendance_app/utils/types_helper/role.dart';
-import 'package:attendance_app/utils/types_helper/state.dart';
+import 'package:timesync360/config/app_config.dart';
+import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/core/database/isar/service/isar_service.dart';
+import 'package:timesync360/core/model/department_model.dart';
+import 'package:timesync360/core/model/organization_model.dart';
+import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/model/user_status_model.dart';
+import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/feature/navigation/model/bottom_bar_model.dart';
+import 'package:timesync360/feature/navigation/model/drawer_model.dart';
+import 'package:timesync360/feature/navigation/service/index.dart';
+import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync360/utils/location_util.dart';
+import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync360/utils/types_helper/role.dart';
+import 'package:timesync360/utils/types_helper/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -156,6 +156,18 @@ class NavigationController extends GetxController {
           onTap: () {
             Get.toNamed(Routes.STAFF);
           },
+        ),
+        DrawerModel(
+          title: "Position",
+          icon: Icons.work_rounded,
+          onTap: () {
+            Get.toNamed(Routes.POSITION);
+          },
+        ),
+        DrawerModel(
+          title: "Department",
+          icon: Icons.location_city_rounded,
+          onTap: () {},
         ),
         DrawerModel(
           title: "Support",

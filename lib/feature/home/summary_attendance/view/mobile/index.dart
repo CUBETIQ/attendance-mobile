@@ -1,10 +1,10 @@
-import 'package:attendance_app/core/widgets/button/back_button.dart';
-import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
-import 'package:attendance_app/feature/home/home/widget/tab_bar.dart';
-import 'package:attendance_app/feature/home/summary_attendance/controller/index.dart';
-import 'package:attendance_app/feature/home/summary_attendance/widget/absent_tab_mobile.dart';
-import 'package:attendance_app/feature/home/summary_attendance/widget/leave_tab_mobile.dart';
-import 'package:attendance_app/feature/home/summary_attendance/widget/present_tab_mobile.dart';
+import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/text/app_bar_title.dart';
+import 'package:timesync360/feature/home/home/widget/tab_bar.dart';
+import 'package:timesync360/feature/home/summary_attendance/controller/index.dart';
+import 'package:timesync360/feature/home/summary_attendance/widget/absent_tab_mobile.dart';
+import 'package:timesync360/feature/home/summary_attendance/widget/leave_tab_mobile.dart';
+import 'package:timesync360/feature/home/summary_attendance/widget/present_tab_mobile.dart';
 import 'package:flutter/material.dart';
 
 class SummaryAttendaceViewMobile extends StatelessWidget {

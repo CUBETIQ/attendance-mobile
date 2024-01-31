@@ -1,4 +1,4 @@
-# attendance_app
+# timesync360
 
 A new Flutter project.
 

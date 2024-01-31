@@ -1,7 +1,7 @@
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/constants/svg.dart';
-import 'package:attendance_app/feature/splash/controller/index.dart';
-import 'package:attendance_app/feature/splash/widgets/animated_text.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/feature/splash/controller/index.dart';
+import 'package:timesync360/feature/splash/widgets/animated_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

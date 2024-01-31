@@ -1,6 +1,6 @@
-import 'package:attendance_app/constants/svg.dart';
-import 'package:attendance_app/core/database/isar/service/isar_service.dart';
-import 'package:attendance_app/feature/onboard/model/onboard_model.dart';
+import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/core/database/isar/service/isar_service.dart';
+import 'package:timesync360/feature/onboard/model/onboard_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

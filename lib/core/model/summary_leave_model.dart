@@ -1,4 +1,4 @@
-import 'package:attendance_app/core/repositories/base_model.dart';
+import 'package:timesync360/core/repositories/base_model.dart';
 
 class SummaryLeaveModel extends BaseModel<SummaryLeaveModel> {
   final String? userId;

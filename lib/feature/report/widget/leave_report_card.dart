@@ -1,9 +1,9 @@
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/model/admin_leave_report_model.dart';
-import 'package:attendance_app/core/widgets/image/cache_image.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/string_util.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/model/admin_leave_report_model.dart';
+import 'package:timesync360/core/widgets/image/cache_image.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/string_util.dart';
 import 'package:flutter/material.dart';
 
 class LeaveReportCard extends StatelessWidget {

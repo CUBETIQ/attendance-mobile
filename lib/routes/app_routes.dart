@@ -31,4 +31,6 @@ abstract class Routes {
   static const ERROR = '/error';
   static const CUSTOMER_SUPPORT = '/customer_support';
   static const POSITION = '/position';
+  static const ADD_POSITION = '/add_position';
+  static const POSITION_DETAIL = '/position_detail';
 }

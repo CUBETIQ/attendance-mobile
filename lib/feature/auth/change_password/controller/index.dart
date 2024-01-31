@@ -1,9 +1,9 @@
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/debouncer/debouncer.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:attendance_app/feature/auth/change_password/model/chnage_password_model.dart';
-import 'package:attendance_app/feature/auth/change_password/service/index.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync360/feature/auth/change_password/model/chnage_password_model.dart';
+import 'package:timesync360/feature/auth/change_password/service/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

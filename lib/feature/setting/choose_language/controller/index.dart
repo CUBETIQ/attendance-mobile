@@ -1,9 +1,9 @@
 import 'dart:ui';
-import 'package:attendance_app/constants/svg.dart';
-import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
-import 'package:attendance_app/core/database/isar/service/isar_service.dart';
-import 'package:attendance_app/core/widgets/loading/loading_dialog.dart';
-import 'package:attendance_app/feature/setting/choose_language/model/language_button_model.dart';
+import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync360/core/database/isar/service/isar_service.dart';
+import 'package:timesync360/core/widgets/loading/loading_dialog.dart';
+import 'package:timesync360/feature/setting/choose_language/model/language_button_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

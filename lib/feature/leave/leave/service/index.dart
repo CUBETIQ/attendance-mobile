@@ -1,7 +1,7 @@
-import 'package:attendance_app/core/model/leave_model.dart';
-import 'package:attendance_app/core/model/summary_leave_model.dart';
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
+import 'package:timesync360/core/model/leave_model.dart';
+import 'package:timesync360/core/model/summary_leave_model.dart';
+import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync360/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
 
 class LeaveService {

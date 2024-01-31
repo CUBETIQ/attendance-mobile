@@ -1,11 +1,11 @@
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/constants/color.dart';
-import 'package:attendance_app/core/model/attendance_model.dart';
-import 'package:attendance_app/core/widgets/card/my_card.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_util.dart';
-import 'package:attendance_app/utils/types_helper/attendance_status.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/color.dart';
+import 'package:timesync360/core/model/attendance_model.dart';
+import 'package:timesync360/core/widgets/card/my_card.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync360/utils/types_helper/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:attendance_app/core/model/leave_model.dart';
+import 'package:timesync360/core/model/leave_model.dart';
 import 'package:get/get.dart';
 
 class LeaveDetailController extends GetxController {

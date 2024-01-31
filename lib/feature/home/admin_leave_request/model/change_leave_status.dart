@@ -1,16 +1,16 @@
 class ChangeLeaveStatusModel {
   final String? status;
-  final int? updateDate;
+  final int? updatedDate;
 
   ChangeLeaveStatusModel({
     this.status,
-    this.updateDate,
+    this.updatedDate,
   });
 
   Map<String, dynamic> toJson() {
     return {
       "status": status,
-      "updateDate": updateDate,
+      "updatedDate": updatedDate,
     };
   }
 }

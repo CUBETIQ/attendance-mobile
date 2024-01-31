@@ -1,8 +1,8 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/core/widgets/button/button.dart';
-import 'package:attendance_app/feature/onboard/controller/index.dart';
-import 'package:attendance_app/feature/onboard/widgets/page.dart';
-import 'package:attendance_app/utils/size_util.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/feature/onboard/controller/index.dart';
+import 'package:timesync360/feature/onboard/widgets/page.dart';
+import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

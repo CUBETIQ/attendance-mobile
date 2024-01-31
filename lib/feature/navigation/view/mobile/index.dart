@@ -1,13 +1,13 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
-import 'package:attendance_app/feature/home/home/view/index.dart';
-import 'package:attendance_app/feature/leave/leave/view/index.dart';
-import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/navigation/widget/side_drawer.dart';
-import 'package:attendance_app/feature/profile/profile/view/index.dart';
-import 'package:attendance_app/feature/report/view/index.dart';
-import 'package:attendance_app/feature/task/task/view/index.dart';
-import 'package:attendance_app/utils/size_util.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/core/widgets/text/app_bar_title.dart';
+import 'package:timesync360/feature/home/home/view/index.dart';
+import 'package:timesync360/feature/leave/leave/view/index.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync360/feature/navigation/widget/side_drawer.dart';
+import 'package:timesync360/feature/profile/profile/view/index.dart';
+import 'package:timesync360/feature/report/view/index.dart';
+import 'package:timesync360/feature/task/task/view/index.dart';
+import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
@@ -99,7 +99,7 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
                 elevation: 2,
-                child: const Icon(Icons.add),
+                child: const Icon(Icons.add_rounded),
               ),
       ),
       bottomNavigationBar: Obx(

@@ -1,5 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:attendance_app/config/font.dart';
+import 'package:timesync360/config/font.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedText extends StatelessWidget {

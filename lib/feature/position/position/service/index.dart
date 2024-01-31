@@ -1,6 +1,6 @@
-import 'package:attendance_app/core/model/position_model.dart';
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
+import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync360/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
 
 class PositionService {
@@ -22,5 +22,14 @@ class PositionService {
       throw Exception("Get All Position failed");
     }
     return positions;
+  }
+
+  Future<void> deletePosition(String id) async {
+    Response response = await dioInstance.dio.delete(
+      Endpoints.instance.get_position + id,
+    );
+    if (response.statusCode != 200) {
+      throw Exception("Delete position failed");
+    }
   }
 }

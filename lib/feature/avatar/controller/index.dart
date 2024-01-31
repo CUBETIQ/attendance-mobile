@@ -1,21 +1,29 @@
-import 'package:attendance_app/constants/profile_image.dart';
+import 'package:timesync360/constants/position_image.dart';
+import 'package:timesync360/constants/profile_image.dart';
 import 'package:get/get.dart';
+import 'package:timesync360/utils/types_helper/avatar_type.dart';
 
 class AvatarController extends GetxController {
-  List<String> avatars = [
-    ProfileImageAssets.profileB1,
-    ProfileImageAssets.profileB2,
-    ProfileImageAssets.profileB3,
-    ProfileImageAssets.profileB4,
-    ProfileImageAssets.profileB5,
-    ProfileImageAssets.profileB6,
-    ProfileImageAssets.profileG1,
-    ProfileImageAssets.profileG2,
-    ProfileImageAssets.profileG3,
-    ProfileImageAssets.profileG4,
-    ProfileImageAssets.profileG5,
-    ProfileImageAssets.profileG6,
-  ].obs;
+  RxList<String> avatars = <String>[].obs;
+  RxString avatarType = AvatarType.profile.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    initArgument();
+  }
+
+  void initArgument() {
+    final data = Get.arguments;
+    avatarType.value = data;
+    if (avatarType.value == AvatarType.profile) {
+      avatars.value = ProfileImageAssets.profileList;
+    } else if (avatarType.value == AvatarType.position) {
+      avatars.value = PositionImageAssets.positionList;
+    } else {
+      avatars.value = [];
+    }
+  }
 
   void pickImage(String image) {
     Get.back(result: image);

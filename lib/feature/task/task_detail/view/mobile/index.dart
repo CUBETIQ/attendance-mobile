@@ -1,15 +1,15 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/widgets/button/back_button.dart';
-import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/feature/navigation/controller/index.dart';
-import 'package:attendance_app/feature/task/task_detail/controller/index.dart';
-import 'package:attendance_app/feature/task/task_detail/widget/detail_row_category.dart';
-import 'package:attendance_app/feature/task/task_detail/widget/detail_row_data.dart';
-import 'package:attendance_app/feature/task/task_detail/widget/detail_row_image.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/time_util.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/text/app_bar_title.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync360/feature/task/task_detail/controller/index.dart';
+import 'package:timesync360/feature/task/task_detail/widget/detail_row_category.dart';
+import 'package:timesync360/feature/task/task_detail/widget/detail_row_data.dart';
+import 'package:timesync360/feature/task/task_detail/widget/detail_row_image.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/time_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,4 +1,4 @@
-import 'package:attendance_app/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:dio/dio.dart';
 
 class AuthInterceptor extends Interceptor {

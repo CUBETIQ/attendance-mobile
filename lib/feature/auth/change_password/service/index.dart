@@ -1,6 +1,6 @@
-import 'package:attendance_app/core/network/dio_util.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/feature/auth/change_password/model/chnage_password_model.dart';
+import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/feature/auth/change_password/model/chnage_password_model.dart';
 import 'package:dio/dio.dart';
 
 class ChangePasswordService {

@@ -1,16 +1,16 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/model/department_model.dart';
-import 'package:attendance_app/core/model/position_model.dart';
-import 'package:attendance_app/core/widgets/async_widget/async_base_widget.dart';
-import 'package:attendance_app/core/widgets/button/back_button.dart';
-import 'package:attendance_app/core/widgets/no_data/no_data.dart';
-import 'package:attendance_app/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/feature/employee/employee/controller/index.dart';
-import 'package:attendance_app/feature/employee/employee/widget/staff_card.dart';
-import 'package:attendance_app/utils/size_util.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/model/department_model.dart';
+import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/no_data/no_data.dart';
+import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync360/core/widgets/text/app_bar_title.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/feature/employee/employee/controller/index.dart';
+import 'package:timesync360/feature/employee/employee/widget/staff_card.dart';
+import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -53,7 +53,7 @@ class StaffViewMobile extends StatelessWidget {
                   SearchBar(
                     hintText: "Search Employee",
                     elevation: MaterialStateProperty.all<double>(0.8),
-                    onChanged: controller.searchStaff,
+                    onSubmitted: controller.searchStaff,
                     leading: IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
@@ -119,7 +119,7 @@ class StaffViewMobile extends StatelessWidget {
           ),
         ),
         elevation: 2,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add_rounded),
       ),
     );
   }

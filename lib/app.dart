@@ -1,10 +1,10 @@
-import 'package:attendance_app/core/translation/translation_service.dart';
-import 'package:attendance_app/main.dart';
-import 'package:attendance_app/routes/app_pages.dart';
-import 'package:attendance_app/theme/theme_data.dart';
-import 'package:attendance_app/translate/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync360/core/translation/translation_service.dart';
+import 'package:timesync360/main.dart';
+import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync360/theme/theme_data.dart';
+import 'package:timesync360/translate/controller/index.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

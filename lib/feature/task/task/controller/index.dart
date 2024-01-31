@@ -1,11 +1,11 @@
-import 'package:attendance_app/constants/svg.dart';
-import 'package:attendance_app/core/model/summary_task_model.dart';
-import 'package:attendance_app/core/model/task_model.dart';
-import 'package:attendance_app/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:attendance_app/core/widgets/snackbar/snackbar.dart';
-import 'package:attendance_app/feature/task/task/service/index.dart';
-import 'package:attendance_app/routes/app_pages.dart';
-import 'package:attendance_app/utils/types_helper/state.dart';
+import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/core/model/summary_task_model.dart';
+import 'package:timesync360/core/model/task_model.dart';
+import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/feature/task/task/service/index.dart';
+import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync360/utils/types_helper/state.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 

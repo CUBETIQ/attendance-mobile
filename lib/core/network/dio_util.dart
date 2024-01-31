@@ -1,8 +1,8 @@
-import 'package:attendance_app/constants/time.dart';
-import 'package:attendance_app/core/database/local_path/app_path_controller.dart';
-import 'package:attendance_app/core/network/endpoint.dart';
-import 'package:attendance_app/core/network/interceptor/auth_interceptor.dart';
-import 'package:attendance_app/core/network/interceptor/logger_interceptor.dart';
+import 'package:timesync360/constants/time.dart';
+import 'package:timesync360/core/database/local_path/app_path_controller.dart';
+import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/network/interceptor/auth_interceptor.dart';
+import 'package:timesync360/core/network/interceptor/logger_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';

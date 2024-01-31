@@ -34,4 +34,5 @@ class SvgAssets {
   static const String cambodiaFlag = 'assets/svgs/cambodia.svg';
   static const String usFlag = 'assets/svgs/us.svg';
   static const String company = 'assets/svgs/company.svg';
+  static const String position = 'assets/svgs/position.svg';
 }

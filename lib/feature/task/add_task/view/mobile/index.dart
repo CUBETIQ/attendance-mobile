@@ -1,15 +1,15 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/core/widgets/button/back_button.dart';
-import 'package:attendance_app/core/widgets/button/button.dart';
-import 'package:attendance_app/core/widgets/color_picker/rounded_color_picker.dart';
-import 'package:attendance_app/core/widgets/dropdown_button/dropdown_button.dart';
-import 'package:attendance_app/core/widgets/icon_picker/rounded_icon_picker.dart';
-import 'package:attendance_app/core/widgets/text/app_bar_title.dart';
-import 'package:attendance_app/core/widgets/textfield/date_picker_field.dart';
-import 'package:attendance_app/core/widgets/textfield/texfield_validate.dart';
-import 'package:attendance_app/feature/task/add_task/controller/index.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/types_helper/state.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/core/widgets/color_picker/rounded_color_picker.dart';
+import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
+import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
+import 'package:timesync360/core/widgets/text/app_bar_title.dart';
+import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
+import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync360/feature/task/add_task/controller/index.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/types_helper/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

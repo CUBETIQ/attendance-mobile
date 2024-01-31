@@ -1,5 +1,5 @@
-import 'package:attendance_app/core/model/summary_attendance_model.dart';
-import 'package:attendance_app/core/network/dio_util.dart';
+import 'package:timesync360/core/model/summary_attendance_model.dart';
+import 'package:timesync360/core/network/dio_util.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/network/endpoint.dart';

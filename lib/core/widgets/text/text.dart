@@ -1,4 +1,4 @@
-import 'package:attendance_app/config/font.dart';
+import 'package:timesync360/config/font.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

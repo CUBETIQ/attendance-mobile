@@ -1,11 +1,11 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/core/model/user_model.dart';
-import 'package:attendance_app/core/widgets/card/my_card.dart';
-import 'package:attendance_app/core/widgets/image/cache_image.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/utils/size_util.dart';
-import 'package:attendance_app/utils/string_util.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/widgets/card/my_card.dart';
+import 'package:timesync360/core/widgets/image/cache_image.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/string_util.dart';
 import 'package:flutter/material.dart';
 
 class SummaryDetailCard extends StatelessWidget {

@@ -1,8 +1,8 @@
-import 'package:attendance_app/config/app_size.dart';
-import 'package:attendance_app/config/font.dart';
-import 'package:attendance_app/constants/color.dart';
-import 'package:attendance_app/core/widgets/text/text.dart';
-import 'package:attendance_app/utils/types_helper/attendance_status.dart';
+import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/color.dart';
+import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/utils/types_helper/attendance_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 

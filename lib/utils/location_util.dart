@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:attendance_app/core/model/organization_model.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:timesync360/core/model/organization_model.dart';
 
 double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
   const double earthRadius = 6371000.0; // Earth radius in meters

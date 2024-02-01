@@ -19,6 +19,11 @@ class PositionDetailViewMobile extends StatelessWidget {
         automaticallyImplyLeading: false,
         elevation: 2,
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [],
+        ),
+      ),
     );
   }
 }

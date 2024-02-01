@@ -59,7 +59,6 @@ class MyTextFieldForm extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
             hasLabel == false
                 ? const SizedBox.shrink()
@@ -76,9 +75,18 @@ class MyTextFieldForm extends StatelessWidget {
               maxLines: maxlines ?? 1,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(AppSize.paddingS17, size.width),
                   vertical: SizeUtils.scale(AppSize.paddingS7, size.width),
                 ),
+                prefix: prefixIcon == null
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: SizeUtils.scale(
+                            AppSize.paddingS17,
+                            size.width,
+                          ),
+                        ),
+                      )
+                    : null,
                 prefixIcon: prefixIcon == null
                     ? null
                     : Icon(

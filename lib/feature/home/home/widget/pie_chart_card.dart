@@ -1,4 +1,4 @@
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/color.dart';
 import 'package:timesync360/core/widgets/card/my_card.dart';
 import 'package:timesync360/core/widgets/text/text.dart';

@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';

@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/color.dart';
 import 'package:timesync360/core/widgets/no_data/no_data.dart';
 import 'package:timesync360/feature/home/summary_attendance/controller/index.dart';

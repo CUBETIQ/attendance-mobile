@@ -1,5 +1,5 @@
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/feature/leave/leave_detail/controller/index.dart';

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "796233484318",
+    "project_id": "timesync365",
+    "storage_bucket": "timesync365.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796233484318:android:18a6d39784c8a9f4be060f",
+        "android_client_info": {
+          "package_name": "com.cubetiqs.timesync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANjNHJghHyY--5f095pdWqnQ8ZHjaVwhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

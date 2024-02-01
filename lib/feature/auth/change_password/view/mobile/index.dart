@@ -1,5 +1,5 @@
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/button/button.dart';

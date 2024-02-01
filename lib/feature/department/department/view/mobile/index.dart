@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/no_data/no_data.dart';

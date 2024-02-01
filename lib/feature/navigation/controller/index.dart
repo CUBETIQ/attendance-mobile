@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_config.dart';
+import 'package:timesync360/constants/app_config.dart';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/model/department_model.dart';

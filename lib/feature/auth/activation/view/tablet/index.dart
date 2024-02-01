@@ -1,4 +1,4 @@
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/lotties.dart';
 import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
@@ -9,7 +9,7 @@ import 'package:timesync360/utils/text_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../config/app_size.dart';
+import '../../../../../constants/app_size.dart';
 
 class ActivationViewTablet extends StatelessWidget {
   const ActivationViewTablet({super.key});

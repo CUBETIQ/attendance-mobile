@@ -58,7 +58,7 @@ class EditOrganizationController extends GetxController {
     Get.back();
     final resultImage = await Get.toNamed(
       Routes.AVATAR,
-      arguments: AvatarType.profile,
+      arguments: AvatarType.organization,
     );
     if (resultImage != null) {
       image.value = resultImage;

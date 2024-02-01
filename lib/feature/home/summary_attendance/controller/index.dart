@@ -37,11 +37,12 @@ class SummaryAttendanceController extends GetxController
   Future<void> getAllLeave() async {
     isLoading.value = true;
     try {
-      leaves.value = await SummaryAttendanceService().getAllLeave(
+      final leaveList = await SummaryAttendanceService().getAllLeave(
         startDate: startOfTheDay.value,
         endDate: endOfTheDay.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
+      leaves.value = removeDuplicateLeave(leaveList);
       getAbsentUser();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -87,7 +88,7 @@ class SummaryAttendanceController extends GetxController
 
   List<AttendanceModel> removeDuplicateAttendances(
       List<AttendanceModel> attendances) {
-    Set<String> userId = Set<String>();
+    Set<String> userId = <String>{};
     List<AttendanceModel> uniqueAttendances = [];
 
     for (AttendanceModel attendance in attendances) {
@@ -98,5 +99,19 @@ class SummaryAttendanceController extends GetxController
     }
 
     return uniqueAttendances;
+  }
+
+  List<LeaveModel> removeDuplicateLeave(List<LeaveModel> leaves) {
+    Set<String> userId = <String>{};
+    List<LeaveModel> uniqueLeaves = [];
+
+    for (LeaveModel leave in leaves) {
+      if (userId.add(leave.userId!)) {
+        // userId is not present in the set, so this is a unique entry
+        uniqueLeaves.add(leave);
+      }
+    }
+
+    return uniqueLeaves;
   }
 }

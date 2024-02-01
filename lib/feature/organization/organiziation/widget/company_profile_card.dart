@@ -1,5 +1,5 @@
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/user_model.dart';
 import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/card/my_card.dart';
@@ -85,6 +85,8 @@ class CompanyProfileCard extends StatelessWidget {
                     imageUrl: companyLogo,
                     width: SizeUtils.scale(100, size.width),
                     height: SizeUtils.scale(100, size.width),
+                    imageHeight: SizeUtils.scale(75, size.width),
+                    imageWidth: SizeUtils.scale(75, size.width),
                     border: Border.all(
                       color: Theme.of(context).colorScheme.primary,
                       width: SizeUtils.scale(2, size.width),

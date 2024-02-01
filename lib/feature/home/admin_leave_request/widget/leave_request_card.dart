@@ -1,4 +1,4 @@
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
 import 'package:timesync360/core/widgets/image/cache_image.dart';
@@ -13,7 +13,7 @@ import 'package:timesync360/utils/types_helper/leave_status.dart';
 import 'package:timesync360/utils/types_helper/leave_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
-import '../../../../config/app_size.dart';
+import '../../../../constants/app_size.dart';
 
 class LeaveRequestCard extends StatelessWidget {
   const LeaveRequestCard({

@@ -15,8 +15,8 @@ class LeaveController extends GetxController {
   RxList<LeaveModel> leaves = <LeaveModel>[].obs;
   RxList<SummaryLeaveModel> summarizeLeaves = <SummaryLeaveModel>[].obs;
   var isLoading = false.obs;
-  Rxn<int> startDate = Rxn<int>();
-  Rxn<int> endDate = Rxn<int>();
+  Rxn<int> startDate = Rxn<int>(null);
+  Rxn<int> endDate = Rxn<int>(null);
   Rx<int> totalLeave = 0.obs;
   Rx<int> totalPendingLeave = 0.obs;
   Rx<int> totalApprovedLeave = 0.obs;

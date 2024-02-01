@@ -1,5 +1,5 @@
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/feature/profile/profile/model/option_model.dart';
 import 'package:timesync360/utils/size_util.dart';

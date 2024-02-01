@@ -63,8 +63,9 @@ class SummaryAttendanceController extends GetxController
   }
 
   void getArgument() {
+    final List<AttendanceModel> allAttendances = Get.arguments["attendances"];
     staffs.value = Get.arguments["staffs"];
-    staffAttendanceList.value = Get.arguments["attendances"];
+    staffAttendanceList.value = removeDuplicateAttendances(allAttendances);
     startOfTheDay.value = Get.arguments["startDate"];
     endOfTheDay.value = Get.arguments["endDate"];
   }
@@ -82,5 +83,20 @@ class SummaryAttendanceController extends GetxController
     final staff = staffs.firstWhere((element) => element.id == leave.userId);
     getNonAbsentUser.value.add(staff);
     return staff;
+  }
+
+  List<AttendanceModel> removeDuplicateAttendances(
+      List<AttendanceModel> attendances) {
+    Set<String> userId = Set<String>();
+    List<AttendanceModel> uniqueAttendances = [];
+
+    for (AttendanceModel attendance in attendances) {
+      if (userId.add(attendance.userId!)) {
+        // userId is not present in the set, so this is a unique entry
+        uniqueAttendances.add(attendance);
+      }
+    }
+
+    return uniqueAttendances;
   }
 }

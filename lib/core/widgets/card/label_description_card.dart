@@ -5,11 +5,11 @@ import 'package:timesync360/utils/size_util.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
-class InfoDetailCard extends StatelessWidget {
+class LabelDescriptionCard extends StatelessWidget {
   final String? title;
   final String? value;
 
-  const InfoDetailCard({super.key, this.title, this.value});
+  const LabelDescriptionCard({super.key, this.title, this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,9 @@ class InfoDetailCard extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          height: SizeUtils.scale(50, size.width),
+          height: value != null && (value?.length ?? 0) < 200
+              ? SizeUtils.scale(150, size.width)
+              : null,
           margin: EdgeInsets.only(
             top: SizeUtils.scale(10, size.width),
             bottom: SizeUtils.scale(15, size.width),
@@ -35,6 +37,10 @@ class InfoDetailCard extends StatelessWidget {
               AppSize.paddingHorizontalLarge,
               size.width,
             ),
+            vertical: SizeUtils.scale(
+              AppSize.paddingVerticalMedium,
+              size.width,
+            ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
@@ -42,12 +48,14 @@ class InfoDetailCard extends StatelessWidget {
             ),
             color: Theme.of(context).colorScheme.primary.withOpacity(0.07),
           ),
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.topLeft,
           child: MyText(
             text: value != null && value != ""
                 ? value.capitalizeMaybeNull ?? "N/A"
                 : "N/A",
             style: BodyLargeRegular,
+            maxLines: 10,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

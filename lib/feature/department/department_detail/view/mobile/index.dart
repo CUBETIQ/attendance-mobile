@@ -6,20 +6,20 @@ import 'package:timesync360/core/widgets/card/label_description_card.dart';
 import 'package:timesync360/core/widgets/card/label_detail_card.dart';
 import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/feature/position/position_detail/controller/index.dart';
+import 'package:timesync360/feature/department/department_detail/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
 
-class PositionDetailViewMobile extends StatelessWidget {
-  const PositionDetailViewMobile({super.key});
+class DepartmentDetailViewMobile extends StatelessWidget {
+  const DepartmentDetailViewMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = PositionDetailController.to;
+    final controller = DepartmentDetailController.to;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const MyAppBarTitle(
-          title: "Position Detail",
+          title: "Department Detail",
         ),
         centerTitle: true,
         leading: const MyBackButton(),
@@ -39,7 +39,7 @@ class PositionDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(30, size.width)),
               Center(
                 child: MyCacheImage(
-                  imageUrl: controller.position.value?.image,
+                  imageUrl: controller.department.value?.image,
                   width: SizeUtils.scale(100, size.width),
                   height: SizeUtils.scale(100, size.width),
                   defaultImage: SvgAssets.position,
@@ -50,11 +50,11 @@ class PositionDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(30, size.width)),
               LabelDetailCard(
                 title: "Name",
-                value: controller.position.value?.name,
+                value: controller.department.value?.name,
               ),
               LabelDescriptionCard(
                 title: "Description",
-                value: controller.position.value?.description,
+                value: controller.department.value?.description,
               ),
             ],
           ),

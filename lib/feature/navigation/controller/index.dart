@@ -167,7 +167,9 @@ class NavigationController extends GetxController {
         DrawerModel(
           title: "Department",
           icon: Icons.location_city_rounded,
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.DEPARTMENT);
+          },
         ),
         DrawerModel(
           title: "Support",

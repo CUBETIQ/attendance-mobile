@@ -33,4 +33,7 @@ abstract class Routes {
   static const POSITION = '/position';
   static const ADD_POSITION = '/add_position';
   static const POSITION_DETAIL = '/position_detail';
+  static const DEPARTMENT = '/department';
+  static const ADD_DEPARTMENT = '/add_department';
+  static const DEPARTMENT_DETAIL = '/department_detail';
 }

@@ -87,6 +87,16 @@ class MyTextFieldForm extends StatelessWidget {
                         ),
                       )
                     : null,
+                suffix: prefixIcon == null
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: SizeUtils.scale(
+                            AppSize.paddingS17,
+                            size.width,
+                          ),
+                        ),
+                      )
+                    : null,
                 prefixIcon: prefixIcon == null
                     ? null
                     : Icon(

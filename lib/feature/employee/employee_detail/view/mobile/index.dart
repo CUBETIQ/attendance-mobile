@@ -5,7 +5,7 @@ import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/feature/employee/employee_detail/controller/index.dart';
-import 'package:timesync360/feature/employee/employee_detail/widget/info_detail_card.dart';
+import 'package:timesync360/core/widgets/card/label_detail_card.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
@@ -75,33 +75,33 @@ class StaffDetailViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(height: SizeUtils.scale(25, size.width)),
-              InfoDetailCard(
+              LabelDetailCard(
                 title: "First Name",
                 value: controller.staff.value.firstName,
               ),
-              InfoDetailCard(
+              LabelDetailCard(
                 title: "Last Name",
                 value: controller.staff.value.lastName,
               ),
-              InfoDetailCard(
+              LabelDetailCard(
                 title: "Email",
                 value: controller.staff.value.email,
               ),
-              InfoDetailCard(
+              LabelDetailCard(
                 title: "Department",
                 value: controller.department.value.name,
               ),
               Row(
                 children: [
                   Expanded(
-                    child: InfoDetailCard(
+                    child: LabelDetailCard(
                       title: "Gender",
                       value: controller.staff.value.gender,
                     ),
                   ),
                   SizedBox(width: SizeUtils.scale(10, size.width)),
                   Expanded(
-                    child: InfoDetailCard(
+                    child: LabelDetailCard(
                       title: "Date Of Birth",
                       value: DateFormatter().formatMillisecondsToDOB(
                         controller.staff.value.dateOfBirth,
@@ -110,11 +110,11 @@ class StaffDetailViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              InfoDetailCard(
+              LabelDetailCard(
                 title: "Address",
                 value: controller.staff.value.address,
               ),
-              InfoDetailCard(
+              LabelDetailCard(
                 title: "Status",
                 value: controller.staff.value.status,
               ),

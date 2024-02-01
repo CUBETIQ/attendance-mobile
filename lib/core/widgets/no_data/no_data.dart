@@ -15,23 +15,25 @@ class MyNoData extends StatelessWidget {
       padding: EdgeInsets.only(
         top: paddingTop ?? 0,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 85,
-            height: 85,
-            child: SvgPicture.asset(
-              SvgAssets.empty,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 85,
+              height: 85,
+              child: SvgPicture.asset(
+                SvgAssets.empty,
+              ),
             ),
-          ),
-          const SizedBox(height: AppSize.paddingS5),
-          Text(
-            "No Data Available",
-            style: BodyLargeMedium,
-          ),
-          const SizedBox(height: AppSize.paddingS8),
-        ],
+            const SizedBox(height: AppSize.paddingS5),
+            Text(
+              "No Data Available",
+              style: BodyLargeMedium,
+            ),
+            const SizedBox(height: AppSize.paddingS8),
+          ],
+        ),
       ),
     );
   }

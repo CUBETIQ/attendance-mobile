@@ -1,5 +1,5 @@
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,11 @@ class LeaveChart extends StatelessWidget {
             animationDuration: 500,
             radius: radius * (size.width / 360),
             lineWidth: lineWidth ?? 12.0,
-            percent: percent?.isNegative == true ? 0.0 : percent ?? 0.0,
+            percent: percent?.isNegative == true
+                ? 0.0
+                : (percent ?? 0) > 1
+                    ? 1
+                    : percent ?? 0.0,
             center: MyText(
               text: centerText ?? "0%",
               style: BodySmallRegular,

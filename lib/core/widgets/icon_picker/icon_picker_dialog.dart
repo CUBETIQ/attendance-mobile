@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

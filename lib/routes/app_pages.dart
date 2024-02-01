@@ -9,6 +9,11 @@ import 'package:timesync360/feature/auth/login/view/index.dart';
 import 'package:timesync360/feature/avatar/view/index.dart';
 import 'package:timesync360/feature/customer_support/customer_support_binding.dart';
 import 'package:timesync360/feature/customer_support/view/index.dart';
+import 'package:timesync360/feature/department/add_department/view/index.dart';
+import 'package:timesync360/feature/department/department/department_binding.dart';
+import 'package:timesync360/feature/department/department/view/index.dart';
+import 'package:timesync360/feature/department/department_detail/department_detail_binding.dart';
+import 'package:timesync360/feature/department/department_detail/view/index.dart';
 import 'package:timesync360/feature/home/admin_leave_request/admin_leave_binding.dart';
 import 'package:timesync360/feature/home/admin_leave_request/view/index.dart';
 import 'package:timesync360/feature/home/home/home_binding.dart';
@@ -185,6 +190,20 @@ class AppPages {
       name: Routes.POSITION_DETAIL,
       page: () => const PositionDetailView(),
       binding: PositionDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.DEPARTMENT,
+      page: () => const DepartmentView(),
+      binding: DepartmentBinding(),
+    ),
+    GetPage(
+      name: Routes.ADD_DEPARTMENT,
+      page: () => const AddDepartmentView(),
+    ),
+    GetPage(
+      name: Routes.DEPARTMENT_DETAIL,
+      page: () => const DepartmentDetailView(),
+      binding: DepartmentDetailBinding(),
     ),
   ];
 }

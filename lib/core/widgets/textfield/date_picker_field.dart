@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

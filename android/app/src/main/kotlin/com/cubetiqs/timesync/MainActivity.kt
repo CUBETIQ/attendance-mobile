@@ -1,4 +1,4 @@
-package com.example.timesync360
+package com.cubetiqs.timesync
 
 import io.flutter.embedding.android.FlutterActivity
 

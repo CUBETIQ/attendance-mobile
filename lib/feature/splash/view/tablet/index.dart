@@ -1,4 +1,4 @@
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/feature/splash/controller/index.dart';
 import 'package:timesync360/feature/splash/widgets/animated_text.dart';

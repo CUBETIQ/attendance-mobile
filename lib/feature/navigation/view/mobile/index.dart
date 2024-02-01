@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/feature/home/home/view/index.dart';
 import 'package:timesync360/feature/leave/leave/view/index.dart';

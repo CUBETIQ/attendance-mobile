@@ -1,4 +1,4 @@
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/attendance_model.dart';
 import 'package:timesync360/core/model/position_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
@@ -11,7 +11,7 @@ import 'package:timesync360/utils/time_util.dart';
 import 'package:timesync360/utils/types_helper/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import '../../../../config/app_size.dart';
+import '../../../../constants/app_size.dart';
 
 class StaffAttendanceCard extends StatelessWidget {
   const StaffAttendanceCard({

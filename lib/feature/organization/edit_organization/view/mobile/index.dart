@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
@@ -44,6 +44,9 @@ class EditOrganizationViewMobile extends StatelessWidget {
                     imageUrl: controller.image.value,
                     width: SizeUtils.scale(110, size.width),
                     height: SizeUtils.scale(110, size.width),
+                    imageHeight: SizeUtils.scale(80, size.width),
+                    imageWidth: SizeUtils.scale(80, size.width),
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

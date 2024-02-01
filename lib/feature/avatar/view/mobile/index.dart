@@ -54,13 +54,19 @@ class AvatarViewMobile extends StatelessWidget {
                           width: SizeUtils.scale(
                             controller.avatarType.value == AvatarType.profile
                                 ? 75
-                                : 60,
+                                : controller.avatarType.value ==
+                                        AvatarType.organization
+                                    ? 50
+                                    : 60,
                             size.width,
                           ),
                           height: SizeUtils.scale(
                             controller.avatarType.value == AvatarType.profile
                                 ? 75
-                                : 60,
+                                : controller.avatarType.value ==
+                                        AvatarType.organization
+                                    ? 50
+                                    : 60,
                             size.width,
                           ),
                         ),

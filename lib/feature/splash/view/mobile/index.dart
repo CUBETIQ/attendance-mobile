@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/image.dart';
 import 'package:timesync360/feature/splash/controller/index.dart';
 import 'package:timesync360/feature/splash/widgets/animated_text.dart';

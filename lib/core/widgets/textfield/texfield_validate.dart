@@ -1,7 +1,7 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,6 @@ class MyTextFieldForm extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
             hasLabel == false
                 ? const SizedBox.shrink()
@@ -76,9 +75,28 @@ class MyTextFieldForm extends StatelessWidget {
               maxLines: maxlines ?? 1,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(AppSize.paddingS17, size.width),
                   vertical: SizeUtils.scale(AppSize.paddingS7, size.width),
                 ),
+                prefix: prefixIcon == null
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: SizeUtils.scale(
+                            AppSize.paddingS17,
+                            size.width,
+                          ),
+                        ),
+                      )
+                    : null,
+                suffix: prefixIcon == null
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: SizeUtils.scale(
+                            AppSize.paddingS17,
+                            size.width,
+                          ),
+                        ),
+                      )
+                    : null,
                 prefixIcon: prefixIcon == null
                     ? null
                     : Icon(

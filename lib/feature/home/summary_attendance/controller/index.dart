@@ -37,11 +37,12 @@ class SummaryAttendanceController extends GetxController
   Future<void> getAllLeave() async {
     isLoading.value = true;
     try {
-      leaves.value = await SummaryAttendanceService().getAllLeave(
+      final leaveList = await SummaryAttendanceService().getAllLeave(
         startDate: startOfTheDay.value,
         endDate: endOfTheDay.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
+      leaves.value = removeDuplicateLeave(leaveList);
       getAbsentUser();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -63,8 +64,9 @@ class SummaryAttendanceController extends GetxController
   }
 
   void getArgument() {
+    final List<AttendanceModel> allAttendances = Get.arguments["attendances"];
     staffs.value = Get.arguments["staffs"];
-    staffAttendanceList.value = Get.arguments["attendances"];
+    staffAttendanceList.value = removeDuplicateAttendances(allAttendances);
     startOfTheDay.value = Get.arguments["startDate"];
     endOfTheDay.value = Get.arguments["endDate"];
   }
@@ -82,5 +84,34 @@ class SummaryAttendanceController extends GetxController
     final staff = staffs.firstWhere((element) => element.id == leave.userId);
     getNonAbsentUser.value.add(staff);
     return staff;
+  }
+
+  List<AttendanceModel> removeDuplicateAttendances(
+      List<AttendanceModel> attendances) {
+    Set<String> userId = <String>{};
+    List<AttendanceModel> uniqueAttendances = [];
+
+    for (AttendanceModel attendance in attendances) {
+      if (userId.add(attendance.userId!)) {
+        // userId is not present in the set, so this is a unique entry
+        uniqueAttendances.add(attendance);
+      }
+    }
+
+    return uniqueAttendances;
+  }
+
+  List<LeaveModel> removeDuplicateLeave(List<LeaveModel> leaves) {
+    Set<String> userId = <String>{};
+    List<LeaveModel> uniqueLeaves = [];
+
+    for (LeaveModel leave in leaves) {
+      if (userId.add(leave.userId!)) {
+        // userId is not present in the set, so this is a unique entry
+        uniqueLeaves.add(leave);
+      }
+    }
+
+    return uniqueLeaves;
   }
 }

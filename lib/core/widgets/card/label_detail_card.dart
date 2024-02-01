@@ -1,15 +1,15 @@
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
-class InfoDetailCard extends StatelessWidget {
+class LabelDetailCard extends StatelessWidget {
   final String? title;
   final String? value;
 
-  const InfoDetailCard({super.key, this.title, this.value});
+  const LabelDetailCard({super.key, this.title, this.value});
 
   @override
   Widget build(BuildContext context) {

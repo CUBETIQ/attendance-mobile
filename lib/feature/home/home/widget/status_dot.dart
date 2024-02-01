@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/utils/types_helper/user_status.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/admin_leave_report_model.dart';
 import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:timesync360/core/widgets/text/text.dart';

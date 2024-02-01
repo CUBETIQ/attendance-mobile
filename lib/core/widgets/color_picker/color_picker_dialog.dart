@@ -1,4 +1,4 @@
-import 'package:timesync360/config/app_size.dart';
+import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';

@@ -10,6 +10,7 @@ class MyProfileImage extends StatelessWidget {
   final String? defaultImage;
   final double? imageWidth;
   final double? imageHeight;
+  final BoxFit? fit;
 
   const MyProfileImage({
     super.key,
@@ -20,6 +21,7 @@ class MyProfileImage extends StatelessWidget {
     this.defaultImage,
     this.imageWidth,
     this.imageHeight,
+    this.fit,
   });
 
   @override
@@ -46,9 +48,9 @@ class MyProfileImage extends StatelessWidget {
                 ),
                 child: Image.asset(
                   imageUrl ?? "",
-                  width: width ?? 90,
-                  height: height ?? 90,
-                  fit: BoxFit.cover,
+                  width: imageWidth ?? width ?? 90,
+                  height: imageHeight ?? height ?? 90,
+                  fit: fit ?? BoxFit.cover,
                 ),
               )
             : MyCacheImage(

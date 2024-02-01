@@ -1,5 +1,5 @@
-import 'package:timesync360/config/app_size.dart';
-import 'package:timesync360/config/font.dart';
+import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/color.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/types_helper/attendance_status.dart';

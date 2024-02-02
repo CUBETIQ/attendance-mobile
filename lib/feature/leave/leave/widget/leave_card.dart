@@ -3,8 +3,8 @@ import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_duration_type.dart';
 import 'package:timesync360/utils/types_helper/leave_status.dart';
 import 'package:timesync360/utils/types_helper/leave_type.dart';
 import 'package:flutter/material.dart';
@@ -107,12 +107,8 @@ class LeaveCard extends StatelessWidget {
                       ),
                     ),
                     MyText(
-                      text: (leave.duration ?? 0) <= 1440
-                          ? leave.durationType == LeaveTypeDuration.fullDay
-                              ? "1 day"
-                              : "0.5 day"
-                          : DateFormatter()
-                              .formatMinutesToDays(leave.duration ?? 0),
+                      text:
+                          " ${StringUtil().removeTrailingZeros(leave.duration)}  ",
                       style: BodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),

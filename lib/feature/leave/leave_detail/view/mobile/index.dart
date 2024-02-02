@@ -7,7 +7,6 @@ import 'package:timesync360/feature/leave/leave_detail/widget/leave_detail_card.
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_duration_type.dart';
 import 'package:timesync360/utils/types_helper/leave_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -104,13 +103,8 @@ class LeaveDetailViewMobile extends StatelessWidget {
                   ),
                   LeaveDetailCard(
                     title: "Duration: ",
-                    value: (controller.leave.value.duration ?? 0) <= 1440
-                        ? controller.leave.value.durationType ==
-                                LeaveTypeDuration.fullDay
-                            ? "1 day"
-                            : "0.5 day"
-                        : DateFormatter().formatMinutesToDays(
-                            controller.leave.value.duration ?? 0),
+                    value:
+                        " ${StringUtil().removeTrailingZeros(controller.leave.value.duration)}  ${(controller.leave.value.duration ?? 0) < 2 ? "Day" : "Days"}",
                   ),
                   LeaveDetailCard(
                     title: controller.leave.value.status == LeaveStatus.approved

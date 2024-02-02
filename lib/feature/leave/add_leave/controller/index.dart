@@ -1,7 +1,9 @@
 import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/leave/add_leave/model/create_leave_model.dart';
+import 'package:timesync360/feature/leave/add_leave/model/update_leave_model.dart';
 import 'package:timesync360/feature/leave/add_leave/service/index.dart';
 import 'package:timesync360/feature/leave/leave/controller/index.dart';
 import 'package:timesync360/utils/time_util.dart';
@@ -19,7 +21,7 @@ class AddLeaveController extends GetxController
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   TextEditingController reasonController = TextEditingController();
-  TextEditingController durationController = TextEditingController();
+  Rx<TextEditingController> durationController = TextEditingController().obs;
   Rxn<int> startDate = Rxn<int>(null);
   Rxn<int> endDate = Rxn<int>(null);
   Rx<String> selectLeaveType = LeaveType.annual.obs;
@@ -38,6 +40,17 @@ class AddLeaveController extends GetxController
   RxString appState = AppState.Create.obs;
   Rxn<LeaveModel> leave = Rxn<LeaveModel>(null);
   final _debouncer = Debouncer(milliseconds: 500);
+  RxList<String> test = [
+    "1",
+    "1.5",
+    "2",
+    "2.5",
+    "3",
+    "3.5",
+  ].obs;
+  Rxn<String> selectedValue = Rxn<String>(null);
+  TextEditingController searchController = TextEditingController();
+  FocusNode? durationFocusNode = FocusNode();
 
   @override
   void onInit() {
@@ -97,6 +110,7 @@ class AddLeaveController extends GetxController
         appState.value = AppState.Edit;
         startDate.value = leave.value?.from;
         endDate.value = leave.value?.to;
+        durationController.value.text = (leave.value?.duration ?? 1).toString();
         startDateController.text =
             DateFormatter().formatMillisecondsToDOB(leave.value?.from);
         endDateController.text =
@@ -121,6 +135,10 @@ class AddLeaveController extends GetxController
           from: startDate.value,
           to: endDate.value,
           reason: reasonController.text,
+          duration: durationController.value.text.isNotEmpty
+              ? durationController.value.text.toDouble()
+              : 1,
+          requestDate: DateTime.now().millisecondsSinceEpoch,
         );
         await AddLeaveService().addLeave(input);
         await LeaveController.to.getUserLeave();
@@ -136,12 +154,15 @@ class AddLeaveController extends GetxController
   Future<void> updateLeave() async {
     _debouncer.run(() async {
       try {
-        CreateLeaveModel input = CreateLeaveModel(
+        UpdateLeaveModel input = UpdateLeaveModel(
           type: selectLeaveType.value,
           durationType: selectLeaveDurationType.value,
           from: startDate.value,
           to: endDate.value,
           reason: reasonController.text,
+          duration: durationController.value.text.isNotEmpty
+              ? durationController.value.text.toDouble()
+              : 1,
         );
         await AddLeaveService().updateLeave(leave.value!.id!, input);
         LeaveController.to.getUserLeave();

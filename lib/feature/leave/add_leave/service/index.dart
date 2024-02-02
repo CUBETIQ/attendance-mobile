@@ -2,6 +2,7 @@ import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/feature/leave/add_leave/model/create_leave_model.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync360/feature/leave/add_leave/model/update_leave_model.dart';
 
 class AddLeaveService {
   DioUtil dioInstance = DioUtil();
@@ -17,7 +18,7 @@ class AddLeaveService {
     }
   }
 
-  Future<void> updateLeave(String id, CreateLeaveModel input) async {
+  Future<void> updateLeave(String id, UpdateLeaveModel input) async {
     Response response = await dioInstance.dio.put(
       Endpoints.instance.leave + id,
       data: input.toJson(),

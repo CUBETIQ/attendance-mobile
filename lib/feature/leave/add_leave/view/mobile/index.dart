@@ -95,6 +95,14 @@ class AddLeaveViewMobile extends StatelessWidget {
               const SizedBox(height: AppSize.paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
+                label: "Duration",
+                hintText: "Enter your duration",
+                textController: controller.reasonController,
+                maxlines: 1,
+              ),
+              const SizedBox(height: AppSize.paddingS5),
+              MyTextFieldForm(
+                hasLabel: true,
                 label: "Reason",
                 hintText: "Enter your Reason",
                 textController: controller.reasonController,

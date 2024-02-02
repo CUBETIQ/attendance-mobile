@@ -19,6 +19,7 @@ class AddLeaveController extends GetxController
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   TextEditingController reasonController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
   Rxn<int> startDate = Rxn<int>(null);
   Rxn<int> endDate = Rxn<int>(null);
   Rx<String> selectLeaveType = LeaveType.annual.obs;

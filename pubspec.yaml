@@ -48,6 +48,9 @@ dependencies:
   mime: ^1.0.4
   permission_handler: ^11.2.0
   firebase_core: ^2.25.0
+  firebase_crashlytics: ^3.4.12
+  firebase_analytics: ^10.8.3
+  flutter_typeahead: ^5.1.0
 
 dev_dependencies:
   flutter_test:

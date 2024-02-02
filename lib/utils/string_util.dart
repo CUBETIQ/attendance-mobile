@@ -13,4 +13,20 @@ class StringUtil {
       return username ?? "";
     }
   }
+
+  String removeTrailingZeros(double? number) {
+    if (number == null) {
+      return "1";
+    }
+
+    String result = number.toString();
+
+    // Remove trailing zeros and dot if no decimal part
+    if (result.contains('.')) {
+      result = result.replaceAll(RegExp(r'0*$'), '');
+      result = result.replaceAll(RegExp(r'\.$'), '');
+    }
+
+    return result;
+  }
 }

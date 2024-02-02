@@ -26,6 +26,7 @@ class MyTextFieldForm extends StatelessWidget {
   final int? maxlines;
   final bool? haveSuffixIcon;
   final void Function()? onTapShowPassword;
+  final FocusNode? focusNode;
 
   const MyTextFieldForm({
     super.key,
@@ -44,6 +45,7 @@ class MyTextFieldForm extends StatelessWidget {
     this.isPassword,
     this.prefixIcon,
     this.maxlines,
+    this.focusNode,
     this.onTapShowPassword,
     this.haveSuffixIcon,
   });
@@ -68,6 +70,7 @@ class MyTextFieldForm extends StatelessWidget {
                   ),
             const SizedBox(height: AppSize.paddingS5),
             TextFormField(
+              focusNode: focusNode,
               controller: textController,
               textCapitalization: textCapitalization ?? TextCapitalization.none,
               inputFormatters: inputFormatters,

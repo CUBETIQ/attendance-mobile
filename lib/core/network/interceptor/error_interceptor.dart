@@ -1,4 +1,5 @@
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
@@ -48,6 +49,8 @@ class ErrorInterceptor extends dio.Interceptor {
     final String accessToken;
     final String refreshToken;
 
+    LocalStorageModel? localStorageData;
+
     dio.Response response = await dioInstance.dio.post(
       Endpoints.instance.refreshToken,
       data: {
@@ -58,8 +61,9 @@ class ErrorInterceptor extends dio.Interceptor {
     if (response.statusCode == 200) {
       accessToken = response.data["data"]["accessToken"];
       refreshToken = response.data["data"]["refreshToken"];
-      await IsarService()
-          .saveLocalData(accessToken: accessToken, refreshToken: refreshToken);
+      localStorageData = LocalStorageModel(
+          accessToken: accessToken, refreshToken: refreshToken);
+      await IsarService().saveLocalData(input: localStorageData);
     } else {
       await IsarService().clearLocalData(deleteToken: true);
       Get.offNamed(Routes.LOGIN);

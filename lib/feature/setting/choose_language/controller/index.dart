@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/widgets/loading/loading_dialog.dart';
 import 'package:timesync360/feature/setting/choose_language/model/language_button_model.dart';
@@ -24,6 +25,7 @@ class ChangeLanguageController extends GetxController {
       LocalStorageController.getInstance();
   Rxn<LanguageButtonModel> selectedLanguage = Rxn<LanguageButtonModel>();
   RxList<bool> isSelected = [false, false].obs;
+  LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override
   void onInit() {
@@ -54,13 +56,15 @@ class ChangeLanguageController extends GetxController {
     isSelected[language.indexOf(languageButtonModel)] = true;
     if (selectedLanguage.value?.title == 'Khmer') {
       Get.updateLocale(Locale(selectedLanguage.value?.code ?? 'km'));
+      localStorageData?.language = selectedLanguage.value?.code ?? 'km';
       await IsarService().saveLocalData(
-        language: selectedLanguage.value?.code ?? 'km',
+        input: localStorageData,
       );
     } else {
       Get.updateLocale(Locale(selectedLanguage.value?.code ?? 'en'));
+      localStorageData?.language = selectedLanguage.value?.code ?? 'en';
       await IsarService().saveLocalData(
-        language: selectedLanguage.value?.code ?? 'en',
+        input: localStorageData,
       );
     }
     await Future.delayed(const Duration(seconds: 1));

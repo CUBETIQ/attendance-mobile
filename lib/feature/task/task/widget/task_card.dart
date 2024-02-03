@@ -5,7 +5,7 @@ import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/task_status.dart';
+import 'package:timesync360/types/task_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 

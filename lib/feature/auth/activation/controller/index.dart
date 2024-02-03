@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/database/isar/entities/local_storage.dart';
+import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/model/activation_model.dart';
 import 'package:timesync360/core/model/organization_model.dart';
@@ -30,6 +31,7 @@ class ActivationController extends GetxController {
   Rx<LocalStorage> localData = LocalStorage().obs;
   Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
   final _debouncer = Debouncer(milliseconds: 500);
+  LocalStorageModel? localStorageData;
 
   @override
   void onInit() {
@@ -43,14 +45,17 @@ class ActivationController extends GetxController {
     final data = await localDataService.get();
     if (MyTextFieldFormController.findController('Activation').isValid) {
       try {
-        ActivateModel input = ActivateModel(
+        ActivateModel inputData = ActivateModel(
           code: activationController.text.toUpperCase(),
           device: device.value,
         );
-        activate.value = await ActivationService().activate(input);
-        await IsarService().saveLocalData(
+        activate.value = await ActivationService().activate(inputData);
+        localStorageData = LocalStorageModel(
           isActivated: true,
           organizationId: activate.value!.organizationId,
+        );
+        await IsarService().saveLocalData(
+          input: localStorageData,
         );
         if (data?.isFirstTime != false) {
           Get.offNamed(Routes.ONBOARD);

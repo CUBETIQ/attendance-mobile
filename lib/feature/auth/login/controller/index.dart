@@ -1,4 +1,5 @@
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/model/department_model.dart';
 import 'package:timesync360/core/model/organization_model.dart';
@@ -30,9 +31,13 @@ class LoginController extends GetxController {
   RxBool showPassword = true.obs;
   Rx<UserStatusModel> userStatus = UserStatusModel().obs;
   final _debouncer = Debouncer(milliseconds: 500);
+  LocalStorageModel? localStorageData = LocalStorageModel();
+  Rxn<String> accessToken = Rxn<String>(null);
+  Rxn<String> refreshToken = Rxn<String>(null);
 
   Future<void> login() async {
     validate();
+    final storageData = await localDataService.get();
     _debouncer.run(() async {
       if (MyTextFieldFormController.findController('Username').isValid &&
           MyTextFieldFormController.findController('Password').isValid) {
@@ -41,14 +46,11 @@ class LoginController extends GetxController {
             username: usernameController.text,
             password: passwordController.text,
           );
-          var accessToken = await LoginService().login(input);
-          await IsarService().saveLocalData(
-            accessToken: accessToken.first,
-            refreshToken: accessToken.last,
-            organizationId: organization.value?.id,
-          );
+          var token = await LoginService().login(input);
+          accessToken.value = token.first;
+          refreshToken.value = token.last;
+          await getOrganization(storageData?.organizationId ?? "");
           await fetchMe();
-          await getOrganization(user.value.organizationId!);
           await getUserStatus();
           if (organization.value == null) {
             Get.offNamed(Routes.ACTIVATION);
@@ -83,8 +85,10 @@ class LoginController extends GetxController {
 
   Future<void> onCheck(bool? value) async {
     isRememberMe.value = value!;
+    localStorageData?.isRememberMe = value;
     await IsarService().saveLocalData(
-        isRememberMe: isRememberMe.value, username: usernameController.text);
+      input: localStorageData,
+    );
   }
 
   Future<void> fetchMe() async {
@@ -117,9 +121,14 @@ class LoginController extends GetxController {
   Future<void> getOrganization(String id) async {
     try {
       organization.value = await LoginService().getOrganization(id: id);
+      localStorageData?.organizationId = organization.value?.id;
       if (organization.value != null) {
-        await IsarService()
-            .saveLocalData(organizationId: organization.value?.id);
+        localStorageData = LocalStorageModel(
+          accessToken: accessToken.value,
+          refreshToken: refreshToken.value,
+          organizationId: organization.value?.id,
+        );
+        await IsarService().saveLocalData(input: localStorageData);
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

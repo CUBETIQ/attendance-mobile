@@ -9,7 +9,7 @@ import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/feature/home/admin_leave_request/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/leave_status.dart';
+import 'package:timesync360/types/leave_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../../../../core/widgets/async_widget/async_base_widget.dart';

@@ -13,8 +13,8 @@ import 'package:timesync360/feature/position/add_position/model/edit_position_mo
 import 'package:timesync360/feature/position/add_position/service/index.dart';
 import 'package:timesync360/feature/position/position/controller/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync360/types/avatar_type.dart';
+import 'package:timesync360/types/state.dart';
 import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
 class AddPositionController extends GetxController {

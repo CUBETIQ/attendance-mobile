@@ -9,7 +9,7 @@ import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync360/feature/department/add_department/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync360/types/state.dart';
 
 class AddDepartmentViewMobile extends StatelessWidget {
   const AddDepartmentViewMobile({super.key});

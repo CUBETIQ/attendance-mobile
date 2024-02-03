@@ -10,8 +10,8 @@ import 'package:timesync360/feature/profile/edit_profile/model/update_profile_mo
 import 'package:timesync360/feature/profile/edit_profile/service/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
-import 'package:timesync360/utils/types_helper/gender.dart';
+import 'package:timesync360/types/avatar_type.dart';
+import 'package:timesync360/types/gender.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';

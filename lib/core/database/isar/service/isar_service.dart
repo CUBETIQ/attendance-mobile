@@ -2,8 +2,10 @@ import 'package:timesync360/core/database/isar/controller/local_language_control
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/database/isar/entities/language.dart';
 import 'package:timesync360/core/database/isar/entities/local_storage.dart';
+import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/main.dart';
 import 'package:get/get.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class IsarService extends GetxService {
   static IsarService get to => Get.find();
@@ -14,6 +16,16 @@ class IsarService extends GetxService {
 
   Future<void> initDataBase() async {
     final appConfig = await _localStorage.get();
+    if (appConfig == null) {
+      final app = LocalStorage();
+      app.id = 1;
+      app.isActivated = false;
+      app.isFirstTime = true;
+      app.darkTheme = false;
+      app.language = 'en';
+      app.isRememberMe = false;
+      await _localStorage.insert(app);
+    }
     storageConfig?.value = appConfig;
     isFirstTime = appConfig?.isFirstTime ?? false;
     isDarkMode = appConfig?.darkTheme ?? false;
@@ -24,33 +36,24 @@ class IsarService extends GetxService {
     await _languageLocalStorage.clear();
   }
 
-  Future<void> saveLocalData({
-    bool? isFirstTime,
-    String? accessToken,
-    bool? darkTheme,
-    String? language,
-    bool? isRememberMe,
-    String? username,
-    String? refreshToken,
-    bool? isActivated,
-    String? organizationId,
-    String? languageCode,
-  }) async {
+  Future<void> saveLocalData({LocalStorageModel? input}) async {
     try {
       final appConfig = await _localStorage.get();
-      final app = LocalStorage();
-      app.id = 1;
-      app.isActivated = isActivated ?? appConfig?.isActivated;
-      app.isFirstTime = isFirstTime ?? appConfig?.isFirstTime;
-      app.accessToken = accessToken ?? appConfig?.accessToken;
-      app.refreshToken = refreshToken ?? appConfig?.refreshToken;
-      app.darkTheme = darkTheme ?? appConfig?.darkTheme;
-      app.language = language ?? appConfig?.language;
-      app.isRememberMe = isRememberMe ?? appConfig?.isRememberMe;
-      app.username = username ?? appConfig?.username;
-      app.organizationId = organizationId ?? appConfig?.organizationId;
-      app.languageCode = languageCode ?? appConfig?.languageCode;
-      await _localStorage.insert(app);
+      if (appConfig == null) {
+        return;
+      }
+      Logs.i(input?.isFirstTime);
+      appConfig.isActivated = input?.isActivated ?? appConfig.isActivated;
+      appConfig.isFirstTime = input?.isFirstTime ?? appConfig.isFirstTime;
+      appConfig.accessToken = input?.accessToken ?? appConfig.accessToken;
+      appConfig.refreshToken = input?.refreshToken ?? appConfig.refreshToken;
+      appConfig.darkTheme = input?.darkTheme ?? appConfig.darkTheme;
+      appConfig.language = input?.language ?? appConfig.language;
+      appConfig.isRememberMe = input?.isRememberMe ?? appConfig.isRememberMe;
+      appConfig.username = input?.username ?? appConfig.username;
+      appConfig.organizationId =
+          input?.organizationId ?? appConfig.organizationId;
+      await _localStorage.insert(appConfig);
     } catch (e) {
       rethrow;
     }
@@ -72,18 +75,22 @@ class IsarService extends GetxService {
   Future<void> clearLocalData({bool? deleteToken, bool? unactivate}) async {
     try {
       final appConfig = await _localStorage.get();
-      final app = LocalStorage();
-      app.id = 1;
-      app.isActivated = unactivate == true ? null : appConfig?.isActivated;
-      app.isFirstTime = appConfig?.isFirstTime;
-      app.accessToken = deleteToken == true ? null : appConfig?.accessToken;
-      app.refreshToken = deleteToken == true ? null : appConfig?.refreshToken;
-      app.organizationId = appConfig?.organizationId;
-      app.darkTheme = appConfig?.darkTheme;
-      app.language = appConfig?.language;
-      app.isRememberMe = appConfig?.isRememberMe;
-      app.username = appConfig?.username;
-      await _localStorage.insert(app);
+      if (appConfig == null) {
+        return;
+      }
+      appConfig.id = 1;
+      appConfig.isActivated = unactivate == true ? null : appConfig.isActivated;
+      appConfig.isFirstTime = appConfig.isFirstTime;
+      appConfig.accessToken =
+          deleteToken == true ? null : appConfig.accessToken;
+      appConfig.refreshToken =
+          deleteToken == true ? null : appConfig.refreshToken;
+      appConfig.organizationId = appConfig.organizationId;
+      appConfig.darkTheme = appConfig.darkTheme;
+      appConfig.language = appConfig.language;
+      appConfig.isRememberMe = appConfig.isRememberMe;
+      appConfig.username = appConfig.username;
+      await _localStorage.insert(appConfig);
     } catch (e) {
       rethrow;
     }

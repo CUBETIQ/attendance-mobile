@@ -11,7 +11,7 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
+import 'package:timesync360/types/avatar_type.dart';
 
 class EditOrganizationController extends GetxController {
   TextEditingController nameController = TextEditingController();

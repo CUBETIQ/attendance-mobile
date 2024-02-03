@@ -8,7 +8,7 @@ import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/attendance_status.dart';
+import 'package:timesync360/types/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../../constants/app_size.dart';

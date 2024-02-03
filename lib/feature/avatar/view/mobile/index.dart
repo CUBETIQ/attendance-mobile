@@ -4,7 +4,7 @@ import 'package:timesync360/feature/avatar/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
+import 'package:timesync360/types/avatar_type.dart';
 
 class AvatarViewMobile extends StatelessWidget {
   const AvatarViewMobile({super.key});

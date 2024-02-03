@@ -8,8 +8,8 @@ import 'package:timesync360/feature/home/admin_leave_request/widget/small_outlin
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_status.dart';
-import 'package:timesync360/utils/types_helper/leave_type.dart';
+import 'package:timesync360/types/leave_status.dart';
+import 'package:timesync360/types/leave_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import '../../../../constants/app_size.dart';

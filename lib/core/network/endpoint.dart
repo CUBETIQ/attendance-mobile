@@ -9,7 +9,7 @@ class Endpoints {
 
   static const String baseUrl = "http://192.168.1.102:3000/api";
 
-  //static const String baseUrl= "https://attendance-api-devx1.ctdn.dev/api";
+  // static const String baseUrl = "https://attendance-api-devx1.ctdn.dev/api";
 
   String get login => "/auth/login";
   String get refreshToken => "/auth/token";

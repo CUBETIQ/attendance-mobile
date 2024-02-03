@@ -2,7 +2,7 @@ import 'package:timesync360/constants/organization_image.dart';
 import 'package:timesync360/constants/position_image.dart';
 import 'package:timesync360/constants/profile_image.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
+import 'package:timesync360/types/avatar_type.dart';
 
 class AvatarController extends GetxController {
   RxList<String> avatars = <String>[].obs;

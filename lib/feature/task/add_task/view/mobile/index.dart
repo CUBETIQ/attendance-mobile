@@ -9,7 +9,7 @@ import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync360/feature/task/add_task/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync360/types/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

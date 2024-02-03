@@ -5,8 +5,8 @@ import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_status.dart';
-import 'package:timesync360/utils/types_helper/leave_type.dart';
+import 'package:timesync360/types/leave_status.dart';
+import 'package:timesync360/types/leave_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 

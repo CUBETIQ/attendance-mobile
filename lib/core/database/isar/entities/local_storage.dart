@@ -15,5 +15,4 @@ class LocalStorage {
   bool? isFirstTime = true;
   bool? isRememberMe;
   String? username;
-  String? languageCode = "en";
 }

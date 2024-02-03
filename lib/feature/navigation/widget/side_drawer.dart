@@ -6,7 +6,7 @@ import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/feature/navigation/model/drawer_model.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/types_helper/role.dart';
+import 'package:timesync360/types/role.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';

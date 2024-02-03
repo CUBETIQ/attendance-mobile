@@ -7,7 +7,7 @@ import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/employee/employee/service/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync360/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

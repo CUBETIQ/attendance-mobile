@@ -6,7 +6,7 @@ import 'package:timesync360/feature/report/widget/data_row.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/attendance_status.dart';
+import 'package:timesync360/types/attendance_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

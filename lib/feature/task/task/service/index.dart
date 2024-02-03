@@ -2,7 +2,7 @@ import 'package:timesync360/core/model/summary_task_model.dart';
 import 'package:timesync360/core/model/task_model.dart';
 import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/utils/types_helper/task_status.dart';
+import 'package:timesync360/types/task_status.dart';
 import 'package:dio/dio.dart';
 
 class TaskService {

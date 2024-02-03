@@ -7,7 +7,7 @@ import 'package:timesync360/feature/leave/leave_detail/widget/leave_detail_card.
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_status.dart';
+import 'package:timesync360/types/leave_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../core/widgets/button/back_button.dart';

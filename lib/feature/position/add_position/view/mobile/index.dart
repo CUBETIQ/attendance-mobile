@@ -9,7 +9,7 @@ import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync360/feature/position/add_position/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync360/types/state.dart';
 
 class AddPositionViewMobile extends StatelessWidget {
   const AddPositionViewMobile({super.key});

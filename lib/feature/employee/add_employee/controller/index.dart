@@ -13,16 +13,16 @@ import 'package:timesync360/feature/employee/add_employee/model/update_staff_mod
 import 'package:timesync360/feature/employee/add_employee/service/index.dart';
 import 'package:timesync360/feature/employee/employee/controller/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync360/types/state.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
-import 'package:timesync360/utils/types_helper/gender.dart';
-import 'package:timesync360/utils/types_helper/role.dart';
-import 'package:timesync360/utils/types_helper/user_status.dart';
+import 'package:timesync360/types/avatar_type.dart';
+import 'package:timesync360/types/gender.dart';
+import 'package:timesync360/types/role.dart';
+import 'package:timesync360/types/user_status.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../utils/types_helper/state.dart';
 
 class AddStaffController extends GetxController {
   RxString title = "Add Employee".obs;

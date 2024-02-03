@@ -7,9 +7,9 @@ import 'package:timesync360/feature/leave/add_leave/model/update_leave_model.dar
 import 'package:timesync360/feature/leave/add_leave/service/index.dart';
 import 'package:timesync360/feature/leave/leave/controller/index.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_duration_type.dart';
-import 'package:timesync360/utils/types_helper/leave_type.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync360/types/leave_duration_type.dart';
+import 'package:timesync360/types/leave_type.dart';
+import 'package:timesync360/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

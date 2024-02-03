@@ -1,5 +1,6 @@
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/database/isar/entities/local_storage.dart';
+import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/model/department_model.dart';
 import 'package:timesync360/core/model/organization_model.dart';
@@ -28,6 +29,7 @@ class SplashController extends GetxController
   Rx<DepartmentModel> department = DepartmentModel().obs;
   Rx<UserStatusModel> userStatus = UserStatusModel().obs;
   Rx<OrganizationModel> organization = OrganizationModel().obs;
+  LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override
   void onInit() {
@@ -58,9 +60,10 @@ class SplashController extends GetxController
         await getDepartment();
       }
     }
+    initRoute();
   }
 
-  Future<void> init() async {
+  Future<void> initRoute() async {
     if (localData.value.isActivated != true) {
       Get.offNamed(Routes.ACTIVATION);
     } else if (localData.value.accessToken != null) {
@@ -131,9 +134,11 @@ class SplashController extends GetxController
       }
       organization.value =
           await SplashService().validateOrganization(id: data!.organizationId!);
-      await IsarService().saveLocalData(organizationId: organization.value.id);
+      if (localData.value.organizationId == null) {
+        localStorageData?.organizationId = organization.value.id;
+        await IsarService().saveLocalData(input: localStorageData);
+      }
       await initLocalDb();
-      init();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

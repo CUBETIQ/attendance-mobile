@@ -5,7 +5,7 @@ import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/types_helper/user_status.dart';
+import 'package:timesync360/types/user_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

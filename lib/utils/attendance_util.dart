@@ -1,4 +1,4 @@
-import 'package:timesync360/utils/types_helper/attendance_status.dart';
+import 'package:timesync360/types/attendance_status.dart';
 
 class CheckInStatusValidator {
   String getStatus(String hour, DateTime checkInTime) {

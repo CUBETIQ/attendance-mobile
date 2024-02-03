@@ -1,4 +1,5 @@
 import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/feature/onboard/model/onboard_model.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class OnBoardController extends GetxController {
     ),
   ];
   RxInt currentIndex = 0.obs;
+  LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override
   void onInit() {
@@ -37,8 +39,9 @@ class OnBoardController extends GetxController {
 
   void onTapButton() async {
     if (currentIndex.value == 2) {
+      localStorageData?.isFirstTime = false;
+      await IsarService().saveLocalData(input: localStorageData);
       Get.offNamed('/login');
-      await IsarService().saveLocalData(isFirstTime: false);
     } else {
       pageController!.nextPage(
         duration: const Duration(milliseconds: 500),

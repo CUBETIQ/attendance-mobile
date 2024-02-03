@@ -25,7 +25,7 @@ class LocalStorageController extends LocalStorage implements IsarRepository {
   @override
   Future<LocalStorage?> get() async {
     final isar = await _db;
-    return isar.localStorages.filter().idEqualTo(1).findFirstSync();
+    return isar.localStorages.get(1);
   }
 
   @override

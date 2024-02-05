@@ -172,6 +172,13 @@ class NavigationController extends GetxController {
           },
         ),
         DrawerModel(
+          title: "Category",
+          icon: Icons.category_rounded,
+          onTap: () {
+            Get.toNamed(Routes.CATEGORY);
+          },
+        ),
+        DrawerModel(
           title: "Support",
           icon: Icons.support_agent_rounded,
           onTap: () {

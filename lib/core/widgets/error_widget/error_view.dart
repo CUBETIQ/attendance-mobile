@@ -48,7 +48,7 @@ class ErrorView extends StatelessWidget {
               width: SizeUtils.scale(150, size.width),
               height: SizeUtils.scale(42, size.width),
               title: "Retry",
-              onTap: () {
+              onTap: () async {
                 Get.offNamed(Routes.SPLASH);
               },
             ),

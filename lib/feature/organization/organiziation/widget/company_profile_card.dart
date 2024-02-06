@@ -1,7 +1,7 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/card/my_card.dart';
 import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:timesync360/core/widgets/image/cache_image_organization.dart';
@@ -16,13 +16,13 @@ class CompanyProfileCard extends StatelessWidget {
     this.companyName,
     this.companyLogo,
     this.companyOwner,
-    this.onTapEdit,
+    required this.onTapEdit,
   });
 
   final String? companyName;
   final String? companyLogo;
   final UserModel? companyOwner;
-  final void Function()? onTapEdit;
+  final Future<void> Function() onTapEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class CompanyProfileCard extends StatelessWidget {
             boxShadow: const [],
             padding: EdgeInsets.symmetric(
               horizontal: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 size.width,
               ),
             ),
@@ -141,7 +141,7 @@ class CompanyProfileCard extends StatelessWidget {
                       SizedBox(
                         height: SizeUtils.scale(6, size.width),
                       ),
-                      MyButton(
+                      MyAsyncButton(
                         title: "Edit",
                         width: SizeUtils.scale(100, size.width),
                         height: SizeUtils.scale(30, size.width),

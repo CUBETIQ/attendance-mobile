@@ -33,8 +33,8 @@ class StatusCard extends StatelessWidget {
             : Container(
                 height: size.width * 0.045,
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.paddingS7,
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSize().paddingS7,
                 ),
                 decoration: BoxDecoration(
                   color: status != null
@@ -45,7 +45,7 @@ class StatusCard extends StatelessWidget {
                               : Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.outlineVariant,
                   borderRadius: BorderRadius.circular(
-                    AppSize.borderRadiusMedium * (size.width / 375.0),
+                    AppSize().borderRadiusMedium * (size.width / 375.0),
                   ),
                 ),
                 child: MyText(

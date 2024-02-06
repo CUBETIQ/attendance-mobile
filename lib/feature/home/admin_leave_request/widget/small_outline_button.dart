@@ -27,7 +27,7 @@ class SmallOutlineButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize.borderRadiusMedium * (size.width / 375.0),
+            AppSize().borderRadiusMedium * (size.width / 375.0),
           ),
           border: Border.all(
             color: Theme.of(context).colorScheme.error,

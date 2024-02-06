@@ -40,16 +40,16 @@ class StaffViewMobile extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
+                  AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
-                horizontal: AppSize.paddingVerticalLarge,
+                horizontal: AppSize().paddingVerticalLarge,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyText(text: "Employee Overview", style: BodyLargeMedium),
-                  const SizedBox(height: AppSize.paddingS8),
+                  SizedBox(height: AppSize().paddingS8),
                   SearchBar(
                     hintText: "Search Employee",
                     elevation: MaterialStateProperty.all<double>(0.8),
@@ -68,7 +68,7 @@ class StaffViewMobile extends StatelessWidget {
                     ],
                     controller: controller.searchController,
                   ),
-                  const SizedBox(height: AppSize.paddingS8),
+                  SizedBox(height: AppSize().paddingS8),
                   Obx(
                     () => MyAsyncWidget(
                       isLoading: controller.isLoading.value,
@@ -80,7 +80,7 @@ class StaffViewMobile extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
                           height: SizeUtils.scale(
-                            AppSize.paddingS8,
+                            AppSize().paddingS8,
                             size.width,
                           ),
                         ),

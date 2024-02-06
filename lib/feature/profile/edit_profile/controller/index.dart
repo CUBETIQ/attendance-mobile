@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:timesync360/core/model/user_model.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/feature/home/home/controller/index.dart';
@@ -35,7 +34,6 @@ class EditProfileController extends GetxController {
     Gender.other,
   ].obs;
   Rxn<String> selectedGender = Rxn<String>(null);
-  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -64,7 +62,6 @@ class EditProfileController extends GetxController {
 
   Future<void> updateProfile() async {
     validate();
-    _debouncer.run(() async {});
     if (MyTextFieldFormController.findController('First Name').isValid &&
         MyTextFieldFormController.findController('Last Name').isValid) {
       isLoading.value = true;

@@ -34,14 +34,14 @@ class HomeStaffMobileView extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(
             left: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
             right: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
-            top: AppSize.paddingTitleSmall,
+            top: AppSize().paddingTitleSmall,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +88,7 @@ class HomeStaffMobileView extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(width: AppSize.paddingS5),
+                    SizedBox(width: AppSize().paddingS5),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,

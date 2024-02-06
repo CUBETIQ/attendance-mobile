@@ -37,12 +37,12 @@ class StaffCard extends StatelessWidget {
         height: cardHeight ?? SizeUtils.scale(60, size.width),
         padding: EdgeInsets.symmetric(
           horizontal:
-              SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
-          vertical: SizeUtils.scale(AppSize.paddingS1, size.width),
+              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+          vertical: SizeUtils.scale(AppSize().paddingS1, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
           ),
           color: Theme.of(context).colorScheme.background,
           boxShadow: [
@@ -61,7 +61,7 @@ class StaffCard extends StatelessWidget {
               width: SizeUtils.scale(40, size.width),
               height: SizeUtils.scale(40, size.width),
             ),
-            SizedBox(width: SizeUtils.scale(AppSize.paddingS5, size.width)),
+            SizedBox(width: SizeUtils.scale(AppSize().paddingS5, size.width)),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +113,8 @@ class StaffCard extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+                        SizeUtils.scale(
+                            AppSize().borderRadiusLarge, size.width),
                       ),
                       color: Theme.of(context).colorScheme.primary,
                     ),

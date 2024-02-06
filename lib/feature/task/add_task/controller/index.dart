@@ -1,6 +1,5 @@
 import 'package:timesync360/core/model/task_model.dart';
 import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/icon_picker/icon_picker_dialog.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
@@ -35,7 +34,6 @@ class AddTaskController extends GetxController {
   ].obs;
   RxString selectPriority = TaskPriority.low.obs;
   late Color screenPickerColor;
-  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -46,53 +44,50 @@ class AddTaskController extends GetxController {
 
   Future<void> addTask() async {
     validate();
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Task').isValid) {
-        try {
-          CreateTaskModel input = CreateTaskModel(
-            name: taskController.text,
-            description: descriptionController.text,
-            startDate: startDate.value,
-            endDate: endDate.value,
-            color: stringColor.value,
-            icon: stringIcon.value,
-            priority: selectPriority.value,
-          );
-          await AddTaskService().addTask(input);
-          TaskController.to.getUserTasks();
-          TaskController.to.getUserSummarizeLeave();
-          Get.back();
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response!.data["message"]);
-          rethrow;
-        }
+    if (MyTextFieldFormController.findController('Task').isValid) {
+      try {
+        CreateTaskModel input = CreateTaskModel(
+          name: taskController.text,
+          description: descriptionController.text,
+          startDate: startDate.value,
+          endDate: endDate.value,
+          color: stringColor.value,
+          icon: stringIcon.value,
+          priority: selectPriority.value,
+        );
+        await AddTaskService().addTask(input);
+        TaskController.to.getUserTasks();
+        TaskController.to.getUserSummarizeLeave();
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response!.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   Future<void> updateTask() async {
     validate();
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Task').isValid) {
-        try {
-          CreateTaskModel input = CreateTaskModel(
-            name: taskController.text,
-            description: descriptionController.text,
-            startDate: startDate.value,
-            endDate: endDate.value,
-            color: stringColor.value,
-            icon: stringIcon.value,
-            priority: selectPriority.value,
-          );
-          await AddTaskService().updateTask(task.value!.id!, input);
-          TaskController.to.getUserTasks();
-          Get.back();
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response!.data["message"]);
-          rethrow;
-        }
+
+    if (MyTextFieldFormController.findController('Task').isValid) {
+      try {
+        CreateTaskModel input = CreateTaskModel(
+          name: taskController.text,
+          description: descriptionController.text,
+          startDate: startDate.value,
+          endDate: endDate.value,
+          color: stringColor.value,
+          icon: stringIcon.value,
+          priority: selectPriority.value,
+        );
+        await AddTaskService().updateTask(task.value!.id!, input);
+        TaskController.to.getUserTasks();
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response!.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   void validate() {

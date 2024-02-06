@@ -6,7 +6,6 @@ import 'package:timesync360/core/model/position_model.dart';
 import 'package:timesync360/core/model/summary_attendance_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/home/home/model/check_in_model.dart';
@@ -95,7 +94,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxDouble latePercentage = 0.0.obs;
   RxDouble onTimePercentage = 0.0.obs;
   RxDouble earlyPercentage = 0.0.obs;
-  final _debounce = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -185,87 +183,82 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> checkIn() async {
-    _debounce.run(() async {
-      if (await checkUserLocation() == false) {
-        return;
-      }
-      DateTime now = await checkTime();
-      if (now.hour > endHour.value.split(":").first.toInt()) {
-        showErrorSnackBar("Error", "You can't check in after $endHour");
-        return;
-      } else {
-        controller.forward();
-        checkOutTime.value = null;
-        totalHour.value = null;
-        try {
-          LocationModel location = LocationModel(
-            lat: NavigationController.to.userLocation.value?.latitude,
-            lng: NavigationController.to.userLocation.value?.longitude,
-            inOffice: NavigationController.to.isInRange.value,
-          );
-          CheckInModel input = CheckInModel(
-            checkInDateTime: now.millisecondsSinceEpoch,
-            checkInType: AttendanceMethod.manual,
-            checkInStatus:
-                CheckInStatusValidator().getStatus(startHour.value, now),
-            checkInEarly: GetMinute().checkEarlyMinute(startHour.value, now),
-            checkInLate: GetMinute().checkLateMinute(startHour.value, now),
-            checkInLocation: location,
-          );
-          AttendanceModel checkIn = await HomeService().checkIn(input);
-          checkInTime.value = DateFormatter().formatTime(
-            DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
-          );
-          await getAttendance();
-          isCheckedIn.value = true;
-          await getSummarizeAttendance();
-          if (Get.isRegistered<ProfileController>()) {
-            ProfileController.to.getSummarizeAttendance();
-          }
-          getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
-        }
-      }
-    });
-  }
-
-  Future<void> checkOut() async {
-    _debounce.run(() async {
-      if (await checkUserLocation() == false) {
-        return;
-      }
+    if (await checkUserLocation() == false) {
+      return;
+    }
+    DateTime now = await checkTime();
+    if (now.hour > endHour.value.split(":").first.toInt()) {
+      showErrorSnackBar("Error", "You can't check in after $endHour");
+      return;
+    } else {
       controller.forward();
-      DateTime now = await checkTime();
+      checkOutTime.value = null;
+      totalHour.value = null;
       try {
         LocationModel location = LocationModel(
           lat: NavigationController.to.userLocation.value?.latitude,
           lng: NavigationController.to.userLocation.value?.longitude,
           inOffice: NavigationController.to.isInRange.value,
         );
-
-        CheckOutModel input = CheckOutModel(
-          checkOutDateTime: now.millisecondsSinceEpoch,
-          checkOutType: AttendanceMethod.manual,
-          checkOutStatus:
-              CheckOutStatusValidator().getStatus(endHour.value, now),
-          checkOutEarly: GetMinute().checkEarlyMinute(endHour.value, now),
-          checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
-          checkOutLocation: location,
+        CheckInModel input = CheckInModel(
+          checkInDateTime: now.millisecondsSinceEpoch,
+          checkInType: AttendanceMethod.manual,
+          checkInStatus:
+              CheckInStatusValidator().getStatus(startHour.value, now),
+          checkInEarly: GetMinute().checkEarlyMinute(startHour.value, now),
+          checkInLate: GetMinute().checkLateMinute(startHour.value, now),
+          checkInLocation: location,
         );
-        AttendanceModel checkOut = await HomeService().checkOut(input);
-        checkOutTime.value = DateFormatter().formatTime(
-          DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
+        AttendanceModel checkIn = await HomeService().checkIn(input);
+        checkInTime.value = DateFormatter().formatTime(
+          DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
         );
-        isCheckedIn.value = false;
         await getAttendance();
-        getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+        isCheckedIn.value = true;
+        await getSummarizeAttendance();
+        if (Get.isRegistered<ProfileController>()) {
+          ProfileController.to.getSummarizeAttendance();
+        }
+        getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
       }
-    });
+    }
+  }
+
+  Future<void> checkOut() async {
+    if (await checkUserLocation() == false) {
+      return;
+    }
+    controller.forward();
+    DateTime now = await checkTime();
+    try {
+      LocationModel location = LocationModel(
+        lat: NavigationController.to.userLocation.value?.latitude,
+        lng: NavigationController.to.userLocation.value?.longitude,
+        inOffice: NavigationController.to.isInRange.value,
+      );
+
+      CheckOutModel input = CheckOutModel(
+        checkOutDateTime: now.millisecondsSinceEpoch,
+        checkOutType: AttendanceMethod.manual,
+        checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
+        checkOutEarly: GetMinute().checkEarlyMinute(endHour.value, now),
+        checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
+        checkOutLocation: location,
+      );
+      AttendanceModel checkOut = await HomeService().checkOut(input);
+      checkOutTime.value = DateFormatter().formatTime(
+        DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
+      );
+      isCheckedIn.value = false;
+      await getAttendance();
+      getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> updateUserStatus(String status) async {

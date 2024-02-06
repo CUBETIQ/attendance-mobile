@@ -1,6 +1,6 @@
 import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
@@ -29,7 +29,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
@@ -56,7 +56,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                 hintText: "Enter your organization name",
                 textController: controller.nameController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Row(
                 children: [
                   Expanded(
@@ -80,14 +80,14 @@ class EditOrganizationViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Address",
                 hintText: "Enter your organization address",
                 textController: controller.addressController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Row(
                 children: [
                   Expanded(
@@ -111,7 +111,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",
@@ -120,7 +120,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                 maxlines: 5,
               ),
               SizedBox(height: SizeUtils.scale(30, size.width)),
-              MyButton(
+              MyAsyncButton(
                 title: "Save",
                 onTap: controller.updateOrganization,
               ),

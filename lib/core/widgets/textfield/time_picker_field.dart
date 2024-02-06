@@ -93,8 +93,8 @@ class MyTimePickerField extends StatelessWidget {
               inputFormatters: inputFormatters,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: (AppSize.paddingS17) * (size.width / 375.0),
-                  vertical: (AppSize.paddingS7) * (size.width / 375.0),
+                  horizontal: (AppSize().paddingS17) * (size.width / 375.0),
+                  vertical: (AppSize().paddingS7) * (size.width / 375.0),
                 ),
                 hintText: hintText,
                 hintStyle: hintStyle ?? BodyMediumMedium,
@@ -107,11 +107,11 @@ class MyTimePickerField extends StatelessWidget {
                 focusedBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -122,11 +122,11 @@ class MyTimePickerField extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -137,11 +137,11 @@ class MyTimePickerField extends StatelessWidget {
                 errorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -152,11 +152,11 @@ class MyTimePickerField extends StatelessWidget {
                 focusedErrorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),

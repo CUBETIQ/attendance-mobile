@@ -26,6 +26,7 @@ class Endpoints {
   String get organization => "/app/organizations/";
   String get get_department => "/app/departments/";
   String get category => "/app/categories/";
+  String get categoryType => "/app/categories/type";
   String get get_user_attendance => "/app/attendances/me";
   String get get_all_staff_attendance => "/app/attendances";
   String get get_organization => "/app/organizations/";

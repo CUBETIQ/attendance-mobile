@@ -5,7 +5,6 @@ import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/model/activation_model.dart';
 import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/feature/auth/activation/model/activation_model.dart';
@@ -30,7 +29,6 @@ class ActivationController extends GetxController {
       LocalStorageController.getInstance();
   Rx<LocalStorage> localData = LocalStorage().obs;
   Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
-  final _debouncer = Debouncer(milliseconds: 500);
   LocalStorageModel? localStorageData;
 
   @override
@@ -41,7 +39,6 @@ class ActivationController extends GetxController {
 
   Future<void> activation() async {
     validate();
-    _debouncer.run(() async {});
     final data = await localDataService.get();
     if (MyTextFieldFormController.findController('Activation').isValid) {
       try {

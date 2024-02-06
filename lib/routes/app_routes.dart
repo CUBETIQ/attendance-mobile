@@ -37,4 +37,5 @@ abstract class Routes {
   static const ADD_DEPARTMENT = '/add_department';
   static const DEPARTMENT_DETAIL = '/department_detail';
   static const CATEGORY = '/category';
+  static const ADD_CATEGORY = '/add_category';
 }

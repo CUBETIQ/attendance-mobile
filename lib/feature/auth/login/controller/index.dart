@@ -5,7 +5,6 @@ import 'package:timesync360/core/model/department_model.dart';
 import 'package:timesync360/core/model/organization_model.dart';
 import 'package:timesync360/core/model/position_model.dart';
 import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/feature/auth/login/model/index.dart';
@@ -30,7 +29,6 @@ class LoginController extends GetxController {
       LocalStorageController.getInstance();
   RxBool showPassword = true.obs;
   Rx<UserStatusModel> userStatus = UserStatusModel().obs;
-  final _debouncer = Debouncer(milliseconds: 500);
   LocalStorageModel? localStorageData = LocalStorageModel();
   Rxn<String> accessToken = Rxn<String>(null);
   Rxn<String> refreshToken = Rxn<String>(null);
@@ -38,44 +36,42 @@ class LoginController extends GetxController {
   Future<void> login() async {
     validate();
     final storageData = await localDataService.get();
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Username').isValid &&
-          MyTextFieldFormController.findController('Password').isValid) {
-        try {
-          LoginModel input = LoginModel(
-            username: usernameController.text,
-            password: passwordController.text,
-          );
-          var token = await LoginService().login(input);
-          accessToken.value = token.first;
-          refreshToken.value = token.last;
-          await getOrganization(storageData?.organizationId ?? "");
-          await fetchMe();
-          await getUserStatus();
-          if (organization.value == null) {
-            Get.offNamed(Routes.ACTIVATION);
-          } else {
-            if (user.value.positionId != null && user.value.positionId != "") {
-              await getPosition();
-            }
-            if (user.value.departmentId != null &&
-                user.value.departmentId != "") {
-              await getDepartment();
-            }
-            Get.offNamed(Routes.NAVIGATION, arguments: {
-              "user": user.value,
-              "position": position.value,
-              "department": department.value,
-              "organization": organization.value,
-              "userStatus": userStatus.value,
-            });
+    if (MyTextFieldFormController.findController('Username').isValid &&
+        MyTextFieldFormController.findController('Password').isValid) {
+      try {
+        LoginModel input = LoginModel(
+          username: usernameController.text,
+          password: passwordController.text,
+        );
+        var token = await LoginService().login(input);
+        accessToken.value = token.first;
+        refreshToken.value = token.last;
+        await getOrganization(storageData?.organizationId ?? "");
+        await fetchMe();
+        await getUserStatus();
+        if (organization.value == null) {
+          Get.offNamed(Routes.ACTIVATION);
+        } else {
+          if (user.value.positionId != null && user.value.positionId != "") {
+            await getPosition();
           }
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
+          if (user.value.departmentId != null &&
+              user.value.departmentId != "") {
+            await getDepartment();
+          }
+          Get.offNamed(Routes.NAVIGATION, arguments: {
+            "user": user.value,
+            "position": position.value,
+            "department": department.value,
+            "organization": organization.value,
+            "userStatus": userStatus.value,
+          });
         }
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   void validate() {

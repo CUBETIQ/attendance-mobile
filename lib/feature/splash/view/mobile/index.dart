@@ -25,7 +25,7 @@ class SplashViewMobile extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
                     SizeUtils.scale(
-                      AppSize.borderRadiusXLarge,
+                      AppSize().borderRadiusXLarge,
                       size.width,
                     ),
                   ),

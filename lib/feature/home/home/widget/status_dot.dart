@@ -22,7 +22,7 @@ class StatusDot extends StatelessWidget {
                     ? Colors.yellow
                     : Colors.red,
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusLarge * (size.width / 375.0),
+          AppSize().borderRadiusLarge * (size.width / 375.0),
         ),
         border: Border.all(
           color: Colors.white,

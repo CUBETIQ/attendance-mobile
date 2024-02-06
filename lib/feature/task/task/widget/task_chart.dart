@@ -36,13 +36,13 @@ class TaskChart extends StatelessWidget {
       width: width,
       height: height ?? 210 * (size.width / 360),
       padding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(AppSize.paddingS8, size.width),
-        horizontal: SizeUtils.scale(AppSize.paddingS8, size.width),
+        vertical: SizeUtils.scale(AppSize().paddingS8, size.width),
+        horizontal: SizeUtils.scale(AppSize().paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+          SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
         ),
         boxShadow: [
           BoxShadow(

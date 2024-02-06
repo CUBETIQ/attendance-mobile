@@ -20,16 +20,16 @@ class OptionButton extends StatelessWidget {
         height: size.width * 0.15,
         padding: EdgeInsets.symmetric(
           horizontal: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             MediaQuery.of(context).size.width,
           ),
         ),
-        margin: const EdgeInsets.only(
-          bottom: AppSize.paddingS5,
+        margin: EdgeInsets.only(
+          bottom: AppSize().paddingS5,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
           ),
           color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
         ),
@@ -40,7 +40,7 @@ class OptionButton extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
               size: SizeUtils.scale(20, size.width),
             ),
-            const SizedBox(width: AppSize.paddingS8),
+            SizedBox(width: AppSize().paddingS8),
             MyText(
               text: option.title ?? "--------",
               style: BodyMedium,

@@ -32,13 +32,13 @@ class LabelDetailCard extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+              SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
             ),
             color: Theme.of(context).colorScheme.primary.withOpacity(0.07),
           ),

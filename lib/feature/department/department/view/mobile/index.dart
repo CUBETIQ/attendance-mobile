@@ -38,16 +38,16 @@ class DepartmentViewMobile extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
+                  AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
-                horizontal: AppSize.paddingVerticalLarge,
+                horizontal: AppSize().paddingVerticalLarge,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyText(text: "Department Overview", style: BodyLargeMedium),
-                  const SizedBox(height: AppSize.paddingS8),
+                  SizedBox(height: AppSize().paddingS8),
                   SearchBar(
                     hintText: "Search Department",
                     elevation: MaterialStateProperty.all<double>(0.2),
@@ -66,7 +66,7 @@ class DepartmentViewMobile extends StatelessWidget {
                     ],
                     controller: controller.searchController,
                   ),
-                  const SizedBox(height: AppSize.paddingS8),
+                  SizedBox(height: AppSize().paddingS8),
                   Obx(
                     () => MyAsyncWidget(
                       isLoading: controller.isLoading.value,
@@ -78,7 +78,7 @@ class DepartmentViewMobile extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
                           height: SizeUtils.scale(
-                            AppSize.paddingS8,
+                            AppSize().paddingS8,
                             size.width,
                           ),
                         ),

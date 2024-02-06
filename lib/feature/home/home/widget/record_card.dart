@@ -39,13 +39,13 @@ class RecordCard extends StatelessWidget {
     return Container(
       width: width ?? double.infinity,
       height: height ?? size.width * 0.67,
-      padding: EdgeInsets.all(SizeUtils.scale(AppSize.paddingS8, size.width)),
+      padding: EdgeInsets.all(SizeUtils.scale(AppSize().paddingS8, size.width)),
       margin: EdgeInsets.only(
-        bottom: SizeUtils.scale(AppSize.paddingS8, size.width),
+        bottom: SizeUtils.scale(AppSize().paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusMedium * (size.width / 375.0),
+          AppSize().borderRadiusMedium * (size.width / 375.0),
         ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
@@ -66,7 +66,7 @@ class RecordCard extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
-          SizedBox(height: AppSize.paddingS5 * (size.width / 375.0)),
+          SizedBox(height: AppSize().paddingS5 * (size.width / 375.0)),
           RecordDataCard(
             time: checkInTime,
             timeString:
@@ -80,7 +80,7 @@ class RecordCard extends StatelessWidget {
             iconColor: const Color(MyColor.success),
             icon: Icons.login,
           ),
-          SizedBox(height: AppSize.paddingS5 * (size.width / 375.0)),
+          SizedBox(height: AppSize().paddingS5 * (size.width / 375.0)),
           RecordDataCard(
             time: null,
             timeString:
@@ -102,7 +102,7 @@ class RecordCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: AppSize.paddingS5 * (size.width / 375.0)),
+          SizedBox(height: AppSize().paddingS5 * (size.width / 375.0)),
           RecordDataCard(
             time: checkOutTime,
             timeString:

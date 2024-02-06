@@ -51,11 +51,11 @@ class CustomerSupportViewMobile extends StatelessWidget {
               (index) => SupportButton(
                 margin: EdgeInsets.only(
                   left: SizeUtils.scale(
-                    AppSize.paddingHorizontalLarge,
+                    AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
                   right: SizeUtils.scale(
-                    AppSize.paddingHorizontalLarge,
+                    AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
                   bottom: SizeUtils.scale(

@@ -1,5 +1,4 @@
 import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/leave/add_leave/model/create_leave_model.dart';
@@ -39,8 +38,7 @@ class AddLeaveController extends GetxController
   late Animation<Color?> colorAnimation;
   RxString appState = AppState.Create.obs;
   Rxn<LeaveModel> leave = Rxn<LeaveModel>(null);
-  final _debouncer = Debouncer(milliseconds: 500);
-  RxList<String> test = [
+  final test = [
     "1",
     "1.5",
     "2",
@@ -127,50 +125,46 @@ class AddLeaveController extends GetxController
   }
 
   Future<void> addLeave() async {
-    _debouncer.run(() async {
-      try {
-        CreateLeaveModel input = CreateLeaveModel(
-          type: selectLeaveType.value,
-          durationType: selectLeaveDurationType.value,
-          from: startDate.value,
-          to: endDate.value,
-          reason: reasonController.text,
-          duration: durationController.value.text.isNotEmpty
-              ? durationController.value.text.toDouble()
-              : 1,
-          requestDate: DateTime.now().millisecondsSinceEpoch,
-        );
-        await AddLeaveService().addLeave(input);
-        await LeaveController.to.getUserLeave();
-        LeaveController.to.getUserSummarizeLeave();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response!.data["message"]);
-        rethrow;
-      }
-    });
+    try {
+      CreateLeaveModel input = CreateLeaveModel(
+        type: selectLeaveType.value,
+        durationType: selectLeaveDurationType.value,
+        from: startDate.value,
+        to: endDate.value,
+        reason: reasonController.text,
+        duration: durationController.value.text.isNotEmpty
+            ? durationController.value.text.toDouble()
+            : 1,
+        requestDate: DateTime.now().millisecondsSinceEpoch,
+      );
+      await AddLeaveService().addLeave(input);
+      await LeaveController.to.getUserLeave();
+      LeaveController.to.getUserSummarizeLeave();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response!.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> updateLeave() async {
-    _debouncer.run(() async {
-      try {
-        UpdateLeaveModel input = UpdateLeaveModel(
-          type: selectLeaveType.value,
-          durationType: selectLeaveDurationType.value,
-          from: startDate.value,
-          to: endDate.value,
-          reason: reasonController.text,
-          duration: durationController.value.text.isNotEmpty
-              ? durationController.value.text.toDouble()
-              : 1,
-        );
-        await AddLeaveService().updateLeave(leave.value!.id!, input);
-        LeaveController.to.getUserLeave();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response!.data["message"]);
-        rethrow;
-      }
-    });
+    try {
+      UpdateLeaveModel input = UpdateLeaveModel(
+        type: selectLeaveType.value,
+        durationType: selectLeaveDurationType.value,
+        from: startDate.value,
+        to: endDate.value,
+        reason: reasonController.text,
+        duration: durationController.value.text.isNotEmpty
+            ? durationController.value.text.toDouble()
+            : 1,
+      );
+      await AddLeaveService().updateLeave(leave.value!.id!, input);
+      LeaveController.to.getUserLeave();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response!.data["message"]);
+      rethrow;
+    }
   }
 }

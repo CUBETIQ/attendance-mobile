@@ -26,18 +26,18 @@ class DateDropDown extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: SizeUtils.scale(
-            AppSize.paddingS5,
+            AppSize().paddingS5,
             size.width,
           ),
           vertical: SizeUtils.scale(
-            AppSize.paddingS2,
+            AppSize().paddingS2,
             size.width,
           ),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             SizeUtils.scale(
-              AppSize.borderRadiusLarge,
+              AppSize().borderRadiusLarge,
               size.width,
             ),
           ),
@@ -55,7 +55,7 @@ class DateDropDown extends StatelessWidget {
             ),
             SizedBox(
               width: SizeUtils.scale(
-                AppSize.paddingS1,
+                AppSize().paddingS1,
                 size.width,
               ),
             ),

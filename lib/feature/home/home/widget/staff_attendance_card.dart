@@ -32,8 +32,8 @@ class StaffAttendanceCard extends StatelessWidget {
       width: size.width - 10,
       padding: EdgeInsets.symmetric(
         horizontal:
-            SizeUtils.scale(AppSize.paddingHorizontalLarge - 2, size.width),
-        vertical: SizeUtils.scale(AppSize.paddingVerticalMedium, size.width),
+            SizeUtils.scale(AppSize().paddingHorizontalLarge - 2, size.width),
+        vertical: SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

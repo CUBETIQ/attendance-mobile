@@ -1,7 +1,7 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/image.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync360/feature/auth/login/controller/index.dart';
@@ -21,13 +21,13 @@ class LoginViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              top: AppSize.paddingTitleLarge,
+              top: AppSize().paddingTitleLarge,
               left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
               right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
             ),
@@ -42,7 +42,7 @@ class LoginViewMobile extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             SizeUtils.scale(
-                              AppSize.borderRadiusMedium,
+                              AppSize().borderRadiusMedium,
                               size.width,
                             ),
                           ),
@@ -50,7 +50,7 @@ class LoginViewMobile extends StatelessWidget {
                         height: 70,
                         child: Image.asset(ImageAssets.logoTimeSync360),
                       ),
-                      const SizedBox(height: AppSize.paddingS6),
+                      SizedBox(height: AppSize().paddingS6),
                       MyText(
                         text: "TimeSync360",
                         style: BodyLargeMedium,
@@ -131,7 +131,7 @@ class LoginViewMobile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: size.height * 0.08),
-                MyButton(
+                MyAsyncButton(
                   title: "Login",
                   onTap: controller.login,
                 ),

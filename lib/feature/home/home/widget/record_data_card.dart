@@ -69,7 +69,7 @@ class RecordDataCard extends StatelessWidget {
                         )
                       : const SizedBox.shrink(),
             ),
-            SizedBox(width: AppSize.paddingS8 * (size.width / 375.0)),
+            SizedBox(width: AppSize().paddingS8 * (size.width / 375.0)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -84,7 +84,7 @@ class RecordDataCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
-                const SizedBox(height: AppSize.paddingS2),
+                SizedBox(height: AppSize().paddingS2),
                 MyText(
                   text: time != null ? secondTitle : onNullTitle,
                   style: BodySmallRegular.copyWith(
@@ -98,12 +98,12 @@ class RecordDataCard extends StatelessWidget {
         Container(
           width: size.width * 0.40,
           height: size.width * 0.15,
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.paddingHorizontalMedium,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize().paddingHorizontalMedium,
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppSize.borderRadiusMedium * (size.width / 375.0),
+                AppSize().borderRadiusMedium * (size.width / 375.0),
               ),
               gradient: gradient ??
                   LinearGradient(
@@ -133,7 +133,7 @@ class RecordDataCard extends StatelessWidget {
                           : Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
-                  const SizedBox(height: AppSize.paddingS1),
+                  SizedBox(height: AppSize().paddingS1),
                   StatusCard(
                     status: status,
                     isBreakTime: isBreakTime,

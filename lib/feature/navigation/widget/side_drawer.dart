@@ -70,7 +70,7 @@ class SideDrawer extends StatelessWidget {
                 child: ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
-                      SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+                      SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
                     ),
                   ),
                   onTap: () {

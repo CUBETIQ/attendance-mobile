@@ -1,5 +1,6 @@
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
@@ -10,7 +11,6 @@ import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/types/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../core/widgets/button/button.dart';
 
 class AddLeaveViewMobile extends StatelessWidget {
   const AddLeaveViewMobile({super.key});
@@ -35,7 +35,7 @@ class AddLeaveViewMobile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
@@ -59,7 +59,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                       controller.selectLeaveType.value = value!,
                 ),
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Row(
                 children: [
                   Expanded(
@@ -91,7 +91,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Obx(() => TypeAheadField<String>(
                     focusNode: controller.durationFocusNode,
                     controller: controller.durationController.value,
@@ -117,7 +117,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                       return controller.test.value;
                     },
                   )),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Reason",
@@ -125,7 +125,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                 textController: controller.reasonController,
                 maxlines: 5,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               // Column(
               //   crossAxisAlignment: CrossAxisAlignment.start,
               //   children: [
@@ -133,12 +133,12 @@ class AddLeaveViewMobile extends StatelessWidget {
               //       text: "Leave Duration Type",
               //       style: BodyMediumMedium,
               //     ),
-              //     const SizedBox(height: AppSize.paddingS5),
+              //     const SizedBox(height: AppSize().paddingS5),
               // Container(
               //   height: 48 * (size.width / 375.0),
               //   decoration: BoxDecoration(
               //     borderRadius: BorderRadius.circular(
-              //       (AppSize.borderRadiusLarge) * (size.width / 375.0),
+              //       (AppSize().borderRadiusLarge) * (size.width / 375.0),
               //     ),
               //     border: Border.all(
               //       width: 2,
@@ -161,7 +161,7 @@ class AddLeaveViewMobile extends StatelessWidget {
               //               alignment: Alignment.center,
               //               decoration: BoxDecoration(
               //                 borderRadius: BorderRadius.circular(
-              //                   (AppSize.borderRadiusLarge) *
+              //                   (AppSize().borderRadiusLarge) *
               //                       (size.width / 375.0),
               //                 ),
               //                 color: controller
@@ -198,7 +198,7 @@ class AddLeaveViewMobile extends StatelessWidget {
               //   ),
               // ],
               SizedBox(height: size.height * 0.06),
-              MyButton(
+              MyAsyncButton(
                 title: "Save",
                 onTap: controller.appState.value == AppState.Edit
                     ? controller.updateLeave

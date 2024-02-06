@@ -1,8 +1,8 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
@@ -32,8 +32,9 @@ class ChangePasswordViewMobile extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal:
-              SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
-          vertical: SizeUtils.scale(AppSize.paddingVerticalLarge, size.height),
+              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+          vertical:
+              SizeUtils.scale(AppSize().paddingVerticalLarge, size.height),
         ),
         child: Column(
           children: [
@@ -86,7 +87,7 @@ class ChangePasswordViewMobile extends StatelessWidget {
             SizedBox(
               height: SizeUtils.scale(10, size.height),
             ),
-            MyButton(
+            MyAsyncButton(
               onTap: controller.isChangeStaffPass.value == true
                   ? controller.changeStaffPassword
                   : controller.changeUserPassword,

@@ -1,7 +1,7 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/lotties.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/text_formater.dart';
@@ -23,11 +23,11 @@ class ActivationViewMobile extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
               left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
               right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
             ),
@@ -74,7 +74,7 @@ class ActivationViewMobile extends StatelessWidget {
                     ],
                   ),
                 ),
-                MyButton(
+                MyAsyncButton(
                   title: "Activate",
                   onTap: controller.activation,
                 ),

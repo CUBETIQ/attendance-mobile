@@ -28,7 +28,7 @@ class SmallButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize.borderRadiusMedium * (size.width / 375.0),
+            AppSize().borderRadiusMedium * (size.width / 375.0),
           ),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),

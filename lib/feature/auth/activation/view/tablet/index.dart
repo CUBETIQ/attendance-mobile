@@ -1,6 +1,6 @@
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/lotties.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync360/feature/auth/activation/controller/index.dart';
@@ -23,13 +23,13 @@ class ActivationViewTablet extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              top: AppSize.paddingTitleLarge,
+              top: AppSize().paddingTitleLarge,
               left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
               right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
             ),
@@ -77,7 +77,7 @@ class ActivationViewTablet extends StatelessWidget {
                       ),
                       SizedBox(height: size.height * 0.1),
                       Center(
-                        child: MyButton(
+                        child: MyAsyncButton(
                           width: size.width * 0.5,
                           title: "Activate",
                           onTap: controller.activation,

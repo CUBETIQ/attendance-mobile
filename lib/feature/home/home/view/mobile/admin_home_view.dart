@@ -45,15 +45,15 @@ class HomeAdminMobileView extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(
                       left: SizeUtils.scale(
-                        AppSize.paddingHorizontalLarge,
+                        AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
                       right: SizeUtils.scale(
-                        AppSize.paddingHorizontalLarge,
+                        AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
                       top: SizeUtils.scale(
-                          AppSize.paddingVerticalLarge, size.width),
+                          AppSize().paddingVerticalLarge, size.width),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

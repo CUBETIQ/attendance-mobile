@@ -47,7 +47,7 @@ class LeaveReportCard extends StatelessWidget {
           MediaQuery.of(context).size.width,
         ),
       ),
-      children: [],
+      // children: [],
     );
   }
 }

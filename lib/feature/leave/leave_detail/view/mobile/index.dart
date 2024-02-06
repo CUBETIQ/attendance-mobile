@@ -36,30 +36,30 @@ class LeaveDetailViewMobile extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
               left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 size.width,
               ),
               right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 size.width,
               ),
-              top: AppSize.paddingTitleSmall,
+              top: AppSize().paddingTitleSmall,
             ),
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
+                  AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
                 vertical: SizeUtils.scale(
-                  AppSize.paddingVerticalMedium,
+                  AppSize().paddingVerticalMedium,
                   size.width,
                 ),
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   SizeUtils.scale(
-                    AppSize.borderRadiusMedium,
+                    AppSize().borderRadiusMedium,
                     size.width,
                   ),
                 ),
@@ -121,7 +121,8 @@ class LeaveDetailViewMobile extends StatelessWidget {
                           height: SizeUtils.scale(45, size.width),
                         ),
                         SizedBox(
-                          width: SizeUtils.scale(AppSize.paddingS5, size.width),
+                          width:
+                              SizeUtils.scale(AppSize().paddingS5, size.width),
                         ),
                         Container(
                           constraints: BoxConstraints(

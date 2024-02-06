@@ -28,7 +28,7 @@ class SummaryDetailCard extends StatelessWidget {
       height: SizeUtils.scale(60, size.width),
       padding: EdgeInsets.symmetric(
         horizontal: SizeUtils.scale(
-          AppSize.paddingHorizontalLarge,
+          AppSize().paddingHorizontalLarge,
           size.width,
         ),
       ),

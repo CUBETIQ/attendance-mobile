@@ -44,7 +44,7 @@ class OrganizationViewMobile extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: SizeUtils.scale(
-                    AppSize.paddingHorizontalLarge,
+                    AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
                 ),
@@ -63,11 +63,11 @@ class OrganizationViewMobile extends StatelessWidget {
                       width: size.width,
                       padding: EdgeInsets.symmetric(
                         horizontal: SizeUtils.scale(
-                          AppSize.paddingHorizontalMedium,
+                          AppSize().paddingHorizontalMedium,
                           size.width,
                         ),
                         vertical: SizeUtils.scale(
-                          AppSize.paddingVerticalLarge,
+                          AppSize().paddingVerticalLarge,
                           size.width,
                         ),
                       ),

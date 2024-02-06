@@ -39,7 +39,7 @@ class AttendanceCard extends StatelessWidget {
       height: height ?? size.height * 0.30,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusLarge * (size.width / 375.0),
+          AppSize().borderRadiusLarge * (size.width / 375.0),
         ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
@@ -112,7 +112,7 @@ class AttendanceCard extends StatelessWidget {
                       width: iconSize ?? size.height * 0.05,
                       height: iconSize ?? size.height * 0.05,
                     ),
-                    const SizedBox(height: AppSize.paddingS4),
+                    SizedBox(height: AppSize().paddingS4),
                     MyText(
                       text: isCheckedIn == true ? "Check Out" : "Check In",
                       style: BodyLargeMedium.copyWith(

@@ -20,13 +20,13 @@ class KpiScoreCard extends StatelessWidget {
           height: SizeUtils.scale(50, size.width),
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalMedium,
+              AppSize().paddingHorizontalMedium,
               size.width,
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+              SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
             ),
             color: Theme.of(context).colorScheme.outline.darken(),
           ),

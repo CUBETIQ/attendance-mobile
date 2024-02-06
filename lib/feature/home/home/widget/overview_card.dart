@@ -28,7 +28,7 @@ class OverviewCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusMedium * (size.width / 375.0),
+          AppSize().borderRadiusMedium * (size.width / 375.0),
         ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [

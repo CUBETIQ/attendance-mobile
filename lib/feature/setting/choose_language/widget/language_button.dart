@@ -34,7 +34,7 @@ class LanguageButton extends StatelessWidget {
         height: height ?? SizeUtils.scale(55, size.width),
         padding: EdgeInsets.symmetric(
           horizontal:
-              SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
+              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
         ),
         margin: EdgeInsets.only(
           bottom: SizeUtils.scale(10, size.width),

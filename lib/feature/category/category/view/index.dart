@@ -1,7 +1,7 @@
 import 'package:timesync360/core/widgets/layout_builder/responsive_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync360/feature/category/view/mobile/index.dart';
-import 'package:timesync360/feature/category/view/tablet/index.dart';
+import 'package:timesync360/feature/category/category/view/mobile/index.dart';
+import 'package:timesync360/feature/category/category/view/tablet/index.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});

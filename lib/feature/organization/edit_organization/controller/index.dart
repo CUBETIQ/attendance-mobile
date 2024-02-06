@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:timesync360/core/model/organization_model.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/organization/edit_organization/model/update_organization_model.dart';
 import 'package:timesync360/feature/organization/edit_organization/service/index.dart';
@@ -24,7 +23,6 @@ class EditOrganizationController extends GetxController {
   Rx<OrganizationModel> organization = OrganizationModel().obs;
   Rxn<File> imageFile = Rxn<File>(null);
   Rxn<String> image = Rxn<String>(null);
-  final _debounce = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -85,32 +83,30 @@ class EditOrganizationController extends GetxController {
   }
 
   Future<void> updateOrganization() async {
-    _debounce.run(() async {
-      try {
-        ConfigsModel configs = ConfigsModel(
-          startHour: startHourController.text,
-          endHour: endHourController.text,
-          breakTime:
-              "${breakStartHourController.text}-${breakEndHourController.text}",
-          breakDuration: DateTimeUtil().calculateDuration(
-            breakStartHourController.text,
-            breakEndHourController.text,
-          ),
-        );
-        UpdateOrganizationModel input = UpdateOrganizationModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
-          address: addressController.text,
-          configs: configs,
-        );
-        await EditOrganizationService()
-            .updateOrganization(id: organization.value.id!, input: input);
-        Get.back(result: 1);
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
-      }
-    });
+    try {
+      ConfigsModel configs = ConfigsModel(
+        startHour: startHourController.text,
+        endHour: endHourController.text,
+        breakTime:
+            "${breakStartHourController.text}-${breakEndHourController.text}",
+        breakDuration: DateTimeUtil().calculateDuration(
+          breakStartHourController.text,
+          breakEndHourController.text,
+        ),
+      );
+      UpdateOrganizationModel input = UpdateOrganizationModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+        address: addressController.text,
+        configs: configs,
+      );
+      await EditOrganizationService()
+          .updateOrganization(id: organization.value.id!, input: input);
+      Get.back(result: 1);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 }

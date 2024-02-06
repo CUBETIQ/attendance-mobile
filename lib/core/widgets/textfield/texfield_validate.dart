@@ -68,7 +68,7 @@ class MyTextFieldForm extends StatelessWidget {
                     text: label,
                     style: labelStyle ?? BodyMediumMedium,
                   ),
-            const SizedBox(height: AppSize.paddingS5),
+            SizedBox(height: AppSize().paddingS5),
             TextFormField(
               focusNode: focusNode,
               controller: textController,
@@ -78,13 +78,13 @@ class MyTextFieldForm extends StatelessWidget {
               maxLines: maxlines ?? 1,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scale(AppSize.paddingS7, size.width),
+                  vertical: SizeUtils.scale(AppSize().paddingS7, size.width),
                 ),
                 prefix: prefixIcon == null
                     ? Padding(
                         padding: EdgeInsets.only(
                           left: SizeUtils.scale(
-                            AppSize.paddingS17,
+                            AppSize().paddingS17,
                             size.width,
                           ),
                         ),
@@ -94,7 +94,7 @@ class MyTextFieldForm extends StatelessWidget {
                     ? Padding(
                         padding: EdgeInsets.only(
                           left: SizeUtils.scale(
-                            AppSize.paddingS17,
+                            AppSize().paddingS17,
                             size.width,
                           ),
                         ),
@@ -134,11 +134,11 @@ class MyTextFieldForm extends StatelessWidget {
                 focusedBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -149,11 +149,11 @@ class MyTextFieldForm extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -164,11 +164,11 @@ class MyTextFieldForm extends StatelessWidget {
                 errorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -179,11 +179,11 @@ class MyTextFieldForm extends StatelessWidget {
                 focusedErrorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),

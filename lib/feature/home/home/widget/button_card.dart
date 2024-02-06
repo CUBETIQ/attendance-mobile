@@ -26,7 +26,7 @@ class ButtonCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             SizeUtils.scale(
-              AppSize.borderRadiusLarge,
+              AppSize().borderRadiusLarge,
               size.width,
             ),
           ),

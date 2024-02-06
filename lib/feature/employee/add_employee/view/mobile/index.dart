@@ -1,8 +1,8 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/model/department_model.dart';
 import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
@@ -39,13 +39,14 @@ class AddStaffViewMobile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS17, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
@@ -57,7 +58,8 @@ class AddStaffViewMobile extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS17, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Username",
@@ -68,7 +70,7 @@ class AddStaffViewMobile extends StatelessWidget {
                 height: SizeUtils.scale(
                   controller.appState.value == AppState.Edit
                       ? 0
-                      : AppSize.paddingS5,
+                      : AppSize().paddingS5,
                   size.width,
                 ),
               ),
@@ -80,14 +82,16 @@ class AddStaffViewMobile extends StatelessWidget {
                       hintText: "Enter your password",
                       textController: controller.passwordController,
                     ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Email",
                 hintText: "Enter your email",
                 textController: controller.emailController,
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Role",
@@ -104,7 +108,8 @@ class AddStaffViewMobile extends StatelessWidget {
                   onChanged: (value) => controller.selectedRole.value = value!,
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<PositionModel>(
                   label: "Position",
@@ -122,7 +127,8 @@ class AddStaffViewMobile extends StatelessWidget {
                       controller.selectedPosition.value = value!,
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<DepartmentModel>(
                   label: "Department",
@@ -140,21 +146,24 @@ class AddStaffViewMobile extends StatelessWidget {
                       controller.selectedDepartment.value = value!,
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "First Name",
                 hintText: "Enter your firstname",
                 textController: controller.firstnameController,
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Last Name",
                 hintText: "Enter your lastname",
                 textController: controller.lastnameController,
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               Row(
                 children: [
                   Expanded(
@@ -190,14 +199,16 @@ class AddStaffViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Address",
                 hintText: "Enter your address",
                 textController: controller.addressController,
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS5, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Status",
@@ -216,7 +227,7 @@ class AddStaffViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: SizeUtils.scale(30, size.width)),
-              MyButton(
+              MyAsyncButton(
                 title: "Save",
                 margin: EdgeInsets.only(
                   bottom: SizeUtils.scale(30, size.width),

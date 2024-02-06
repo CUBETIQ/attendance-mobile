@@ -32,15 +32,16 @@ class LeaveCard extends StatelessWidget {
       child: Container(
         height: SizeUtils.scale(170, size.width),
         margin:
-            EdgeInsets.only(bottom: AppSize.paddingS8 * (size.width / 375.0)),
+            EdgeInsets.only(bottom: AppSize().paddingS8 * (size.width / 375.0)),
         padding: EdgeInsets.symmetric(
           horizontal:
-              SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
-          vertical: SizeUtils.scale(AppSize.paddingVerticalMedium, size.width),
+              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+          vertical:
+              SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize.borderRadiusMedium * (size.width / 375.0),
+            AppSize().borderRadiusMedium * (size.width / 375.0),
           ),
           color: Theme.of(context).colorScheme.background,
           boxShadow: [
@@ -64,7 +65,7 @@ class LeaveCard extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(
                     horizontal:
-                        AppSize.paddingHorizontalSmall * (size.width / 375.0),
+                        AppSize().paddingHorizontalSmall * (size.width / 375.0),
                   ),
                   decoration: BoxDecoration(
                     color: leave.status == LeaveStatus.pending
@@ -160,7 +161,8 @@ class LeaveCard extends StatelessWidget {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                              AppSize.borderRadiusMedium * (size.width / 375.0),
+                              AppSize().borderRadiusMedium *
+                                  (size.width / 375.0),
                             ),
                             border: Border.all(
                               color: Theme.of(context)
@@ -179,7 +181,8 @@ class LeaveCard extends StatelessWidget {
                     : const SizedBox.shrink(),
                 leave.status == LeaveStatus.pending
                     ? SizedBox(
-                        height: SizeUtils.scale(AppSize.paddingS4, size.width),
+                        height:
+                            SizeUtils.scale(AppSize().paddingS4, size.width),
                       )
                     : const SizedBox.shrink(),
                 GestureDetector(
@@ -190,7 +193,7 @@ class LeaveCard extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        AppSize.borderRadiusMedium * (size.width / 375.0),
+                        AppSize().borderRadiusMedium * (size.width / 375.0),
                       ),
                       color: Theme.of(context).colorScheme.primary,
                     ),

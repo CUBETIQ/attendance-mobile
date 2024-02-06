@@ -23,7 +23,7 @@ class AttendanceTextTitle extends StatelessWidget {
           : Padding(
               padding: EdgeInsets.only(
                 left: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
+                  AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
                 top: SizeUtils.scale(10, size.width),

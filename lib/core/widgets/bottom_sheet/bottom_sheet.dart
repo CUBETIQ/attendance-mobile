@@ -26,14 +26,14 @@ void getCheckInBottomSheet(BuildContext context,
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: AppSize.paddingTitleSmall,
+          top: AppSize().paddingTitleSmall,
         ),
         child: Column(
           children: [
@@ -92,14 +92,14 @@ void getCheckOutBottomSheet(BuildContext context,
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: AppSize.paddingTitleSmall,
+          top: AppSize().paddingTitleSmall,
         ),
         child: Column(
           children: [
@@ -162,14 +162,14 @@ void getLogOutBottomSheet(
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: AppSize.paddingTitleSmall,
+          top: AppSize().paddingTitleSmall,
         ),
         child: Column(
           children: [
@@ -249,14 +249,14 @@ void getConfirmBottomSheet(
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: AppSize.paddingTitleSmall,
+          top: AppSize().paddingTitleSmall,
         ),
         child: Column(
           children: [
@@ -336,14 +336,14 @@ void getEditAndDeleteBottomSheet(
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: AppSize.paddingTitleSmall,
+          top: AppSize().paddingTitleSmall,
         ),
         child: Column(
           children: [
@@ -401,14 +401,14 @@ void getEditDeleteViewBottomSheet(
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: AppSize.paddingTitleSmall,
+          top: AppSize().paddingTitleSmall,
         ),
         child: Column(
           children: [
@@ -469,14 +469,14 @@ void getPickImageButtomSheet(
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: AppSize.paddingTitleSmall,
+          top: AppSize().paddingTitleSmall,
         ),
         child: Column(
           children: [
@@ -534,14 +534,14 @@ void getOptionsBottomSheet(
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: SizeUtils.scale(AppSize.paddingTitleSmall, size.width),
+          top: SizeUtils.scale(AppSize().paddingTitleSmall, size.width),
         ),
         child: Column(
           children: [

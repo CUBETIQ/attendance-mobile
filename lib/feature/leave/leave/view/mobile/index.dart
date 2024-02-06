@@ -29,20 +29,20 @@ class LeaveViewMobile extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
               left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
               right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              top: AppSize.paddingVerticalLarge,
+              top: AppSize().paddingVerticalLarge,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyText(text: "Leave Summary", style: BodyLargeMedium),
-                const SizedBox(height: AppSize.paddingS10),
+                SizedBox(height: AppSize().paddingS10),
                 Row(
                   children: [
                     Expanded(
@@ -88,7 +88,7 @@ class LeaveViewMobile extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.paddingS14),
+                SizedBox(height: AppSize().paddingS14),
                 Row(
                   children: [
                     MyText(
@@ -97,7 +97,7 @@ class LeaveViewMobile extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.paddingS10),
+                SizedBox(height: AppSize().paddingS10),
                 Obx(
                   () => MyAsyncWidget(
                     isLoading: controller.isLoading.value,

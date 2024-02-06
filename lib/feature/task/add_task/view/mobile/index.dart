@@ -1,6 +1,6 @@
 import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/color_picker/rounded_color_picker.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
@@ -36,7 +36,7 @@ class AddTaskViewMobile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
@@ -49,7 +49,7 @@ class AddTaskViewMobile extends StatelessWidget {
                 hintText: "Enter your task",
                 textController: controller.taskController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Row(
                 children: [
                   Expanded(
@@ -81,7 +81,7 @@ class AddTaskViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Priority",
@@ -99,7 +99,7 @@ class AddTaskViewMobile extends StatelessWidget {
                       controller.selectPriority.value = value!,
                 ),
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",
@@ -107,14 +107,15 @@ class AddTaskViewMobile extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Obx(
                     () => RoundedIconPicker(
+                      iconColor: Colors.white,
                       icon: controller.stringIcon.value,
-                      color: controller.color.value,
+                      baseColor: controller.color.value,
                       onTap: () => controller.onTapPickIcon(context),
                     ),
                   ),
@@ -127,7 +128,7 @@ class AddTaskViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(height: size.height * 0.06),
-              MyButton(
+              MyAsyncButton(
                 title: "Save",
                 onTap: controller.appState.value == AppState.Edit
                     ? controller.updateTask

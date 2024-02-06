@@ -29,7 +29,7 @@ class LeaveDetailCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: SizeUtils.scale(AppSize.paddingS5, size.width),
+          height: SizeUtils.scale(AppSize().paddingS5, size.width),
         ),
         MyText(
           text: title ?? "Title",
@@ -39,7 +39,7 @@ class LeaveDetailCard extends StatelessWidget {
               ),
         ),
         SizedBox(
-          height: SizeUtils.scale(AppSize.paddingS5, size.width),
+          height: SizeUtils.scale(AppSize().paddingS5, size.width),
         ),
         child ??
             MyText(

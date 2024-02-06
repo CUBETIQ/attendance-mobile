@@ -20,14 +20,14 @@ void getColorPickerDialog({
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppSize.borderRadiusLarge *
+                AppSize().borderRadiusLarge *
                     (MediaQuery.of(context).size.width / 375.0),
               ),
               color: Theme.of(context).colorScheme.secondaryContainer,
@@ -61,7 +61,7 @@ void getColorPickerDialog({
                   },
                   heading: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: AppSize.paddingS8),
+                        EdgeInsets.symmetric(vertical: AppSize().paddingS8),
                     child: MyText(
                       text: 'Select color',
                       style: Theme.of(context).textTheme.titleSmall,
@@ -69,7 +69,7 @@ void getColorPickerDialog({
                   ),
                   subheading: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: AppSize.paddingS8),
+                        EdgeInsets.symmetric(vertical: AppSize().paddingS8),
                     child: MyText(
                       text: 'Select color shade',
                       style: Theme.of(context).textTheme.titleSmall,
@@ -79,10 +79,10 @@ void getColorPickerDialog({
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: SizeUtils.scale(
-                      AppSize.paddingHorizontalLarge,
+                      AppSize().paddingHorizontalLarge,
                       MediaQuery.of(context).size.width,
                     ),
-                    vertical: AppSize.paddingS4,
+                    vertical: AppSize().paddingS4,
                   ),
                   child: Row(
                     children: [

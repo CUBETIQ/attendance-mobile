@@ -31,11 +31,11 @@ class WorkHourCard extends StatelessWidget {
     return MyCard(
       padding: EdgeInsets.symmetric(
         horizontal: SizeUtils.scale(
-          AppSize.paddingHorizontalLarge,
+          AppSize().paddingHorizontalLarge,
           size.width,
         ),
         vertical: SizeUtils.scale(
-          AppSize.paddingVerticalMedium,
+          AppSize().paddingVerticalMedium,
           size.width,
         ),
       ),
@@ -92,7 +92,7 @@ class WorkHourCard extends StatelessWidget {
             percent: (percentage ?? 0) > 1 ? 1 : percentage ?? 0,
             barRadius: Radius.circular(
               SizeUtils.scale(
-                AppSize.borderRadiusLarge,
+                AppSize().borderRadiusLarge,
                 size.width,
               ),
             ),

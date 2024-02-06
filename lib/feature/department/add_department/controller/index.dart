@@ -4,7 +4,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/feature/department/add_department/model/add_department_model.dart';
@@ -25,7 +24,6 @@ class AddDepartmentController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   Rxn<DepartmentModel> department = Rxn<DepartmentModel>(null);
-  final _debounce = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -46,56 +44,51 @@ class AddDepartmentController extends GetxController {
   }
 
   Future<void> addDepartment() async {
-    _debounce.run(() async {
-      validate();
-      if (!MyTextFieldFormController.findController('name').isValid) {
-        return;
-      }
-      try {
-        final AddDepartmentModel input = AddDepartmentModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
-          organizationId: NavigationController.to.organization.value.id ?? "",
-        );
-        department.value = await AddDepartmentService().addDepartment(input);
-        DepartmentController.to.departmentListBackUp.value
-            .add(department.value!);
-        DepartmentController.to.departmentList.value =
-            DepartmentController.to.departmentListBackUp.value;
-        DepartmentController.to.departmentListBackUp.refresh();
-        DepartmentController.to.departmentList.refresh();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
-      }
-    });
+    validate();
+    if (!MyTextFieldFormController.findController('name').isValid) {
+      return;
+    }
+    try {
+      final AddDepartmentModel input = AddDepartmentModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+        organizationId: NavigationController.to.organization.value.id ?? "",
+      );
+      department.value = await AddDepartmentService().addDepartment(input);
+      DepartmentController.to.departmentListBackUp.value.add(department.value!);
+      DepartmentController.to.departmentList.value =
+          DepartmentController.to.departmentListBackUp.value;
+      DepartmentController.to.departmentListBackUp.refresh();
+      DepartmentController.to.departmentList.refresh();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> updateDepartment() async {
-    _debounce.run(() async {
-      validate();
-      if (!MyTextFieldFormController.findController('name').isValid) {
-        return;
-      }
-      try {
-        final EditDepartmentModel input = EditDepartmentModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
-        );
-        await AddDepartmentService().updateDepartment(
-          department.value?.id ?? "",
-          input,
-        );
-        await DepartmentController.to.getAllDepartments();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
-      }
-    });
+    validate();
+    if (!MyTextFieldFormController.findController('name').isValid) {
+      return;
+    }
+    try {
+      final EditDepartmentModel input = EditDepartmentModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+      );
+      await AddDepartmentService().updateDepartment(
+        department.value?.id ?? "",
+        input,
+      );
+      await DepartmentController.to.getAllDepartments();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   void pickImage() {

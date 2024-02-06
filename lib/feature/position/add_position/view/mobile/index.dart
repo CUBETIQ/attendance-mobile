@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/svg.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
@@ -34,13 +34,14 @@ class AddPositionViewMobile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS17, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
@@ -55,14 +56,15 @@ class AddPositionViewMobile extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS17, size.width)),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "name",
                 hintText: "Enter name",
                 textController: controller.nameController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",
@@ -72,7 +74,7 @@ class AddPositionViewMobile extends StatelessWidget {
               ),
               SizedBox(height: SizeUtils.scale(40, size.width)),
               Obx(
-                () => MyButton(
+                () => MyAsyncButton(
                   title: "Save",
                   onTap: controller.state.value == AppState.Create
                       ? controller.addPosition

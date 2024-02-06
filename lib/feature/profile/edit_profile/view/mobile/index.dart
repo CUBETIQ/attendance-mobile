@@ -1,6 +1,6 @@
 import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
@@ -32,13 +32,13 @@ class EditProfileViewMobile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Column(
             children: [
-              const SizedBox(height: AppSize.paddingS17),
+              SizedBox(height: AppSize().paddingS17),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
@@ -50,21 +50,21 @@ class EditProfileViewMobile extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: AppSize.paddingS17),
+              SizedBox(height: AppSize().paddingS17),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "First Name",
                 hintText: "Enter your firstname",
                 textController: controller.firstnameController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Last Name",
                 hintText: "Enter your lastname",
                 textController: controller.lastnameController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Gender",
@@ -82,7 +82,7 @@ class EditProfileViewMobile extends StatelessWidget {
                       controller.selectedGender.value = value!,
                 ),
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyDatePickerField(
                 hasLabel: true,
                 label: "Date of birth",
@@ -90,7 +90,7 @@ class EditProfileViewMobile extends StatelessWidget {
                 textController: controller.dobController,
                 onDateResult: controller.getDateInMilliSecond,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Address",
@@ -98,7 +98,7 @@ class EditProfileViewMobile extends StatelessWidget {
                 textController: controller.addressController,
               ),
               SizedBox(height: size.height * 0.06),
-              MyButton(
+              MyAsyncButton(
                 title: "Save",
                 onTap: controller.updateProfile,
               ),

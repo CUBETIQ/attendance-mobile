@@ -51,7 +51,7 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
+                  AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
               ),
@@ -59,7 +59,7 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: SizeUtils.scale(
-                        AppSize.paddingVerticalLarge, size.width),
+                        AppSize().paddingVerticalLarge, size.width),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -33,10 +33,11 @@ class ProfileViewMobile extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
+              left:
+                  SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
               right:
-                  SizeUtils.scale(AppSize.paddingHorizontalLarge, size.width),
-              top: SizeUtils.scale(AppSize.paddingS11, size.width),
+                  SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+              top: SizeUtils.scale(AppSize().paddingS11, size.width),
             ),
             child: Column(
               children: [
@@ -44,18 +45,18 @@ class ProfileViewMobile extends StatelessWidget {
                   width: size.width - SizeUtils.scale(48, size.width),
                   padding: EdgeInsets.symmetric(
                     horizontal: SizeUtils.scale(
-                      AppSize.paddingHorizontalLarge,
+                      AppSize().paddingHorizontalLarge,
                       size.width,
                     ),
                     vertical: SizeUtils.scale(
-                      AppSize.paddingS11,
+                      AppSize().paddingS11,
                       size.width,
                     ),
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
                       SizeUtils.scale(
-                        AppSize.borderRadiusLarge,
+                        AppSize().borderRadiusLarge,
                         size.width,
                       ),
                     ),
@@ -149,7 +150,7 @@ class ProfileViewMobile extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: AppSize.paddingS8),
+                SizedBox(height: AppSize().paddingS8),
                 Obx(
                   () => AttendanceProfileCard(
                     size: size,
@@ -158,7 +159,7 @@ class ProfileViewMobile extends StatelessWidget {
                     totalLeave: controller.totalLeave.value,
                   ),
                 ),
-                const SizedBox(height: AppSize.paddingS11),
+                SizedBox(height: AppSize().paddingS11),
                 ...List.generate(
                   controller.options.length,
                   (index) => OptionButton(

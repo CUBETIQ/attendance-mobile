@@ -29,14 +29,14 @@ class ChangeLanguageViewMobile extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             MediaQuery.of(context).size.width,
           ),
           right: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+            AppSize().paddingHorizontalLarge,
             MediaQuery.of(context).size.width,
           ),
-          top: SizeUtils.scale(AppSize.paddingVerticalLarge, size.width),
+          top: SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -34,13 +34,13 @@ class LeaveChart extends StatelessWidget {
       width: width,
       height: height ?? SizeUtils.scale(160, size.width),
       padding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(AppSize.paddingS5, size.width),
-        horizontal: SizeUtils.scale(AppSize.paddingS8, size.width),
+        vertical: SizeUtils.scale(AppSize().paddingS5, size.width),
+        horizontal: SizeUtils.scale(AppSize().paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+          SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
         ),
         boxShadow: [
           BoxShadow(

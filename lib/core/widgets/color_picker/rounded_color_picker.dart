@@ -18,7 +18,7 @@ class RoundedColorPicker extends StatelessWidget {
           text: "Color",
           style: BodyMediumMedium,
         ),
-        const SizedBox(height: AppSize.paddingS5),
+        SizedBox(height: AppSize().paddingS5),
         GestureDetector(
           onTap: onTap,
           child: Container(

@@ -28,7 +28,7 @@ class _IconPickerState extends State<IconPicker> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppSize.borderRadiusLarge *
+                AppSize().borderRadiusLarge *
                     (MediaQuery.of(context).size.width / 375.0),
               ),
               color: Theme.of(context).colorScheme.secondaryContainer,
@@ -44,7 +44,7 @@ class _IconPickerState extends State<IconPicker> {
                       crossAxisCount: 4,
                       mainAxisSpacing: 16,
                     ),
-                    padding: EdgeInsets.all(AppSize.paddingS5 *
+                    padding: EdgeInsets.all(AppSize().paddingS5 *
                         (MediaQuery.of(context).size.width / 375.0)),
                     itemCount: sortedKeys.length,
                     itemBuilder: (context, index) {

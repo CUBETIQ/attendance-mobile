@@ -54,7 +54,7 @@ class LinearIndicator extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   percent: percent ?? 0,
                   barRadius: Radius.circular(
-                    SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
                   ),
                   progressColor:
                       indicatorColor ?? Theme.of(context).colorScheme.primary,

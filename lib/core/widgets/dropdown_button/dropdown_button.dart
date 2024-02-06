@@ -116,23 +116,23 @@ class MyDropDownButton<T> extends StatelessWidget {
                 width: buttonWidth ?? 60,
                 padding: buttonPadding ??
                     EdgeInsets.symmetric(
-                      horizontal: (AppSize.paddingS17) * (size.width / 375.0),
+                      horizontal: (AppSize().paddingS17) * (size.width / 375.0),
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
                       color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: isRoundedCorner == true
                           ? BorderRadius.circular(
-                              (borderRadius ?? AppSize.borderRadiusLarge) *
+                              (borderRadius ?? AppSize().borderRadiusLarge) *
                                   (size.width / 375.0),
                             )
                           : BorderRadius.only(
                               topLeft: Radius.circular(
-                                (borderRadius ?? AppSize.borderRadiusSmall) *
+                                (borderRadius ?? AppSize().borderRadiusSmall) *
                                     (size.width / 375.0),
                               ),
                               topRight: Radius.circular(
-                                (borderRadius ?? AppSize.borderRadiusSmall) *
+                                (borderRadius ?? AppSize().borderRadiusSmall) *
                                     (size.width / 375.0),
                               ),
                             ),
@@ -159,11 +159,11 @@ class MyDropDownButton<T> extends StatelessWidget {
                 padding: dropdownPadding ??
                     EdgeInsets.symmetric(
                       horizontal: SizeUtils.scale(
-                        AppSize.paddingHorizontalLarge,
+                        AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
                       vertical: SizeUtils.scale(
-                        AppSize.paddingVerticalMedium,
+                        AppSize().paddingVerticalMedium,
                         size.width,
                       ),
                     ),
@@ -171,7 +171,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                     BoxDecoration(
                       color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(
-                        AppSize.borderRadiusLarge * (size.width / 375.0),
+                        AppSize().borderRadiusLarge * (size.width / 375.0),
                       ),
                     ),
                 elevation: dropdownElevation ?? 2,

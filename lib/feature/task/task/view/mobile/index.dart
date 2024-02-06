@@ -30,16 +30,16 @@ class TaskViewMobile extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              horizontal: AppSize.paddingVerticalLarge,
+              horizontal: AppSize().paddingVerticalLarge,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyText(text: "Task Summary", style: BodyLargeMedium),
-                const SizedBox(height: AppSize.paddingS8),
+                SizedBox(height: AppSize().paddingS8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -80,9 +80,9 @@ class TaskViewMobile extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.paddingS11),
+                SizedBox(height: AppSize().paddingS11),
                 MyText(text: "MyTask", style: BodyLargeMedium),
-                const SizedBox(height: AppSize.paddingS8),
+                SizedBox(height: AppSize().paddingS8),
                 Obx(
                   () => MyAsyncWidget(
                     isLoading: false,
@@ -94,7 +94,7 @@ class TaskViewMobile extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
                         height: SizeUtils.scale(
-                          AppSize.paddingS8,
+                          AppSize().paddingS8,
                           size.width,
                         ),
                       ),

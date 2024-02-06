@@ -43,7 +43,8 @@ class MyButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            (borderRadius ?? AppSize.borderRadiusLarge) * (size.width / 375.0),
+            (borderRadius ?? AppSize().borderRadiusLarge) *
+                (size.width / 375.0),
           ),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),

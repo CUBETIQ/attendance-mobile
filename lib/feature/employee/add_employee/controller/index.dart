@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:timesync360/core/model/department_model.dart';
 import 'package:timesync360/core/model/position_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
@@ -59,7 +57,6 @@ class AddStaffController extends GetxController {
   Rx<UserModel> staff = UserModel().obs;
   Rxn<int> dob = Rxn<int>(null);
   Rx<String> appState = AppState.Create.obs;
-  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -104,73 +101,68 @@ class AddStaffController extends GetxController {
 
   Future<void> onTapAddStaff() async {
     validate(true);
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Username').isValid &&
-          MyTextFieldFormController.findController('Password').isValid &&
-          MyTextFieldFormController.findController('Email').isValid) {
-        try {
-          CreateStaffModel input = CreateStaffModel(
-            username: usernameController.text,
-            password: passwordController.text,
-            firstName: firstnameController.text,
-            lastName: lastnameController.text,
-            address: addressController.text,
-            dateOfBirth: dob.value,
-            role: selectedRole.value,
-            gender: selectedGender.value,
-            status: selectedStatus.value,
-            image: image.value,
-            name: "${firstnameController.text} ${lastnameController.text}",
-            departmentId: selectedDepartment.value?.id,
-            organizationId: NavigationController.to.organization.value.id,
-            positionId: selectedPosition.value?.id,
-            email: emailController.text,
-          );
-          await AddStaffService().addStaff(input);
-          await StaffController.to.getAllStaffs();
-          Get.back(closeOverlays: true);
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
-        }
+    if (MyTextFieldFormController.findController('Username').isValid &&
+        MyTextFieldFormController.findController('Password').isValid &&
+        MyTextFieldFormController.findController('Email').isValid) {
+      try {
+        CreateStaffModel input = CreateStaffModel(
+          username: usernameController.text,
+          password: passwordController.text,
+          firstName: firstnameController.text,
+          lastName: lastnameController.text,
+          address: addressController.text,
+          dateOfBirth: dob.value,
+          role: selectedRole.value,
+          gender: selectedGender.value,
+          status: selectedStatus.value,
+          image: image.value,
+          name: "${firstnameController.text} ${lastnameController.text}",
+          departmentId: selectedDepartment.value?.id,
+          organizationId: NavigationController.to.organization.value.id,
+          positionId: selectedPosition.value?.id,
+          email: emailController.text,
+        );
+        await AddStaffService().addStaff(input);
+        await StaffController.to.getAllStaffs();
+        Get.back(closeOverlays: true);
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   Future<void> onTapUpdateStaff() async {
     validate(false);
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Username').isValid) {
-        try {
-          UpdateStaffModel input = UpdateStaffModel(
-            username: usernameController.text,
-            firstName: firstnameController.text,
-            lastName: lastnameController.text,
-            address: addressController.text,
-            dateOfBirth: dob.value,
-            role: selectedRole.value,
-            gender: selectedGender.value,
-            status: selectedStatus.value,
-            name: "${firstnameController.text} ${lastnameController.text}",
-            image: image.value,
-            departmentId: selectedDepartment.value?.id,
-            organizationId: NavigationController.to.organization.value.id,
-            positionId: selectedPosition.value?.id,
-            email: emailController.text,
-          );
-          await AddStaffService()
-              .updateStaff(input: input, id: staff.value.id!);
-          await StaffController.to.getAllStaffs();
-          if (NavigationController.to.user.value.id == staff.value.id) {
-            await NavigationController.to.fetchMe();
-          }
-          Get.back(closeOverlays: true);
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
+    if (MyTextFieldFormController.findController('Username').isValid) {
+      try {
+        UpdateStaffModel input = UpdateStaffModel(
+          username: usernameController.text,
+          firstName: firstnameController.text,
+          lastName: lastnameController.text,
+          address: addressController.text,
+          dateOfBirth: dob.value,
+          role: selectedRole.value,
+          gender: selectedGender.value,
+          status: selectedStatus.value,
+          name: "${firstnameController.text} ${lastnameController.text}",
+          image: image.value,
+          departmentId: selectedDepartment.value?.id,
+          organizationId: NavigationController.to.organization.value.id,
+          positionId: selectedPosition.value?.id,
+          email: emailController.text,
+        );
+        await AddStaffService().updateStaff(input: input, id: staff.value.id!);
+        await StaffController.to.getAllStaffs();
+        if (NavigationController.to.user.value.id == staff.value.id) {
+          await NavigationController.to.fetchMe();
         }
+        Get.back(closeOverlays: true);
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   Future<void> pickImage() async {

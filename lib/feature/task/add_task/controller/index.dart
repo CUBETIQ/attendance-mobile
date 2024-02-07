@@ -1,4 +1,3 @@
-import 'package:logger/logger.dart';
 import 'package:timesync360/core/model/task_model.dart';
 import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
 import 'package:timesync360/core/widgets/icon_picker/icon_picker_dialog.dart';
@@ -56,7 +55,6 @@ class AddTaskController extends GetxController {
           icon: stringIcon.value,
           priority: selectPriority.value,
         );
-        Logger().e([startDate.value, endDate.value]);
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
         TaskController.to.getUserSummarizeLeave();
@@ -82,7 +80,6 @@ class AddTaskController extends GetxController {
           icon: stringIcon.value,
           priority: selectPriority.value,
         );
-        Logger().e([startDate.value, endDate.value]);
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
         Get.back();
@@ -133,12 +130,10 @@ class AddTaskController extends GetxController {
 
   void getStartDateInMilliSecond(int? date) {
     startDate.value = date;
-    Logger().i(startDate.value);
   }
 
   void getEndDateInMilliSecond(int? date) {
     endDate.value = date;
-    Logger().i(endDate.value);
   }
 
   void onTapPickColor(BuildContext context) {

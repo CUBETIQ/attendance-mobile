@@ -128,7 +128,9 @@ class SplashController extends GetxController
         Get.offNamed(Routes.ACTIVATION);
         return;
       }
-      if (data?.organizationId == null && data?.isActivated == true) {
+      if (data?.organizationId == null &&
+          data?.isActivated == true &&
+          data?.accessToken == null) {
         Get.offNamed(Routes.LOGIN);
         return;
       }

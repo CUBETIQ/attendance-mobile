@@ -3,6 +3,7 @@ import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/category_model.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/extensions/string.dart';
+import 'package:timesync360/utils/color_utils.dart';
 import 'package:timesync360/utils/size_util.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -31,8 +32,8 @@ class CategoryCard extends StatelessWidget {
               shape: BoxShape.circle,
               color:
                   category.color != null && category.color?.isNotEmpty == true
-                      ? Color(category.color!.toInt())
-                      : Theme.of(context).colorScheme.primary,
+                      ? Color(category.color!.toInt()).withOpacity(0.15)
+                      : Theme.of(context).colorScheme.primary.withOpacity(0.15),
             ),
             child: Icon(
               category.icon != null && category.icon?.isNotEmpty == true
@@ -41,7 +42,10 @@ class CategoryCard extends StatelessWidget {
                       fontFamily: 'MaterialIcons',
                     )
                   : Icons.task,
-              color: Colors.white,
+              color:
+                  category.color != null && category.color?.isNotEmpty == true
+                      ? darken(Color(category.color!.toInt()), 20)
+                      : darken(Theme.of(context).colorScheme.primary, 20),
               size: SizeUtils.scale(
                 38,
                 size.width,

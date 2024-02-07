@@ -38,8 +38,9 @@ class AddCategoryViewMobile extends StatelessWidget {
               Obx(
                 () => RoundedIconPicker(
                   hasOpacity: true,
-                  onTap: () => controller.onTapPickIcon(context),
+                  onTap: () => controller.onTapImage(context),
                   haslabel: false,
+                  color: controller.color.value,
                   icon: controller.stringIcon.value,
                   width: SizeUtils.scale(100, size.width),
                   height: SizeUtils.scale(100, size.width),

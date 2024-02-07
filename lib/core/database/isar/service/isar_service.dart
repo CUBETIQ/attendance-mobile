@@ -5,7 +5,6 @@ import 'package:timesync360/core/database/isar/entities/local_storage.dart';
 import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/main.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/logger.dart';
 
 class IsarService extends GetxService {
   static IsarService get to => Get.find();
@@ -42,7 +41,6 @@ class IsarService extends GetxService {
       if (appConfig == null) {
         return;
       }
-      Logs.i(input?.isFirstTime);
       appConfig.isActivated = input?.isActivated ?? appConfig.isActivated;
       appConfig.isFirstTime = input?.isFirstTime ?? appConfig.isFirstTime;
       appConfig.accessToken = input?.accessToken ?? appConfig.accessToken;

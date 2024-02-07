@@ -31,16 +31,6 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
         elevation: 2,
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: SizeUtils.scale(15, size.width)),
-            child: Icon(
-              Icons.filter_list,
-              color: Theme.of(context).colorScheme.onBackground,
-              size: 25 * (size.width / 375.0),
-            ),
-          ),
-        ],
       ),
       body: MyRefreshIndicator(
         onRefresh: controller.onRefresh,

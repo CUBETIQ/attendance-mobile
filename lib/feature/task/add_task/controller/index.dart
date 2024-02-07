@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:timesync360/core/model/task_model.dart';
 import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
 import 'package:timesync360/core/widgets/icon_picker/icon_picker_dialog.dart';
@@ -38,7 +39,7 @@ class AddTaskController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    initStartAndEndDate();
+    initDate();
     getArgument();
   }
 
@@ -55,6 +56,7 @@ class AddTaskController extends GetxController {
           icon: stringIcon.value,
           priority: selectPriority.value,
         );
+        Logger().e([startDate.value, endDate.value]);
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
         TaskController.to.getUserSummarizeLeave();
@@ -80,6 +82,7 @@ class AddTaskController extends GetxController {
           icon: stringIcon.value,
           priority: selectPriority.value,
         );
+        Logger().e([startDate.value, endDate.value]);
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
         Get.back();
@@ -121,24 +124,21 @@ class AddTaskController extends GetxController {
     }
   }
 
-  void initStartAndEndDate() {
+  void initDate() {
     DateTime now = DateTime.now();
     startDateController.text =
         DateFormatter().formatMillisecondsToDOB(now.millisecondsSinceEpoch);
-    endDateController.text =
-        DateFormatter().formatMillisecondsToDOB(now.millisecondsSinceEpoch);
     startDate.value = now.millisecondsSinceEpoch;
-    endDate.value = now.millisecondsSinceEpoch;
   }
 
   void getStartDateInMilliSecond(int? date) {
     startDate.value = date;
-    endDate.value = date;
-    endDateController.text = DateFormatter().formatMillisecondsToDOB(date ?? 0);
+    Logger().i(startDate.value);
   }
 
   void getEndDateInMilliSecond(int? date) {
     endDate.value = date;
+    Logger().i(endDate.value);
   }
 
   void onTapPickColor(BuildContext context) {

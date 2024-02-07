@@ -56,27 +56,29 @@ class AddTaskViewMobile extends StatelessWidget {
                     child: MyDatePickerField(
                       hasLabel: true,
                       label: "Start Date",
-                      hintText: "Enter your start date",
+                      hintText: "Select Date",
                       textController: controller.startDateController,
                       onDateResult: controller.getStartDateInMilliSecond,
                     ),
                   ),
                   SizedBox(width: size.width * 0.02),
                   Expanded(
-                    child: Obx(
-                      () => MyDatePickerField(
-                        hasLabel: true,
-                        label: "Due Date",
-                        hintText: "Enter your end date",
-                        initialDate: controller.startDate.value != null
-                            ? DateTime.fromMillisecondsSinceEpoch(
-                                controller.startDate.value!)
-                            : null,
-                        firstDate: DateTime.fromMillisecondsSinceEpoch(
-                            controller.startDate.value!),
-                        textController: controller.endDateController,
-                        onDateResult: controller.getEndDateInMilliSecond,
-                      ),
+                    child: MyDatePickerField(
+                      hasLabel: true,
+                      label: "Due Date",
+                      hintText: "Select Date",
+                      initialDate: controller.startDate.value != null
+                          ? DateTime.fromMillisecondsSinceEpoch(
+                              controller.startDate.value!,
+                            )
+                          : DateTime.now(),
+                      firstDate: controller.startDate.value != null
+                          ? DateTime.fromMillisecondsSinceEpoch(
+                              controller.startDate.value!,
+                            )
+                          : DateTime.now(),
+                      textController: controller.endDateController,
+                      onDateResult: controller.getEndDateInMilliSecond,
                     ),
                   ),
                 ],

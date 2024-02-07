@@ -10,6 +10,8 @@ import 'package:timesync360/feature/avatar/view/index.dart';
 import 'package:timesync360/feature/category/add_category/view/index.dart';
 import 'package:timesync360/feature/category/category/category_binding.dart';
 import 'package:timesync360/feature/category/category/view/index.dart';
+import 'package:timesync360/feature/category/category_detail/category_binding.dart';
+import 'package:timesync360/feature/category/category_detail/view/index.dart';
 import 'package:timesync360/feature/customer_support/customer_support_binding.dart';
 import 'package:timesync360/feature/customer_support/view/index.dart';
 import 'package:timesync360/feature/department/add_department/view/index.dart';
@@ -216,6 +218,11 @@ class AppPages {
     GetPage(
       name: Routes.ADD_CATEGORY,
       page: () => const AddCategoryView(),
+    ),
+    GetPage(
+      name: Routes.CATEGORY_DETAIL,
+      page: () => const CategoryDetailView(),
+      binding: CategoryDetailBinding(),
     ),
   ];
 }

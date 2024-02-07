@@ -44,6 +44,9 @@ class CategoryViewMobile extends StatelessWidget {
                     ...List.generate(
                       controller.categories.length,
                       (index) => CategoryCard(
+                        onTap: () => controller.onTapCategory(
+                          controller.categories[index],
+                        ),
                         category: controller.categories[index],
                       ),
                     )

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:timesync360/core/model/category_model.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/feature/category/add_category/model/create_category_model.dart';
+import 'package:timesync360/feature/category/add_category/model/update_category_model.dart';
 import '../../../../core/network/dio_util.dart';
 
 class AddCategoryService {
@@ -33,5 +34,16 @@ class AddCategoryService {
       throw Exception("Add category failed");
     }
     return category;
+  }
+
+  Future<void> updateCategory(String id, UpdateCategoryModel input) async {
+    Map<String, dynamic> body = input.toJson();
+    Response response = await dioInstance.dio.put(
+      Endpoints.instance.category + id,
+      data: body,
+    );
+    if (response.statusCode != 200) {
+      throw Exception("Update category failed");
+    }
   }
 }

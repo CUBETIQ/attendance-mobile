@@ -22,4 +22,13 @@ class CategoryService {
     }
     return categories;
   }
+
+  Future<void> deleteCategory(String id) async {
+    Response response = await dioInstance.dio.delete(
+      Endpoints.instance.category + id,
+    );
+    if (response.statusCode != 200) {
+      throw Exception("Delete category failed");
+    }
+  }
 }

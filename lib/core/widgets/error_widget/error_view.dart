@@ -2,7 +2,6 @@ import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/lotties.dart';
 import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/routes/app_pages.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,7 +48,7 @@ class ErrorView extends StatelessWidget {
               height: SizeUtils.scale(42, size.width),
               title: "Retry",
               onTap: () async {
-                Get.offNamed(Routes.SPLASH);
+                Get.offNamed(Get.previousRoute);
               },
             ),
           ],

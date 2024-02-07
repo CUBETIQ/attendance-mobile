@@ -7,6 +7,7 @@ import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync360/feature/category/add_category/controller/index.dart';
+import 'package:timesync360/types/state.dart';
 import 'package:timesync360/utils/size_util.dart';
 
 class AddCategoryViewMobile extends StatelessWidget {
@@ -18,8 +19,10 @@ class AddCategoryViewMobile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const MyAppBarTitle(
-          title: "Add Category",
+        title: Obx(
+          () => MyAppBarTitle(
+            title: controller.title.value,
+          ),
         ),
         centerTitle: true,
         leading: const MyBackButton(),
@@ -38,8 +41,9 @@ class AddCategoryViewMobile extends StatelessWidget {
               Obx(
                 () => RoundedIconPicker(
                   hasOpacity: true,
-                  onTap: () => controller.onTapPickIcon(context),
+                  onTap: () => controller.onTapImage(context),
                   haslabel: false,
+                  color: controller.color.value,
                   icon: controller.stringIcon.value,
                   width: SizeUtils.scale(100, size.width),
                   height: SizeUtils.scale(100, size.width),
@@ -81,7 +85,9 @@ class AddCategoryViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(20, size.width)),
               MyAsyncButton(
                 title: "Save",
-                onTap: controller.addCategory,
+                onTap: controller.appState.value == AppState.Create
+                    ? controller.addCategory
+                    : controller.updateCategory,
               ),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
@@ -40,9 +41,14 @@ class MyAsyncButton extends StatelessWidget {
       () => GestureDetector(
         onTap: isDisableButton.value == false
             ? () async {
-                isDisableButton.value = true;
-                await onTap();
-                isDisableButton.value = false;
+                try {
+                  isDisableButton.value = true;
+                  await onTap();
+                } catch (e) {
+                  Logger().e(e);
+                } finally {
+                  isDisableButton.value = false;
+                }
               }
             : null,
         child: Container(

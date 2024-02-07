@@ -11,15 +11,15 @@ import 'package:get/get.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
-  RxList<TaskModel> tasks = <TaskModel>[].obs;
-  RxInt totalTask = 0.obs;
-  RxInt totalCompletedTask = 0.obs;
-  RxInt totalUncompletedTask = 0.obs;
-  RxDouble percentageCompletedTask = 0.0.obs;
-  RxDouble percentageUncompletedTask = 0.0.obs;
-  RxList<SummaryTaskModel> summarizeTasks = <SummaryTaskModel>[].obs;
-  Rxn<int> startDate = Rxn<int>();
-  Rxn<int> endDate = Rxn<int>();
+  final RxList<TaskModel> tasks = <TaskModel>[].obs;
+  final RxInt totalTask = 0.obs;
+  final RxInt totalCompletedTask = 0.obs;
+  final RxInt totalUncompletedTask = 0.obs;
+  final RxDouble percentageCompletedTask = 0.0.obs;
+  final RxDouble percentageUncompletedTask = 0.0.obs;
+  final RxList<SummaryTaskModel> summarizeTasks = <SummaryTaskModel>[].obs;
+  final Rxn<int> startDate = Rxn<int>();
+  final Rxn<int> endDate = Rxn<int>();
 
   @override
   void onInit() {
@@ -33,7 +33,6 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      totalTask.value = tasks.length;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -47,6 +46,7 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
+      totalTask.value = summarizeTasks.value.last.totalTask ?? 0;
       for (var element in summarizeTasks) {
         totalCompletedTask.value += element.totalTaskDone!;
         totalUncompletedTask.value += element.totalTaskNotDone!;

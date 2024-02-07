@@ -17,18 +17,18 @@ import 'package:get/get.dart';
 
 class ActivationController extends GetxController {
   static ActivationController get to => Get.find();
-  TextEditingController activationController = TextEditingController();
+  final TextEditingController activationController = TextEditingController();
   final String title = "Please enter the activation code";
   final String description =
       "To unlock the flow of time with TimeSync360: Where every moment counts, and attendance becomes a seamless journey through the fabric of efficiency.";
-  Rxn<ActivationModel> activate = Rxn<ActivationModel>(null);
-  Rxn<AndroidDeviceInfo> androidInfo = Rxn<AndroidDeviceInfo>(null);
-  Rxn<IosDeviceInfo> iosInfo = Rxn<IosDeviceInfo>(null);
-  Rxn<String> device = Rxn<String>(null);
+  final Rxn<ActivationModel> activate = Rxn<ActivationModel>(null);
+  final Rxn<AndroidDeviceInfo> androidInfo = Rxn<AndroidDeviceInfo>(null);
+  final Rxn<IosDeviceInfo> iosInfo = Rxn<IosDeviceInfo>(null);
+  final Rxn<String> device = Rxn<String>(null);
   final LocalStorageController localDataService =
       LocalStorageController.getInstance();
-  Rx<LocalStorage> localData = LocalStorage().obs;
-  Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
+  final Rx<LocalStorage> localData = LocalStorage().obs;
+  final Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
   LocalStorageModel? localStorageData;
 
   @override

@@ -17,14 +17,14 @@ import '../../../../core/model/user_model.dart';
 
 class LoginController extends GetxController {
   static LoginController get to => Get.find();
-  String title = 'login';
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  RxBool isRememberMe = false.obs;
-  Rx<UserModel> user = UserModel().obs;
-  Rx<PositionModel> position = PositionModel().obs;
-  Rx<DepartmentModel> department = DepartmentModel().obs;
-  Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
+  final String title = 'login';
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final RxBool isRememberMe = false.obs;
+  final Rx<UserModel> user = UserModel().obs;
+  final Rx<PositionModel> position = PositionModel().obs;
+  final Rx<DepartmentModel> department = DepartmentModel().obs;
+  final Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
   final LocalStorageController localDataService =
       LocalStorageController.getInstance();
   RxBool showPassword = true.obs;

@@ -452,6 +452,10 @@ void getPickImageButtomSheet(
   bool? isDismissible,
   void Function()? onTapGallery,
   void Function()? onTapAvatar,
+  String? firstButtonTitle,
+  String? secondButtonTitle,
+  IconData? firstButtonIcon,
+  IconData? secondButtonIcon,
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
@@ -490,15 +494,15 @@ void getPickImageButtomSheet(
             SizedBox(height: SizeUtils.scale(40, size.width)),
             MyButton(
               isIconButton: true,
-              icon: Icons.photo_rounded,
-              title: "Open Gallery",
+              icon: firstButtonIcon ?? Icons.photo_rounded,
+              title: firstButtonTitle ?? "Open Gallery",
               onTap: onTapGallery,
             ),
             SizedBox(height: SizeUtils.scale(10, size.width)),
             MyButton(
               isIconButton: true,
-              icon: Icons.person_rounded,
-              title: "Default Avatar",
+              icon: secondButtonIcon ?? Icons.person_rounded,
+              title: secondButtonTitle ?? "Default Avatar",
               onTap: onTapAvatar,
             ),
           ],

@@ -2,6 +2,7 @@ import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/extensions/string.dart';
 import 'package:flutter/material.dart';
+import 'package:timesync360/utils/color_utils.dart';
 import '../text/text.dart';
 
 class RoundedIconPicker extends StatelessWidget {
@@ -48,23 +49,13 @@ class RoundedIconPicker extends StatelessWidget {
             width: width ?? 55 * (size.width / 375.0),
             height: height ?? 55 * (size.width / 375.0),
             decoration: BoxDecoration(
-              boxShadow: baseColor != null
-                  ? []
-                  : [
-                      BoxShadow(
-                        color: color?.withOpacity(0.15) ??
-                            Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.15),
-                        spreadRadius: 2,
-                        blurRadius: 4,
-                        offset:
-                            const Offset(0, 0), // changes position of shadow
-                      ),
-                    ],
+              border: Border.all(
+                color:
+                    baseColor ?? color ?? Theme.of(context).colorScheme.primary,
+                width: 2,
+              ),
               color: baseColor ??
-                  color?.withOpacity(0.25) ??
+                  color?.withOpacity(0.30) ??
                   Theme.of(context).colorScheme.primary.withOpacity(
                         hasOpacity == true ? 0.25 : 1,
                       ),
@@ -74,8 +65,12 @@ class RoundedIconPicker extends StatelessWidget {
               icon?.isEmpty == false || icon != null
                   ? IconData(icon!.toInt(), fontFamily: 'MaterialIcons')
                   : Icons.task,
-              color:
-                  iconColor ?? color ?? Theme.of(context).colorScheme.primary,
+              // darken color by 20%
+              color: iconColor ??
+                  darken(
+                    color ?? Theme.of(context).colorScheme.primary,
+                    20,
+                  ),
               size: iconSize ?? 26 * (size.width / 375.0),
             ),
           ),

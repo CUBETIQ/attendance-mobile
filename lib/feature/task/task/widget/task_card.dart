@@ -135,9 +135,11 @@ class TaskCard extends StatelessWidget {
                           ? "Due: ${DateFormatter().formatMillisecondsToDOB(task.endDate!)}"
                           : "Due: N/A",
                       style: BodyXSmallRegular.copyWith(
-                        color: task.status == TaskStatus.completed
+                        color: task.endDate == null
                             ? Theme.of(context).colorScheme.outline
-                            : Theme.of(context).colorScheme.error,
+                            : task.status == TaskStatus.completed
+                                ? Theme.of(context).colorScheme.outline
+                                : Theme.of(context).colorScheme.error,
                       ),
                     ),
                   ],

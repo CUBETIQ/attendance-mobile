@@ -80,9 +80,11 @@ class MyDatePickerField extends StatelessWidget {
                 if (picked != null) {
                   if (label == "Start Date") {
                     resultDate = picked;
-                  } else {
+                  } else if (label == "Due Date" || label == "End Date") {
                     resultDate = DateTime(
                         picked.year, picked.month, picked.day, 23, 59, 59);
+                  } else {
+                    resultDate = picked;
                   }
                   // Throw back the data through the function
                   onDateResult?.call(resultDate!.millisecondsSinceEpoch);

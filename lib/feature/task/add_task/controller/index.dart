@@ -38,7 +38,7 @@ class AddTaskController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    initStartAndEndDate();
+    initDate();
     getArgument();
   }
 
@@ -121,20 +121,15 @@ class AddTaskController extends GetxController {
     }
   }
 
-  void initStartAndEndDate() {
+  void initDate() {
     DateTime now = DateTime.now();
     startDateController.text =
         DateFormatter().formatMillisecondsToDOB(now.millisecondsSinceEpoch);
-    endDateController.text =
-        DateFormatter().formatMillisecondsToDOB(now.millisecondsSinceEpoch);
     startDate.value = now.millisecondsSinceEpoch;
-    endDate.value = now.millisecondsSinceEpoch;
   }
 
   void getStartDateInMilliSecond(int? date) {
     startDate.value = date;
-    endDate.value = date;
-    endDateController.text = DateFormatter().formatMillisecondsToDOB(date ?? 0);
   }
 
   void getEndDateInMilliSecond(int? date) {

@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:timesync360/types/avatar_type.dart';
 
 class AvatarController extends GetxController {
-  RxList<String> avatars = <String>[].obs;
-  RxString avatarType = AvatarType.profile.obs;
+  final avatars = <String>[].obs;
+  final avatarType = AvatarType.profile.obs;
 
   @override
   void onInit() {

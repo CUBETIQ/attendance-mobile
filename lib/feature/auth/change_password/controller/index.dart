@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChangePasswordController extends GetxController {
-  final Rx<UserModel> user = UserModel().obs;
-  final RxBool isChangeStaffPass = false.obs;
-  final TextEditingController oldPasswordController = TextEditingController();
-  final TextEditingController newPasswordController = TextEditingController();
-  final RxBool hideOldPassword = true.obs;
-  final RxBool hideNewPassword = true.obs;
+  final user = UserModel().obs;
+  final isChangeStaffPass = false.obs;
+  final oldPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final hideOldPassword = true.obs;
+  final hideNewPassword = true.obs;
 
   @override
   void onInit() {

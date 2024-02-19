@@ -18,27 +18,26 @@ import '../../../../core/model/user_model.dart';
 class LoginController extends GetxController {
   static LoginController get to => Get.find();
   final String title = 'login';
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
-  final RxBool isRememberMe = false.obs;
-  final Rx<UserModel> user = UserModel().obs;
-  final Rx<PositionModel> position = PositionModel().obs;
-  final Rx<DepartmentModel> department = DepartmentModel().obs;
-  final Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
-  final LocalStorageController localDataService =
-      LocalStorageController.getInstance();
-  RxBool showPassword = true.obs;
-  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
+  final passwordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final isRememberMe = false.obs;
+  final user = UserModel().obs;
+  final position = PositionModel().obs;
+  final department = DepartmentModel().obs;
+  final organization = Rxn<OrganizationModel>(null);
+  final localDataService = LocalStorageController.getInstance();
+  final showPassword = true.obs;
+  final userStatus = UserStatusModel().obs;
   LocalStorageModel? localStorageData = LocalStorageModel();
-  Rxn<String> accessToken = Rxn<String>(null);
-  Rxn<String> refreshToken = Rxn<String>(null);
+  final accessToken = Rxn<String>(null);
+  final refreshToken = Rxn<String>(null);
 
   Future<void> login() async {
     validate();
-    final storageData = await localDataService.get();
     if (MyTextFieldFormController.findController('Username').isValid &&
         MyTextFieldFormController.findController('Password').isValid) {
       try {
+        final storageData = await localDataService.get();
         LoginModel input = LoginModel(
           username: usernameController.text,
           password: passwordController.text,

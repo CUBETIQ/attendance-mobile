@@ -38,10 +38,9 @@ class DioUtil {
           policy: CachePolicy.refreshForceCache,
           hitCacheOnErrorExcept: [],
           maxStale: const Duration(
-            days: 1,
+            days: 2,
           ),
           priority: CachePriority.high,
-          // allowPostMethod: true,
         ),
       ),
     ];

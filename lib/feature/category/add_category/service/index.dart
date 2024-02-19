@@ -3,10 +3,20 @@ import 'package:timesync360/core/model/category_model.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/feature/category/add_category/model/create_category_model.dart';
 import 'package:timesync360/feature/category/add_category/model/update_category_model.dart';
+import 'package:timesync360/utils/logger.dart';
 import '../../../../core/network/dio_util.dart';
 
 class AddCategoryService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = AddCategoryService._internal();
+  final dioInstance = DioUtil();
+
+  factory AddCategoryService() {
+    return _singleton;
+  }
+
+  AddCategoryService._internal() {
+    Logs.t('[AddCategoryService] Initialized');
+  }
 
   Future<List<String>> getCategoryType() async {
     final List<String> categoryTypes;

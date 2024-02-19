@@ -4,11 +4,11 @@ import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 
 class CategoryService {
-  DioUtil dioInstance = DioUtil();
+  final dioInstance = DioUtil();
 
   Future<List<CategoryModel>> getAllCategory(String orgnaizationId) async {
     final List<CategoryModel>? categories;
-    Map<String, dynamic> queryParam = {
+    final queryParam = {
       "organizationId": orgnaizationId,
     };
     Response response = await dioInstance.dio.get(

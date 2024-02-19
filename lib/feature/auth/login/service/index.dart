@@ -10,9 +10,19 @@ import 'package:timesync360/feature/auth/login/model/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class LoginService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = LoginService._internal();
+  final dioInstance = DioUtil();
+
+  factory LoginService() {
+    return _singleton;
+  }
+
+  LoginService._internal() {
+    Logs.t('[LoginService] Initialized');
+  }
 
   Future<Set<String>> login(LoginModel input) async {
     final String accessToken;
@@ -23,10 +33,12 @@ class LoginService {
       "username": input.username,
       "password": input.password,
     };
+
     dio.Response response = await dioInstance.dio.post(
       Endpoints.instance.login,
       data: data,
     );
+
     if (response.statusCode == 200) {
       accessToken = response.data["data"]["accessToken"];
       refreshToken = response.data["data"]["refreshToken"];

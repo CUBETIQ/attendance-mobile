@@ -3,7 +3,15 @@ import 'package:logger/logger.dart';
 class Logs {
   static final Logger _logger = Logger(
     filter: null, // Use the default LogFilter (-> only log in debug mode)
-    printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+    level: Level.all, // Use the default LogFilter (-> only log in debug mode)
+    printer: PrettyPrinter(
+      methodCount: 0,
+      errorMethodCount: 5,
+      lineLength: 75,
+      colors: true,
+      printEmojis: true,
+      printTime: false,
+    ), // Use the PrettyPrinter to format and print log
     output: null, // Use the default LogOutput (-> send everything to console)
   );
 

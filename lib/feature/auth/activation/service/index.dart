@@ -3,15 +3,24 @@ import 'package:timesync360/core/model/activation_model.dart';
 import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/feature/auth/activation/model/activation_model.dart';
-import 'package:dio/dio.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class ActivationService {
-  DioUtil dioInstance = DioUtil();
-  final LocalStorageController localDataService =
-      LocalStorageController.getInstance();
+  static final _singleton = ActivationService._internal();
+  final dioInstance = DioUtil();
+  final localDataService = LocalStorageController.getInstance();
+
+  factory ActivationService() {
+    return _singleton;
+  }
+
+  ActivationService._internal() {
+    Logs.t('[ActivationService] Initialized');
+  }
+
   Future<ActivationModel> activate(ActivateModel input) async {
     final ActivationModel? activateModel;
-    Response response = await dioInstance.dio.post(
+    final response = await dioInstance.dio.post(
       Endpoints.instance.activation,
       data: {
         "code": input.code,

@@ -49,18 +49,20 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      totalTask.value = summarizeTasks.value.last.totalTask ?? 0;
-      for (var element in summarizeTasks) {
-        totalCompletedTask.value += element.totalTaskDone!;
-        totalUncompletedTask.value += element.totalTaskNotDone!;
-      }
-      if (totalCompletedTask.value != 0) {
-        percentageCompletedTask.value =
-            (totalCompletedTask.value / totalTask.value * 100) / 100;
-      }
-      if (totalUncompletedTask.value != 0) {
-        percentageUncompletedTask.value =
-            (totalUncompletedTask.value / totalTask.value * 100) / 100;
+      if (summarizeTasks.isNotEmpty) {
+        totalTask.value = summarizeTasks.value.last.totalTask ?? 0;
+        for (var element in summarizeTasks) {
+          totalCompletedTask.value += element.totalTaskDone!;
+          totalUncompletedTask.value += element.totalTaskNotDone!;
+        }
+        if (totalCompletedTask.value != 0) {
+          percentageCompletedTask.value =
+              (totalCompletedTask.value / totalTask.value * 100) / 100;
+        }
+        if (totalUncompletedTask.value != 0) {
+          percentageUncompletedTask.value =
+              (totalUncompletedTask.value / totalTask.value * 100) / 100;
+        }
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

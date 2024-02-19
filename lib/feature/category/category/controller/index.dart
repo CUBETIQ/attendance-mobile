@@ -11,7 +11,7 @@ import 'package:timesync360/types/state.dart';
 
 class CategoryController extends GetxController {
   static CategoryController get to => Get.find();
-  final RxList<CategoryModel> categories = <CategoryModel>[].obs;
+  final categories = <CategoryModel>[].obs;
 
   @override
   void onInit() {
@@ -41,7 +41,7 @@ class CategoryController extends GetxController {
       categories.refresh();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
+      return;
     }
   }
 

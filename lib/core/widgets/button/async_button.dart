@@ -46,6 +46,7 @@ class MyAsyncButton extends StatelessWidget {
                   await onTap();
                 } catch (e) {
                   Logger().e(e);
+                  return;
                 } finally {
                   isDisableButton.value = false;
                 }
@@ -61,7 +62,9 @@ class MyAsyncButton extends StatelessWidget {
               (borderRadius ?? AppSize().borderRadiusLarge) *
                   (size.width / 375.0),
             ),
-            color: backgroundColor ?? Theme.of(context).colorScheme.primary,
+            color: isDisableButton.value == true
+                ? Theme.of(context).colorScheme.outline
+                : backgroundColor ?? Theme.of(context).colorScheme.primary,
           ),
           child: isIconButton == true
               ? Row(

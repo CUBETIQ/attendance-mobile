@@ -17,17 +17,17 @@ import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/types/state.dart';
 
 class AddCategoryController extends GetxController {
-  final Rxn<String> stringIcon = Rxn<String>(null);
-  TextEditingController nameController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  final RxList<String> categoryTypes = <String>[].obs;
-  final RxnString selectedCategoryType = RxnString(null);
+  final stringIcon = Rxn<String>(null);
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final categoryTypes = <String>[].obs;
+  final selectedCategoryType = RxnString(null);
   late Color screenPickerColor;
-  final Rxn<Color> color = Rxn<Color>(null);
-  final Rxn<String> stringColor = Rxn<String>(null);
-  final RxString title = "Add Category".tr.obs;
-  RxString appState = AppState.Create.obs;
-  Rx<CategoryModel> category = CategoryModel().obs;
+  final color = Rxn<Color>(null);
+  final stringColor = Rxn<String>(null);
+  final title = "Add Category".tr.obs;
+  final appState = AppState.Create.obs;
+  final category = CategoryModel().obs;
 
   @override
   void onInit() {

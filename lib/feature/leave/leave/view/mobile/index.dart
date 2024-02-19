@@ -1,6 +1,7 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync360/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync360/core/widgets/no_data/no_data.dart';
 import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
@@ -41,8 +42,21 @@ class LeaveViewMobile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MyText(text: "Leave Summary", style: BodyLargeMedium),
-                SizedBox(height: AppSize().paddingS10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(text: "Leave Summary", style: BodyLargeMedium),
+                    Obx(
+                      () => DateDropDown(
+                        date: controller.selectDate.value,
+                        size: size,
+                        isShowday: false,
+                        onTap: () => controller.onTapDate(context),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: SizeUtils.scale(20, size.width)),
                 Row(
                   children: [
                     Expanded(

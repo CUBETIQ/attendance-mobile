@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/model/summary_task_model.dart';
 import 'package:timesync360/core/model/task_model.dart';
@@ -20,6 +22,7 @@ class TaskController extends GetxController {
   final RxList<SummaryTaskModel> summarizeTasks = <SummaryTaskModel>[].obs;
   final Rxn<int> startDate = Rxn<int>();
   final Rxn<int> endDate = Rxn<int>();
+  Rx<DateTime> selectDate = DateTime.now().obs;
 
   @override
   void onInit() {
@@ -46,18 +49,20 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      totalTask.value = summarizeTasks.value.last.totalTask ?? 0;
-      for (var element in summarizeTasks) {
-        totalCompletedTask.value += element.totalTaskDone!;
-        totalUncompletedTask.value += element.totalTaskNotDone!;
-      }
-      if (totalCompletedTask.value != 0) {
-        percentageCompletedTask.value =
-            (totalCompletedTask.value / totalTask.value * 100) / 100;
-      }
-      if (totalUncompletedTask.value != 0) {
-        percentageUncompletedTask.value =
-            (totalUncompletedTask.value / totalTask.value * 100) / 100;
+      if (summarizeTasks.isNotEmpty) {
+        totalTask.value = summarizeTasks.value.last.totalTask ?? 0;
+        for (var element in summarizeTasks) {
+          totalCompletedTask.value += element.totalTaskDone!;
+          totalUncompletedTask.value += element.totalTaskNotDone!;
+        }
+        if (totalCompletedTask.value != 0) {
+          percentageCompletedTask.value =
+              (totalCompletedTask.value / totalTask.value * 100) / 100;
+        }
+        if (totalUncompletedTask.value != 0) {
+          percentageUncompletedTask.value =
+              (totalUncompletedTask.value / totalTask.value * 100) / 100;
+        }
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -165,5 +170,24 @@ class TaskController extends GetxController {
     totalUncompletedTask.value = 0;
     percentageCompletedTask.value = 0;
     percentageUncompletedTask.value = 0;
+  }
+
+  Future<void> onTapDate(BuildContext context) async {
+    final DateTime? picked = await showMonthPicker(
+      context: context,
+      initialDate: selectDate.value,
+      firstDate: DateTime(2019),
+      lastDate: DateTime(2050),
+      roundedCornersRadius: 24,
+      animationMilliseconds: 0,
+      dismissible: true,
+    );
+    if (picked != null) {
+      selectDate.value = picked;
+      startDate.value =
+          DateTime(picked.year, picked.month, 1).millisecondsSinceEpoch;
+      endDate.value =
+          DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
+    }
   }
 }

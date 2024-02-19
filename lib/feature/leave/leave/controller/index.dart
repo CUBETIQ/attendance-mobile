@@ -1,3 +1,4 @@
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/model/summary_leave_model.dart';
@@ -24,6 +25,7 @@ class LeaveController extends GetxController {
   RxDouble percentagePendingLeave = 0.0.obs;
   RxDouble percentageApprovedLeave = 0.0.obs;
   RxDouble percentageDeclinedLeave = 0.0.obs;
+  Rx<DateTime> selectDate = DateTime.now().obs;
 
   @override
   void onInit() {
@@ -163,6 +165,25 @@ class LeaveController extends GetxController {
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
+    }
+  }
+
+  Future<void> onTapDate(BuildContext context) async {
+    final DateTime? picked = await showMonthPicker(
+      context: context,
+      initialDate: selectDate.value,
+      firstDate: DateTime(2019),
+      lastDate: DateTime(2050),
+      roundedCornersRadius: 24,
+      animationMilliseconds: 0,
+      dismissible: true,
+    );
+    if (picked != null) {
+      selectDate.value = picked;
+      startDate.value =
+          DateTime(picked.year, picked.month, 1).millisecondsSinceEpoch;
+      endDate.value =
+          DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
     }
   }
 }

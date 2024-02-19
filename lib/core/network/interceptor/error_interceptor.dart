@@ -1,4 +1,5 @@
-import 'package:logger/logger.dart';
+import 'dart:io';
+
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
@@ -17,13 +18,12 @@ class ErrorInterceptor extends dio.Interceptor {
   @override
   Future onError(
       dio.DioException err, dio.ErrorInterceptorHandler handler) async {
-    Logger().e(err);
-
-    if (err.message?.contains("The connection errored") == true) {
+    if (err is SocketException) {
       Get.offNamed(Routes.LOGIN);
     }
 
-    if (err.response != null && err.response!.statusCode == 401 ||
+    if (err.response != null &&
+        err.response!.statusCode == 401 &&
         err.response?.data["message"] == "Token expired") {
       final data = await localDataService.get();
       final token = data?.refreshToken ?? "1234567@qwerty";

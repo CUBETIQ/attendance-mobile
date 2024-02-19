@@ -12,18 +12,25 @@ class DateDropDown extends StatelessWidget {
     required this.size,
     this.onTap,
     this.isShowday = true,
+    this.width,
+    this.height,
   });
 
   final DateTime date;
   final Size size;
   final void Function()? onTap;
   final bool isShowday;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: width,
+        height: height,
+        alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
           horizontal: SizeUtils.scale(
             AppSize().paddingS5,
@@ -44,6 +51,7 @@ class DateDropDown extends StatelessWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MyText(
               text: isShowday == true

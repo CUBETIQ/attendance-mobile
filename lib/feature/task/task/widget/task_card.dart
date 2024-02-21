@@ -118,11 +118,11 @@ class TaskCard extends StatelessWidget {
                           child: MyText(
                             text: (task.name ?? "Task Name").capitalizeFirst,
                             maxLines: 2,
-                            style: BodyLarge.copyWith(
-                              color: color != null
-                                  ? Color(color!.toInt())
-                                  : Theme.of(context).colorScheme.primary,
-                            ),
+                            style: AppStyles().bodyLarge.copyWith(
+                                  color: color != null
+                                      ? Color(color!.toInt())
+                                      : Theme.of(context).colorScheme.primary,
+                                ),
                           ),
                         ),
                       ],
@@ -134,13 +134,13 @@ class TaskCard extends StatelessWidget {
                       text: task.endDate != null
                           ? "Due: ${DateFormatter().formatMillisecondsToDOB(task.endDate!)}"
                           : "Due: N/A",
-                      style: BodyXSmallRegular.copyWith(
-                        color: task.endDate == null
-                            ? Theme.of(context).colorScheme.outline
-                            : task.status == TaskStatus.completed
+                      style: AppStyles().bodyXSmallRegular.copyWith(
+                            color: task.endDate == null
                                 ? Theme.of(context).colorScheme.outline
-                                : Theme.of(context).colorScheme.error,
-                      ),
+                                : task.status == TaskStatus.completed
+                                    ? Theme.of(context).colorScheme.outline
+                                    : Theme.of(context).colorScheme.error,
+                          ),
                     ),
                   ],
                 ),

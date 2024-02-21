@@ -49,7 +49,7 @@ class PositionCard extends StatelessWidget {
                 SizedBox(width: SizeUtils.scale(10, size.width)),
                 MyText(
                   text: position.name ?? "",
-                  style: BodyMediumMedium,
+                  style: AppStyles().bodyMediumMedium,
                 ),
               ],
             ),
@@ -63,9 +63,9 @@ class PositionCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "View Detail",
-                      style: BodySmallMedium.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                      style: AppStyles().bodySmallMedium.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                     SizedBox(width: SizeUtils.scale(5, size.width)),
                     Icon(

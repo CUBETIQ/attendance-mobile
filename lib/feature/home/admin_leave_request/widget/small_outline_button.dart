@@ -36,7 +36,7 @@ class SmallOutlineButton extends StatelessWidget {
         ),
         child: MyText(
           text: title,
-          style: BodySmallMedium,
+          style: AppStyles().bodySmallMedium,
         ),
       ),
     );

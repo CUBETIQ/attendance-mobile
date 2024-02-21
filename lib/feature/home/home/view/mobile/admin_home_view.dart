@@ -63,10 +63,11 @@ class HomeAdminMobileView extends StatelessWidget {
                           children: [
                             MyText(
                               text: 'Overall Attendance',
-                              style: BodyLargeMedium.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                              ),
+                              style: AppStyles().bodyLargeMedium.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
                             ),
                             Obx(
                               () => DateDropDown(
@@ -139,10 +140,11 @@ class HomeAdminMobileView extends StatelessWidget {
                           children: [
                             MyText(
                               text: 'Attendance Statistics'.trString,
-                              style: BodyLargeMedium.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                              ),
+                              style: AppStyles().bodyLargeMedium.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
                             ),
                             const Spacer(),
                             Obx(
@@ -218,9 +220,10 @@ class HomeAdminMobileView extends StatelessWidget {
                         SizedBox(height: SizeUtils.scale(20, size.width)),
                         MyText(
                           text: 'Employee Attendance'.trString,
-                          style: BodyLargeMedium.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
+                          style: AppStyles().bodyLargeMedium.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
                         ),
                         SizedBox(height: SizeUtils.scale(20, size.width)),
                         Obx(

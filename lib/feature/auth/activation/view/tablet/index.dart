@@ -53,13 +53,13 @@ class ActivationViewTablet extends StatelessWidget {
                       MyText(
                         text: controller.title,
                         maxLines: 1,
-                        style: BodyXXXlarge,
+                        style: AppStyles().bodyXXXlarge,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyText(
                         text: controller.description,
                         maxLines: 5,
-                        style: BodyLargeMedium,
+                        style: AppStyles().bodyLargeMedium,
                       ),
                       SizedBox(height: size.height * 0.05),
                       Center(

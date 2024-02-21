@@ -76,7 +76,7 @@ class LeaveRequestCard extends StatelessWidget {
                         staff.lastName,
                         staff.username,
                       ),
-                      style: BodyMediumRegular,
+                      style: AppStyles().bodyMediumRegular,
                     ),
                   ),
                 ],
@@ -101,9 +101,9 @@ class LeaveRequestCard extends StatelessWidget {
                 ),
                 child: MyText(
                   text: (leave.status ?? LeaveStatus.pending).capitalizeFirst,
-                  style: BodySmallRegular.copyWith(
-                    color: Colors.white,
-                  ),
+                  style: AppStyles().bodySmallRegular.copyWith(
+                        color: Colors.white,
+                      ),
                 ),
               ),
             ],
@@ -119,29 +119,29 @@ class LeaveRequestCard extends StatelessWidget {
                   MyText(
                     text:
                         "${(leave.type ?? LeaveType.annual).capitalize} leave request",
-                    style: BodyLargeMedium,
+                    style: AppStyles().bodyLargeMedium,
                   ),
                   MyText(
                     text:
                         "${DateFormatter().formatMillisecondsToDOB(leave.from)} - ${DateFormatter().formatMillisecondsToDOB(leave.to)}",
-                    style: BodySmallRegular.copyWith(
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
+                    style: AppStyles().bodySmallRegular.copyWith(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
                   ),
                   Row(
                     children: [
                       MyText(
                         text: "Duration: ",
-                        style: BodySmallRegular.copyWith(
-                          color: Theme.of(context).colorScheme.outline,
-                        ),
+                        style: AppStyles().bodySmallRegular.copyWith(
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
                       ),
                       MyText(
                         text:
                             " ${StringUtil().removeTrailingZeros(leave.duration)}  ${(leave.duration ?? 0) < 2 ? "Day" : "Days"}",
-                        style: BodySmallRegular.copyWith(
-                          color: Theme.of(context).colorScheme.outline,
-                        ),
+                        style: AppStyles().bodySmallRegular.copyWith(
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
                       ),
                     ],
                   ),
@@ -157,9 +157,9 @@ class LeaveRequestCard extends StatelessWidget {
                         : leave.status == LeaveStatus.rejected
                             ? "Declined By"
                             : "Pending Approval",
-                    style: BodySmallRegular.copyWith(
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
+                    style: AppStyles().bodySmallRegular.copyWith(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
                   ),
                   SizedBox(height: SizeUtils.scale(5, size.width)),
                   Container(
@@ -167,11 +167,15 @@ class LeaveRequestCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(90, size.width),
                     ),
                     child: MyText(
-                      text: leave.updateBy?["name"] ?? "-----",
-                      maxLines: 2,
-                      style: BodyMediumRegular.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
+                      text: StringUtil().getfullname(
+                        leave.updateBy?.firstName,
+                        leave.updateBy?.lastName,
+                        leave.updateBy?.username,
                       ),
+                      maxLines: 2,
+                      style: AppStyles().bodyMediumRegular.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                   ),
                 ],

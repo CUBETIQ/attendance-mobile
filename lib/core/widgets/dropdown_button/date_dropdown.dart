@@ -57,9 +57,9 @@ class DateDropDown extends StatelessWidget {
               text: isShowday == true
                   ? DateFormatter().formatShortDate(date)
                   : DateFormatter().formatShortDateWithoutDay(date),
-              style: BodySmall.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
+              style: AppStyles().bodySmall.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
             SizedBox(
               width: SizeUtils.scale(

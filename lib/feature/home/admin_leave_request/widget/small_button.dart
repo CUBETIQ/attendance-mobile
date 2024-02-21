@@ -34,9 +34,9 @@ class SmallButton extends StatelessWidget {
         ),
         child: MyText(
           text: title,
-          style: BodySmallMedium.copyWith(
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
+          style: AppStyles().bodySmallMedium.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
       ),
     );

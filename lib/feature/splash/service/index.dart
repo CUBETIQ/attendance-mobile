@@ -6,9 +6,19 @@ import 'package:timesync360/core/model/user_status_model.dart';
 import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class SplashService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = SplashService._internal();
+  final dioInstance = DioUtil();
+
+  factory SplashService() {
+    return _singleton;
+  }
+
+  SplashService._internal() {
+    Logs.t('[SplashService] Initialized');
+  }
 
   Future<OrganizationModel> validateOrganization({required String id}) async {
     final OrganizationModel organization;

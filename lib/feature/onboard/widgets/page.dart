@@ -50,14 +50,14 @@ class MyPage extends StatelessWidget {
             children: [
               MyText(
                 text: title ?? "Title",
-                style: titleStyle ?? BodyXXlargeMedium,
+                style: titleStyle ?? AppStyles().bodyXXlargeMedium,
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: size.height * 0.02),
               MyText(
                 text: description ?? "Description",
-                style: descriptionStyle ?? BodyMediumMedium,
+                style: descriptionStyle ?? AppStyles().bodyMediumMedium,
                 maxLines: 8,
                 textAlign: TextAlign.center,
               ),

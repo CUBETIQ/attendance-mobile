@@ -3,9 +3,19 @@ import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class AdminLeaveRequestService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = AdminLeaveRequestService._internal();
+  final dioInstance = DioUtil();
+
+  factory AdminLeaveRequestService() {
+    return _singleton;
+  }
+
+  AdminLeaveRequestService._internal() {
+    Logs.t('[AdminLeaveRequestService] Initialized');
+  }
 
   Future<List<LeaveModel>> getAllLeave(
       {int? startDate, int? endDate, required String organizationId}) async {

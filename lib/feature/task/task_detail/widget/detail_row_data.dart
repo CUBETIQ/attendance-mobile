@@ -18,14 +18,14 @@ class DetailRowData extends StatelessWidget {
           width: SizeUtils.scale(160, size.width),
           child: MyText(
             text: title ?? "status",
-            style: BodyMediumMedium.copyWith(
-              color: Theme.of(context).colorScheme.outline,
-            ),
+            style: AppStyles().bodyMediumMedium.copyWith(
+                  color: Theme.of(context).colorScheme.outline,
+                ),
           ),
         ),
         MyText(
           text: value ?? "Value",
-          style: BodyMediumMedium,
+          style: AppStyles().bodyMediumMedium,
         ),
       ],
     );

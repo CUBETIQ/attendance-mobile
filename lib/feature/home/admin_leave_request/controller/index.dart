@@ -12,12 +12,12 @@ import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class AdminLeaveRequestController extends GetxController {
   static AdminLeaveRequestController get to => Get.find();
-  Rx<DateTime> selectDate = DateTime.now().obs;
-  Rxn<int> startDate = Rxn<int>(null);
-  Rxn<int> endDate = Rxn<int>(null);
-  RxList<LeaveModel> leaveList = <LeaveModel>[].obs;
-  RxList<UserModel> staffList = <UserModel>[].obs;
-  RxBool isLoading = false.obs;
+  final selectDate = DateTime.now().obs;
+  final startDate = Rxn<int>(null);
+  final endDate = Rxn<int>(null);
+  final leaveList = <LeaveModel>[].obs;
+  final staffList = <UserModel>[].obs;
+  final isLoading = false.obs;
 
   @override
   void onInit() {

@@ -79,22 +79,22 @@ class LeaveDetailViewMobile extends StatelessWidget {
                   LeaveDetailCard(
                     title: "Type: ",
                     value: controller.leave.value.type?.capitalizeFirst,
-                    valueStyle: BodyLargeMedium.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                    valueStyle: AppStyles().bodyLargeMedium.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
                   LeaveDetailCard(
                     title: "Status: ",
                     value: controller.leave.value.status?.capitalizeFirst,
-                    valueStyle: BodyLargeMedium.copyWith(
-                      color:
-                          controller.leave.value.status == LeaveStatus.pending
+                    valueStyle: AppStyles().bodyLargeMedium.copyWith(
+                          color: controller.leave.value.status ==
+                                  LeaveStatus.pending
                               ? const Color(0XFFBF9705)
                               : controller.leave.value.status ==
                                       LeaveStatus.approved
                                   ? Colors.green
                                   : Colors.red,
-                    ),
+                        ),
                   ),
                   LeaveDetailCard(
                     title: "Date: ",
@@ -116,7 +116,7 @@ class LeaveDetailViewMobile extends StatelessWidget {
                       children: [
                         MyCacheImage(
                           imageUrl:
-                              controller.leave.value.updateBy?["image"] ?? "",
+                              controller.leave.value.updateBy?.image ?? "",
                           width: SizeUtils.scale(45, size.width),
                           height: SizeUtils.scale(45, size.width),
                         ),
@@ -130,11 +130,11 @@ class LeaveDetailViewMobile extends StatelessWidget {
                           ),
                           child: MyText(
                             text: StringUtil().getfullname(
-                              controller.leave.value.updateBy?["firstName"],
-                              controller.leave.value.updateBy?["lastName"],
-                              controller.leave.value.updateBy?["username"],
+                              controller.leave.value.updateBy?.firstName,
+                              controller.leave.value.updateBy?.lastName,
+                              controller.leave.value.updateBy?.username,
                             ),
-                            style: BodyLargeMedium,
+                            style: AppStyles().bodyLargeMedium,
                           ),
                         ),
                       ],

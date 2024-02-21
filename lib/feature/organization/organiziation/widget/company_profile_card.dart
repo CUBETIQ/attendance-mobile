@@ -103,9 +103,9 @@ class CompanyProfileCard extends StatelessWidget {
                         ),
                         child: MyText(
                           text: companyName ?? "Organization Name",
-                          style: BodyLargeRegular.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: AppStyles().bodyLargeRegular.copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                       ),
                       SizedBox(
@@ -131,9 +131,10 @@ class CompanyProfileCard extends StatelessWidget {
                                 companyOwner?.lastName,
                                 companyOwner?.username,
                               ),
-                              style: BodySmallRegular.copyWith(
-                                color: Theme.of(context).colorScheme.outline,
-                              ),
+                              style: AppStyles().bodySmallRegular.copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.outline,
+                                  ),
                             ),
                           ),
                         ],

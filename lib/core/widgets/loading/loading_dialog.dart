@@ -28,7 +28,7 @@ class LoadingDialog extends StatelessWidget {
               children: [
                 MyText(
                   text: title,
-                  style: BodyLargeMedium,
+                  style: AppStyles().bodyLargeMedium,
                 ),
                 SizedBox(width: SizeUtils.scale(10, size.width)),
                 LoadingAnimationWidget.flickr(

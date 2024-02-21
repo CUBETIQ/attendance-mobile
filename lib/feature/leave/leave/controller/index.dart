@@ -13,19 +13,19 @@ import 'package:get/get.dart';
 
 class LeaveController extends GetxController {
   static LeaveController get to => Get.find();
-  RxList<LeaveModel> leaves = <LeaveModel>[].obs;
-  RxList<SummaryLeaveModel> summarizeLeaves = <SummaryLeaveModel>[].obs;
+  final leaves = <LeaveModel>[].obs;
+  final summarizeLeaves = <SummaryLeaveModel>[].obs;
   var isLoading = false.obs;
-  Rxn<int> startDate = Rxn<int>(null);
-  Rxn<int> endDate = Rxn<int>(null);
-  Rx<int> totalLeave = 0.obs;
-  Rx<int> totalPendingLeave = 0.obs;
-  Rx<int> totalApprovedLeave = 0.obs;
-  Rx<int> totalDeclinedLeave = 0.obs;
-  RxDouble percentagePendingLeave = 0.0.obs;
-  RxDouble percentageApprovedLeave = 0.0.obs;
-  RxDouble percentageDeclinedLeave = 0.0.obs;
-  Rx<DateTime> selectDate = DateTime.now().obs;
+  final startDate = Rxn<int>(null);
+  final endDate = Rxn<int>(null);
+  final totalLeave = 0.obs;
+  final totalPendingLeave = 0.obs;
+  final totalApprovedLeave = 0.obs;
+  final totalDeclinedLeave = 0.obs;
+  final percentagePendingLeave = 0.0.obs;
+  final percentageApprovedLeave = 0.0.obs;
+  final percentageDeclinedLeave = 0.0.obs;
+  final selectDate = DateTime.now().obs;
 
   @override
   void onInit() {

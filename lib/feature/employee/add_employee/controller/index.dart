@@ -23,40 +23,40 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddStaffController extends GetxController {
-  RxString title = "Add Employee".obs;
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController lastnameController = TextEditingController();
-  TextEditingController dobController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  List<String> status = [
+  final title = "Add Employee".obs;
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+  final dobController = TextEditingController();
+  final addressController = TextEditingController();
+  final status = [
     UserStatus.active,
     UserStatus.doNotDisturb,
     UserStatus.idle,
   ];
-  RxList<String> genderList = [
+  final genderList = [
     Gender.female,
     Gender.male,
     Gender.other,
   ].obs;
-  RxList<String> roleList = [
+  final roleList = [
     Role.admin,
     Role.staff,
   ].obs;
-  RxList<PositionModel> positionList = <PositionModel>[].obs;
-  RxList<DepartmentModel> departmentList = <DepartmentModel>[].obs;
-  Rxn<PositionModel> selectedPosition = Rxn<PositionModel>(null);
-  Rxn<DepartmentModel> selectedDepartment = Rxn<DepartmentModel>(null);
-  Rxn<String> selectedStatus = Rxn<String>(UserStatus.idle);
-  Rxn<String> selectedRole = Rxn<String>(Role.staff);
-  Rxn<String> selectedGender = Rxn<String>(Gender.male);
-  Rxn<String> image = Rxn<String>(null);
-  Rxn<File> imageFile = Rxn<File>(null);
-  Rx<UserModel> staff = UserModel().obs;
-  Rxn<int> dob = Rxn<int>(null);
-  Rx<String> appState = AppState.Create.obs;
+  final positionList = <PositionModel>[].obs;
+  final departmentList = <DepartmentModel>[].obs;
+  final selectedPosition = Rxn<PositionModel>(null);
+  final selectedDepartment = Rxn<DepartmentModel>(null);
+  final selectedStatus = Rxn<String>(UserStatus.idle);
+  final selectedRole = Rxn<String>(Role.staff);
+  final selectedGender = Rxn<String>(Gender.male);
+  final image = Rxn<String>(null);
+  final imageFile = Rxn<File>(null);
+  final staff = UserModel().obs;
+  final dob = Rxn<int>(null);
+  final appState = AppState.Create.obs;
 
   @override
   void onInit() {

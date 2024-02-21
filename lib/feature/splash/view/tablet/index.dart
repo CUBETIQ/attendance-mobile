@@ -30,7 +30,7 @@ class SplashViewTablet extends StatelessWidget {
             const SizedBox(height: 30),
             AnimatedText(
               title: controller.title,
-              textStyle: BodyXXlargeMedium,
+              textStyle: AppStyles().bodyXXlargeMedium,
             )
           ],
         ),

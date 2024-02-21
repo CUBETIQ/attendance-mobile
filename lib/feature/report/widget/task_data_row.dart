@@ -49,7 +49,7 @@ class TaskDataRowReport extends StatelessWidget {
               child: MyText(
                 text: data?.name?.capitalizeFirst ?? "",
                 overflow: TextOverflow.ellipsis,
-                style: BodyMediumMedium,
+                style: AppStyles().bodyMediumMedium,
                 maxLines: 2,
               ),
             ),
@@ -64,18 +64,18 @@ class TaskDataRowReport extends StatelessWidget {
                 MyText(
                   text: "Status: ",
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+                  style: AppStyles().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 ),
                 MyText(
                   text: data?.status?.capitalizeFirst ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: data?.status == TaskStatus.completed
-                        ? MyColor.successColor
-                        : MyColor.pendingColor,
-                  ),
+                  style: AppStyles().bodySmallRegular.copyWith(
+                        color: data?.status == TaskStatus.completed
+                            ? MyColor.successColor
+                            : MyColor.pendingColor,
+                      ),
                 ),
               ],
             ),
@@ -84,16 +84,16 @@ class TaskDataRowReport extends StatelessWidget {
                 MyText(
                   text: "Due Date: ",
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+                  style: AppStyles().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 ),
                 MyText(
                   text: DateFormatter().formatMillisecondsToDOB(data?.endDate),
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: AppStyles().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
                 ),
               ],
             ),

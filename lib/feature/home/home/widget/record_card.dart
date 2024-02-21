@@ -62,9 +62,9 @@ class RecordCard extends StatelessWidget {
         children: [
           MyText(
             text: DateFormatter().formatFullDate(date),
-            style: BodyMediumSemi.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+            style: AppStyles().bodyMediumSemi.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
           ),
           SizedBox(height: AppSize().paddingS5 * (size.width / 375.0)),
           RecordDataCard(

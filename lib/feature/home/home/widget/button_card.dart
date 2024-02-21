@@ -60,7 +60,7 @@ class ButtonCard extends StatelessWidget {
             ),
             MyText(
               text: title,
-              style: BodyLargeMedium,
+              style: AppStyles().bodyLargeMedium,
             )
           ],
         ),

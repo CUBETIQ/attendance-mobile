@@ -48,16 +48,16 @@ class SummaryDetailCard extends StatelessWidget {
                   staff.lastName,
                   staff.username,
                 ),
-                style: BodyMediumMedium,
+                style: AppStyles().bodyMediumMedium,
               ),
             ],
           ),
           const Spacer(),
           MyText(
             text: status,
-            style: BodyMediumMedium.copyWith(
-              color: valueColor,
-            ),
+            style: AppStyles().bodyMediumMedium.copyWith(
+                  color: valueColor,
+                ),
           ),
         ],
       ),

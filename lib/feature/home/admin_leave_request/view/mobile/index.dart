@@ -54,7 +54,9 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      MyText(text: "Employee Leave", style: BodyXlargeMedium),
+                      MyText(
+                          text: "Employee Leave",
+                          style: AppStyles().bodyXlargeMedium),
                       Obx(
                         () => DateDropDown(
                           date: controller.selectDate.value,

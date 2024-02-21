@@ -17,13 +17,13 @@ import 'package:timesync360/types/state.dart';
 import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
 class AddDepartmentController extends GetxController {
-  RxString title = "Add Department".obs;
-  RxString state = AppState.Create.obs;
-  Rxn<String> image = Rxn<String>(null);
-  Rxn<File> imageFile = Rxn<File>(null);
-  TextEditingController nameController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  Rxn<DepartmentModel> department = Rxn<DepartmentModel>(null);
+  final title = "Add Department".obs;
+  final state = AppState.Create.obs;
+  final image = Rxn<String>(null);
+  final imageFile = Rxn<File>(null);
+  final nameController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final department = Rxn<DepartmentModel>(null);
 
   @override
   void onInit() {

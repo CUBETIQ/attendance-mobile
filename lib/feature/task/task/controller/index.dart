@@ -13,16 +13,16 @@ import 'package:get/get.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
-  final RxList<TaskModel> tasks = <TaskModel>[].obs;
-  final RxInt totalTask = 0.obs;
-  final RxInt totalCompletedTask = 0.obs;
-  final RxInt totalUncompletedTask = 0.obs;
-  final RxDouble percentageCompletedTask = 0.0.obs;
-  final RxDouble percentageUncompletedTask = 0.0.obs;
-  final RxList<SummaryTaskModel> summarizeTasks = <SummaryTaskModel>[].obs;
-  final Rxn<int> startDate = Rxn<int>();
-  final Rxn<int> endDate = Rxn<int>();
-  Rx<DateTime> selectDate = DateTime.now().obs;
+  final tasks = <TaskModel>[].obs;
+  final totalTask = 0.obs;
+  final totalCompletedTask = 0.obs;
+  final totalUncompletedTask = 0.obs;
+  final percentageCompletedTask = 0.0.obs;
+  final percentageUncompletedTask = 0.0.obs;
+  final summarizeTasks = <SummaryTaskModel>[].obs;
+  final startDate = Rxn<int>();
+  final endDate = Rxn<int>();
+  final selectDate = DateTime.now().obs;
 
   @override
   void onInit() {

@@ -34,7 +34,7 @@ class InfoDataColumn extends StatelessWidget {
             ),
             MyText(
               text: title,
-              style: BodyMediumMedium,
+              style: AppStyles().bodyMediumMedium,
             ),
           ],
         ),

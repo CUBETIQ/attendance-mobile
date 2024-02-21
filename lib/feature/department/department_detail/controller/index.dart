@@ -3,7 +3,7 @@ import 'package:timesync360/core/model/department_model.dart';
 
 class DepartmentDetailController extends GetxController {
   static DepartmentDetailController get to => Get.find();
-  Rxn<DepartmentModel> department = Rxn<DepartmentModel>(null);
+  final department = Rxn<DepartmentModel>(null);
 
   @override
   void onInit() {

@@ -28,7 +28,7 @@ class MyText extends StatelessWidget {
       overflow: overflow ?? TextOverflow.ellipsis,
       textAlign: textAlign ?? TextAlign.start,
       textDirection: textDirection,
-      style: style ?? BodySmallMedium,
+      style: style ?? AppStyles().bodySmallMedium,
     );
   }
 }

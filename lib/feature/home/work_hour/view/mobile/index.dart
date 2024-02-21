@@ -57,7 +57,10 @@ class WorkingHourViewMobile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      MyText(text: "Work Overview", style: BodyXlargeMedium),
+                      MyText(
+                        text: "Work Overview",
+                        style: AppStyles().bodyXlargeMedium,
+                      ),
                       Obx(
                         () => DateDropDown(
                           date: controller.selectDate.value,

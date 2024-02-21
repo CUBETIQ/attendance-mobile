@@ -41,7 +41,7 @@ class CustomerSupportViewMobile extends StatelessWidget {
             ),
             MyText(
               text: 'Hello, How can we Help you?',
-              style: BodyXlargeMedium,
+              style: AppStyles().bodyXlargeMedium,
             ),
             SizedBox(
               height: SizeUtils.scale(40, size.width),

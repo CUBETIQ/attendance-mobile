@@ -56,11 +56,11 @@ class AdminReportViewMobile extends StatelessWidget {
                             children: [
                               MyText(
                                 text: 'Report Overview',
-                                style: BodyLargeMedium.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
-                                ),
+                                style: AppStyles().bodyLargeMedium.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ),
                               ),
                               Obx(
                                 () => DateDropDown(

@@ -61,18 +61,18 @@ class MyButton extends StatelessWidget {
                   MyText(
                     text: title,
                     style: style ??
-                        BodyLargeMedium.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
+                        AppStyles().bodyLargeMedium.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
                   ),
                 ],
               )
             : MyText(
                 text: title,
                 style: style ??
-                    BodyLargeMedium.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+                    AppStyles().bodyLargeMedium.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
               ),
       ),
     );

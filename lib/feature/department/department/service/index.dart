@@ -2,9 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:timesync360/core/model/department_model.dart';
 import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class DepartmentService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = DepartmentService._internal();
+  final dioInstance = DioUtil();
+
+  factory DepartmentService() {
+    return _singleton;
+  }
+
+  DepartmentService._internal() {
+    Logs.t('[DepartmentService] Initialized');
+  }
 
   Future<List<DepartmentModel>> getAllDepartment(
       {required String organizationId}) async {

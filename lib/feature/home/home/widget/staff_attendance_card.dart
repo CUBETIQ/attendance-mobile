@@ -59,12 +59,12 @@ class StaffAttendanceCard extends StatelessWidget {
                         staff.lastName,
                         staff.username,
                       ),
-                      style: BodyLargeSemi,
+                      style: AppStyles().bodyLargeSemi,
                     ),
                   ),
                   MyText(
                     text: position.name ?? "N/A",
-                    style: BodyMediumRegular,
+                    style: AppStyles().bodyMediumRegular,
                   ),
                 ],
               ),
@@ -81,17 +81,17 @@ class StaffAttendanceCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Attendance",
-                    style: BodyMediumSemi,
+                    style: AppStyles().bodyMediumSemi,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: "Check In",
-                    style: BodySmallMedium,
+                    style: AppStyles().bodySmallMedium,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: "Check Out",
-                    style: BodySmallMedium,
+                    style: AppStyles().bodySmallMedium,
                   ),
                 ],
               ),
@@ -100,21 +100,21 @@ class StaffAttendanceCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Time",
-                    style: BodyMediumSemi,
+                    style: AppStyles().bodyMediumSemi,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: DateFormatter().formatTimeWithDate(
                       attendance.checkInDateTime,
                     ),
-                    style: BodySmallRegular,
+                    style: AppStyles().bodySmallRegular,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: DateFormatter().formatTimeWithDate(
                       attendance.checkOutDateTime,
                     ),
-                    style: BodySmallRegular,
+                    style: AppStyles().bodySmallRegular,
                   ),
                 ],
               ),
@@ -123,36 +123,38 @@ class StaffAttendanceCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Status",
-                    style: BodyMediumSemi,
+                    style: AppStyles().bodyMediumSemi,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
-                    style: BodySmallRegular.copyWith(
-                      color: attendance.checkInStatus != null
-                          ? attendance.checkInStatus == AttendanceStatus.early
-                              ? Colors.green
-                              : attendance.checkInStatus ==
-                                      AttendanceStatus.late
-                                  ? Colors.red
-                                  : Colors.orange
-                          : Theme.of(context).colorScheme.onBackground,
-                    ),
+                    style: AppStyles().bodySmallRegular.copyWith(
+                          color: attendance.checkInStatus != null
+                              ? attendance.checkInStatus ==
+                                      AttendanceStatus.early
+                                  ? Colors.green
+                                  : attendance.checkInStatus ==
+                                          AttendanceStatus.late
+                                      ? Colors.red
+                                      : Colors.orange
+                              : Theme.of(context).colorScheme.onBackground,
+                        ),
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text:
                         attendance.checkOutStatus.capitalizeMaybeNull ?? "N/A",
-                    style: BodySmallRegular.copyWith(
-                      color: attendance.checkOutStatus != null
-                          ? attendance.checkOutStatus == AttendanceStatus.early
-                              ? Colors.green
-                              : attendance.checkOutStatus ==
-                                      AttendanceStatus.late
-                                  ? Colors.red
-                                  : Colors.orange
-                          : Theme.of(context).colorScheme.onBackground,
-                    ),
+                    style: AppStyles().bodySmallRegular.copyWith(
+                          color: attendance.checkOutStatus != null
+                              ? attendance.checkOutStatus ==
+                                      AttendanceStatus.early
+                                  ? Colors.green
+                                  : attendance.checkOutStatus ==
+                                          AttendanceStatus.late
+                                      ? Colors.red
+                                      : Colors.orange
+                              : Theme.of(context).colorScheme.onBackground,
+                        ),
                   ),
                 ],
               ),

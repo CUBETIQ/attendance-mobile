@@ -29,7 +29,7 @@ class MyNoData extends StatelessWidget {
             SizedBox(height: AppSize().paddingS5),
             Text(
               "No Data Available",
-              style: BodyLargeMedium,
+              style: AppStyles().bodyLargeMedium,
             ),
             SizedBox(height: AppSize().paddingS8),
           ],

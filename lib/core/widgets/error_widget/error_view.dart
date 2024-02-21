@@ -36,9 +36,9 @@ class ErrorView extends StatelessWidget {
                       "Oh no! A problem occurred. Don't worry, our team has been notified and is working to fix it.",
                   maxLines: 3,
                   textAlign: TextAlign.center,
-                  style: BodyXlargeMedium.copyWith(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: AppStyles().bodyXlargeMedium.copyWith(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
                 ),
               ),
             ),

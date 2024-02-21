@@ -64,9 +64,9 @@ class SupportButton extends StatelessWidget {
                 ),
                 MyText(
                   text: buttonModel.title,
-                  style: BodyMediumMedium.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
+                  style: AppStyles().bodyMediumMedium.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                 )
               ],
             ),

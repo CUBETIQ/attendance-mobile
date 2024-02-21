@@ -42,7 +42,7 @@ class SettingViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(20, size.width)),
               MyText(
                 text: "Appearance",
-                style: BodyXlargeMedium,
+                style: AppStyles().bodyXlargeMedium,
               ),
               SizedBox(height: SizeUtils.scale(15, size.width)),
               Obx(
@@ -57,7 +57,7 @@ class SettingViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(
                 text: "Preferences",
-                style: BodyXlargeMedium,
+                style: AppStyles().bodyXlargeMedium,
               ),
               SizedBox(height: SizeUtils.scale(15, size.width)),
               SettingCardButton(

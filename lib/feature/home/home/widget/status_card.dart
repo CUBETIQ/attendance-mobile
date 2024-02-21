@@ -24,9 +24,9 @@ class StatusCard extends StatelessWidget {
     return isBreakTime == true
         ? MyText(
             text: breakTimeTitle ?? "Ongoing",
-            style: BodySmallMedium.copyWith(
-              color: Colors.white,
-            ),
+            style: AppStyles().bodySmallMedium.copyWith(
+                  color: Colors.white,
+                ),
           )
         : isBreakTime == false
             ? const SizedBox.shrink()
@@ -50,13 +50,13 @@ class StatusCard extends StatelessWidget {
                 ),
                 child: MyText(
                   text: (status ?? "No Status").capitalizeFirst,
-                  style: BodySmallMedium.copyWith(
-                    color: status != null
-                        ? status == AttendanceStatus.early
-                            ? Colors.white
-                            : Theme.of(context).colorScheme.onPrimary
-                        : Theme.of(context).colorScheme.onSurface,
-                  ),
+                  style: AppStyles().bodySmallMedium.copyWith(
+                        color: status != null
+                            ? status == AttendanceStatus.early
+                                ? Colors.white
+                                : Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
               );
   }

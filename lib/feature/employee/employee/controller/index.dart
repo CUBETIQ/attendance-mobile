@@ -14,14 +14,14 @@ import 'package:get/get.dart';
 
 class StaffController extends GetxController {
   static StaffController get to => Get.find();
-  RxList<UserModel> staffsBackUp = <UserModel>[].obs;
-  RxList<UserModel> staffs = <UserModel>[].obs;
-  RxList<PositionModel> positions = <PositionModel>[].obs;
-  RxList<DepartmentModel> departments = <DepartmentModel>[].obs;
-  RxString organizationId = "".obs;
-  RxBool isLoading = false.obs;
-  TextEditingController searchController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
+  final staffsBackUp = <UserModel>[].obs;
+  final staffs = <UserModel>[].obs;
+  final positions = <PositionModel>[].obs;
+  final departments = <DepartmentModel>[].obs;
+  final organizationId = "".obs;
+  final isLoading = false.obs;
+  final searchController = TextEditingController();
+  final newPasswordController = TextEditingController();
 
   @override
   void onInit() {

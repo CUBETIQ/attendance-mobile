@@ -33,8 +33,8 @@ class MyTabBar extends StatelessWidget {
         controller: controller,
         onTap: onTap,
         overlayColor: MaterialStateProperty.all(Colors.transparent),
-        labelStyle: BodyLargeMedium,
-        unselectedLabelStyle: BodyLargeMedium,
+        labelStyle: AppStyles().bodyLargeMedium,
+        unselectedLabelStyle: AppStyles().bodyLargeMedium,
         unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
         labelColor: isCircleBorder == true
             ? Theme.of(context).colorScheme.onPrimary

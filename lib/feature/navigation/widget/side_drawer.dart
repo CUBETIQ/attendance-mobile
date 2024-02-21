@@ -52,15 +52,15 @@ class SideDrawer extends StatelessWidget {
                 user.lastName,
                 user.username,
               ),
-              style: BodyLarge.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
-              ),
+              style: AppStyles().bodyLarge.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
             ),
             MyText(
               text: (user.role ?? Role.admin).capitalizeFirst,
-              style: BodyMediumRegular.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
-              ),
+              style: AppStyles().bodyMediumRegular.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
             ),
             SizedBox(height: SizeUtils.scale(10, size.height)),
             ...List.generate(
@@ -83,9 +83,9 @@ class SideDrawer extends StatelessWidget {
                   ),
                   title: MyText(
                     text: drawerItems[index].title,
-                    style: BodyMediumMedium.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                    style: AppStyles().bodyMediumMedium.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                   ),
                 ),
               ),
@@ -105,9 +105,9 @@ class SideDrawer extends StatelessWidget {
                   SizedBox(width: SizeUtils.scale(3, size.width)),
                   MyText(
                     text: "TimeSync 360 V1.0.0",
-                    style: BodyMediumMedium.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                    style: AppStyles().bodyMediumMedium.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                   ),
                 ],
               ),

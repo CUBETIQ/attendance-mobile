@@ -46,7 +46,10 @@ class DepartmentViewMobile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyText(text: "Department Overview", style: BodyLargeMedium),
+                  MyText(
+                    text: "Department Overview",
+                    style: AppStyles().bodyLargeMedium,
+                  ),
                   SizedBox(height: AppSize().paddingS8),
                   SearchBar(
                     hintText: "Search Department",

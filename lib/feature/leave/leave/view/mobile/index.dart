@@ -45,7 +45,9 @@ class LeaveViewMobile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    MyText(text: "Leave Summary", style: BodyLargeMedium),
+                    MyText(
+                        text: "Leave Summary",
+                        style: AppStyles().bodyLargeMedium),
                     Obx(
                       () => DateDropDown(
                         date: controller.selectDate.value,
@@ -107,7 +109,7 @@ class LeaveViewMobile extends StatelessWidget {
                   children: [
                     MyText(
                       text: "My Request",
-                      style: BodyLargeMedium,
+                      style: AppStyles().bodyLargeMedium,
                     ),
                   ],
                 ),

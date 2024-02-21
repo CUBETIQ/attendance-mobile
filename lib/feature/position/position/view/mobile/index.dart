@@ -46,7 +46,9 @@ class PositionViewMobile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyText(text: "Position Overview", style: BodyLargeMedium),
+                  MyText(
+                      text: "Position Overview",
+                      style: AppStyles().bodyLargeMedium),
                   SizedBox(height: AppSize().paddingS8),
                   SearchBar(
                     hintText: "Search Position",

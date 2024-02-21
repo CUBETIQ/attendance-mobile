@@ -17,18 +17,17 @@ import 'package:get/get.dart';
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
   static SplashController get to => Get.find();
-  Rx<UserModel> user = UserModel().obs;
-  Rx<PositionModel> position = PositionModel().obs;
+  final user = UserModel().obs;
+  final position = PositionModel().obs;
   final double frameRate = 70;
   final String title = 'TimeSync360';
   late AnimationController controller;
   late Animation<double> animation;
-  final LocalStorageController localDataService =
-      LocalStorageController.getInstance();
-  Rx<LocalStorage> localData = LocalStorage().obs;
-  Rx<DepartmentModel> department = DepartmentModel().obs;
-  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
+  final localDataService = LocalStorageController.getInstance();
+  final localData = LocalStorage().obs;
+  final department = DepartmentModel().obs;
+  final userStatus = UserStatusModel().obs;
+  final organization = OrganizationModel().obs;
   LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override

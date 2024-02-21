@@ -79,20 +79,20 @@ class MyAsyncButton extends StatelessWidget {
                     MyText(
                       text: title,
                       style: style ??
-                          BodyLargeMedium.copyWith(
-                            color: isDisableButton.value == true
-                                ? Theme.of(context).colorScheme.outline
-                                : Theme.of(context).colorScheme.onPrimary,
-                          ),
+                          AppStyles().bodyLargeMedium.copyWith(
+                                color: isDisableButton.value == true
+                                    ? Theme.of(context).colorScheme.outline
+                                    : Theme.of(context).colorScheme.onPrimary,
+                              ),
                     ),
                   ],
                 )
               : MyText(
                   text: title,
                   style: style ??
-                      BodyLargeMedium.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
+                      AppStyles().bodyLargeMedium.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
                 ),
         ),
       ),

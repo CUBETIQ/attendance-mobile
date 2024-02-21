@@ -15,24 +15,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddTaskController extends GetxController {
-  RxString title = "Add Task".obs;
-  Rxn<int> startDate = Rxn<int>(null);
-  Rxn<int> endDate = Rxn<int>(null);
-  TextEditingController taskController = TextEditingController();
-  TextEditingController startDateController = TextEditingController();
-  TextEditingController endDateController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  Rxn<Color> color = Rxn<Color>(null);
-  Rxn<String> stringColor = Rxn<String>(null);
-  Rxn<String> stringIcon = Rxn<String>(null);
-  RxString appState = AppState.Create.obs;
-  Rxn<TaskModel> task = Rxn<TaskModel>(null);
-  RxList<String> priority = [
+  final title = "Add Task".obs;
+  final startDate = Rxn<int>(null);
+  final endDate = Rxn<int>(null);
+  final taskController = TextEditingController();
+  final startDateController = TextEditingController();
+  final endDateController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final color = Rxn<Color>(null);
+  final stringColor = Rxn<String>(null);
+  final stringIcon = Rxn<String>(null);
+  final appState = AppState.Create.obs;
+  final task = Rxn<TaskModel>(null);
+  final priority = [
     TaskPriority.low,
     TaskPriority.medium,
     TaskPriority.high,
   ].obs;
-  RxString selectPriority = TaskPriority.low.obs;
+  final selectPriority = TaskPriority.low.obs;
   late Color screenPickerColor;
 
   @override

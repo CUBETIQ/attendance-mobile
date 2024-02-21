@@ -42,7 +42,9 @@ class TaskViewMobile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    MyText(text: "Task Summary", style: BodyLargeMedium),
+                    MyText(
+                        text: "Task Summary",
+                        style: AppStyles().bodyLargeMedium),
                     Obx(
                       () => DateDropDown(
                         date: controller.selectDate.value,
@@ -68,7 +70,7 @@ class TaskViewMobile extends StatelessWidget {
                           centerWidget: MyText(
                             text:
                                 "${(controller.percentageUncompletedTask.value * 100).toStringAsFixed(2)}%",
-                            style: BodyMediumRegular,
+                            style: AppStyles().bodyMediumRegular,
                           ),
                           percent: controller.percentageUncompletedTask.value,
                           textBelow:
@@ -86,7 +88,7 @@ class TaskViewMobile extends StatelessWidget {
                           centerWidget: MyText(
                             text:
                                 "${(controller.percentageCompletedTask.value * 100).toStringAsFixed(2)}%",
-                            style: BodyMediumRegular,
+                            style: AppStyles().bodyMediumRegular,
                           ),
                           percent: controller.percentageCompletedTask.value,
                           textBelow:
@@ -97,7 +99,7 @@ class TaskViewMobile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: AppSize().paddingS11),
-                MyText(text: "MyTask", style: BodyLargeMedium),
+                MyText(text: "MyTask", style: AppStyles().bodyLargeMedium),
                 SizedBox(height: AppSize().paddingS8),
                 Obx(
                   () => MyAsyncWidget(

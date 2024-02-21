@@ -43,7 +43,7 @@ class OptionButton extends StatelessWidget {
             SizedBox(width: AppSize().paddingS8),
             MyText(
               text: option.title ?? "--------",
-              style: BodyMedium,
+              style: AppStyles().bodyMedium,
             ),
             const Spacer(),
             Icon(

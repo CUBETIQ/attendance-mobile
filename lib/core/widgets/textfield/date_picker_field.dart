@@ -65,7 +65,7 @@ class MyDatePickerField extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : MyText(
                     text: label,
-                    style: labelStyle ?? BodyMediumMedium,
+                    style: labelStyle ?? AppStyles().bodyMediumMedium,
                   ),
             const SizedBox(height: 8),
             TextFormField(
@@ -101,7 +101,7 @@ class MyDatePickerField extends StatelessWidget {
                   vertical: (AppSize().paddingS7) * (size.width / 375.0),
                 ),
                 hintText: hintText,
-                hintStyle: hintStyle ?? BodyMediumMedium,
+                hintStyle: hintStyle ?? AppStyles().bodyMediumMedium,
                 filled: filled ?? false,
                 fillColor: filled == true
                     ? Theme.of(context).colorScheme.secondaryContainer
@@ -168,9 +168,9 @@ class MyDatePickerField extends StatelessWidget {
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
-                errorStyle: errorStyle ?? BodyXSmallMedium,
+                errorStyle: errorStyle ?? AppStyles().bodyXSmallMedium,
               ),
-              style: style ?? BodyMediumMedium,
+              style: style ?? AppStyles().bodyMediumMedium,
               onChanged: (value) {
                 controller.formKey.currentState?.validate();
               },

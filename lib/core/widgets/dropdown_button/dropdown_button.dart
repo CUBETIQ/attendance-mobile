@@ -86,7 +86,7 @@ class MyDropDownButton<T> extends StatelessWidget {
             ? const SizedBox.shrink()
             : MyText(
                 text: label,
-                style: labelStyle ?? BodyMediumMedium,
+                style: labelStyle ?? AppStyles().bodyMediumMedium,
               ),
         const SizedBox(height: 8),
         SizedBox(
@@ -96,15 +96,15 @@ class MyDropDownButton<T> extends StatelessWidget {
             child: DropdownButton2<T>(
               //To avoid long text overflowing.
               isExpanded: true,
-              style: BodyMediumMedium.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+              style: AppStyles().bodyMediumMedium.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
               hint: Container(
                 alignment: hintAlignment,
                 child: MyText(
                   text: hint ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: BodyMediumMedium,
+                  style: AppStyles().bodyMediumMedium,
                 ),
               ),
               value: value,

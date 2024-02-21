@@ -3,7 +3,7 @@ import 'package:timesync360/core/model/position_model.dart';
 
 class PositionDetailController extends GetxController {
   static PositionDetailController get to => Get.find();
-  Rxn<PositionModel> position = Rxn<PositionModel>(null);
+  final position = Rxn<PositionModel>(null);
 
   @override
   void onInit() {

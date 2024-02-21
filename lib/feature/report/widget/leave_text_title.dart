@@ -28,9 +28,9 @@ class LeaveTextTitle extends StatelessWidget {
               ),
               child: MyText(
                 text: 'On Leave',
-                style: BodyLargeMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
+                style: AppStyles().bodyLargeMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
               ),
             ),
     );

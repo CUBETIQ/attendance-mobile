@@ -104,7 +104,7 @@ class HomeStaffMobileView extends StatelessWidget {
                                 controller.user.value.lastName,
                                 controller.user.value.username,
                               ),
-                              style: BodyXlargeMedium,
+                              style: AppStyles().bodyXlargeMedium,
                             ),
                           ),
                         ),
@@ -112,7 +112,7 @@ class HomeStaffMobileView extends StatelessWidget {
                           () => MyText(
                             text: NavigationController.to.position.value.name ??
                                 "-----",
-                            style: BodyMediumRegular,
+                            style: AppStyles().bodyMediumRegular,
                           ),
                         )
                       ],
@@ -123,7 +123,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.02),
               MyText(
                 text: "Attendance ",
-                style: BodyXlargeMedium,
+                style: AppStyles().bodyXlargeMedium,
               ),
               SizedBox(height: size.height * 0.015),
               Obx(
@@ -172,7 +172,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               MyText(
                 text: "Overview",
-                style: BodyXlargeMedium,
+                style: AppStyles().bodyXlargeMedium,
               ),
               SizedBox(height: size.height * 0.02),
               Row(
@@ -211,7 +211,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               MyText(
                 text: "Today Record",
-                style: BodyXlarge,
+                style: AppStyles().bodyXlarge,
               ),
               SizedBox(height: size.height * 0.02),
               Obx(

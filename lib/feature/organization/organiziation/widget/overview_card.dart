@@ -45,15 +45,15 @@ class OverViewCard extends StatelessWidget {
               ),
               MyText(
                 text: "Employee",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppStyles().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
               MyText(
                 text: "${staffs ?? 0}/${totalStaff ?? 0}",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppStyles().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
             ],
           ),
@@ -66,15 +66,15 @@ class OverViewCard extends StatelessWidget {
               ),
               MyText(
                 text: "Department",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppStyles().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
               MyText(
                 text: (totalDepartment ?? 0).toString(),
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppStyles().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
             ],
           ),
@@ -87,15 +87,15 @@ class OverViewCard extends StatelessWidget {
               ),
               MyText(
                 text: "Position",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppStyles().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
               MyText(
                 text: (totalPosition ?? 0).toString(),
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppStyles().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
             ],
           ),

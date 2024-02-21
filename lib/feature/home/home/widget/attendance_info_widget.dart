@@ -33,11 +33,11 @@ class AttendanceInfoWidget extends StatelessWidget {
         SizedBox(width: SizeUtils.scale(10, size.width)),
         MyText(
           text: title,
-          style: BodyMediumRegular,
+          style: AppStyles().bodyMediumRegular,
         ),
         MyText(
           text: "${value ?? 0}",
-          style: BodyMediumRegular,
+          style: AppStyles().bodyMediumRegular,
         ),
       ],
     );

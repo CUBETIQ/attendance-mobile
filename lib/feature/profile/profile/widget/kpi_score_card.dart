@@ -40,9 +40,9 @@ class KpiScoreCard extends StatelessWidget {
               SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
                 text: "Performance Score: $score",
-                style: BodyLargeSemi.copyWith(
-                  color: Colors.white,
-                ),
+                style: AppStyles().bodyLargeSemi.copyWith(
+                      color: Colors.white,
+                    ),
               ),
             ],
           ),

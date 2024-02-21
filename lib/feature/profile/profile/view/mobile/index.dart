@@ -101,7 +101,7 @@ class ProfileViewMobile extends StatelessWidget {
                               controller.user.value.lastName,
                               controller.user.value.username,
                             ),
-                            style: BodyXlargeMedium,
+                            style: AppStyles().bodyXlargeMedium,
                           ),
                         ),
                       ),

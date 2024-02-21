@@ -61,8 +61,8 @@ class ErrorInterceptor extends dio.Interceptor {
       Endpoints.instance.refreshToken,
       data: {
         "refreshToken": token,
-      },
-    );
+      }, 
+    ); 
 
     if (response.statusCode == 200) {
       accessToken = response.data["data"]["accessToken"];

@@ -50,7 +50,7 @@ class ChangePasswordViewMobile extends StatelessWidget {
               maxLines: 2,
               textAlign: TextAlign.center,
               text: "To change your password, Please enter the detail below",
-              style: BodyMediumRegular,
+              style: AppStyles().bodyMediumRegular,
             ),
             SizedBox(
               height: SizeUtils.scale(10, size.height),

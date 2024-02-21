@@ -53,7 +53,7 @@ class LoginViewMobile extends StatelessWidget {
                       SizedBox(height: AppSize().paddingS6),
                       MyText(
                         text: "TimeSync360",
-                        style: BodyLargeMedium,
+                        style: AppStyles().bodyLargeMedium,
                       ),
                     ],
                   ),
@@ -61,13 +61,13 @@ class LoginViewMobile extends StatelessWidget {
                 SizedBox(height: size.height * 0.04),
                 MyText(
                   text: "Access your account",
-                  style: BodyXXlarge,
+                  style: AppStyles().bodyXXlarge,
                 ),
                 MyText(
                   text: "Please fill your detail to access your account.",
-                  style: BodyMediumRegular.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
+                  style: AppStyles().bodyMediumRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                 ),
                 SizedBox(height: size.height * 0.05),
                 MyTextFieldForm(
@@ -115,7 +115,7 @@ class LoginViewMobile extends StatelessWidget {
                         SizedBox(width: size.width * 0.01),
                         MyText(
                           text: "Remember me",
-                          style: BodyMediumMedium,
+                          style: AppStyles().bodyMediumMedium,
                         ),
                       ],
                     ),
@@ -123,9 +123,9 @@ class LoginViewMobile extends StatelessWidget {
                       onTap: null,
                       child: MyText(
                         text: "Forgot Password?",
-                        style: BodyMediumMedium.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                        style: AppStyles().bodyMediumMedium.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                       ),
                     ),
                   ],

@@ -19,9 +19,9 @@ class LabelDetailCard extends StatelessWidget {
       children: [
         MyText(
           text: title ?? "Title",
-          style: BodySmallMedium.copyWith(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
+          style: AppStyles().bodySmallMedium.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
         ),
         Container(
           width: double.infinity,
@@ -47,7 +47,7 @@ class LabelDetailCard extends StatelessWidget {
             text: value != null && value != ""
                 ? value.capitalizeMaybeNull ?? "N/A"
                 : "N/A",
-            style: BodyLargeRegular,
+            style: AppStyles().bodyLargeRegular,
           ),
         ),
       ],

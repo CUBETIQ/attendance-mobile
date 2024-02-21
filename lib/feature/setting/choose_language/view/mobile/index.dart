@@ -43,16 +43,16 @@ class ChangeLanguageViewMobile extends StatelessWidget {
           children: [
             MyText(
               text: "Choose your language",
-              style: BodyXXlargeMedium,
+              style: AppStyles().bodyXXlargeMedium,
             ),
             SizedBox(height: SizeUtils.scale(10, size.width)),
             MyText(
               text:
                   "Choose a language that suits your style and make your app journey uniquely yours. Whether it's Khmer or English, your preferences matter.",
               maxLines: 5,
-              style: BodyMediumRegular.copyWith(
-                color: Theme.of(context).colorScheme.outline,
-              ),
+              style: AppStyles().bodyMediumRegular.copyWith(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
             ),
             SizedBox(height: SizeUtils.scale(50, size.width)),
             ...List.generate(

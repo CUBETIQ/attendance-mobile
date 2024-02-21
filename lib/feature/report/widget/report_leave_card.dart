@@ -3,6 +3,7 @@ import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/widgets/card/my_card.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,13 +67,13 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "From",
-                          style: BodyMediumSemi,
+                          style: AppStyles().bodyMediumSemi,
                         ),
                         SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: DateFormatter()
                               .formatMillisecondsToDOB(leave.from),
-                          style: BodySmallRegular,
+                          style: AppStyles().bodySmallRegular,
                         ),
                       ],
                     ),
@@ -82,13 +83,13 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "To",
-                          style: BodyMediumSemi,
+                          style: AppStyles().bodyMediumSemi,
                         ),
                         SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text:
                               DateFormatter().formatMillisecondsToDOB(leave.to),
-                          style: BodySmallRegular,
+                          style: AppStyles().bodySmallRegular,
                         ),
                       ],
                     ),
@@ -98,14 +99,14 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Status",
-                          style: BodyMediumSemi,
+                          style: AppStyles().bodyMediumSemi,
                         ),
                         SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: leave.status?.capitalizeFirst ?? "N/A",
-                          style: BodySmallSemi.copyWith(
-                            color: Colors.green,
-                          ),
+                          style: AppStyles().bodySmallSemi.copyWith(
+                                color: Colors.green,
+                              ),
                         ),
                       ],
                     ),
@@ -119,13 +120,13 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Type: ",
-                          style: BodySmallMedium,
+                          style: AppStyles().bodySmallMedium,
                         ),
                         MyText(
                           text: leave.type?.capitalizeFirst ?? "N/A",
-                          style: BodySmallMedium.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                          style: AppStyles().bodySmallMedium.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         ),
                       ],
                     ),
@@ -133,18 +134,22 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Approver: ",
-                          style: BodySmallMedium,
+                          style: AppStyles().bodySmallMedium,
                         ),
                         Container(
                           constraints: BoxConstraints(
                             maxWidth: SizeUtils.scale(100, size.width),
                           ),
                           child: MyText(
-                            text: leave.updateBy?["name"] ?? "N/A",
-                            overflow: TextOverflow.ellipsis,
-                            style: BodySmallMedium.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
+                            text: StringUtil().getfullname(
+                              leave.updateBy?.firstName,
+                              leave.updateBy?.lastName,
+                              leave.updateBy?.username,
                             ),
+                            overflow: TextOverflow.ellipsis,
+                            style: AppStyles().bodySmallMedium.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                           ),
                         ),
                       ],

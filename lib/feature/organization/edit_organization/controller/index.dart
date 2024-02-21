@@ -13,16 +13,16 @@ import 'package:get/get.dart';
 import 'package:timesync360/types/avatar_type.dart';
 
 class EditOrganizationController extends GetxController {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController startHourController = TextEditingController();
-  TextEditingController endHourController = TextEditingController();
-  TextEditingController breakStartHourController = TextEditingController();
-  TextEditingController breakEndHourController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
-  Rxn<File> imageFile = Rxn<File>(null);
-  Rxn<String> image = Rxn<String>(null);
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final startHourController = TextEditingController();
+  final endHourController = TextEditingController();
+  final breakStartHourController = TextEditingController();
+  final breakEndHourController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final organization = OrganizationModel().obs;
+  final imageFile = Rxn<File>(null);
+  final image = Rxn<String>(null);
 
   @override
   void onInit() {

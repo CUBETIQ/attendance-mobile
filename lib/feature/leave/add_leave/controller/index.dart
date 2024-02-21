@@ -16,28 +16,28 @@ import 'package:get/get.dart';
 class AddLeaveController extends GetxController
     with GetSingleTickerProviderStateMixin {
   static AddLeaveController get to => Get.find();
-  RxString title = "Add Leave".obs;
-  TextEditingController startDateController = TextEditingController();
-  TextEditingController endDateController = TextEditingController();
-  TextEditingController reasonController = TextEditingController();
-  Rx<TextEditingController> durationController = TextEditingController().obs;
-  Rxn<int> startDate = Rxn<int>(null);
-  Rxn<int> endDate = Rxn<int>(null);
-  Rx<String> selectLeaveType = LeaveType.annual.obs;
-  RxList<String> leaveTypes = [
+  final title = "Add Leave".obs;
+  final startDateController = TextEditingController();
+  final endDateController = TextEditingController();
+  final reasonController = TextEditingController();
+  final durationController = TextEditingController().obs;
+  final startDate = Rxn<int>(null);
+  final endDate = Rxn<int>(null);
+  final selectLeaveType = LeaveType.annual.obs;
+  final leaveTypes = [
     LeaveType.annual,
     LeaveType.sick,
   ].obs;
-  RxList<String> leaveTypeDuration = [
+  final leaveTypeDuration = [
     LeaveTypeDuration.fullDay,
     LeaveTypeDuration.halfDay,
   ].obs;
-  Rx<String> selectLeaveDurationType = LeaveTypeDuration.fullDay.obs;
+  final selectLeaveDurationType = LeaveTypeDuration.fullDay.obs;
   late AnimationController animationController;
   late Animation<double> sizeAnimation;
   late Animation<Color?> colorAnimation;
-  RxString appState = AppState.Create.obs;
-  Rxn<LeaveModel> leave = Rxn<LeaveModel>(null);
+  final appState = AppState.Create.obs;
+  final leave = Rxn<LeaveModel>(null);
   final test = [
     "1",
     "1.5",
@@ -46,8 +46,8 @@ class AddLeaveController extends GetxController
     "3",
     "3.5",
   ].obs;
-  Rxn<String> selectedValue = Rxn<String>(null);
-  TextEditingController searchController = TextEditingController();
+  final selectedValue = Rxn<String>(null);
+  final searchController = TextEditingController();
   FocusNode? durationFocusNode = FocusNode();
 
   @override

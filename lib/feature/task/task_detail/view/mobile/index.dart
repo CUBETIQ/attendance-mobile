@@ -44,7 +44,7 @@ class TaskDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(20, size.width)),
               MyText(
                 text: controller.task.value?.name ?? "Title",
-                style: BodyXXlargeMedium,
+                style: AppStyles().bodyXXlargeMedium,
                 textAlign: TextAlign.start,
                 maxLines: 5,
               ),
@@ -80,11 +80,11 @@ class TaskDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(20, size.width)),
               const Divider(thickness: 1.5),
               SizedBox(height: SizeUtils.scale(10, size.width)),
-              MyText(text: "Description", style: BodyLargeMedium),
+              MyText(text: "Description", style: AppStyles().bodyLargeMedium),
               SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(
                 text: controller.task.value?.description ?? "",
-                style: BodyMediumRegular,
+                style: AppStyles().bodyMediumRegular,
                 maxLines: 20,
               ),
             ],

@@ -75,9 +75,9 @@ class AttendancePieChartCard extends StatelessWidget {
                             title: "No Data",
                             radius:
                                 chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            titleStyle: AppStyles().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                         ],
                       )
@@ -93,9 +93,9 @@ class AttendancePieChartCard extends StatelessWidget {
                             title: "Present",
                             radius:
                                 chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            titleStyle: AppStyles().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                           PieChartSectionData(
                             showTitle: false,
@@ -104,9 +104,9 @@ class AttendancePieChartCard extends StatelessWidget {
                             title: "On Leave",
                             radius:
                                 chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            titleStyle: AppStyles().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                           PieChartSectionData(
                             showTitle: false,
@@ -115,9 +115,9 @@ class AttendancePieChartCard extends StatelessWidget {
                             title: "Absent",
                             radius:
                                 chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            titleStyle: AppStyles().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                         ],
                       ),
@@ -131,7 +131,7 @@ class AttendancePieChartCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyText(text: "Summary ", style: BodyLargeMedium),
+              MyText(text: "Summary ", style: AppStyles().bodyLargeMedium),
               SizedBox(height: SizeUtils.scale(10, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.successColor,

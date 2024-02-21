@@ -6,9 +6,19 @@ import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class OrganizationService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = OrganizationService._internal();
+  final dioInstance = DioUtil();
+
+  factory OrganizationService() {
+    return _singleton;
+  }
+
+  OrganizationService._internal() {
+    Logs.t('[OrganizationService] Initialized');
+  }
 
   Future<OrganizationModel> getOrganization({required String id}) async {
     final OrganizationModel? organization;

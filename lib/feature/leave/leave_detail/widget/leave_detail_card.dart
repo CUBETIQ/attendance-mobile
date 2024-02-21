@@ -34,9 +34,9 @@ class LeaveDetailCard extends StatelessWidget {
         MyText(
           text: title ?? "Title",
           style: titleStyle ??
-              BodyMediumRegular.copyWith(
-                color: Theme.of(context).colorScheme.outline,
-              ),
+              AppStyles().bodyMediumRegular.copyWith(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
         ),
         SizedBox(
           height: SizeUtils.scale(AppSize().paddingS5, size.width),
@@ -44,7 +44,7 @@ class LeaveDetailCard extends StatelessWidget {
         child ??
             MyText(
               text: value ?? "value",
-              style: valueStyle ?? BodyLargeMedium,
+              style: valueStyle ?? AppStyles().bodyLargeMedium,
             ),
         noDivider == true ? const SizedBox.shrink() : const Divider(),
       ],

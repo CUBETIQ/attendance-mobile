@@ -22,7 +22,7 @@ class AnimatedText extends StatelessWidget {
         WavyAnimatedText(
           title,
           speed: Duration(milliseconds: speed ?? 250),
-          textStyle: textStyle ?? BodyXlargeMedium,
+          textStyle: textStyle ?? AppStyles().bodyXlargeMedium,
           textAlign: TextAlign.center,
         ),
       ],

@@ -12,14 +12,13 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController {
   static ProfileController get to => Get.find();
 
-  Rx<UserModel> user = UserModel().obs;
-  Rxn<String> name = Rxn<String>(null);
+  final user = UserModel().obs;
+  final name = Rxn<String>(null);
   late List<OptionModel> options;
-  RxList<SummaryAttendanceModel> summaryAttendance =
-      <SummaryAttendanceModel>[].obs;
-  Rxn<int> totalAttendance = Rxn<int>(null);
-  Rxn<int> totalAbsent = Rxn<int>(null);
-  Rxn<int> totalLeave = Rxn<int>(null);
+  final summaryAttendance = <SummaryAttendanceModel>[].obs;
+  final totalAttendance = Rxn<int>(null);
+  final totalAbsent = Rxn<int>(null);
+  final totalLeave = Rxn<int>(null);
 
   @override
   void onInit() {

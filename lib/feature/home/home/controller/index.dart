@@ -43,8 +43,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxList<PositionModel> positionList = <PositionModel>[].obs;
   var isLoadingList = false.obs;
   var isLoadingStaffAttendance = false.obs;
-  RxString startHour = "8:00".obs;
-  RxString endHour = "17:00".obs;
+  RxString startHour = "8".obs;
+  RxString endHour = "17".obs;
   Rxn<String> totalHour = Rxn<String>(null);
   RxString currentDate = "".obs;
   late AnimationController controller;
@@ -187,7 +187,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       return;
     }
     DateTime now = await checkTime();
-    if (now.hour > endHour.value.split(":").first.toInt()) {
+    if (now.hour > endHour.value.toInt()) {
       showErrorSnackBar("Error", "You can't check in after $endHour");
       return;
     } else {
@@ -344,17 +344,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       if (attendanceChart.isNotEmpty) {
         totalStaff.value = attendanceChart.first.totalStaff ?? 0;
         haveNoData.value = false;
-        for (var element in attendanceChart) {
-          totalChartPresent.value += element.totalAttendance ?? 0;
-          totalChartAbsent.value += element.totalAbsent ?? 0;
-          totalChartLeave.value += element.totalLeave ?? 0;
-          totalCheckInLate.value += element.totalCheckinLate ?? 0;
-          totalCheckInOnTime.value += element.totalCheckinOnTime ?? 0;
-          totalCheckInEarly.value += element.totalCheckinEarly ?? 0;
-          totalCheckOutLate.value += element.totalCheckoutLate ?? 0;
-          totalCheckOutOnTime.value += element.totalCheckoutOnTime ?? 0;
-          totalCheckOutEarly.value += element.totalCheckoutEarly ?? 0;
-        }
+
+        totalChartPresent.value = attendanceChart.first.totalAttendance ?? 0;
+        totalChartAbsent.value = attendanceChart.first.totalAbsent ?? 0;
+        totalChartLeave.value = attendanceChart.first.totalLeave ?? 0;
+        totalCheckInLate.value = attendanceChart.first.totalCheckinLate ?? 0;
+        totalCheckInOnTime.value =
+            attendanceChart.first.totalCheckinOnTime ?? 0;
+        totalCheckInEarly.value = attendanceChart.first.totalCheckinEarly ?? 0;
+        totalCheckOutLate.value = attendanceChart.first.totalCheckoutLate ?? 0;
+        totalCheckOutOnTime.value =
+            attendanceChart.first.totalCheckoutOnTime ?? 0;
+        totalCheckOutEarly.value =
+            attendanceChart.first.totalCheckoutEarly ?? 0;
+
         presentPercentage.value =
             (totalChartPresent.value / totalStaff.value) * 100;
         absentPercentage.value =
@@ -459,8 +462,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
     startHour.value =
         NavigationController.to.organization.value.configs?.startHour ?? "8:00";
-    endHour.value =
-        NavigationController.to.organization.value.configs?.endHour ?? "17:00";
+    endHour.value = NavigationController.to.organization.value.configs?.endHour
+            ?.split(":")
+            .first ??
+        "17";
 
     currentDate.value = DateFormat('E, MMM dd').format(date);
   }

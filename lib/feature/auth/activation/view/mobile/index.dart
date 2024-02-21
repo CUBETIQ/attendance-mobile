@@ -53,13 +53,13 @@ class ActivationViewMobile extends StatelessWidget {
                       MyText(
                         text: controller.title,
                         maxLines: 1,
-                        style: BodyXlarge,
+                        style: AppStyles().bodyXlarge,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyText(
                         text: controller.description,
                         maxLines: 5,
-                        style: BodySmallMedium,
+                        style: AppStyles().bodySmallMedium,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyTextFieldForm(

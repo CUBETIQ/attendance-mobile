@@ -3,9 +3,19 @@ import 'package:timesync360/core/model/summary_leave_model.dart';
 import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class LeaveService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = LeaveService._internal();
+  final dioInstance = DioUtil();
+
+  factory LeaveService() {
+    return _singleton;
+  }
+
+  LeaveService._internal() {
+    Logs.t('[LeaveService] Initialized');
+  }
 
   Future<List<LeaveModel>> getUserLeave({int? startDate, int? endDate}) async {
     final List<LeaveModel>? leave;

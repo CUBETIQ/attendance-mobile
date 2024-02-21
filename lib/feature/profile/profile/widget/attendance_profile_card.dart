@@ -38,14 +38,14 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Present",
-                    style: BodySmallRegular,
+                    style: AppStyles().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAttendance != null
                         ? totalAttendance.toString()
                         : "0",
-                    style: BodyXlargeMedium,
+                    style: AppStyles().bodyXlargeMedium,
                   ),
                 ],
               ),
@@ -58,12 +58,12 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Absent",
-                    style: BodySmallRegular,
+                    style: AppStyles().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAbsent != null ? totalAbsent.toString() : "0",
-                    style: BodyXlargeMedium,
+                    style: AppStyles().bodyXlargeMedium,
                   ),
                 ],
               ),
@@ -76,12 +76,12 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "On Leave",
-                    style: BodySmallRegular,
+                    style: AppStyles().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalLeave != null ? totalLeave.toString() : "0",
-                    style: BodyXlargeMedium,
+                    style: AppStyles().bodyXlargeMedium,
                   ),
                 ],
               ),

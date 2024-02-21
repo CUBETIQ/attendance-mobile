@@ -35,7 +35,7 @@ class AttendanceReportCard extends StatelessWidget {
               text: StringUtil()
                   .getfullname(data.firstName, data.lastName, data.username),
               overflow: TextOverflow.ellipsis,
-              style: BodyMediumMedium,
+              style: AppStyles().bodyMediumMedium,
               maxLines: 2,
             ),
           ),
@@ -43,7 +43,7 @@ class AttendanceReportCard extends StatelessWidget {
             child: MyText(
               text: data.position ?? "N/A",
               overflow: TextOverflow.ellipsis,
-              style: BodyMediumMedium,
+              style: AppStyles().bodyMediumMedium,
               maxLines: 2,
             ),
           ),

@@ -6,9 +6,8 @@ import 'package:get/get.dart';
 
 class SettingController extends GetxController {
   static SettingController get to => Get.find();
-  final LocalStorageController localDataService =
-      LocalStorageController.getInstance();
-  RxBool isDarkMode = false.obs;
+  final localDataService = LocalStorageController.getInstance();
+  final isDarkMode = false.obs;
   LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override

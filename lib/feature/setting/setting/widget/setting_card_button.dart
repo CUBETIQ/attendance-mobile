@@ -46,14 +46,14 @@ class SettingCardButton extends StatelessWidget {
                     children: [
                       MyText(
                         text: title,
-                        style: BodyLargeMedium,
+                        style: AppStyles().bodyLargeMedium,
                       ),
                       MyText(
                         text: description,
                         maxLines: 2,
-                        style: BodySmallRegular.copyWith(
-                          color: Theme.of(context).colorScheme.outline,
-                        ),
+                        style: AppStyles().bodySmallRegular.copyWith(
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
                       ),
                     ],
                   ),

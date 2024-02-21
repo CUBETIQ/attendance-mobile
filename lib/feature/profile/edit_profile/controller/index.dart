@@ -18,22 +18,22 @@ import 'package:get/get.dart';
 
 class EditProfileController extends GetxController {
   static EditProfileController get to => Get.find();
-  Rx<UserModel> user = UserModel().obs;
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController lastnameController = TextEditingController();
-  TextEditingController dobController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  var isLoading = false.obs;
-  Rxn<String> image = Rxn<String>(null);
-  Rxn<String> backUpImage = Rxn<String>(null);
-  Rxn<int> dob = Rxn<int>(null);
-  Rxn<File> imageFile = Rxn<File>(null);
-  RxList<String> genderList = [
+  final user = UserModel().obs;
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+  final dobController = TextEditingController();
+  final addressController = TextEditingController();
+  final isLoading = false.obs;
+  final image = Rxn<String>(null);
+  final backUpImage = Rxn<String>(null);
+  final dob = Rxn<int>(null);
+  final imageFile = Rxn<File>(null);
+  final genderList = [
     Gender.female,
     Gender.male,
     Gender.other,
   ].obs;
-  Rxn<String> selectedGender = Rxn<String>(null);
+  final selectedGender = Rxn<String>(null);
 
   @override
   void onInit() {

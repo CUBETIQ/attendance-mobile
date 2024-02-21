@@ -4,11 +4,21 @@ import 'package:timesync360/core/network/endpoint.dart';
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class NavigationService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = NavigationService._internal();
+  final dioInstance = DioUtil();
   late bool isLocationServiceEnabled;
   late LocationPermission permission;
+
+  factory NavigationService() {
+    return _singleton;
+  }
+
+  NavigationService._internal() {
+    Logs.t('[NavigationService] Initialized');
+  }
 
   Future<Position> getCurrentLocation() async {
     isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();

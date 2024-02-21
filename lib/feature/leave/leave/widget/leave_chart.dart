@@ -53,7 +53,7 @@ class LeaveChart extends StatelessWidget {
       ),
       child: Column(
         children: [
-          MyText(text: title, style: BodyMediumRegular),
+          MyText(text: title, style: AppStyles().bodyMediumRegular),
           SizedBox(height: SizeUtils.scale(10, size.width)),
           CircularPercentIndicator(
             animation: true,
@@ -67,7 +67,7 @@ class LeaveChart extends StatelessWidget {
                     : percent ?? 0.0,
             center: MyText(
               text: centerText ?? "0%",
-              style: BodySmallRegular,
+              style: AppStyles().bodySmallRegular,
             ),
             linearGradient: const LinearGradient(
               colors: [
@@ -79,7 +79,8 @@ class LeaveChart extends StatelessWidget {
             circularStrokeCap: CircularStrokeCap.round,
           ),
           SizedBox(height: SizeUtils.scale(10, size.width)),
-          MyText(text: textBelow ?? "0/0", style: BodyMediumRegular),
+          MyText(
+              text: textBelow ?? "0/0", style: AppStyles().bodyMediumRegular),
         ],
       ),
     );

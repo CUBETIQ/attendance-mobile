@@ -76,12 +76,12 @@ class StaffCard extends StatelessWidget {
                       staff.lastName,
                       staff.username,
                     ),
-                    style: BodyMediumSemi,
+                    style: AppStyles().bodyMediumSemi,
                   ),
                 ),
                 MyText(
                   text: position ?? "N/A",
-                  style: BodyMediumRegular,
+                  style: AppStyles().bodyMediumRegular,
                 ),
               ],
             ),
@@ -92,15 +92,15 @@ class StaffCard extends StatelessWidget {
               children: [
                 MyText(
                   text: (staff.status ?? UserStatus.active).capitalizeFirst,
-                  style: BodyMediumRegular.copyWith(
-                    color: staff.status != null
-                        ? staff.status == UserStatus.active
-                            ? Colors.green
-                            : staff.status == UserStatus.idle
-                                ? Colors.orange
-                                : Colors.red
-                        : Colors.green,
-                  ),
+                  style: AppStyles().bodyMediumRegular.copyWith(
+                        color: staff.status != null
+                            ? staff.status == UserStatus.active
+                                ? Colors.green
+                                : staff.status == UserStatus.idle
+                                    ? Colors.orange
+                                    : Colors.red
+                            : Colors.green,
+                      ),
                 ),
                 SizedBox(height: SizeUtils.scale(4, size.width)),
                 GestureDetector(
@@ -123,9 +123,9 @@ class StaffCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "View Detail",
-                          style: BodySmallRegular.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
+                          style: AppStyles().bodySmallRegular.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                         ),
                         SizedBox(width: SizeUtils.scale(2, size.width)),
                         Icon(

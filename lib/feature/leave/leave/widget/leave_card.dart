@@ -79,9 +79,9 @@ class LeaveCard extends StatelessWidget {
                   ),
                   child: MyText(
                     text: (leave.status ?? LeaveStatus.pending).capitalizeFirst,
-                    style: BodySmallRegular.copyWith(
-                      color: Colors.white,
-                    ),
+                    style: AppStyles().bodySmallRegular.copyWith(
+                          color: Colors.white,
+                        ),
                   ),
                 ),
                 SizedBox(
@@ -90,29 +90,29 @@ class LeaveCard extends StatelessWidget {
                 MyText(
                   text:
                       "${(leave.type ?? LeaveType.annual).capitalize} leave request",
-                  style: BodyLargeMedium,
+                  style: AppStyles().bodyLargeMedium,
                 ),
                 MyText(
                   text:
                       "${DateFormatter().formatMillisecondsToDOB(leave.from)} - ${DateFormatter().formatMillisecondsToDOB(leave.to)}",
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
+                  style: AppStyles().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                 ),
                 Row(
                   children: [
                     MyText(
                       text: "Duration: ",
-                      style: BodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
+                      style: AppStyles().bodySmallRegular.copyWith(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
                     ),
                     MyText(
                       text:
                           " ${StringUtil().removeTrailingZeros(leave.duration)}  ",
-                      style: BodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
+                      style: AppStyles().bodySmallRegular.copyWith(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
                     ),
                   ],
                 ),
@@ -126,9 +126,9 @@ class LeaveCard extends StatelessWidget {
                           : leave.status == LeaveStatus.rejected
                               ? "Declined By"
                               : "Pending Approval",
-                      style: BodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
+                      style: AppStyles().bodySmallRegular.copyWith(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
                     ),
                     SizedBox(
                       height: 5 * (size.width / 375.0),
@@ -138,10 +138,14 @@ class LeaveCard extends StatelessWidget {
                         maxWidth: SizeUtils.scale(160, size.width),
                       ),
                       child: MyText(
-                        text: leave.updateBy?["name"] ?? "-----",
-                        style: BodyMediumRegular.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
+                        text: StringUtil().getfullname(
+                          leave.updateBy?.firstName,
+                          leave.updateBy?.lastName,
+                          leave.updateBy?.username,
                         ),
+                        style: AppStyles().bodyMediumRegular.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                       ),
                     ),
                   ],
@@ -174,7 +178,7 @@ class LeaveCard extends StatelessWidget {
                           ),
                           child: MyText(
                             text: "Cancel",
-                            style: BodySmallMedium,
+                            style: AppStyles().bodySmallMedium,
                           ),
                         ),
                       )
@@ -199,9 +203,9 @@ class LeaveCard extends StatelessWidget {
                     ),
                     child: MyText(
                       text: "View",
-                      style: BodySmallMedium.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
+                      style: AppStyles().bodySmallMedium.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
                     ),
                   ),
                 ),

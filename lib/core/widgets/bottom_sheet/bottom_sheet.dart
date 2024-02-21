@@ -47,15 +47,15 @@ void getCheckInBottomSheet(BuildContext context,
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "You Have Checked In!",
-              style: BodyLarge.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              style: AppStyles().bodyLarge.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
               text:
                   "You have successfully checked in of your present! Good luck and have a nice day!",
-              style: BodyMediumRegular,
+              style: AppStyles().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
@@ -113,15 +113,15 @@ void getCheckOutBottomSheet(BuildContext context,
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "You Have Checked Out!",
-              style: BodyLarge.copyWith(
-                color: Theme.of(context).colorScheme.error,
-              ),
+              style: AppStyles().bodyLarge.copyWith(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
               text:
                   "You have successfully checked out of your present! Good bye and have a good rest!",
-              style: BodyMediumRegular,
+              style: AppStyles().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
@@ -183,14 +183,14 @@ void getLogOutBottomSheet(
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "Log Out",
-              style: BodyLarge.copyWith(
-                color: Theme.of(context).colorScheme.error,
-              ),
+              style: AppStyles().bodyLarge.copyWith(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "Are you sure you want to log out?",
-              style: BodyMediumRegular,
+              style: AppStyles().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
@@ -270,14 +270,14 @@ void getConfirmBottomSheet(
             SizedBox(height: size.height * 0.01),
             MyText(
               text: title ?? "Title",
-              style: BodyLarge.copyWith(
-                color: titleColor,
-              ),
+              style: AppStyles().bodyLarge.copyWith(
+                    color: titleColor,
+                  ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
               text: description ?? "Description",
-              style: BodyMediumRegular,
+              style: AppStyles().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),

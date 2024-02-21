@@ -12,10 +12,10 @@ import '../../../../routes/app_pages.dart';
 
 class DepartmentController extends GetxController {
   static DepartmentController get to => Get.find();
-  RxList<DepartmentModel> departmentList = <DepartmentModel>[].obs;
-  RxList<DepartmentModel> departmentListBackUp = <DepartmentModel>[].obs;
-  RxBool isLoading = false.obs;
-  TextEditingController searchController = TextEditingController();
+  final departmentList = <DepartmentModel>[].obs;
+  final departmentListBackUp = <DepartmentModel>[].obs;
+  final isLoading = false.obs;
+  final searchController = TextEditingController();
 
   @override
   void onInit() {

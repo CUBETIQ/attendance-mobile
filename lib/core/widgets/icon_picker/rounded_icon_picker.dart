@@ -39,7 +39,7 @@ class RoundedIconPicker extends StatelessWidget {
         haslabel == true
             ? MyText(
                 text: "Icon",
-                style: BodyMediumMedium,
+                style: AppStyles().bodyMediumMedium,
               )
             : const SizedBox.shrink(),
         SizedBox(height: haslabel == true ? 0 : AppSize().paddingS5),

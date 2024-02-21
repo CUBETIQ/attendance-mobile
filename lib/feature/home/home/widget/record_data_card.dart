@@ -80,16 +80,16 @@ class RecordDataCard extends StatelessWidget {
                           time ?? 0,
                         ))
                       : timeString ?? "--:--",
-                  style: BodyMediumMedium.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                  style: AppStyles().bodyMediumMedium.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
                 SizedBox(height: AppSize().paddingS2),
                 MyText(
                   text: time != null ? secondTitle : onNullTitle,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
+                  style: AppStyles().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                 ),
               ],
             ),
@@ -127,11 +127,11 @@ class RecordDataCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: secondTitle,
-                    style: BodyMediumMedium.copyWith(
-                      color: gradient != null
-                          ? Colors.white
-                          : Theme.of(context).colorScheme.onSurface,
-                    ),
+                    style: AppStyles().bodyMediumMedium.copyWith(
+                          color: gradient != null
+                              ? Colors.white
+                              : Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
                   SizedBox(height: AppSize().paddingS1),
                   StatusCard(

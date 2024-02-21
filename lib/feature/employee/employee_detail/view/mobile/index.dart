@@ -60,15 +60,15 @@ class StaffDetailViewMobile extends StatelessWidget {
                           controller.staff.value.lastName,
                           controller.staff.value.username,
                         ),
-                        style: BodyXlargeSemi.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                        style: AppStyles().bodyXlargeSemi.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                       ),
                       MyText(
                         text: controller.position.value.name ?? "No Position",
-                        style: BodyMediumRegular.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
+                        style: AppStyles().bodyMediumRegular.copyWith(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
                       ),
                     ],
                   ),

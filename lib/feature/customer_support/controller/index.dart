@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class CustomerSupportController extends GetxController {
   static CustomerSupportController get to => Get.find();
 
-  List<SupportButtonModel> buttons = [
+  final buttons = [
     SupportButtonModel(
       title: 'Contact Live Chat',
       leadingIcon: Icons.support_agent_rounded,

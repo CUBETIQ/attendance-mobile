@@ -30,7 +30,7 @@ class TaskReportCard extends StatelessWidget {
               text: StringUtil()
                   .getfullname(data.firstName, data.lastName, data.username),
               overflow: TextOverflow.ellipsis,
-              style: BodyMediumMedium,
+              style: AppStyles().bodyMediumMedium,
               maxLines: 2,
             ),
           ),

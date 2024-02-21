@@ -11,10 +11,10 @@ import 'package:get/get.dart';
 
 class OrganizationController extends GetxController {
   static OrganizationController get to => Get.find();
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
-  RxList<UserModel> staffs = <UserModel>[].obs;
-  RxList<PositionModel> positions = <PositionModel>[].obs;
-  RxList<DepartmentModel> departments = <DepartmentModel>[].obs;
+  final organization = OrganizationModel().obs;
+  final staffs = <UserModel>[].obs;
+  final positions = <PositionModel>[].obs;
+  final departments = <DepartmentModel>[].obs;
 
   @override
   void onInit() {

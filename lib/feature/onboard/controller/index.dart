@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class OnBoardController extends GetxController {
   static OnBoardController get to => Get.find();
   PageController? pageController;
-  List<OnBoardModel> onBoardList = [
+  final onBoardList = [
     OnBoardModel(
       title: 'Seamless Time Tracking',
       description:
@@ -28,7 +28,7 @@ class OnBoardController extends GetxController {
       image: SvgAssets.onboard3,
     ),
   ];
-  RxInt currentIndex = 0.obs;
+  final currentIndex = 0.obs;
   LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChangeLanguageController extends GetxController {
-  RxList<LanguageButtonModel> language = [
+  final language = [
     LanguageButtonModel(
       code: 'km',
       imageFlag: SvgAssets.cambodiaFlag,
@@ -21,10 +21,9 @@ class ChangeLanguageController extends GetxController {
       title: 'English',
     ),
   ].obs;
-  final LocalStorageController _localStorage =
-      LocalStorageController.getInstance();
-  Rxn<LanguageButtonModel> selectedLanguage = Rxn<LanguageButtonModel>();
-  RxList<bool> isSelected = [false, false].obs;
+  final _localStorage = LocalStorageController.getInstance();
+  final selectedLanguage = Rxn<LanguageButtonModel>();
+  final isSelected = [false, false].obs;
   LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override

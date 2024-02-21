@@ -48,7 +48,10 @@ class StaffViewMobile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyText(text: "Employee Overview", style: BodyLargeMedium),
+                  MyText(
+                    text: "Employee Overview",
+                    style: AppStyles().bodyLargeMedium,
+                  ),
                   SizedBox(height: AppSize().paddingS8),
                   SearchBar(
                     hintText: "Search Employee",

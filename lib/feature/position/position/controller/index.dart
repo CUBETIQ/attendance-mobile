@@ -12,10 +12,10 @@ import '../../../../constants/svg.dart';
 
 class PositionController extends GetxController {
   static PositionController get to => Get.find();
-  RxList<PositionModel> positionList = <PositionModel>[].obs;
-  RxList<PositionModel> positionListBackUp = <PositionModel>[].obs;
-  TextEditingController searchController = TextEditingController();
-  RxBool isLoading = false.obs;
+  final positionList = <PositionModel>[].obs;
+  final positionListBackUp = <PositionModel>[].obs;
+  final searchController = TextEditingController();
+  final isLoading = false.obs;
 
   @override
   void onInit() {

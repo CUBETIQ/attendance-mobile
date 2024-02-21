@@ -23,14 +23,15 @@ class DataRowReport extends StatelessWidget {
       children: [
         MyText(
           text: title ?? "Title",
-          style: BodyMediumRegular,
+          style: AppStyles().bodyMediumRegular,
         ),
         MyText(
           text: value ?? "Value",
           style: style ??
-              BodyMediumMedium.copyWith(
-                color: textColor ?? Theme.of(context).colorScheme.onBackground,
-              ),
+              AppStyles().bodyMediumMedium.copyWith(
+                    color:
+                        textColor ?? Theme.of(context).colorScheme.onBackground,
+                  ),
         )
       ],
     );

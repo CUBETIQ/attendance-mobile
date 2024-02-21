@@ -31,9 +31,9 @@ class AttendanceTextTitle extends StatelessWidget {
               ),
               child: MyText(
                 text: 'My Attendance',
-                style: BodyLargeMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
+                style: AppStyles().bodyLargeMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
               ),
             ),
     );

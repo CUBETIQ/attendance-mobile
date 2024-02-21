@@ -24,7 +24,7 @@ class ProfileDetailRow extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: MyText(
             text: title ?? "Title",
-            style: BodyMediumRegular,
+            style: AppStyles().bodyMediumRegular,
           ),
         ),
         Container(
@@ -37,7 +37,7 @@ class ProfileDetailRow extends StatelessWidget {
             text: value != "" && value != null
                 ? value.capitalizeMaybeNull ?? "N/A"
                 : "N/A",
-            style: BodyMediumRegular,
+            style: AppStyles().bodyMediumRegular,
           ),
         ),
       ],

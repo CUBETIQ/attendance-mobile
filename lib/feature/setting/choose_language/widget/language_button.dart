@@ -54,7 +54,7 @@ class LanguageButton extends StatelessWidget {
                 SizedBox(width: SizeUtils.scale(15, size.width)),
                 MyText(
                   text: title,
-                  style: BodyLargeMedium,
+                  style: AppStyles().bodyLargeMedium,
                 ),
               ],
             ),

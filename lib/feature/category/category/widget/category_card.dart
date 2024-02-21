@@ -63,7 +63,7 @@ class CategoryCard extends StatelessWidget {
             MyText(
               text: category.name ?? "N/A",
               maxLines: 2,
-              style: BodyMediumRegular,
+              style: AppStyles().bodyMediumRegular,
             ),
           ],
         ),

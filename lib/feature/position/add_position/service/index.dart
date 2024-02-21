@@ -4,9 +4,19 @@ import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/feature/position/add_position/model/add_position_model.dart';
 import 'package:timesync360/feature/position/add_position/model/edit_position_model.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class AddPositionService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = AddPositionService._internal();
+  final dioInstance = DioUtil();
+
+  factory AddPositionService() {
+    return _singleton;
+  }
+
+  AddPositionService._internal() {
+    Logs.t('[AddPositionService] Initialized');
+  }
 
   Future<PositionModel> addPosition(AddPositionModel input) async {
     final PositionModel position;

@@ -24,16 +24,16 @@ class JobCompanyTitle extends StatelessWidget {
           ),
           child: MyText(
             text: organization,
-            style: BodyMediumRegular.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: AppStyles().bodyMediumRegular.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
         ),
         MyText(
           text: " | ",
-          style: BodyMediumRegular.copyWith(
-            color: Theme.of(context).colorScheme.primary,
-          ),
+          style: AppStyles().bodyMediumRegular.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
         ),
         Container(
           constraints: BoxConstraints(
@@ -41,9 +41,9 @@ class JobCompanyTitle extends StatelessWidget {
           ),
           child: MyText(
             text: position,
-            style: BodyMediumRegular.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: AppStyles().bodyMediumRegular.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
         ),
       ],

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class TaskDetailController extends GetxController {
   static TaskDetailController get to => Get.find();
-  Rxn<TaskModel> task = Rxn<TaskModel>(null);
+  final task = Rxn<TaskModel>(null);
 
   @override
   void onInit() {

@@ -1,11 +1,11 @@
 class AppSize {
-  AppSize._(); // private constructor to prevent instantiation from outside
-
-  static final AppSize _instance = AppSize._(); // singleton instance
+  static final AppSize _instance = AppSize._internal();
 
   factory AppSize() {
     return _instance;
   }
+
+  AppSize._internal();
 
   // Padding Vertical
   double get paddingVerticalSmall => 8.0;

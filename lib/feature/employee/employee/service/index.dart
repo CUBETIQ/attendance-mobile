@@ -5,9 +5,19 @@ import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class StaffService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = StaffService._internal();
+  final dioInstance = DioUtil();
+
+  factory StaffService() {
+    return _singleton;
+  }
+
+  StaffService._internal() {
+    Logs.t('[StaffService] Initialized');
+  }
 
   Future<List<UserModel>> getAllStaffs({required String organizationId}) async {
     final List<UserModel> staffs;

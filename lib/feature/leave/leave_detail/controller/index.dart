@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class LeaveDetailController extends GetxController {
   static LeaveDetailController get to => Get.find();
-  Rx<LeaveModel> leave = LeaveModel().obs;
+  final leave = LeaveModel().obs;
 
   @override
   void onInit() {

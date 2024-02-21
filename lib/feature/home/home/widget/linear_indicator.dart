@@ -42,7 +42,7 @@ class LinearIndicator extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MyText(text: title ?? "Title", style: BodyMedium),
+          MyText(text: title ?? "Title", style: AppStyles().bodyMedium),
           Row(
             children: [
               Expanded(
@@ -65,10 +65,10 @@ class LinearIndicator extends StatelessWidget {
                 text: percent != null && percent?.isNaN == false
                     ? '${(percent! * 100).toStringAsFixed(2)}%'
                     : "0.00%",
-                style: BodySmall.copyWith(
-                  color:
-                      indicatorColor ?? Theme.of(context).colorScheme.primary,
-                ),
+                style: AppStyles().bodySmall.copyWith(
+                      color: indicatorColor ??
+                          Theme.of(context).colorScheme.primary,
+                    ),
               ),
             ],
           ),
@@ -76,7 +76,7 @@ class LinearIndicator extends StatelessWidget {
             child: MyText(
               text:
                   '${isCheckIn == true ? checkInEmployees : checkOutEmployees} out of $totalEmployees employees are present',
-              style: BodySmallRegular,
+              style: AppStyles().bodySmallRegular,
             ),
           ),
         ],

@@ -24,14 +24,14 @@ import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
-  RxInt selectedIndex = 0.obs;
-  Rx<UserModel> user = UserModel().obs;
-  Rx<PositionModel> position = PositionModel().obs;
-  Rx<DepartmentModel> department = DepartmentModel().obs;
-  RxString getUserRole = "".obs;
+  final selectedIndex = 0.obs;
+  final user = UserModel().obs;
+  final position = PositionModel().obs;
+  final department = DepartmentModel().obs;
+  final getUserRole = "".obs;
   late List<DrawerModel> drawerItems;
-  List<String> titles = ['Home', 'Task', 'Profile'];
-  List<BottomBarModel> items = [
+  final titles = ['Home', 'Task', 'Profile'];
+  final items = [
     BottomBarModel(
       title: 'Home',
       icon: Icons.home_rounded,
@@ -58,17 +58,16 @@ class NavigationController extends GetxController {
       selectedIcon: Icons.person_rounded,
     ),
   ];
-  Rxn<OranizationLocationModel> organizationLocation =
-      Rxn<OranizationLocationModel>(null);
-  Rxn<Position> userLocation = Rxn<Position>(null);
-  RxBool isInRange = false.obs;
-  RxString startBreakTime = "".obs;
-  RxString endBreakTime = "".obs;
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
-  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
-  Rxn<String> fullname = Rxn<String>(null);
+  final organizationLocation = Rxn<OranizationLocationModel>(null);
+  final userLocation = Rxn<Position>(null);
+  final isInRange = false.obs;
+  final startBreakTime = "".obs;
+  final endBreakTime = "".obs;
+  final organization = OrganizationModel().obs;
+  final userStatus = UserStatusModel().obs;
+  final fullname = Rxn<String>(null);
   final zoomDrawerController = ZoomDrawerController();
-  RxInt totalWorkMinutes = 0.obs;
+  final totalWorkMinutes = 0.obs;
 
   void toggleDrawer() {
     zoomDrawerController.toggle?.call();

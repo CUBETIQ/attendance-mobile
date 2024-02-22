@@ -43,7 +43,7 @@ class SummaryDetailCard extends StatelessWidget {
               ),
               SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
-                text: StringUtil().getfullname(
+                text: StringUtil.getfullname(
                   staff.firstName,
                   staff.lastName,
                   staff.username,

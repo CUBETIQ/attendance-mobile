@@ -64,7 +64,7 @@ class WorkHourCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(210, size.width),
                     ),
                     child: MyText(
-                      text: StringUtil().getfullname(
+                      text: StringUtil.getfullname(
                         staff.firstName,
                         staff.lastName,
                         staff.username,
@@ -105,7 +105,7 @@ class WorkHourCard extends StatelessWidget {
               SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
                 text:
-                    '${DateFormatter().formatMinutes(totalWorkMinute ?? 0)}/8:00',
+                    '${DateFormatter.formatMinutes(totalWorkMinute ?? 0)}/8:00',
               )
             ],
           )

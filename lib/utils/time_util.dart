@@ -1,11 +1,11 @@
 import 'package:intl/intl.dart';
 
 class DateFormatter {
-  String formatDateTime(DateTime dateTime) {
+  static String formatDateTime(DateTime dateTime) {
     return DateFormat('E, d MMMM y').format(dateTime);
   }
 
-  String formatShortDate(DateTime dateTime) {
+  static String formatShortDate(DateTime dateTime) {
     // Define the desired format
     final DateFormat formatter = DateFormat('d MMMM, y');
 
@@ -13,7 +13,7 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
-  String formatShortDateWithoutDay(DateTime dateTime) {
+  static String formatShortDateWithoutDay(DateTime dateTime) {
     // Define the desired format
     final DateFormat formatter = DateFormat('MMMM, y');
 
@@ -21,7 +21,7 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
-  String formatFullDate(DateTime dateTime) {
+  static String formatFullDate(DateTime dateTime) {
     // Define the desired format
     final DateFormat formatter = DateFormat('EEEE d MMMM, y');
 
@@ -29,7 +29,7 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
-  String formatTime(DateTime dateTime) {
+  static String formatTime(DateTime dateTime) {
     // Define the desired time format
     final DateFormat formatter = DateFormat('h:mm a');
 
@@ -37,7 +37,7 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
-  String formatTimeWithDate(int? dateTime) {
+  static String formatTimeWithDate(int? dateTime) {
     if (dateTime == null || dateTime.toString().length < 5) {
       return "N/A";
     }
@@ -52,7 +52,7 @@ class DateFormatter {
     return formatter.format(date);
   }
 
-  String formatTimeNoTrailing(DateTime dateTime) {
+  static String formatTimeNoTrailing(DateTime dateTime) {
     // Define the desired time format
     final DateFormat formatter = DateFormat('h:mm a');
 
@@ -60,7 +60,7 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
-  String formatMinutesToDays(int minutes) {
+  static String formatMinutesToDays(int minutes) {
     // Calculate days
     int days = minutes ~/ (24 * 60); // Assuming 24 hours in a day
 
@@ -70,7 +70,7 @@ class DateFormatter {
     return formattedTime;
   }
 
-  String formatMinutes(int minutes) {
+  static String formatMinutes(int minutes) {
     // Calculate hours and remaining minutes
 
     if (minutes == 0) {
@@ -87,7 +87,7 @@ class DateFormatter {
     return formattedTime;
   }
 
-  String formatMillisecondsToDOB(int? milliseconds) {
+  static String formatMillisecondsToDOB(int? milliseconds) {
     if (milliseconds == null || milliseconds.toString().length < 5) {
       return "N/A";
     }
@@ -97,7 +97,7 @@ class DateFormatter {
     return DateFormat('dd/MM/yyyy').format(dateTime);
   }
 
-  int calculateDurationInMinutes(
+  static int calculateDurationInMinutes(
       int startDateMilliseconds, int? endDateMilliseconds) {
     // Convert start date from milliseconds to DateTime
     DateTime startDate =
@@ -113,7 +113,7 @@ class DateFormatter {
     return duration.inMinutes;
   }
 
-  String getHourMinuteSecondFromMinute(int? minutes) {
+  static String getHourMinuteSecondFromMinute(int? minutes) {
     if (minutes == null || minutes == 0) {
       return "N/A";
     }
@@ -136,7 +136,7 @@ class DateFormatter {
 /////////////////////////////////
 
 class DateTimeUtil {
-  int? getStartOfDayInMilisecond(DateTime? picked) {
+  static int? getStartOfDayInMilisecond(DateTime? picked) {
     if (picked != null) {
       DateTime startOfDayDateTime = DateTime(
         picked.year,
@@ -152,7 +152,7 @@ class DateTimeUtil {
     return null;
   }
 
-  int? getEndOfDayInMilisecond(DateTime? date) {
+  static int? getEndOfDayInMilisecond(DateTime? date) {
     if (date != null) {
       DateTime endOfDayDateTime = DateTime(
         date.year,
@@ -168,7 +168,7 @@ class DateTimeUtil {
     return null;
   }
 
-  int? getStartOfMonthInMilliseconds(DateTime? picked) {
+  static int? getStartOfMonthInMilliseconds(DateTime? picked) {
     if (picked != null) {
       DateTime startOfMonthDateTime = DateTime(
         picked.year,
@@ -184,7 +184,7 @@ class DateTimeUtil {
     return null;
   }
 
-  int? getEndOfMonthInMilliseconds(DateTime? date) {
+  static int? getEndOfMonthInMilliseconds(DateTime? date) {
     if (date != null) {
       DateTime endOfMonthDateTime = DateTime(
         date.year,
@@ -200,7 +200,7 @@ class DateTimeUtil {
     return null;
   }
 
-  int calculateTotalMinutes(String startHour, String endHour) {
+  static int calculateTotalMinutes(String startHour, String endHour) {
     DateTime startTime = DateTime(2022, 1, 1,
         int.parse(startHour.split(":")[0]), int.parse(startHour.split(":")[1]));
     DateTime endTime = DateTime(2022, 1, 1, int.parse(endHour.split(":")[0]),
@@ -210,7 +210,7 @@ class DateTimeUtil {
     return difference.inMinutes;
   }
 
-  String calculateDuration(String startHour, String endHour) {
+  static String calculateDuration(String startHour, String endHour) {
     // Parse startHour and endHour strings into DateTime objects
     DateTime startTime = DateFormat('H:mm').parse(startHour);
     DateTime endTime = DateFormat('H:mm').parse(endHour);

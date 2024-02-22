@@ -32,9 +32,7 @@ class NavigationService {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      Future.delayed(const Duration(seconds: 1), () {
-        openAppSettings();
-      });
+      openAppSettings();
     }
 
     return await Geolocator.getCurrentPosition();

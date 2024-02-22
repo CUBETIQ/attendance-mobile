@@ -132,7 +132,7 @@ class TaskCard extends StatelessWidget {
                     ),
                     MyText(
                       text: task.endDate != null
-                          ? "Due: ${DateFormatter().formatMillisecondsToDOB(task.endDate!)}"
+                          ? "Due: ${DateFormatter.formatMillisecondsToDOB(task.endDate!)}"
                           : "Due: N/A",
                       style: AppStyles().bodyXSmallRegular.copyWith(
                             color: task.endDate == null

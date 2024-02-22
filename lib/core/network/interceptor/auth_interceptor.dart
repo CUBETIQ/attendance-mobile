@@ -1,3 +1,4 @@
+import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:dio/dio.dart';
 
@@ -12,10 +13,12 @@ class AuthInterceptor extends Interceptor {
       options.headers.addAll({
         'content-type': 'application/json',
         'Authorization': "Bearer ${localData?.accessToken}",
+        'User-Agent': AppConfig.getUserAgent,
       });
     } else {
       options.headers.addAll({
         'content-type': 'application/json',
+        'User-Agent': AppConfig.getUserAgent,
       });
     }
     return super.onRequest(options, handler);

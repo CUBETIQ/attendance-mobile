@@ -47,7 +47,7 @@ class SideDrawer extends StatelessWidget {
             ),
             SizedBox(height: SizeUtils.scale(5, size.height)),
             MyText(
-              text: StringUtil().getfullname(
+              text: StringUtil.getfullname(
                 user.firstName,
                 user.lastName,
                 user.username,

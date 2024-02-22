@@ -99,12 +99,12 @@ class LeaveDetailViewMobile extends StatelessWidget {
                   LeaveDetailCard(
                     title: "Date: ",
                     value:
-                        "${DateFormatter().formatMillisecondsToDOB(controller.leave.value.from)} - ${DateFormatter().formatMillisecondsToDOB(controller.leave.value.to)}",
+                        "${DateFormatter.formatMillisecondsToDOB(controller.leave.value.from)} - ${DateFormatter.formatMillisecondsToDOB(controller.leave.value.to)}",
                   ),
                   LeaveDetailCard(
                     title: "Duration: ",
                     value:
-                        " ${StringUtil().removeTrailingZeros(controller.leave.value.duration)}  ${(controller.leave.value.duration ?? 0) < 2 ? "Day" : "Days"}",
+                        " ${StringUtil.removeTrailingZeros(controller.leave.value.duration)}  ${(controller.leave.value.duration ?? 0) < 2 ? "Day" : "Days"}",
                   ),
                   LeaveDetailCard(
                     title: controller.leave.value.status == LeaveStatus.approved
@@ -129,7 +129,7 @@ class LeaveDetailViewMobile extends StatelessWidget {
                             maxWidth: SizeUtils.scale(200, size.width),
                           ),
                           child: MyText(
-                            text: StringUtil().getfullname(
+                            text: StringUtil.getfullname(
                               controller.leave.value.updateBy?.firstName,
                               controller.leave.value.updateBy?.lastName,
                               controller.leave.value.updateBy?.username,

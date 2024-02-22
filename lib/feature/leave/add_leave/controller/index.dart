@@ -45,7 +45,7 @@ class AddLeaveController extends GetxController
     "2.5",
     "3",
     "3.5",
-  ].obs;
+  ];
   final selectedValue = Rxn<String>(null);
   final searchController = TextEditingController();
   FocusNode? durationFocusNode = FocusNode();
@@ -74,10 +74,10 @@ class AddLeaveController extends GetxController
     // Set endDate to the end of the day
     DateTime endOfDay = DateTime(now.year, now.month, now.day, 23, 59, 59, 999);
 
-    startDateController.text = DateFormatter()
-        .formatMillisecondsToDOB(startOfDay.millisecondsSinceEpoch);
-    endDateController.text = DateFormatter()
-        .formatMillisecondsToDOB(endOfDay.millisecondsSinceEpoch);
+    startDateController.text = DateFormatter.formatMillisecondsToDOB(
+        startOfDay.millisecondsSinceEpoch);
+    endDateController.text =
+        DateFormatter.formatMillisecondsToDOB(endOfDay.millisecondsSinceEpoch);
     startDate.value = startOfDay.millisecondsSinceEpoch;
     endDate.value = endOfDay.millisecondsSinceEpoch;
   }
@@ -85,7 +85,7 @@ class AddLeaveController extends GetxController
   void getStartDateInMilliSecond(int? date) {
     startDate.value = date;
     endDate.value = date;
-    endDateController.text = DateFormatter().formatMillisecondsToDOB(date ?? 0);
+    endDateController.text = DateFormatter.formatMillisecondsToDOB(date ?? 0);
   }
 
   void getEndDateInMilliSecond(int? date) {
@@ -110,9 +110,9 @@ class AddLeaveController extends GetxController
         endDate.value = leave.value?.to;
         durationController.value.text = (leave.value?.duration ?? 1).toString();
         startDateController.text =
-            DateFormatter().formatMillisecondsToDOB(leave.value?.from);
+            DateFormatter.formatMillisecondsToDOB(leave.value?.from);
         endDateController.text =
-            DateFormatter().formatMillisecondsToDOB(leave.value?.to);
+            DateFormatter.formatMillisecondsToDOB(leave.value?.to);
         selectLeaveType.value = leave.value?.type ?? LeaveType.annual;
         selectLeaveDurationType.value =
             leave.value?.durationType ?? LeaveTypeDuration.fullDay;

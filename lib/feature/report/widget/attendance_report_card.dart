@@ -32,8 +32,8 @@ class AttendanceReportCard extends StatelessWidget {
           SizedBox(
             width: SizeUtils.scale(110, size.width),
             child: MyText(
-              text: StringUtil()
-                  .getfullname(data.firstName, data.lastName, data.username),
+              text: StringUtil.getfullname(
+                  data.firstName, data.lastName, data.username),
               overflow: TextOverflow.ellipsis,
               style: AppStyles().bodyMediumMedium,
               maxLines: 2,
@@ -64,7 +64,7 @@ class AttendanceReportCard extends StatelessWidget {
       children: [
         DataRowReport(
           title: "Check In: ",
-          value: DateFormatter().formatTimeWithDate(
+          value: DateFormatter.formatTimeWithDate(
             data.attendance?.checkInDateTime,
           ),
         ),
@@ -93,14 +93,14 @@ class AttendanceReportCard extends StatelessWidget {
         data.attendance != null && data.attendance?.checkInEarly != null
             ? DataRowReport(
                 title: "Check In Early: ",
-                value: DateFormatter().getHourMinuteSecondFromMinute(
+                value: DateFormatter.getHourMinuteSecondFromMinute(
                   data.attendance?.checkInEarly,
                 ),
               )
             : data.attendance != null && data.attendance?.checkInLate != null
                 ? DataRowReport(
                     title: "Check In Late: ",
-                    value: DateFormatter().getHourMinuteSecondFromMinute(
+                    value: DateFormatter.getHourMinuteSecondFromMinute(
                       data.attendance?.checkInLate,
                     ),
                   )
@@ -108,7 +108,7 @@ class AttendanceReportCard extends StatelessWidget {
         SizedBox(height: SizeUtils.scale(2, size.width)),
         DataRowReport(
           title: "Check Out: ",
-          value: DateFormatter().formatTimeWithDate(
+          value: DateFormatter.formatTimeWithDate(
             data.attendance?.checkOutDateTime,
           ),
         ),
@@ -133,14 +133,14 @@ class AttendanceReportCard extends StatelessWidget {
         data.attendance != null && data.attendance?.checkOutLate != null
             ? DataRowReport(
                 title: "Check Out Late: ",
-                value: DateFormatter().getHourMinuteSecondFromMinute(
+                value: DateFormatter.getHourMinuteSecondFromMinute(
                   data.attendance?.checkOutLate,
                 ),
               )
             : data.attendance != null && data.attendance?.checkOutEarly != null
                 ? DataRowReport(
                     title: "Check Out Early: ",
-                    value: DateFormatter().getHourMinuteSecondFromMinute(
+                    value: DateFormatter.getHourMinuteSecondFromMinute(
                       data.attendance?.checkOutEarly,
                     ),
                   )
@@ -148,7 +148,7 @@ class AttendanceReportCard extends StatelessWidget {
         SizedBox(height: SizeUtils.scale(2, size.width)),
         DataRowReport(
           title: "Work Hour: ",
-          value: DateFormatter().getHourMinuteSecondFromMinute(totalWorkMinute),
+          value: DateFormatter.getHourMinuteSecondFromMinute(totalWorkMinute),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         DataRowReport(

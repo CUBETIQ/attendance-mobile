@@ -75,7 +75,7 @@ class RecordDataCard extends StatelessWidget {
               children: [
                 MyText(
                   text: time != null
-                      ? DateFormatter().formatTimeNoTrailing(
+                      ? DateFormatter.formatTimeNoTrailing(
                           DateTime.fromMillisecondsSinceEpoch(
                           time ?? 0,
                         ))

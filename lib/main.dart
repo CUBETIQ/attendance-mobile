@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:timesync360/app.dart';
+import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/core/database/isar/entities/local_storage.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/database/local_path/app_path_controller.dart';
@@ -54,6 +55,7 @@ Future<void> main() async {
 
   await initService();
   await AppPathController.initPath();
+  await AppConfig.init();
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
   runApp(const MyApp());
   FlutterNativeSplash.remove();

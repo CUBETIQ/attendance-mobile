@@ -92,31 +92,33 @@ class AddLeaveViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(height: AppSize().paddingS5),
-              Obx(() => TypeAheadField<String>(
-                    focusNode: controller.durationFocusNode,
-                    controller: controller.durationController.value,
-                    builder: (context, textController, focusNode) {
-                      return MyTextFieldForm(
-                        focusNode: focusNode,
-                        hasLabel: true,
-                        label: "Duration",
-                        hintText: "Enter your Duration",
-                        textController: controller.durationController.value,
-                      );
-                    },
-                    itemBuilder: (context, value) {
-                      return ListTile(
-                        title: Text(value),
-                      );
-                    },
-                    onSelected: (value) {
-                      controller.durationFocusNode?.unfocus();
-                      controller.durationController.value.text = value;
-                    },
-                    suggestionsCallback: (String search) {
-                      return controller.test.value;
-                    },
-                  )),
+              Obx(
+                () => TypeAheadField<String>(
+                  focusNode: controller.durationFocusNode,
+                  controller: controller.durationController.value,
+                  builder: (context, textController, focusNode) {
+                    return MyTextFieldForm(
+                      focusNode: focusNode,
+                      hasLabel: true,
+                      label: "Duration",
+                      hintText: "Enter your Duration",
+                      textController: controller.durationController.value,
+                    );
+                  },
+                  itemBuilder: (context, value) {
+                    return ListTile(
+                      title: Text(value),
+                    );
+                  },
+                  onSelected: (value) {
+                    controller.durationFocusNode?.unfocus();
+                    controller.durationController.value.text = value;
+                  },
+                  suggestionsCallback: (String search) {
+                    return controller.test;
+                  },
+                ),
+              ),
               SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
@@ -126,77 +128,6 @@ class AddLeaveViewMobile extends StatelessWidget {
                 maxlines: 5,
               ),
               SizedBox(height: AppSize().paddingS5),
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     MyText(
-              //       text: "Leave Duration Type",
-              //       style: BodyMediumMedium,
-              //     ),
-              //     const SizedBox(height: AppSize().paddingS5),
-              // Container(
-              //   height: 48 * (size.width / 375.0),
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(
-              //       (AppSize().borderRadiusLarge) * (size.width / 375.0),
-              //     ),
-              //     border: Border.all(
-              //       width: 2,
-              //       color: Theme.of(context)
-              //           .colorScheme
-              //           .primary
-              //           .withOpacity(0.9),
-              //     ),
-              //   ),
-              //   child: Row(
-              //     children: List.generate(
-              //       controller.leaveTypeDuration.length,
-              //       (index) => Expanded(
-              //         child: GestureDetector(
-              //           onTap: () =>
-              //               controller.onChnageLeaveDurationType(index),
-              //           child: Obx(
-              //             () => AnimatedContainer(
-              //               duration: const Duration(milliseconds: 300),
-              //               alignment: Alignment.center,
-              //               decoration: BoxDecoration(
-              //                 borderRadius: BorderRadius.circular(
-              //                   (AppSize().borderRadiusLarge) *
-              //                       (size.width / 375.0),
-              //                 ),
-              //                 color: controller
-              //                             .selectLeaveDurationType.value ==
-              //                         controller.leaveTypeDuration[index]
-              //                     ? Theme.of(context)
-              //                         .colorScheme
-              //                         .primary
-              //                         .withOpacity(0.9)
-              //                     : Colors.transparent,
-              //               ),
-              //               child: MyText(
-              //                 text: controller.leaveTypeDuration[index],
-              //                 style: BodyMediumMedium.copyWith(
-              //                   color: controller.selectLeaveDurationType
-              //                               .value ==
-              //                           controller.leaveTypeDuration[index]
-              //                       ? Theme.of(context)
-              //                           .colorScheme
-              //                           .onPrimary
-              //                       : Theme.of(context)
-              //                           .colorScheme
-              //                           .onBackground,
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              //
-              //   ),
-              // ],
               SizedBox(height: size.height * 0.06),
               MyAsyncButton(
                 title: "Save",

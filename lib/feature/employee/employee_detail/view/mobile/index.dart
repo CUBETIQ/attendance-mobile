@@ -55,7 +55,7 @@ class StaffDetailViewMobile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MyText(
-                        text: StringUtil().getfullname(
+                        text: StringUtil.getfullname(
                           controller.staff.value.firstName,
                           controller.staff.value.lastName,
                           controller.staff.value.username,
@@ -103,7 +103,7 @@ class StaffDetailViewMobile extends StatelessWidget {
                   Expanded(
                     child: LabelDetailCard(
                       title: "Date Of Birth",
-                      value: DateFormatter().formatMillisecondsToDOB(
+                      value: DateFormatter.formatMillisecondsToDOB(
                         controller.staff.value.dateOfBirth,
                       ),
                     ),

@@ -61,7 +61,7 @@ class RecordCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MyText(
-            text: DateFormatter().formatFullDate(date),
+            text: DateFormatter.formatFullDate(date),
             style: AppStyles().bodyMediumSemi.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),

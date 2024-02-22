@@ -103,9 +103,9 @@ class AddTaskController extends GetxController {
         taskController.text = task.value?.name ?? '';
         selectPriority.value = task.value?.priority ?? TaskPriority.low;
         startDateController.text =
-            DateFormatter().formatMillisecondsToDOB(task.value?.startDate ?? 0);
+            DateFormatter.formatMillisecondsToDOB(task.value?.startDate ?? 0);
         endDateController.text =
-            DateFormatter().formatMillisecondsToDOB(task.value?.endDate ?? 0);
+            DateFormatter.formatMillisecondsToDOB(task.value?.endDate ?? 0);
         startDate.value = task.value?.startDate ?? 0;
         endDate.value = task.value?.endDate ?? 0;
         descriptionController.text = task.value?.description ?? '';
@@ -124,7 +124,7 @@ class AddTaskController extends GetxController {
   void initDate() {
     DateTime now = DateTime.now();
     startDateController.text =
-        DateFormatter().formatMillisecondsToDOB(now.millisecondsSinceEpoch);
+        DateFormatter.formatMillisecondsToDOB(now.millisecondsSinceEpoch);
     startDate.value = now.millisecondsSinceEpoch;
   }
 

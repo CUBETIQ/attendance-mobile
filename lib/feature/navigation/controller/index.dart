@@ -102,11 +102,11 @@ class NavigationController extends GetxController {
     endBreakTime.value =
         organization.value.configs?.breakTime?.split("-")[1] ?? "13:00";
 
-    int totalMinuteBreakTime = DateTimeUtil()
-        .calculateTotalMinutes(startBreakTime.value, endBreakTime.value);
+    int totalMinuteBreakTime = DateTimeUtil.calculateTotalMinutes(
+        startBreakTime.value, endBreakTime.value);
 
     totalWorkMinutes.value =
-        DateTimeUtil().calculateTotalMinutes(startHour, endHour) -
+        DateTimeUtil.calculateTotalMinutes(startHour, endHour) -
             totalMinuteBreakTime;
   }
 

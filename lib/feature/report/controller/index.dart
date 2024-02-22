@@ -126,18 +126,18 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     if (DateTime(date.year, date.month) !=
         DateTime(DateTime.now().year, DateTime.now().month)) {
       calendarStartOfTheMonth.value =
-          DateTimeUtil().getStartOfMonthInMilliseconds(date);
+          DateTimeUtil.getStartOfMonthInMilliseconds(date);
       calendarEndOfTheMonth.value =
-          DateTimeUtil().getEndOfMonthInMilliseconds(date);
+          DateTimeUtil.getEndOfMonthInMilliseconds(date);
       await getAttendance();
       await getLeave();
       onDaySelected(date, date);
     } else {
       calendarFocusedDay.value = DateTime.now();
       calendarStartOfTheMonth.value =
-          DateTimeUtil().getStartOfMonthInMilliseconds(DateTime.now());
+          DateTimeUtil.getStartOfMonthInMilliseconds(DateTime.now());
       calendarEndOfTheMonth.value =
-          DateTimeUtil().getEndOfMonthInMilliseconds(DateTime.now());
+          DateTimeUtil.getEndOfMonthInMilliseconds(DateTime.now());
       await getAttendance();
       await getLeave();
       onDaySelected(DateTime.now(), DateTime.now());
@@ -154,12 +154,12 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
           .where(
             (element) =>
                 (element.from ?? 0) >=
-                    (DateTimeUtil().getStartOfDayInMilisecond(
+                    (DateTimeUtil.getStartOfDayInMilisecond(
                             savedSelectedDate.value) ??
                         0) &&
                 (element.from ?? 0) <=
-                    (DateTimeUtil()
-                            .getEndOfDayInMilisecond(savedSelectedDate.value) ??
+                    (DateTimeUtil.getEndOfDayInMilisecond(
+                            savedSelectedDate.value) ??
                         0) &&
                 element.status == LeaveStatus.approved,
           )
@@ -197,12 +197,12 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
       attendanceList.value = attendanceResult
           .where((element) =>
               (element.checkInDateTime ?? 0) >=
-                  (DateTimeUtil()
-                          .getStartOfDayInMilisecond(savedSelectedDate.value) ??
+                  (DateTimeUtil.getStartOfDayInMilisecond(
+                          savedSelectedDate.value) ??
                       0) &&
               (element.checkInDateTime ?? 0) <=
-                  (DateTimeUtil()
-                          .getEndOfDayInMilisecond(savedSelectedDate.value) ??
+                  (DateTimeUtil.getEndOfDayInMilisecond(
+                          savedSelectedDate.value) ??
                       0))
           .toList();
       for (var i = 0; i < attendanceResult.length; i++) {
@@ -242,8 +242,8 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     );
     if (picked != null) {
       selectedDate.value = picked;
-      startDate.value = DateTimeUtil().getStartOfDayInMilisecond(picked);
-      endDate.value = DateTimeUtil().getEndOfDayInMilisecond(picked);
+      startDate.value = DateTimeUtil.getStartOfDayInMilisecond(picked);
+      endDate.value = DateTimeUtil.getEndOfDayInMilisecond(picked);
       await getStaffAttendanceReport();
     }
   }
@@ -255,18 +255,17 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     attendanceList.value = attendanceResult
         .where((element) =>
             (element.checkInDateTime ?? 0) >=
-                (DateTimeUtil().getStartOfDayInMilisecond(selectedDay) ?? 0) &&
+                (DateTimeUtil.getStartOfDayInMilisecond(selectedDay) ?? 0) &&
             (element.checkInDateTime ?? 0) <=
-                (DateTimeUtil().getEndOfDayInMilisecond(selectedDay) ?? 0))
+                (DateTimeUtil.getEndOfDayInMilisecond(selectedDay) ?? 0))
         .toList();
     leaves.value = leaveResult
         .where(
           (element) =>
               (element.from ?? 0) >=
-                  (DateTimeUtil().getStartOfDayInMilisecond(selectedDay) ??
-                      0) &&
+                  (DateTimeUtil.getStartOfDayInMilisecond(selectedDay) ?? 0) &&
               (element.from ?? 0) <=
-                  (DateTimeUtil().getEndOfDayInMilisecond(selectedDay) ?? 0) &&
+                  (DateTimeUtil.getEndOfDayInMilisecond(selectedDay) ?? 0) &&
               element.status == LeaveStatus.approved,
         )
         .toList();
@@ -274,11 +273,11 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
 
   void initDate() {
     startDate.value =
-        DateTimeUtil().getStartOfDayInMilisecond(selectedDate.value);
-    endDate.value = DateTimeUtil().getEndOfDayInMilisecond(selectedDate.value);
+        DateTimeUtil.getStartOfDayInMilisecond(selectedDate.value);
+    endDate.value = DateTimeUtil.getEndOfDayInMilisecond(selectedDate.value);
     calendarStartOfTheMonth.value =
-        DateTimeUtil().getStartOfMonthInMilliseconds(calendarFocusedDay.value);
+        DateTimeUtil.getStartOfMonthInMilliseconds(calendarFocusedDay.value);
     calendarEndOfTheMonth.value =
-        DateTimeUtil().getEndOfMonthInMilliseconds(calendarFocusedDay.value);
+        DateTimeUtil.getEndOfMonthInMilliseconds(calendarFocusedDay.value);
   }
 }

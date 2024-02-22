@@ -126,7 +126,7 @@ class CompanyProfileCard extends StatelessWidget {
                               maxWidth: SizeUtils.scale(120, size.width),
                             ),
                             child: MyText(
-                              text: StringUtil().getfullname(
+                              text: StringUtil.getfullname(
                                 companyOwner?.firstName,
                                 companyOwner?.lastName,
                                 companyOwner?.username,

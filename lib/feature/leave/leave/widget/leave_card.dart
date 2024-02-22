@@ -94,7 +94,7 @@ class LeaveCard extends StatelessWidget {
                 ),
                 MyText(
                   text:
-                      "${DateFormatter().formatMillisecondsToDOB(leave.from)} - ${DateFormatter().formatMillisecondsToDOB(leave.to)}",
+                      "${DateFormatter.formatMillisecondsToDOB(leave.from)} - ${DateFormatter.formatMillisecondsToDOB(leave.to)}",
                   style: AppStyles().bodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),
@@ -109,7 +109,7 @@ class LeaveCard extends StatelessWidget {
                     ),
                     MyText(
                       text:
-                          " ${StringUtil().removeTrailingZeros(leave.duration)}  ",
+                          " ${StringUtil.removeTrailingZeros(leave.duration)}  ",
                       style: AppStyles().bodySmallRegular.copyWith(
                             color: Theme.of(context).colorScheme.outline,
                           ),
@@ -138,7 +138,7 @@ class LeaveCard extends StatelessWidget {
                         maxWidth: SizeUtils.scale(160, size.width),
                       ),
                       child: MyText(
-                        text: StringUtil().getfullname(
+                        text: StringUtil.getfullname(
                           leave.updateBy?.firstName,
                           leave.updateBy?.lastName,
                           leave.updateBy?.username,

@@ -99,7 +99,7 @@ class HomeStaffMobileView extends StatelessWidget {
                               maxWidth: SizeUtils.scale(240, size.width),
                             ),
                             child: MyText(
-                              text: StringUtil().getfullname(
+                              text: StringUtil.getfullname(
                                 controller.user.value.firstName,
                                 controller.user.value.lastName,
                                 controller.user.value.username,

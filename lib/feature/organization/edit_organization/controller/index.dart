@@ -89,7 +89,7 @@ class EditOrganizationController extends GetxController {
         endHour: endHourController.text,
         breakTime:
             "${breakStartHourController.text}-${breakEndHourController.text}",
-        breakDuration: DateTimeUtil().calculateDuration(
+        breakDuration: DateTimeUtil.calculateDuration(
           breakStartHourController.text,
           breakEndHourController.text,
         ),

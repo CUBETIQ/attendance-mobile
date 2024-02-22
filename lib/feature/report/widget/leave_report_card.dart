@@ -26,8 +26,8 @@ class LeaveReportCard extends StatelessWidget {
           SizedBox(
             width: SizeUtils.scale(110, size.width),
             child: MyText(
-              text: StringUtil()
-                  .getfullname(data.firstName, data.lastName, data.username),
+              text: StringUtil.getfullname(
+                  data.firstName, data.lastName, data.username),
               overflow: TextOverflow.ellipsis,
               style: AppStyles().bodyMediumMedium,
               maxLines: 2,

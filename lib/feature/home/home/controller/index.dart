@@ -17,6 +17,7 @@ import 'package:timesync360/feature/profile/profile/controller/index.dart';
 import 'package:timesync360/utils/attendance_util.dart';
 import 'package:timesync360/types/attendance_method.dart';
 import 'package:timesync360/types/role.dart';
+import 'package:timesync360/utils/double_util.dart';
 import 'package:timesync360/utils/time_util.dart';
 import 'package:timesync360/types/user_status.dart';
 import 'package:dio/dio.dart';
@@ -43,8 +44,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxList<PositionModel> positionList = <PositionModel>[].obs;
   var isLoadingList = false.obs;
   var isLoadingStaffAttendance = false.obs;
-  RxString startHour = "8".obs;
-  RxString endHour = "17".obs;
+  RxString startHour = "8:00".obs;
+  RxString endHour = "17:00".obs;
   Rxn<String> totalHour = Rxn<String>(null);
   RxString currentDate = "".obs;
   late AnimationController controller;
@@ -109,6 +110,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void onRefresh() {
+    NavigationController.to.getUserLocation();
     getAttendance();
     checkBreakTime();
     getSummarizeAttendance();
@@ -137,8 +139,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
     if (picked != null) {
       selectDate.value = picked;
-      startOfDay.value = DateTimeUtil().getStartOfDayInMilisecond(picked);
-      endOfDay.value = DateTimeUtil().getEndOfDayInMilisecond(picked);
+      startOfDay.value = DateTimeUtil.getStartOfDayInMilisecond(picked);
+      endOfDay.value = DateTimeUtil.getEndOfDayInMilisecond(picked);
       getDashboardChart();
       getAllStaffAttendance();
     }
@@ -183,11 +185,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> checkIn() async {
-    if (await checkUserLocation() == false) {
+    final checkLocation = await checkUserLocation();
+    if (checkLocation == false) {
       return;
     }
     DateTime now = await checkTime();
-    if (now.hour > endHour.value.toInt()) {
+    final getEndhout = endHour.value.split(":").first;
+    if (now.hour > getEndhout.toInt()) {
       showErrorSnackBar("Error", "You can't check in after $endHour");
       return;
     } else {
@@ -203,14 +207,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         CheckInModel input = CheckInModel(
           checkInDateTime: now.millisecondsSinceEpoch,
           checkInType: AttendanceMethod.manual,
-          checkInStatus:
-              CheckInStatusValidator().getStatus(startHour.value, now),
-          checkInEarly: GetMinute().checkEarlyMinute(startHour.value, now),
-          checkInLate: GetMinute().checkLateMinute(startHour.value, now),
+          checkInStatus: CheckInStatusValidator.getStatus(startHour.value, now),
+          checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
+          checkInLate: GetMinute.checkLateMinute(startHour.value, now),
           checkInLocation: location,
         );
         AttendanceModel checkIn = await HomeService().checkIn(input);
-        checkInTime.value = DateFormatter().formatTime(
+        checkInTime.value = DateFormatter.formatTime(
           DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
         );
         await getAttendance();
@@ -228,7 +231,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> checkOut() async {
-    if (await checkUserLocation() == false) {
+    final checkLocation = await checkUserLocation();
+    if (checkLocation == false) {
       return;
     }
     controller.forward();
@@ -239,17 +243,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         lng: NavigationController.to.userLocation.value?.longitude,
         inOffice: NavigationController.to.isInRange.value,
       );
-
       CheckOutModel input = CheckOutModel(
         checkOutDateTime: now.millisecondsSinceEpoch,
         checkOutType: AttendanceMethod.manual,
         checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
-        checkOutEarly: GetMinute().checkEarlyMinute(endHour.value, now),
-        checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
+        checkOutEarly: GetMinute.checkEarlyMinute(endHour.value, now),
+        checkOutLate: GetMinute.checkLateMinute(endHour.value, now),
         checkOutLocation: location,
       );
       AttendanceModel checkOut = await HomeService().checkOut(input);
-      checkOutTime.value = DateFormatter().formatTime(
+      checkOutTime.value = DateFormatter.formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
       );
       isCheckedIn.value = false;
@@ -283,11 +286,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       );
       if (attendanceList.isNotEmpty) {
         if (attendanceList.last.checkOutDateTime != null) {
-          totalHour.value = DateFormatter().formatMinutes(
+          totalHour.value = DateFormatter.formatMinutes(
             attendanceList.last.duration!,
           );
         }
-        checkInTime.value = DateFormatter().formatTime(
+        checkInTime.value = DateFormatter.formatTime(
           DateTime.fromMillisecondsSinceEpoch(
             attendanceList.last.checkInDateTime!,
           ),
@@ -295,7 +298,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
         } else {
-          checkOutTime.value = DateFormatter().formatTime(
+          checkOutTime.value = DateFormatter.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
               attendanceList.last.checkOutDateTime!,
             ),
@@ -358,18 +361,21 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         totalCheckOutEarly.value =
             attendanceChart.first.totalCheckoutEarly ?? 0;
 
-        presentPercentage.value =
-            (totalChartPresent.value / totalStaff.value) * 100;
-        absentPercentage.value =
-            (totalChartAbsent.value / totalStaff.value) * 100;
-        onLeavePercentage.value =
-            (totalChartLeave.value / totalStaff.value) * 100;
-        latePercentage.value =
-            ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
-        onTimePercentage.value =
-            ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
-        earlyPercentage.value =
-            ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
+        // Percentage for attendance chart
+        presentPercentage.value = DoubleUtil.caculatePercentage(
+            totalChartPresent.value, totalStaff.value);
+        absentPercentage.value = DoubleUtil.caculatePercentage(
+            totalChartAbsent.value, totalStaff.value);
+        onLeavePercentage.value = DoubleUtil.caculatePercentage(
+            totalChartLeave.value, totalStaff.value);
+
+        // Percentage for check in and check out
+        latePercentage.value = DoubleUtil.caculatePercentageForProgress(
+            totalCheckInLate.value, totalStaff.value);
+        onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
+            totalCheckInOnTime.value, totalStaff.value);
+        earlyPercentage.value = DoubleUtil.caculatePercentageForProgress(
+            totalCheckInEarly.value, totalStaff.value);
       } else {
         haveNoData.value = true;
       }
@@ -453,20 +459,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         .millisecondsSinceEpoch;
     endOfDay.value = DateTime(date.year, date.month, date.day, 23, 59, 59)
         .millisecondsSinceEpoch;
-
     startOfMonth.value =
         DateTime(date.year, date.month, 1, 0, 0, 0).millisecondsSinceEpoch;
-
     endOfMonth.value = DateTime(date.year, date.month + 1, 0, 23, 59, 59)
         .millisecondsSinceEpoch;
-
     startHour.value =
         NavigationController.to.organization.value.configs?.startHour ?? "8:00";
-    endHour.value = NavigationController.to.organization.value.configs?.endHour
-            ?.split(":")
-            .first ??
-        "17";
-
+    endHour.value =
+        NavigationController.to.organization.value.configs?.endHour ?? "17:00";
     currentDate.value = DateFormat('E, MMM dd').format(date);
   }
 
@@ -519,19 +519,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       isCheckIn.value = !isCheckIn.value;
       if (attendanceChart.isNotEmpty) {
         if (selectedAttendanceType.value == "Check In") {
-          latePercentage.value =
-              ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
-          onTimePercentage.value =
-              ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
-          earlyPercentage.value =
-              ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
+          latePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckInLate.value, totalStaff.value);
+          onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckInOnTime.value, totalStaff.value);
+          earlyPercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckInEarly.value, totalStaff.value);
         } else {
-          latePercentage.value =
-              ((totalCheckOutLate.value / totalStaffs.value) * 100) / 100;
-          onTimePercentage.value =
-              ((totalCheckOutOnTime.value / totalStaffs.value) * 100) / 100;
-          earlyPercentage.value =
-              ((totalCheckOutEarly.value / totalStaffs.value) * 100) / 100;
+          latePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckOutLate.value, totalStaffs.value);
+          onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckOutOnTime.value, totalStaffs.value);
+          earlyPercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckOutEarly.value, totalStaffs.value);
         }
       }
     }

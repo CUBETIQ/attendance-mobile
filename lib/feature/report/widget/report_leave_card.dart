@@ -71,8 +71,8 @@ class ReportLeaveCard extends StatelessWidget {
                         ),
                         SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
-                          text: DateFormatter()
-                              .formatMillisecondsToDOB(leave.from),
+                          text:
+                              DateFormatter.formatMillisecondsToDOB(leave.from),
                           style: AppStyles().bodySmallRegular,
                         ),
                       ],
@@ -87,8 +87,7 @@ class ReportLeaveCard extends StatelessWidget {
                         ),
                         SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
-                          text:
-                              DateFormatter().formatMillisecondsToDOB(leave.to),
+                          text: DateFormatter.formatMillisecondsToDOB(leave.to),
                           style: AppStyles().bodySmallRegular,
                         ),
                       ],
@@ -141,7 +140,7 @@ class ReportLeaveCard extends StatelessWidget {
                             maxWidth: SizeUtils.scale(100, size.width),
                           ),
                           child: MyText(
-                            text: StringUtil().getfullname(
+                            text: StringUtil.getfullname(
                               leave.updateBy?.firstName,
                               leave.updateBy?.lastName,
                               leave.updateBy?.username,

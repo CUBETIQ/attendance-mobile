@@ -95,14 +95,14 @@ class ReportAttendanceCard extends StatelessWidget {
                     ),
                     SizedBox(height: SizeUtils.scale(2, size.width)),
                     MyText(
-                      text: DateFormatter().formatTimeWithDate(
+                      text: DateFormatter.formatTimeWithDate(
                         attendance.checkInDateTime,
                       ),
                       style: AppStyles().bodySmallRegular,
                     ),
                     SizedBox(height: SizeUtils.scale(2, size.width)),
                     MyText(
-                      text: DateFormatter().formatTimeWithDate(
+                      text: DateFormatter.formatTimeWithDate(
                         attendance.checkOutDateTime,
                       ),
                       style: AppStyles().bodySmallRegular,

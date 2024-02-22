@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:timesync360/config/app_config.dart';
+
 class Endpoints {
   Endpoints._();
 
@@ -7,7 +9,7 @@ class Endpoints {
 
   static Endpoints get instance => _instance;
 
-  static const String baseUrl = "http://192.168.1.102:3000/api";
+  static const String baseUrl = AppConfig.baseUrl;
 
   // static const String baseUrl = "https://attendance-api-devx1.ctdn.dev/api";
 

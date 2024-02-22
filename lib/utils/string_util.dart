@@ -1,5 +1,6 @@
 class StringUtil {
-  String getfullname(String? firstName, String? lastName, String? username) {
+  static String getfullname(
+      String? firstName, String? lastName, String? username) {
     if ((firstName != null && firstName.isNotEmpty) &&
         (lastName != null && lastName.isNotEmpty)) {
       return "$firstName $lastName";
@@ -14,7 +15,7 @@ class StringUtil {
     }
   }
 
-  String removeTrailingZeros(double? number) {
+  static String removeTrailingZeros(double? number) {
     if (number == null) {
       return "1";
     }

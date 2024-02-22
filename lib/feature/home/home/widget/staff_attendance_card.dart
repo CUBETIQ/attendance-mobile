@@ -54,7 +54,7 @@ class StaffAttendanceCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(200, size.width),
                     ),
                     child: MyText(
-                      text: StringUtil().getfullname(
+                      text: StringUtil.getfullname(
                         staff.firstName,
                         staff.lastName,
                         staff.username,
@@ -104,14 +104,14 @@ class StaffAttendanceCard extends StatelessWidget {
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
-                    text: DateFormatter().formatTimeWithDate(
+                    text: DateFormatter.formatTimeWithDate(
                       attendance.checkInDateTime,
                     ),
                     style: AppStyles().bodySmallRegular,
                   ),
                   SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
-                    text: DateFormatter().formatTimeWithDate(
+                    text: DateFormatter.formatTimeWithDate(
                       attendance.checkOutDateTime,
                     ),
                     style: AppStyles().bodySmallRegular,

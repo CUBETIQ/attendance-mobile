@@ -96,7 +96,7 @@ class ProfileViewMobile extends StatelessWidget {
                         ),
                         child: Obx(
                           () => MyText(
-                            text: StringUtil().getfullname(
+                            text: StringUtil.getfullname(
                               controller.user.value.firstName,
                               controller.user.value.lastName,
                               controller.user.value.username,
@@ -132,7 +132,7 @@ class ProfileViewMobile extends StatelessWidget {
                       Obx(
                         () => ProfileDetailRow(
                           title: "Dob",
-                          value: DateFormatter().formatMillisecondsToDOB(
+                          value: DateFormatter.formatMillisecondsToDOB(
                             controller.user.value.dateOfBirth,
                           ),
                         ),

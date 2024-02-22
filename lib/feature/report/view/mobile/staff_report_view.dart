@@ -100,7 +100,7 @@ class StaffReportViewMobile extends StatelessWidget {
                   ? const SizedBox.shrink()
                   : controller.attendanceList.value.isEmpty &&
                           controller.leaves.value.isEmpty
-                      ? MyNoData(paddingTop: SizeUtils.scale(30, size.width))
+                      ? const MyNoData()
                       : ListView.separated(
                           shrinkWrap: true,
                           padding: EdgeInsets.symmetric(

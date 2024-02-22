@@ -91,7 +91,7 @@ class WorkingHourViewMobile extends StatelessWidget {
                             totalWorkMinute = 0;
                             for (var attendance in attendance) {
                               totalWorkMinute = (totalWorkMinute ?? 0) +
-                                  DateFormatter().calculateDurationInMinutes(
+                                  DateFormatter.calculateDurationInMinutes(
                                     attendance.checkInDateTime!,
                                     attendance.checkOutDateTime,
                                   );

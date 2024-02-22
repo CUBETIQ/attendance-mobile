@@ -71,7 +71,7 @@ class StaffCard extends StatelessWidget {
                     maxWidth: SizeUtils.scale(140, size.width),
                   ),
                   child: MyText(
-                    text: StringUtil().getfullname(
+                    text: StringUtil.getfullname(
                       staff.firstName,
                       staff.lastName,
                       staff.username,

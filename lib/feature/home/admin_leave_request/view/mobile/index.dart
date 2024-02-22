@@ -72,7 +72,9 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
                     () => MyAsyncWidget(
                       isLoading: controller.isLoading.value,
                       list: controller.leaveList,
-                      noDataWidget: const MyNoData(),
+                      noDataWidget: MyNoData(
+                        paddingTop: SizeUtils.scale(180, size.width),
+                      ),
                       builderWidget: ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),

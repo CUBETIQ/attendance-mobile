@@ -71,7 +71,7 @@ class LeaveRequestCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(130, size.width),
                     ),
                     child: MyText(
-                      text: StringUtil().getfullname(
+                      text: StringUtil.getfullname(
                         staff.firstName,
                         staff.lastName,
                         staff.username,
@@ -123,7 +123,7 @@ class LeaveRequestCard extends StatelessWidget {
                   ),
                   MyText(
                     text:
-                        "${DateFormatter().formatMillisecondsToDOB(leave.from)} - ${DateFormatter().formatMillisecondsToDOB(leave.to)}",
+                        "${DateFormatter.formatMillisecondsToDOB(leave.from)} - ${DateFormatter.formatMillisecondsToDOB(leave.to)}",
                     style: AppStyles().bodySmallRegular.copyWith(
                           color: Theme.of(context).colorScheme.outline,
                         ),
@@ -138,7 +138,7 @@ class LeaveRequestCard extends StatelessWidget {
                       ),
                       MyText(
                         text:
-                            " ${StringUtil().removeTrailingZeros(leave.duration)}  ${(leave.duration ?? 0) < 2 ? "Day" : "Days"}",
+                            " ${StringUtil.removeTrailingZeros(leave.duration)}  ${(leave.duration ?? 0) < 2 ? "Day" : "Days"}",
                         style: AppStyles().bodySmallRegular.copyWith(
                               color: Theme.of(context).colorScheme.outline,
                             ),
@@ -167,7 +167,7 @@ class LeaveRequestCard extends StatelessWidget {
                       maxWidth: SizeUtils.scale(90, size.width),
                     ),
                     child: MyText(
-                      text: StringUtil().getfullname(
+                      text: StringUtil.getfullname(
                         leave.updateBy?.firstName,
                         leave.updateBy?.lastName,
                         leave.updateBy?.username,

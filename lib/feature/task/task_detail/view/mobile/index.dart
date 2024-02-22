@@ -62,7 +62,7 @@ class TaskDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowData(
                 title: "Due Date",
-                value: DateFormatter().formatMillisecondsToDOB(
+                value: DateFormatter.formatMillisecondsToDOB(
                   controller.task.value?.endDate,
                 ),
               ),

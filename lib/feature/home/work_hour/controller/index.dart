@@ -82,8 +82,7 @@ class WorkHourController extends GetxController {
   }
 
   void initDate() {
-    startOfDay.value =
-        DateTimeUtil().getStartOfDayInMilisecond(selectDate.value);
-    endOfDay.value = DateTimeUtil().getEndOfDayInMilisecond(selectDate.value);
+    startOfDay.value = DateTimeUtil.getStartOfDayInMilisecond(selectDate.value);
+    endOfDay.value = DateTimeUtil.getEndOfDayInMilisecond(selectDate.value);
   }
 }

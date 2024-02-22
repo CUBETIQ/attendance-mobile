@@ -89,7 +89,7 @@ class TaskDataRowReport extends StatelessWidget {
                       ),
                 ),
                 MyText(
-                  text: DateFormatter().formatMillisecondsToDOB(data?.endDate),
+                  text: DateFormatter.formatMillisecondsToDOB(data?.endDate),
                   overflow: TextOverflow.ellipsis,
                   style: AppStyles().bodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.error,

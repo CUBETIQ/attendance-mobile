@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/network/dio_util.dart';
 import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/widgets/dialog/dialog.dart';
 import 'package:timesync360/routes/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
@@ -28,6 +30,14 @@ class ErrorInterceptor extends dio.Interceptor {
       final data = await localDataService.get();
       final token = data?.refreshToken ?? "1234567@qwerty";
       try {
+        // Check if the refresh token in isar is expired it will show session expired and navigate to login page
+        bool hasExpired = JwtDecoder.isExpired(token);
+        if (hasExpired) {
+          await IsarService().clearLocalData(deleteToken: true);
+          showSessionExpiredDialog();
+          return;
+        }
+
         await Future.delayed(const Duration(seconds: 20));
         final newToken = await refreshToken(token);
 
@@ -61,8 +71,8 @@ class ErrorInterceptor extends dio.Interceptor {
       Endpoints.instance.refreshToken,
       data: {
         "refreshToken": token,
-      }, 
-    ); 
+      },
+    );
 
     if (response.statusCode == 200) {
       accessToken = response.data["data"]["accessToken"];

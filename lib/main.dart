@@ -55,7 +55,9 @@ Future<void> main() async {
 
   await initService();
   await AppPathController.initPath();
-  await AppConfig.init();
+
+  // initialize the app config
+  await AppConfig.initAppConfig();
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
   runApp(const MyApp());
   FlutterNativeSplash.remove();

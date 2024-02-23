@@ -62,9 +62,10 @@ class SplashController extends GetxController
     initRoute();
   }
 
-  Future<void> initRoute() async {
+  void initRoute() {
     if (localData.value.isActivated != true) {
       Get.offNamed(Routes.ACTIVATION);
+      return;
     } else if (localData.value.accessToken != null) {
       Get.offNamed(Routes.NAVIGATION, arguments: {
         "user": user.value,
@@ -73,11 +74,12 @@ class SplashController extends GetxController
         "organization": organization.value,
         "userStatus": userStatus.value,
       });
+      return;
     } else if (localData.value.isFirstTime == false) {
       Get.offNamed(Routes.LOGIN);
-    } else {
-      Get.offNamed(Routes.ONBOARD);
+      return;
     }
+    Get.offNamed(Routes.ONBOARD);
   }
 
   Future<void> getUserStatus() async {

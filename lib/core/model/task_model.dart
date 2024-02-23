@@ -11,6 +11,7 @@ class TaskModel extends BaseModel<TaskModel> {
   final String? status;
   final int? startDate;
   final int? endDate;
+  final int? completedDate;
   final String? color;
   final String? icon;
   final String? priority;
@@ -28,6 +29,7 @@ class TaskModel extends BaseModel<TaskModel> {
     this.priority,
     this.startDate,
     this.endDate,
+    this.completedDate,
     this.color,
     this.icon,
     this.attachment,
@@ -48,6 +50,7 @@ class TaskModel extends BaseModel<TaskModel> {
       description: json['description'],
       status: json['status'],
       startDate: json['startDate'],
+      completedDate: json['completedDate'],
       priority: json['priority'],
       endDate: json['endDate'],
       color: json['color'],

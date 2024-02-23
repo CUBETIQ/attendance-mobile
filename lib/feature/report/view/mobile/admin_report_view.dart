@@ -1,3 +1,4 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
@@ -71,25 +72,51 @@ class AdminReportViewMobile extends StatelessWidget {
                               ),
                             ],
                           ),
-                          // SizedBox(height: SizeUtils.scale(20, size.width)),
-                          // MyCard(
-                          //   width: size.width,
-                          //   height: SizeUtils.scale(50, size.width),
-                          //   backgroundColor: Theme.of(context)
-                          //       .colorScheme
-                          //       .secondaryContainer,
-                          //   boxShadow: [
-                          //     BoxShadow(
-                          //       color: Theme.of(context)
-                          //           .colorScheme
-                          //           .outline
-                          //           .withOpacity(0.15),
-                          //       spreadRadius: 0,
-                          //       blurRadius: 1,
-                          //       offset: const Offset(0, 0),
-                          //     ),
-                          //   ],
-                          // ),
+                          SizedBox(height: SizeUtils.scale(20, size.width)),
+                          Obx(
+                            () => SizedBox(
+                              width: size.width,
+                              child: AnimatedToggleSwitch<int>.size(
+                                textDirection: TextDirection.rtl,
+                                current: controller.selectTabIndex.value,
+                                values: const [0, 1, 2],
+                                indicatorSize: const Size.fromWidth(100),
+                                iconBuilder: (i) => Icon(
+                                  Icons.person,
+                                  color: controller.selectTabIndex.value == i
+                                      ? Theme.of(context).colorScheme.onPrimary
+                                      : Colors.black,
+                                ),
+                                borderWidth: 4.0,
+                                iconAnimationType: AnimationType.onHover,
+                                style: ToggleStyle(
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
+                                  borderColor: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(
+                                    SizeUtils.scale(
+                                      AppSize().borderRadiusLarge,
+                                      size.width,
+                                    ),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 0.2,
+                                      blurRadius: 0.2,
+                                      offset: const Offset(0, 0),
+                                    ),
+                                  ],
+                                ),
+                                styleBuilder: (i) => ToggleStyle(
+                                  indicatorColor:
+                                      Theme.of(context).colorScheme.primary,
+                                ),
+                                onChanged: controller.onTabChange,
+                              ),
+                            ),
+                          ),
                           SizedBox(height: SizeUtils.scale(20, size.width)),
                           Obx(
                             () => MyAsyncWidget(

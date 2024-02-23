@@ -3,6 +3,7 @@ import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/task/task_detail/controller/index.dart';
 import 'package:timesync360/feature/task/task_detail/widget/detail_row_category.dart';
@@ -44,7 +45,11 @@ class TaskDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(20, size.width)),
               MyText(
                 text: controller.task.value?.name ?? "Title",
-                style: AppStyles().bodyXXlargeMedium,
+                style: AppStyles().bodyXXlargeMedium.copyWith(
+                      color: controller.task.value?.color != null
+                          ? Color(controller.task.value!.color!.toInt())
+                          : Theme.of(context).colorScheme.primary,
+                    ),
                 textAlign: TextAlign.start,
                 maxLines: 5,
               ),
@@ -83,7 +88,10 @@ class TaskDetailViewMobile extends StatelessWidget {
               MyText(text: "Description", style: AppStyles().bodyLargeMedium),
               SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(
-                text: controller.task.value?.description ?? "",
+                text: controller.task.value?.description != null &&
+                        controller.task.value?.description?.isNotEmpty == true
+                    ? controller.task.value!.description!
+                    : "N/A",
                 style: AppStyles().bodyMediumRegular,
                 maxLines: 20,
               ),

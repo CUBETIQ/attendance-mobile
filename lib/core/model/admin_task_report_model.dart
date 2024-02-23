@@ -72,6 +72,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
   final String? status;
   final int? startDate;
   final int? endDate;
+  final int? completedDate;
   final List<String>? attachment;
   final String? color;
   final String? icon;
@@ -83,6 +84,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
     this.status,
     this.startDate,
     this.endDate,
+    this.completedDate,
     this.attachment,
     this.color,
     this.icon,
@@ -100,6 +102,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
       status: json['status'],
       startDate: json['startDate'],
       endDate: json['endDate'],
+      completedDate: json['completedDate'],
       attachment: json['attachment'].cast<String>(),
       color: json['color'],
       icon: json['icon'],
@@ -123,6 +126,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
       "status": status,
       "startDate": startDate,
       "endDate": endDate,
+      "completedDate": completedDate,
       "attachment": attachment,
       "color": color,
       "icon": icon,

@@ -60,6 +60,7 @@ class TaskService {
   Future<void> completeTask(String id) async {
     Map<String, dynamic> data = {
       "status": TaskStatus.completed,
+      "completedDate": DateTime.now().millisecondsSinceEpoch,
     };
 
     Response response = await dioInstance.dio.put(

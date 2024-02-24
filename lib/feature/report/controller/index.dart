@@ -37,11 +37,11 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
   final savedSelectedDate = DateTime.now().obs;
   final reportTab = ["Attendance", "Leave"];
   final reportTabIcon = [
-    Icons.person_rounded,
+    Icons.work_off_rounded,
     Icons.task,
-    Icons.work_off_rounded
+    Icons.person_rounded,
   ];
-  final selectTabIndex = 0.obs;
+  final selectTabIndex = 2.obs;
 
   @override
   void onInit() {
@@ -251,6 +251,8 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
       startDate.value = DateTimeUtil.getStartOfDayInMilisecond(picked);
       endDate.value = DateTimeUtil.getEndOfDayInMilisecond(picked);
       await getStaffAttendanceReport();
+      await getStaffLeaveReport();
+      await getStaffTaskReport();
     }
   }
 

@@ -28,24 +28,14 @@ class AddLeaveController extends GetxController
     LeaveType.annual,
     LeaveType.sick,
   ].obs;
-  final leaveTypeDuration = [
-    LeaveTypeDuration.fullDay,
-    LeaveTypeDuration.halfDay,
-  ].obs;
   final selectLeaveDurationType = LeaveTypeDuration.fullDay.obs;
   late AnimationController animationController;
   late Animation<double> sizeAnimation;
   late Animation<Color?> colorAnimation;
   final appState = AppState.Create.obs;
   final leave = Rxn<LeaveModel>(null);
-  final test = [
-    "1",
-    "1.5",
-    "2",
-    "2.5",
-    "3",
-    "3.5",
-  ];
+  final List<String> duration =
+      List.generate(7, (index) => ((index + 1) * 0.5).toString());
   final selectedValue = Rxn<String>(null);
   final searchController = TextEditingController();
   FocusNode? durationFocusNode = FocusNode();
@@ -90,14 +80,6 @@ class AddLeaveController extends GetxController
 
   void getEndDateInMilliSecond(int? date) {
     endDate.value = date;
-  }
-
-  void onChnageLeaveDurationType(int index) {
-    // Reset the animation before starting it
-    animationController.reset();
-    // Start the animation
-    animationController.reverse();
-    selectLeaveDurationType.value = leaveTypeDuration[index];
   }
 
   void getArgument() {

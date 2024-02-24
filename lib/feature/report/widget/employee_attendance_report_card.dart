@@ -2,7 +2,7 @@ import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/admin_attendance_report_model.dart';
 import 'package:timesync360/core/widgets/image/cache_image.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/report/widget/data_row.dart';
+import 'package:timesync360/feature/report/widget/attendance_data_row.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:timesync360/utils/time_util.dart';
@@ -10,8 +10,8 @@ import 'package:timesync360/types/attendance_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AttendanceReportCard extends StatelessWidget {
-  const AttendanceReportCard({
+class EmployeeAttendanceReportCard extends StatelessWidget {
+  const EmployeeAttendanceReportCard({
     super.key,
     required this.data,
     required this.totalWorkMinute,
@@ -62,14 +62,14 @@ class AttendanceReportCard extends StatelessWidget {
         ),
       ),
       children: [
-        DataRowReport(
+        AttendanceDataRowReport(
           title: "Check In: ",
           value: DateFormatter.formatTimeWithDate(
             data.attendance?.checkInDateTime,
           ),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
-        DataRowReport(
+        AttendanceDataRowReport(
           title: "Check In Status: ",
           value: data.attendance.isBlank == false &&
                   data.attendance?.checkInStatus != null
@@ -91,14 +91,14 @@ class AttendanceReportCard extends StatelessWidget {
           ),
         ),
         data.attendance != null && data.attendance?.checkInEarly != null
-            ? DataRowReport(
+            ? AttendanceDataRowReport(
                 title: "Check In Early: ",
                 value: DateFormatter.getHourMinuteSecondFromMinute(
                   data.attendance?.checkInEarly,
                 ),
               )
             : data.attendance != null && data.attendance?.checkInLate != null
-                ? DataRowReport(
+                ? AttendanceDataRowReport(
                     title: "Check In Late: ",
                     value: DateFormatter.getHourMinuteSecondFromMinute(
                       data.attendance?.checkInLate,
@@ -106,14 +106,14 @@ class AttendanceReportCard extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
         SizedBox(height: SizeUtils.scale(2, size.width)),
-        DataRowReport(
+        AttendanceDataRowReport(
           title: "Check Out: ",
           value: DateFormatter.formatTimeWithDate(
             data.attendance?.checkOutDateTime,
           ),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
-        DataRowReport(
+        AttendanceDataRowReport(
             title: "Check Out Status: ",
             value: data.attendance != null &&
                     data.attendance?.checkOutStatus != null
@@ -131,14 +131,14 @@ class AttendanceReportCard extends StatelessWidget {
           height: SizeUtils.scale(data.attendance != null ? 2 : 0, size.width),
         ),
         data.attendance != null && data.attendance?.checkOutLate != null
-            ? DataRowReport(
+            ? AttendanceDataRowReport(
                 title: "Check Out Late: ",
                 value: DateFormatter.getHourMinuteSecondFromMinute(
                   data.attendance?.checkOutLate,
                 ),
               )
             : data.attendance != null && data.attendance?.checkOutEarly != null
-                ? DataRowReport(
+                ? AttendanceDataRowReport(
                     title: "Check Out Early: ",
                     value: DateFormatter.getHourMinuteSecondFromMinute(
                       data.attendance?.checkOutEarly,
@@ -146,12 +146,12 @@ class AttendanceReportCard extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
         SizedBox(height: SizeUtils.scale(2, size.width)),
-        DataRowReport(
+        AttendanceDataRowReport(
           title: "Work Hour: ",
           value: DateFormatter.getHourMinuteSecondFromMinute(totalWorkMinute),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
-        DataRowReport(
+        AttendanceDataRowReport(
           title: "Total Session ",
           value: (data.attendance?.totalSession ?? 0).toString(),
         ),

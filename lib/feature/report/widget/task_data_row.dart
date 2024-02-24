@@ -20,10 +20,12 @@ class TaskDataRowReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               width: SizeUtils.scale(30, size.width),
@@ -99,6 +101,7 @@ class TaskDataRowReport extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(height: SizeUtils.scale(10, size.width)),
       ],
     );
   }

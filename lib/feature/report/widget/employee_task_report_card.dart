@@ -7,8 +7,8 @@ import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/string_util.dart';
 import 'package:flutter/material.dart';
 
-class TaskReportCard extends StatelessWidget {
-  const TaskReportCard({
+class EmployeeTaskReportCard extends StatelessWidget {
+  const EmployeeTaskReportCard({
     super.key,
     required this.data,
   });
@@ -48,14 +48,37 @@ class TaskReportCard extends StatelessWidget {
           MediaQuery.of(context).size.width,
         ),
       ),
-      children: [
-        ...List.generate(
-          data.task?.length ?? 0,
-          (index) => TaskDataRowReport(
-            data: data.task?[index],
-          ),
-        ),
-      ],
+      children: data.task?.isNotEmpty == true
+          ? [
+              ...List.generate(
+                data.task?.length ?? 0,
+                (index) => TaskDataRowReport(
+                  data: data.task?[index],
+                ),
+              ),
+            ]
+          : [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: SizeUtils.scale(10, size.width),
+                ),
+                child: Center(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      SizedBox(width: SizeUtils.scale(5, size.width)),
+                      MyText(
+                        text: "No Task",
+                        style: AppStyles().bodyMediumMedium,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
     );
   }
 }

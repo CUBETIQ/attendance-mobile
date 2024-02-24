@@ -115,7 +115,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                     controller.durationController.value.text = value;
                   },
                   suggestionsCallback: (String search) {
-                    return controller.test;
+                    return controller.duration;
                   },
                 ),
               ),

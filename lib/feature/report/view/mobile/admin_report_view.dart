@@ -9,6 +9,7 @@ import 'package:timesync360/feature/home/home/widget/tab_bar.dart';
 import 'package:timesync360/feature/report/controller/index.dart';
 import 'package:timesync360/feature/report/view/mobile/staff_report_view.dart';
 import 'package:timesync360/feature/report/widget/employee_attendance_report_card.dart';
+import 'package:timesync360/feature/report/widget/employee_leave_report_card.dart';
 import 'package:timesync360/feature/report/widget/employee_task_report_card.dart';
 import 'package:timesync360/feature/report/widget/toggle_button.dart';
 import 'package:timesync360/utils/size_util.dart';
@@ -113,12 +114,21 @@ class AdminReportViewMobile extends StatelessWidget {
                                               totalWorkMinute: totalWorkMinute,
                                             );
                                           }
-                                        : (context, index) {
-                                            return EmployeeTaskReportCard(
-                                              data: controller.staffTaskReports
-                                                  .value[index],
-                                            );
-                                          },
+                                        : controller.selectTabIndex.value == 1
+                                            ? (context, index) {
+                                                return EmployeeTaskReportCard(
+                                                  data: controller
+                                                      .staffTaskReports
+                                                      .value[index],
+                                                );
+                                              }
+                                            : (context, index) {
+                                                return EmployeeLeaveReportCard(
+                                                  data: controller
+                                                      .staffLeaveReports
+                                                      .value[index],
+                                                );
+                                              },
                               ),
                             ),
                           ),

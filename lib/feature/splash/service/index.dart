@@ -3,8 +3,8 @@ import 'package:timesync360/core/model/organization_model.dart';
 import 'package:timesync360/core/model/position_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
 import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/network/dio/dio_util.dart';
+import 'package:timesync360/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
 import 'package:timesync360/utils/logger.dart';
 

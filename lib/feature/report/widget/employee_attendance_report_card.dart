@@ -39,14 +39,6 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
               maxLines: 2,
             ),
           ),
-          Expanded(
-            child: MyText(
-              text: data.position ?? "N/A",
-              overflow: TextOverflow.ellipsis,
-              style: AppStyles().bodyMediumMedium,
-              maxLines: 2,
-            ),
-          ),
         ],
       ),
       initiallyExpanded: true,

@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:timesync360/core/model/category_model.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/network/dio/endpoint.dart';
 import 'package:timesync360/feature/category/add_category/model/create_category_model.dart';
 import 'package:timesync360/feature/category/add_category/model/update_category_model.dart';
 import 'package:timesync360/utils/logger.dart';
-import '../../../../core/network/dio_util.dart';
+import '../../../../core/network/dio/dio_util.dart';
 
 class AddCategoryService {
   static final _singleton = AddCategoryService._internal();

@@ -1,5 +1,5 @@
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/network/dio/dio_util.dart';
+import 'package:timesync360/core/network/dio/endpoint.dart';
 import 'package:timesync360/feature/organization/edit_organization/model/update_organization_model.dart';
 import 'package:dio/dio.dart';
 import 'package:timesync360/utils/logger.dart';

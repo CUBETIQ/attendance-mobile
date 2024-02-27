@@ -34,12 +34,30 @@ class ToggleButton extends StatelessWidget {
         current: currentIndex,
         values: values,
         indicatorSize: const Size.fromWidth(100),
-        iconBuilder: (i) => Icon(
-          icons[i],
-          color: selectedIndex == i
-              ? Theme.of(context).colorScheme.onPrimary
-              : Theme.of(context).colorScheme.secondary,
-        ),
+        selectedIconScale: 1,
+        indicatorAppearingBuilder: (context, value, indicator) {
+          return Container(
+            width: SizeUtils.scale(300, size.width),
+            height: SizeUtils.scale(50, size.width),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(
+                SizeUtils.scale(
+                  AppSize().borderRadiusLarge,
+                  size.width,
+                ),
+              ),
+            ),
+          );
+        },
+        iconBuilder: (i) => Icon(icons[i],
+            color: selectedIndex == i
+                ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.secondary,
+            size: SizeUtils.scale(
+              22,
+              size.width,
+            )),
         iconOpacity: 0.8,
         iconAnimationType: AnimationType.onSelected,
         style: ToggleStyle(
@@ -64,7 +82,6 @@ class ToggleButton extends StatelessWidget {
           indicatorColor: Theme.of(context).colorScheme.primary,
         ),
         onChanged: onChanged,
-        fittingMode: FittingMode.none,
       ),
     );
   }

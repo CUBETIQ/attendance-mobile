@@ -41,6 +41,7 @@ class TaskDataRowReport extends StatelessWidget {
                     ? IconData(data!.icon!.toInt(), fontFamily: 'MaterialIcons')
                     : Icons.task,
                 color: Colors.white,
+                size: SizeUtils.scale(18, size.width),
               ),
             ),
             SizedBox(width: SizeUtils.scale(10, size.width)),

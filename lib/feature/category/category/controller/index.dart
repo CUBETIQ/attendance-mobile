@@ -34,10 +34,14 @@ class CategoryController extends GetxController {
     }
   }
 
-  Future<void> deleteCategory(String? id) async {
+  Future<void> deleteCategory(CategoryModel? data) async {
+    if (data?.organizationId == null) {
+      showWarningSnackBar("Warning", "You cannot delete this category");
+      return;
+    }
     try {
-      await CategoryService().deleteCategory(id ?? "");
-      categories.removeWhere((element) => element.id == id);
+      await CategoryService().deleteCategory(data?.id ?? "");
+      categories.removeWhere((element) => element.id == data?.id);
       categories.refresh();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -77,7 +81,7 @@ class CategoryController extends GetxController {
       },
       onTapDelete: () {
         Get.back();
-        deleteCategory(category.id);
+        deleteCategory(category);
       },
     );
   }

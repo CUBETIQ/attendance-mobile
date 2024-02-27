@@ -138,7 +138,7 @@ class TaskController extends GetxController {
         Get.toNamed(
           Routes.ADD_TASK,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "task": task,
           },
         );

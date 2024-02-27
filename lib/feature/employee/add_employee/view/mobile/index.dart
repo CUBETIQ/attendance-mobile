@@ -68,13 +68,13 @@ class AddStaffViewMobile extends StatelessWidget {
               ),
               SizedBox(
                 height: SizeUtils.scale(
-                  controller.appState.value == AppState.Edit
+                  controller.appState.value == AppState.edit
                       ? 0
                       : AppSize().paddingS5,
                   size.width,
                 ),
               ),
-              controller.appState.value == AppState.Edit
+              controller.appState.value == AppState.edit
                   ? const SizedBox.shrink()
                   : MyTextFieldForm(
                       hasLabel: true,
@@ -232,7 +232,7 @@ class AddStaffViewMobile extends StatelessWidget {
                 margin: EdgeInsets.only(
                   bottom: SizeUtils.scale(30, size.width),
                 ),
-                onTap: controller.appState.value == AppState.Edit
+                onTap: controller.appState.value == AppState.edit
                     ? controller.onTapUpdateStaff
                     : controller.onTapAddStaff,
               ),

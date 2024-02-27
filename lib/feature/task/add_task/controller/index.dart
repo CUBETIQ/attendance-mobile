@@ -25,7 +25,7 @@ class AddTaskController extends GetxController {
   final color = Rxn<Color>(null);
   final stringColor = Rxn<String>(null);
   final stringIcon = Rxn<String>(null);
-  final appState = AppState.Create.obs;
+  final appState = AppState.create.obs;
   final task = Rxn<TaskModel>(null);
   final priority = [
     TaskPriority.low,
@@ -96,9 +96,9 @@ class AddTaskController extends GetxController {
 
   void getArgument() {
     if (Get.arguments != null) {
-      if (Get.arguments["state"] == AppState.Edit) {
+      if (Get.arguments["state"] == AppState.edit) {
         title.value = "Edit Task";
-        appState.value = AppState.Edit;
+        appState.value = AppState.edit;
         task.value = Get.arguments["task"];
         taskController.text = task.value?.name ?? '';
         selectPriority.value = task.value?.priority ?? TaskPriority.low;
@@ -116,7 +116,7 @@ class AddTaskController extends GetxController {
         }
       } else {
         title.value = "Add Task";
-        appState.value = AppState.Create;
+        appState.value = AppState.create;
       }
     }
   }

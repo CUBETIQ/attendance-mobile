@@ -26,7 +26,7 @@ class AddCategoryController extends GetxController {
   final color = Rxn<Color>(null);
   final stringColor = Rxn<String>(null);
   final title = "Add Category".tr.obs;
-  final appState = AppState.Create.obs;
+  final appState = AppState.create.obs;
   final category = CategoryModel().obs;
 
   @override
@@ -96,7 +96,7 @@ class AddCategoryController extends GetxController {
     await getCategoryType();
     if (data != null) {
       appState.value = data["state"];
-      if (appState.value == AppState.Edit) {
+      if (appState.value == AppState.edit) {
         title.value = "Edit Category".trString;
         category.value = data["category"];
         Logger().i(category);

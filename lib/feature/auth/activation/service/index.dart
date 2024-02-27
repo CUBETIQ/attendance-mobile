@@ -1,7 +1,7 @@
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/model/activation_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/network/dio/dio_util.dart';
+import 'package:timesync360/core/network/dio/endpoint.dart';
 import 'package:timesync360/feature/auth/activation/model/activation_model.dart';
 import 'package:timesync360/utils/logger.dart';
 

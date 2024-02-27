@@ -1,5 +1,5 @@
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/network/dio/dio_util.dart';
+import 'package:timesync360/core/network/dio/endpoint.dart';
 import 'package:timesync360/feature/employee/add_employee/model/create_staff_model.dart';
 import 'package:timesync360/feature/employee/add_employee/model/update_staff_model.dart';
 import 'package:dio/dio.dart';

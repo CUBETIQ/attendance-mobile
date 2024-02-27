@@ -91,3 +91,47 @@ showSuccessSnackBar(String title, String message,
     );
   }
 }
+
+showWarningSnackBar(String title, String message,
+    {SnackPosition? snackPosition, Color? bgColor}) {
+  if (!Get.isSnackbarOpen) {
+    return Get.snackbar(
+      title.trString,
+      message.trString,
+      titleText: Align(
+        alignment: Alignment.topLeft,
+        child: MyText(
+          text: title,
+          maxLines: 2,
+          textAlign: TextAlign.left,
+          style: AppStyles().bodyLargeMedium.copyWith(color: Colors.white),
+        ),
+      ),
+      messageText: Align(
+        alignment: Alignment.bottomLeft,
+        child: MyText(
+          maxLines: 3,
+          text: message,
+          textAlign: TextAlign.left,
+          style: AppStyles().bodyMediumRegular.copyWith(color: Colors.white),
+        ),
+      ),
+      icon: const Icon(
+        Icons.warning_rounded,
+        color: Colors.white,
+        size: 25,
+      ),
+      shouldIconPulse: false,
+      maxWidth: 300,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      snackPosition: snackPosition ?? SnackPosition.top,
+      backgroundColor: bgColor ?? Colors.orange,
+      borderRadius: 20,
+      margin: const EdgeInsets.all(15),
+      colorText: Colors.white,
+      duration: const Duration(seconds: 2),
+      isDismissible: false,
+      forwardAnimationCurve: Curves.easeOutBack,
+    );
+  }
+}

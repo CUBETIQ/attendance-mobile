@@ -4,6 +4,7 @@ import 'package:timesync360/core/database/isar/controller/local_storage_controll
 
 class AppConfig {
   static const String baseUrl = "http://192.168.1.102:3000/api";
+  static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev/api";
 
   static String? userAgent;
   static get getUserAgent => userAgent;

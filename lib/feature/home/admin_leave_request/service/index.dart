@@ -1,6 +1,6 @@
 import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync360/core/network/dio/dio_util.dart';
+import 'package:timesync360/core/network/dio/endpoint.dart';
 import 'package:timesync360/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:dio/dio.dart';
 import 'package:timesync360/utils/logger.dart';

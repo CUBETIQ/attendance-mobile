@@ -76,7 +76,7 @@ class AddDepartmentViewMobile extends StatelessWidget {
               Obx(
                 () => MyAsyncButton(
                   title: "Save",
-                  onTap: controller.state.value == AppState.Create
+                  onTap: controller.state.value == AppState.create
                       ? controller.addDepartment
                       : controller.updateDepartment,
                 ),

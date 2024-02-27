@@ -1,9 +1,9 @@
+import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/core/database/isar/controller/local_language_controller.dart';
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/database/isar/entities/language.dart';
 import 'package:timesync360/core/database/isar/entities/local_storage.dart';
 import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
-import 'package:timesync360/main.dart';
 import 'package:get/get.dart';
 
 class IsarService extends GetxService {
@@ -25,9 +25,8 @@ class IsarService extends GetxService {
       app.isRememberMe = false;
       await _localStorage.insert(app);
     }
-    storageConfig?.value = appConfig;
-    isFirstTime = appConfig?.isFirstTime ?? false;
-    isDarkMode = appConfig?.darkTheme ?? false;
+    AppConfig.isFirstTime = appConfig?.isFirstTime ?? false;
+    AppConfig.isDarkMode = appConfig?.darkTheme ?? false;
   }
 
   Future<void> clearDataBase() async {

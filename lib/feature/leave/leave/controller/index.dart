@@ -116,7 +116,7 @@ class LeaveController extends GetxController {
         Get.toNamed(
           Routes.ADD_LEAVE,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "leave": leave,
           },
         );

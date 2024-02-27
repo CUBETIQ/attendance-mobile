@@ -6,22 +6,25 @@ class AppConfig {
   static const String baseUrl = "http://192.168.1.102:3000/api";
   static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev/api";
 
-  static String? userAgent;
-  static get getUserAgent => userAgent;
+  static String? _userAgent;
+  static get getUserAgent => _userAgent;
 
   static String? accessToken;
-  static get getAccessToken => accessToken;
 
-  static bool? isFirstTime;
-  static get getIsFirstTime => isFirstTime;
+  static bool? isFirstTime = false;
 
-  static bool? isActivated;
-  static get getIsActivated => isActivated;
+  static bool isDarkMode = false;
+
+  static bool? isActivated = false;
+
+  static bool weWantFatalErrorRecording = true;
+
+  static const double defaultLocationRadius = 200;
 
   static Future<void> initAppConfig() async {
     final localData = await LocalStorageController.getInstance().get();
     final packageInfo = await PackageInfo.fromPlatform();
-    userAgent =
+    _userAgent =
         "TimeSyncApi:SDK-Dart/${packageInfo.version} (${Platform.isAndroid ? 'Android' : 'iOS'})";
     accessToken = localData?.accessToken;
     isFirstTime = localData?.isFirstTime;

@@ -85,7 +85,7 @@ class AddCategoryViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(20, size.width)),
               MyAsyncButton(
                 title: "Save",
-                onTap: controller.appState.value == AppState.Create
+                onTap: controller.appState.value == AppState.create
                     ? controller.addCategory
                     : controller.updateCategory,
               ),

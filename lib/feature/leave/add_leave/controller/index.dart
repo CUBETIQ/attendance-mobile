@@ -32,7 +32,7 @@ class AddLeaveController extends GetxController
   late AnimationController animationController;
   late Animation<double> sizeAnimation;
   late Animation<Color?> colorAnimation;
-  final appState = AppState.Create.obs;
+  final appState = AppState.create.obs;
   final leave = Rxn<LeaveModel>(null);
   final List<String> duration =
       List.generate(7, (index) => ((index + 1) * 0.5).toString());
@@ -84,10 +84,10 @@ class AddLeaveController extends GetxController
 
   void getArgument() {
     if (Get.arguments != null) {
-      if (Get.arguments["state"] == AppState.Edit) {
+      if (Get.arguments["state"] == AppState.edit) {
         leave.value = Get.arguments["leave"];
         title.value = "Edit Leave";
-        appState.value = AppState.Edit;
+        appState.value = AppState.edit;
         startDate.value = leave.value?.from;
         endDate.value = leave.value?.to;
         durationController.value.text = (leave.value?.duration ?? 1).toString();
@@ -101,7 +101,7 @@ class AddLeaveController extends GetxController
         reasonController.text = leave.value?.reason ?? '';
       } else {
         title.value = "Add Leave";
-        appState.value = AppState.Create;
+        appState.value = AppState.create;
       }
     }
   }

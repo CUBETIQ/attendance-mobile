@@ -131,7 +131,7 @@ class AddLeaveViewMobile extends StatelessWidget {
               SizedBox(height: size.height * 0.06),
               MyAsyncButton(
                 title: "Save",
-                onTap: controller.appState.value == AppState.Edit
+                onTap: controller.appState.value == AppState.edit
                     ? controller.updateLeave
                     : controller.addLeave,
               ),

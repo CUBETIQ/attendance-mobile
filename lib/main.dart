@@ -4,29 +4,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get/get.dart';
 import 'package:timesync360/app.dart';
 import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/core/database/isar/entities/local_storage.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/database/local_path/app_path_controller.dart';
 import 'package:timesync360/firebase_options.dart';
 
 // using SizeUits.scaleWidth for make the bigger device and smalller device have same Ui size we need
 
-bool isFirstTime = false;
-bool isDarkMode = false;
-bool weWantFatalErrorRecording = true;
-Rx<LocalStorage?>? storageConfig = Rx<LocalStorage?>(null);
-
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   //////////// Firebase Crashlytics ////////////
@@ -35,7 +27,7 @@ Future<void> main() async {
 
   // Pass all uncaught "fatal" errors from the framework to Crashlytics
   FlutterError.onError = (errorDetails) {
-    if (weWantFatalErrorRecording) {
+    if (AppConfig.weWantFatalErrorRecording) {
       FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
     } else {
       FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
@@ -47,7 +39,7 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(
       error,
       stack,
-      fatal: weWantFatalErrorRecording,
+      fatal: AppConfig.weWantFatalErrorRecording,
     );
     return true;
   };
@@ -58,7 +50,7 @@ Future<void> main() async {
 
   // initialize the app config
   await AppConfig.initAppConfig();
-  const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
+
   runApp(const MyApp());
   FlutterNativeSplash.remove();
 }

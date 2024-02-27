@@ -66,7 +66,7 @@ class DepartmentController extends GetxController {
   }
 
   void onTapAddDepartment() {
-    Get.toNamed(Routes.ADD_DEPARTMENT, arguments: {"state": AppState.Create});
+    Get.toNamed(Routes.ADD_DEPARTMENT, arguments: {"state": AppState.create});
   }
 
   void clearSearch() {
@@ -88,7 +88,7 @@ class DepartmentController extends GetxController {
         Get.toNamed(
           Routes.ADD_DEPARTMENT,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "department": department,
           },
         );

@@ -104,7 +104,7 @@ class StaffController extends GetxController {
         Get.toNamed(
           Routes.ADD_STAFF,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "positions": positions,
             "departments": departments,
             "staff": staff,
@@ -145,7 +145,7 @@ class StaffController extends GetxController {
     Get.toNamed(
       Routes.ADD_STAFF,
       arguments: {
-        "state": AppState.Create,
+        "state": AppState.create,
         "positions": positions,
         "departments": departments
       },

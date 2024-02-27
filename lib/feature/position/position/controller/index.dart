@@ -62,7 +62,7 @@ class PositionController extends GetxController {
         Get.toNamed(
           Routes.ADD_POSITION,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "position": position,
           },
         );
@@ -83,7 +83,7 @@ class PositionController extends GetxController {
   }
 
   void onTapAddPosition() {
-    Get.toNamed(Routes.ADD_POSITION, arguments: {"state": AppState.Create});
+    Get.toNamed(Routes.ADD_POSITION, arguments: {"state": AppState.create});
   }
 
   void searchPosition(String value) {

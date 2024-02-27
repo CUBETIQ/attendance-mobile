@@ -56,7 +56,7 @@ class AddStaffController extends GetxController {
   final imageFile = Rxn<File>(null);
   final staff = UserModel().obs;
   final dob = Rxn<int>(null);
-  final appState = AppState.Create.obs;
+  final appState = AppState.create.obs;
 
   @override
   void onInit() {
@@ -69,7 +69,7 @@ class AddStaffController extends GetxController {
       appState.value = Get.arguments["state"];
       positionList.value = Get.arguments["positions"];
       departmentList.value = Get.arguments["departments"];
-      if (appState.value == AppState.Edit) {
+      if (appState.value == AppState.edit) {
         title.value = "Edit Employee";
         staff.value = Get.arguments["staff"];
         image.value = staff.value.image;

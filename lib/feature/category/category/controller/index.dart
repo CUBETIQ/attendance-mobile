@@ -52,7 +52,7 @@ class CategoryController extends GetxController {
   void onTapAddCategory() {
     Get.toNamed(
       Routes.ADD_CATEGORY,
-      arguments: {"state": AppState.Create},
+      arguments: {"state": AppState.create},
     );
   }
 
@@ -74,7 +74,7 @@ class CategoryController extends GetxController {
         Get.toNamed(
           Routes.ADD_CATEGORY,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "category": category,
           },
         );

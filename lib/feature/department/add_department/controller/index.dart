@@ -18,7 +18,7 @@ import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
 class AddDepartmentController extends GetxController {
   final title = "Add Department".obs;
-  final state = AppState.Create.obs;
+  final state = AppState.create.obs;
   final image = Rxn<String>(null);
   final imageFile = Rxn<File>(null);
   final nameController = TextEditingController();
@@ -34,7 +34,7 @@ class AddDepartmentController extends GetxController {
   void initArgument() {
     final data = Get.arguments;
     state.value = data["state"];
-    if (state.value == AppState.Edit) {
+    if (state.value == AppState.edit) {
       title.value = "Edit Department";
       department.value = data["department"];
       image.value = department.value?.image;

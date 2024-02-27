@@ -76,7 +76,7 @@ class AddPositionViewMobile extends StatelessWidget {
               Obx(
                 () => MyAsyncButton(
                   title: "Save",
-                  onTap: controller.state.value == AppState.Create
+                  onTap: controller.state.value == AppState.create
                       ? controller.addPosition
                       : controller.updatePosition,
                 ),

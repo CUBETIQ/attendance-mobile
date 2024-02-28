@@ -1,3 +1,4 @@
+import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
@@ -32,6 +33,13 @@ class LoginController extends GetxController {
   final accessToken = Rxn<String>(null);
   final refreshToken = Rxn<String>(null);
 
+  @override
+  onInit() {
+    super.onInit();
+
+    initRememberMe();
+  }
+
   Future<void> login() async {
     validate();
     if (MyTextFieldFormController.findController('Username').isValid &&
@@ -45,9 +53,11 @@ class LoginController extends GetxController {
         var token = await LoginService().login(input);
         accessToken.value = token.first;
         refreshToken.value = token.last;
+
         await getOrganization(storageData?.organizationId ?? "");
         await fetchMe();
         await getUserStatus();
+        await setRememberMe();
         if (organization.value == null) {
           Get.offNamed(Routes.ACTIVATION);
         } else {
@@ -78,12 +88,27 @@ class LoginController extends GetxController {
     MyTextFieldFormController.findController('Password').isValid;
   }
 
+  void initRememberMe() {
+    isRememberMe.value =
+        AppConfig.getLocalData?.isRememberMe?.isNotEmpty == true ? true : false;
+    if (AppConfig.getLocalData?.isRememberMe != null) {
+      usernameController.text = AppConfig.getLocalData?.isRememberMe ?? "";
+    }
+  }
+
+  Future<void> setRememberMe() async {
+    if (isRememberMe.value == true) {
+      if (usernameController.text.isNotEmpty) {
+        localStorageData?.isRememberMe = usernameController.text;
+      }
+    } else {
+      localStorageData?.isRememberMe = '';
+    }
+    await IsarService().saveLocalData(input: localStorageData);
+  }
+
   Future<void> onCheck(bool? value) async {
     isRememberMe.value = value!;
-    localStorageData?.isRememberMe = value;
-    await IsarService().saveLocalData(
-      input: localStorageData,
-    );
   }
 
   Future<void> fetchMe() async {

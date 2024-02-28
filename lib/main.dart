@@ -9,6 +9,8 @@ import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/database/local_path/app_path_controller.dart';
 import 'package:timesync360/firebase_options.dart';
+import 'package:timesync360/notification/notification_service.dart';
+import 'package:timesync360/utils/logger.dart';
 
 // using SizeUits.scaleWidth for make the bigger device and smalller device have same Ui size we need
 
@@ -20,6 +22,30 @@ Future<void> main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // Initialize Firebase App and Messaging
+  await firebaseInit();
+
+  await initService();
+  await AppPathController.initPath();
+
+  // initialize the app config
+  await AppConfig.initAppConfig();
+
+  runApp(const MyApp());
+  FlutterNativeSplash.remove();
+}
+
+Future<void> initService() async {
+  await IsarService().initDataBase();
+}
+
+Future<void> firebaseInit() async {
+  Logs.t('[firebaseInitialized] Initializing Firebase');
+  // Initialize Firebase App and Messaging
+  await NotificationService.initializeFirebase();
+  // Initialize Firebase Messaging Background Handler
+  NotificationService.initializeFirebaseMessagingBackgroundHandler();
 
   //////////// Firebase Crashlytics ////////////
   FirebaseCrashlytics.instance
@@ -44,17 +70,4 @@ Future<void> main() async {
     return true;
   };
   //////////// Firebase Crashlytics ////////////
-
-  await initService();
-  await AppPathController.initPath();
-
-  // initialize the app config
-  await AppConfig.initAppConfig();
-
-  runApp(const MyApp());
-  FlutterNativeSplash.remove();
-}
-
-Future<void> initService() async {
-  await IsarService().initDataBase();
 }

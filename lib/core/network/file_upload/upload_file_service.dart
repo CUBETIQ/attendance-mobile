@@ -22,9 +22,13 @@ class UploadFileService {
   Future<UploadFileModel?> uploadFile(File file, FileMetadata? metadata) async {
     try {
       dioInstance.setBaseUrl(AppConfig.uploadUrl);
+      dioInstance.addHeader({
+        "x-api-key": AppConfig.xUploadApiKey,
+        "x-api-hash": "",
+      });
       final data = FileUtil.getFormData(file, metadata);
       final response = await dioInstance.dio.post(
-        "/upload",
+        "/api/upload",
         data: data,
       );
       if (response.statusCode == 200) {

@@ -4,7 +4,13 @@ import 'package:timesync360/core/database/isar/controller/local_storage_controll
 
 class AppConfig {
   static const String baseUrl = "http://192.168.1.102:3000/api";
-  static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev/api";
+  static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";
+
+  static const String xUploadApiKey = "fb73ce111f0ddde0e56569aa31fc8d30";
+  static const String xApiDevice = "TimeSync360";
+  static String? xApiHash;
+
+  static const String appName = "TimeSync360";
 
   static String? _userAgent;
   static get getUserAgent => _userAgent;

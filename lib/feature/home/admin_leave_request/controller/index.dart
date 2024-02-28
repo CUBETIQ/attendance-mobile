@@ -1,5 +1,6 @@
 import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:timesync360/feature/home/admin_leave_request/service/index.dart';
@@ -63,14 +64,9 @@ class AdminLeaveRequestController extends GetxController {
   }
 
   Future<void> onTapDate(BuildContext context) async {
-    final DateTime? picked = await showMonthPicker(
+    final DateTime? picked = await monthPicker(
       context: context,
       initialDate: selectDate.value,
-      firstDate: DateTime(2019),
-      lastDate: DateTime(2050),
-      roundedCornersRadius: 24,
-      animationMilliseconds: 0,
-      dismissible: true,
     );
     if (picked != null) {
       selectDate.value = picked;

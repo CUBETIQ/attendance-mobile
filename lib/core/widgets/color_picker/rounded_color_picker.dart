@@ -6,18 +6,26 @@ import 'package:flutter/material.dart';
 class RoundedColorPicker extends StatelessWidget {
   final void Function()? onTap;
   final Color? color;
+  final bool? haslabel;
 
-  const RoundedColorPicker({super.key, this.onTap, this.color});
+  const RoundedColorPicker({
+    super.key,
+    this.onTap,
+    this.color,
+    this.haslabel = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
-        MyText(
-          text: "Color",
-          style: AppStyles().bodyMediumMedium,
-        ),
+        haslabel == true
+            ? MyText(
+                text: "Color",
+                style: AppStyles().bodyMediumMedium,
+              )
+            : const SizedBox.shrink(),
         SizedBox(height: AppSize().paddingS5),
         GestureDetector(
           onTap: onTap,

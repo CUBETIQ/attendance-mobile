@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
@@ -11,6 +12,7 @@ import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/navigation/model/bottom_bar_model.dart';
 import 'package:timesync360/feature/navigation/model/drawer_model.dart';
 import 'package:timesync360/feature/navigation/service/index.dart';
+import 'package:timesync360/feature/qr_scan/view/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
 import 'package:timesync360/utils/location_util.dart';
 import 'package:timesync360/utils/time_util.dart';
@@ -36,6 +38,9 @@ class NavigationController extends GetxController {
       title: 'Home',
       icon: Icons.home_rounded,
       selectedIcon: Icons.home_rounded,
+      action: InkWell(
+          onTap: () => Get.toNamed(Routes.SCANQR),
+          child: SvgPicture.asset(SvgAssets.scanQR)),
     ),
     BottomBarModel(
       title: 'Report',
@@ -58,6 +63,7 @@ class NavigationController extends GetxController {
       selectedIcon: Icons.person_rounded,
     ),
   ];
+
   final organizationLocation = Rxn<OranizationLocationModel>(null);
   final userLocation = Rxn<Position>(null);
   final isInRange = false.obs;

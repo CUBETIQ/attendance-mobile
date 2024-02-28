@@ -42,7 +42,7 @@ class RoundedIconPicker extends StatelessWidget {
                 style: AppStyles().bodyMediumMedium,
               )
             : const SizedBox.shrink(),
-        SizedBox(height: haslabel == true ? 0 : AppSize().paddingS5),
+        SizedBox(height: haslabel == true ? AppSize().paddingS5 : 0),
         GestureDetector(
           onTap: onTap,
           child: Container(

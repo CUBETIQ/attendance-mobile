@@ -6,6 +6,7 @@ import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/category/add_category/controller/index.dart';
 import 'package:timesync360/types/state.dart';
 import 'package:timesync360/utils/size_util.dart';
@@ -68,7 +69,7 @@ class AddCategoryViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e),
+                          child: Text(e.capitalizeFirst.trString),
                         ),
                       )
                       .toList(),

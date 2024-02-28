@@ -167,7 +167,7 @@ class HomeAdminMobileView extends StatelessWidget {
                                     .map(
                                       (e) => DropdownMenuItem<String>(
                                         value: e,
-                                        child: Text(e),
+                                        child: Text(e.trString),
                                       ),
                                     )
                                     .toList(),

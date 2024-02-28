@@ -131,7 +131,7 @@ class AttendancePieChartCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyText(text: "Summary ", style: AppStyles().bodyLargeMedium),
+              MyText(text: "Summary", style: AppStyles().bodyLargeMedium),
               SizedBox(height: SizeUtils.scale(10, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.successColor,

@@ -6,6 +6,7 @@ import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/leave/add_leave/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/types/state.dart';
@@ -51,7 +52,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst),
+                          child: Text(e.capitalizeFirst.trString),
                         ),
                       )
                       .toList(),
@@ -101,7 +102,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                       focusNode: focusNode,
                       hasLabel: true,
                       label: "Duration",
-                      hintText: "Enter your Duration",
+                      hintText: "Enter your duration",
                       textController: controller.durationController.value,
                     );
                   },
@@ -123,7 +124,7 @@ class AddLeaveViewMobile extends StatelessWidget {
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Reason",
-                hintText: "Enter your Reason",
+                hintText: "Enter your reason",
                 textController: controller.reasonController,
                 maxlines: 5,
               ),

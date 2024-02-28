@@ -1,6 +1,7 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class KpiScoreCard extends StatelessWidget {
               ),
               SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
-                text: "Performance Score: $score",
+                text: "${"Performance Score:".trString} $score",
                 style: AppStyles().bodyLargeSemi.copyWith(
                       color: Colors.white,
                     ),

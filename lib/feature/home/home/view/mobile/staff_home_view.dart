@@ -122,7 +122,7 @@ class HomeStaffMobileView extends StatelessWidget {
               ),
               SizedBox(height: size.height * 0.02),
               MyText(
-                text: "Attendance ",
+                text: "Attendance",
                 style: AppStyles().bodyXlargeMedium,
               ),
               SizedBox(height: size.height * 0.015),

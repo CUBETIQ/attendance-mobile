@@ -55,14 +55,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
       ),
       children: [
         AttendanceDataRowReport(
-          title: "Check In: ",
+          title: "Check In:",
           value: DateFormatter.formatTimeWithDate(
             data.attendance?.checkInDateTime,
           ),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         AttendanceDataRowReport(
-          title: "Check In Status: ",
+          title: "Check In Status:",
           value: data.attendance.isBlank == false &&
                   data.attendance?.checkInStatus != null
               ? data.attendance?.checkInStatus!.capitalizeFirst
@@ -84,14 +84,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
         ),
         data.attendance != null && data.attendance?.checkInEarly != null
             ? AttendanceDataRowReport(
-                title: "Check In Early: ",
+                title: "Check In Early:",
                 value: DateFormatter.getHourMinuteSecondFromMinute(
                   data.attendance?.checkInEarly,
                 ),
               )
             : data.attendance != null && data.attendance?.checkInLate != null
                 ? AttendanceDataRowReport(
-                    title: "Check In Late: ",
+                    title: "Check In Late:",
                     value: DateFormatter.getHourMinuteSecondFromMinute(
                       data.attendance?.checkInLate,
                     ),
@@ -99,14 +99,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                 : const SizedBox.shrink(),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         AttendanceDataRowReport(
-          title: "Check Out: ",
+          title: "Check Out:",
           value: DateFormatter.formatTimeWithDate(
             data.attendance?.checkOutDateTime,
           ),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         AttendanceDataRowReport(
-            title: "Check Out Status: ",
+            title: "Check Out Status:",
             value: data.attendance != null &&
                     data.attendance?.checkOutStatus != null
                 ? data.attendance?.checkOutStatus!.capitalizeFirst
@@ -124,14 +124,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
         ),
         data.attendance != null && data.attendance?.checkOutLate != null
             ? AttendanceDataRowReport(
-                title: "Check Out Late: ",
+                title: "Check Out Late:",
                 value: DateFormatter.getHourMinuteSecondFromMinute(
                   data.attendance?.checkOutLate,
                 ),
               )
             : data.attendance != null && data.attendance?.checkOutEarly != null
                 ? AttendanceDataRowReport(
-                    title: "Check Out Early: ",
+                    title: "Check Out Early:",
                     value: DateFormatter.getHourMinuteSecondFromMinute(
                       data.attendance?.checkOutEarly,
                     ),
@@ -139,12 +139,12 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                 : const SizedBox.shrink(),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         AttendanceDataRowReport(
-          title: "Work Hour: ",
+          title: "Work Hour:",
           value: DateFormatter.getHourMinuteSecondFromMinute(totalWorkMinute),
         ),
         SizedBox(height: SizeUtils.scale(2, size.width)),
         AttendanceDataRowReport(
-          title: "Total Session ",
+          title: "Total Session",
           value: (data.attendance?.totalSession ?? 0).toString(),
         ),
       ],

@@ -56,7 +56,7 @@ class TaskChart extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MyText(text: title ?? "MyTask", style: AppStyles().bodyLargeMedium),
+          MyText(text: title ?? "My Task", style: AppStyles().bodyLargeMedium),
           SizedBox(height: SizeUtils.scale(10, size.width)),
           CircularPercentIndicator(
             animation: true,
@@ -80,7 +80,7 @@ class TaskChart extends StatelessWidget {
           ),
           SizedBox(height: SizeUtils.scale(10, size.width)),
           MyText(
-              text: textBelow ?? "MyTask",
+              text: textBelow ?? "My Task",
               style: AppStyles().bodyMediumRegular),
         ],
       ),

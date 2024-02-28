@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Light theme data
 ThemeData lightThemeData() {
   return FlexThemeData.light(
-    scheme: FlexScheme.materialHc,
+    scheme: FlexScheme.indigoM3,
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     blendLevel: 7,
     subThemesData: const FlexSubThemesData(
@@ -25,7 +25,7 @@ ThemeData lightThemeData() {
 // Dark theme data
 ThemeData darkThemeData() {
   return FlexThemeData.dark(
-    scheme: FlexScheme.materialHc,
+    scheme: FlexScheme.indigoM3,
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     blendLevel: 13,
     subThemesData: const FlexSubThemesData(

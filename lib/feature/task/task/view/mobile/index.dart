@@ -5,6 +5,7 @@ import 'package:timesync360/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync360/core/widgets/no_data/no_data.dart';
 import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/task/task/controller/index.dart';
 import 'package:timesync360/feature/task/task/widget/task_chart.dart';
 import 'package:timesync360/feature/task/task/widget/task_card.dart';
@@ -74,7 +75,7 @@ class TaskViewMobile extends StatelessWidget {
                           ),
                           percent: controller.percentageUncompletedTask.value,
                           textBelow:
-                              "Task: ${controller.totalUncompletedTask}/${controller.totalTask.value}",
+                              "${"Task:".trString} ${controller.totalUncompletedTask}/${controller.totalTask.value}",
                         ),
                       ),
                     ),
@@ -92,14 +93,14 @@ class TaskViewMobile extends StatelessWidget {
                           ),
                           percent: controller.percentageCompletedTask.value,
                           textBelow:
-                              "Task: ${controller.totalCompletedTask}/${controller.totalTask.value}",
+                              "${"Task:".trString} ${controller.totalCompletedTask}/${controller.totalTask.value}",
                         ),
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: AppSize().paddingS11),
-                MyText(text: "MyTask", style: AppStyles().bodyLargeMedium),
+                MyText(text: "My Task", style: AppStyles().bodyLargeMedium),
                 SizedBox(height: AppSize().paddingS8),
                 Obx(
                   () => MyAsyncWidget(

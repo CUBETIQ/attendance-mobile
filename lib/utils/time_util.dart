@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class DateFormatter {
@@ -7,7 +8,8 @@ class DateFormatter {
 
   static String formatShortDate(DateTime dateTime) {
     // Define the desired format
-    final DateFormat formatter = DateFormat('d MMMM, y');
+    final DateFormat formatter =
+        DateFormat('d MMMM, y', Get.locale?.languageCode);
 
     // Format the DateTime
     return formatter.format(dateTime);
@@ -15,7 +17,8 @@ class DateFormatter {
 
   static String formatShortDateWithoutDay(DateTime dateTime) {
     // Define the desired format
-    final DateFormat formatter = DateFormat('MMMM, y');
+    final DateFormat formatter =
+        DateFormat('MMMM, y', Get.locale?.languageCode);
 
     // Format the DateTime
     return formatter.format(dateTime);
@@ -23,7 +26,8 @@ class DateFormatter {
 
   static String formatFullDate(DateTime dateTime) {
     // Define the desired format
-    final DateFormat formatter = DateFormat('EEEE d MMMM, y');
+    final DateFormat formatter =
+        DateFormat('EEEE d MMMM, y', Get.locale?.languageCode);
 
     // Format the DateTime
     return formatter.format(dateTime);
@@ -31,7 +35,7 @@ class DateFormatter {
 
   static String formatTime(DateTime dateTime) {
     // Define the desired time format
-    final DateFormat formatter = DateFormat('h:mm a');
+    final DateFormat formatter = DateFormat('h:mm a', Get.locale?.languageCode);
 
     // Format the DateTime
     return formatter.format(dateTime);
@@ -46,7 +50,7 @@ class DateFormatter {
     DateTime date = DateTime.fromMillisecondsSinceEpoch(dateTime);
 
     // Define the desired time format
-    final DateFormat formatter = DateFormat('h:mm a');
+    final DateFormat formatter = DateFormat('h:mm a', Get.locale?.languageCode);
 
     // Format the DateTime
     return formatter.format(date);
@@ -54,7 +58,7 @@ class DateFormatter {
 
   static String formatTimeNoTrailing(DateTime dateTime) {
     // Define the desired time format
-    final DateFormat formatter = DateFormat('h:mm a');
+    final DateFormat formatter = DateFormat('h:mm a', Get.locale?.languageCode);
 
     // Format the DateTime
     return formatter.format(dateTime);
@@ -94,7 +98,7 @@ class DateFormatter {
     // Cover milliseconds to DateTime
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds);
     // Format the result as a string
-    return DateFormat('dd/MM/yyyy').format(dateTime);
+    return DateFormat('dd/MM/yyyy', Get.locale?.languageCode).format(dateTime);
   }
 
   static int calculateDurationInMinutes(
@@ -212,8 +216,10 @@ class DateTimeUtil {
 
   static String calculateDuration(String startHour, String endHour) {
     // Parse startHour and endHour strings into DateTime objects
-    DateTime startTime = DateFormat('H:mm').parse(startHour);
-    DateTime endTime = DateFormat('H:mm').parse(endHour);
+    DateTime startTime =
+        DateFormat('H:mm', Get.locale?.languageCode).parse(startHour);
+    DateTime endTime =
+        DateFormat('H:mm', Get.locale?.languageCode).parse(endHour);
 
     // Calculate the duration between startTime and endTime
     Duration duration = endTime.difference(startTime);

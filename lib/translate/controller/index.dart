@@ -36,23 +36,21 @@ class LanguageController extends GetxController {
   }
 
   Future<void> initTranslation() async {
-
-    // TODO: Uncomment this code when the app is ready to be published
     final appConfig = await _localStorage.get();
-    // final languageConfig = await _languageLocalStorage.get();
-    // if (languageConfig?.enUS != null && languageConfig?.kmKH != null) {
-    //   langEN.value =
-    //       Map<String, String>.from(fromJson(languageConfig?.enUS ?? ""));
-    //   langKH.value =
-    //       Map<String, String>.from(fromJson(languageConfig?.kmKH ?? ""));
-    // } else {
-    langEN.value = await getTranslation(lang: "en");
-    langKH.value = await getTranslation(lang: "km");
-    await IsarService().saveLanguage(
-      enLang: toJson(langEN.value),
-      kmLang: toJson(langKH.value),
-    );
-    // }
+    final languageConfig = await _languageLocalStorage.get();
+    if (languageConfig?.enUS != null && languageConfig?.kmKH != null) {
+      langEN.value =
+          Map<String, String>.from(fromJson(languageConfig?.enUS ?? ""));
+      langKH.value =
+          Map<String, String>.from(fromJson(languageConfig?.kmKH ?? ""));
+    } else {
+      langEN.value = await getTranslation(lang: "en");
+      langKH.value = await getTranslation(lang: "km");
+      await IsarService().saveLanguage(
+        enLang: toJson(langEN.value),
+        kmLang: toJson(langKH.value),
+      );
+    }
     final local = Locale(appConfig?.language ?? 'en');
     Get.updateLocale(local);
   }

@@ -4,6 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync360/core/model/position_model.dart';
+import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
@@ -49,6 +51,17 @@ class AddPositionController extends GetxController {
       return;
     }
     try {
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "position",
+          userId: NavigationController.to.user.value.id,
+        );
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
+      }
       final AddPositionModel input = AddPositionModel(
         name: nameController.text,
         description: descriptionController.text,
@@ -74,6 +87,17 @@ class AddPositionController extends GetxController {
       return;
     }
     try {
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "position",
+          userId: NavigationController.to.user.value.id,
+        );
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
+      }
       final EditPositionModel input = EditPositionModel(
         name: nameController.text,
         description: descriptionController.text,

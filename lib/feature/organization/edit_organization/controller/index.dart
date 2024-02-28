@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:timesync360/core/model/organization_model.dart';
+import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/organization/edit_organization/model/update_organization_model.dart';
 import 'package:timesync360/feature/organization/edit_organization/service/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
@@ -84,6 +87,17 @@ class EditOrganizationController extends GetxController {
 
   Future<void> updateOrganization() async {
     try {
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "organization",
+          userId: NavigationController.to.user.value.id,
+        );
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
+      }
       ConfigsModel configs = ConfigsModel(
         startHour: startHourController.text,
         endHour: endHourController.text,

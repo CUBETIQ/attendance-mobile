@@ -22,7 +22,7 @@ class MyTabBar extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: Theme.of(context).colorScheme.background,
         borderRadius: isCircleBorder == true
             ? BorderRadius.circular(
                 SizeUtils.scale(15, size.width),

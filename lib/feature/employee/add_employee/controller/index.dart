@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:timesync360/core/model/department_model.dart';
 import 'package:timesync360/core/model/position_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
@@ -105,6 +107,17 @@ class AddStaffController extends GetxController {
         MyTextFieldFormController.findController('Password').isValid &&
         MyTextFieldFormController.findController('Email').isValid) {
       try {
+        if (imageFile.value != null) {
+          final metedata = FileMetadata(
+            source: "profile",
+            userId: NavigationController.to.user.value.id,
+          );
+          final data =
+              await UploadFileService().uploadFile(imageFile.value!, metedata);
+          if (data != null) {
+            image.value = data.url;
+          }
+        }
         CreateStaffModel input = CreateStaffModel(
           username: usernameController.text,
           password: passwordController.text,
@@ -136,6 +149,17 @@ class AddStaffController extends GetxController {
     validate(false);
     if (MyTextFieldFormController.findController('Username').isValid) {
       try {
+        if (imageFile.value != null) {
+          final metedata = FileMetadata(
+            source: "profile",
+            userId: NavigationController.to.user.value.id,
+          );
+          final data =
+              await UploadFileService().uploadFile(imageFile.value!, metedata);
+          if (data != null) {
+            image.value = data.url;
+          }
+        }
         UpdateStaffModel input = UpdateStaffModel(
           username: usernameController.text,
           firstName: firstnameController.text,

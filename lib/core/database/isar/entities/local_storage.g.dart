@@ -40,7 +40,7 @@ const LocalStorageSchema = CollectionSchema(
     r'isRememberMe': PropertySchema(
       id: 4,
       name: r'isRememberMe',
-      type: IsarType.bool,
+      type: IsarType.string,
     ),
     r'language': PropertySchema(
       id: 5,
@@ -90,6 +90,12 @@ int _localStorageEstimateSize(
     }
   }
   {
+    final value = object.isRememberMe;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.language;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -126,7 +132,7 @@ void _localStorageSerialize(
   writer.writeBool(offsets[1], object.darkTheme);
   writer.writeBool(offsets[2], object.isActivated);
   writer.writeBool(offsets[3], object.isFirstTime);
-  writer.writeBool(offsets[4], object.isRememberMe);
+  writer.writeString(offsets[4], object.isRememberMe);
   writer.writeString(offsets[5], object.language);
   writer.writeString(offsets[6], object.organizationId);
   writer.writeString(offsets[7], object.refreshToken);
@@ -145,7 +151,7 @@ LocalStorage _localStorageDeserialize(
   object.id = id;
   object.isActivated = reader.readBoolOrNull(offsets[2]);
   object.isFirstTime = reader.readBoolOrNull(offsets[3]);
-  object.isRememberMe = reader.readBoolOrNull(offsets[4]);
+  object.isRememberMe = reader.readStringOrNull(offsets[4]);
   object.language = reader.readStringOrNull(offsets[5]);
   object.organizationId = reader.readStringOrNull(offsets[6]);
   object.refreshToken = reader.readStringOrNull(offsets[7]);
@@ -169,7 +175,7 @@ P _localStorageDeserializeProp<P>(
     case 3:
       return (reader.readBoolOrNull(offset)) as P;
     case 4:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
@@ -604,11 +610,137 @@ extension LocalStorageQueryFilter
   }
 
   QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      isRememberMeEqualTo(bool? value) {
+      isRememberMeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isRememberMe',
         value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'isRememberMe',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'isRememberMe',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isRememberMe',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'isRememberMe',
+        value: '',
       ));
     });
   }
@@ -1511,9 +1643,10 @@ extension LocalStorageQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByIsRememberMe() {
+  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByIsRememberMe(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isRememberMe');
+      return query.addDistinctBy(r'isRememberMe', caseSensitive: caseSensitive);
     });
   }
 
@@ -1579,7 +1712,7 @@ extension LocalStorageQueryProperty
     });
   }
 
-  QueryBuilder<LocalStorage, bool?, QQueryOperations> isRememberMeProperty() {
+  QueryBuilder<LocalStorage, String?, QQueryOperations> isRememberMeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isRememberMe');
     });

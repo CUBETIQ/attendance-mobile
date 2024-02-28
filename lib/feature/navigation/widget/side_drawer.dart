@@ -65,51 +65,59 @@ class SideDrawer extends StatelessWidget {
             SizedBox(height: SizeUtils.scale(10, size.height)),
             ...List.generate(
               drawerItems.length,
-              (index) => SizedBox(
-                height: SizeUtils.scale(22, size.height),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
-                    ),
+              (index) => ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: SizeUtils.scale(20, size.width)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
                   ),
-                  onTap: () {
-                    ZoomDrawer.of(context)?.close();
-                    drawerItems[index].onTap!();
-                  },
-                  leading: Icon(
-                    drawerItems[index].icon,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  title: MyText(
-                    text: drawerItems[index].title,
-                    style: AppStyles().bodyMediumMedium.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                  ),
+                ),
+                onTap: () {
+                  ZoomDrawer.of(context)?.close();
+                  drawerItems[index].onTap!();
+                },
+                leading: Icon(
+                  drawerItems[index].icon,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                title: MyText(
+                  text: drawerItems[index].title,
+                  style: AppStyles().bodyMediumMedium.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                 ),
               ),
             ),
             const Spacer(),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: SizeUtils.scale(20, size.height),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.copyright_rounded,
-                    color: Theme.of(context).colorScheme.secondary,
-                    size: SizeUtils.scale(24, size.width),
+            Transform.translate(
+              offset: Offset(SizeUtils.scale(70, size.width), 0),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: SizeUtils.scale(20, size.height),
+                ),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.copyright_rounded,
+                        color: Theme.of(context).colorScheme.secondary,
+                        size: SizeUtils.scale(24, size.width),
+                      ),
+                      SizedBox(width: SizeUtils.scale(3, size.width)),
+                      MyText(
+                        text: "TimeSync 360 V1.0.0",
+                        style: AppStyles().bodyMediumMedium.copyWith(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                      ),
+                    ],
                   ),
-                  SizedBox(width: SizeUtils.scale(3, size.width)),
-                  MyText(
-                    text: "TimeSync 360 V1.0.0",
-                    style: AppStyles().bodyMediumMedium.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                  ),
-                ],
+                ),
               ),
             )
           ],

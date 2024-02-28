@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_this
+
 
 import 'package:get/get.dart';
 
@@ -46,7 +46,7 @@ extension StringExtension on String {
   //Translate string
   String get trString {
     try {
-      return this.tr;
+      return tr;
     } catch (error) {
       return this;
     }

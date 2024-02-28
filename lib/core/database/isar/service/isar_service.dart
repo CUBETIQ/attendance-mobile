@@ -22,7 +22,6 @@ class IsarService extends GetxService {
       app.isFirstTime = true;
       app.darkTheme = false;
       app.language = 'en';
-      app.isRememberMe = false;
       await _localStorage.insert(app);
     }
     AppConfig.isFirstTime = appConfig?.isFirstTime ?? false;
@@ -50,6 +49,7 @@ class IsarService extends GetxService {
       appConfig.username = input?.username ?? appConfig.username;
       appConfig.organizationId =
           input?.organizationId ?? appConfig.organizationId;
+      AppConfig.setConfig(appConfig);
       await _localStorage.insert(appConfig);
     } catch (e) {
       rethrow;

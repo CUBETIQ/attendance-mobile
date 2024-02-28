@@ -45,11 +45,11 @@ class ChangeLanguageController extends GetxController {
 
   Future<void> changeLanguage(
       LanguageButtonModel languageButtonModel, Size size) async {
+    if (selectedLanguage.value == languageButtonModel) return;
     const LoadingDialog().show(
       size: size,
       title: "Changing Language",
     );
-    if (selectedLanguage.value == languageButtonModel) return;
     selectedLanguage.value = languageButtonModel;
     isSelected.value = [false, false];
     isSelected[language.indexOf(languageButtonModel)] = true;

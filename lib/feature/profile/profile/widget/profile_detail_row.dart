@@ -17,27 +17,24 @@ class ProfileDetailRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          constraints: BoxConstraints(
-            maxWidth: SizeUtils.scale(80, size.width),
-          ),
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           alignment: Alignment.centerLeft,
           child: MyText(
             text: title ?? "Title",
             style: AppStyles().bodyMediumRegular,
           ),
         ),
-        Container(
-          constraints: BoxConstraints(
-            maxWidth: SizeUtils.scale(170, size.width),
-          ),
-          padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
-          alignment: Alignment.centerRight,
-          child: MyText(
-            text: value != "" && value != null
-                ? value.capitalizeMaybeNull ?? "N/A"
-                : "N/A",
-            style: AppStyles().bodyMediumRegular,
+        Flexible(
+          child: Container(
+            padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
+            alignment: Alignment.centerRight,
+            child: MyText(
+              text: value != "" && value != null
+                  ? value.capitalizeMaybeNull ?? "N/A"
+                  : "N/A",
+              overflow: TextOverflow.ellipsis,
+              style: AppStyles().bodyMediumRegular,
+            ),
           ),
         ),
       ],

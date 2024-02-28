@@ -67,6 +67,15 @@ class MainScreen extends StatelessWidget {
           icon: const Icon(Icons.menu),
           onPressed: controller.toggleDrawer,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Obx(() {
+              return controller.items[controller.selectedIndex.value].action ??
+                  const SizedBox.shrink();
+            }),
+          ),
+        ],
         title: Obx(
           () => MyAppBarTitle(
             title: controller.items[controller.selectedIndex.value].title,

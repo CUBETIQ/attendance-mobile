@@ -101,11 +101,10 @@ class WorkHourCard extends StatelessWidget {
           SizedBox(height: SizeUtils.scale(10, size.width)),
           Row(
             children: [
-              const MyText(text: "Total Hour: "),
-              SizedBox(width: SizeUtils.scale(10, size.width)),
+              const MyText(text: "Total Hour:"),
               MyText(
                 text:
-                    '${DateFormatter.formatMinutes(totalWorkMinute ?? 0)}/8:00',
+                    ' ${DateFormatter.formatMinutes(totalWorkMinute ?? 0)}/8:00',
               )
             ],
           )

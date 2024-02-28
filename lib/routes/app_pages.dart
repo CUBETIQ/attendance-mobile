@@ -44,6 +44,8 @@ import 'package:timesync360/feature/position/position_detail/position_detail_bin
 import 'package:timesync360/feature/position/position_detail/view/index.dart';
 import 'package:timesync360/feature/profile/edit_profile/view/index.dart';
 import 'package:timesync360/feature/profile/profile/profile_binding.dart';
+import 'package:timesync360/feature/qr_scan/scan_qr_binding.dart';
+import 'package:timesync360/feature/qr_scan/view/index.dart';
 import 'package:timesync360/feature/report/report_binding.dart';
 import 'package:timesync360/feature/setting/choose_language/view/index.dart';
 import 'package:timesync360/feature/setting/setting/setting_binding.dart';
@@ -223,6 +225,11 @@ class AppPages {
       name: Routes.CATEGORY_DETAIL,
       page: () => const CategoryDetailView(),
       binding: CategoryDetailBinding(),
+    ),
+        GetPage(
+      name: Routes.SCANQR,
+      page: () => const ScanQRView(),
+      binding: ScanQRBinding(),
     ),
   ];
 }

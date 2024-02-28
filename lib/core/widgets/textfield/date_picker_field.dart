@@ -72,11 +72,11 @@ class MyDatePickerField extends StatelessWidget {
               readOnly: true,
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
-                  context: context,
-                  initialDate: initialDate ?? DateTime.now(),
-                  firstDate: firstDate ?? DateTime(1900),
-                  lastDate: DateTime(2100),
-                );
+                    context: context,
+                    initialDate: initialDate ?? DateTime.now(),
+                    firstDate: firstDate ?? DateTime(1900),
+                    lastDate: DateTime(2100),
+                    locale: Get.locale);
                 if (picked != null) {
                   if (label == "Start Date") {
                     resultDate = picked;

@@ -7,6 +7,7 @@ import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/task/add_task/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/types/state.dart';
@@ -93,7 +94,7 @@ class AddTaskViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst),
+                          child: Text(e.capitalizeFirst.trString),
                         ),
                       )
                       .toList(),

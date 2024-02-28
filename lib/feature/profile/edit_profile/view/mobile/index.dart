@@ -6,6 +6,7 @@ import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/profile/edit_profile/controller/index.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,7 @@ class EditProfileViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst),
+                          child: Text(e.capitalizeFirst.trString),
                         ),
                       )
                       .toList(),
@@ -86,7 +87,7 @@ class EditProfileViewMobile extends StatelessWidget {
               MyDatePickerField(
                 hasLabel: true,
                 label: "Date of birth",
-                hintText: "Enter your date of birth",
+                hintText: "Enter your date of birth".trString,
                 textController: controller.dobController,
                 onDateResult: controller.getDateInMilliSecond,
               ),

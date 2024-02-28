@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:timesync360/core/widgets/no_data/no_data.dart';
 import 'package:timesync360/feature/report/controller/index.dart';
 import 'package:timesync360/feature/report/widget/attendance_text_title.dart';
@@ -34,7 +35,7 @@ class StaffReportViewMobile extends StatelessWidget {
                     );
                   },
                 ),
-                locale: 'en_US',
+                locale: Get.locale.toString(),
                 headerStyle: const HeaderStyle(
                   formatButtonVisible: false,
                   titleCentered: true,

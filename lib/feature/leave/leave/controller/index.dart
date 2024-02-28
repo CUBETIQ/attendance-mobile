@@ -3,6 +3,7 @@ import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/model/summary_leave_model.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync360/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/leave/leave/service/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
@@ -169,14 +170,9 @@ class LeaveController extends GetxController {
   }
 
   Future<void> onTapDate(BuildContext context) async {
-    final DateTime? picked = await showMonthPicker(
+    final DateTime? picked = await monthPicker(
       context: context,
       initialDate: selectDate.value,
-      firstDate: DateTime(2019),
-      lastDate: DateTime(2050),
-      roundedCornersRadius: 24,
-      animationMilliseconds: 0,
-      dismissible: true,
     );
     if (picked != null) {
       selectDate.value = picked;

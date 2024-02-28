@@ -93,7 +93,7 @@ class TaskViewMobile extends StatelessWidget {
                           ),
                           percent: controller.percentageCompletedTask.value,
                           textBelow:
-                              "Task: ${controller.totalCompletedTask}/${controller.totalTask.value}",
+                              "${"Task:".trString} ${controller.totalCompletedTask}/${controller.totalTask.value}",
                         ),
                       ),
                     ),

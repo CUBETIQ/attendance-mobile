@@ -36,7 +36,6 @@ class LanguageController extends GetxController {
   }
 
   Future<void> initTranslation() async {
-
     // TODO: Uncomment this code when the app is ready to be published
     final appConfig = await _localStorage.get();
     // final languageConfig = await _languageLocalStorage.get();

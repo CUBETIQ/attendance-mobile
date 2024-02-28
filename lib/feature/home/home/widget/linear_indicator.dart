@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/card/my_card.dart';
@@ -74,8 +75,12 @@ class LinearIndicator extends StatelessWidget {
           ),
           Align(
             child: MyText(
-              text:
-                  '${isCheckIn == true ? checkInEmployees : checkOutEmployees} out of $totalEmployees employees are present',
+              text: '@employee out of @total employees are present'.trParams({
+                'employee': isCheckIn == true
+                    ? '$checkInEmployees'
+                    : '$checkOutEmployees',
+                'total': '$totalEmployees',
+              }),
               style: AppStyles().bodySmallRegular,
             ),
           ),

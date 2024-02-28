@@ -139,7 +139,7 @@ class HomeAdminMobileView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             MyText(
-                              text: 'Attendance Statistics'.trString,
+                              text: 'Attendance Statistic',
                               style: AppStyles().bodyLargeMedium.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme

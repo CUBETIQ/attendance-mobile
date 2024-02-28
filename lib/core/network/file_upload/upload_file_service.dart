@@ -22,9 +22,14 @@ class UploadFileService {
   Future<UploadFileModel?> uploadFile(File file, FileMetadata? metadata) async {
     try {
       dioInstance.setBaseUrl(AppConfig.uploadUrl);
+      dioInstance.addHeader({
+        "x-api-key": AppConfig.xUploadApiKey,
+        // "x-api-hash": AppConfig.xApiHash,
+      });
+
       final data = FileUtil.getFormData(file, metadata);
       final response = await dioInstance.dio.post(
-        "/upload",
+        "/api/upload",
         data: data,
       );
       if (response.statusCode == 200) {
@@ -34,6 +39,8 @@ class UploadFileService {
       }
     } on DioException catch (e) {
       Logs.e(e.message);
+    } finally {
+      dioInstance.setBaseUrl(AppConfig.baseUrl);
     }
     return null;
   }

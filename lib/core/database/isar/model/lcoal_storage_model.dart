@@ -3,7 +3,7 @@ class LocalStorageModel {
   String? accessToken;
   bool? darkTheme;
   String? language;
-  bool? isRememberMe;
+  String? isRememberMe;
   String? username;
   String? refreshToken;
   bool? isActivated;

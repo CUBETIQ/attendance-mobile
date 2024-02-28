@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:timesync360/core/model/user_model.dart';
+import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
@@ -65,6 +67,17 @@ class EditProfileController extends GetxController {
     if (MyTextFieldFormController.findController('First Name').isValid &&
         MyTextFieldFormController.findController('Last Name').isValid) {
       isLoading.value = true;
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "profile",
+          userId: NavigationController.to.user.value.id,
+        );
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
+      }
       try {
         UpdateProfileModel input = UpdateProfileModel(
           firstname: firstnameController.text,

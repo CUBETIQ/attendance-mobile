@@ -57,4 +57,8 @@ class DioUtil {
   void setBaseUrl(String baseUrl) {
     _dio.options.baseUrl = baseUrl;
   }
+
+  void addHeader(Map<String, dynamic> headers) {
+    _dio.options.headers.addAll(headers);
+  }
 }

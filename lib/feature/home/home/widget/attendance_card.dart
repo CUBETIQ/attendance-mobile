@@ -17,6 +17,7 @@ class AttendanceCard extends StatelessWidget {
   final double? width;
   final double? buttonSize;
   final double? iconSize;
+  final bool isInOfficeRange;
 
   const AttendanceCard({
     super.key,
@@ -29,6 +30,7 @@ class AttendanceCard extends StatelessWidget {
     this.width,
     this.buttonSize,
     this.iconSize,
+    this.isInOfficeRange = false,
   });
 
   @override
@@ -155,7 +157,9 @@ class AttendanceCard extends StatelessWidget {
                 ),
                 SizedBox(width: size.width * 0.01),
                 MyText(
-                  text: "Location: You are in office area.",
+                  text: isInOfficeRange
+                      ? "Location: You are in office area."
+                      : "Location: You are not in office area.",
                   style: AppStyles().bodyMediumRegular,
                 ),
               ],

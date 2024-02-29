@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
@@ -38,14 +39,16 @@ class ScanQRViewMobile extends StatelessWidget {
           ),
           Transform.translate(
             offset: const Offset(0, -250),
-            child: const MyText(
+            child: MyText(
               text: 'Scan QR',
+              style: AppStyles().bodyXlarge,
             ),
           ),
           Transform.translate(
             offset: const Offset(0, -220),
-            child: const MyText(
+            child: MyText(
               text: 'Align frame with QR Code',
+              style: AppStyles().bodyMediumRegular,
             ),
           ),
           Transform.translate(

@@ -1,5 +1,4 @@
 import 'package:permission_handler/permission_handler.dart';
-import 'package:timesync360/core/widgets/dialog/dialog.dart';
 
 class PermissonHandler {
   static Future<bool> requestStoragePermission() async {

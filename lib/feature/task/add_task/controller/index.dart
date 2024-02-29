@@ -1,3 +1,4 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:timesync360/core/model/task_model.dart';
 import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
 import 'package:timesync360/core/widgets/icon_picker/icon_picker_dialog.dart';
@@ -24,7 +25,9 @@ class AddTaskController extends GetxController {
   final descriptionController = TextEditingController();
   final color = Rxn<Color>(null);
   final stringColor = Rxn<String>(null);
+  final stringColorLabel = Rxn<String>(null);
   final stringIcon = Rxn<String>(null);
+  final stringIconLabel = Rxn<String>(null);
   final appState = AppState.create.obs;
   final task = Rxn<TaskModel>(null);
   final priority = [
@@ -144,6 +147,9 @@ class AddTaskController extends GetxController {
       onChangeResult: (colorString, value) {
         stringColor.value = colorString;
         color.value = value;
+        if (color.value != null) {
+          stringColorLabel.value = ColorTools.nameThatColor(color.value!);
+        }
       },
       onCancel: () {
         String? colorString = Theme.of(context).colorScheme.primary.toString();
@@ -151,6 +157,7 @@ class AddTaskController extends GetxController {
         Match? match = regExp.firstMatch(colorString);
         color.value = Theme.of(context).colorScheme.primary;
         stringColor.value = match?.group(0) ?? '';
+
         Get.back();
       },
       onConfirm: () {
@@ -163,7 +170,8 @@ class AddTaskController extends GetxController {
     Get.dialog(
       IconPicker(
         onChangeResult: (value) {
-          stringIcon.value = value;
+          stringIcon.value = value.iconCode;
+          stringIconLabel.value = value.iconName;
         },
       ),
     );

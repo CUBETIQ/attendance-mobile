@@ -112,20 +112,26 @@ class AddTaskViewMobile extends StatelessWidget {
               ),
               SizedBox(height: AppSize().paddingS5),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Obx(
-                    () => RoundedIconPicker(
-                      iconColor: Colors.white,
-                      icon: controller.stringIcon.value,
-                      baseColor: controller.color.value,
-                      onTap: () => controller.onTapPickIcon(context),
+                  Expanded(
+                    child: Obx(
+                      () => RoundedIconPicker(
+                        iconColor: Colors.white,
+                        icon: controller.stringIcon.value,
+                        label: controller.stringIconLabel.value,
+                        baseColor: controller.color.value,
+                        onTap: () => controller.onTapPickIcon(context),
+                      ),
                     ),
                   ),
-                  Obx(
-                    () => RoundedColorPicker(
-                      color: controller.color.value,
-                      onTap: () => controller.onTapPickColor(context),
+                  Expanded(
+                    child: Obx(
+                      () => RoundedColorPicker(
+                        color: controller.color.value,
+                        label: controller.stringColorLabel.value,
+                        onTap: () => controller.onTapPickColor(context),
+                      ),
                     ),
                   ),
                 ],

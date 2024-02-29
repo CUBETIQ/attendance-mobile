@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class IconPicker extends StatefulWidget {
-  final void Function(String?)? onChangeResult;
+  final void Function(IconPickerResult)? onChangeResult;
   const IconPicker({super.key, this.onChangeResult});
 
   @override
@@ -16,6 +16,7 @@ class _IconPickerState extends State<IconPicker> {
   IconData selectedIcon = Icons.task;
   int? selectedIndex;
   String? icon;
+  String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,12 @@ class _IconPickerState extends State<IconPicker> {
                             selectedIndex = index;
                             selectedIcon = iconsMap[sortedKeys[index]]!;
                             icon = selectedIcon.codePoint.toString();
-                            widget.onChangeResult?.call(icon);
+
+                            String iconName = sortedKeys[selectedIndex!];
+                            IconPickerResult result =
+                                IconPickerResult(icon, iconName);
+
+                            widget.onChangeResult?.call(result);
                           });
                         },
                         child: Column(
@@ -116,6 +122,13 @@ class _IconPickerState extends State<IconPicker> {
       ),
     );
   }
+}
+
+class IconPickerResult {
+  final String? iconCode;
+  final String? iconName;
+
+  IconPickerResult(this.iconCode, this.iconName);
 }
 
 final iconsMap = {

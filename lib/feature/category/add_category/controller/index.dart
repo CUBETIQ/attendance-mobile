@@ -154,7 +154,7 @@ class AddCategoryController extends GetxController {
     Get.dialog(
       IconPicker(
         onChangeResult: (value) {
-          stringIcon.value = value;
+          stringIcon.value = value.iconCode;
         },
       ),
     );

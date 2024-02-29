@@ -1,6 +1,7 @@
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/button/upload_button.dart';
 import 'package:timesync360/core/widgets/color_picker/rounded_color_picker.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
@@ -136,6 +137,9 @@ class AddTaskViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: size.height * 0.06),
+              Obx(() =>
+                  UploadButton(files: controller.files, onTap: () async {})),
               SizedBox(height: size.height * 0.06),
               MyAsyncButton(
                 title: "Save",

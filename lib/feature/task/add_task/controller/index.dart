@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:timesync360/core/model/task_model.dart';
 import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
@@ -34,9 +36,10 @@ class AddTaskController extends GetxController {
     TaskPriority.low,
     TaskPriority.medium,
     TaskPriority.high,
-  ].obs;
+  ];
   final selectPriority = TaskPriority.low.obs;
   late Color screenPickerColor;
+  final files = <File>[].obs;
 
   @override
   void onInit() {

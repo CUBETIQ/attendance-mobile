@@ -112,35 +112,39 @@ class AddTaskViewMobile extends StatelessWidget {
                 maxlines: 5,
               ),
               SizedBox(height: AppSize().paddingS5),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Obx(
-                      () => RoundedIconPicker(
-                        iconColor: Colors.white,
-                        icon: controller.stringIcon.value,
-                        label: controller.stringIconLabel.value,
-                        baseColor: controller.color.value,
-                        onTap: () => controller.onTapPickIcon(context),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Obx(
+                        () => RoundedIconPicker(
+                          iconColor: Colors.white,
+                          icon: controller.stringIcon.value,
+                          label: controller.stringIconLabel.value,
+                          baseColor: controller.color.value,
+                          onTap: () => controller.onTapPickIcon(context),
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Obx(
-                      () => RoundedColorPicker(
-                        color: controller.color.value,
-                        label: controller.stringColorLabel.value,
-                        onTap: () => controller.onTapPickColor(context),
+                    Expanded(
+                      child: Obx(
+                        () => RoundedColorPicker(
+                          color: controller.color.value,
+                          label: controller.stringColorLabel.value,
+                          onTap: () => controller.onTapPickColor(context),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              SizedBox(height: size.height * 0.06),
-              Obx(() => UploadButton(
-                  files: controller.files.value, onTap: controller.uploadFile)),
-              SizedBox(height: size.height * 0.06),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.02),
+                child: UploadButton(
+                    files: controller.files, onTap: controller.uploadFile),
+              ),
               MyAsyncButton(
                 title: "Save",
                 onTap: controller.appState.value == AppState.edit

@@ -13,7 +13,7 @@ import 'package:timesync360/extensions/file_format.dart';
 import 'package:path/path.dart' as path;
 
 class UploadButton extends StatelessWidget {
-  final List<File> files;
+  final RxList<File> files;
   final int? fileLimit;
   final double? width;
   final double? height;
@@ -90,67 +90,69 @@ class UploadButton extends StatelessWidget {
             ),
           ),
         ),
-        Visibility(
-          visible: files.isNotEmpty,
-          replacement: const SizedBox.shrink(),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Obx(() => Visibility(
+              visible: files.value.isNotEmpty,
+              replacement: const SizedBox.shrink(),
+              child: Column(
                 children: [
-                  const MyText(
-                    text: "Recent File Uploaded",
-                  ),
-                  MyText(
-                    text: "${files.length}/${fileLimit ?? 3}",
-                  )
-                ],
-              ),
-              const SizedBox(height: 15),
-              Column(
-                children: [
-                  for (int i = 0; i < files.length; i++)
-                    MyFileTitle(
-                      file: files[i],
-                      trailing: PopupMenuButton(
-                        elevation: 1,
-                        onSelected: (value) {
-                          if (value == 0) {
-                            OpenFile.open(files[i].path);
-                          } else {
-                            _removeFile(i);
-                          }
-                        },
-                        itemBuilder: (context) {
-                          return [
-                            const PopupMenuItem(
-                              value: 0,
-                              child: Text(
-                                "View",
-                              ),
-                            ),
-                            const PopupMenuItem(
-                              value: 1,
-                              child: Text(
-                                "Remove",
-                              ),
-                            ),
-                          ];
-                        },
-                      ),
+                  Padding(
+                    padding: EdgeInsets.only(top: size.height * 0.02),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const MyText(
+                          text: "Recent File Uploaded",
+                        ),
+                        MyText(
+                          text: "${files.length}/${fileLimit ?? 3}",
+                        )
+                      ],
                     ),
+                  ),
+                  const SizedBox(height: 15),
+                  Column(
+                    children: [
+                      for (int i = 0; i < files.value.length; i++)
+                        MyFileTitle(
+                          file: files[i],
+                          trailing: PopupMenuButton(
+                            elevation: 1,
+                            onSelected: (value) {
+                              if (value == 0) {
+                                OpenFile.open(files[i].path);
+                              } else {
+                                _removeFile(i);
+                              }
+                            },
+                            itemBuilder: (context) {
+                              return [
+                                const PopupMenuItem(
+                                  value: 0,
+                                  child: Text(
+                                    "View",
+                                  ),
+                                ),
+                                const PopupMenuItem(
+                                  value: 1,
+                                  child: Text(
+                                    "Remove",
+                                  ),
+                                ),
+                              ];
+                            },
+                          ),
+                        ),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        ),
+            )),
       ],
     );
   }
 
   void _removeFile(int index) {
     files.removeAt(index);
-    Get.back();
   }
 }
 

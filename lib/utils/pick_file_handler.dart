@@ -5,7 +5,9 @@ import 'package:timesync360/utils/permission_handler.dart';
 class PickFileHandler {
   static Future<File?> openGallery() async {
     File? file;
-    final permission = await PermissonHandler.requestStoragePermission();
+    final permission = Platform.isIOS
+        ? await PermissonHandler.requestPhotoPermission()
+        : await PermissonHandler.requestStoragePermission();
     if (permission) {
       try {
         final result =

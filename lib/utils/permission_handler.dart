@@ -6,25 +6,45 @@ import 'package:timesync360/utils/logger.dart';
 class PermissonHandler {
   static Future<bool> requestStoragePermission() async {
     var storagePermission = await Permission.storage.status;
-    Logs.e("Storage Permission: $storagePermission");
     if (storagePermission.isGranted) {
-      Logs.t("1");
       return true;
     } else {
       var result = await Permission.storage.request();
-      Logs.t("Storage Permission: $result");
       if (result.isGranted) {
-        Logs.t("2");
         return true;
       } else if (result.isPermanentlyDenied) {
-        Logs.t("3");
         showPermissionDialog(
           "Storage Permission",
           "Storage permission is required. Please enable it from settings",
         );
         return false;
       } else {
-        Logs.t("4");
+        showPermissionDialog(
+          "Storage Permission",
+          "Storage permission is required. Please enable it from settings",
+        );
+        return false;
+      }
+    }
+  }
+
+  static Future<bool> requestPhotoPermission() async {
+    var storagePermission = await Permission.photos.status;
+    Logs.e(storagePermission);
+    if (storagePermission.isGranted) {
+      return true;
+    } else {
+      var result = await Permission.photos.request();
+      Logs.e(result);
+      if (result.isGranted) {
+        return true;
+      } else if (result.isPermanentlyDenied) {
+        showPermissionDialog(
+          "Storage Permission",
+          "Storage permission is required. Please enable it from settings",
+        );
+        return false;
+      } else {
         showPermissionDialog(
           "Storage Permission",
           "Storage permission is required. Please enable it from settings",

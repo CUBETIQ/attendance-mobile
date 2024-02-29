@@ -9,12 +9,9 @@ import 'package:timesync360/feature/home/home/controller/index.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/profile/edit_profile/model/update_profile_model.dart';
 import 'package:timesync360/feature/profile/edit_profile/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/avatar_type.dart';
 import 'package:timesync360/types/gender.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -103,42 +100,20 @@ class EditProfileController extends GetxController {
     }
   }
 
-  Future<void> pickImage() async {
+  void pickImage() async {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapCamera: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = file;
+      },
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.profile,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   void validate() {

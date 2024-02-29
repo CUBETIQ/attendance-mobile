@@ -1,11 +1,15 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/routes/app_pages.dart';
 
 showSessionExpiredDialog() {
-  Get.dialog(
+  return Get.dialog(
     barrierDismissible: false,
     Dialog(
       child: PopScope(
@@ -55,4 +59,92 @@ showSessionExpiredDialog() {
       ),
     ),
   );
+}
+
+showPermissionDialog(
+  String title,
+  String content,
+) {
+  return Platform.isIOS
+      ? Get.dialog(
+          CupertinoAlertDialog(
+            title: MyText(
+              text: title,
+              textAlign: TextAlign.center,
+              style: AppStyles().bodyMediumMedium,
+            ),
+            content: MyText(
+              text: content,
+              maxLines: 4,
+              style: AppStyles().bodySmallRegular,
+            ),
+            actions: [
+              CupertinoDialogAction(
+                child: MyText(
+                  text: "Cancel",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+              CupertinoDialogAction(
+                child: MyText(
+                  text: "Setting",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () async {
+                  Get.back();
+                  await openAppSettings();
+                },
+              )
+            ],
+          ),
+        )
+      : Get.dialog(
+          AlertDialog(
+            titlePadding: const EdgeInsets.only(
+              top: 15,
+              bottom: 5,
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
+            ),
+            actionsPadding: const EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
+            title: MyText(
+              text: title,
+              textAlign: TextAlign.center,
+              style: AppStyles().bodyLargeMedium,
+            ),
+            content: MyText(
+              text: content,
+              maxLines: 4,
+              style: AppStyles().bodyMediumRegular,
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: MyText(
+                  text: "Cancel",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+              TextButton(
+                child: MyText(
+                  text: "Setting",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () async {
+                  Get.back();
+                  await openAppSettings();
+                },
+              )
+            ],
+          ),
+        );
 }

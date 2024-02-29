@@ -7,13 +7,10 @@ import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/organization/edit_organization/model/update_organization_model.dart';
 import 'package:timesync360/feature/organization/edit_organization/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
 import 'package:timesync360/utils/time_util.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/types/avatar_type.dart';
 
 class EditOrganizationController extends GetxController {
   final nameController = TextEditingController();
@@ -47,42 +44,20 @@ class EditOrganizationController extends GetxController {
     image.value = organization.value.image ?? "";
   }
 
-  Future<void> pickImage() async {
+  void pickImage() async {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapCamera: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = file;
+      },
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.organization,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   Future<void> updateOrganization() async {

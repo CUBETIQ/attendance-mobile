@@ -12,7 +12,6 @@ import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/navigation/model/bottom_bar_model.dart';
 import 'package:timesync360/feature/navigation/model/drawer_model.dart';
 import 'package:timesync360/feature/navigation/service/index.dart';
-import 'package:timesync360/feature/qr_scan/view/index.dart';
 import 'package:timesync360/routes/app_pages.dart';
 import 'package:timesync360/utils/location_util.dart';
 import 'package:timesync360/utils/time_util.dart';

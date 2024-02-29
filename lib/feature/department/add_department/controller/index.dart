@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync360/core/model/department_model.dart';
@@ -13,8 +12,6 @@ import 'package:timesync360/feature/department/add_department/model/edit_departm
 import 'package:timesync360/feature/department/add_department/service/index.dart';
 import 'package:timesync360/feature/department/department/controller/index.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/types/avatar_type.dart';
 import 'package:timesync360/types/state.dart';
 import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
@@ -118,39 +115,14 @@ class AddDepartmentController extends GetxController {
   void pickImage() {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = null;
+      },
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.position,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   void validate() {

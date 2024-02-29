@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync360/constants/font.dart';
@@ -5,7 +8,7 @@ import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/routes/app_pages.dart';
 
 showSessionExpiredDialog() {
-  Get.dialog(
+  return Get.dialog(
     barrierDismissible: false,
     Dialog(
       child: PopScope(
@@ -55,4 +58,57 @@ showSessionExpiredDialog() {
       ),
     ),
   );
+}
+
+showPermissionDialog(
+  String title,
+  String content,
+) {
+  return Platform.isIOS
+      ? Get.dialog(
+          CupertinoAlertDialog(
+            title: MyText(
+              text: title,
+              textAlign: TextAlign.center,
+              style: AppStyles().bodyMediumMedium,
+            ),
+            content: MyText(
+              text: content,
+              maxLines: 4,
+              style: AppStyles().bodySmallRegular,
+            ),
+            actions: [
+              CupertinoDialogAction(
+                child: MyText(
+                  text: "Cancel",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () {},
+              ),
+              CupertinoDialogAction(
+                child: MyText(
+                  text: "Setting",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () {},
+              )
+            ],
+          ),
+        )
+      : Get.dialog(
+          AlertDialog(
+            title: new Text("Dialog Title"),
+            content: new Text("This is my content"),
+            actions: <Widget>[
+              TextButton(
+                child: Text("Yes"),
+                onPressed: () {},
+              ),
+              TextButton(
+                child: Text("No"),
+                onPressed: () {},
+              )
+            ],
+          ),
+        );
 }

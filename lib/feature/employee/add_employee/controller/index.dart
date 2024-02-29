@@ -12,15 +12,12 @@ import 'package:timesync360/feature/employee/add_employee/model/create_staff_mod
 import 'package:timesync360/feature/employee/add_employee/model/update_staff_model.dart';
 import 'package:timesync360/feature/employee/add_employee/service/index.dart';
 import 'package:timesync360/feature/employee/employee/controller/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
 import 'package:timesync360/types/state.dart';
 import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/avatar_type.dart';
 import 'package:timesync360/types/gender.dart';
 import 'package:timesync360/types/role.dart';
 import 'package:timesync360/types/user_status.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -189,42 +186,20 @@ class AddStaffController extends GetxController {
     }
   }
 
-  Future<void> pickImage() async {
+  void pickImage() async {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapCamera: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = file;
+      },
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.profile,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   void getDateInMilliSecond(int? date) {

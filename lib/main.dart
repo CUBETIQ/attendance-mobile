@@ -9,7 +9,6 @@ import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/core/database/isar/service/isar_service.dart';
 import 'package:timesync360/core/database/local_path/app_path_controller.dart';
 import 'package:timesync360/firebase_options.dart';
-import 'package:timesync360/notification/notification_service.dart';
 import 'package:timesync360/utils/logger.dart';
 
 // using SizeUits.scaleWidth for make the bigger device and smalller device have same Ui size we need
@@ -43,9 +42,9 @@ Future<void> initService() async {
 Future<void> firebaseInit() async {
   Logs.t('[firebaseInitialized] Initializing Firebase');
   // Initialize Firebase App and Messaging
-  await NotificationService.initializeFirebase();
+  // await NotificationService.initializeFirebase();
   // Initialize Firebase Messaging Background Handler
-  NotificationService.initializeFirebaseMessagingBackgroundHandler();
+  // NotificationService.initializeFirebaseMessagingBackgroundHandler();
 
   //////////// Firebase Crashlytics ////////////
   FirebaseCrashlytics.instance

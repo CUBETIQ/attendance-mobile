@@ -4,7 +4,6 @@ import 'package:timesync360/constants/color.dart';
 import 'package:timesync360/core/model/position_model.dart';
 import 'package:timesync360/core/model/user_model.dart';
 import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
-import 'package:timesync360/core/widgets/dialog/dialog.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/no_data/no_data.dart';
 import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';

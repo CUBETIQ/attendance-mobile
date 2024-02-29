@@ -1,8 +1,12 @@
+import 'dart:io';
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/widgets/button/button.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync360/types/avatar_type.dart';
+import 'package:timesync360/utils/pick_file_handler.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -448,6 +452,105 @@ void getEditDeleteViewBottomSheet(
 }
 
 void getPickImageButtomSheet(
+  BuildContext context, {
+  bool? isDismissible,
+  void Function(File file)? onTapGallery,
+  void Function(String? image, File? file)? onTapAvatar,
+  void Function(File file)? onTapCamera,
+  String? firstButtonTitle,
+  String? secondButtonTitle,
+  IconData? firstButtonIcon,
+  IconData? secondButtonIcon,
+  IconData? thirdButtonIcon,
+  String? avatarType,
+}) {
+  final size = MediaQuery.of(context).size;
+  Get.bottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50 * (size.width / 375.0)),
+        topRight: Radius.circular(50 * (size.width / 375.0)),
+      ),
+    ),
+    isDismissible: isDismissible ?? true,
+    Container(
+      width: size.width,
+      height: SizeUtils.scale(430, size.width),
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          top: AppSize().paddingTitleSmall,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width * 0.65,
+              height: size.height * 0.22,
+              child: SvgPicture.asset(
+                SvgAssets.gallery,
+              ),
+            ),
+            SizedBox(height: SizeUtils.scale(40, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: firstButtonIcon ?? Icons.photo_rounded,
+              title: firstButtonTitle ?? "Open Gallery",
+              onTap: () async {
+                Get.back();
+                final file = await PickFileHandler.openGallery();
+                if (file != null) {
+                  onTapGallery?.call(file);
+                }
+              },
+            ),
+            SizedBox(height: SizeUtils.scale(10, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: thirdButtonIcon ?? Icons.camera_rounded,
+              title: secondButtonTitle ?? "Open Camcera",
+              onTap: () async {
+                Get.back();
+                final file = await PickFileHandler.openCamera();
+                if (file != null) {
+                  onTapCamera?.call(file);
+                }
+              },
+            ),
+            SizedBox(height: SizeUtils.scale(10, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: secondButtonIcon ?? Icons.person_rounded,
+              title: secondButtonTitle ?? "Default Avatar",
+              onTap: () async {
+                Get.back();
+                File? file;
+                final resultImage = await Get.toNamed(
+                  Routes.AVATAR,
+                  arguments: avatarType ?? AvatarType.profile,
+                );
+                if (resultImage != null) {
+                  final image = resultImage;
+                  file = null;
+                  onTapAvatar?.call(image, file);
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+void getPickIconButtomSheet(
   BuildContext context, {
   bool? isDismissible,
   void Function()? onTapGallery,

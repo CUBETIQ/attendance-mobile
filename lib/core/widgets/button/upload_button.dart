@@ -9,8 +9,8 @@ import 'package:timesync360/constants/svg.dart';
 import 'package:timesync360/core/widgets/image/custom_svg.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as path;
 import 'package:timesync360/extensions/file_format.dart';
+import 'package:path/path.dart' as path;
 
 class UploadButton extends StatelessWidget {
   final List<File> files;
@@ -42,7 +42,8 @@ class UploadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     RxBool isDisableButton = false.obs;
-    return Row(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Obx(
           () => GestureDetector(
@@ -89,79 +90,67 @@ class UploadButton extends StatelessWidget {
             ),
           ),
         ),
-        Obx(
-          () => Visibility(
-            visible: files.isNotEmpty,
-            replacement: const SizedBox.shrink(),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const MyText(
-                      text: "Recent File Uploaded",
-                    ),
-                    MyText(
-                      text: "${files.length}/${fileLimit ?? 3}",
-                    )
-                  ],
-                ),
-                const SizedBox(height: 15),
-                Column(
-                  children: [
-                    for (int i = 0; i < files.length; i++)
-                      MyFileTitle(
-                        file: files[i],
-                        trailing: PopupMenuButton(
-                          elevation: 1,
-                          onSelected: (value) {
-                            if (value == 0) {
-                              OpenFile.open(files[i].path);
-                            } else {
-                              showAlertRemove(context, i);
-                            }
-                          },
-                          itemBuilder: (context) {
-                            return [
-                              const PopupMenuItem(
-                                value: 0,
-                                child: Text(
-                                  "View",
-                                ),
+        Visibility(
+          visible: files.isNotEmpty,
+          replacement: const SizedBox.shrink(),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const MyText(
+                    text: "Recent File Uploaded",
+                  ),
+                  MyText(
+                    text: "${files.length}/${fileLimit ?? 3}",
+                  )
+                ],
+              ),
+              const SizedBox(height: 15),
+              Column(
+                children: [
+                  for (int i = 0; i < files.length; i++)
+                    MyFileTitle(
+                      file: files[i],
+                      trailing: PopupMenuButton(
+                        elevation: 1,
+                        onSelected: (value) {
+                          if (value == 0) {
+                            OpenFile.open(files[i].path);
+                          } else {
+                            _removeFile(i);
+                          }
+                        },
+                        itemBuilder: (context) {
+                          return [
+                            const PopupMenuItem(
+                              value: 0,
+                              child: Text(
+                                "View",
                               ),
-                              const PopupMenuItem(
-                                value: 1,
-                                child: Text(
-                                  "Remove",
-                                ),
+                            ),
+                            const PopupMenuItem(
+                              value: 1,
+                              child: Text(
+                                "Remove",
                               ),
-                            ];
-                          },
-                        ),
+                            ),
+                          ];
+                        },
                       ),
-                  ],
-                ),
-              ],
-            ),
+                    ),
+                ],
+              ),
+            ],
           ),
         ),
       ],
     );
   }
 
-    void _removeFile(int index) {
+  void _removeFile(int index) {
     files.removeAt(index);
     Get.back();
-  }
-
-    void showAlertRemove(BuildContext context, int index) {
-    // showConfirmRemoveBottomSheet(
-    //   title: "File Removal Request",
-    //   description: "Are you sure you want to remove this file?",
-    //   context: context,
-    //   onTap: () => 
-      _removeFile(index);
-    // );
   }
 }
 
@@ -190,9 +179,7 @@ class MyFileTitle extends StatelessWidget {
           dense: true,
           visualDensity: VisualDensity.compact,
           contentPadding: const EdgeInsets.only(left: 20),
-          leading: 
-          
-          CustomSvg(
+          leading: CustomSvg(
             height: 24,
             width: 24,
             svg: file.isImage ? SvgAssets.image : SvgAssets.file,
@@ -216,4 +203,3 @@ class MyFileTitle extends StatelessWidget {
     );
   }
 }
-

@@ -138,8 +138,8 @@ class AddTaskViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(height: size.height * 0.06),
-              Obx(() =>
-                  UploadButton(files: controller.files, onTap: () async {})),
+              Obx(() => UploadButton(
+                  files: controller.files.value, onTap: controller.uploadFile)),
               SizedBox(height: size.height * 0.06),
               MyAsyncButton(
                 title: "Save",

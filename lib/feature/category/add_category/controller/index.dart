@@ -115,7 +115,7 @@ class AddCategoryController extends GetxController {
   }
 
   void onTapImage(BuildContext context) {
-    getPickImageButtomSheet(
+    getPickIconButtomSheet(
       Get.context!,
       onTapGallery: onTapPickIcon,
       onTapAvatar: () => onTapPickColor(context),

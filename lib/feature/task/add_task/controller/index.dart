@@ -10,6 +10,8 @@ import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/task/add_task/model/create_task_model.dart';
 import 'package:timesync360/feature/task/add_task/service/index.dart';
 import 'package:timesync360/feature/task/task/controller/index.dart';
+import 'package:timesync360/utils/file_util.dart';
+import 'package:timesync360/utils/pick_file_handler.dart';
 import 'package:timesync360/utils/time_util.dart';
 import 'package:timesync360/types/state.dart';
 import 'package:timesync360/types/task_priority.dart';
@@ -123,6 +125,17 @@ class AddTaskController extends GetxController {
       } else {
         title.value = "Add Task";
         appState.value = AppState.create;
+      }
+    }
+  }
+
+  Future<void> uploadFile() async {
+    final file = await PickFileHandler.openGallery();
+    if (file != null) {
+      bool fileSizeValid = await FileUtil.validateFileSize(file);
+      if (fileSizeValid) {
+        files.value.add(file);
+        files.refresh();
       }
     }
   }

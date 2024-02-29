@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/routes/app_pages.dart';
@@ -83,30 +84,65 @@ showPermissionDialog(
                   text: "Cancel",
                   style: AppStyles().bodyMediumRegular,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Get.back();
+                },
               ),
               CupertinoDialogAction(
                 child: MyText(
                   text: "Setting",
                   style: AppStyles().bodyMediumRegular,
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  Get.back();
+                  await openAppSettings();
+                },
               )
             ],
           ),
         )
       : Get.dialog(
           AlertDialog(
-            title: new Text("Dialog Title"),
-            content: new Text("This is my content"),
+            titlePadding: const EdgeInsets.only(
+              top: 15,
+              bottom: 5,
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
+            ),
+            actionsPadding: const EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
+            title: MyText(
+              text: title,
+              textAlign: TextAlign.center,
+              style: AppStyles().bodyLargeMedium,
+            ),
+            content: MyText(
+              text: content,
+              maxLines: 4,
+              style: AppStyles().bodyMediumRegular,
+            ),
             actions: <Widget>[
               TextButton(
-                child: Text("Yes"),
-                onPressed: () {},
+                child: MyText(
+                  text: "Cancel",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
               ),
               TextButton(
-                child: Text("No"),
-                onPressed: () {},
+                child: MyText(
+                  text: "Setting",
+                  style: AppStyles().bodyMediumRegular,
+                ),
+                onPressed: () async {
+                  Get.back();
+                  await openAppSettings();
+                },
               )
             ],
           ),

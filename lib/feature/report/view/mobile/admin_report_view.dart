@@ -41,15 +41,15 @@ class AdminReportViewMobile extends StatelessWidget {
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Padding(
                       padding: EdgeInsets.only(
-                        left: SizeUtils.scale(
+                        left: SizeUtils.scaleMobile(
                           AppSize().paddingHorizontalLarge,
                           size.width,
                         ),
-                        right: SizeUtils.scale(
+                        right: SizeUtils.scaleMobile(
                           AppSize().paddingHorizontalLarge,
                           size.width,
                         ),
-                        top: SizeUtils.scale(
+                        top: SizeUtils.scaleMobile(
                             AppSize().paddingVerticalLarge, size.width),
                       ),
                       child: Column(
@@ -59,7 +59,7 @@ class AdminReportViewMobile extends StatelessWidget {
                             children: [
                               MyText(
                                 text: 'Report Overview',
-                                style: AppStyles().bodyLargeMedium.copyWith(
+                                style: AppFonts().bodyLargeMedium.copyWith(
                                       color: Theme.of(context)
                                           .colorScheme
                                           .onBackground,
@@ -74,7 +74,8 @@ class AdminReportViewMobile extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: SizeUtils.scale(20, size.width)),
+                          SizedBox(
+                              height: SizeUtils.scaleMobile(20, size.width)),
                           Obx(
                             () => ToggleButton(
                               currentIndex: controller.selectTabIndex.value,
@@ -84,7 +85,8 @@ class AdminReportViewMobile extends StatelessWidget {
                               values: const [0, 1, 2],
                             ),
                           ),
-                          SizedBox(height: SizeUtils.scale(20, size.width)),
+                          SizedBox(
+                              height: SizeUtils.scaleMobile(20, size.width)),
                           Obx(
                             () => MyAsyncWidget(
                               isLoading: controller.isLoading.value,
@@ -94,7 +96,8 @@ class AdminReportViewMobile extends StatelessWidget {
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 separatorBuilder: (context, index) => SizedBox(
-                                    height: SizeUtils.scale(10, size.width)),
+                                    height:
+                                        SizeUtils.scaleMobile(10, size.width)),
                                 itemCount: controller.selectTabIndex.value == 2
                                     ? controller.staffReports.value.length
                                     : controller.selectTabIndex.value == 1

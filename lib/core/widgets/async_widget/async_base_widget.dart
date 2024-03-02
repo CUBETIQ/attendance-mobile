@@ -22,7 +22,7 @@ class MyAsyncWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     if (isLoading) {
       return Padding(
-        padding: EdgeInsets.only(top: SizeUtils.scale(40, size.width)),
+        padding: EdgeInsets.only(top: SizeUtils.scaleMobile(40, size.width)),
         child: const MyLoading(),
       );
     } else if (list.isEmpty) {

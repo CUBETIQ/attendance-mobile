@@ -40,7 +40,7 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: SizeUtils.scale(
+                horizontal: SizeUtils.scaleMobile(
                   AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
@@ -48,7 +48,7 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: SizeUtils.scale(
+                    height: SizeUtils.scaleMobile(
                         AppSize().paddingVerticalLarge, size.width),
                   ),
                   Row(
@@ -56,7 +56,7 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
                     children: [
                       MyText(
                           text: "Employee Leave",
-                          style: AppStyles().bodyXlargeMedium),
+                          style: AppFonts().bodyXlargeMedium),
                       Obx(
                         () => DateDropDown(
                           date: controller.selectDate.value,
@@ -67,19 +67,19 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: SizeUtils.scale(20, size.width)),
+                  SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                   Obx(
                     () => MyAsyncWidget(
                       isLoading: controller.isLoading.value,
                       list: controller.leaveList,
                       noDataWidget: MyNoData(
-                        paddingTop: SizeUtils.scale(180, size.width),
+                        paddingTop: SizeUtils.scaleMobile(180, size.width),
                       ),
                       builderWidget: ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: SizeUtils.scale(10, size.width)),
+                        separatorBuilder: (context, index) => SizedBox(
+                            height: SizeUtils.scaleMobile(10, size.width)),
                         itemCount: controller.leaveList.value.length,
                         itemBuilder: (context, index) {
                           final leave = controller.leaveList.value[index];

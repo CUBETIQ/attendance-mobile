@@ -34,15 +34,15 @@ class StaffCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: cardWidth ?? size.width,
-        height: cardHeight ?? SizeUtils.scale(60, size.width),
+        height: cardHeight ?? SizeUtils.scaleMobile(60, size.width),
         padding: EdgeInsets.symmetric(
-          horizontal:
-              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
-          vertical: SizeUtils.scale(AppSize().paddingS1, size.width),
+          horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge, size.width),
+          vertical: SizeUtils.scaleMobile(AppSize().paddingS1, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+            SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
           ),
           color: Theme.of(context).colorScheme.background,
           boxShadow: [
@@ -58,17 +58,18 @@ class StaffCard extends StatelessWidget {
           children: [
             MyCacheImage(
               imageUrl: staff.image ?? "",
-              width: SizeUtils.scale(40, size.width),
-              height: SizeUtils.scale(40, size.width),
+              width: SizeUtils.scaleMobile(40, size.width),
+              height: SizeUtils.scaleMobile(40, size.width),
             ),
-            SizedBox(width: SizeUtils.scale(AppSize().paddingS5, size.width)),
+            SizedBox(
+                width: SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   constraints: BoxConstraints(
-                    maxWidth: SizeUtils.scale(140, size.width),
+                    maxWidth: SizeUtils.scaleMobile(140, size.width),
                   ),
                   child: MyText(
                     text: StringUtil.getfullname(
@@ -76,12 +77,12 @@ class StaffCard extends StatelessWidget {
                       staff.lastName,
                       staff.username,
                     ),
-                    style: AppStyles().bodyMediumSemi,
+                    style: AppFonts().bodyMediumSemi,
                   ),
                 ),
                 MyText(
                   text: position ?? "N/A",
-                  style: AppStyles().bodyMediumRegular,
+                  style: AppFonts().bodyMediumRegular,
                 ),
               ],
             ),
@@ -92,7 +93,7 @@ class StaffCard extends StatelessWidget {
               children: [
                 MyText(
                   text: (staff.status ?? UserStatus.active).capitalizeFirst,
-                  style: AppStyles().bodyMediumRegular.copyWith(
+                  style: AppFonts().bodyMediumRegular.copyWith(
                         color: staff.status != null
                             ? staff.status == UserStatus.active
                                 ? Colors.green
@@ -102,18 +103,18 @@ class StaffCard extends StatelessWidget {
                             : Colors.green,
                       ),
                 ),
-                SizedBox(height: SizeUtils.scale(4, size.width)),
+                SizedBox(height: SizeUtils.scaleMobile(4, size.width)),
                 GestureDetector(
                   onTap: onTapViewDetail,
                   child: Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(5, size.width),
-                      vertical: SizeUtils.scale(2, size.width),
+                      horizontal: SizeUtils.scaleMobile(5, size.width),
+                      vertical: SizeUtils.scaleMobile(2, size.width),
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        SizeUtils.scale(
+                        SizeUtils.scaleMobile(
                             AppSize().borderRadiusLarge, size.width),
                       ),
                       color: Theme.of(context).colorScheme.primary,
@@ -123,14 +124,14 @@ class StaffCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "View Detail",
-                          style: AppStyles().bodySmallRegular.copyWith(
+                          style: AppFonts().bodySmallRegular.copyWith(
                                 color: Theme.of(context).colorScheme.onPrimary,
                               ),
                         ),
-                        SizedBox(width: SizeUtils.scale(2, size.width)),
+                        SizedBox(width: SizeUtils.scaleMobile(2, size.width)),
                         Icon(
                           Icons.arrow_forward_ios,
-                          size: SizeUtils.scale(10, size.width),
+                          size: SizeUtils.scaleMobile(10, size.width),
                           color: Theme.of(context).colorScheme.onPrimary,
                         )
                       ],

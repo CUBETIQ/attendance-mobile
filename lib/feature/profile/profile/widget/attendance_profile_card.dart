@@ -25,7 +25,7 @@ class AttendanceProfileCard extends StatelessWidget {
       width: size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
         ),
         color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
       ),
@@ -38,14 +38,14 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Present",
-                    style: AppStyles().bodySmallRegular,
+                    style: AppFonts().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAttendance != null
                         ? totalAttendance.toString()
                         : "0",
-                    style: AppStyles().bodyXlargeMedium,
+                    style: AppFonts().bodyXlargeMedium,
                   ),
                 ],
               ),
@@ -58,12 +58,12 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Absent",
-                    style: AppStyles().bodySmallRegular,
+                    style: AppFonts().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAbsent != null ? totalAbsent.toString() : "0",
-                    style: AppStyles().bodyXlargeMedium,
+                    style: AppFonts().bodyXlargeMedium,
                   ),
                 ],
               ),
@@ -76,12 +76,12 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "On Leave",
-                    style: AppStyles().bodySmallRegular,
+                    style: AppFonts().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalLeave != null ? totalLeave.toString() : "0",
-                    style: AppStyles().bodyXlargeMedium,
+                    style: AppFonts().bodyXlargeMedium,
                   ),
                 ],
               ),

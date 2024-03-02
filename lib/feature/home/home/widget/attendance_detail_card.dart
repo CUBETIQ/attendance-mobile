@@ -36,11 +36,11 @@ class AttendanceDetailCard extends StatelessWidget {
         ),
         MyText(
           text: time == null || time == "null" ? "--:--" : time!,
-          style: timeStyle ?? AppStyles().bodyMediumRegular,
+          style: timeStyle ?? AppFonts().bodyMediumRegular,
         ),
         MyText(
           text: title,
-          style: titleStyle ?? AppStyles().bodyMediumRegular,
+          style: titleStyle ?? AppFonts().bodyMediumRegular,
         ),
       ],
     );

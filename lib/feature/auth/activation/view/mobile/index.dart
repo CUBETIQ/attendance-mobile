@@ -22,11 +22,11 @@ class ActivationViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scale(
+              left: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scale(
+              right: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
@@ -53,13 +53,13 @@ class ActivationViewMobile extends StatelessWidget {
                       MyText(
                         text: controller.title,
                         maxLines: 1,
-                        style: AppStyles().bodyXlarge,
+                        style: AppFonts().bodyXlarge,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyText(
                         text: controller.description,
                         maxLines: 5,
-                        style: AppStyles().bodySmallMedium,
+                        style: AppFonts().bodySmallMedium,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyTextFieldForm(

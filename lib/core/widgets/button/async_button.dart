@@ -4,6 +4,7 @@ import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
+import 'package:timesync360/utils/size_util.dart';
 
 class MyAsyncButton extends StatelessWidget {
   final double? width;
@@ -54,7 +55,7 @@ class MyAsyncButton extends StatelessWidget {
             : null,
         child: Container(
           width: width ?? double.infinity,
-          height: height ?? 48 * (size.width / 375.0),
+          height: height ?? SizeUtils.scaleMobile(48, size.width),
           margin: margin,
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -79,7 +80,7 @@ class MyAsyncButton extends StatelessWidget {
                     MyText(
                       text: title,
                       style: style ??
-                          AppStyles().bodyLargeMedium.copyWith(
+                          AppFonts().bodyLargeMedium.copyWith(
                                 color: isDisableButton.value == true
                                     ? Theme.of(context).colorScheme.outline
                                     : Theme.of(context).colorScheme.onPrimary,
@@ -90,7 +91,7 @@ class MyAsyncButton extends StatelessWidget {
               : MyText(
                   text: title,
                   style: style ??
-                      AppStyles().bodyLargeMedium.copyWith(
+                      AppFonts().bodyLargeMedium.copyWith(
                             color: Theme.of(context).colorScheme.onPrimary,
                           ),
                 ),

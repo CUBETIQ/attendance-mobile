@@ -41,7 +41,7 @@ class RoundedColorPicker extends StatelessWidget {
                   text: label ?? "Color",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
-                  style: AppStyles().bodyMediumMedium,
+                  style: AppFonts().bodyMediumMedium,
                 )
               : const SizedBox.shrink(),
         ],

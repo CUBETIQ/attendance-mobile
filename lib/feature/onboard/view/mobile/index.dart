@@ -39,7 +39,7 @@ class OnBoardViewMobile extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(
+                  horizontal: SizeUtils.scaleMobile(
                     AppSize().paddingHorizontalLarge,
                     MediaQuery.of(context).size.width,
                   ),

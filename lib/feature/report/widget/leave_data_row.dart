@@ -20,8 +20,8 @@ class LeaveDataRowReport extends StatelessWidget {
         Row(
           children: [
             Container(
-              width: SizeUtils.scale(30, size.width),
-              height: SizeUtils.scale(30, size.width),
+              width: SizeUtils.scaleMobile(30, size.width),
+              height: SizeUtils.scaleMobile(30, size.width),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.primary,
@@ -29,7 +29,7 @@ class LeaveDataRowReport extends StatelessWidget {
               child: Icon(
                 Icons.calendar_today,
                 color: Theme.of(context).colorScheme.onPrimary,
-                size: SizeUtils.scale(18, size.width),
+                size: SizeUtils.scaleMobile(18, size.width),
               ),
             ),
             const SizedBox(width: 10),
@@ -39,25 +39,25 @@ class LeaveDataRowReport extends StatelessWidget {
               ),
               child: MyText(
                 text: "${leave?.type.capitalizeMaybeNull ?? ""} Leave",
-                style: AppStyles().bodyMediumMedium,
+                style: AppFonts().bodyMediumMedium,
               ),
             ),
             const Spacer(),
             MyText(
               text: "Duration: ${leave?.duration ?? 0}",
-              style: AppStyles().bodyMediumMedium,
+              style: AppFonts().bodyMediumMedium,
             ),
             MyText(
               text: (leave?.duration ?? 0) > 1 ? " days" : " day",
-              style: AppStyles().bodyMediumMedium,
+              style: AppFonts().bodyMediumMedium,
             ),
           ],
         ),
-        SizedBox(height: SizeUtils.scale(5, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
         MyText(
           text:
               "From: ${DateFormatter.formatMillisecondsToDOB(leave?.from)} - ${DateFormatter.formatMillisecondsToDOB(leave?.to)}",
-          style: AppStyles().bodySmallRegular,
+          style: AppFonts().bodySmallRegular,
         ),
       ],
     );

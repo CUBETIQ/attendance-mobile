@@ -3,14 +3,13 @@ import 'package:timesync360/core/network/dio/dio_util.dart';
 import 'package:timesync360/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:timesync360/utils/logger.dart';
+import 'package:timesync360/utils/permission_handler.dart';
 
 class NavigationService {
   static final _singleton = NavigationService._internal();
   final dioInstance = DioUtil();
   late bool isLocationServiceEnabled;
-  late LocationPermission permission;
 
   factory NavigationService() {
     return _singleton;
@@ -20,22 +19,17 @@ class NavigationService {
     Logs.t('[NavigationService] Initialized');
   }
 
-  Future<Position> getCurrentLocation() async {
-    isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
-    permission = await Geolocator.checkPermission();
-    if (!isLocationServiceEnabled) {
-      return throw Exception("Please enable location service");
+  Future<Position?> getCurrentLocation() async {
+    final locationPermission =
+        await PermissonHandler.requestLocationPermission();
+    if (locationPermission) {
+      isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!isLocationServiceEnabled) {
+        return throw Exception("Please enable location service");
+      }
+      return await Geolocator.getCurrentPosition();
     }
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      openAppSettings();
-    }
-
-    return await Geolocator.getCurrentPosition();
+    return null;
   }
 
   Future<UserModel> fetchMe() async {

@@ -33,12 +33,12 @@ class CategoryViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: SizeUtils.scale(10, size.width),
-                horizontal: SizeUtils.scale(24, size.width),
+                vertical: SizeUtils.scaleMobile(10, size.width),
+                horizontal: SizeUtils.scaleMobile(24, size.width),
               ),
               child: Obx(
                 () => Wrap(
-                  spacing: SizeUtils.scale(8, size.width),
+                  spacing: SizeUtils.scaleMobile(8, size.width),
                   alignment: WrapAlignment.start,
                   children: [
                     ...List.generate(

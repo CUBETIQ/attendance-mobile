@@ -13,6 +13,7 @@ class MyCard extends StatelessWidget {
     this.margin,
     this.borderRadius,
     this.boxShadow,
+    this.clip,
   });
 
   final double? width;
@@ -23,6 +24,7 @@ class MyCard extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final BorderRadiusGeometry? borderRadius;
   final List<BoxShadow>? boxShadow;
+  final Clip? clip;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +35,15 @@ class MyCard extends StatelessWidget {
       height: height,
       padding: padding ??
           EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(AppSize().paddingS1, size.width),
-            vertical:
-                SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
+            horizontal: SizeUtils.scaleMobile(AppSize().paddingS1, size.width),
+            vertical: SizeUtils.scaleMobile(
+                AppSize().paddingVerticalMedium, size.width),
           ),
+      clipBehavior: clip ?? Clip.none,
       decoration: BoxDecoration(
         borderRadius: borderRadius ??
             BorderRadius.circular(
-              SizeUtils.scale(
+              SizeUtils.scaleMobile(
                 AppSize().borderRadiusLarge,
                 size.width,
               ),

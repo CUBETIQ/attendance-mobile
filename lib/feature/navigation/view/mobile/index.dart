@@ -28,7 +28,8 @@ class NavigationViewMobile extends StatelessWidget {
         ),
       ),
       mainScreen: const MainScreen(),
-      borderRadius: SizeUtils.scale(AppSize().borderRadiusLarge, context.width),
+      borderRadius:
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, context.width),
       showShadow: false,
       angle: -10.0,
       androidCloseOnBackTap: true,
@@ -44,7 +45,7 @@ class NavigationViewMobile extends StatelessWidget {
       duration: 300.milliseconds,
       reverseDuration: 200.milliseconds,
       mainScreenTapClose: true,
-      slideWidth: SizeUtils.scale(
+      slideWidth: SizeUtils.scaleMobile(
         238,
         context.width,
       ),

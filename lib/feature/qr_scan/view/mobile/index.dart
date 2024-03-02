@@ -41,14 +41,14 @@ class ScanQRViewMobile extends StatelessWidget {
             offset: const Offset(0, -250),
             child: MyText(
               text: 'Scan QR',
-              style: AppStyles().bodyXlarge,
+              style: AppFonts().bodyXlarge,
             ),
           ),
           Transform.translate(
             offset: const Offset(0, -220),
             child: MyText(
               text: 'Align frame with QR Code',
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
             ),
           ),
           Transform.translate(

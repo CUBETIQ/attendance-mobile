@@ -12,6 +12,7 @@ import 'package:timesync360/feature/department/add_department/model/edit_departm
 import 'package:timesync360/feature/department/add_department/service/index.dart';
 import 'package:timesync360/feature/department/department/controller/index.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync360/types/avatar_type.dart';
 import 'package:timesync360/types/state.dart';
 import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
@@ -122,6 +123,7 @@ class AddDepartmentController extends GetxController {
         image.value = result;
         imageFile.value = null;
       },
+      avatarType: AvatarType.department,
     );
   }
 

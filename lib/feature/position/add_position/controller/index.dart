@@ -12,6 +12,7 @@ import 'package:timesync360/feature/position/add_position/model/add_position_mod
 import 'package:timesync360/feature/position/add_position/model/edit_position_model.dart';
 import 'package:timesync360/feature/position/add_position/service/index.dart';
 import 'package:timesync360/feature/position/position/controller/index.dart';
+import 'package:timesync360/types/avatar_type.dart';
 import 'package:timesync360/types/state.dart';
 import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
@@ -125,6 +126,7 @@ class AddPositionController extends GetxController {
         image.value = result;
         imageFile.value = file;
       },
+      avatarType: AvatarType.position,
     );
   }
 

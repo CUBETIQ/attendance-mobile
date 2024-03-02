@@ -32,15 +32,15 @@ class LeaveChart extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width,
-      height: height ?? SizeUtils.scale(160, size.width),
+      height: height ?? SizeUtils.scaleMobile(160, size.width),
       padding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(AppSize().paddingS5, size.width),
-        horizontal: SizeUtils.scale(AppSize().paddingS8, size.width),
+        vertical: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+        horizontal: SizeUtils.scaleMobile(AppSize().paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
         ),
         boxShadow: [
           BoxShadow(
@@ -53,8 +53,8 @@ class LeaveChart extends StatelessWidget {
       ),
       child: Column(
         children: [
-          MyText(text: title, style: AppStyles().bodyMediumRegular),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          MyText(text: title, style: AppFonts().bodyMediumRegular),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
@@ -67,7 +67,7 @@ class LeaveChart extends StatelessWidget {
                     : percent ?? 0.0,
             center: MyText(
               text: centerText ?? "0%",
-              style: AppStyles().bodySmallRegular,
+              style: AppFonts().bodySmallRegular,
             ),
             linearGradient: const LinearGradient(
               colors: [
@@ -78,9 +78,8 @@ class LeaveChart extends StatelessWidget {
             backgroundColor: Colors.grey.withOpacity(0.3),
             circularStrokeCap: CircularStrokeCap.round,
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
-          MyText(
-              text: textBelow ?? "0/0", style: AppStyles().bodyMediumRegular),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+          MyText(text: textBelow ?? "0/0", style: AppFonts().bodyMediumRegular),
         ],
       ),
     );

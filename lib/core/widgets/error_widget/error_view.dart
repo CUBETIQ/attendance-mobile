@@ -21,7 +21,7 @@ class ErrorView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: SizeUtils.scale(300, size.width),
+              width: SizeUtils.scaleMobile(300, size.width),
               child: Lottie.asset(
                 LottieAssets.error404,
                 fit: BoxFit.cover,
@@ -30,23 +30,23 @@ class ErrorView extends StatelessWidget {
             Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(24, size.width),
+                  horizontal: SizeUtils.scaleMobile(24, size.width),
                 ),
                 child: MyText(
                   text:
                       "Oh no! A problem occurred. Don't worry, our team has been notified and is working to fix it.",
                   maxLines: 3,
                   textAlign: TextAlign.center,
-                  style: AppStyles().bodyXlargeMedium.copyWith(
+                  style: AppFonts().bodyXlargeMedium.copyWith(
                         color: Theme.of(context).colorScheme.error,
                       ),
                 ),
               ),
             ),
-            SizedBox(height: SizeUtils.scale(24, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(24, size.width)),
             MyButton(
-              width: SizeUtils.scale(150, size.width),
-              height: SizeUtils.scale(42, size.width),
+              width: SizeUtils.scaleMobile(150, size.width),
+              height: SizeUtils.scaleMobile(42, size.width),
               title: "Retry",
               onTap: () async {
                 Get.offAllNamed(Routes.SPLASH);

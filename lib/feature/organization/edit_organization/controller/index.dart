@@ -7,6 +7,7 @@ import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/organization/edit_organization/model/update_organization_model.dart';
 import 'package:timesync360/feature/organization/edit_organization/service/index.dart';
+import 'package:timesync360/types/avatar_type.dart';
 import 'package:timesync360/utils/time_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,7 @@ class EditOrganizationController extends GetxController {
         image.value = result;
         imageFile.value = file;
       },
+      avatarType: AvatarType.organization,
     );
   }
 

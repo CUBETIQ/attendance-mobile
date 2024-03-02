@@ -39,9 +39,10 @@ class RecordCard extends StatelessWidget {
     return Container(
       width: width ?? double.infinity,
       height: height ?? size.width * 0.67,
-      padding: EdgeInsets.all(SizeUtils.scale(AppSize().paddingS8, size.width)),
+      padding: EdgeInsets.all(
+          SizeUtils.scaleMobile(AppSize().paddingS8, size.width)),
       margin: EdgeInsets.only(
-        bottom: SizeUtils.scale(AppSize().paddingS8, size.width),
+        bottom: SizeUtils.scaleMobile(AppSize().paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -62,7 +63,7 @@ class RecordCard extends StatelessWidget {
         children: [
           MyText(
             text: DateFormatter.formatFullDate(date),
-            style: AppStyles().bodyMediumSemi.copyWith(
+            style: AppFonts().bodyMediumSemi.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),

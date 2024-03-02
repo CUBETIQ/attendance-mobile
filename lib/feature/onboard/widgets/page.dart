@@ -40,7 +40,7 @@ class MyPage extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -50,14 +50,14 @@ class MyPage extends StatelessWidget {
             children: [
               MyText(
                 text: title ?? "Title",
-                style: titleStyle ?? AppStyles().bodyXXlargeMedium,
+                style: titleStyle ?? AppFonts().bodyXXlargeMedium,
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: size.height * 0.02),
               MyText(
                 text: description ?? "Description",
-                style: descriptionStyle ?? AppStyles().bodyMediumMedium,
+                style: descriptionStyle ?? AppFonts().bodyMediumMedium,
                 maxLines: 8,
                 textAlign: TextAlign.center,
               ),

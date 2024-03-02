@@ -23,12 +23,12 @@ class AttendanceDataRowReport extends StatelessWidget {
       children: [
         MyText(
           text: title ?? "Title",
-          style: AppStyles().bodyMediumRegular,
+          style: AppFonts().bodyMediumRegular,
         ),
         MyText(
           text: value ?? "Value",
           style: style ??
-              AppStyles().bodyMediumMedium.copyWith(
+              AppFonts().bodyMediumMedium.copyWith(
                     color:
                         textColor ?? Theme.of(context).colorScheme.onBackground,
                   ),

@@ -31,7 +31,7 @@ class TaskViewMobile extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.scale(
+              vertical: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
@@ -45,7 +45,7 @@ class TaskViewMobile extends StatelessWidget {
                   children: [
                     MyText(
                         text: "Task Summary",
-                        style: AppStyles().bodyLargeMedium),
+                        style: AppFonts().bodyLargeMedium),
                     Obx(
                       () => DateDropDown(
                         date: controller.selectDate.value,
@@ -57,7 +57,7 @@ class TaskViewMobile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: SizeUtils.scale(20, size.width),
+                  height: SizeUtils.scaleMobile(20, size.width),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +71,7 @@ class TaskViewMobile extends StatelessWidget {
                           centerWidget: MyText(
                             text:
                                 "${(controller.percentageUncompletedTask.value * 100).toStringAsFixed(2)}%",
-                            style: AppStyles().bodyMediumRegular,
+                            style: AppFonts().bodyMediumRegular,
                           ),
                           percent: controller.percentageUncompletedTask.value,
                           textBelow:
@@ -89,7 +89,7 @@ class TaskViewMobile extends StatelessWidget {
                           centerWidget: MyText(
                             text:
                                 "${(controller.percentageCompletedTask.value * 100).toStringAsFixed(2)}%",
-                            style: AppStyles().bodyMediumRegular,
+                            style: AppFonts().bodyMediumRegular,
                           ),
                           percent: controller.percentageCompletedTask.value,
                           textBelow:
@@ -100,7 +100,7 @@ class TaskViewMobile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: AppSize().paddingS11),
-                MyText(text: "My Task", style: AppStyles().bodyLargeMedium),
+                MyText(text: "My Task", style: AppFonts().bodyLargeMedium),
                 SizedBox(height: AppSize().paddingS8),
                 Obx(
                   () => MyAsyncWidget(
@@ -112,7 +112,7 @@ class TaskViewMobile extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
-                        height: SizeUtils.scale(
+                        height: SizeUtils.scaleMobile(
                           AppSize().paddingS8,
                           size.width,
                         ),

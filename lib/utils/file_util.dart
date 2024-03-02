@@ -47,4 +47,17 @@ class FileUtil {
     }
     return true;
   }
+
+  static String getFileSize(File file) {
+    final fileSize = file.lengthSync();
+    final kb = fileSize / 1024;
+    final mb = kb / 1024;
+    if (mb > 1) {
+      return "${mb.toStringAsFixed(2)} MB";
+    } else if (kb > 1) {
+      return "${kb.toStringAsFixed(2)} KB";
+    } else {
+      return "${fileSize.toStringAsFixed(2)} B";
+    }
+  }
 }

@@ -20,7 +20,7 @@ class LeaveTabMobile extends StatelessWidget {
           : SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(
+                  horizontal: SizeUtils.scaleMobile(
                     AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
@@ -28,13 +28,13 @@ class LeaveTabMobile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: SizeUtils.scale(30, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
                     Obx(
                       () => ListView.separated(
                         itemCount: controller.leaves.length,
                         shrinkWrap: true,
                         separatorBuilder: (context, index) => SizedBox(
-                          height: SizeUtils.scale(10, size.width),
+                          height: SizeUtils.scaleMobile(10, size.width),
                         ),
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {

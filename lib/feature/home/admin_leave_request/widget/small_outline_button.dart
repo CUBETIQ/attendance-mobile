@@ -23,7 +23,7 @@ class SmallOutlineButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SizeUtils.scale(30, size.width),
+        height: SizeUtils.scaleMobile(30, size.width),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -36,7 +36,7 @@ class SmallOutlineButton extends StatelessWidget {
         ),
         child: MyText(
           text: title,
-          style: AppStyles().bodySmallMedium,
+          style: AppFonts().bodySmallMedium,
         ),
       ),
     );

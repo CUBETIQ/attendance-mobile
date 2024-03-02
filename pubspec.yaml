@@ -59,6 +59,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   open_file: ^3.3.2
   image_picker: ^1.0.7
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:

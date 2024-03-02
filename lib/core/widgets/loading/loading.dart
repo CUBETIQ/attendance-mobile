@@ -9,12 +9,12 @@ class MyLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.only(top: SizeUtils.scale(30, width)),
+      padding: EdgeInsets.only(top: SizeUtils.scaleMobile(30, width)),
       child: Center(
         child: LoadingAnimationWidget.flickr(
           leftDotColor: Theme.of(context).colorScheme.onBackground,
           rightDotColor: Theme.of(context).colorScheme.primary,
-          size: SizeUtils.scale(40, width),
+          size: SizeUtils.scaleMobile(40, width),
         ),
       ),
     );

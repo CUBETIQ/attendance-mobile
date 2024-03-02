@@ -32,29 +32,29 @@ class ChangePasswordViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal:
-                SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
-            vertical:
-                SizeUtils.scale(AppSize().paddingVerticalLarge, size.height),
+            horizontal: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge, size.width),
+            vertical: SizeUtils.scaleMobile(
+                AppSize().paddingVerticalLarge, size.height),
           ),
           child: Column(
             children: [
               SizedBox(
-                width: SizeUtils.scale(200, size.width),
-                height: SizeUtils.scale(140, size.width),
+                width: SizeUtils.scaleMobile(200, size.width),
+                height: SizeUtils.scaleMobile(140, size.width),
                 child: SvgPicture.asset(SvgAssets.password),
               ),
               SizedBox(
-                height: SizeUtils.scale(10, size.height),
+                height: SizeUtils.scaleMobile(10, size.height),
               ),
               MyText(
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 text: "To change your password, Please enter the detail below",
-                style: AppStyles().bodyMediumRegular,
+                style: AppFonts().bodyMediumRegular,
               ),
               SizedBox(
-                height: SizeUtils.scale(10, size.height),
+                height: SizeUtils.scaleMobile(10, size.height),
               ),
               controller.isChangeStaffPass.value == true
                   ? const SizedBox.shrink()
@@ -71,7 +71,7 @@ class ChangePasswordViewMobile extends StatelessWidget {
                       ),
                     ),
               SizedBox(
-                height: SizeUtils.scale(5, size.height),
+                height: SizeUtils.scaleMobile(5, size.height),
               ),
               Obx(
                 () => MyTextFieldForm(
@@ -86,7 +86,7 @@ class ChangePasswordViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: SizeUtils.scale(10, size.height),
+                height: SizeUtils.scaleMobile(10, size.height),
               ),
               MyAsyncButton(
                 onTap: controller.isChangeStaffPass.value == true

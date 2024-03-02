@@ -22,16 +22,16 @@ class AttendanceTextTitle extends StatelessWidget {
           ? const SizedBox.shrink()
           : Padding(
               padding: EdgeInsets.only(
-                left: SizeUtils.scale(
+                left: SizeUtils.scaleMobile(
                   AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
-                top: SizeUtils.scale(10, size.width),
-                bottom: SizeUtils.scale(10, size.width),
+                top: SizeUtils.scaleMobile(10, size.width),
+                bottom: SizeUtils.scaleMobile(10, size.width),
               ),
               child: MyText(
                 text: 'My Attendance',
-                style: AppStyles().bodyLargeMedium.copyWith(
+                style: AppFonts().bodyLargeMedium.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
               ),

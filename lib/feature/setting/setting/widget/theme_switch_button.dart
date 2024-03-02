@@ -33,10 +33,10 @@ class ThemeSwitchButton extends StatelessWidget {
             children: [
               Icon(
                 Icons.dark_mode_rounded,
-                size: SizeUtils.scale(30, size.width),
+                size: SizeUtils.scaleMobile(30, size.width),
                 color: Theme.of(context).colorScheme.primary,
               ),
-              SizedBox(width: SizeUtils.scale(15, size.width)),
+              SizedBox(width: SizeUtils.scaleMobile(15, size.width)),
               Expanded(
                 flex: 10,
                 child: Column(
@@ -44,12 +44,12 @@ class ThemeSwitchButton extends StatelessWidget {
                   children: [
                     MyText(
                       text: title,
-                      style: AppStyles().bodyLargeMedium,
+                      style: AppFonts().bodyLargeMedium,
                     ),
                     MyText(
                       text: description,
                       maxLines: 2,
-                      style: AppStyles().bodySmallRegular.copyWith(
+                      style: AppFonts().bodySmallRegular.copyWith(
                             color: Theme.of(context).colorScheme.outline,
                           ),
                     ),
@@ -63,10 +63,10 @@ class ThemeSwitchButton extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: SizeUtils.scale(5, size.width)),
+          SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
           Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scale(45, size.width),
+              left: SizeUtils.scaleMobile(45, size.width),
             ),
             child: const Divider(),
           ),

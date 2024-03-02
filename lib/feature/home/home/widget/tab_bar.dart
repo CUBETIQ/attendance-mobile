@@ -25,7 +25,7 @@ class MyTabBar extends StatelessWidget {
         color: Theme.of(context).colorScheme.background,
         borderRadius: isCircleBorder == true
             ? BorderRadius.circular(
-                SizeUtils.scale(15, size.width),
+                SizeUtils.scaleMobile(15, size.width),
               )
             : null,
       ),
@@ -33,8 +33,8 @@ class MyTabBar extends StatelessWidget {
         controller: controller,
         onTap: onTap,
         overlayColor: MaterialStateProperty.all(Colors.transparent),
-        labelStyle: AppStyles().bodyLargeMedium,
-        unselectedLabelStyle: AppStyles().bodyLargeMedium,
+        labelStyle: AppFonts().bodyLargeMedium,
+        unselectedLabelStyle: AppFonts().bodyLargeMedium,
         unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
         labelColor: isCircleBorder == true
             ? Theme.of(context).colorScheme.onPrimary
@@ -43,7 +43,7 @@ class MyTabBar extends StatelessWidget {
         indicator: BoxDecoration(
           borderRadius: isCircleBorder == true
               ? BorderRadius.circular(
-                  SizeUtils.scale(15, size.width),
+                  SizeUtils.scaleMobile(15, size.width),
                 )
               : null,
           color: isCircleBorder == true
@@ -54,7 +54,7 @@ class MyTabBar extends StatelessWidget {
               : Border(
                   bottom: BorderSide(
                     color: Theme.of(context).colorScheme.primary,
-                    width: SizeUtils.scale(3, size.width),
+                    width: SizeUtils.scaleMobile(3, size.width),
                   ),
                 ),
         ),

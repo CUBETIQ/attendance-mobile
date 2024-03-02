@@ -31,13 +31,13 @@ class LanguageButton extends StatelessWidget {
       onTap: onTap,
       child: MyCard(
         width: width ?? size.width,
-        height: height ?? SizeUtils.scale(55, size.width),
+        height: height ?? SizeUtils.scaleMobile(55, size.width),
         padding: EdgeInsets.symmetric(
-          horizontal:
-              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+          horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge, size.width),
         ),
         margin: EdgeInsets.only(
-          bottom: SizeUtils.scale(10, size.width),
+          bottom: SizeUtils.scaleMobile(10, size.width),
         ),
         backgroundColor: isSelected == false
             ? Theme.of(context).colorScheme.background
@@ -49,12 +49,12 @@ class LanguageButton extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   imageFlag,
-                  width: SizeUtils.scale(40, size.width),
+                  width: SizeUtils.scaleMobile(40, size.width),
                 ),
-                SizedBox(width: SizeUtils.scale(15, size.width)),
+                SizedBox(width: SizeUtils.scaleMobile(15, size.width)),
                 MyText(
                   text: title,
-                  style: AppStyles().bodyLargeMedium,
+                  style: AppFonts().bodyLargeMedium,
                 ),
               ],
             ),
@@ -62,7 +62,7 @@ class LanguageButton extends StatelessWidget {
                 ? Icon(
                     Icons.check_circle_outline_rounded,
                     color: Theme.of(context).colorScheme.primary,
-                    size: SizeUtils.scale(24, size.width),
+                    size: SizeUtils.scaleMobile(24, size.width),
                   )
                 : const SizedBox.shrink(),
           ],

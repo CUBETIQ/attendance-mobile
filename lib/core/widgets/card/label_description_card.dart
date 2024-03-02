@@ -19,32 +19,32 @@ class LabelDescriptionCard extends StatelessWidget {
       children: [
         MyText(
           text: title ?? "Title",
-          style: AppStyles().bodySmallMedium.copyWith(
+          style: AppFonts().bodySmallMedium.copyWith(
                 color: Theme.of(context).colorScheme.secondary,
               ),
         ),
         Container(
           width: double.infinity,
           height: value != null && (value?.length ?? 0) < 200
-              ? SizeUtils.scale(150, size.width)
+              ? SizeUtils.scaleMobile(150, size.width)
               : null,
           margin: EdgeInsets.only(
-            top: SizeUtils.scale(10, size.width),
-            bottom: SizeUtils.scale(15, size.width),
+            top: SizeUtils.scaleMobile(10, size.width),
+            bottom: SizeUtils.scaleMobile(15, size.width),
           ),
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
-            vertical: SizeUtils.scale(
+            vertical: SizeUtils.scaleMobile(
               AppSize().paddingVerticalMedium,
               size.width,
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+              SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
             ),
             color: Theme.of(context).colorScheme.primary.withOpacity(0.07),
           ),
@@ -53,7 +53,7 @@ class LabelDescriptionCard extends StatelessWidget {
             text: value != null && value != ""
                 ? value.capitalizeMaybeNull ?? "N/A"
                 : "N/A",
-            style: AppStyles().bodyLargeRegular,
+            style: AppFonts().bodyLargeRegular,
             maxLines: 10,
             overflow: TextOverflow.ellipsis,
           ),

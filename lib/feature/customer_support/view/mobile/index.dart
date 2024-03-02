@@ -35,30 +35,30 @@ class CustomerSupportViewMobile extends StatelessWidget {
             Center(
               child: LottieBuilder.asset(
                 LottieAssets.customerService,
-                height: SizeUtils.scale(300, size.width),
-                width: SizeUtils.scale(300, size.width),
+                height: SizeUtils.scaleMobile(300, size.width),
+                width: SizeUtils.scaleMobile(300, size.width),
               ),
             ),
             MyText(
               text: 'Hello, How can we Help you?',
-              style: AppStyles().bodyXlargeMedium,
+              style: AppFonts().bodyXlargeMedium,
             ),
             SizedBox(
-              height: SizeUtils.scale(40, size.width),
+              height: SizeUtils.scaleMobile(40, size.width),
             ),
             ...List.generate(
               controller.buttons.length,
               (index) => SupportButton(
                 margin: EdgeInsets.only(
-                  left: SizeUtils.scale(
+                  left: SizeUtils.scaleMobile(
                     AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
-                  right: SizeUtils.scale(
+                  right: SizeUtils.scaleMobile(
                     AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
-                  bottom: SizeUtils.scale(
+                  bottom: SizeUtils.scaleMobile(
                     10,
                     size.width,
                   ),

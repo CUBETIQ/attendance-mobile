@@ -691,7 +691,7 @@ void getPickAttachmentButtomSheet(
   BuildContext context, {
   bool? isDismissible,
   void Function(File file)? onTapGallery,
-  void Function(File? file)? onTapFile,
+  void Function(File file)? onTapFile,
   void Function(File file)? onTapCamera,
   String? firstButtonTitle,
   String? secondButtonTitle,
@@ -767,7 +767,7 @@ void getPickAttachmentButtomSheet(
               title: secondButtonTitle ?? "Open File",
               onTap: () async {
                 Get.back();
-                final file = await PickFileHandler.openFileFolder();
+                final file = await PickFileHandler.openFileFolder() ?? File("");
                 onTapFile?.call(file);
               },
             ),

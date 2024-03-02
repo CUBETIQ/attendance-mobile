@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/attachment/upload_Attachment_Button.dart';
+import 'package:timesync360/core/widgets/attachment/upload_button.dart';
 import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/color_picker/rounded_color_picker.dart';
@@ -149,9 +149,14 @@ class AddTaskViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+                height: SizeUtils.scaleMobile(AppSize().paddingS3, size.height),
               ),
-              const UploadAttachmentButton(),
+              UploadAttachmentButton(
+                files: controller.attachments,
+                getFiles: (file) {
+                  controller.files.value = file ?? [];
+                },
+              ),
               SizedBox(
                 height:
                     SizeUtils.scaleMobile(AppSize().paddingS10, size.height),

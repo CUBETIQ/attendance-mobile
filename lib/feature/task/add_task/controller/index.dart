@@ -1,17 +1,18 @@
 import 'dart:io';
-
 import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:timesync360/core/model/attachment_model.dart';
 import 'package:timesync360/core/model/task_model.dart';
+import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
 import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
 import 'package:timesync360/core/widgets/icon_picker/icon_picker_dialog.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/extensions/string.dart';
+import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/task/add_task/model/create_task_model.dart';
 import 'package:timesync360/feature/task/add_task/service/index.dart';
 import 'package:timesync360/feature/task/task/controller/index.dart';
-import 'package:timesync360/utils/file_util.dart';
-import 'package:timesync360/utils/pick_file_handler.dart';
 import 'package:timesync360/utils/time_util.dart';
 import 'package:timesync360/types/state.dart';
 import 'package:timesync360/types/task_priority.dart';
@@ -41,6 +42,7 @@ class AddTaskController extends GetxController {
   ];
   final selectPriority = TaskPriority.low.obs;
   late Color screenPickerColor;
+  final attachments = <AttachmentModel>[].obs;
   final files = <File>[].obs;
 
   @override
@@ -53,6 +55,25 @@ class AddTaskController extends GetxController {
   Future<void> addTask() async {
     validate();
     if (MyTextFieldFormController.findController('Task').isValid) {
+      if (files.isNotEmpty) {
+        final metedata = FileMetadata(
+          source: "task",
+          userId: NavigationController.to.user.value.id,
+        );
+        final result = <AttachmentModel>[];
+        for (var file in files) {
+          final data = await UploadFileService().uploadFile(file, metedata);
+          result.add(AttachmentModel(
+            id: data?.id,
+            fileId: data?.fileId,
+            name: data?.name,
+            url: data?.url,
+            date: DateTime.now().millisecondsSinceEpoch,
+            extension: data?.extension,
+          ));
+        }
+        attachments.value = result;
+      }
       try {
         CreateTaskModel input = CreateTaskModel(
           name: taskController.text,
@@ -62,6 +83,7 @@ class AddTaskController extends GetxController {
           color: stringColor.value,
           icon: stringIcon.value,
           priority: selectPriority.value,
+          attachment: attachments.value,
         );
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
@@ -76,8 +98,26 @@ class AddTaskController extends GetxController {
 
   Future<void> updateTask() async {
     validate();
-
     if (MyTextFieldFormController.findController('Task').isValid) {
+      if (files.isNotEmpty) {
+        final metedata = FileMetadata(
+          source: "task",
+          userId: NavigationController.to.user.value.id,
+        );
+        final result = <AttachmentModel>[];
+        for (var file in files) {
+          final data = await UploadFileService().uploadFile(file, metedata);
+          result.add(AttachmentModel(
+            id: data?.id,
+            fileId: data?.fileId,
+            name: data?.name,
+            url: data?.url,
+            date: DateTime.now().millisecondsSinceEpoch,
+            extension: data?.extension,
+          ));
+        }
+        attachments.value = result;
+      }
       try {
         CreateTaskModel input = CreateTaskModel(
           name: taskController.text,
@@ -87,6 +127,7 @@ class AddTaskController extends GetxController {
           color: stringColor.value,
           icon: stringIcon.value,
           priority: selectPriority.value,
+          attachment: attachments.value,
         );
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
@@ -106,8 +147,10 @@ class AddTaskController extends GetxController {
     if (Get.arguments != null) {
       if (Get.arguments["state"] == AppState.edit) {
         title.value = "Edit Task";
+        files.value = [];
         appState.value = AppState.edit;
         task.value = Get.arguments["task"];
+        attachments.value = task.value?.attachment ?? [];
         taskController.text = task.value?.name ?? '';
         selectPriority.value = task.value?.priority ?? TaskPriority.low;
         startDateController.text =
@@ -125,17 +168,6 @@ class AddTaskController extends GetxController {
       } else {
         title.value = "Add Task";
         appState.value = AppState.create;
-      }
-    }
-  }
-
-  Future<void> uploadFile() async {
-    final file = await PickFileHandler.openGallery();
-    if (file != null) {
-      bool fileSizeValid = await FileUtil.validateFileSize(file);
-      if (fileSizeValid) {
-        files.value.add(file);
-        files.refresh();
       }
     }
   }

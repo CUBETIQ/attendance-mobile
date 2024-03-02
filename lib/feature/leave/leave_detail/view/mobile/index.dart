@@ -35,11 +35,11 @@ class LeaveDetailViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scale(
+              left: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 size.width,
               ),
-              right: SizeUtils.scale(
+              right: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 size.width,
               ),
@@ -47,18 +47,18 @@ class LeaveDetailViewMobile extends StatelessWidget {
             ),
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: SizeUtils.scale(
+                horizontal: SizeUtils.scaleMobile(
                   AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
-                vertical: SizeUtils.scale(
+                vertical: SizeUtils.scaleMobile(
                   AppSize().paddingVerticalMedium,
                   size.width,
                 ),
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
-                  SizeUtils.scale(
+                  SizeUtils.scaleMobile(
                     AppSize().borderRadiusMedium,
                     size.width,
                   ),
@@ -79,14 +79,14 @@ class LeaveDetailViewMobile extends StatelessWidget {
                   LeaveDetailCard(
                     title: "Type: ",
                     value: controller.leave.value.type?.capitalizeFirst,
-                    valueStyle: AppStyles().bodyLargeMedium.copyWith(
+                    valueStyle: AppFonts().bodyLargeMedium.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                         ),
                   ),
                   LeaveDetailCard(
                     title: "Status: ",
                     value: controller.leave.value.status?.capitalizeFirst,
-                    valueStyle: AppStyles().bodyLargeMedium.copyWith(
+                    valueStyle: AppFonts().bodyLargeMedium.copyWith(
                           color: controller.leave.value.status ==
                                   LeaveStatus.pending
                               ? const Color(0XFFBF9705)
@@ -117,16 +117,16 @@ class LeaveDetailViewMobile extends StatelessWidget {
                         MyCacheImage(
                           imageUrl:
                               controller.leave.value.updateBy?.image ?? "",
-                          width: SizeUtils.scale(45, size.width),
-                          height: SizeUtils.scale(45, size.width),
+                          width: SizeUtils.scaleMobile(45, size.width),
+                          height: SizeUtils.scaleMobile(45, size.width),
                         ),
                         SizedBox(
-                          width:
-                              SizeUtils.scale(AppSize().paddingS5, size.width),
+                          width: SizeUtils.scaleMobile(
+                              AppSize().paddingS5, size.width),
                         ),
                         Container(
                           constraints: BoxConstraints(
-                            maxWidth: SizeUtils.scale(200, size.width),
+                            maxWidth: SizeUtils.scaleMobile(200, size.width),
                           ),
                           child: MyText(
                             text: StringUtil.getfullname(
@@ -134,7 +134,7 @@ class LeaveDetailViewMobile extends StatelessWidget {
                               controller.leave.value.updateBy?.lastName,
                               controller.leave.value.updateBy?.username,
                             ),
-                            style: AppStyles().bodyLargeMedium,
+                            style: AppFonts().bodyLargeMedium,
                           ),
                         ),
                       ],

@@ -32,18 +32,18 @@ class DateDropDown extends StatelessWidget {
         height: height,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scale(
+          horizontal: SizeUtils.scaleMobile(
             AppSize().paddingS5,
             size.width,
           ),
-          vertical: SizeUtils.scale(
+          vertical: SizeUtils.scaleMobile(
             AppSize().paddingS2,
             size.width,
           ),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(
+            SizeUtils.scaleMobile(
               AppSize().borderRadiusLarge,
               size.width,
             ),
@@ -57,12 +57,12 @@ class DateDropDown extends StatelessWidget {
               text: isShowday == true
                   ? DateFormatter.formatShortDate(date)
                   : DateFormatter.formatShortDateWithoutDay(date),
-              style: AppStyles().bodySmall.copyWith(
+              style: AppFonts().bodySmall.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
             ),
             SizedBox(
-              width: SizeUtils.scale(
+              width: SizeUtils.scaleMobile(
                 AppSize().paddingS1,
                 size.width,
               ),

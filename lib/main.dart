@@ -11,7 +11,9 @@ import 'package:timesync360/core/database/local_path/app_path_controller.dart';
 import 'package:timesync360/firebase_options.dart';
 import 'package:timesync360/utils/logger.dart';
 
-// using SizeUits.scaleWidth for make the bigger device and smalller device have same Ui size we need
+// using SizeUits.scaleMobile for make the bigger device and smalller device have same Ui size we need for mobile
+
+// using SizeUits.scaleTablet for make the bigger device and smalller device have same Ui size we need
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

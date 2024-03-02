@@ -29,22 +29,22 @@ class LeaveDetailCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: SizeUtils.scale(AppSize().paddingS5, size.width),
+          height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
         ),
         MyText(
           text: title ?? "Title",
           style: titleStyle ??
-              AppStyles().bodyMediumRegular.copyWith(
+              AppFonts().bodyMediumRegular.copyWith(
                     color: Theme.of(context).colorScheme.outline,
                   ),
         ),
         SizedBox(
-          height: SizeUtils.scale(AppSize().paddingS5, size.width),
+          height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
         ),
         child ??
             MyText(
               text: value ?? "value",
-              style: valueStyle ?? AppStyles().bodyLargeMedium,
+              style: valueStyle ?? AppFonts().bodyLargeMedium,
             ),
         noDivider == true ? const SizedBox.shrink() : const Divider(),
       ],

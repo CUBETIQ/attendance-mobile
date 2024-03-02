@@ -23,12 +23,11 @@ class ActivationViewTablet extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              top: AppSize().paddingTitleLarge,
-              left: SizeUtils.scale(
+              left: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scale(
+              right: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
@@ -43,48 +42,46 @@ class ActivationViewTablet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: size.height * 0.1),
-                      SizedBox(
-                        width: size.width * 0.8,
-                        child: Lottie.asset(
-                          LottieAssets.lottieActivation,
-                          fit: BoxFit.cover,
+                      Center(
+                        child: SizedBox(
+                          width: size.width * 0.8,
+                          child: Lottie.asset(
+                            LottieAssets.lottieActivation,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       MyText(
                         text: controller.title,
                         maxLines: 1,
-                        style: AppStyles().bodyXXXlarge,
+                        style: AppFonts().bodyXlarge,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyText(
                         text: controller.description,
                         maxLines: 5,
-                        style: AppStyles().bodyLargeMedium,
+                        style: AppFonts().bodySmallMedium,
                       ),
-                      SizedBox(height: size.height * 0.05),
-                      Center(
-                        child: SizedBox(
-                          width: size.width * 0.5,
-                          child: MyTextFieldForm(
-                            hasLabel: false,
-                            textCapitalization: TextCapitalization.characters,
-                            label: "Activation",
-                            hintText: "Enter your activation code",
-                            textController: controller.activationController,
-                            inputFormatters: [UpperCaseTextFormatter()],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: size.height * 0.1),
-                      Center(
-                        child: MyAsyncButton(
-                          width: size.width * 0.5,
-                          title: "Activate",
-                          onTap: controller.activation,
-                        ),
+                      SizedBox(height: size.height * 0.01),
+                      MyTextFieldForm(
+                        hasLabel: false,
+                        prefixIcon: Icons.vpn_key_rounded,
+                        textCapitalization: TextCapitalization.characters,
+                        label: "Activation",
+                        hintText: "Enter your activation code",
+                        textController: controller.activationController,
+                        inputFormatters: [UpperCaseTextFormatter()],
                       ),
                     ],
                   ),
+                ),
+                MyAsyncButton(
+                  title: "Activate",
+                  height: SizeUtils.scaleTablet(
+                    50,
+                    MediaQuery.of(context).size.width,
+                  ),
+                  onTap: controller.activation,
                 ),
               ],
             ),

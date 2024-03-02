@@ -24,13 +24,13 @@ class SplashViewMobile extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    SizeUtils.scale(
+                    SizeUtils.scaleMobile(
                       AppSize().borderRadiusXLarge,
                       size.width,
                     ),
                   ),
                 ),
-                height: SizeUtils.scale(100, size.width),
+                height: SizeUtils.scaleMobile(100, size.width),
                 child: Image.asset(
                   ImageAssets.logoTimeSync360,
                 ),

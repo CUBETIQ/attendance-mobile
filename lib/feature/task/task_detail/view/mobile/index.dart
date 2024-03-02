@@ -34,7 +34,7 @@ class TaskDetailViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
@@ -42,10 +42,10 @@ class TaskDetailViewMobile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: SizeUtils.scale(20, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
               MyText(
                 text: controller.task.value?.name ?? "Title",
-                style: AppStyles().bodyXXlargeMedium.copyWith(
+                style: AppFonts().bodyXXlargeMedium.copyWith(
                       color: controller.task.value?.color != null
                           ? Color(controller.task.value!.color!.toInt())
                           : Theme.of(context).colorScheme.primary,
@@ -53,46 +53,46 @@ class TaskDetailViewMobile extends StatelessWidget {
                 textAlign: TextAlign.start,
                 maxLines: 5,
               ),
-              SizedBox(height: SizeUtils.scale(20, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
               DetailRowData(
                 title: "Status",
                 value: controller.task.value?.status?.capitalizeFirst,
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               DetailRowImage(
                 title: "Assignee",
                 name: NavigationController.to.fullname.value,
                 image: NavigationController.to.user.value.image,
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               DetailRowData(
                 title: "Due Date",
                 value: DateFormatter.formatMillisecondsToDOB(
                   controller.task.value?.endDate,
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               DetailRowData(
                 title: "Priority",
                 value: controller.task.value?.priority?.capitalizeFirst,
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               DetailRowCategory(
                 title: "Category",
                 icon: controller.task.value?.icon,
                 color: controller.task.value?.color,
               ),
-              SizedBox(height: SizeUtils.scale(20, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
               const Divider(thickness: 1.5),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
-              MyText(text: "Description", style: AppStyles().bodyLargeMedium),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              MyText(text: "Description", style: AppFonts().bodyLargeMedium),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               MyText(
                 text: controller.task.value?.description != null &&
                         controller.task.value?.description?.isNotEmpty == true
                     ? controller.task.value!.description!
                     : "N/A",
-                style: AppStyles().bodyMediumRegular,
+                style: AppFonts().bodyMediumRegular,
                 maxLines: 20,
               ),
             ],

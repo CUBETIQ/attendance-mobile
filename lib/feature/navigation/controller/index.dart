@@ -119,8 +119,10 @@ class NavigationController extends GetxController {
     organizationLocation.value = organization.value.location;
     try {
       userLocation.value = await NavigationService().getCurrentLocation();
-      isInRange.value = isWithinRadius(userLocation.value!,
-          organizationLocation.value!, AppConfig.defaultLocationRadius);
+      if (userLocation.value != null) {
+        isInRange.value = isWithinRadius(userLocation.value!,
+            organizationLocation.value!, AppConfig.defaultLocationRadius);
+      }
     } on Exception catch (e) {
       showErrorSnackBar("Error", e.toString());
       rethrow;

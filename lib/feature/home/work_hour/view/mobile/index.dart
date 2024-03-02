@@ -41,16 +41,16 @@ class WorkingHourViewMobile extends StatelessWidget {
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                left: SizeUtils.scale(
+                left: SizeUtils.scaleMobile(
                   AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
-                right: SizeUtils.scale(
+                right: SizeUtils.scaleMobile(
                   AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
-                top:
-                    SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
+                top: SizeUtils.scaleMobile(
+                    AppSize().paddingVerticalLarge, size.width),
               ),
               child: Column(
                 children: [
@@ -59,7 +59,7 @@ class WorkingHourViewMobile extends StatelessWidget {
                     children: [
                       MyText(
                         text: "Work Overview",
-                        style: AppStyles().bodyXlargeMedium,
+                        style: AppFonts().bodyXlargeMedium,
                       ),
                       Obx(
                         () => DateDropDown(
@@ -70,7 +70,7 @@ class WorkingHourViewMobile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: SizeUtils.scale(20, size.width)),
+                  SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                   Obx(
                     () => MyAsyncWidget(
                       list: controller.staffs.value,

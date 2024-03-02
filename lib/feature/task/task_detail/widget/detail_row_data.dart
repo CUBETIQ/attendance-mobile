@@ -15,17 +15,17 @@ class DetailRowData extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: SizeUtils.scale(160, size.width),
+          width: SizeUtils.scaleMobile(160, size.width),
           child: MyText(
             text: title ?? "status",
-            style: AppStyles().bodyMediumMedium.copyWith(
+            style: AppFonts().bodyMediumMedium.copyWith(
                   color: Theme.of(context).colorScheme.outline,
                 ),
           ),
         ),
         MyText(
           text: value ?? "Value",
-          style: AppStyles().bodyMediumMedium,
+          style: AppFonts().bodyMediumMedium,
         ),
       ],
     );

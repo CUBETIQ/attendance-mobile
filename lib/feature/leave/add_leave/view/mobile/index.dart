@@ -35,7 +35,7 @@ class AddLeaveViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),

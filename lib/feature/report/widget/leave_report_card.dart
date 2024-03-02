@@ -22,14 +22,14 @@ class LeaveReportCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MyCacheImage(imageUrl: data.image ?? ""),
-          SizedBox(width: SizeUtils.scale(10, size.width)),
+          SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
           SizedBox(
-            width: SizeUtils.scale(110, size.width),
+            width: SizeUtils.scaleMobile(110, size.width),
             child: MyText(
               text: StringUtil.getfullname(
                   data.firstName, data.lastName, data.username),
               overflow: TextOverflow.ellipsis,
-              style: AppStyles().bodyMediumMedium,
+              style: AppFonts().bodyMediumMedium,
               maxLines: 2,
             ),
           ),
@@ -38,11 +38,11 @@ class LeaveReportCard extends StatelessWidget {
       initiallyExpanded: true,
       expandedAlignment: Alignment.centerLeft,
       childrenPadding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(
+        vertical: SizeUtils.scaleMobile(
           5,
           MediaQuery.of(context).size.width,
         ),
-        horizontal: SizeUtils.scale(
+        horizontal: SizeUtils.scaleMobile(
           10,
           MediaQuery.of(context).size.width,
         ),

@@ -75,7 +75,7 @@ class OverviewCard extends StatelessWidget {
               ),
               child: MyText(
                 text: number != null && number != "null" ? number ?? "0" : "0",
-                style: AppStyles().bodyLargeMedium,
+                style: AppFonts().bodyLargeMedium,
               ),
             ),
           ),
@@ -87,7 +87,7 @@ class OverviewCard extends StatelessWidget {
               ),
               child: MyText(
                 text: title ?? "Title",
-                style: AppStyles().bodySmallRegular,
+                style: AppFonts().bodySmallRegular,
               ),
             ),
           ),

@@ -24,7 +24,7 @@ class SmallButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SizeUtils.scale(30, size.width),
+        height: SizeUtils.scaleMobile(30, size.width),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -34,7 +34,7 @@ class SmallButton extends StatelessWidget {
         ),
         child: MyText(
           text: title,
-          style: AppStyles().bodySmallMedium.copyWith(
+          style: AppFonts().bodySmallMedium.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
         ),

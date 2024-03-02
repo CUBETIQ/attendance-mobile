@@ -48,7 +48,7 @@ class StaffReportViewMobile extends StatelessWidget {
                 calendarStyle: CalendarStyle(
                   outsideDaysVisible: false,
                   markerMargin: EdgeInsets.only(
-                    top: SizeUtils.scale(6, size.width),
+                    top: SizeUtils.scaleMobile(6, size.width),
                   ),
                   holidayDecoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -104,13 +104,13 @@ class StaffReportViewMobile extends StatelessWidget {
                       : ListView.separated(
                           shrinkWrap: true,
                           padding: EdgeInsets.symmetric(
-                            horizontal: SizeUtils.scale(20, size.width),
-                            vertical: SizeUtils.scale(10, size.width),
+                            horizontal: SizeUtils.scaleMobile(20, size.width),
+                            vertical: SizeUtils.scaleMobile(10, size.width),
                           ),
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.attendanceList.value.length,
                           separatorBuilder: (context, index) => SizedBox(
-                            height: SizeUtils.scale(10, size.width),
+                            height: SizeUtils.scaleMobile(10, size.width),
                           ),
                           itemBuilder: (context, index) {
                             return ReportAttendanceCard(
@@ -125,13 +125,13 @@ class StaffReportViewMobile extends StatelessWidget {
               () => ListView.separated(
                 shrinkWrap: true,
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(20, size.width),
-                  vertical: SizeUtils.scale(10, size.width),
+                  horizontal: SizeUtils.scaleMobile(20, size.width),
+                  vertical: SizeUtils.scaleMobile(10, size.width),
                 ),
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.leaves.value.length,
                 separatorBuilder: (context, index) => SizedBox(
-                  height: SizeUtils.scale(10, size.width),
+                  height: SizeUtils.scaleMobile(10, size.width),
                 ),
                 itemBuilder: (context, index) {
                   return ReportLeaveCard(

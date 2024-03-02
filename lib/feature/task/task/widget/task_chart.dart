@@ -36,13 +36,13 @@ class TaskChart extends StatelessWidget {
       width: width,
       height: height ?? 210 * (size.width / 360),
       padding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(AppSize().paddingS8, size.width),
-        horizontal: SizeUtils.scale(AppSize().paddingS8, size.width),
+        vertical: SizeUtils.scaleMobile(AppSize().paddingS8, size.width),
+        horizontal: SizeUtils.scaleMobile(AppSize().paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
         ),
         boxShadow: [
           BoxShadow(
@@ -56,8 +56,8 @@ class TaskChart extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MyText(text: title ?? "My Task", style: AppStyles().bodyLargeMedium),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          MyText(text: title ?? "My Task", style: AppFonts().bodyLargeMedium),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
@@ -78,10 +78,10 @@ class TaskChart extends StatelessWidget {
             backgroundColor: Colors.grey.withOpacity(0.3),
             circularStrokeCap: CircularStrokeCap.round,
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           MyText(
               text: textBelow ?? "My Task",
-              style: AppStyles().bodyMediumRegular),
+              style: AppFonts().bodyMediumRegular),
         ],
       ),
     );

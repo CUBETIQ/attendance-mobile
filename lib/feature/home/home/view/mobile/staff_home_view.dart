@@ -33,11 +33,11 @@ class HomeStaffMobileView extends StatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(
-            left: SizeUtils.scale(
+            left: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
-            right: SizeUtils.scale(
+            right: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
@@ -47,7 +47,7 @@ class HomeStaffMobileView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: SizeUtils.scale(55, size.width),
+                height: SizeUtils.scaleMobile(55, size.width),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -57,8 +57,8 @@ class HomeStaffMobileView extends StatelessWidget {
                           () => MyCacheImage(
                             imageUrl:
                                 NavigationController.to.user.value.image ?? "",
-                            width: SizeUtils.scale(55, size.width),
-                            height: SizeUtils.scale(55, size.width),
+                            width: SizeUtils.scaleMobile(55, size.width),
+                            height: SizeUtils.scaleMobile(55, size.width),
                           ),
                         ),
                         Positioned(
@@ -96,7 +96,7 @@ class HomeStaffMobileView extends StatelessWidget {
                         Obx(
                           () => Container(
                             constraints: BoxConstraints(
-                              maxWidth: SizeUtils.scale(240, size.width),
+                              maxWidth: SizeUtils.scaleMobile(240, size.width),
                             ),
                             child: MyText(
                               text: StringUtil.getfullname(
@@ -104,7 +104,7 @@ class HomeStaffMobileView extends StatelessWidget {
                                 controller.user.value.lastName,
                                 controller.user.value.username,
                               ),
-                              style: AppStyles().bodyXlargeMedium,
+                              style: AppFonts().bodyXlargeMedium,
                             ),
                           ),
                         ),
@@ -112,7 +112,7 @@ class HomeStaffMobileView extends StatelessWidget {
                           () => MyText(
                             text: NavigationController.to.position.value.name ??
                                 "-----",
-                            style: AppStyles().bodyMediumRegular,
+                            style: AppFonts().bodyMediumRegular,
                           ),
                         )
                       ],
@@ -123,7 +123,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.02),
               MyText(
                 text: "Attendance",
-                style: AppStyles().bodyXlargeMedium,
+                style: AppFonts().bodyXlargeMedium,
               ),
               SizedBox(height: size.height * 0.015),
               Obx(
@@ -173,7 +173,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               MyText(
                 text: "Overview",
-                style: AppStyles().bodyXlargeMedium,
+                style: AppFonts().bodyXlargeMedium,
               ),
               SizedBox(height: size.height * 0.02),
               Row(
@@ -212,7 +212,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               MyText(
                 text: "Today Record",
-                style: AppStyles().bodyXlarge,
+                style: AppFonts().bodyXlarge,
               ),
               SizedBox(height: size.height * 0.02),
               Obx(

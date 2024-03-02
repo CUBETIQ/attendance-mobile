@@ -38,7 +38,7 @@ class AddStaffViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -46,20 +46,22 @@ class AddStaffViewMobile extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS17, size.width)),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
                   () => MyProfileImage(
                     imageFile: controller.imageFile.value,
                     imageUrl: controller.image.value,
-                    width: SizeUtils.scale(110, size.width),
-                    height: SizeUtils.scale(110, size.width),
+                    width: SizeUtils.scaleMobile(110, size.width),
+                    height: SizeUtils.scaleMobile(110, size.width),
                   ),
                 ),
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS17, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Username",
@@ -67,7 +69,7 @@ class AddStaffViewMobile extends StatelessWidget {
                 textController: controller.usernameController,
               ),
               SizedBox(
-                height: SizeUtils.scale(
+                height: SizeUtils.scaleMobile(
                   controller.appState.value == AppState.edit
                       ? 0
                       : AppSize().paddingS5,
@@ -83,7 +85,8 @@ class AddStaffViewMobile extends StatelessWidget {
                       textController: controller.passwordController,
                     ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Email",
@@ -91,7 +94,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 textController: controller.emailController,
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Role",
@@ -109,7 +113,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<PositionModel>(
                   label: "Position",
@@ -128,7 +133,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<DepartmentModel>(
                   label: "Department",
@@ -147,7 +153,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "First Name",
@@ -155,7 +162,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 textController: controller.firstnameController,
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Last Name",
@@ -163,7 +171,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 textController: controller.lastnameController,
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               Row(
                 children: [
                   Expanded(
@@ -186,7 +195,7 @@ class AddStaffViewMobile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: SizeUtils.scale(size.width * 0.02, size.width),
+                    width: SizeUtils.scaleMobile(size.width * 0.02, size.width),
                   ),
                   Expanded(
                     child: MyDatePickerField(
@@ -200,7 +209,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Address",
@@ -208,7 +218,8 @@ class AddStaffViewMobile extends StatelessWidget {
                 textController: controller.addressController,
               ),
               SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS5, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Status",
@@ -226,11 +237,11 @@ class AddStaffViewMobile extends StatelessWidget {
                       controller.selectedStatus.value = value!,
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(30, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
               MyAsyncButton(
                 title: "Save",
                 margin: EdgeInsets.only(
-                  bottom: SizeUtils.scale(30, size.width),
+                  bottom: SizeUtils.scaleMobile(30, size.width),
                 ),
                 onTap: controller.appState.value == AppState.edit
                     ? controller.onTapUpdateStaff

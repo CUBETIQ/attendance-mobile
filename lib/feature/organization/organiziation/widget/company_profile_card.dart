@@ -32,27 +32,27 @@ class CompanyProfileCard extends StatelessWidget {
         //parent container for the background
         MyCard(
           width: size.width,
-          height: SizeUtils.scale(160, size.width),
+          height: SizeUtils.scaleMobile(160, size.width),
           borderRadius: BorderRadius.circular(0),
           boxShadow: const [],
         ),
         //blue container on the back
         MyCard(
           width: size.width,
-          height: SizeUtils.scale(90, size.width),
+          height: SizeUtils.scaleMobile(90, size.width),
           borderRadius: BorderRadius.circular(0),
           boxShadow: const [],
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
         //front content
         Positioned(
-          top: SizeUtils.scale(30, size.width),
+          top: SizeUtils.scaleMobile(30, size.width),
           child: MyCard(
             width: size.width,
-            height: SizeUtils.scale(130, size.width),
+            height: SizeUtils.scaleMobile(130, size.width),
             boxShadow: const [],
             padding: EdgeInsets.symmetric(
-              horizontal: SizeUtils.scale(
+              horizontal: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 size.width,
               ),
@@ -62,13 +62,13 @@ class CompanyProfileCard extends StatelessWidget {
             child: MyCard(
               width: size.width,
               padding: EdgeInsets.all(
-                SizeUtils.scale(
+                SizeUtils.scaleMobile(
                   15,
                   size.width,
                 ),
               ),
               borderRadius: BorderRadius.circular(
-                SizeUtils.scale(14, size.width),
+                SizeUtils.scaleMobile(14, size.width),
               ),
               boxShadow: [
                 BoxShadow(
@@ -83,47 +83,47 @@ class CompanyProfileCard extends StatelessWidget {
                 children: [
                   MyCacheImageOrganization(
                     imageUrl: companyLogo,
-                    width: SizeUtils.scale(100, size.width),
-                    height: SizeUtils.scale(100, size.width),
-                    imageHeight: SizeUtils.scale(75, size.width),
-                    imageWidth: SizeUtils.scale(75, size.width),
+                    width: SizeUtils.scaleMobile(100, size.width),
+                    height: SizeUtils.scaleMobile(100, size.width),
+                    imageHeight: SizeUtils.scaleMobile(75, size.width),
+                    imageWidth: SizeUtils.scaleMobile(75, size.width),
                     border: Border.all(
                       color: Theme.of(context).colorScheme.primary,
-                      width: SizeUtils.scale(2, size.width),
+                      width: SizeUtils.scaleMobile(2, size.width),
                     ),
                   ),
-                  SizedBox(width: SizeUtils.scale(50, size.width)),
+                  SizedBox(width: SizeUtils.scaleMobile(50, size.width)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         constraints: BoxConstraints(
-                          maxWidth: SizeUtils.scale(145, size.width),
+                          maxWidth: SizeUtils.scaleMobile(145, size.width),
                         ),
                         child: MyText(
                           text: companyName ?? "Organization Name",
-                          style: AppStyles().bodyLargeRegular.copyWith(
+                          style: AppFonts().bodyLargeRegular.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),
                         ),
                       ),
                       SizedBox(
-                        height: SizeUtils.scale(6, size.width),
+                        height: SizeUtils.scaleMobile(6, size.width),
                       ),
                       Row(
                         children: [
                           MyCacheImage(
                             imageUrl: companyOwner?.image,
-                            width: SizeUtils.scale(22, size.width),
-                            height: SizeUtils.scale(22, size.width),
+                            width: SizeUtils.scaleMobile(22, size.width),
+                            height: SizeUtils.scaleMobile(22, size.width),
                           ),
                           SizedBox(
-                            width: SizeUtils.scale(5, size.width),
+                            width: SizeUtils.scaleMobile(5, size.width),
                           ),
                           Container(
                             constraints: BoxConstraints(
-                              maxWidth: SizeUtils.scale(120, size.width),
+                              maxWidth: SizeUtils.scaleMobile(120, size.width),
                             ),
                             child: MyText(
                               text: StringUtil.getfullname(
@@ -131,7 +131,7 @@ class CompanyProfileCard extends StatelessWidget {
                                 companyOwner?.lastName,
                                 companyOwner?.username,
                               ),
-                              style: AppStyles().bodySmallRegular.copyWith(
+                              style: AppFonts().bodySmallRegular.copyWith(
                                     color:
                                         Theme.of(context).colorScheme.outline,
                                   ),
@@ -140,12 +140,12 @@ class CompanyProfileCard extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: SizeUtils.scale(6, size.width),
+                        height: SizeUtils.scaleMobile(6, size.width),
                       ),
                       MyAsyncButton(
                         title: "Edit",
-                        width: SizeUtils.scale(100, size.width),
-                        height: SizeUtils.scale(30, size.width),
+                        width: SizeUtils.scaleMobile(100, size.width),
+                        height: SizeUtils.scaleMobile(30, size.width),
                         onTap: onTapEdit,
                       ),
                     ],

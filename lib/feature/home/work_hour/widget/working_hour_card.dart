@@ -30,17 +30,17 @@ class WorkHourCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scale(
+        horizontal: SizeUtils.scaleMobile(
           AppSize().paddingHorizontalLarge,
           size.width,
         ),
-        vertical: SizeUtils.scale(
+        vertical: SizeUtils.scaleMobile(
           AppSize().paddingVerticalMedium,
           size.width,
         ),
       ),
       margin: EdgeInsets.only(
-        bottom: SizeUtils.scale(
+        bottom: SizeUtils.scaleMobile(
           10,
           size.width,
         ),
@@ -51,17 +51,17 @@ class WorkHourCard extends StatelessWidget {
             children: [
               MyCacheImage(
                 imageUrl: staff.image,
-                width: SizeUtils.scale(40, size.width),
-                height: SizeUtils.scale(40, size.width),
+                width: SizeUtils.scaleMobile(40, size.width),
+                height: SizeUtils.scaleMobile(40, size.width),
               ),
-              SizedBox(width: SizeUtils.scale(15, size.width)),
+              SizedBox(width: SizeUtils.scaleMobile(15, size.width)),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scale(210, size.width),
+                      maxWidth: SizeUtils.scaleMobile(210, size.width),
                     ),
                     child: MyText(
                       text: StringUtil.getfullname(
@@ -69,21 +69,21 @@ class WorkHourCard extends StatelessWidget {
                         staff.lastName,
                         staff.username,
                       ),
-                      style: AppStyles().bodyMediumMedium,
+                      style: AppFonts().bodyMediumMedium,
                     ),
                   ),
                   MyText(
                     text: position.name ?? "N/A",
-                    style: AppStyles().bodyMediumMedium,
+                    style: AppFonts().bodyMediumMedium,
                   ),
                 ],
               ),
             ],
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           LinearPercentIndicator(
             animation: true,
-            lineHeight: SizeUtils.scale(
+            lineHeight: SizeUtils.scaleMobile(
               12,
               size.width,
             ),
@@ -91,14 +91,14 @@ class WorkHourCard extends StatelessWidget {
             padding: EdgeInsets.zero,
             percent: (percentage ?? 0) > 1 ? 1 : percentage ?? 0,
             barRadius: Radius.circular(
-              SizeUtils.scale(
+              SizeUtils.scaleMobile(
                 AppSize().borderRadiusLarge,
                 size.width,
               ),
             ),
             progressColor: Theme.of(context).colorScheme.primary,
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           Row(
             children: [
               const MyText(text: "Total Hour:"),

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timesync360/utils/permission_handler.dart';
 
@@ -35,6 +36,28 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.camera);
         if (result != null) {
           file = File(result.path);
+          return file;
+        } else {
+          return null;
+        }
+      } catch (e) {
+        rethrow;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  static Future<File?> openFileFolder() async {
+    File? file;
+    final permission = await PermissonHandler.requestStoragePermission();
+    if (permission) {
+      try {
+        final result = await FilePicker.platform.pickFiles(
+          allowMultiple: false,
+        );
+        if (result != null) {
+          file = File(result.files.single.path!);
           return file;
         } else {
           return null;

@@ -28,24 +28,24 @@ class EditOrganizationViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scale(30, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
                   () => MyProfileImage(
                     imageFile: controller.imageFile.value,
                     imageUrl: controller.image.value,
-                    width: SizeUtils.scale(110, size.width),
-                    height: SizeUtils.scale(110, size.width),
-                    imageHeight: SizeUtils.scale(80, size.width),
-                    imageWidth: SizeUtils.scale(80, size.width),
+                    width: SizeUtils.scaleMobile(110, size.width),
+                    height: SizeUtils.scaleMobile(110, size.width),
+                    imageHeight: SizeUtils.scaleMobile(80, size.width),
+                    imageWidth: SizeUtils.scaleMobile(80, size.width),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -68,7 +68,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: SizeUtils.scale(10, size.width),
+                    width: SizeUtils.scaleMobile(10, size.width),
                   ),
                   Expanded(
                     child: MyTimePickerField(
@@ -99,7 +99,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: SizeUtils.scale(10, size.width),
+                    width: SizeUtils.scaleMobile(10, size.width),
                   ),
                   Expanded(
                     child: MyTimePickerField(
@@ -119,7 +119,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              SizedBox(height: SizeUtils.scale(30, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
               MyAsyncButton(
                 title: "Save",
                 onTap: controller.updateOrganization,

@@ -31,8 +31,8 @@ class OnBoardViewTablet extends StatelessWidget {
                           height: size.height * 0.60,
                           title: e.title,
                           description: e.description,
-                          titleStyle: AppStyles().bodyXXXlargeMedium,
-                          descriptionStyle: AppStyles().bodyLargeMedium,
+                          titleStyle: AppFonts().bodyXXXlargeMedium,
+                          descriptionStyle: AppFonts().bodyLargeMedium,
                         ),
                       )
                       .toList(),

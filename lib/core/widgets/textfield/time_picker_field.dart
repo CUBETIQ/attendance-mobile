@@ -57,7 +57,7 @@ class MyTimePickerField extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : MyText(
                     text: label,
-                    style: labelStyle ?? AppStyles().bodyMediumMedium,
+                    style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
             const SizedBox(height: 8),
             TextFormField(
@@ -97,7 +97,7 @@ class MyTimePickerField extends StatelessWidget {
                   vertical: (AppSize().paddingS7) * (size.width / 375.0),
                 ),
                 hintText: hintText,
-                hintStyle: hintStyle ?? AppStyles().bodyMediumMedium,
+                hintStyle: hintStyle ?? AppFonts().bodyMediumMedium,
                 filled: filled ?? false,
                 fillColor: filled == true
                     ? Theme.of(context).colorScheme.secondaryContainer
@@ -164,9 +164,9 @@ class MyTimePickerField extends StatelessWidget {
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
-                errorStyle: errorStyle ?? AppStyles().bodyXSmallMedium,
+                errorStyle: errorStyle ?? AppFonts().bodyXSmallMedium,
               ),
-              style: style ?? AppStyles().bodyMediumMedium,
+              style: style ?? AppFonts().bodyMediumMedium,
               onChanged: (value) {
                 controller.formKey.currentState?.validate();
               },

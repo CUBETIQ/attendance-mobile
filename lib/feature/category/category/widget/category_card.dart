@@ -23,16 +23,16 @@ class CategoryCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: SizeUtils.scale(75, size.width),
-          maxHeight: SizeUtils.scale(120, size.width),
+          maxWidth: SizeUtils.scaleMobile(75, size.width),
+          maxHeight: SizeUtils.scaleMobile(120, size.width),
         ),
         alignment: Alignment.center,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: SizeUtils.scale(75, size.width),
-              height: SizeUtils.scale(75, size.width),
+              width: SizeUtils.scaleMobile(75, size.width),
+              height: SizeUtils.scaleMobile(75, size.width),
               alignment: Alignment.center,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
@@ -53,17 +53,17 @@ class CategoryCard extends StatelessWidget {
                     category.color != null && category.color?.isNotEmpty == true
                         ? darken(Color(category.color!.toInt()), 20)
                         : darken(Theme.of(context).colorScheme.primary, 20),
-                size: SizeUtils.scale(
+                size: SizeUtils.scaleMobile(
                   38,
                   size.width,
                 ),
               ),
             ),
-            SizedBox(height: SizeUtils.scale(5, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
             MyText(
               text: category.name ?? "N/A",
               maxLines: 2,
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
             ),
           ],
         ),

@@ -29,25 +29,25 @@ class DepartmentDetailViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scale(30, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
               Center(
                 child: MyCacheImage(
                   imageUrl: controller.department.value?.image,
-                  width: SizeUtils.scale(100, size.width),
-                  height: SizeUtils.scale(100, size.width),
+                  width: SizeUtils.scaleMobile(100, size.width),
+                  height: SizeUtils.scaleMobile(100, size.width),
                   defaultImage: SvgAssets.position,
-                  imageHeight: SizeUtils.scale(75, size.width),
-                  imageWidth: SizeUtils.scale(75, size.width),
+                  imageHeight: SizeUtils.scaleMobile(75, size.width),
+                  imageWidth: SizeUtils.scaleMobile(75, size.width),
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(30, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
               LabelDetailCard(
                 title: "Name",
                 value: controller.department.value?.name,

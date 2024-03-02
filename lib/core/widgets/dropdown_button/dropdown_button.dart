@@ -86,17 +86,17 @@ class MyDropDownButton<T> extends StatelessWidget {
             ? const SizedBox.shrink()
             : MyText(
                 text: label,
-                style: labelStyle ?? AppStyles().bodyMediumMedium,
+                style: labelStyle ?? AppFonts().bodyMediumMedium,
               ),
         const SizedBox(height: 8),
         SizedBox(
           width: width ?? double.infinity,
-          height: height ?? SizeUtils.scale(47.7, size.width),
+          height: height ?? SizeUtils.scaleMobile(47.7, size.width),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.
               isExpanded: true,
-              style: AppStyles().bodyMediumMedium.copyWith(
+              style: AppFonts().bodyMediumMedium.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
               hint: Container(
@@ -104,7 +104,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                 child: MyText(
                   text: hint ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: AppStyles().bodyMediumMedium,
+                  style: AppFonts().bodyMediumMedium,
                 ),
               ),
               value: value,
@@ -158,11 +158,11 @@ class MyDropDownButton<T> extends StatelessWidget {
                 useRootNavigator: false,
                 padding: dropdownPadding ??
                     EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(
+                      horizontal: SizeUtils.scaleMobile(
                         AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
-                      vertical: SizeUtils.scale(
+                      vertical: SizeUtils.scaleMobile(
                         AppSize().paddingVerticalMedium,
                         size.width,
                       ),

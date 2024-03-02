@@ -39,7 +39,7 @@ class StaffViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: SizeUtils.scale(
+                vertical: SizeUtils.scaleMobile(
                   AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
@@ -50,7 +50,7 @@ class StaffViewMobile extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Employee Overview",
-                    style: AppStyles().bodyLargeMedium,
+                    style: AppFonts().bodyLargeMedium,
                   ),
                   SizedBox(height: AppSize().paddingS8),
                   SearchBar(
@@ -82,7 +82,7 @@ class StaffViewMobile extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
-                          height: SizeUtils.scale(
+                          height: SizeUtils.scaleMobile(
                             AppSize().paddingS8,
                             size.width,
                           ),

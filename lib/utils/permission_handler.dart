@@ -6,6 +6,7 @@ import 'package:timesync360/utils/logger.dart';
 class PermissonHandler {
   static Future<bool> requestStoragePermission() async {
     var storagePermission = await Permission.storage.status;
+    Logs.t("Storage Permission: $storagePermission");
     if (storagePermission.isGranted) {
       return true;
     } else {
@@ -29,13 +30,12 @@ class PermissonHandler {
   }
 
   static Future<bool> requestPhotoPermission() async {
-    var storagePermission = await Permission.photos.status;
-    Logs.e(storagePermission);
-    if (storagePermission.isGranted) {
+    var photoPermission = await Permission.photos.status;
+    Logs.t("Photo Permission: $photoPermission");
+    if (photoPermission.isGranted || photoPermission.isLimited) {
       return true;
     } else {
       var result = await Permission.photos.request();
-      Logs.e(result);
       if (result.isGranted) {
         return true;
       } else if (result.isPermanentlyDenied) {
@@ -56,12 +56,11 @@ class PermissonHandler {
 
   static Future<bool> requestCameraPermission() async {
     var cameraPermission = await Permission.camera.status;
-
+    Logs.t("Camera Permission: $cameraPermission");
     if (cameraPermission.isGranted) {
       return true;
     } else {
       var result = await Permission.camera.request();
-      Logs.t("Camera Permission: $result");
       if (result.isGranted) {
         return true;
       } else if (result.isPermanentlyDenied) {
@@ -81,10 +80,10 @@ class PermissonHandler {
   }
 
   static Future<bool> requestLocationPermission() async {
-    final permission = await Geolocator.checkPermission();
-
-    if (permission == LocationPermission.always ||
-        permission == LocationPermission.whileInUse) {
+    final locationPermission = await Geolocator.checkPermission();
+    Logs.t("Location Permission: $locationPermission");
+    if (locationPermission == LocationPermission.always ||
+        locationPermission == LocationPermission.whileInUse) {
       return true;
     } else {
       final requestPermission = await Geolocator.requestPermission();

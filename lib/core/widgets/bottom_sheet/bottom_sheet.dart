@@ -29,11 +29,11 @@ void getCheckInBottomSheet(BuildContext context,
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -51,7 +51,7 @@ void getCheckInBottomSheet(BuildContext context,
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "You Have Checked In!",
-              style: AppStyles().bodyLarge.copyWith(
+              style: AppFonts().bodyLarge.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                   ),
             ),
@@ -59,7 +59,7 @@ void getCheckInBottomSheet(BuildContext context,
             MyText(
               text:
                   "You have successfully checked in of your present! Good luck and have a nice day!",
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
@@ -95,11 +95,11 @@ void getCheckOutBottomSheet(BuildContext context,
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -117,7 +117,7 @@ void getCheckOutBottomSheet(BuildContext context,
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "You Have Checked Out!",
-              style: AppStyles().bodyLarge.copyWith(
+              style: AppFonts().bodyLarge.copyWith(
                     color: Theme.of(context).colorScheme.error,
                   ),
             ),
@@ -125,7 +125,7 @@ void getCheckOutBottomSheet(BuildContext context,
             MyText(
               text:
                   "You have successfully checked out of your present! Good bye and have a good rest!",
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
@@ -165,11 +165,11 @@ void getLogOutBottomSheet(
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -187,14 +187,14 @@ void getLogOutBottomSheet(
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "Log Out",
-              style: AppStyles().bodyLarge.copyWith(
+              style: AppFonts().bodyLarge.copyWith(
                     color: Theme.of(context).colorScheme.error,
                   ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
               text: "Are you sure you want to log out?",
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
@@ -248,15 +248,15 @@ void getConfirmBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scale(400, size.width),
+      height: SizeUtils.scaleMobile(400, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -274,14 +274,14 @@ void getConfirmBottomSheet(
             SizedBox(height: size.height * 0.01),
             MyText(
               text: title ?? "Title",
-              style: AppStyles().bodyLarge.copyWith(
+              style: AppFonts().bodyLarge.copyWith(
                     color: titleColor,
                   ),
             ),
             SizedBox(height: size.height * 0.01),
             MyText(
               text: description ?? "Description",
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
@@ -335,15 +335,15 @@ void getEditAndDeleteBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scale(370, size.width),
+      height: SizeUtils.scaleMobile(370, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -358,14 +358,14 @@ void getEditAndDeleteBottomSheet(
                 image,
               ),
             ),
-            SizedBox(height: SizeUtils.scale(40, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(40, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.edit_rounded,
               title: "Edit",
               onTap: onTapEdit,
             ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.delete_rounded,
@@ -400,15 +400,15 @@ void getEditDeleteViewBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scale(435, size.width),
+      height: SizeUtils.scaleMobile(435, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -423,21 +423,21 @@ void getEditDeleteViewBottomSheet(
                 image,
               ),
             ),
-            SizedBox(height: SizeUtils.scale(35, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(35, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.visibility_rounded,
               title: "View Detail",
               onTap: onTapView,
             ),
-            SizedBox(height: SizeUtils.scale(5, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.edit_rounded,
               title: "Edit",
               onTap: onTapEdit,
             ),
-            SizedBox(height: SizeUtils.scale(5, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.delete_rounded,
@@ -475,15 +475,15 @@ void getPickImageButtomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scale(430, size.width),
+      height: SizeUtils.scaleMobile(430, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -498,7 +498,7 @@ void getPickImageButtomSheet(
                 SvgAssets.gallery,
               ),
             ),
-            SizedBox(height: SizeUtils.scale(40, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(40, size.width)),
             MyButton(
               isIconButton: true,
               icon: firstButtonIcon ?? Icons.photo_rounded,
@@ -511,7 +511,7 @@ void getPickImageButtomSheet(
                 }
               },
             ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: thirdButtonIcon ?? Icons.camera_rounded,
@@ -524,7 +524,7 @@ void getPickImageButtomSheet(
                 }
               },
             ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: secondButtonIcon ?? Icons.person_rounded,
@@ -571,15 +571,15 @@ void getPickIconButtomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scale(370, size.width),
+      height: SizeUtils.scaleMobile(370, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
@@ -594,14 +594,14 @@ void getPickIconButtomSheet(
                 SvgAssets.gallery,
               ),
             ),
-            SizedBox(height: SizeUtils.scale(40, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(40, size.width)),
             MyButton(
               isIconButton: true,
               icon: firstButtonIcon ?? Icons.photo_rounded,
               title: firstButtonTitle ?? "Open Gallery",
               onTap: onTapGallery,
             ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: secondButtonIcon ?? Icons.person_rounded,
@@ -636,49 +636,140 @@ void getOptionsBottomSheet(
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
-      height: SizeUtils.scale(430, size.width),
+      height: SizeUtils.scaleMobile(430, size.width),
       color: Theme.of(context).colorScheme.surface,
       child: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(
+          left: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          right: SizeUtils.scale(
+          right: SizeUtils.scaleMobile(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          top: SizeUtils.scale(AppSize().paddingTitleSmall, size.width),
+          top: SizeUtils.scaleMobile(AppSize().paddingTitleSmall, size.width),
         ),
         child: Column(
           children: [
             SizedBox(
-              width: SizeUtils.scale(200, size.width),
-              height: SizeUtils.scale(140, size.width),
+              width: SizeUtils.scaleMobile(200, size.width),
+              height: SizeUtils.scaleMobile(140, size.width),
               child: SvgPicture.asset(
                 image,
               ),
             ),
-            SizedBox(height: SizeUtils.scale(40, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(40, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.key_rounded,
               title: "Change Password",
               onTap: onTapChangePassword,
             ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.edit_rounded,
               title: "Edit",
               onTap: onTapEdit,
             ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
             MyButton(
               isIconButton: true,
               icon: Icons.delete_rounded,
               title: "Delete",
               onTap: onTapDelete,
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+void getPickAttachmentButtomSheet(
+  BuildContext context, {
+  bool? isDismissible,
+  void Function(File file)? onTapGallery,
+  void Function(File? file)? onTapFile,
+  void Function(File file)? onTapCamera,
+  String? firstButtonTitle,
+  String? secondButtonTitle,
+  IconData? firstButtonIcon,
+  IconData? secondButtonIcon,
+  IconData? thirdButtonIcon,
+  String? avatarType,
+}) {
+  final size = MediaQuery.of(context).size;
+  Get.bottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50 * (size.width / 375.0)),
+        topRight: Radius.circular(50 * (size.width / 375.0)),
+      ),
+    ),
+    isDismissible: isDismissible ?? true,
+    Container(
+      width: size.width,
+      height: SizeUtils.scaleMobile(430, size.width),
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scaleMobile(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scaleMobile(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          top: AppSize().paddingTitleSmall,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width * 0.65,
+              height: size.height * 0.22,
+              child: SvgPicture.asset(
+                SvgAssets.gallery,
+              ),
+            ),
+            SizedBox(height: SizeUtils.scaleMobile(40, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: firstButtonIcon ?? Icons.photo_rounded,
+              title: firstButtonTitle ?? "Open Gallery",
+              onTap: () async {
+                Get.back();
+                final file = await PickFileHandler.openGallery();
+                if (file != null) {
+                  onTapGallery?.call(file);
+                }
+              },
+            ),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: thirdButtonIcon ?? Icons.camera_rounded,
+              title: secondButtonTitle ?? "Open Camcera",
+              onTap: () async {
+                Get.back();
+                final file = await PickFileHandler.openCamera();
+                if (file != null) {
+                  onTapCamera?.call(file);
+                }
+              },
+            ),
+            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+            MyButton(
+              isIconButton: true,
+              icon: secondButtonIcon ?? Icons.file_open_rounded,
+              title: secondButtonTitle ?? "Open File",
+              onTap: () async {
+                Get.back();
+                final file = await PickFileHandler.openFileFolder();
+                onTapFile?.call(file);
+              },
             ),
           ],
         ),

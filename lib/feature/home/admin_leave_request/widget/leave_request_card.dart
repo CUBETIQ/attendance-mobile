@@ -40,12 +40,13 @@ class LeaveRequestCard extends StatelessWidget {
           EdgeInsets.only(bottom: AppSize().paddingS4 * (size.width / 375.0)),
       padding: EdgeInsets.symmetric(
         horizontal:
-            SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
-        vertical: SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
+            SizeUtils.scaleMobile(AppSize().paddingHorizontalLarge, size.width),
+        vertical:
+            SizeUtils.scaleMobile(AppSize().paddingVerticalMedium, size.width),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
         ),
         color: Theme.of(context).colorScheme.background,
         boxShadow: [
@@ -65,10 +66,10 @@ class LeaveRequestCard extends StatelessWidget {
               Row(
                 children: [
                   MyCacheImage(imageUrl: staff.image),
-                  SizedBox(width: SizeUtils.scale(10, size.width)),
+                  SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scale(130, size.width),
+                      maxWidth: SizeUtils.scaleMobile(130, size.width),
                     ),
                     child: MyText(
                       text: StringUtil.getfullname(
@@ -76,7 +77,7 @@ class LeaveRequestCard extends StatelessWidget {
                         staff.lastName,
                         staff.username,
                       ),
-                      style: AppStyles().bodyMediumRegular,
+                      style: AppFonts().bodyMediumRegular,
                     ),
                   ),
                 ],
@@ -101,7 +102,7 @@ class LeaveRequestCard extends StatelessWidget {
                 ),
                 child: MyText(
                   text: (leave.status ?? LeaveStatus.pending).capitalizeFirst,
-                  style: AppStyles().bodySmallRegular.copyWith(
+                  style: AppFonts().bodySmallRegular.copyWith(
                         color: Colors.white,
                       ),
                 ),
@@ -119,12 +120,12 @@ class LeaveRequestCard extends StatelessWidget {
                   MyText(
                     text:
                         "${(leave.type ?? LeaveType.annual).capitalize} leave request",
-                    style: AppStyles().bodyLargeMedium,
+                    style: AppFonts().bodyLargeMedium,
                   ),
                   MyText(
                     text:
                         "${DateFormatter.formatMillisecondsToDOB(leave.from)} - ${DateFormatter.formatMillisecondsToDOB(leave.to)}",
-                    style: AppStyles().bodySmallRegular.copyWith(
+                    style: AppFonts().bodySmallRegular.copyWith(
                           color: Theme.of(context).colorScheme.outline,
                         ),
                   ),
@@ -132,14 +133,14 @@ class LeaveRequestCard extends StatelessWidget {
                     children: [
                       MyText(
                         text: "Duration: ",
-                        style: AppStyles().bodySmallRegular.copyWith(
+                        style: AppFonts().bodySmallRegular.copyWith(
                               color: Theme.of(context).colorScheme.outline,
                             ),
                       ),
                       MyText(
                         text:
                             " ${StringUtil.removeTrailingZeros(leave.duration)}  ${(leave.duration ?? 0) < 2 ? "Day" : "Days"}",
-                        style: AppStyles().bodySmallRegular.copyWith(
+                        style: AppFonts().bodySmallRegular.copyWith(
                               color: Theme.of(context).colorScheme.outline,
                             ),
                       ),
@@ -157,14 +158,14 @@ class LeaveRequestCard extends StatelessWidget {
                         : leave.status == LeaveStatus.rejected
                             ? "Declined By"
                             : "Pending Approval",
-                    style: AppStyles().bodySmallRegular.copyWith(
+                    style: AppFonts().bodySmallRegular.copyWith(
                           color: Theme.of(context).colorScheme.outline,
                         ),
                   ),
-                  SizedBox(height: SizeUtils.scale(5, size.width)),
+                  SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scale(90, size.width),
+                      maxWidth: SizeUtils.scaleMobile(90, size.width),
                     ),
                     child: MyText(
                       text: StringUtil.getfullname(
@@ -173,7 +174,7 @@ class LeaveRequestCard extends StatelessWidget {
                         leave.updateBy?.username,
                       ),
                       maxLines: 2,
-                      style: AppStyles().bodyMediumRegular.copyWith(
+                      style: AppFonts().bodyMediumRegular.copyWith(
                             color: Theme.of(context).colorScheme.primary,
                           ),
                     ),
@@ -182,7 +183,7 @@ class LeaveRequestCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -197,7 +198,7 @@ class LeaveRequestCard extends StatelessWidget {
                   : const SizedBox.shrink(),
               leave.status == LeaveStatus.pending
                   ? SizedBox(
-                      width: SizeUtils.scale(5, size.width),
+                      width: SizeUtils.scaleMobile(5, size.width),
                     )
                   : const SizedBox.shrink(),
               leave.status == LeaveStatus.pending
@@ -211,7 +212,7 @@ class LeaveRequestCard extends StatelessWidget {
                   : const SizedBox.shrink(),
               leave.status == LeaveStatus.pending
                   ? SizedBox(
-                      width: SizeUtils.scale(5, size.width),
+                      width: SizeUtils.scaleMobile(5, size.width),
                     )
                   : const SizedBox.shrink(),
               Expanded(

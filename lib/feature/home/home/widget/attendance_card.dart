@@ -60,11 +60,11 @@ class AttendanceCard extends StatelessWidget {
           children: [
             MyText(
               text: "Today's Date",
-              style: AppStyles().bodyLargeMedium,
+              style: AppFonts().bodyLargeMedium,
             ),
             MyText(
               text: currentDate,
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
             ),
             SizedBox(height: size.height * 0.01),
             GestureDetector(
@@ -137,7 +137,7 @@ class AttendanceCard extends StatelessWidget {
                       SizedBox(height: AppSize().paddingS4),
                       MyText(
                         text: isCheckedIn == true ? "Check Out" : "Check In",
-                        style: AppStyles().bodyLargeMedium.copyWith(
+                        style: AppFonts().bodyLargeMedium.copyWith(
                               color: Colors.white,
                             ),
                       ),
@@ -160,7 +160,7 @@ class AttendanceCard extends StatelessWidget {
                   text: isInOfficeRange
                       ? "Location: You are in office area."
                       : "Location: You are not in office area.",
-                  style: AppStyles().bodyMediumRegular,
+                  style: AppFonts().bodyMediumRegular,
                 ),
               ],
             )

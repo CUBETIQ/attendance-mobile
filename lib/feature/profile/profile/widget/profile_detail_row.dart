@@ -21,19 +21,20 @@ class ProfileDetailRow extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: MyText(
             text: title ?? "Title",
-            style: AppStyles().bodyMediumRegular,
+            style: AppFonts().bodyMediumRegular,
           ),
         ),
         Flexible(
           child: Container(
-            padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
+            padding:
+                EdgeInsets.only(right: SizeUtils.scaleMobile(10, size.width)),
             alignment: Alignment.centerRight,
             child: MyText(
               text: value != "" && value != null
                   ? value.capitalizeMaybeNull ?? "N/A"
                   : "N/A",
               overflow: TextOverflow.ellipsis,
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
             ),
           ),
         ),

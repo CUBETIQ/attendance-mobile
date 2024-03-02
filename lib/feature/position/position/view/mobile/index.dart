@@ -37,7 +37,7 @@ class PositionViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: SizeUtils.scale(
+                vertical: SizeUtils.scaleMobile(
                   AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
@@ -48,7 +48,7 @@ class PositionViewMobile extends StatelessWidget {
                 children: [
                   MyText(
                       text: "Position Overview",
-                      style: AppStyles().bodyLargeMedium),
+                      style: AppFonts().bodyLargeMedium),
                   SizedBox(height: AppSize().paddingS8),
                   SearchBar(
                     hintText: "Search Position",
@@ -79,7 +79,7 @@ class PositionViewMobile extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
-                          height: SizeUtils.scale(
+                          height: SizeUtils.scaleMobile(
                             AppSize().paddingS8,
                             size.width,
                           ),

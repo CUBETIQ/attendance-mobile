@@ -36,7 +36,7 @@ class TaskCard extends StatelessWidget {
         width: size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+            SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
           ),
           boxShadow: [
             BoxShadow(
@@ -56,13 +56,13 @@ class TaskCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      SizeUtils.scale(
+                      SizeUtils.scaleMobile(
                         AppSize().borderRadiusLarge,
                         size.width,
                       ),
                     ),
                     bottomLeft: Radius.circular(
-                      SizeUtils.scale(
+                      SizeUtils.scaleMobile(
                         AppSize().borderRadiusLarge,
                         size.width,
                       ),
@@ -74,14 +74,15 @@ class TaskCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: SizeUtils.scale(AppSize().paddingS5, size.width),
+                width: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
               ),
               Container(
                 constraints: BoxConstraints(
-                  maxWidth: SizeUtils.scale(260, size.width),
+                  maxWidth: SizeUtils.scaleMobile(260, size.width),
                 ),
                 padding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scale(AppSize().paddingS4, size.width),
+                  vertical:
+                      SizeUtils.scaleMobile(AppSize().paddingS4, size.width),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,8 +91,8 @@ class TaskCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          width: SizeUtils.scale(40, size.width),
-                          height: SizeUtils.scale(40, size.width),
+                          width: SizeUtils.scaleMobile(40, size.width),
+                          height: SizeUtils.scaleMobile(40, size.width),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: color != null
@@ -104,7 +105,7 @@ class TaskCard extends StatelessWidget {
                                     fontFamily: 'MaterialIcons')
                                 : Icons.task,
                             color: Colors.white,
-                            size: SizeUtils.scale(
+                            size: SizeUtils.scaleMobile(
                               16,
                               size.width,
                             ),
@@ -118,7 +119,7 @@ class TaskCard extends StatelessWidget {
                           child: MyText(
                             text: (task.name ?? "Task Name").capitalizeFirst,
                             maxLines: 2,
-                            style: AppStyles().bodyLarge.copyWith(
+                            style: AppFonts().bodyLarge.copyWith(
                                   color: color != null
                                       ? Color(color!.toInt())
                                       : Theme.of(context).colorScheme.primary,
@@ -128,13 +129,14 @@ class TaskCard extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: SizeUtils.scale(AppSize().paddingS1, size.width),
+                      height: SizeUtils.scaleMobile(
+                          AppSize().paddingS1, size.width),
                     ),
                     MyText(
                       text: task.endDate != null
                           ? "${"Due:".trString} ${DateFormatter.formatMillisecondsToDOB(task.endDate!)}"
                           : "Due: N/A",
-                      style: AppStyles().bodyXSmallRegular.copyWith(
+                      style: AppFonts().bodyXSmallRegular.copyWith(
                             color: task.endDate == null
                                 ? Theme.of(context).colorScheme.outline
                                 : task.status == TaskStatus.completed
@@ -148,9 +150,10 @@ class TaskCard extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    vertical: SizeUtils.scale(AppSize().paddingS5, size.width),
+                    vertical:
+                        SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
                     horizontal:
-                        SizeUtils.scale(AppSize().paddingS5, size.width),
+                        SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

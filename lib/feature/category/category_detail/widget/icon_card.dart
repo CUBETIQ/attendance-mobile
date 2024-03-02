@@ -23,8 +23,8 @@ class IconCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      width: width ?? SizeUtils.scale(75, size.width),
-      height: width ?? SizeUtils.scale(75, size.width),
+      width: width ?? SizeUtils.scaleMobile(75, size.width),
+      height: width ?? SizeUtils.scaleMobile(75, size.width),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: bgColor != null && bgColor?.isNotEmpty == true
@@ -42,7 +42,7 @@ class IconCard extends StatelessWidget {
             // Darken the color by 20%
             ? darken(Color(bgColor!.toInt()), 20)
             : darken(Theme.of(context).colorScheme.primary, 20),
-        size: iconSize ?? SizeUtils.scale(50, size.width),
+        size: iconSize ?? SizeUtils.scaleMobile(50, size.width),
       ),
     );
   }

@@ -23,12 +23,12 @@ showSessionExpiredDialog() {
             children: [
               MyText(
                 text: "Session Expired",
-                style: AppStyles().bodyLarge,
+                style: AppFonts().bodyLarge,
               ),
               const SizedBox(height: 5),
               MyText(
                 text: "Your session has expired. Please login again.",
-                style: AppStyles().bodyMediumRegular,
+                style: AppFonts().bodyMediumRegular,
               ),
               const SizedBox(height: 10),
               Align(
@@ -46,7 +46,7 @@ showSessionExpiredDialog() {
                     ),
                     child: MyText(
                       text: "Confirm",
-                      style: AppStyles().bodyMediumRegular.copyWith(
+                      style: AppFonts().bodyMediumRegular.copyWith(
                             color: Theme.of(Get.context!).colorScheme.onPrimary,
                           ),
                     ),
@@ -71,18 +71,18 @@ showPermissionDialog(
             title: MyText(
               text: title,
               textAlign: TextAlign.center,
-              style: AppStyles().bodyMediumMedium,
+              style: AppFonts().bodyMediumMedium,
             ),
             content: MyText(
               text: content,
               maxLines: 4,
-              style: AppStyles().bodySmallRegular,
+              style: AppFonts().bodySmallRegular,
             ),
             actions: [
               CupertinoDialogAction(
                 child: MyText(
                   text: "Cancel",
-                  style: AppStyles().bodyMediumRegular,
+                  style: AppFonts().bodyMediumRegular,
                 ),
                 onPressed: () {
                   Get.back();
@@ -91,7 +91,7 @@ showPermissionDialog(
               CupertinoDialogAction(
                 child: MyText(
                   text: "Setting",
-                  style: AppStyles().bodyMediumRegular,
+                  style: AppFonts().bodyMediumRegular,
                 ),
                 onPressed: () async {
                   Get.back();
@@ -117,18 +117,18 @@ showPermissionDialog(
             title: MyText(
               text: title,
               textAlign: TextAlign.center,
-              style: AppStyles().bodyLargeMedium,
+              style: AppFonts().bodyLargeMedium,
             ),
             content: MyText(
               text: content,
               maxLines: 4,
-              style: AppStyles().bodyMediumRegular,
+              style: AppFonts().bodyMediumRegular,
             ),
             actions: <Widget>[
               TextButton(
                 child: MyText(
                   text: "Cancel",
-                  style: AppStyles().bodyMediumRegular,
+                  style: AppFonts().bodyMediumRegular,
                 ),
                 onPressed: () {
                   Get.back();
@@ -137,7 +137,7 @@ showPermissionDialog(
               TextButton(
                 child: MyText(
                   text: "Setting",
-                  style: AppStyles().bodyMediumRegular,
+                  style: AppFonts().bodyMediumRegular,
                 ),
                 onPressed: () async {
                   Get.back();

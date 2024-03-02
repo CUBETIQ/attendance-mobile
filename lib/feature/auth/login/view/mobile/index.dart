@@ -22,11 +22,11 @@ class LoginViewMobile extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
               top: AppSize().paddingTitleLarge,
-              left: SizeUtils.scale(
+              left: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scale(
+              right: SizeUtils.scaleMobile(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
@@ -41,7 +41,7 @@ class LoginViewMobile extends StatelessWidget {
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                            SizeUtils.scale(
+                            SizeUtils.scaleMobile(
                               AppSize().borderRadiusMedium,
                               size.width,
                             ),
@@ -53,7 +53,7 @@ class LoginViewMobile extends StatelessWidget {
                       SizedBox(height: AppSize().paddingS6),
                       MyText(
                         text: "TimeSync360",
-                        style: AppStyles().bodyLargeMedium,
+                        style: AppFonts().bodyLargeMedium,
                       ),
                     ],
                   ),
@@ -61,11 +61,11 @@ class LoginViewMobile extends StatelessWidget {
                 SizedBox(height: size.height * 0.04),
                 MyText(
                   text: "Access your account",
-                  style: AppStyles().bodyXXlarge,
+                  style: AppFonts().bodyXXlarge,
                 ),
                 MyText(
                   text: "Please fill your detail to access your account.",
-                  style: AppStyles().bodyMediumRegular.copyWith(
+                  style: AppFonts().bodyMediumRegular.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),
                 ),
@@ -115,7 +115,7 @@ class LoginViewMobile extends StatelessWidget {
                         SizedBox(width: size.width * 0.01),
                         MyText(
                           text: "Remember me",
-                          style: AppStyles().bodyMediumMedium,
+                          style: AppFonts().bodyMediumMedium,
                         ),
                       ],
                     ),
@@ -123,7 +123,7 @@ class LoginViewMobile extends StatelessWidget {
                       onTap: null,
                       child: MyText(
                         text: "Forgot Password?",
-                        style: AppStyles().bodyMediumMedium.copyWith(
+                        style: AppFonts().bodyMediumMedium.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                             ),
                       ),

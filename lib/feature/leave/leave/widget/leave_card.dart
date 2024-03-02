@@ -30,14 +30,14 @@ class LeaveCard extends StatelessWidget {
     return GestureDetector(
       onTap: leave.status != LeaveStatus.pending ? null : onTap,
       child: Container(
-        height: SizeUtils.scale(170, size.width),
+        height: SizeUtils.scaleMobile(170, size.width),
         margin:
             EdgeInsets.only(bottom: AppSize().paddingS8 * (size.width / 375.0)),
         padding: EdgeInsets.symmetric(
-          horizontal:
-              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
-          vertical:
-              SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
+          horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge, size.width),
+          vertical: SizeUtils.scaleMobile(
+              AppSize().paddingVerticalMedium, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -79,7 +79,7 @@ class LeaveCard extends StatelessWidget {
                   ),
                   child: MyText(
                     text: (leave.status ?? LeaveStatus.pending).capitalizeFirst,
-                    style: AppStyles().bodySmallRegular.copyWith(
+                    style: AppFonts().bodySmallRegular.copyWith(
                           color: Colors.white,
                         ),
                   ),
@@ -90,12 +90,12 @@ class LeaveCard extends StatelessWidget {
                 MyText(
                   text:
                       "${(leave.type ?? LeaveType.annual).capitalize} leave request",
-                  style: AppStyles().bodyLargeMedium,
+                  style: AppFonts().bodyLargeMedium,
                 ),
                 MyText(
                   text:
                       "${DateFormatter.formatMillisecondsToDOB(leave.from)} - ${DateFormatter.formatMillisecondsToDOB(leave.to)}",
-                  style: AppStyles().bodySmallRegular.copyWith(
+                  style: AppFonts().bodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),
                 ),
@@ -103,14 +103,14 @@ class LeaveCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "Duration: ",
-                      style: AppStyles().bodySmallRegular.copyWith(
+                      style: AppFonts().bodySmallRegular.copyWith(
                             color: Theme.of(context).colorScheme.outline,
                           ),
                     ),
                     MyText(
                       text:
                           " ${StringUtil.removeTrailingZeros(leave.duration)}  ",
-                      style: AppStyles().bodySmallRegular.copyWith(
+                      style: AppFonts().bodySmallRegular.copyWith(
                             color: Theme.of(context).colorScheme.outline,
                           ),
                     ),
@@ -126,7 +126,7 @@ class LeaveCard extends StatelessWidget {
                           : leave.status == LeaveStatus.rejected
                               ? "Declined By"
                               : "Pending Approval",
-                      style: AppStyles().bodySmallRegular.copyWith(
+                      style: AppFonts().bodySmallRegular.copyWith(
                             color: Theme.of(context).colorScheme.outline,
                           ),
                     ),
@@ -135,7 +135,7 @@ class LeaveCard extends StatelessWidget {
                     ),
                     Container(
                       constraints: BoxConstraints(
-                        maxWidth: SizeUtils.scale(160, size.width),
+                        maxWidth: SizeUtils.scaleMobile(160, size.width),
                       ),
                       child: MyText(
                         text: StringUtil.getfullname(
@@ -143,7 +143,7 @@ class LeaveCard extends StatelessWidget {
                           leave.updateBy?.lastName,
                           leave.updateBy?.username,
                         ),
-                        style: AppStyles().bodyMediumRegular.copyWith(
+                        style: AppFonts().bodyMediumRegular.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                             ),
                       ),
@@ -160,8 +160,8 @@ class LeaveCard extends StatelessWidget {
                     ? GestureDetector(
                         onTap: onTapCancel,
                         child: Container(
-                          width: SizeUtils.scale(100, size.width),
-                          height: SizeUtils.scale(30, size.width),
+                          width: SizeUtils.scaleMobile(100, size.width),
+                          height: SizeUtils.scaleMobile(30, size.width),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
@@ -178,22 +178,22 @@ class LeaveCard extends StatelessWidget {
                           ),
                           child: MyText(
                             text: "Cancel",
-                            style: AppStyles().bodySmallMedium,
+                            style: AppFonts().bodySmallMedium,
                           ),
                         ),
                       )
                     : const SizedBox.shrink(),
                 leave.status == LeaveStatus.pending
                     ? SizedBox(
-                        height:
-                            SizeUtils.scale(AppSize().paddingS4, size.width),
+                        height: SizeUtils.scaleMobile(
+                            AppSize().paddingS4, size.width),
                       )
                     : const SizedBox.shrink(),
                 GestureDetector(
                   onTap: onTapView,
                   child: Container(
-                    width: SizeUtils.scale(100, size.width),
-                    height: SizeUtils.scale(30, size.width),
+                    width: SizeUtils.scaleMobile(100, size.width),
+                    height: SizeUtils.scaleMobile(30, size.width),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
@@ -203,7 +203,7 @@ class LeaveCard extends StatelessWidget {
                     ),
                     child: MyText(
                       text: "View",
-                      style: AppStyles().bodySmallMedium.copyWith(
+                      style: AppFonts().bodySmallMedium.copyWith(
                             color: Theme.of(context).colorScheme.onPrimary,
                           ),
                     ),

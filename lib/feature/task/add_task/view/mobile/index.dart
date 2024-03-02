@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/core/widgets/attachment/upload_Attachment_Button.dart';
 import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/upload_button.dart';
 import 'package:timesync360/core/widgets/color_picker/rounded_color_picker.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
@@ -10,10 +12,8 @@ import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/task/add_task/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/types/state.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:timesync360/utils/size_util.dart';
 
 class AddTaskViewMobile extends StatelessWidget {
   const AddTaskViewMobile({super.key});
@@ -37,7 +37,7 @@ class AddTaskViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -51,7 +51,9 @@ class AddTaskViewMobile extends StatelessWidget {
                 hintText: "Enter your task",
                 textController: controller.taskController,
               ),
-              SizedBox(height: AppSize().paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -63,7 +65,10 @@ class AddTaskViewMobile extends StatelessWidget {
                       onDateResult: controller.getStartDateInMilliSecond,
                     ),
                   ),
-                  SizedBox(width: size.width * 0.02),
+                  SizedBox(
+                    width:
+                        SizeUtils.scaleMobile(AppSize().paddingS1, size.height),
+                  ),
                   Expanded(
                     child: MyDatePickerField(
                       hasLabel: true,
@@ -85,7 +90,9 @@ class AddTaskViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: AppSize().paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Priority",
@@ -103,7 +110,9 @@ class AddTaskViewMobile extends StatelessWidget {
                       controller.selectPriority.value = value!,
                 ),
               ),
-              SizedBox(height: AppSize().paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",
@@ -111,42 +120,50 @@ class AddTaskViewMobile extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              SizedBox(height: AppSize().paddingS5),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Obx(
-                        () => RoundedIconPicker(
-                          iconColor: Colors.white,
-                          icon: controller.stringIcon.value,
-                          label: controller.stringIconLabel.value,
-                          baseColor: controller.color.value,
-                          onTap: () => controller.onTapPickIcon(context),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Obx(
-                        () => RoundedColorPicker(
-                          color: controller.color.value,
-                          label: controller.stringColorLabel.value,
-                          onTap: () => controller.onTapPickColor(context),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: size.height * 0.02),
-                child: UploadButton(
-                    files: controller.files, onTap: controller.uploadFile),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Obx(
+                      () => RoundedIconPicker(
+                        iconColor: Colors.white,
+                        icon: controller.stringIcon.value,
+                        label: controller.stringIconLabel.value,
+                        baseColor: controller.color.value,
+                        onTap: () => controller.onTapPickIcon(context),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Obx(
+                      () => RoundedColorPicker(
+                        color: controller.color.value,
+                        label: controller.stringColorLabel.value,
+                        onTap: () => controller.onTapPickColor(context),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
+              const UploadAttachmentButton(),
+              SizedBox(
+                height:
+                    SizeUtils.scaleMobile(AppSize().paddingS10, size.height),
               ),
               MyAsyncButton(
                 title: "Save",
+                margin: EdgeInsets.only(
+                  bottom: SizeUtils.scaleMobile(
+                    AppSize().paddingS10,
+                    size.width,
+                  ),
+                ),
                 onTap: controller.appState.value == AppState.edit
                     ? controller.updateTask
                     : controller.addTask,

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppStyles {
-  static final AppStyles _instance = AppStyles._internal();
+class AppFonts {
+  static final AppFonts _instance = AppFonts._internal();
 
-  factory AppStyles() => _instance;
+  factory AppFonts() => _instance;
 
-  AppStyles._internal();
+  AppFonts._internal();
 
   static const String fontFamily = 'Inter';
 
   double calculateFontSize(BuildContext context, double baseSize) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    if (screenWidth >= 414) {
-      return baseSize * 1;
+    if (screenWidth > 450) {
+      return baseSize * 1.5;
     } else if (screenWidth <= 375) {
       return baseSize * 0.85;
     } else {

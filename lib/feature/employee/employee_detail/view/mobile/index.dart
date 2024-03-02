@@ -32,25 +32,25 @@ class StaffDetailViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
+            horizontal: SizeUtils.scaleMobile(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scale(20, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Obx(
                     () => MyCacheImage(
                       imageUrl: controller.staff.value.image ?? "",
-                      width: SizeUtils.scale(80, size.width),
-                      height: SizeUtils.scale(80, size.width),
+                      width: SizeUtils.scaleMobile(80, size.width),
+                      height: SizeUtils.scaleMobile(80, size.width),
                     ),
                   ),
-                  SizedBox(width: SizeUtils.scale(20, size.width)),
+                  SizedBox(width: SizeUtils.scaleMobile(20, size.width)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -60,13 +60,13 @@ class StaffDetailViewMobile extends StatelessWidget {
                           controller.staff.value.lastName,
                           controller.staff.value.username,
                         ),
-                        style: AppStyles().bodyXlargeSemi.copyWith(
+                        style: AppFonts().bodyXlargeSemi.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                             ),
                       ),
                       MyText(
                         text: controller.position.value.name ?? "No Position",
-                        style: AppStyles().bodyMediumRegular.copyWith(
+                        style: AppFonts().bodyMediumRegular.copyWith(
                               color: Theme.of(context).colorScheme.secondary,
                             ),
                       ),
@@ -74,7 +74,7 @@ class StaffDetailViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: SizeUtils.scale(25, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(25, size.width)),
               LabelDetailCard(
                 title: "First Name",
                 value: controller.staff.value.firstName,
@@ -99,7 +99,7 @@ class StaffDetailViewMobile extends StatelessWidget {
                       value: controller.staff.value.gender,
                     ),
                   ),
-                  SizedBox(width: SizeUtils.scale(10, size.width)),
+                  SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
                   Expanded(
                     child: LabelDetailCard(
                       title: "Date Of Birth",

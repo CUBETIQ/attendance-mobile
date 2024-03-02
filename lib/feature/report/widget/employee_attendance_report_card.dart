@@ -28,14 +28,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MyCacheImage(imageUrl: data.image ?? ""),
-          SizedBox(width: SizeUtils.scale(10, size.width)),
+          SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
           SizedBox(
-            width: SizeUtils.scale(110, size.width),
+            width: SizeUtils.scaleMobile(110, size.width),
             child: MyText(
               text: StringUtil.getfullname(
                   data.firstName, data.lastName, data.username),
               overflow: TextOverflow.ellipsis,
-              style: AppStyles().bodyMediumMedium,
+              style: AppFonts().bodyMediumMedium,
               maxLines: 2,
             ),
           ),
@@ -44,11 +44,11 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
       initiallyExpanded: true,
       expandedAlignment: Alignment.centerLeft,
       childrenPadding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(
+        vertical: SizeUtils.scaleMobile(
           5,
           MediaQuery.of(context).size.width,
         ),
-        horizontal: SizeUtils.scale(
+        horizontal: SizeUtils.scaleMobile(
           10,
           MediaQuery.of(context).size.width,
         ),
@@ -60,7 +60,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
             data.attendance?.checkInDateTime,
           ),
         ),
-        SizedBox(height: SizeUtils.scale(2, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(
           title: "Check In Status:",
           value: data.attendance.isBlank == false &&
@@ -77,7 +77,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                   : Theme.of(context).colorScheme.onBackground,
         ),
         SizedBox(
-          height: SizeUtils.scale(
+          height: SizeUtils.scaleMobile(
             data.attendance != null ? 2 : 0,
             size.width,
           ),
@@ -97,14 +97,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                     ),
                   )
                 : const SizedBox.shrink(),
-        SizedBox(height: SizeUtils.scale(2, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(
           title: "Check Out:",
           value: DateFormatter.formatTimeWithDate(
             data.attendance?.checkOutDateTime,
           ),
         ),
-        SizedBox(height: SizeUtils.scale(2, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(
             title: "Check Out Status:",
             value: data.attendance != null &&
@@ -120,7 +120,8 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                         : Colors.orange
                 : Theme.of(context).colorScheme.onBackground),
         SizedBox(
-          height: SizeUtils.scale(data.attendance != null ? 2 : 0, size.width),
+          height: SizeUtils.scaleMobile(
+              data.attendance != null ? 2 : 0, size.width),
         ),
         data.attendance != null && data.attendance?.checkOutLate != null
             ? AttendanceDataRowReport(
@@ -137,12 +138,12 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                     ),
                   )
                 : const SizedBox.shrink(),
-        SizedBox(height: SizeUtils.scale(2, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(
           title: "Work Hour:",
           value: DateFormatter.getHourMinuteSecondFromMinute(totalWorkMinute),
         ),
-        SizedBox(height: SizeUtils.scale(2, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(
           title: "Total Session",
           value: (data.attendance?.totalSession ?? 0).toString(),

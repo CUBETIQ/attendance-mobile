@@ -20,14 +20,14 @@ class EmployeeLeaveReportCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MyCacheImage(imageUrl: data.image ?? ""),
-          SizedBox(width: SizeUtils.scale(10, size.width)),
+          SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
           SizedBox(
-            width: SizeUtils.scale(110, size.width),
+            width: SizeUtils.scaleMobile(110, size.width),
             child: MyText(
               text: StringUtil.getfullname(
                   data.firstName, data.lastName, data.username),
               overflow: TextOverflow.ellipsis,
-              style: AppStyles().bodyMediumMedium,
+              style: AppFonts().bodyMediumMedium,
               maxLines: 2,
             ),
           ),
@@ -36,11 +36,11 @@ class EmployeeLeaveReportCard extends StatelessWidget {
       initiallyExpanded: true,
       expandedAlignment: Alignment.centerLeft,
       childrenPadding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(
+        vertical: SizeUtils.scaleMobile(
           5,
           MediaQuery.of(context).size.width,
         ),
-        horizontal: SizeUtils.scale(
+        horizontal: SizeUtils.scaleMobile(
           10,
           MediaQuery.of(context).size.width,
         ),
@@ -52,7 +52,7 @@ class EmployeeLeaveReportCard extends StatelessWidget {
               )
             : Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scale(10, size.width),
+                  vertical: SizeUtils.scaleMobile(10, size.width),
                 ),
                 child: Center(
                   child: Row(
@@ -61,10 +61,10 @@ class EmployeeLeaveReportCard extends StatelessWidget {
                         Icons.info,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(width: SizeUtils.scale(5, size.width)),
+                      SizedBox(width: SizeUtils.scaleMobile(5, size.width)),
                       MyText(
                         text: "Not On Leave",
-                        style: AppStyles().bodyMediumMedium,
+                        style: AppFonts().bodyMediumMedium,
                       ),
                     ],
                   ),

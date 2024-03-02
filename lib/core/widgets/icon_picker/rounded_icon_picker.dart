@@ -79,7 +79,7 @@ class RoundedIconPicker extends StatelessWidget {
                     text: label ?? "Icon",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 3,
-                    style: AppStyles().bodyMediumMedium,
+                    style: AppFonts().bodyMediumMedium,
                   ),
                 )
               : const SizedBox.shrink(),

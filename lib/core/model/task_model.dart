@@ -1,3 +1,4 @@
+import 'package:timesync360/core/model/attachment_model.dart';
 import 'package:timesync360/core/repositories/base_model.dart';
 
 class TaskModel extends BaseModel<TaskModel> {
@@ -15,7 +16,7 @@ class TaskModel extends BaseModel<TaskModel> {
   final String? color;
   final String? icon;
   final String? priority;
-  final List<String>? attachment;
+  final List<AttachmentModel>? attachment;
 
   TaskModel({
     this.id,
@@ -55,9 +56,7 @@ class TaskModel extends BaseModel<TaskModel> {
       endDate: json['endDate'],
       color: json['color'],
       icon: json['icon'],
-      attachment: json['attachment'] != null
-          ? List<String>.from(json['attachment'])
-          : null,
+      attachment: AttachmentModel().fromListJson(json['attachment']),
     );
   }
 
@@ -85,7 +84,7 @@ class TaskModel extends BaseModel<TaskModel> {
       "endDate": endDate,
       "color": color,
       "icon": icon,
-      "attachment": attachment,
+      "attachment": attachment?.map((e) => e.toJson()).toList(),
     };
   }
 }

@@ -19,12 +19,12 @@ class ReportAttendanceCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(75, size.width),
+      height: SizeUtils.scaleMobile(75, size.width),
       padding: EdgeInsets.only(
-        right: SizeUtils.scale(20, size.width),
+        right: SizeUtils.scaleMobile(20, size.width),
       ),
       borderRadius: BorderRadius.circular(
-        SizeUtils.scale(
+        SizeUtils.scaleMobile(
           14,
           size.width,
         ),
@@ -33,18 +33,18 @@ class ReportAttendanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: SizeUtils.scale(35, size.width),
-            height: SizeUtils.scale(75, size.width),
+            width: SizeUtils.scaleMobile(35, size.width),
+            height: SizeUtils.scaleMobile(75, size.width),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(
-                  SizeUtils.scale(
+                  SizeUtils.scaleMobile(
                     14,
                     size.width,
                   ),
                 ),
                 bottomLeft: Radius.circular(
-                  SizeUtils.scale(
+                  SizeUtils.scaleMobile(
                     14,
                     size.width,
                   ),
@@ -54,7 +54,7 @@ class ReportAttendanceCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: SizeUtils.scale(15, size.width),
+            width: SizeUtils.scaleMobile(15, size.width),
           ),
           Expanded(
             child: Row(
@@ -67,19 +67,19 @@ class ReportAttendanceCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "Attendance",
-                      style: AppStyles().bodyMediumSemi,
+                      style: AppFonts().bodyMediumSemi,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: "Check In",
-                      style: AppStyles().bodySmallMedium.copyWith(
+                      style: AppFonts().bodySmallMedium.copyWith(
                             color: MyColor.successColor,
                           ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: "Check Out",
-                      style: AppStyles().bodySmallMedium.copyWith(
+                      style: AppFonts().bodySmallMedium.copyWith(
                             color: MyColor.errorColor,
                           ),
                     ),
@@ -91,21 +91,21 @@ class ReportAttendanceCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "Time",
-                      style: AppStyles().bodyMediumSemi,
+                      style: AppFonts().bodyMediumSemi,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: DateFormatter.formatTimeWithDate(
                         attendance.checkInDateTime,
                       ),
-                      style: AppStyles().bodySmallRegular,
+                      style: AppFonts().bodySmallRegular,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: DateFormatter.formatTimeWithDate(
                         attendance.checkOutDateTime,
                       ),
-                      style: AppStyles().bodySmallRegular,
+                      style: AppFonts().bodySmallRegular,
                     ),
                   ],
                 ),
@@ -115,15 +115,15 @@ class ReportAttendanceCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "Status",
-                      style: AppStyles().bodyMediumSemi.copyWith(
+                      style: AppFonts().bodyMediumSemi.copyWith(
                             color: Theme.of(context).colorScheme.primary,
                           ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text:
                           attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
-                      style: AppStyles().bodySmallRegular.copyWith(
+                      style: AppFonts().bodySmallRegular.copyWith(
                             color: attendance.checkInStatus != null
                                 ? attendance.checkInStatus ==
                                         AttendanceStatus.early
@@ -135,11 +135,11 @@ class ReportAttendanceCard extends StatelessWidget {
                                 : Theme.of(context).colorScheme.onBackground,
                           ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: attendance.checkOutStatus?.capitalizeMaybeNull ??
                           "N/A",
-                      style: AppStyles().bodySmallRegular.copyWith(
+                      style: AppFonts().bodySmallRegular.copyWith(
                             color: attendance.checkOutStatus != null
                                 ? attendance.checkOutStatus ==
                                         AttendanceStatus.early

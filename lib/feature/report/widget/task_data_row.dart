@@ -28,8 +28,8 @@ class TaskDataRowReport extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: SizeUtils.scale(30, size.width),
-              height: SizeUtils.scale(30, size.width),
+              width: SizeUtils.scaleMobile(30, size.width),
+              height: SizeUtils.scaleMobile(30, size.width),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: data?.color != null
@@ -41,24 +41,24 @@ class TaskDataRowReport extends StatelessWidget {
                     ? IconData(data!.icon!.toInt(), fontFamily: 'MaterialIcons')
                     : Icons.task,
                 color: Colors.white,
-                size: SizeUtils.scale(18, size.width),
+                size: SizeUtils.scaleMobile(18, size.width),
               ),
             ),
-            SizedBox(width: SizeUtils.scale(10, size.width)),
+            SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
             Container(
               constraints: BoxConstraints(
-                maxWidth: SizeUtils.scale(255, size.width),
+                maxWidth: SizeUtils.scaleMobile(255, size.width),
               ),
               child: MyText(
                 text: data?.name?.capitalizeFirst ?? "",
                 overflow: TextOverflow.ellipsis,
-                style: AppStyles().bodyMediumMedium,
+                style: AppFonts().bodyMediumMedium,
                 maxLines: 2,
               ),
             ),
           ],
         ),
-        SizedBox(height: SizeUtils.scale(5, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -67,14 +67,14 @@ class TaskDataRowReport extends StatelessWidget {
                 MyText(
                   text: "Status: ",
                   overflow: TextOverflow.ellipsis,
-                  style: AppStyles().bodySmallRegular.copyWith(
+                  style: AppFonts().bodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
                 MyText(
                   text: data?.status?.capitalizeFirst ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: AppStyles().bodySmallRegular.copyWith(
+                  style: AppFonts().bodySmallRegular.copyWith(
                         color: data?.status == TaskStatus.completed
                             ? MyColor.successColor
                             : MyColor.pendingColor,
@@ -87,14 +87,14 @@ class TaskDataRowReport extends StatelessWidget {
                 MyText(
                   text: "Due Date: ",
                   overflow: TextOverflow.ellipsis,
-                  style: AppStyles().bodySmallRegular.copyWith(
+                  style: AppFonts().bodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
                 MyText(
                   text: DateFormatter.formatMillisecondsToDOB(data?.endDate),
                   overflow: TextOverflow.ellipsis,
-                  style: AppStyles().bodySmallRegular.copyWith(
+                  style: AppFonts().bodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.error,
                       ),
                 ),
@@ -102,7 +102,7 @@ class TaskDataRowReport extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: SizeUtils.scale(10, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
       ],
     );
   }

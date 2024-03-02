@@ -24,14 +24,14 @@ class JobCompanyTitle extends StatelessWidget {
           ),
           child: MyText(
             text: organization,
-            style: AppStyles().bodyMediumRegular.copyWith(
+            style: AppFonts().bodyMediumRegular.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
           ),
         ),
         MyText(
           text: " | ",
-          style: AppStyles().bodyMediumRegular.copyWith(
+          style: AppFonts().bodyMediumRegular.copyWith(
                 color: Theme.of(context).colorScheme.primary,
               ),
         ),
@@ -41,7 +41,7 @@ class JobCompanyTitle extends StatelessWidget {
           ),
           child: MyText(
             text: position,
-            style: AppStyles().bodyMediumRegular.copyWith(
+            style: AppFonts().bodyMediumRegular.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
           ),

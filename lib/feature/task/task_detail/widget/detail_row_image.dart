@@ -17,24 +17,24 @@ class DetailRowImage extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: SizeUtils.scale(160, size.width),
+          width: SizeUtils.scaleMobile(160, size.width),
           child: MyText(
             text: title ?? "status",
-            style: AppStyles().bodyMediumMedium.copyWith(
+            style: AppFonts().bodyMediumMedium.copyWith(
                   color: Theme.of(context).colorScheme.outline,
                 ),
           ),
         ),
         MyCacheImage(
           imageUrl: image ?? "",
-          width: SizeUtils.scale(25, size.width),
-          height: SizeUtils.scale(25, size.width),
+          width: SizeUtils.scaleMobile(25, size.width),
+          height: SizeUtils.scaleMobile(25, size.width),
         ),
-        SizedBox(width: SizeUtils.scale(10, size.width)),
+        SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
         Expanded(
           child: MyText(
             text: name ?? "name",
-            style: AppStyles().bodyMediumMedium,
+            style: AppFonts().bodyMediumMedium,
           ),
         ),
       ],

@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
@@ -26,9 +24,8 @@ class MyDatePickerField extends StatelessWidget {
   final void Function(int?)? onDateResult;
   final DateTime? initialDate;
   final DateTime? firstDate;
-  DateTime? resultDate;
 
-  MyDatePickerField({
+  const MyDatePickerField({
     super.key,
     required this.label,
     required this.textController,
@@ -46,13 +43,13 @@ class MyDatePickerField extends StatelessWidget {
     this.onDateResult,
     this.initialDate,
     this.firstDate,
-    this.resultDate,
   });
 
   @override
   Widget build(BuildContext context) {
     final controller = MyTextFieldFormController.findController(label);
     final size = MediaQuery.of(context).size;
+    DateTime? resultDate;
     return GetBuilder<MyTextFieldFormController>(
       init: controller,
       builder: (_) => Form(

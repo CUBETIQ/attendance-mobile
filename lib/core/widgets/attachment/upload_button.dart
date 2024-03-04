@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -10,13 +8,11 @@ import 'package:timesync360/core/model/attachment_model.dart';
 import 'package:timesync360/core/widgets/attachment/attachment_card.dart';
 import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/logger.dart';
 import 'package:timesync360/utils/size_util.dart';
 
 class UploadAttachmentButton extends StatelessWidget {
   const UploadAttachmentButton({
     super.key,
-    this.getFiles,
     this.width,
     this.height,
     this.dotRadius,
@@ -27,7 +23,6 @@ class UploadAttachmentButton extends StatelessWidget {
     required this.files,
   });
 
-  final void Function(List<File>? file)? getFiles;
   final double? width;
   final double? height;
   final Radius? dotRadius;
@@ -40,44 +35,33 @@ class UploadAttachmentButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    List<File> fileList = [];
     return Obx(
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () {
-              getPickAttachmentButtomSheet(
-                context,
-                onTapGallery: (file) {
-                  Logs.i("Gallery file: $file");
-                  AttachmentModel attachment = AttachmentModel(
-                    file: file,
-                  );
-                  files.add(attachment);
-                  fileList.add(file);
-                  getFiles?.call(fileList);
-                },
-                onTapCamera: (file) {
-                  Logs.i("Camera file: $file");
-                  AttachmentModel attachment = AttachmentModel(
-                    file: file,
-                  );
-                  files.add(attachment);
-                  fileList.add(file);
-                  getFiles?.call(fileList);
-                },
-                onTapFile: (file) {
-                  Logs.i("File: $file");
-                  AttachmentModel attachment = AttachmentModel(
-                    file: file,
-                  );
-                  files.add(attachment);
-                  fileList.add(file);
-                  getFiles?.call(fileList);
-                },
-              );
-            },
+            onTap: files.length > 2
+                ? null
+                : () {
+                    getPickAttachmentButtomSheet(
+                      context,
+                      onTapGallery: (file) {
+                        AttachmentModel attachment =
+                            AttachmentModel(file: file);
+                        files.add(attachment);
+                      },
+                      onTapCamera: (file) {
+                        AttachmentModel attachment =
+                            AttachmentModel(file: file);
+                        files.add(attachment);
+                      },
+                      onTapFile: (file) {
+                        AttachmentModel attachment =
+                            AttachmentModel(file: file);
+                        files.add(attachment);
+                      },
+                    );
+                  },
             child: DottedBorder(
               color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
               strokeWidth: dotStrokeWidth ?? 3.5,
@@ -133,19 +117,25 @@ class UploadAttachmentButton extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
-          MyText(
-            text: "Max File: ${files.length}/3",
-            style: AppFonts().bodyLarge.copyWith(
-                  color: Theme.of(context).colorScheme.secondary,
+          SizedBox(
+              height:
+                  SizeUtils.scaleMobile(files.isEmpty ? 0 : 10, size.width)),
+          files.isEmpty
+              ? const SizedBox.shrink()
+              : MyText(
+                  text: "Max File: ${files.length}/3",
+                  style: AppFonts().bodyLarge.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                 ),
-          ),
           SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           ...List.generate(
             files.value.length,
             (index) => AttachmentCard(
               data: files[index],
-              onTapDelete: () => removeFile(index),
+              onTapIcon: () {
+                removeFile(index);
+              },
             ),
           ),
         ],

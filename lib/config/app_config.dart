@@ -4,6 +4,8 @@ import 'package:timesync360/core/database/isar/controller/local_storage_controll
 import 'package:timesync360/core/database/isar/entities/local_storage.dart';
 import 'package:timesync360/key.dart';
 import 'package:timesync360/utils/encrypt_util.dart';
+import 'package:timesync360/utils/file_util.dart';
+import 'package:timesync360/utils/logger.dart';
 
 class AppConfig {
   static const String baseUrl = "http://192.168.1.102:3000/api";
@@ -11,6 +13,8 @@ class AppConfig {
 
   static const String xUploadApiKey = Key.xApiKey;
   static String? xApiHash;
+
+  static String? appLocalPath;
 
   static const String appName = "TimeSync360";
 
@@ -44,6 +48,8 @@ class AppConfig {
     accessToken = _localData?.accessToken;
     isFirstTime = _localData?.isFirstTime;
     isActivated = _localData?.isActivated;
+    appLocalPath = await FileUtil.getLocalPath();
+    Logs.t("App local path: $appLocalPath");
     xApiHash = EncryptUtil.createHash(Key.xApiKey, Key.publicKey);
   }
 }

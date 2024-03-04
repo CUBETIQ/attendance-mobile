@@ -153,9 +153,6 @@ class AddTaskViewMobile extends StatelessWidget {
               ),
               UploadAttachmentButton(
                 files: controller.attachments,
-                getFiles: (file) {
-                  controller.files.value = file ?? [];
-                },
               ),
               SizedBox(
                 height:

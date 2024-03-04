@@ -74,6 +74,7 @@ flutter:
   assets:
     - assets/lotties/
     - assets/svgs/
+    - assets/svgs/icons/
     - assets/images/
     - assets/images/profile/
     - assets/images/position/

@@ -14,6 +14,7 @@ class MyCard extends StatelessWidget {
     this.borderRadius,
     this.boxShadow,
     this.clip,
+    this.alignment,
   });
 
   final double? width;
@@ -25,6 +26,7 @@ class MyCard extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final List<BoxShadow>? boxShadow;
   final Clip? clip;
+  final AlignmentGeometry? alignment;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class MyCard extends StatelessWidget {
       margin: margin,
       width: width ?? size.width,
       height: height,
+      alignment: alignment,
       padding: padding ??
           EdgeInsets.symmetric(
             horizontal: SizeUtils.scaleMobile(AppSize().paddingS1, size.width),

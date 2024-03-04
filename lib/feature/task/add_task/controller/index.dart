@@ -1,15 +1,11 @@
-import 'dart:io';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:timesync360/core/model/attachment_model.dart';
 import 'package:timesync360/core/model/task_model.dart';
-import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
-import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
 import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
 import 'package:timesync360/core/widgets/icon_picker/icon_picker_dialog.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/task/add_task/model/create_task_model.dart';
 import 'package:timesync360/feature/task/add_task/service/index.dart';
 import 'package:timesync360/feature/task/task/controller/index.dart';
@@ -19,6 +15,7 @@ import 'package:timesync360/types/task_priority.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync360/utils/upload_file_util.dart';
 
 class AddTaskController extends GetxController {
   final title = "Add Task".obs;
@@ -43,7 +40,6 @@ class AddTaskController extends GetxController {
   final selectPriority = TaskPriority.low.obs;
   late Color screenPickerColor;
   final attachments = <AttachmentModel>[].obs;
-  final files = <File>[].obs;
 
   @override
   void onInit() {
@@ -55,26 +51,10 @@ class AddTaskController extends GetxController {
   Future<void> addTask() async {
     validate();
     if (MyTextFieldFormController.findController('Task').isValid) {
-      if (files.isNotEmpty) {
-        final metedata = FileMetadata(
-          source: "task",
-          userId: NavigationController.to.user.value.id,
-        );
-        final result = <AttachmentModel>[];
-        for (var file in files) {
-          final data = await UploadFileService().uploadFile(file, metedata);
-          result.add(AttachmentModel(
-            id: data?.id,
-            fileId: data?.fileId,
-            name: data?.name,
-            url: data?.url,
-            date: DateTime.now().millisecondsSinceEpoch,
-            extension: data?.extension,
-          ));
-        }
-        attachments.value = result;
-      }
       try {
+        final result =
+            await UploadFileUtil.uploadFiles(attachments.value, "task");
+        attachments.value = result;
         CreateTaskModel input = CreateTaskModel(
           name: taskController.text,
           description: descriptionController.text,
@@ -99,26 +79,10 @@ class AddTaskController extends GetxController {
   Future<void> updateTask() async {
     validate();
     if (MyTextFieldFormController.findController('Task').isValid) {
-      if (files.isNotEmpty) {
-        final metedata = FileMetadata(
-          source: "task",
-          userId: NavigationController.to.user.value.id,
-        );
-        final result = <AttachmentModel>[];
-        for (var file in files) {
-          final data = await UploadFileService().uploadFile(file, metedata);
-          result.add(AttachmentModel(
-            id: data?.id,
-            fileId: data?.fileId,
-            name: data?.name,
-            url: data?.url,
-            date: DateTime.now().millisecondsSinceEpoch,
-            extension: data?.extension,
-          ));
-        }
-        attachments.value = result;
-      }
       try {
+        final result =
+            await UploadFileUtil.uploadFiles(attachments.value, "task");
+        attachments.value = result;
         CreateTaskModel input = CreateTaskModel(
           name: taskController.text,
           description: descriptionController.text,
@@ -147,7 +111,6 @@ class AddTaskController extends GetxController {
     if (Get.arguments != null) {
       if (Get.arguments["state"] == AppState.edit) {
         title.value = "Edit Task";
-        files.value = [];
         appState.value = AppState.edit;
         task.value = Get.arguments["task"];
         attachments.value = task.value?.attachment ?? [];

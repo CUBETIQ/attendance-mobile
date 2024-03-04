@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:path/path.dart';
 import 'package:timesync360/constants/app_size.dart';
 import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/attachment_model.dart';
@@ -6,6 +8,7 @@ import 'package:timesync360/core/widgets/card/my_card.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/file_util.dart';
 import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync360/utils/svg_util.dart';
 
 class AttachmentCard extends StatelessWidget {
   const AttachmentCard({
@@ -15,7 +18,9 @@ class AttachmentCard extends StatelessWidget {
     this.imageWidth,
     this.imageHeight,
     required this.data,
-    this.onTapDelete,
+    this.icon,
+    this.onTapIcon,
+    this.trailing,
   });
 
   final double? width;
@@ -23,7 +28,9 @@ class AttachmentCard extends StatelessWidget {
   final double? imageWidth;
   final double? imageHeight;
   final AttachmentModel data;
-  final void Function()? onTapDelete;
+  final IconData? icon;
+  final void Function()? onTapIcon;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +50,45 @@ class AttachmentCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(
               SizeUtils.scaleMobile(AppSize().borderRadiusMedium, size.width),
             ),
+            backgroundColor: Theme.of(context).colorScheme.primary,
             padding: EdgeInsets.zero,
+            alignment: FileUtil.checkFileImageExtension(data.extension) == true
+                ? null
+                : FileUtil.checkFileImageExtension(
+                            extension(data.file!.path)) ==
+                        true
+                    ? null
+                    : Alignment.center,
             clip: Clip.antiAliasWithSaveLayer,
             child: data.file != null
-                ? Image.file(
-                    data.file!,
-                    fit: BoxFit.cover,
-                  )
-                : Image.network(
-                    data.url ?? "",
-                    fit: BoxFit.cover,
-                  ),
+                ? FileUtil.checkFileImageExtension(
+                            extension(data.file!.path)) ==
+                        true
+                    ? Image.file(
+                        data.file!,
+                        fit: BoxFit.cover,
+                      )
+                    : SizedBox(
+                        width: SizeUtils.scaleMobile(35, size.width),
+                        height: SizeUtils.scaleMobile(35, size.width),
+                        child: SvgPicture.asset(
+                          SvgUtil.getSvgByExtenion(extension(data.file!.path)),
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                : FileUtil.checkFileImageExtension(data.extension) == true
+                    ? Image.network(
+                        data.url ?? "",
+                        fit: BoxFit.cover,
+                      )
+                    : SizedBox(
+                        width: SizeUtils.scaleMobile(35, size.width),
+                        height: SizeUtils.scaleMobile(35, size.width),
+                        child: SvgPicture.asset(
+                          SvgUtil.getSvgByExtenion(data.extension),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
           ),
           SizedBox(
             width: SizeUtils.scaleMobile(8, size.width),
@@ -96,8 +131,8 @@ class AttachmentCard extends StatelessWidget {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: onTapDelete,
-            child: const Icon(Icons.delete_forever_rounded),
+            onTap: onTapIcon,
+            child: trailing ?? Icon(icon ?? Icons.delete_forever_rounded),
           )
         ],
       ),

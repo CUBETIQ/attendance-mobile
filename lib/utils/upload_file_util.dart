@@ -11,26 +11,32 @@ class UploadFileUtil {
       userId: NavigationController.to.user.value.id,
     );
 
-    final data = await Future.wait<AttachmentModel>(
-      attachments.map((attachment) async {
-        if (attachment.file != null) {
-          final data = await UploadFileService().uploadFile(
-            attachment.file!,
-            metedata,
-          );
-          return AttachmentModel(
-            id: data?.id,
-            fileId: data?.fileId,
-            name: data?.name,
-            url: data?.url,
-            date: DateTime.now().millisecondsSinceEpoch,
-            extension: data?.extension,
-          );
-        } else {
-          return attachment;
-        }
-      }),
-    );
-    return data;
+    try {
+      final data = await Future.wait<AttachmentModel>(
+        attachments.map((attachment) async {
+          if (attachment.file != null) {
+            final data = await UploadFileService().uploadFile(
+              attachment.file!,
+              metedata,
+            );
+            return AttachmentModel(
+              id: data?.id,
+              fileId: data?.fileId,
+              name: data?.name,
+              url: data?.url,
+              date: DateTime.now().millisecondsSinceEpoch,
+              size: data?.size,
+              extension: data?.extension,
+            );
+          } else {
+            return attachment;
+          }
+        }),
+      );
+      data.removeWhere((element) => element.id == null);
+      return data;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

@@ -103,14 +103,10 @@ class TaskDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
               SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
-              ListView.separated(
+              ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.task.value?.attachment?.length ?? 0,
-                separatorBuilder: (context, index) {
-                  return SizedBox(
-                    height: SizeUtils.scaleMobile(10, size.width),
-                  );
-                },
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   RxBool fileExist = controller.checkExistFile(index).obs;
                   RxDouble progress = 0.0.obs;
@@ -120,31 +116,45 @@ class TaskDetailViewMobile extends StatelessWidget {
                       data: controller.task.value?.attachment?[index] ??
                           AttachmentModel(),
                       trailing: isDownloading.value
-                          ? CircularProgressIndicator(
-                              value: progress.value,
-                              strokeWidth: 2.0,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Theme.of(context).colorScheme.primary,
-                              ),
+                          ? MyText(
+                              text: "${progress.value.toStringAsFixed(0)} %",
+                              style: AppFonts().bodyMediumMedium.copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
                             )
                           : null,
                       icon: fileExist.value
                           ? Icons.visibility_rounded
                           : Icons.download_rounded,
-                      onTapIcon: () async {
-                        await FileUtil.downloadFile(
-                          controller.task.value?.attachment![index].name ?? "",
-                          controller.task.value?.attachment?[index].url ?? "",
-                          progress.value,
-                          checkDownloading: (value) {
-                            isDownloading.value = value;
-                          },
-                        );
-                        fileExist.value = FileUtil.checkFileExist(
-                            fileName: controller
-                                    .task.value?.attachment?[index].name ??
-                                "");
-                      },
+                      onTapIcon: fileExist.value
+                          ? () async {
+                              await FileUtil.openFile(
+                                controller
+                                        .task.value?.attachment?[index].name ??
+                                    "",
+                              );
+                            }
+                          : () async {
+                              await FileUtil.downloadFile(
+                                controller
+                                        .task.value?.attachment![index].name ??
+                                    "",
+                                controller.task.value?.attachment?[index].url ??
+                                    "",
+                                getProgress: (value) {
+                                  progress.value = value;
+                                },
+                                checkDownloading: (value) {
+                                  isDownloading.value = value;
+                                },
+                              );
+                              fileExist.value = FileUtil.checkFileExist(
+                                fileName: controller
+                                        .task.value?.attachment?[index].name ??
+                                    "",
+                              );
+                            },
                     ),
                   );
                 },

@@ -24,7 +24,11 @@ class DateFormatter {
     return formatter.format(dateTime);
   }
 
-  static String formatFullDate(DateTime dateTime) {
+  static String formatFullDate(DateTime? dateTime) {
+    if (dateTime == null) {
+      return "N/A";
+    }
+
     // Define the desired format
     final DateFormat formatter =
         DateFormat('EEEE d MMMM, y', Get.locale?.languageCode);

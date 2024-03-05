@@ -22,7 +22,6 @@ class TaskDetailController extends GetxController {
   bool checkExistFile(int index) {
     final fileExist = FileUtil.checkFileExist(
         fileName: task.value?.attachment?[index].name ?? "");
-
     return fileExist;
   }
 }

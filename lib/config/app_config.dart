@@ -49,7 +49,7 @@ class AppConfig {
     isFirstTime = _localData?.isFirstTime;
     isActivated = _localData?.isActivated;
     appLocalPath = await FileUtil.getLocalPath();
-    Logs.t("App local path: $appLocalPath");
+    Logs.i("App Local Path: $appLocalPath");
     xApiHash = EncryptUtil.createHash(Key.xApiKey, Key.publicKey);
   }
 }

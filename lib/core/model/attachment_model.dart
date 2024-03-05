@@ -7,6 +7,7 @@ class AttachmentModel extends BaseModel<AttachmentModel> {
   final String? name;
   final String? extension;
   final String? url;
+  final int? size;
   final int? date;
   File? file;
 
@@ -18,6 +19,7 @@ class AttachmentModel extends BaseModel<AttachmentModel> {
     this.url,
     this.file,
     this.date,
+    this.size,
   });
 
   @override
@@ -31,6 +33,7 @@ class AttachmentModel extends BaseModel<AttachmentModel> {
       name: json['name'],
       extension: json['extension'],
       url: json['url'],
+      size: json['size'],
       date: json['date'],
     );
   }
@@ -51,6 +54,7 @@ class AttachmentModel extends BaseModel<AttachmentModel> {
       'name': name,
       'extension': extension,
       'url': url,
+      'size': size,
       'date': date,
     };
   }

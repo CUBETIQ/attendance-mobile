@@ -103,61 +103,78 @@ class TaskDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
               SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: controller.task.value?.attachment?.length ?? 0,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  RxBool fileExist = controller.checkExistFile(index).obs;
-                  RxDouble progress = 0.0.obs;
-                  RxBool isDownloading = false.obs;
-                  return Obx(
-                    () => AttachmentCard(
-                      data: controller.task.value?.attachment?[index] ??
-                          AttachmentModel(),
-                      trailing: isDownloading.value
-                          ? MyText(
-                              text: "${progress.value.toStringAsFixed(0)} %",
-                              style: AppFonts().bodyMediumMedium.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+              Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.task.value?.attachment?.length ?? 0,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    RxBool fileExist = controller.checkExistFile(index).obs;
+                    RxDouble progress = 0.0.obs;
+                    RxBool isDownloading = false.obs;
+                    return Obx(
+                      () => AttachmentCard(
+                        data: controller.task.value?.attachment?[index] ??
+                            AttachmentModel(),
+                        trailing: isDownloading.value
+                            ? Stack(
+                                alignment: AlignmentDirectional.center,
+                                children: <Widget>[
+                                  Center(
+                                    child: SizedBox(
+                                      width:
+                                          SizeUtils.scaleMobile(25, size.width),
+                                      height:
+                                          SizeUtils.scaleMobile(25, size.width),
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 3.5,
+                                        value: progress.value,
+                                      ),
+                                    ),
                                   ),
-                            )
-                          : null,
-                      icon: fileExist.value
-                          ? Icons.visibility_rounded
-                          : Icons.download_rounded,
-                      onTapIcon: fileExist.value
-                          ? () async {
-                              await FileUtil.openFile(
-                                controller
-                                        .task.value?.attachment?[index].name ??
-                                    "",
-                              );
-                            }
-                          : () async {
-                              await FileUtil.downloadFile(
-                                controller
-                                        .task.value?.attachment![index].name ??
-                                    "",
-                                controller.task.value?.attachment?[index].url ??
-                                    "",
-                                getProgress: (value) {
-                                  progress.value = value;
-                                },
-                                checkDownloading: (value) {
-                                  isDownloading.value = value;
-                                },
-                              );
-                              fileExist.value = FileUtil.checkFileExist(
-                                fileName: controller
-                                        .task.value?.attachment?[index].name ??
-                                    "",
-                              );
-                            },
-                    ),
-                  );
-                },
+                                  Center(
+                                    child: MyText(
+                                      text:
+                                          "${(progress.value * 100).toStringAsFixed(0)}%",
+                                      style: AppFonts().bodyXSmallMedium,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : null,
+                        icon: fileExist.value
+                            ? Icons.visibility_rounded
+                            : Icons.download_rounded,
+                        onTapIcon: isDownloading.value
+                            ? null
+                            : fileExist.value
+                                ? () async {
+                                    await FileUtil.openFile(
+                                      controller.task.value?.attachment?[index]
+                                              .name ??
+                                          "",
+                                    );
+                                  }
+                                : () async {
+                                    await FileUtil.downloadFile(
+                                      controller.task.value?.attachment![index]
+                                              .name ??
+                                          "",
+                                      controller.task.value?.attachment?[index]
+                                              .url ??
+                                          "",
+                                      isDownloading.value,
+                                      progress.value,
+                                      (value) => isDownloading.value = value,
+                                      (value) => progress.value = value,
+                                    );
+                                    fileExist.value =
+                                        controller.checkExistFile(index);
+                                  },
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

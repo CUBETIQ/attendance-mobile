@@ -34,6 +34,8 @@ class AppConfig {
 
   static bool isDarkMode = false;
 
+  static String? theme;
+
   static bool? isActivated = false;
 
   static bool weWantFatalErrorRecording = true;

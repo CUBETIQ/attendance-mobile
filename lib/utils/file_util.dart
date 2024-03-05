@@ -155,24 +155,29 @@ class FileUtil {
   }
 
   // download file from server
-  static Future<void> downloadFile(String filename, String url,
-      {void Function(bool)? checkDownloading,
-      void Function(double)? getProgress}) async {
+  static Future<void> downloadFile(
+      String filename,
+      String url,
+      bool isDownloading,
+      double progress,
+      void Function(bool) getIsDownloading,
+      void Function(double) getPorgress) async {
     try {
       final checkStoragePermission =
           await PermissonHandler.requestStoragePermission();
       if (!checkStoragePermission) {
         return;
       }
-      bool isDownloading = false;
       final dio = Dio();
-      double progress = 0;
+      isDownloading = true;
+      getIsDownloading(isDownloading);
       await dio.download(
         url,
         "${AppConfig.appLocalPath}/$filename",
         options: Options(
           headers: {HttpHeaders.acceptEncodingHeader: "*"},
           responseType: ResponseType.bytes,
+          contentType: "application/octet-stream",
           followRedirects: false,
           validateStatus: (status) {
             return status! < 500;
@@ -180,28 +185,19 @@ class FileUtil {
         ),
         deleteOnError: true,
         onReceiveProgress: (count, total) {
-          double progressValue = (count / total) * 100;
-          progress = progressValue;
-          getProgress?.call(progress);
-          isDownloading = true;
-          checkDownloading?.call(isDownloading);
-          if (progressValue >= 100) {
-            isDownloading = false;
-            checkDownloading?.call(isDownloading);
-          } else if (progressValue.isNegative) {
-            isDownloading = false;
-            checkDownloading?.call(isDownloading);
+          if (total != -1) {
+            progress = count / total;
+            getPorgress.call(progress);
+          } else {
+            progress = 0;
           }
         },
       );
-      Logs.i(File("${AppConfig.appLocalPath}/$filename").path);
-      await saveFileToLocalStorage(
-        fileName: filename,
-        filePath: "${AppConfig.appLocalPath}/$filename",
-        storePath: AppConfig.appLocalPath,
-      );
     } catch (e) {
       Logs.e("Error: $e");
+    } finally {
+      isDownloading = false;
+      getIsDownloading.call(isDownloading);
     }
   }
 }

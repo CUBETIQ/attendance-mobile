@@ -15,4 +15,5 @@ class LocalStorage {
   bool? isFirstTime = true;
   String? isRememberMe;
   String? username;
+  String? theme;
 }

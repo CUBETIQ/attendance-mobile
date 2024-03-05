@@ -7,6 +7,6 @@ class AppTimeouts {
 
   AppTimeouts._internal();
 
-  static const int connectTimeout = 10;
-  static const int receiveTimeout = 10;
+  static const int connectTimeout = 60;
+  static const int receiveTimeout = 60;
 }

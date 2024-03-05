@@ -24,6 +24,7 @@ class IsarService extends GetxService {
       app.language = 'en';
       await _localStorage.insert(app);
     }
+    AppConfig.theme = appConfig?.theme;
     AppConfig.isFirstTime = appConfig?.isFirstTime ?? false;
     AppConfig.isDarkMode = appConfig?.darkTheme ?? false;
   }

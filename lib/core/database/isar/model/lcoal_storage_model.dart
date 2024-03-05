@@ -9,6 +9,7 @@ class LocalStorageModel {
   bool? isActivated;
   String? organizationId;
   String? languageCode;
+  String? theme;
 
   LocalStorageModel({
     this.isFirstTime,
@@ -21,5 +22,6 @@ class LocalStorageModel {
     this.isActivated,
     this.organizationId,
     this.languageCode,
+    this.theme,
   });
 }

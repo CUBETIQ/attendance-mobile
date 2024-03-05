@@ -60,6 +60,7 @@ dependencies:
   open_file: ^3.3.2
   image_picker: ^1.0.7
   dotted_border: ^2.1.0
+  restart_app: ^1.2.1
 
 dev_dependencies:
   flutter_test:

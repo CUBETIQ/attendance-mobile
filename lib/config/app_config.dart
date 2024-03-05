@@ -34,6 +34,8 @@ class AppConfig {
 
   static bool isDarkMode = false;
 
+  static String? theme;
+
   static bool? isActivated = false;
 
   static bool weWantFatalErrorRecording = true;
@@ -49,7 +51,7 @@ class AppConfig {
     isFirstTime = _localData?.isFirstTime;
     isActivated = _localData?.isActivated;
     appLocalPath = await FileUtil.getLocalPath();
-    Logs.t("App local path: $appLocalPath");
+    Logs.i("App Local Path: $appLocalPath");
     xApiHash = EncryptUtil.createHash(Key.xApiKey, Key.publicKey);
   }
 }

@@ -66,7 +66,7 @@ class FileUtil {
     return true;
   }
 
-  static String getFileSize(File file) {
+  static String getFileSizeWithFile(File file) {
     final fileSize = file.lengthSync();
     final kb = fileSize / 1024;
     final mb = kb / 1024;
@@ -76,6 +76,23 @@ class FileUtil {
       return "${kb.toStringAsFixed(2)} KB";
     } else {
       return "${fileSize.toStringAsFixed(2)} B";
+    }
+  }
+
+  static String getFileSizeFromByte(int? fileSizeInBytes) {
+    if (fileSizeInBytes == null) {
+      return "0 B";
+    }
+
+    double fileSizeInKB = fileSizeInBytes / 1024;
+    double fileSizeInMB = fileSizeInKB / 1024;
+
+    if (fileSizeInMB > 1) {
+      return "${fileSizeInMB.toStringAsFixed(2)} MB";
+    } else if (fileSizeInKB > 1) {
+      return "${fileSizeInKB.toStringAsFixed(2)} KB";
+    } else {
+      return "${fileSizeInBytes.toStringAsFixed(2)} B";
     }
   }
 
@@ -92,11 +109,9 @@ class FileUtil {
 
         if (await directory.exists()) {
           localPath = directory.path;
-          return localPath;
         } else {
           final newDirectory = await directory.create(recursive: true);
           localPath = newDirectory.path;
-          return localPath;
         }
       }
     } catch (err) {
@@ -122,38 +137,67 @@ class FileUtil {
     return fileExistsCheck;
   }
 
-  static Future<void> downloadFile(String filename, String url, double progress,
-      {void Function(bool)? checkDownloading}) async {
+  // save file to local storage
+  static Future<void> saveFileToLocalStorage({
+    required String fileName,
+    required String filePath,
+    required String? storePath,
+  }) async {
     try {
-      bool isDownloading = false;
+      final destinationFilePath = '$storePath/$fileName';
+      File sourceFile = File(filePath);
+      File destinationFile = File(destinationFilePath);
+      List<int> fileBytes = await sourceFile.readAsBytes();
+      await destinationFile.writeAsBytes(fileBytes);
+    } catch (e) {
+      Logs.e("Error: $e");
+    }
+  }
+
+  // download file from server
+  static Future<void> downloadFile(
+      String filename,
+      String url,
+      bool isDownloading,
+      double progress,
+      void Function(bool) getIsDownloading,
+      void Function(double) getPorgress) async {
+    try {
+      final checkStoragePermission =
+          await PermissonHandler.requestStoragePermission();
+      if (!checkStoragePermission) {
+        return;
+      }
       final dio = Dio();
+      isDownloading = true;
+      getIsDownloading(isDownloading);
       await dio.download(
         url,
         "${AppConfig.appLocalPath}/$filename",
         options: Options(
           headers: {HttpHeaders.acceptEncodingHeader: "*"},
           responseType: ResponseType.bytes,
+          contentType: "application/octet-stream",
           followRedirects: false,
           validateStatus: (status) {
             return status! < 500;
           },
         ),
+        deleteOnError: true,
         onReceiveProgress: (count, total) {
-          double progressValue = (count / total) * 100;
-          progress = progressValue;
-          isDownloading = true;
-          checkDownloading?.call(isDownloading);
-          if (progressValue >= 100) {
-            isDownloading = false;
-            checkDownloading?.call(isDownloading);
-          } else if (progressValue.isNegative) {
-            isDownloading = false;
-            checkDownloading?.call(isDownloading);
+          if (total != -1) {
+            progress = count / total;
+            getPorgress.call(progress);
+          } else {
+            progress = 0;
           }
         },
       );
     } catch (e) {
       Logs.e("Error: $e");
+    } finally {
+      isDownloading = false;
+      getIsDownloading.call(isDownloading);
     }
   }
 }

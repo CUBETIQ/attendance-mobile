@@ -9,6 +9,7 @@ import 'package:timesync360/core/widgets/text/text.dart';
 import 'package:timesync360/utils/file_util.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/svg_util.dart';
+import 'package:timesync360/utils/time_util.dart';
 
 class AttachmentCard extends StatelessWidget {
   const AttachmentCard({
@@ -91,11 +92,11 @@ class AttachmentCard extends StatelessWidget {
                       ),
           ),
           SizedBox(
-            width: SizeUtils.scaleMobile(8, size.width),
+            width: SizeUtils.scaleMobile(10, size.width),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.scaleMobile(4, size.width),
+              vertical: SizeUtils.scaleMobile(2.5, size.width),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,14 +115,16 @@ class AttachmentCard extends StatelessWidget {
                 ),
                 MyText(
                   text: data.file != null
-                      ? FileUtil.getFileSize(data.file!)
-                      : "300 KB",
+                      ? FileUtil.getFileSizeWithFile(data.file!)
+                      : FileUtil.getFileSizeFromByte(data.size),
                   style: AppFonts().bodyMediumMedium.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),
                 ),
                 MyText(
-                  text: "Feb 01 2024",
+                  text: DateFormatter.formatMillisecondsToDOB(
+                    data.date ?? DateTime.now().millisecondsSinceEpoch,
+                  ),
                   style: AppFonts().bodySmallMedium.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),

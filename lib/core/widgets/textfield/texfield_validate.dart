@@ -27,6 +27,7 @@ class MyTextFieldForm extends StatelessWidget {
   final bool? haveSuffixIcon;
   final void Function()? onTapShowPassword;
   final FocusNode? focusNode;
+  final TextInputType? keyboardType;
 
   const MyTextFieldForm({
     super.key,
@@ -48,6 +49,7 @@ class MyTextFieldForm extends StatelessWidget {
     this.focusNode,
     this.onTapShowPassword,
     this.haveSuffixIcon,
+    this.keyboardType,
   });
 
   @override
@@ -78,6 +80,7 @@ class MyTextFieldForm extends StatelessWidget {
               inputFormatters: inputFormatters,
               obscureText: isPassword ?? false,
               maxLines: maxlines ?? 1,
+              keyboardType: keyboardType,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical:

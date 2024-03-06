@@ -19,7 +19,7 @@ class DetailRowCategory extends StatelessWidget {
         SizedBox(
           width: SizeUtils.scaleMobile(160, size.width),
           child: MyText(
-            text: title ?? "status",
+            text: title ?? "category",
             style: AppFonts().bodyMediumMedium.copyWith(
                   color: Theme.of(context).colorScheme.outline,
                 ),

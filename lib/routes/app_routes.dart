@@ -3,7 +3,6 @@
 part of 'app_pages.dart';
 
 abstract class Routes {
-
   static const SPLASH = '/splash';
   static const ACTIVATION = '/activation';
   static const ONBOARD = '/onboard';
@@ -40,5 +39,6 @@ abstract class Routes {
   static const CATEGORY = '/category';
   static const ADD_CATEGORY = '/add_category';
   static const CATEGORY_DETAIL = '/category_detail';
-  static const SCANQR= '/scanqr';
+  static const SCANQR = '/scanqr';
+  static const THEME = '/theme';
 }

@@ -11,7 +11,7 @@ class StringUtil {
         (lastName != null && lastName.isNotEmpty)) {
       return lastName;
     } else {
-      return username ?? "";
+      return username ?? "N/A";
     }
   }
 

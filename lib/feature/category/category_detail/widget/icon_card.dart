@@ -40,8 +40,8 @@ class IconCard extends StatelessWidget {
             : Icons.task,
         color: bgColor != null && bgColor?.isNotEmpty == true
             // Darken the color by 20%
-            ? darken(Color(bgColor!.toInt()), 20)
-            : darken(Theme.of(context).colorScheme.primary, 20),
+            ? ColorUtil.darken(Color(bgColor!.toInt()), 20)
+            : ColorUtil.darken(Theme.of(context).colorScheme.primary, 20),
         size: iconSize ?? SizeUtils.scaleMobile(50, size.width),
       ),
     );

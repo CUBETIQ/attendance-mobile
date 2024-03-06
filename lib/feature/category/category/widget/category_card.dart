@@ -51,8 +51,9 @@ class CategoryCard extends StatelessWidget {
                     : Icons.task,
                 color:
                     category.color != null && category.color?.isNotEmpty == true
-                        ? darken(Color(category.color!.toInt()), 20)
-                        : darken(Theme.of(context).colorScheme.primary, 20),
+                        ? ColorUtil.darken(Color(category.color!.toInt()), 20)
+                        : ColorUtil.darken(
+                            Theme.of(context).colorScheme.primary, 20),
                 size: SizeUtils.scaleMobile(
                   38,
                   size.width,

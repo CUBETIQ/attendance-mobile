@@ -48,11 +48,17 @@ class SettingViewMobile extends StatelessWidget {
               Obx(
                 () => ThemeSwitchButton(
                   title: "Dark Mode",
-                  description:
-                      "Enable dark mode for a better viewing experience.",
+                  description: "Enable dark mode.",
                   value: controller.isDarkMode.value,
                   onChanged: controller.changeTheme,
                 ),
+              ),
+              SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+              SettingCardButton(
+                leadingIcon: Icons.color_lens_rounded,
+                title: "Change Theme",
+                description: "Change the theme of the application.",
+                onTap: () => Get.toNamed(Routes.THEME),
               ),
               SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               MyText(

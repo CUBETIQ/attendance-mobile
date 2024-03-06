@@ -3,14 +3,14 @@ import 'package:timesync360/constants/font.dart';
 import 'package:timesync360/core/model/attachment_model.dart';
 import 'package:timesync360/core/widgets/attachment/attachment_card.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
+import 'package:timesync360/core/widgets/progress_indicator/indicator_with_percentage.dart';
+import 'package:timesync360/core/widgets/row/detail_row_category.dart';
+import 'package:timesync360/core/widgets/row/detail_row_data.dart';
+import 'package:timesync360/core/widgets/row/detail_row_image.dart';
 import 'package:timesync360/core/widgets/text/app_bar_title.dart';
 import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/extensions/string.dart';
 import 'package:timesync360/feature/navigation/controller/index.dart';
 import 'package:timesync360/feature/task/task_detail/controller/index.dart';
-import 'package:timesync360/feature/task/task_detail/widget/detail_row_category.dart';
-import 'package:timesync360/feature/task/task_detail/widget/detail_row_data.dart';
-import 'package:timesync360/feature/task/task_detail/widget/detail_row_image.dart';
 import 'package:timesync360/utils/file_util.dart';
 import 'package:timesync360/utils/size_util.dart';
 import 'package:timesync360/utils/time_util.dart';
@@ -49,9 +49,7 @@ class TaskDetailViewMobile extends StatelessWidget {
               MyText(
                 text: controller.task.value?.name ?? "Title",
                 style: AppFonts().bodyXXlargeMedium.copyWith(
-                      color: controller.task.value?.color != null
-                          ? Color(controller.task.value!.color!.toInt())
-                          : Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                 textAlign: TextAlign.start,
                 maxLines: 5,
@@ -69,7 +67,7 @@ class TaskDetailViewMobile extends StatelessWidget {
               ),
               SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               DetailRowData(
-                title: "Due Date",
+                title: "Due",
                 value: DateFormatter.formatMillisecondsToDOB(
                   controller.task.value?.endDate,
                 ),
@@ -83,7 +81,6 @@ class TaskDetailViewMobile extends StatelessWidget {
               DetailRowCategory(
                 title: "Category",
                 icon: controller.task.value?.icon,
-                color: controller.task.value?.color,
               ),
               SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
               const Divider(thickness: 1.5),
@@ -112,34 +109,14 @@ class TaskDetailViewMobile extends StatelessWidget {
                     RxBool fileExist = controller.checkExistFile(index).obs;
                     RxDouble progress = 0.0.obs;
                     RxBool isDownloading = false.obs;
+                    final attachment =
+                        controller.task.value?.attachment?[index];
                     return Obx(
                       () => AttachmentCard(
-                        data: controller.task.value?.attachment?[index] ??
-                            AttachmentModel(),
+                        data: attachment ?? AttachmentModel(),
                         trailing: isDownloading.value
-                            ? Stack(
-                                alignment: AlignmentDirectional.center,
-                                children: <Widget>[
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          SizeUtils.scaleMobile(25, size.width),
-                                      height:
-                                          SizeUtils.scaleMobile(25, size.width),
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 3.5,
-                                        value: progress.value,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: MyText(
-                                      text:
-                                          "${(progress.value * 100).toStringAsFixed(0)}%",
-                                      style: AppFonts().bodyXSmallMedium,
-                                    ),
-                                  ),
-                                ],
+                            ? ProgressIndicatorWithPercentage(
+                                percentage: progress.value,
                               )
                             : null,
                         icon: fileExist.value
@@ -150,19 +127,13 @@ class TaskDetailViewMobile extends StatelessWidget {
                             : fileExist.value
                                 ? () async {
                                     await FileUtil.openFile(
-                                      controller.task.value?.attachment?[index]
-                                              .name ??
-                                          "",
+                                      attachment?.name ?? "",
                                     );
                                   }
                                 : () async {
                                     await FileUtil.downloadFile(
-                                      controller.task.value?.attachment![index]
-                                              .name ??
-                                          "",
-                                      controller.task.value?.attachment?[index]
-                                              .url ??
-                                          "",
+                                      attachment?.name ?? "",
+                                      attachment?.url ?? "",
                                       isDownloading.value,
                                       progress.value,
                                       (value) => isDownloading.value = value,

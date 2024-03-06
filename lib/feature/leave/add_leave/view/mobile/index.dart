@@ -1,5 +1,7 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:timesync360/constants/app_size.dart';
+import 'package:timesync360/core/widgets/attachment/upload_button.dart';
 import 'package:timesync360/core/widgets/button/async_button.dart';
 import 'package:timesync360/core/widgets/button/back_button.dart';
 import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
@@ -60,7 +62,9 @@ class AddLeaveViewMobile extends StatelessWidget {
                       controller.selectLeaveType.value = value!,
                 ),
               ),
-              SizedBox(height: AppSize().paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -92,7 +96,9 @@ class AddLeaveViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: AppSize().paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
               Obx(
                 () => TypeAheadField<String>(
                   focusNode: controller.durationFocusNode,
@@ -104,6 +110,10 @@ class AddLeaveViewMobile extends StatelessWidget {
                       label: "Duration",
                       hintText: "Enter your duration",
                       textController: controller.durationController.value,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
                     );
                   },
                   itemBuilder: (context, value) {
@@ -120,7 +130,9 @@ class AddLeaveViewMobile extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: AppSize().paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Reason",
@@ -128,8 +140,15 @@ class AddLeaveViewMobile extends StatelessWidget {
                 textController: controller.reasonController,
                 maxlines: 5,
               ),
-              SizedBox(height: AppSize().paddingS5),
-              SizedBox(height: size.height * 0.06),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
+              UploadAttachmentButton(
+                files: controller.attachments,
+              ),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS10, size.width),
+              ),
               MyAsyncButton(
                 title: "Save",
                 onTap: controller.appState.value == AppState.edit

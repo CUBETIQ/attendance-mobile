@@ -71,9 +71,8 @@ class LeaveReportModel extends BaseModel<LeaveReportModel> {
   final int? from;
   final int? to;
   final String? status;
-  final List<String>? attachment;
   final String? durationType;
-  final int? duration;
+  final double? duration;
 
   LeaveReportModel({
     this.type,
@@ -81,7 +80,6 @@ class LeaveReportModel extends BaseModel<LeaveReportModel> {
     this.from,
     this.to,
     this.status,
-    this.attachment,
     this.durationType,
     this.duration,
   });
@@ -97,9 +95,6 @@ class LeaveReportModel extends BaseModel<LeaveReportModel> {
       from: json['from'],
       to: json['to'],
       status: json['status'],
-      attachment: json['attachment'] != null
-          ? List<String>.from(json['attachment'])
-          : <String>[],
       durationType: json['durationType'],
       duration: json['duration'],
     );
@@ -121,7 +116,6 @@ class LeaveReportModel extends BaseModel<LeaveReportModel> {
       'from': from,
       'to': to,
       'status': status,
-      'attachment': attachment,
       'durationType': durationType,
       'duration': duration,
     };

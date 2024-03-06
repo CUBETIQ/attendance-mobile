@@ -1,3 +1,4 @@
+import 'package:timesync360/core/model/attachment_model.dart';
 import 'package:timesync360/core/model/leave_model.dart';
 import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/extensions/string.dart';
@@ -12,6 +13,7 @@ import 'package:timesync360/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync360/utils/upload_file_util.dart';
 
 class AddLeaveController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -39,6 +41,7 @@ class AddLeaveController extends GetxController
   final selectedValue = Rxn<String>(null);
   final searchController = TextEditingController();
   FocusNode? durationFocusNode = FocusNode();
+  final attachments = <AttachmentModel>[].obs;
 
   @override
   void onInit() {
@@ -90,6 +93,7 @@ class AddLeaveController extends GetxController
         appState.value = AppState.edit;
         startDate.value = leave.value?.from;
         endDate.value = leave.value?.to;
+        attachments.value = leave.value?.attachment ?? [];
         durationController.value.text = (leave.value?.duration ?? 1).toString();
         startDateController.text =
             DateFormatter.formatMillisecondsToDOB(leave.value?.from);
@@ -108,6 +112,9 @@ class AddLeaveController extends GetxController
 
   Future<void> addLeave() async {
     try {
+      final result =
+          await UploadFileUtil.uploadFiles(attachments.value, "leave");
+      attachments.value = result;
       CreateLeaveModel input = CreateLeaveModel(
         type: selectLeaveType.value,
         durationType: selectLeaveDurationType.value,
@@ -118,6 +125,7 @@ class AddLeaveController extends GetxController
             ? durationController.value.text.toDouble()
             : 1,
         requestDate: DateTime.now().millisecondsSinceEpoch,
+        attachment: attachments.value,
       );
       await AddLeaveService().addLeave(input);
       await LeaveController.to.getUserLeave();
@@ -131,6 +139,9 @@ class AddLeaveController extends GetxController
 
   Future<void> updateLeave() async {
     try {
+      final result =
+          await UploadFileUtil.uploadFiles(attachments.value, "leave");
+      attachments.value = result;
       UpdateLeaveModel input = UpdateLeaveModel(
         type: selectLeaveType.value,
         durationType: selectLeaveDurationType.value,
@@ -140,6 +151,7 @@ class AddLeaveController extends GetxController
         duration: durationController.value.text.isNotEmpty
             ? durationController.value.text.toDouble()
             : 1,
+        attachment: attachments.value,
       );
       await AddLeaveService().updateLeave(leave.value!.id!, input);
       LeaveController.to.getUserLeave();

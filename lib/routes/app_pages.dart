@@ -47,6 +47,7 @@ import 'package:timesync360/feature/profile/profile/profile_binding.dart';
 import 'package:timesync360/feature/qr_scan/scan_qr_binding.dart';
 import 'package:timesync360/feature/qr_scan/view/index.dart';
 import 'package:timesync360/feature/report/report_binding.dart';
+import 'package:timesync360/feature/setting/change_theme/view/index.dart';
 import 'package:timesync360/feature/setting/choose_language/view/index.dart';
 import 'package:timesync360/feature/setting/setting/setting_binding.dart';
 import 'package:timesync360/feature/setting/setting/view/index.dart';
@@ -226,10 +227,14 @@ class AppPages {
       page: () => const CategoryDetailView(),
       binding: CategoryDetailBinding(),
     ),
-        GetPage(
+    GetPage(
       name: Routes.SCANQR,
       page: () => const ScanQRView(),
       binding: ScanQRBinding(),
+    ),
+    GetPage(
+      name: Routes.THEME,
+      page: () => const ChangeThemeView(),
     ),
   ];
 }

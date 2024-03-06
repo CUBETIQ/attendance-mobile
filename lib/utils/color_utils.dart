@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
 
-/// Darken a color by [percent] amount (100 = black)
-// ........................................................
-Color darken(Color c, [int percent = 10]) {
-  assert(1 <= percent && percent <= 100);
-  var f = 1 - percent / 100;
-  return Color.fromARGB(c.alpha, (c.red * f).round(), (c.green * f).round(),
-      (c.blue * f).round());
-}
+class ColorUtil {
+  static bool isColorBright(Color color) {
+    // Calculate luminance
+    double luminance = color.computeLuminance();
 
-/// Lighten a color by [percent] amount (100 = white)
+    // Choose a threshold value based on your preference
+    double threshold = 0.5;
+
+    // Check if the color is bright or dark
+    return luminance > threshold;
+  }
+
+  /// Darken a color by [percent] amount (100 = black)
 // ........................................................
-Color lighten(Color c, [int percent = 10]) {
-  assert(1 <= percent && percent <= 100);
-  var p = percent / 100;
-  return Color.fromARGB(
-      c.alpha,
-      c.red + ((255 - c.red) * p).round(),
-      c.green + ((255 - c.green) * p).round(),
-      c.blue + ((255 - c.blue) * p).round());
+  static Color darken(Color c, [int percent = 10]) {
+    assert(1 <= percent && percent <= 100);
+    var f = 1 - percent / 100;
+    return Color.fromARGB(c.alpha, (c.red * f).round(), (c.green * f).round(),
+        (c.blue * f).round());
+  }
+
+  /// Lighten a color by [percent] amount (100 = white)
+// ........................................................
+  static Color lighten(Color c, [int percent = 10]) {
+    assert(1 <= percent && percent <= 100);
+    var p = percent / 100;
+    return Color.fromARGB(
+        c.alpha,
+        c.red + ((255 - c.red) * p).round(),
+        c.green + ((255 - c.green) * p).round(),
+        c.blue + ((255 - c.blue) * p).round());
+  }
 }

@@ -8,11 +8,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:timesync360/config/app_config.dart';
 import 'package:timesync360/constants/time.dart';
 import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync360/utils/logger.dart';
 import 'package:timesync360/utils/permission_handler.dart';
 
 class FileUtil {
-  static const maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
+  static const maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
   static const maxProfileSize = 2 * 1024 * 1024; // 2MB in bytes
 
   static String getFileName(File? file) {
@@ -56,7 +57,8 @@ class FileUtil {
   static Future<bool> validateFileSize(File file) async {
     final fileSize = await file.length();
     if (fileSize > maxFileSize) {
-      Logs.e("File cannot be larger than 3MB");
+      Logs.e("File cannot be larger than 5MB");
+      showWarningSnackBar("File Size Limit", "File cannot be larger than 5MB");
       return false;
     }
     return true;
@@ -66,6 +68,7 @@ class FileUtil {
     final fileSize = await file.length();
     if (fileSize > maxProfileSize) {
       Logs.e("Profile cannot be larger than 2MB");
+      showWarningSnackBar("Photo Size Limit", "File cannot be larger than 2MB");
       return false;
     }
     return true;

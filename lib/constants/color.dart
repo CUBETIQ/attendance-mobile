@@ -17,4 +17,7 @@ class MyColor {
   static const Color pendingColor = Color(0XFFBF9705);
   static const Color successColor = Color(0xFF08B80E);
   static const Color errorColor = Color(0xFFD72E08);
+
+  // color used for change theme
+  
 }

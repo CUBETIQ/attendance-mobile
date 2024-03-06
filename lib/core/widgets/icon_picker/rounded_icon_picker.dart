@@ -65,7 +65,7 @@ class RoundedIconPicker extends StatelessWidget {
                     : Icons.task,
                 // darken color by 20%
                 color: iconColor ??
-                    darken(
+                    ColorUtil.darken(
                       color ?? Theme.of(context).colorScheme.primary,
                       20,
                     ),

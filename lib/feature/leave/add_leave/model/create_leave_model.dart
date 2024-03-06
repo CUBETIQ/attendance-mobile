@@ -1,3 +1,5 @@
+import 'package:timesync360/core/model/attachment_model.dart';
+
 class CreateLeaveModel {
   final String? type;
   final String? reason;
@@ -6,6 +8,7 @@ class CreateLeaveModel {
   final String? durationType;
   final double? duration;
   final int? requestDate;
+  final List<AttachmentModel>? attachment;
 
   CreateLeaveModel({
     this.type,
@@ -15,6 +18,7 @@ class CreateLeaveModel {
     this.durationType,
     this.duration,
     this.requestDate,
+    this.attachment,
   });
 
   Map<String, dynamic> toJson() {
@@ -26,6 +30,7 @@ class CreateLeaveModel {
       "durationType": durationType,
       "duration": duration,
       "requestDate": requestDate,
+      "attachment": attachment?.map((e) => e.toJson()).toList(),
     };
   }
 }

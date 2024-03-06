@@ -5,11 +5,20 @@ import 'package:timesync360/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class DetailRowImage extends StatelessWidget {
-  const DetailRowImage({super.key, this.title, this.image, this.name});
+  const DetailRowImage({
+    super.key,
+    this.title,
+    this.image,
+    this.name,
+    this.imageWidth,
+    this.imageHeight,
+  });
 
   final String? title;
   final String? name;
   final String? image;
+  final double? imageWidth;
+  final double? imageHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +36,8 @@ class DetailRowImage extends StatelessWidget {
         ),
         MyCacheImage(
           imageUrl: image ?? "",
-          width: SizeUtils.scaleMobile(25, size.width),
-          height: SizeUtils.scaleMobile(25, size.width),
+          width: imageWidth ?? SizeUtils.scaleMobile(25, size.width),
+          height: imageHeight ?? SizeUtils.scaleMobile(25, size.width),
         ),
         SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
         Expanded(

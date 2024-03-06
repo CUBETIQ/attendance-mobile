@@ -15,7 +15,11 @@ class FileUtil {
   static const maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
   static const maxProfileSize = 2 * 1024 * 1024; // 2MB in bytes
 
-  static String getFileName(File file) {
+  static String getFileName(File? file) {
+    if (file == null) {
+      return "";
+    }
+
     return file.path.split('/').last;
   }
 
@@ -142,10 +146,9 @@ class FileUtil {
   static Future<void> saveFileToLocalStorage({
     required String fileName,
     required String filePath,
-    required String? storePath,
   }) async {
     try {
-      final destinationFilePath = '$storePath/$fileName';
+      final destinationFilePath = '${AppConfig.appLocalPath}/$fileName';
       File sourceFile = File(filePath);
       File destinationFile = File(destinationFilePath);
       List<int> fileBytes = await sourceFile.readAsBytes();

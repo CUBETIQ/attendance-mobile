@@ -6,12 +6,13 @@ import 'package:open_file/open_file.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:timesync360/config/app_config.dart';
+import 'package:timesync360/constants/time.dart';
 import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
 import 'package:timesync360/utils/logger.dart';
 import 'package:timesync360/utils/permission_handler.dart';
 
 class FileUtil {
-  static const maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
+  static const maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
   static const maxProfileSize = 2 * 1024 * 1024; // 2MB in bytes
 
   static String getFileName(File file) {
@@ -51,7 +52,7 @@ class FileUtil {
   static Future<bool> validateFileSize(File file) async {
     final fileSize = await file.length();
     if (fileSize > maxFileSize) {
-      Logs.e("File cannot be larger than 5MB");
+      Logs.e("File cannot be larger than 3MB");
       return false;
     }
     return true;
@@ -177,8 +178,9 @@ class FileUtil {
         options: Options(
           headers: {HttpHeaders.acceptEncodingHeader: "*"},
           responseType: ResponseType.bytes,
-          contentType: "application/octet-stream",
           followRedirects: false,
+          sendTimeout: const Duration(seconds: AppTimeouts.connectTimeout),
+          receiveTimeout: const Duration(seconds: AppTimeouts.receiveTimeout),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -195,6 +197,7 @@ class FileUtil {
       );
     } catch (e) {
       Logs.e("Error: $e");
+      rethrow;
     } finally {
       isDownloading = false;
       getIsDownloading.call(isDownloading);

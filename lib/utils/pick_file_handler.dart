@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:timesync360/utils/file_util.dart';
 import 'package:timesync360/utils/permission_handler.dart';
 
 class PickFileHandler {
@@ -15,7 +16,12 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.gallery);
         if (result != null) {
           file = File(result.path);
-          return file;
+          final validateFileSize = await FileUtil.validateFileSize(file);
+          if (validateFileSize) {
+            return file;
+          } else {
+            return null;
+          }
         } else {
           return null;
         }
@@ -36,7 +42,12 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.camera);
         if (result != null) {
           file = File(result.path);
-          return file;
+          final validateFileSize = await FileUtil.validateFileSize(file);
+          if (validateFileSize) {
+            return file;
+          } else {
+            return null;
+          }
         } else {
           return null;
         }
@@ -58,7 +69,12 @@ class PickFileHandler {
         );
         if (result != null) {
           file = File(result.files.single.path!);
-          return file;
+          final validateFileSize = await FileUtil.validateFileSize(file);
+          if (validateFileSize) {
+            return file;
+          } else {
+            return null;
+          }
         } else {
           return null;
         }

@@ -1,4 +1,4 @@
-import 'package:timesync360/feature/qr_scan/controller/index.dart';
+import 'package:timesync/feature/qr_scan/controller/index.dart';
 import 'package:get/get.dart';
 
 class ScanQRBinding extends Binding {

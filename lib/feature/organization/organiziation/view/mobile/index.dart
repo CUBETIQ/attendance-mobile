@@ -1,13 +1,13 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/organization/organiziation/controller/index.dart';
-import 'package:timesync360/feature/organization/organiziation/widget/company_profile_card.dart';
-import 'package:timesync360/feature/organization/organiziation/widget/info_data_column.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/organization/organiziation/controller/index.dart';
+import 'package:timesync/feature/organization/organiziation/widget/company_profile_card.dart';
+import 'package:timesync/feature/organization/organiziation/widget/info_data_column.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../widget/overview_card.dart';
@@ -25,7 +25,6 @@ class OrganizationViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SizedBox(
         height: size.height,

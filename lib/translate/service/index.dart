@@ -1,5 +1,5 @@
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
 
 class TranslateService {

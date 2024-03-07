@@ -1,4 +1,4 @@
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class MarkerDot extends StatelessWidget {

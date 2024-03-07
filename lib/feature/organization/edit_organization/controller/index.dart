@@ -1,14 +1,14 @@
 import 'dart:io';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
-import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/organization/edit_organization/model/update_organization_model.dart';
-import 'package:timesync360/feature/organization/edit_organization/service/index.dart';
-import 'package:timesync360/types/avatar_type.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/organization/edit_organization/model/update_organization_model.dart';
+import 'package:timesync/feature/organization/edit_organization/service/index.dart';
+import 'package:timesync/types/avatar_type.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,7 +80,7 @@ class EditOrganizationController extends GetxController {
         endHour: endHourController.text,
         breakTime:
             "${breakStartHourController.text}-${breakEndHourController.text}",
-        breakDuration: DateTimeUtil.calculateDuration(
+        breakDuration: DateUtil.calculateDuration(
           breakStartHourController.text,
           breakEndHourController.text,
         ),

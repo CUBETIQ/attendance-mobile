@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/extensions/string.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/extensions/string.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync360/utils/color_utils.dart';
+import 'package:timesync/utils/color_utils.dart';
 import '../text/text.dart';
 
 class RoundedIconPicker extends StatelessWidget {

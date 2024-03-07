@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
-import 'package:timesync360/feature/position/add_position/model/add_position_model.dart';
-import 'package:timesync360/feature/position/add_position/model/edit_position_model.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/position/add_position/model/add_position_model.dart';
+import 'package:timesync/feature/position/add_position/model/edit_position_model.dart';
+import 'package:timesync/utils/logger.dart';
 
 class AddPositionService {
   static final _singleton = AddPositionService._internal();

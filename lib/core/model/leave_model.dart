@@ -1,6 +1,6 @@
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/repositories/base_model.dart';
-import 'package:timesync360/extensions/string.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/repositories/base_model.dart';
+import 'package:timesync/extensions/string.dart';
 
 class LeaveModel extends BaseModel<LeaveModel> {
   final String? id;

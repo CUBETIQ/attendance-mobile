@@ -1,9 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class KpiScoreCard extends StatelessWidget {
@@ -29,20 +28,20 @@ class KpiScoreCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(
               SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
             ),
-            color: Theme.of(context).colorScheme.outline.darken(),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
           ),
           child: Row(
             children: [
               Icon(
                 Icons.star_rounded,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
                 size: size.width * 0.1,
               ),
               SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
               MyText(
                 text: "${"Performance Score:".trString} $score",
                 style: AppFonts().bodyLargeSemi.copyWith(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
               ),
             ],
@@ -53,16 +52,16 @@ class KpiScoreCard extends StatelessWidget {
           top: SizeUtils.scaleMobile(10, size.width),
           child: Icon(
             Icons.star_rounded,
-            color: Colors.grey.darken(),
+            color: Theme.of(context).colorScheme.onPrimary,
             size: SizeUtils.scaleMobile(25, size.width),
           ),
         ),
         Positioned(
-          right: SizeUtils.scaleMobile(22, size.width),
-          top: SizeUtils.scaleMobile(22, size.width),
+          right: SizeUtils.scaleMobile(20, size.width),
+          top: SizeUtils.scaleMobile(18, size.width),
           child: Icon(
             Icons.star_rounded,
-            color: Colors.grey.darken(),
+            color: Theme.of(context).colorScheme.onPrimary,
             size: SizeUtils.scaleMobile(48, size.width),
           ),
         ),

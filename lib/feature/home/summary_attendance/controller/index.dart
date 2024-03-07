@@ -1,9 +1,9 @@
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/home/summary_attendance/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/home/summary_attendance/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

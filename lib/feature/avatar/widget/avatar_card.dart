@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/utils/size_util.dart';
 import '../../../types/avatar_type.dart';
 
 class AvatarCard extends StatelessWidget {

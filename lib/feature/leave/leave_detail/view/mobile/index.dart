@@ -1,20 +1,20 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/widgets/attachment/attachment_card.dart';
-import 'package:timesync360/core/widgets/progress_indicator/indicator_with_percentage.dart';
-import 'package:timesync360/core/widgets/row/detail_row_data.dart';
-import 'package:timesync360/core/widgets/row/detail_row_image.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/leave/leave_detail/controller/index.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/widgets/attachment/attachment_card.dart';
+import 'package:timesync/core/widgets/progress_indicator/indicator_with_percentage.dart';
+import 'package:timesync/core/widgets/row/detail_row_data.dart';
+import 'package:timesync/core/widgets/row/detail_row_image.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/leave/leave_detail/controller/index.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync360/types/leave_status.dart';
-import 'package:timesync360/utils/file_util.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/utils/file_util.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import '../../../../../core/widgets/button/back_button.dart';
 import '../../../../../core/widgets/text/app_bar_title.dart';
 
@@ -33,7 +33,6 @@ class LeaveDetailViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SizedBox(
         height: size.height,
@@ -93,7 +92,7 @@ class LeaveDetailViewMobile extends StatelessWidget {
                 DetailRowData(
                   title: "Date",
                   value:
-                      "${DateFormatter.formatMillisecondsToDOB(controller.leave.value.from)} - ${DateFormatter.formatMillisecondsToDOB(controller.leave.value.to)}",
+                      "${DateUtil.formatMillisecondsToDOB(controller.leave.value.from)} - ${DateUtil.formatMillisecondsToDOB(controller.leave.value.to)}",
                 ),
                 SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                 const Divider(thickness: 1.5),

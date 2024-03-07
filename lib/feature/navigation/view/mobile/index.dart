@@ -1,13 +1,13 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/feature/home/home/view/index.dart';
-import 'package:timesync360/feature/leave/leave/view/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/navigation/widget/side_drawer.dart';
-import 'package:timesync360/feature/profile/profile/view/index.dart';
-import 'package:timesync360/feature/report/view/index.dart';
-import 'package:timesync360/feature/task/task/view/index.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/feature/home/home/view/index.dart';
+import 'package:timesync/feature/leave/leave/view/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/navigation/widget/side_drawer.dart';
+import 'package:timesync/feature/profile/profile/view/index.dart';
+import 'package:timesync/feature/report/view/index.dart';
+import 'package:timesync/feature/task/task/view/index.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
@@ -63,7 +63,6 @@ class MainScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        elevation: 2,
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: controller.toggleDrawer,
@@ -108,7 +107,6 @@ class MainScreen extends StatelessWidget {
                     Radius.circular(40),
                   ),
                 ),
-                elevation: 2,
                 child: const Icon(Icons.add_rounded),
               ),
       ),

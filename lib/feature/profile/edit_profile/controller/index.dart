@@ -1,16 +1,16 @@
 import 'dart:io';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
-import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/home/home/controller/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/profile/edit_profile/model/update_profile_model.dart';
-import 'package:timesync360/feature/profile/edit_profile/service/index.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/gender.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/home/home/controller/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/profile/edit_profile/model/update_profile_model.dart';
+import 'package:timesync/feature/profile/edit_profile/service/index.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/gender.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +51,7 @@ class EditProfileController extends GetxController {
     if (user.value.dateOfBirth != null &&
         user.value.dateOfBirth.toString().length > 5) {
       dobController.text =
-          DateFormatter.formatMillisecondsToDOB(user.value.dateOfBirth);
+          DateUtil.formatMillisecondsToDOB(user.value.dateOfBirth);
     }
   }
 

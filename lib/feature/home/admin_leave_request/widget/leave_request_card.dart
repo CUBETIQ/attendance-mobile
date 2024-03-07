@@ -1,15 +1,15 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/admin_leave_request/widget/small_button.dart';
-import 'package:timesync360/feature/home/admin_leave_request/widget/small_outline_button.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/leave_status.dart';
-import 'package:timesync360/types/leave_type.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/admin_leave_request/widget/small_button.dart';
+import 'package:timesync/feature/home/admin_leave_request/widget/small_outline_button.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import '../../../../constants/app_size.dart';
@@ -124,7 +124,7 @@ class LeaveRequestCard extends StatelessWidget {
                   ),
                   MyText(
                     text:
-                        "${DateFormatter.formatMillisecondsToDOB(leave.from)} - ${DateFormatter.formatMillisecondsToDOB(leave.to)}",
+                        "${DateUtil.formatMillisecondsToDOB(leave.from)} - ${DateUtil.formatMillisecondsToDOB(leave.to)}",
                     style: AppFonts().bodySmallRegular.copyWith(
                           color: Theme.of(context).colorScheme.outline,
                         ),

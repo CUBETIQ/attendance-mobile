@@ -1,14 +1,14 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/employee/employee_detail/controller/index.dart';
-import 'package:timesync360/core/widgets/card/label_detail_card.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/employee/employee_detail/controller/index.dart';
+import 'package:timesync/core/widgets/card/label_detail_card.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +27,6 @@ class StaffDetailViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -103,7 +102,7 @@ class StaffDetailViewMobile extends StatelessWidget {
                   Expanded(
                     child: LabelDetailCard(
                       title: "Date Of Birth",
-                      value: DateFormatter.formatMillisecondsToDOB(
+                      value: DateUtil.formatMillisecondsToDOB(
                         controller.staff.value.dateOfBirth,
                       ),
                     ),

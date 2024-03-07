@@ -1,15 +1,15 @@
 import 'dart:io';
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/entities/local_storage.dart';
-import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/model/activation_model.dart';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/auth/activation/model/activation_model.dart';
-import 'package:timesync360/feature/auth/activation/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/entities/local_storage.dart';
+import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/model/activation_model.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/auth/activation/model/activation_model.dart';
+import 'package:timesync/feature/auth/activation/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class ActivationController extends GetxController {
   final activationController = TextEditingController();
   final title = "Please enter the activation code";
   final description =
-      "To unlock the flow of time with TimeSync360: Where every moment counts, and attendance becomes a seamless journey through the fabric of efficiency.";
+      "To unlock the flow of time with timesync: Where every moment counts, and attendance becomes a seamless journey through the fabric of efficiency.";
   final activate = Rxn<ActivationModel>(null);
   final androidInfo = Rxn<AndroidDeviceInfo>(null);
   final iosInfo = Rxn<IosDeviceInfo>(null);

@@ -1,19 +1,19 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/dropdown_button/date_dropdown.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/work_hour/controller/index.dart';
-import 'package:timesync360/feature/home/work_hour/widget/working_hour_card.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/work_hour/controller/index.dart';
+import 'package:timesync/feature/home/work_hour/widget/working_hour_card.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -32,7 +32,6 @@ class WorkingHourViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: MyRefreshIndicator(
         onRefresh: controller.onRefresh,
@@ -91,7 +90,7 @@ class WorkingHourViewMobile extends StatelessWidget {
                             totalWorkMinute = 0;
                             for (var attendance in attendance) {
                               totalWorkMinute = (totalWorkMinute ?? 0) +
-                                  DateFormatter.calculateDurationInMinutes(
+                                  DateUtil.calculateDurationInMinutes(
                                     attendance.checkInDateTime!,
                                     attendance.checkOutDateTime,
                                   );

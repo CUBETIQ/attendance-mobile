@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:timesync360/utils/file_util.dart';
-import 'package:timesync360/utils/permission_handler.dart';
+import 'package:timesync/utils/file_util.dart';
+import 'package:timesync/utils/permission_handler.dart';
 
 class PickFileHandler {
   static Future<File?> openGallery() async {

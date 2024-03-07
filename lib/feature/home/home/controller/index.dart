@@ -1,25 +1,25 @@
 import 'dart:async';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/model/attendance_chart_model.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/summary_attendance_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/feature/home/home/model/check_in_model.dart';
-import 'package:timesync360/feature/home/home/model/check_out_model.dart';
-import 'package:timesync360/feature/home/home/model/update_user_status_model.dart';
-import 'package:timesync360/feature/home/home/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/profile/profile/controller/index.dart';
-import 'package:timesync360/utils/attendance_util.dart';
-import 'package:timesync360/types/attendance_method.dart';
-import 'package:timesync360/types/role.dart';
-import 'package:timesync360/utils/double_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/user_status.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/attendance_chart_model.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/summary_attendance_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/home/home/model/check_in_model.dart';
+import 'package:timesync/feature/home/home/model/check_out_model.dart';
+import 'package:timesync/feature/home/home/model/update_user_status_model.dart';
+import 'package:timesync/feature/home/home/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/profile/profile/controller/index.dart';
+import 'package:timesync/utils/attendance_util.dart';
+import 'package:timesync/types/attendance_method.dart';
+import 'package:timesync/types/role.dart';
+import 'package:timesync/utils/double_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/user_status.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -139,8 +139,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
     if (picked != null) {
       selectDate.value = picked;
-      startOfDay.value = DateTimeUtil.getStartOfDayInMilisecond(picked);
-      endOfDay.value = DateTimeUtil.getEndOfDayInMilisecond(picked);
+      startOfDay.value = DateUtil.getStartOfDayInMilisecond(picked);
+      endOfDay.value = DateUtil.getEndOfDayInMilisecond(picked);
       getDashboardChart();
       getAllStaffAttendance();
     }
@@ -213,7 +213,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           checkInLocation: location,
         );
         AttendanceModel checkIn = await HomeService().checkIn(input);
-        checkInTime.value = DateFormatter.formatTime(
+        checkInTime.value = DateUtil.formatTime(
           DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
         );
         await getAttendance();
@@ -252,7 +252,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         checkOutLocation: location,
       );
       AttendanceModel checkOut = await HomeService().checkOut(input);
-      checkOutTime.value = DateFormatter.formatTime(
+      checkOutTime.value = DateUtil.formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
       );
       isCheckedIn.value = false;
@@ -286,11 +286,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       );
       if (attendanceList.isNotEmpty) {
         if (attendanceList.last.checkOutDateTime != null) {
-          totalHour.value = DateFormatter.formatMinutes(
+          totalHour.value = DateUtil.formatMinutes(
             attendanceList.last.duration!,
           );
         }
-        checkInTime.value = DateFormatter.formatTime(
+        checkInTime.value = DateUtil.formatTime(
           DateTime.fromMillisecondsSinceEpoch(
             attendanceList.last.checkInDateTime!,
           ),
@@ -298,7 +298,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
         } else {
-          checkOutTime.value = DateFormatter.formatTime(
+          checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
               attendanceList.last.checkOutDateTime!,
             ),

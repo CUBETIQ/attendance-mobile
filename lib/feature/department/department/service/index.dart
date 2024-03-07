@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/utils/logger.dart';
 
 class DepartmentService {
   static final _singleton = DepartmentService._internal();

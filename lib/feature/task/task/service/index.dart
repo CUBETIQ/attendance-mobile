@@ -1,10 +1,10 @@
-import 'package:timesync360/core/model/summary_task_model.dart';
-import 'package:timesync360/core/model/task_model.dart';
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
-import 'package:timesync360/types/task_status.dart';
+import 'package:timesync/core/model/summary_task_model.dart';
+import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/types/task_status.dart';
 import 'package:dio/dio.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/utils/logger.dart';
 
 class TaskService {
   static final _singleton = TaskService._internal();

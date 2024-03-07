@@ -5,12 +5,12 @@ import 'package:mime/mime.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/constants/time.dart';
-import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/utils/logger.dart';
-import 'package:timesync360/utils/permission_handler.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/time.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/permission_handler.dart';
 
 class FileUtil {
   static const maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
@@ -44,7 +44,7 @@ class FileUtil {
     return FormData.fromMap(
       {
         'metadata': metadata?.toJson(),
-        'bucket_id': 'timesync360',
+        'bucket_id': 'timesync',
         "file": MultipartFile.fromFileSync(
           file.path,
           filename: fileName,

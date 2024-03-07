@@ -1,5 +1,5 @@
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/repositories/base_model.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/repositories/base_model.dart';
 
 class TaskModel extends BaseModel<TaskModel> {
   final String? id;

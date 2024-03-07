@@ -1,10 +1,10 @@
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:timesync360/utils/logger.dart';
-import 'package:timesync360/utils/permission_handler.dart';
+import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/permission_handler.dart';
 
 class NavigationService {
   static final _singleton = NavigationService._internal();

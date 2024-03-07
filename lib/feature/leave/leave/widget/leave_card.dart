@@ -1,12 +1,12 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/leave_status.dart';
-import 'package:timesync360/types/leave_type.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 
@@ -94,7 +94,7 @@ class LeaveCard extends StatelessWidget {
                 ),
                 MyText(
                   text:
-                      "${DateFormatter.formatMillisecondsToDOB(leave.from)} - ${DateFormatter.formatMillisecondsToDOB(leave.to)}",
+                      "${DateUtil.formatMillisecondsToDOB(leave.from)} - ${DateUtil.formatMillisecondsToDOB(leave.to)}",
                   style: AppFonts().bodySmallRegular.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),

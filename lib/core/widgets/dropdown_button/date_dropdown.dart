@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 
 class DateDropDown extends StatelessWidget {
@@ -55,8 +55,8 @@ class DateDropDown extends StatelessWidget {
           children: [
             MyText(
               text: isShowday == true
-                  ? DateFormatter.formatShortDate(date)
-                  : DateFormatter.formatShortDateWithoutDay(date),
+                  ? DateUtil.formatShortDate(date)
+                  : DateUtil.formatShortDateWithoutDay(date),
               style: AppFonts().bodySmall.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),

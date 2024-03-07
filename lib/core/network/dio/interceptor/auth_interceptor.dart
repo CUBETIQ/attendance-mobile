@@ -1,5 +1,5 @@
-import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:dio/dio.dart';
 
 class AuthInterceptor extends Interceptor {

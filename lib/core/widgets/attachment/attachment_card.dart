@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:path/path.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/file_util.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/svg_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/file_util.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/svg_util.dart';
+import 'package:timesync/utils/date_util.dart';
 
 class AttachmentCard extends StatelessWidget {
   const AttachmentCard({
@@ -122,7 +122,7 @@ class AttachmentCard extends StatelessWidget {
                       ),
                 ),
                 MyText(
-                  text: DateFormatter.formatMillisecondsToDOB(
+                  text: DateUtil.formatMillisecondsToDOB(
                     data.date ?? DateTime.now().millisecondsSinceEpoch,
                   ),
                   style: AppFonts().bodySmallMedium.copyWith(

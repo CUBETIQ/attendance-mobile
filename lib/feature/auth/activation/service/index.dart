@@ -1,9 +1,9 @@
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/model/activation_model.dart';
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
-import 'package:timesync360/feature/auth/activation/model/activation_model.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/model/activation_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/auth/activation/model/activation_model.dart';
+import 'package:timesync/utils/logger.dart';
 
 class ActivationService {
   static final _singleton = ActivationService._internal();

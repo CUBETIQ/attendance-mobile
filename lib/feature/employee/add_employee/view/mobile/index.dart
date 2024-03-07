@@ -1,16 +1,16 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/widgets/button/async_button.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
-import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/employee/add_employee/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/types/state.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
+import 'package:timesync/core/widgets/profile_image/profile_image.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/feature/employee/add_employee/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/types/state.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +33,6 @@ class AddStaffViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(

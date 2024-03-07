@@ -1,8 +1,8 @@
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/network/file_upload/model/file_metadata.dart';
-import 'package:timesync360/core/network/file_upload/upload_file_service.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/utils/file_util.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/utils/file_util.dart';
 
 class UploadFileUtil {
   static Future<List<AttachmentModel>> uploadFiles(

@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/feature/report/controller/index.dart';
-import 'package:timesync360/feature/report/widget/attendance_text_title.dart';
-import 'package:timesync360/feature/report/widget/leave_text_title.dart';
-import 'package:timesync360/feature/report/widget/marker_dot.dart';
-import 'package:timesync360/feature/report/widget/report_attendance_card.dart';
-import 'package:timesync360/feature/report/widget/report_leave_card.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/feature/report/controller/index.dart';
+import 'package:timesync/feature/report/widget/attendance_text_title.dart';
+import 'package:timesync/feature/report/widget/leave_text_title.dart';
+import 'package:timesync/feature/report/widget/marker_dot.dart';
+import 'package:timesync/feature/report/widget/report_attendance_card.dart';
+import 'package:timesync/feature/report/widget/report_leave_card.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 

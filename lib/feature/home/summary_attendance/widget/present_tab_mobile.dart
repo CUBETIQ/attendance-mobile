@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/feature/home/summary_attendance/controller/index.dart';
-import 'package:timesync360/feature/home/summary_attendance/widget/summary_detail_card.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/feature/home/summary_attendance/controller/index.dart';
+import 'package:timesync/feature/home/summary_attendance/widget/summary_detail_card.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class PresentTabMobile extends StatelessWidget {

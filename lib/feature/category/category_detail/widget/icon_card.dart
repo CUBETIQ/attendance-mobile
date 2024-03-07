@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/utils/color_utils.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/utils/color_utils.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class IconCard extends StatelessWidget {
   const IconCard({

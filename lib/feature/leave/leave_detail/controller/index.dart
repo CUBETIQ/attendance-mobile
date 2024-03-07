@@ -1,6 +1,6 @@
-import 'package:timesync360/core/model/leave_model.dart';
+import 'package:timesync/core/model/leave_model.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/file_util.dart';
+import 'package:timesync/utils/file_util.dart';
 
 class LeaveDetailController extends GetxController {
   static LeaveDetailController get to => Get.find();

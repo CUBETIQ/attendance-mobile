@@ -1,19 +1,19 @@
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/feature/leave/add_leave/model/create_leave_model.dart';
-import 'package:timesync360/feature/leave/add_leave/model/update_leave_model.dart';
-import 'package:timesync360/feature/leave/add_leave/service/index.dart';
-import 'package:timesync360/feature/leave/leave/controller/index.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/leave_duration_type.dart';
-import 'package:timesync360/types/leave_type.dart';
-import 'package:timesync360/types/state.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/leave/add_leave/model/create_leave_model.dart';
+import 'package:timesync/feature/leave/add_leave/model/update_leave_model.dart';
+import 'package:timesync/feature/leave/add_leave/service/index.dart';
+import 'package:timesync/feature/leave/leave/controller/index.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/leave_duration_type.dart';
+import 'package:timesync/types/leave_type.dart';
+import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/upload_file_util.dart';
+import 'package:timesync/utils/upload_file_util.dart';
 
 class AddLeaveController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -67,10 +67,10 @@ class AddLeaveController extends GetxController
     // Set endDate to the end of the day
     DateTime endOfDay = DateTime(now.year, now.month, now.day, 23, 59, 59, 999);
 
-    startDateController.text = DateFormatter.formatMillisecondsToDOB(
-        startOfDay.millisecondsSinceEpoch);
+    startDateController.text =
+        DateUtil.formatMillisecondsToDOB(startOfDay.millisecondsSinceEpoch);
     endDateController.text =
-        DateFormatter.formatMillisecondsToDOB(endOfDay.millisecondsSinceEpoch);
+        DateUtil.formatMillisecondsToDOB(endOfDay.millisecondsSinceEpoch);
     startDate.value = startOfDay.millisecondsSinceEpoch;
     endDate.value = endOfDay.millisecondsSinceEpoch;
   }
@@ -78,7 +78,7 @@ class AddLeaveController extends GetxController
   void getStartDateInMilliSecond(int? date) {
     startDate.value = date;
     endDate.value = date;
-    endDateController.text = DateFormatter.formatMillisecondsToDOB(date ?? 0);
+    endDateController.text = DateUtil.formatMillisecondsToDOB(date ?? 0);
   }
 
   void getEndDateInMilliSecond(int? date) {
@@ -96,9 +96,9 @@ class AddLeaveController extends GetxController
         attachments.value = leave.value?.attachment ?? [];
         durationController.value.text = (leave.value?.duration ?? 1).toString();
         startDateController.text =
-            DateFormatter.formatMillisecondsToDOB(leave.value?.from);
+            DateUtil.formatMillisecondsToDOB(leave.value?.from);
         endDateController.text =
-            DateFormatter.formatMillisecondsToDOB(leave.value?.to);
+            DateUtil.formatMillisecondsToDOB(leave.value?.to);
         selectLeaveType.value = leave.value?.type ?? LeaveType.annual;
         selectLeaveDurationType.value =
             leave.value?.durationType ?? LeaveTypeDuration.fullDay;

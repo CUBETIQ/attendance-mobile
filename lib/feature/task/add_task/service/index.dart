@@ -1,8 +1,8 @@
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
-import 'package:timesync360/feature/task/add_task/model/create_task_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
 import 'package:dio/dio.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/utils/logger.dart';
 
 class AddTaskService {
   static final _singleton = AddTaskService._internal();

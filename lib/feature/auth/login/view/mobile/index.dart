@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/image.dart';
-import 'package:timesync360/core/widgets/button/async_button.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/auth/login/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/image.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/feature/auth/login/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,11 +48,11 @@ class LoginViewMobile extends StatelessWidget {
                           ),
                         ),
                         height: 70,
-                        child: Image.asset(ImageAssets.logoTimeSync360),
+                        child: Image.asset(ImageAssets.logotimesync),
                       ),
                       SizedBox(height: AppSize().paddingS6),
                       MyText(
-                        text: "TimeSync360",
+                        text: "timesync",
                         style: AppFonts().bodyLargeMedium,
                       ),
                     ],

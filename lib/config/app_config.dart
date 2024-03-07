@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/entities/local_storage.dart';
-import 'package:timesync360/key.dart';
-import 'package:timesync360/utils/encrypt_util.dart';
-import 'package:timesync360/utils/file_util.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/entities/local_storage.dart';
+import 'package:timesync/key.dart';
+import 'package:timesync/utils/encrypt_util.dart';
+import 'package:timesync/utils/file_util.dart';
 
 class AppConfig {
   static const String baseUrl = "http://192.168.1.102:3000/api";
+  // static const String baseUrl = "https://timesync-api-uat.ctdn.dev/api";
   static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";
 
   static const String xUploadApiKey = Key.xApiKey;
@@ -15,7 +16,7 @@ class AppConfig {
 
   static String? appLocalPath;
 
-  static const String appName = "TimeSync360";
+  static const String appName = "timesync";
 
   // Setup the local storage for fetching while using the app
   static LocalStorage? _localData = LocalStorage();

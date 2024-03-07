@@ -1,4 +1,4 @@
-import 'package:timesync360/core/repositories/base_model.dart';
+import 'package:timesync/core/repositories/base_model.dart';
 
 class FileMetadata extends BaseModel<FileMetadata> {
   final String? userId;

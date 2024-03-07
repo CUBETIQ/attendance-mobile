@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,56 +20,46 @@ class MyTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+    return TabBar(
+      controller: controller,
+      onTap: onTap,
+      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      labelStyle: AppFonts().bodyLargeMedium,
+      unselectedLabelStyle: AppFonts().bodyLargeMedium,
+      unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
+      labelColor: isCircleBorder == true
+          ? Theme.of(context).colorScheme.onPrimary
+          : Theme.of(context).colorScheme.onBackground,
+      dividerColor: Colors.transparent,
+      indicator: BoxDecoration(
         borderRadius: isCircleBorder == true
             ? BorderRadius.circular(
                 SizeUtils.scaleMobile(15, size.width),
               )
             : null,
-      ),
-      child: TabBar(
-        controller: controller,
-        onTap: onTap,
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
-        labelStyle: AppFonts().bodyLargeMedium,
-        unselectedLabelStyle: AppFonts().bodyLargeMedium,
-        unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
-        labelColor: isCircleBorder == true
-            ? Theme.of(context).colorScheme.onPrimary
-            : Theme.of(context).colorScheme.onBackground,
-        dividerColor: Colors.transparent,
-        indicator: BoxDecoration(
-          borderRadius: isCircleBorder == true
-              ? BorderRadius.circular(
-                  SizeUtils.scaleMobile(15, size.width),
-                )
-              : null,
-          color: isCircleBorder == true
-              ? Theme.of(context).colorScheme.primary
-              : null,
-          border: isCircleBorder == true
-              ? null
-              : Border(
-                  bottom: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: SizeUtils.scaleMobile(3, size.width),
-                  ),
+        color: isCircleBorder == true
+            ? Theme.of(context).colorScheme.primary
+            : null,
+        border: isCircleBorder == true
+            ? null
+            : Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: SizeUtils.scaleMobile(3, size.width),
                 ),
-        ),
-        indicatorSize: isCircleBorder == true
-            ? TabBarIndicatorSize.tab
-            : TabBarIndicatorSize.label,
-        tabs: [
-          ...List.generate(
-            tabs.length,
-            (index) => Tab(
-              text: tabs[index].tr,
-            ),
-          ),
-        ],
+              ),
       ),
+      indicatorSize: isCircleBorder == true
+          ? TabBarIndicatorSize.tab
+          : TabBarIndicatorSize.label,
+      tabs: [
+        ...List.generate(
+          tabs.length,
+          (index) => Tab(
+            text: tabs[index].tr,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,6 +1,6 @@
-import 'package:timesync360/core/database/isar/entities/language.dart';
-import 'package:timesync360/core/database/isar/entities/local_storage.dart';
-import 'package:timesync360/core/database/isar/repository/isar_repo.dart';
+import 'package:timesync/core/database/isar/entities/language.dart';
+import 'package:timesync/core/database/isar/entities/local_storage.dart';
+import 'package:timesync/core/database/isar/repository/isar_repo.dart';
 import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';

@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:timesync360/config/app_config.dart';
+import 'package:timesync/config/app_config.dart';
 
 class Endpoints {
   Endpoints._();

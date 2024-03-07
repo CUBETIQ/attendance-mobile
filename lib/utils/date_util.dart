@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class DateFormatter {
+class DateUtil {
   static String formatDateTime(DateTime dateTime) {
     return DateFormat('E, d MMMM y').format(dateTime);
   }
@@ -139,11 +139,7 @@ class DateFormatter {
 
     return result.isNotEmpty ? result : 'N/A';
   }
-}
 
-/////////////////////////////////
-
-class DateTimeUtil {
   static int? getStartOfDayInMilisecond(DateTime? picked) {
     if (picked != null) {
       DateTime startOfDayDateTime = DateTime(
@@ -235,3 +231,7 @@ class DateTimeUtil {
     return formattedDuration;
   }
 }
+
+/////////////////////////////////
+
+

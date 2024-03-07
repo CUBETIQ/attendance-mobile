@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:get/get.dart';
-import 'package:timesync360/core/database/isar/controller/local_language_controller.dart';
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/translate/service/index.dart';
-import 'package:timesync360/utils/converter.dart';
+import 'package:timesync/core/database/isar/controller/local_language_controller.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/translate/service/index.dart';
+import 'package:timesync/utils/converter.dart';
 
 class LanguageController extends GetxController {
   static LanguageController get to => Get.find();

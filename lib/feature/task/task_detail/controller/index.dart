@@ -1,6 +1,6 @@
-import 'package:timesync360/core/model/task_model.dart';
+import 'package:timesync/core/model/task_model.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/file_util.dart';
+import 'package:timesync/utils/file_util.dart';
 
 class TaskDetailController extends GetxController {
   static TaskDetailController get to => Get.find();

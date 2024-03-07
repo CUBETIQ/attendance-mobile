@@ -1,12 +1,12 @@
 import 'package:msh_checkbox/msh_checkbox.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/task_model.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/task_status.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/task_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
@@ -106,7 +106,7 @@ class TaskCard extends StatelessWidget {
                     ),
                     MyText(
                       text: task.endDate != null
-                          ? "${"Due:".trString} ${DateFormatter.formatMillisecondsToDOB(task.endDate!)}"
+                          ? "${"Due:".trString} ${DateUtil.formatMillisecondsToDOB(task.endDate!)}"
                           : "Due: N/A",
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: task.endDate == null

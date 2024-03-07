@@ -1,14 +1,14 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/attendance_status.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../../constants/app_size.dart';
@@ -105,14 +105,14 @@ class StaffAttendanceCard extends StatelessWidget {
                   ),
                   SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                   MyText(
-                    text: DateFormatter.formatTimeWithDate(
+                    text: DateUtil.formatTimeWithDate(
                       attendance.checkInDateTime,
                     ),
                     style: AppFonts().bodySmallRegular,
                   ),
                   SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                   MyText(
-                    text: DateFormatter.formatTimeWithDate(
+                    text: DateUtil.formatTimeWithDate(
                       attendance.checkOutDateTime,
                     ),
                     style: AppFonts().bodySmallRegular,

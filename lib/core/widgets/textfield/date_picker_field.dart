@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/constants/font.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -101,7 +101,7 @@ class MyDatePickerField extends StatelessWidget {
                 hintStyle: hintStyle ?? AppFonts().bodyMediumMedium,
                 filled: filled ?? false,
                 fillColor: filled == true
-                    ? Theme.of(context).colorScheme.secondaryContainer
+                    ? Theme.of(context).colorScheme.primary.withOpacity(0.095)
                     : null,
                 isDense: true,
                 errorMaxLines: 2,
@@ -117,7 +117,9 @@ class MyDatePickerField extends StatelessWidget {
                     ),
                   ),
                   borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
+                    width: 1.5,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
                   ),
                 ),
                 enabledBorder: UnderlineInputBorder(
@@ -132,7 +134,9 @@ class MyDatePickerField extends StatelessWidget {
                     ),
                   ),
                   borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
+                    width: 1.5,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
                   ),
                 ),
                 errorBorder: UnderlineInputBorder(

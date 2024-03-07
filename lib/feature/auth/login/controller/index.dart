@@ -1,16 +1,16 @@
-import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/auth/login/model/index.dart';
-import 'package:timesync360/feature/auth/login/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/auth/login/model/index.dart';
+import 'package:timesync/feature/auth/login/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +36,6 @@ class LoginController extends GetxController {
   @override
   onInit() {
     super.onInit();
-
     initRememberMe();
   }
 

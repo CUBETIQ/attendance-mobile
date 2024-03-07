@@ -1,5 +1,5 @@
-// import 'package:timesync360/config/font.dart';
-// import 'package:timesync360/core/widgets/text/text.dart';
+// import 'package:timesync/config/font.dart';
+// import 'package:timesync/core/widgets/text/text.dart';
 // import 'package:flutter/material.dart';
 
 // class MyOutLineButton extends StatelessWidget {

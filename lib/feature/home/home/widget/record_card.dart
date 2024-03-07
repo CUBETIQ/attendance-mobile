@@ -1,12 +1,12 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/home/widget/record_data_card.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/home/widget/record_data_card.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 
 class RecordCard extends StatelessWidget {
@@ -62,7 +62,7 @@ class RecordCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MyText(
-            text: DateFormatter.formatFullDate(date),
+            text: DateUtil.formatFullDate(date),
             style: AppFonts().bodyMediumSemi.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),

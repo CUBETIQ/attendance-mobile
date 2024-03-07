@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';

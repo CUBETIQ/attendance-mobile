@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/widgets/button/async_button.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/department/add_department/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/types/state.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/profile_image/profile_image.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/feature/department/add_department/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/types/state.dart';
 
 class AddDepartmentViewMobile extends StatelessWidget {
   const AddDepartmentViewMobile({super.key});
@@ -28,7 +28,6 @@ class AddDepartmentViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(

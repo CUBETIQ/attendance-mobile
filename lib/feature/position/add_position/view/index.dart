@@ -1,7 +1,7 @@
-import 'package:timesync360/core/widgets/layout_builder/responsive_layout.dart';
+import 'package:timesync/core/widgets/layout_builder/responsive_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync360/feature/position/add_position/view/mobile/index.dart';
-import 'package:timesync360/feature/position/add_position/view/tablet/index.dart';
+import 'package:timesync/feature/position/add_position/view/mobile/index.dart';
+import 'package:timesync/feature/position/add_position/view/tablet/index.dart';
 
 class AddPositionView extends StatelessWidget {
   const AddPositionView({super.key});

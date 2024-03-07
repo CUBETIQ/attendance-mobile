@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/utils/logger.dart';
 
 class LoggerInterceptor extends Interceptor {
   @override

@@ -1,21 +1,21 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/model/task_model.dart';
-import 'package:timesync360/core/widgets/color_picker/color_picker_dialog.dart';
-import 'package:timesync360/core/widgets/icon_picker/icon_picker_dialog.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/feature/task/add_task/model/create_task_model.dart';
-import 'package:timesync360/feature/task/add_task/service/index.dart';
-import 'package:timesync360/feature/task/task/controller/index.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/state.dart';
-import 'package:timesync360/types/task_priority.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/widgets/color_picker/color_picker_dialog.dart';
+import 'package:timesync/core/widgets/icon_picker/icon_picker_dialog.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
+import 'package:timesync/feature/task/add_task/service/index.dart';
+import 'package:timesync/feature/task/task/controller/index.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/state.dart';
+import 'package:timesync/types/task_priority.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/upload_file_util.dart';
+import 'package:timesync/utils/upload_file_util.dart';
 
 class AddTaskController extends GetxController {
   final title = "Add Task".obs;
@@ -117,9 +117,9 @@ class AddTaskController extends GetxController {
         taskController.text = task.value?.name ?? '';
         selectPriority.value = task.value?.priority ?? TaskPriority.low;
         startDateController.text =
-            DateFormatter.formatMillisecondsToDOB(task.value?.startDate ?? 0);
+            DateUtil.formatMillisecondsToDOB(task.value?.startDate ?? 0);
         endDateController.text =
-            DateFormatter.formatMillisecondsToDOB(task.value?.endDate ?? 0);
+            DateUtil.formatMillisecondsToDOB(task.value?.endDate ?? 0);
         startDate.value = task.value?.startDate ?? 0;
         endDate.value = task.value?.endDate ?? 0;
         descriptionController.text = task.value?.description ?? '';
@@ -138,7 +138,7 @@ class AddTaskController extends GetxController {
   void initDate() {
     DateTime now = DateTime.now();
     startDateController.text =
-        DateFormatter.formatMillisecondsToDOB(now.millisecondsSinceEpoch);
+        DateUtil.formatMillisecondsToDOB(now.millisecondsSinceEpoch);
     startDate.value = now.millisecondsSinceEpoch;
   }
 

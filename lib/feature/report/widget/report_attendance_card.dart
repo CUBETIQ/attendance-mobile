@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/attendance_status.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -95,14 +95,14 @@ class ReportAttendanceCard extends StatelessWidget {
                     ),
                     SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
-                      text: DateFormatter.formatTimeWithDate(
+                      text: DateUtil.formatTimeWithDate(
                         attendance.checkInDateTime,
                       ),
                       style: AppFonts().bodySmallRegular,
                     ),
                     SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
-                      text: DateFormatter.formatTimeWithDate(
+                      text: DateUtil.formatTimeWithDate(
                         attendance.checkOutDateTime,
                       ),
                       style: AppFonts().bodySmallRegular,

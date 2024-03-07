@@ -1,4 +1,4 @@
-import 'package:timesync360/constants/svg.dart';
+import 'package:timesync/constants/svg.dart';
 
 class SvgUtil {
   static String getSvgByExtenion(String? extension) {

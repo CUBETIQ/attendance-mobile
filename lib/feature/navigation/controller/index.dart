@@ -1,22 +1,22 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/navigation/model/bottom_bar_model.dart';
-import 'package:timesync360/feature/navigation/model/drawer_model.dart';
-import 'package:timesync360/feature/navigation/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/location_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/role.dart';
-import 'package:timesync360/types/state.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/model/bottom_bar_model.dart';
+import 'package:timesync/feature/navigation/model/drawer_model.dart';
+import 'package:timesync/feature/navigation/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/utils/location_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/role.dart';
+import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -107,11 +107,11 @@ class NavigationController extends GetxController {
     endBreakTime.value =
         organization.value.configs?.breakTime?.split("-")[1] ?? "13:00";
 
-    int totalMinuteBreakTime = DateTimeUtil.calculateTotalMinutes(
+    int totalMinuteBreakTime = DateUtil.calculateTotalMinutes(
         startBreakTime.value, endBreakTime.value);
 
     totalWorkMinutes.value =
-        DateTimeUtil.calculateTotalMinutes(startHour, endHour) -
+        DateUtil.calculateTotalMinutes(startHour, endHour) -
             totalMinuteBreakTime;
   }
 

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:timesync360/feature/position/position_detail/controller/index.dart';
+import 'package:timesync/feature/position/position_detail/controller/index.dart';
 
 class PositionDetailBinding extends Binding {
   @override

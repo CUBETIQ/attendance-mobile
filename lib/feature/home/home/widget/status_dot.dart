@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/types/user_status.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/types/user_status.dart';
 import 'package:flutter/material.dart';
 
 class StatusDot extends StatelessWidget {

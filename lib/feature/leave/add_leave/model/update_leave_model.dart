@@ -1,4 +1,4 @@
-import 'package:timesync360/core/model/attachment_model.dart';
+import 'package:timesync/core/model/attachment_model.dart';
 
 class UpdateLeaveModel {
   final String? type;

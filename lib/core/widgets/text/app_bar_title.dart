@@ -1,4 +1,4 @@
-import 'package:timesync360/constants/font.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:timesync360/app.dart';
-import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/database/local_path/app_path_controller.dart';
-import 'package:timesync360/firebase_options.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/app.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/database/local_path/app_path_controller.dart';
+import 'package:timesync/firebase_options.dart';
+import 'package:timesync/utils/logger.dart';
 
 // using SizeUits.scaleMobile for make the bigger device and smalller device have same Ui size we need for mobile
 

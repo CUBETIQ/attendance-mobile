@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
-import 'package:timesync360/core/widgets/dialog/dialog.dart';
-import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/core/widgets/dialog/dialog.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 

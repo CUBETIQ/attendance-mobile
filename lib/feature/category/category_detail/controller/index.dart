@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:timesync360/core/model/category_model.dart';
+import 'package:timesync/core/model/category_model.dart';
 
 class CategoryDetailController extends GetxController {
   static CategoryDetailController get to => Get.find();

@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/lotties.dart';
-import 'package:timesync360/core/widgets/button/async_button.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/auth/activation/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/text_formater.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/lotties.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/feature/auth/activation/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/text_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

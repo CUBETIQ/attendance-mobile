@@ -1,4 +1,4 @@
-import 'package:timesync360/types/role.dart';
+import 'package:timesync/types/role.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

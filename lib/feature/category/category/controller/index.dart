@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/model/category_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/category/category/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/types/state.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/category_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/category/category/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/state.dart';
 
 class CategoryController extends GetxController {
   static CategoryController get to => Get.find();

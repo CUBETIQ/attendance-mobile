@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/feature/category/category/controller/index.dart';
-import 'package:timesync360/feature/category/category/widget/category_card.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/feature/category/category/controller/index.dart';
+import 'package:timesync/feature/category/category/widget/category_card.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class CategoryViewMobile extends StatelessWidget {
   const CategoryViewMobile({super.key});
@@ -22,7 +22,6 @@ class CategoryViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: MyRefreshIndicator(
         onRefresh: controller.onRefresh,
@@ -64,7 +63,6 @@ class CategoryViewMobile extends StatelessWidget {
             Radius.circular(40),
           ),
         ),
-        elevation: 2,
         child: const Icon(Icons.add_rounded),
       ),
     );

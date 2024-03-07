@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/qr_scan/controller/index.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/qr_scan/controller/index.dart';
 
 class ScanQRViewMobile extends StatelessWidget {
   const ScanQRViewMobile({super.key});
@@ -19,7 +19,6 @@ class ScanQRViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: Stack(
         alignment: Alignment.center,

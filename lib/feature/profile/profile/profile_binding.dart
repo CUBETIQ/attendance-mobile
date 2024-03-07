@@ -1,4 +1,4 @@
-import 'package:timesync360/feature/profile/profile/controller/index.dart';
+import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:get/get.dart';
 
 class ProfileBinding extends Binding {

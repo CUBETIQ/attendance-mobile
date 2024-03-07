@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/category_model.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/utils/color_utils.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/category_model.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/utils/color_utils.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({

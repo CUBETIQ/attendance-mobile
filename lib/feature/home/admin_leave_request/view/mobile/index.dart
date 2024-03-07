@@ -1,15 +1,15 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/dropdown_button/date_dropdown.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/admin_leave_request/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/types/leave_status.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/admin_leave_request/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/types/leave_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../../../../core/widgets/async_widget/async_base_widget.dart';
@@ -30,7 +30,6 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: MyRefreshIndicator(
         onRefresh: controller.onRefresh,

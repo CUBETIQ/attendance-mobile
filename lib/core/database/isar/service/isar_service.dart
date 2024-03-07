@@ -1,9 +1,9 @@
-import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/core/database/isar/controller/local_language_controller.dart';
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/entities/language.dart';
-import 'package:timesync360/core/database/isar/entities/local_storage.dart';
-import 'package:timesync360/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/core/database/isar/controller/local_language_controller.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/entities/language.dart';
+import 'package:timesync/core/database/isar/entities/local_storage.dart';
+import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
 import 'package:get/get.dart';
 
 class IsarService extends GetxService {
@@ -50,6 +50,7 @@ class IsarService extends GetxService {
       appConfig.username = input?.username ?? appConfig.username;
       appConfig.organizationId =
           input?.organizationId ?? appConfig.organizationId;
+      appConfig.theme = input?.theme ?? appConfig.theme;
       AppConfig.setConfig(appConfig);
       await _localStorage.insert(appConfig);
     } catch (e) {

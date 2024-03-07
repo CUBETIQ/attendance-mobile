@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {

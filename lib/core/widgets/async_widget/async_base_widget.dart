@@ -1,6 +1,6 @@
-import 'package:timesync360/core/widgets/loading/loading.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/core/widgets/loading/loading.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class MyAsyncWidget extends StatelessWidget {

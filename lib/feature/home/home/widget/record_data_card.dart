@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/home/widget/status_card.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/home/widget/status_card.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -75,7 +75,7 @@ class RecordDataCard extends StatelessWidget {
               children: [
                 MyText(
                   text: time != null
-                      ? DateFormatter.formatTimeNoTrailing(
+                      ? DateUtil.formatTimeNoTrailing(
                           DateTime.fromMillisecondsSinceEpoch(
                           time ?? 0,
                         ))

@@ -1,8 +1,8 @@
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/feature/avatar/controller/index.dart';
-import 'package:timesync360/feature/avatar/widget/avatar_card.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/feature/avatar/controller/index.dart';
+import 'package:timesync/feature/avatar/widget/avatar_card.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +21,6 @@ class AvatarViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(

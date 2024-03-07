@@ -1,10 +1,10 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/admin_leave_report_model.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/admin_leave_report_model.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
 
 class LeaveDataRowReport extends StatelessWidget {
   const LeaveDataRowReport({super.key, required this.leave});
@@ -56,7 +56,7 @@ class LeaveDataRowReport extends StatelessWidget {
         SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
         MyText(
           text:
-              "From: ${DateFormatter.formatMillisecondsToDOB(leave?.from)} - ${DateFormatter.formatMillisecondsToDOB(leave?.to)}",
+              "From: ${DateUtil.formatMillisecondsToDOB(leave?.from)} - ${DateUtil.formatMillisecondsToDOB(leave?.to)}",
           style: AppFonts().bodySmallRegular,
         ),
       ],

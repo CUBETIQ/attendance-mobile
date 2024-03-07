@@ -1,7 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:timesync360/core/widgets/dialog/dialog.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/core/widgets/dialog/dialog.dart';
+import 'package:timesync/utils/logger.dart';
 
 class PermissonHandler {
   static Future<bool> requestStoragePermission() async {

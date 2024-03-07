@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:timesync360/config/app_config.dart';
-import 'package:timesync360/firebase_options.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/firebase_options.dart';
+import 'package:timesync/utils/logger.dart';
 
 class NotificationService {
   /////// Singleton ////////

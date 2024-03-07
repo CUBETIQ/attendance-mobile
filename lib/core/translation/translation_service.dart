@@ -1,4 +1,4 @@
-import 'package:timesync360/translate/controller/index.dart';
+import 'package:timesync/translate/controller/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,4 @@
-import 'package:timesync360/feature/customer_support/model/support_button.dart';
+import 'package:timesync/feature/customer_support/model/support_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +41,9 @@ class MyDropDownButton<T> extends StatelessWidget {
     this.width,
     this.height,
     this.isRoundedCorner = false,
+    this.backgroundColor,
+    this.hintStyle,
+    this.dropDownBackgroundColor,
   });
 
   final String? hint;
@@ -75,6 +78,9 @@ class MyDropDownButton<T> extends StatelessWidget {
   final double? width;
   final double? height;
   final bool isRoundedCorner;
+  final Color? backgroundColor;
+  final Color? dropDownBackgroundColor;
+  final TextStyle? hintStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +110,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                 child: MyText(
                   text: hint ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: AppFonts().bodyMediumMedium,
+                  style: hintStyle ?? AppFonts().bodyMediumMedium,
                 ),
               ),
               value: value,
@@ -120,7 +126,11 @@ class MyDropDownButton<T> extends StatelessWidget {
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      color: backgroundColor ??
+                          Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.095),
                       borderRadius: isRoundedCorner == true
                           ? BorderRadius.circular(
                               (borderRadius ?? AppSize().borderRadiusLarge) *
@@ -137,10 +147,15 @@ class MyDropDownButton<T> extends StatelessWidget {
                               ),
                             ),
                       border: Border(
-                        bottom: BorderSide(
-                          color: Theme.of(context).colorScheme.outlineVariant,
-                          width: 1.0,
-                        ),
+                        bottom: isRoundedCorner == true
+                            ? BorderSide.none
+                            : BorderSide(
+                                width: 1.5,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.9),
+                              ),
                       ),
                     ),
                 elevation: buttonElevation,
@@ -169,7 +184,8 @@ class MyDropDownButton<T> extends StatelessWidget {
                     ),
                 decoration: dropdownDecoration ??
                     BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      color: dropDownBackgroundColor ??
+                          Theme.of(context).colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(
                         AppSize().borderRadiusLarge * (size.width / 375.0),
                       ),

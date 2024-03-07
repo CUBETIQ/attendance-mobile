@@ -1,19 +1,19 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/attachment_model.dart';
-import 'package:timesync360/core/widgets/attachment/attachment_card.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/progress_indicator/indicator_with_percentage.dart';
-import 'package:timesync360/core/widgets/row/detail_row_category.dart';
-import 'package:timesync360/core/widgets/row/detail_row_data.dart';
-import 'package:timesync360/core/widgets/row/detail_row_image.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/task/task_detail/controller/index.dart';
-import 'package:timesync360/utils/file_util.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/widgets/attachment/attachment_card.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/progress_indicator/indicator_with_percentage.dart';
+import 'package:timesync/core/widgets/row/detail_row_category.dart';
+import 'package:timesync/core/widgets/row/detail_row_data.dart';
+import 'package:timesync/core/widgets/row/detail_row_image.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/task/task_detail/controller/index.dart';
+import 'package:timesync/utils/file_util.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +32,6 @@ class TaskDetailViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -68,7 +67,7 @@ class TaskDetailViewMobile extends StatelessWidget {
               SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               DetailRowData(
                 title: "Due",
-                value: DateFormatter.formatMillisecondsToDOB(
+                value: DateUtil.formatMillisecondsToDOB(
                   controller.task.value?.endDate,
                 ),
               ),

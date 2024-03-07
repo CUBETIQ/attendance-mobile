@@ -1,4 +1,4 @@
-import 'package:timesync360/feature/leave/leave_detail/controller/index.dart';
+import 'package:timesync/feature/leave/leave_detail/controller/index.dart';
 import 'package:get/get.dart';
 
 class LeaveDetailBinding extends Binding {

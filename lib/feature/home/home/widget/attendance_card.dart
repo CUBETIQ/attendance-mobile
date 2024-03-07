@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/utils/logger.dart';
 
 class AttendanceCard extends StatelessWidget {
   final bool? isCheckedIn;

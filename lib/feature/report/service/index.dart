@@ -1,12 +1,12 @@
-import 'package:timesync360/core/model/admin_attendance_report_model.dart';
-import 'package:timesync360/core/model/admin_leave_report_model.dart';
-import 'package:timesync360/core/model/admin_task_report_model.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/network/dio/dio_util.dart';
-import 'package:timesync360/core/network/dio/endpoint.dart';
+import 'package:timesync/core/model/admin_attendance_report_model.dart';
+import 'package:timesync/core/model/admin_leave_report_model.dart';
+import 'package:timesync/core/model/admin_task_report_model.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
-import 'package:timesync360/utils/logger.dart';
+import 'package:timesync/utils/logger.dart';
 
 class ReportService {
   static final _singleton = ReportService._internal();

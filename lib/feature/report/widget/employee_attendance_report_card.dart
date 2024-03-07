@@ -1,12 +1,12 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/admin_attendance_report_model.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/report/widget/attendance_data_row.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/types/attendance_status.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/admin_attendance_report_model.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/report/widget/attendance_data_row.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/attendance_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -56,7 +56,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
       children: [
         AttendanceDataRowReport(
           title: "Check In:",
-          value: DateFormatter.formatTimeWithDate(
+          value: DateUtil.formatTimeWithDate(
             data.attendance?.checkInDateTime,
           ),
         ),
@@ -85,14 +85,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
         data.attendance != null && data.attendance?.checkInEarly != null
             ? AttendanceDataRowReport(
                 title: "Check In Early:",
-                value: DateFormatter.getHourMinuteSecondFromMinute(
+                value: DateUtil.getHourMinuteSecondFromMinute(
                   data.attendance?.checkInEarly,
                 ),
               )
             : data.attendance != null && data.attendance?.checkInLate != null
                 ? AttendanceDataRowReport(
                     title: "Check In Late:",
-                    value: DateFormatter.getHourMinuteSecondFromMinute(
+                    value: DateUtil.getHourMinuteSecondFromMinute(
                       data.attendance?.checkInLate,
                     ),
                   )
@@ -100,7 +100,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
         SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(
           title: "Check Out:",
-          value: DateFormatter.formatTimeWithDate(
+          value: DateUtil.formatTimeWithDate(
             data.attendance?.checkOutDateTime,
           ),
         ),
@@ -126,14 +126,14 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
         data.attendance != null && data.attendance?.checkOutLate != null
             ? AttendanceDataRowReport(
                 title: "Check Out Late:",
-                value: DateFormatter.getHourMinuteSecondFromMinute(
+                value: DateUtil.getHourMinuteSecondFromMinute(
                   data.attendance?.checkOutLate,
                 ),
               )
             : data.attendance != null && data.attendance?.checkOutEarly != null
                 ? AttendanceDataRowReport(
                     title: "Check Out Early:",
-                    value: DateFormatter.getHourMinuteSecondFromMinute(
+                    value: DateUtil.getHourMinuteSecondFromMinute(
                       data.attendance?.checkOutEarly,
                     ),
                   )
@@ -141,7 +141,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
         SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(
           title: "Work Hour:",
-          value: DateFormatter.getHourMinuteSecondFromMinute(totalWorkMinute),
+          value: DateUtil.getHourMinuteSecondFromMinute(totalWorkMinute),
         ),
         SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
         AttendanceDataRowReport(

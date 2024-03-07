@@ -1,17 +1,17 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/attachment/upload_button.dart';
-import 'package:timesync360/core/widgets/button/async_button.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/feature/leave/add_leave/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/types/state.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/attachment/upload_button.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/leave/add_leave/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/types/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +32,6 @@ class AddLeaveViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(

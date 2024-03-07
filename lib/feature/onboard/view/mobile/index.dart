@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
-import 'package:timesync360/feature/onboard/controller/index.dart';
-import 'package:timesync360/feature/onboard/widgets/page.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/button/button.dart';
+import 'package:timesync/feature/onboard/controller/index.dart';
+import 'package:timesync/feature/onboard/widgets/page.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

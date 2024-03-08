@@ -49,4 +49,5 @@ class Endpoints {
   String get get_staff_task_report => "/app/admin-reports/task-report";
   String get get_staff_leave_report => "/app/admin-reports/leave-report";
   String get get_translation => "/app/translate";
+  String get get_user_earn_point => "/app/earn-point/me";
 }

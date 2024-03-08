@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
@@ -116,10 +117,21 @@ class AttendanceCard extends StatelessWidget {
                                   const Color(0XFFe83371),
                                   const Color(0XFF9b3092),
                                 ]
-                              : [
-                                  const Color(0xFF4049E0),
-                                  const Color(0XFF7653C9),
-                                ]
+                              : Get.isDarkMode
+                                  ? [
+                                      Theme.of(context).colorScheme.primary,
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .onTertiaryContainer
+                                          .darken(10),
+                                    ]
+                                  : [
+                                      Theme.of(context).colorScheme.primary,
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .onTertiaryContainer
+                                          .lighten(30),
+                                    ]
                           : [
                               const Color.fromARGB(255, 122, 122, 122),
                               const Color.fromARGB(255, 122, 122, 122),
@@ -133,12 +145,13 @@ class AttendanceCard extends StatelessWidget {
                         SvgAssets.tap,
                         width: iconSize ?? size.height * 0.05,
                         height: iconSize ?? size.height * 0.05,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                       SizedBox(height: AppSize().paddingS4),
                       MyText(
                         text: isCheckedIn == true ? "Check Out" : "Check In",
                         style: AppFonts().bodyLargeMedium.copyWith(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                       ),
                     ],

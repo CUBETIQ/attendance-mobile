@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/color.dart';
@@ -19,7 +18,6 @@ import 'package:timesync/feature/home/home/widget/pie_chart_card.dart';
 import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
 import 'package:timesync/feature/home/home/widget/tab_bar.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +29,6 @@ class HomeAdminMobileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = HomeController.to;
     final size = MediaQuery.of(context).size;
-    Logs.e(Theme.of(context).colorScheme.primary.hexCode);
     return Column(
       children: [
         MyTabBar(

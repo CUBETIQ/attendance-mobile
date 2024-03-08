@@ -1,3 +1,4 @@
+import 'package:timesync/core/model/earn_point_model.dart';
 import 'package:timesync/core/model/summary_attendance_model.dart';
 import 'package:timesync/core/network/dio/dio_util.dart';
 import 'package:dio/dio.dart';
@@ -29,5 +30,18 @@ class ProfileService {
       throw Exception("Get attendance failed");
     }
     return summaryAttendance;
+  }
+
+  Future<EarnPointModel> getEarnPoint() async {
+    EarnPointModel? earnPoint;
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_user_earn_point,
+    );
+    if (response.statusCode == 200) {
+      earnPoint = EarnPointModel().fromJson(response.data["data"]);
+    } else {
+      throw Exception("Get earn point failed");
+    }
+    return earnPoint;
   }
 }

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Tracker",
       defaultTransition: Transition.cupertino,
-      themeMode: AppConfig.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      themeMode: AppConfig.isDarkMode ? ThemeMode.dark : ThemeMode.system,
       initialRoute: AppPages.INITIAL,
       localizationsDelegates: ServiceTranslation().delegates,
       translations: ServiceTranslation(),

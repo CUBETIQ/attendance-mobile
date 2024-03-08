@@ -12,6 +12,16 @@ class ColorUtil {
     return luminance > threshold;
   }
 
+  static Color generateGradientColor(Color color, double factor) {
+    // Adjust the brightness or saturation as needed
+    return Color.fromARGB(
+      color.alpha,
+      (color.red * (1 - factor)).round(),
+      (color.green * (1 - factor)).round(),
+      (color.blue * (1 - factor)).round(),
+    );
+  }
+
   /// Darken a color by [percent] amount (100 = black)
 // ........................................................
   static Color darken(Color c, [int percent = 10]) {

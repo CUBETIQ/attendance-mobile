@@ -41,4 +41,5 @@ abstract class Routes {
   static const CATEGORY_DETAIL = '/category_detail';
   static const SCANQR = '/scanqr';
   static const THEME = '/theme';
+  static const POINT = '/point';
 }

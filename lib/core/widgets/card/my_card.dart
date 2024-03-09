@@ -15,6 +15,8 @@ class MyCard extends StatelessWidget {
     this.boxShadow,
     this.clip,
     this.alignment,
+    this.border,
+    this.gradient,
   });
 
   final double? width;
@@ -27,6 +29,8 @@ class MyCard extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
   final Clip? clip;
   final AlignmentGeometry? alignment;
+  final BoxBorder? border;
+  final Gradient? gradient;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,8 @@ class MyCard extends StatelessWidget {
                 size.width,
               ),
             ),
+        gradient: gradient,
+        border: border,
         color: backgroundColor ?? Theme.of(context).colorScheme.background,
         boxShadow: boxShadow ??
             [

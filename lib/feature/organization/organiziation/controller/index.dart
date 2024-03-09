@@ -1,20 +1,20 @@
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/organization/organiziation/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/organization/organiziation/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class OrganizationController extends GetxController {
   static OrganizationController get to => Get.find();
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
-  RxList<UserModel> staffs = <UserModel>[].obs;
-  RxList<PositionModel> positions = <PositionModel>[].obs;
-  RxList<DepartmentModel> departments = <DepartmentModel>[].obs;
+  final organization = OrganizationModel().obs;
+  final staffs = <UserModel>[].obs;
+  final positions = <PositionModel>[].obs;
+  final departments = <DepartmentModel>[].obs;
 
   @override
   void onInit() {

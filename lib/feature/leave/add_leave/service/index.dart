@@ -1,10 +1,21 @@
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/feature/leave/add_leave/model/create_leave_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/leave/add_leave/model/create_leave_model.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/feature/leave/add_leave/model/update_leave_model.dart';
+import 'package:timesync/utils/logger.dart';
 
 class AddLeaveService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = AddLeaveService._internal();
+  final dioInstance = DioUtil();
+
+  factory AddLeaveService() {
+    return _singleton;
+  }
+
+  AddLeaveService._internal() {
+    Logs.t('[AddLeaveService] Initialized');
+  }
 
   Future<void> addLeave(CreateLeaveModel input) async {
     Map<String, dynamic> data = input.toJson();
@@ -17,7 +28,7 @@ class AddLeaveService {
     }
   }
 
-  Future<void> updateLeave(String id, CreateLeaveModel input) async {
+  Future<void> updateLeave(String id, UpdateLeaveModel input) async {
     Response response = await dioInstance.dio.put(
       Endpoints.instance.leave + id,
       data: input.toJson(),

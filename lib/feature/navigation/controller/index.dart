@@ -1,21 +1,22 @@
-import 'package:timesync360/constants/app_config.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/navigation/model/bottom_bar_model.dart';
-import 'package:timesync360/feature/navigation/model/drawer_model.dart';
-import 'package:timesync360/feature/navigation/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/location_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/role.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/model/bottom_bar_model.dart';
+import 'package:timesync/feature/navigation/model/drawer_model.dart';
+import 'package:timesync/feature/navigation/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/utils/location_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/role.dart';
+import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -24,18 +25,21 @@ import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
-  RxInt selectedIndex = 0.obs;
-  Rx<UserModel> user = UserModel().obs;
-  Rx<PositionModel> position = PositionModel().obs;
-  Rx<DepartmentModel> department = DepartmentModel().obs;
-  RxString getUserRole = "".obs;
+  final selectedIndex = 0.obs;
+  final user = UserModel().obs;
+  final position = PositionModel().obs;
+  final department = DepartmentModel().obs;
+  final getUserRole = "".obs;
   late List<DrawerModel> drawerItems;
-  List<String> titles = ['Home', 'Task', 'Profile'];
-  List<BottomBarModel> items = [
+  final titles = ['Home', 'Task', 'Profile'];
+  final items = [
     BottomBarModel(
       title: 'Home',
       icon: Icons.home_rounded,
       selectedIcon: Icons.home_rounded,
+      action: InkWell(
+          onTap: () => Get.toNamed(Routes.SCANQR),
+          child: SvgPicture.asset(SvgAssets.scanQR)),
     ),
     BottomBarModel(
       title: 'Report',
@@ -58,17 +62,17 @@ class NavigationController extends GetxController {
       selectedIcon: Icons.person_rounded,
     ),
   ];
-  Rxn<OranizationLocationModel> organizationLocation =
-      Rxn<OranizationLocationModel>(null);
-  Rxn<Position> userLocation = Rxn<Position>(null);
-  RxBool isInRange = false.obs;
-  RxString startBreakTime = "".obs;
-  RxString endBreakTime = "".obs;
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
-  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
-  Rxn<String> fullname = Rxn<String>(null);
+
+  final organizationLocation = Rxn<OranizationLocationModel>(null);
+  final userLocation = Rxn<Position>(null);
+  final isInRange = false.obs;
+  final startBreakTime = "".obs;
+  final endBreakTime = "".obs;
+  final organization = OrganizationModel().obs;
+  final userStatus = UserStatusModel().obs;
+  final fullname = Rxn<String>(null);
   final zoomDrawerController = ZoomDrawerController();
-  RxInt totalWorkMinutes = 0.obs;
+  final totalWorkMinutes = 0.obs;
 
   void toggleDrawer() {
     zoomDrawerController.toggle?.call();
@@ -103,11 +107,11 @@ class NavigationController extends GetxController {
     endBreakTime.value =
         organization.value.configs?.breakTime?.split("-")[1] ?? "13:00";
 
-    int totalMinuteBreakTime = DateTimeUtil()
-        .calculateTotalMinutes(startBreakTime.value, endBreakTime.value);
+    int totalMinuteBreakTime = DateUtil.calculateTotalMinutes(
+        startBreakTime.value, endBreakTime.value);
 
     totalWorkMinutes.value =
-        DateTimeUtil().calculateTotalMinutes(startHour, endHour) -
+        DateUtil.calculateTotalMinutes(startHour, endHour) -
             totalMinuteBreakTime;
   }
 
@@ -115,8 +119,10 @@ class NavigationController extends GetxController {
     organizationLocation.value = organization.value.location;
     try {
       userLocation.value = await NavigationService().getCurrentLocation();
-      isInRange.value = isWithinRadius(userLocation.value!,
-          organizationLocation.value!, AppConfig.DEFAULT_LOCATION_RADIUS);
+      if (userLocation.value != null) {
+        isInRange.value = isWithinRadius(userLocation.value!,
+            organizationLocation.value!, AppConfig.defaultLocationRadius);
+      }
     } on Exception catch (e) {
       showErrorSnackBar("Error", e.toString());
       rethrow;
@@ -133,11 +139,11 @@ class NavigationController extends GetxController {
   }
 
   void onTapAddTask() {
-    Get.toNamed(Routes.ADD_TASK, arguments: {"state": AppState.Create});
+    Get.toNamed(Routes.ADD_TASK, arguments: {"state": AppState.create});
   }
 
   void onTapAddLeave() {
-    Get.toNamed(Routes.ADD_LEAVE, arguments: {"state": AppState.Create});
+    Get.toNamed(Routes.ADD_LEAVE, arguments: {"state": AppState.create});
   }
 
   void initSideBarMenu() {
@@ -169,6 +175,13 @@ class NavigationController extends GetxController {
           icon: Icons.location_city_rounded,
           onTap: () {
             Get.toNamed(Routes.DEPARTMENT);
+          },
+        ),
+        DrawerModel(
+          title: "Category",
+          icon: Icons.category_rounded,
+          onTap: () {
+            Get.toNamed(Routes.CATEGORY);
           },
         ),
         DrawerModel(

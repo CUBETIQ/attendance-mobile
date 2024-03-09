@@ -1,12 +1,22 @@
-import 'package:timesync360/core/model/summary_task_model.dart';
-import 'package:timesync360/core/model/task_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/utils/types_helper/task_status.dart';
+import 'package:timesync/core/model/summary_task_model.dart';
+import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/types/task_status.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class TaskService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = TaskService._internal();
+  final dioInstance = DioUtil();
+
+  factory TaskService() {
+    return _singleton;
+  }
+
+  TaskService._internal() {
+    Logs.t('[TaskService] Initialized');
+  }
 
   Future<List<TaskModel>> getUserTasks({int? startDate, int? endDate}) async {
     final List<TaskModel> tasks;
@@ -50,6 +60,7 @@ class TaskService {
   Future<void> completeTask(String id) async {
     Map<String, dynamic> data = {
       "status": TaskStatus.completed,
+      "completedDate": DateTime.now().millisecondsSinceEpoch,
     };
 
     Response response = await dioInstance.dio.put(

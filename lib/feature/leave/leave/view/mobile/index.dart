@@ -1,13 +1,14 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/leave/leave/controller/index.dart';
-import 'package:timesync360/feature/leave/leave/widget/leave_card.dart';
-import 'package:timesync360/feature/leave/leave/widget/leave_chart.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/leave/leave/controller/index.dart';
+import 'package:timesync/feature/leave/leave/widget/leave_card.dart';
+import 'package:timesync/feature/leave/leave/widget/leave_chart.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,21 +29,36 @@ class LeaveViewMobile extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              left: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              right: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              top: AppSize.paddingVerticalLarge,
+              top: AppSize().paddingVerticalLarge,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MyText(text: "Leave Summary", style: BodyLargeMedium),
-                const SizedBox(height: AppSize.paddingS10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(
+                        text: "Leave Summary",
+                        style: AppFonts().bodyLargeMedium),
+                    Obx(
+                      () => DateDropDown(
+                        date: controller.selectDate.value,
+                        size: size,
+                        isShowday: false,
+                        onTap: () => controller.onTapDate(context),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                 Row(
                   children: [
                     Expanded(
@@ -88,16 +104,16 @@ class LeaveViewMobile extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.paddingS14),
+                SizedBox(height: AppSize().paddingS14),
                 Row(
                   children: [
                     MyText(
                       text: "My Request",
-                      style: BodyLargeMedium,
+                      style: AppFonts().bodyLargeMedium,
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.paddingS10),
+                SizedBox(height: AppSize().paddingS10),
                 Obx(
                   () => MyAsyncWidget(
                     isLoading: controller.isLoading.value,

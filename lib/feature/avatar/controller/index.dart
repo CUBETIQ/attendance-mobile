@@ -1,12 +1,12 @@
-import 'package:timesync360/constants/organization_image.dart';
-import 'package:timesync360/constants/position_image.dart';
-import 'package:timesync360/constants/profile_image.dart';
+import 'package:timesync/constants/organization_image.dart';
+import 'package:timesync/constants/position_image.dart';
+import 'package:timesync/constants/profile_image.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
+import 'package:timesync/types/avatar_type.dart';
 
 class AvatarController extends GetxController {
-  RxList<String> avatars = <String>[].obs;
-  RxString avatarType = AvatarType.profile.obs;
+  final avatars = <String>[].obs;
+  final avatarType = AvatarType.profile.obs;
 
   @override
   void onInit() {

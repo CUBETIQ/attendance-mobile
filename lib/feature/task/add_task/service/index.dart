@@ -1,10 +1,20 @@
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/feature/task/add_task/model/create_task_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class AddTaskService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = AddTaskService._internal();
+  final dioInstance = DioUtil();
+
+  factory AddTaskService() {
+    return _singleton;
+  }
+
+  AddTaskService._internal() {
+    Logs.t('[AddTaskService] Initialized');
+  }
 
   Future<void> addTask(CreateTaskModel input) async {
     Map<String, dynamic> data = input.toJson();

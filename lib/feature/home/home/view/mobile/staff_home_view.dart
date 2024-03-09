@@ -1,20 +1,20 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/home/controller/index.dart';
-import 'package:timesync360/feature/home/home/widget/attendance_card.dart';
-import 'package:timesync360/feature/home/home/widget/attendance_detail_card.dart';
-import 'package:timesync360/feature/home/home/widget/overview_card.dart';
-import 'package:timesync360/feature/home/home/widget/record_card.dart';
-import 'package:timesync360/feature/home/home/widget/status_dot.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/home/controller/index.dart';
+import 'package:timesync/feature/home/home/widget/attendance_card.dart';
+import 'package:timesync/feature/home/home/widget/attendance_detail_card.dart';
+import 'package:timesync/feature/home/home/widget/overview_card.dart';
+import 'package:timesync/feature/home/home/widget/record_card.dart';
+import 'package:timesync/feature/home/home/widget/status_dot.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,21 +33,21 @@ class HomeStaffMobileView extends StatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(
-            left: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            left: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
-            right: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            right: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
-            top: AppSize.paddingTitleSmall,
+            top: AppSize().paddingTitleSmall,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: SizeUtils.scale(55, size.width),
+                height: SizeUtils.scaleMobile(55, size.width),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -57,8 +57,8 @@ class HomeStaffMobileView extends StatelessWidget {
                           () => MyCacheImage(
                             imageUrl:
                                 NavigationController.to.user.value.image ?? "",
-                            width: SizeUtils.scale(55, size.width),
-                            height: SizeUtils.scale(55, size.width),
+                            width: SizeUtils.scaleMobile(55, size.width),
+                            height: SizeUtils.scaleMobile(55, size.width),
                           ),
                         ),
                         Positioned(
@@ -88,7 +88,7 @@ class HomeStaffMobileView extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(width: AppSize.paddingS5),
+                    SizedBox(width: AppSize().paddingS5),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -96,15 +96,15 @@ class HomeStaffMobileView extends StatelessWidget {
                         Obx(
                           () => Container(
                             constraints: BoxConstraints(
-                              maxWidth: SizeUtils.scale(240, size.width),
+                              maxWidth: SizeUtils.scaleMobile(240, size.width),
                             ),
                             child: MyText(
-                              text: StringUtil().getfullname(
+                              text: StringUtil.getfullname(
                                 controller.user.value.firstName,
                                 controller.user.value.lastName,
                                 controller.user.value.username,
                               ),
-                              style: BodyXlargeMedium,
+                              style: AppFonts().bodyXlargeMedium,
                             ),
                           ),
                         ),
@@ -112,7 +112,7 @@ class HomeStaffMobileView extends StatelessWidget {
                           () => MyText(
                             text: NavigationController.to.position.value.name ??
                                 "-----",
-                            style: BodyMediumRegular,
+                            style: AppFonts().bodyMediumRegular,
                           ),
                         )
                       ],
@@ -122,12 +122,13 @@ class HomeStaffMobileView extends StatelessWidget {
               ),
               SizedBox(height: size.height * 0.02),
               MyText(
-                text: "Attendance ",
-                style: BodyXlargeMedium,
+                text: "Attendance",
+                style: AppFonts().bodyXlargeMedium,
               ),
               SizedBox(height: size.height * 0.015),
               Obx(
                 () => AttendanceCard(
+                  isInOfficeRange: NavigationController.to.isInRange.value,
                   scale: controller.scaleAnimation,
                   onCheckIn: controller.checkIn,
                   onCheckOut: controller.checkOut,
@@ -172,7 +173,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               MyText(
                 text: "Overview",
-                style: BodyXlargeMedium,
+                style: AppFonts().bodyXlargeMedium,
               ),
               SizedBox(height: size.height * 0.02),
               Row(
@@ -211,7 +212,7 @@ class HomeStaffMobileView extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               MyText(
                 text: "Today Record",
-                style: BodyXlarge,
+                style: AppFonts().bodyXlarge,
               ),
               SizedBox(height: size.height * 0.02),
               Obx(

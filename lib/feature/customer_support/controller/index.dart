@@ -1,11 +1,11 @@
-import 'package:timesync360/feature/customer_support/model/support_button.dart';
+import 'package:timesync/feature/customer_support/model/support_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomerSupportController extends GetxController {
   static CustomerSupportController get to => Get.find();
 
-  List<SupportButtonModel> buttons = [
+  final buttons = [
     SupportButtonModel(
       title: 'Contact Live Chat',
       leadingIcon: Icons.support_agent_rounded,

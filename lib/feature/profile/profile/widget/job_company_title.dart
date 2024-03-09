@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 
 class JobCompanyTitle extends StatelessWidget {
@@ -24,16 +24,16 @@ class JobCompanyTitle extends StatelessWidget {
           ),
           child: MyText(
             text: organization,
-            style: BodyMediumRegular.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: AppFonts().bodyMediumRegular.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
         ),
         MyText(
           text: " | ",
-          style: BodyMediumRegular.copyWith(
-            color: Theme.of(context).colorScheme.primary,
-          ),
+          style: AppFonts().bodyMediumRegular.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
         ),
         Container(
           constraints: BoxConstraints(
@@ -41,9 +41,9 @@ class JobCompanyTitle extends StatelessWidget {
           ),
           child: MyText(
             text: position,
-            style: BodyMediumRegular.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: AppFonts().bodyMediumRegular.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
         ),
       ],

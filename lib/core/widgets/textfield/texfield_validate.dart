@@ -1,9 +1,9 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -26,6 +26,8 @@ class MyTextFieldForm extends StatelessWidget {
   final int? maxlines;
   final bool? haveSuffixIcon;
   final void Function()? onTapShowPassword;
+  final FocusNode? focusNode;
+  final TextInputType? keyboardType;
 
   const MyTextFieldForm({
     super.key,
@@ -44,8 +46,10 @@ class MyTextFieldForm extends StatelessWidget {
     this.isPassword,
     this.prefixIcon,
     this.maxlines,
+    this.focusNode,
     this.onTapShowPassword,
     this.haveSuffixIcon,
+    this.keyboardType,
   });
 
   @override
@@ -64,142 +68,163 @@ class MyTextFieldForm extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : MyText(
                     text: label,
-                    style: labelStyle ?? BodyMediumMedium,
+                    style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
-            const SizedBox(height: AppSize.paddingS5),
-            TextFormField(
-              controller: textController,
-              textCapitalization: textCapitalization ?? TextCapitalization.none,
-              inputFormatters: inputFormatters,
-              obscureText: isPassword ?? false,
-              maxLines: maxlines ?? 1,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scale(AppSize.paddingS7, size.width),
-                ),
-                prefix: prefixIcon == null
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                          left: SizeUtils.scale(
-                            AppSize.paddingS17,
-                            size.width,
-                          ),
-                        ),
-                      )
-                    : null,
-                suffix: prefixIcon == null
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                          left: SizeUtils.scale(
-                            AppSize.paddingS17,
-                            size.width,
-                          ),
-                        ),
-                      )
-                    : null,
-                prefixIcon: prefixIcon == null
-                    ? null
-                    : Icon(
-                        prefixIcon,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                suffixIcon: haveSuffixIcon == true
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                          right: SizeUtils.scale(10, size.width),
-                        ),
-                        child: GestureDetector(
-                          onTap: onTapShowPassword,
-                          child: Icon(
-                            isPassword == false
-                                ? Icons.visibility_off_rounded
-                                : Icons.visibility_rounded,
-                            color: Theme.of(context).colorScheme.onBackground,
-                            size: SizeUtils.scale(20, size.width),
-                          ),
-                        ),
-                      )
-                    : null,
-                hintText: hintText?.trString,
-                isDense: true,
-                hintStyle: hintStyle ?? BodyMediumMedium,
-                filled: filled ?? false,
-                fillColor: filled == true
-                    ? Theme.of(context).colorScheme.secondaryContainer
-                    : null,
-                errorMaxLines: 2,
-                focusedBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                  ),
-                  borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
-                  ),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                  ),
-                  borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
-                  ),
-                ),
-                errorBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                  ),
-                  borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-                ),
-                focusedErrorBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                  ),
-                  borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-                ),
-                errorStyle: errorStyle ?? BodyXSmallMedium,
+            SizedBox(
+              height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+            ),
+            Theme(
+              data: Theme.of(context).copyWith(
+                primaryColor: Theme.of(context).colorScheme.error,
               ),
-              style: style ?? BodyMediumMedium,
-              onChanged: (value) {
-                controller.formKey.currentState?.validate();
-              },
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '$label is required';
-                }
-                return null;
-              },
+              child: TextFormField(
+                focusNode: focusNode,
+                controller: textController,
+                textCapitalization:
+                    textCapitalization ?? TextCapitalization.none,
+                inputFormatters: inputFormatters,
+                obscureText: isPassword ?? false,
+                maxLines: maxlines ?? 1,
+                keyboardType: keyboardType,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical:
+                        SizeUtils.scaleMobile(AppSize().paddingS7, size.width),
+                  ),
+                  prefix: prefixIcon == null
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                            left: SizeUtils.scaleMobile(
+                              AppSize().paddingS17,
+                              size.width,
+                            ),
+                          ),
+                        )
+                      : null,
+                  suffix: prefixIcon == null
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                            left: SizeUtils.scaleMobile(
+                              AppSize().paddingS17,
+                              size.width,
+                            ),
+                          ),
+                        )
+                      : null,
+                  prefixIcon: prefixIcon == null
+                      ? null
+                      : Icon(
+                          prefixIcon,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                  suffixIcon: haveSuffixIcon == true
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                            right: SizeUtils.scaleMobile(10, size.width),
+                          ),
+                          child: GestureDetector(
+                            onTap: onTapShowPassword,
+                            child: Icon(
+                              isPassword == false
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
+                              color: Theme.of(context).colorScheme.onBackground,
+                              size: SizeUtils.scaleMobile(20, size.width),
+                            ),
+                          ),
+                        )
+                      : null,
+                  hintText: hintText?.trString,
+                  isDense: true,
+                  hintStyle: hintStyle ?? AppFonts().bodyMediumMedium,
+                  filled: filled ?? false,
+                  fillColor: filled == true
+                      ? Theme.of(context).colorScheme.primary.withOpacity(0.095)
+                      : null,
+                  errorMaxLines: 2,
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                      topRight: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                    ),
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.9),
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                      topRight: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                    ),
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.9),
+                    ),
+                  ),
+                  errorBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                      topRight: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                    ),
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                  focusedErrorBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                      topRight: Radius.circular(
+                        (borderRadius ?? AppSize().borderRadiusSmall) *
+                            (size.width / 375.0),
+                      ),
+                    ),
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                  errorStyle: errorStyle ?? AppFonts().bodyXSmallMedium,
+                ),
+                style: style ?? AppFonts().bodyMediumMedium,
+                onChanged: (value) {
+                  controller.formKey.currentState?.validate();
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '$label is required';
+                  }
+                  return null;
+                },
+              ),
             ),
           ],
         ),

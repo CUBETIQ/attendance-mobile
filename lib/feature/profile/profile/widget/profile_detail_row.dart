@@ -1,6 +1,6 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -17,27 +17,25 @@ class ProfileDetailRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          constraints: BoxConstraints(
-            maxWidth: SizeUtils.scale(80, size.width),
-          ),
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           alignment: Alignment.centerLeft,
           child: MyText(
             text: title ?? "Title",
-            style: BodyMediumRegular,
+            style: AppFonts().bodyMediumRegular,
           ),
         ),
-        Container(
-          constraints: BoxConstraints(
-            maxWidth: SizeUtils.scale(170, size.width),
-          ),
-          padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
-          alignment: Alignment.centerRight,
-          child: MyText(
-            text: value != "" && value != null
-                ? value.capitalizeMaybeNull ?? "N/A"
-                : "N/A",
-            style: BodyMediumRegular,
+        Flexible(
+          child: Container(
+            padding:
+                EdgeInsets.only(right: SizeUtils.scaleMobile(10, size.width)),
+            alignment: Alignment.centerRight,
+            child: MyText(
+              text: value != "" && value != null
+                  ? value.capitalizeMaybeNull ?? "N/A"
+                  : "N/A",
+              overflow: TextOverflow.ellipsis,
+              style: AppFonts().bodyMediumRegular,
+            ),
           ),
         ),
       ],

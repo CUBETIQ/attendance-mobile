@@ -1,14 +1,24 @@
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/feature/auth/change_password/model/chnage_password_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/auth/change_password/model/change_password_model.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class ChangePasswordService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = ChangePasswordService._internal();
+  final dioInstance = DioUtil();
+
+  factory ChangePasswordService() {
+    return _singleton;
+  }
+
+  ChangePasswordService._internal() {
+    Logs.t('[ChangePasswordService] Initialized');
+  }
 
   Future<void> changeStaffPassword(
       {required String id, required String newPassword}) async {
-    final Map<String, dynamic> data = {
+    final data = {
       "newPassword": newPassword,
     };
     Response response = await dioInstance.dio.put(
@@ -16,15 +26,12 @@ class ChangePasswordService {
       data: data,
     );
     if (response.statusCode != 200) {
-      throw Exception("Change password failed");
+      throw Exception(response.data["message"]);
     }
   }
 
   Future<void> changeUserPassword(ChangePasswordModel input) async {
-    final Map<String, dynamic> data = {
-      "oldPassword": input.oldPassword,
-      "newPassword": input.newPassword,
-    };
+    final data = input.toJson();
     Response response = await dioInstance.dio.put(
       Endpoints.instance.change_password,
       data: data,

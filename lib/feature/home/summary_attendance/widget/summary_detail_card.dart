@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
 import 'package:flutter/material.dart';
 
 class SummaryDetailCard extends StatelessWidget {
@@ -25,10 +25,10 @@ class SummaryDetailCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(60, size.width),
+      height: SizeUtils.scaleMobile(60, size.width),
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scale(
-          AppSize.paddingHorizontalLarge,
+        horizontal: SizeUtils.scaleMobile(
+          AppSize().paddingHorizontalLarge,
           size.width,
         ),
       ),
@@ -38,26 +38,26 @@ class SummaryDetailCard extends StatelessWidget {
             children: [
               MyCacheImage(
                 imageUrl: staff.image,
-                width: SizeUtils.scale(40, size.width),
-                height: SizeUtils.scale(40, size.width),
+                width: SizeUtils.scaleMobile(40, size.width),
+                height: SizeUtils.scaleMobile(40, size.width),
               ),
-              SizedBox(width: SizeUtils.scale(10, size.width)),
+              SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
               MyText(
-                text: StringUtil().getfullname(
+                text: StringUtil.getfullname(
                   staff.firstName,
                   staff.lastName,
                   staff.username,
                 ),
-                style: BodyMediumMedium,
+                style: AppFonts().bodyMediumMedium,
               ),
             ],
           ),
           const Spacer(),
           MyText(
             text: status,
-            style: BodyMediumMedium.copyWith(
-              color: valueColor,
-            ),
+            style: AppFonts().bodyMediumMedium.copyWith(
+                  color: valueColor,
+                ),
           ),
         ],
       ),

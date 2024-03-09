@@ -1,12 +1,12 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
-import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/core/widgets/textfield/time_picker_field.dart';
-import 'package:timesync360/feature/organization/edit_organization/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/profile_image/profile_image.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/core/widgets/textfield/time_picker_field.dart';
+import 'package:timesync/feature/organization/edit_organization/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,29 +23,28 @@ class EditOrganizationViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scale(30, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
                   () => MyProfileImage(
                     imageFile: controller.imageFile.value,
                     imageUrl: controller.image.value,
-                    width: SizeUtils.scale(110, size.width),
-                    height: SizeUtils.scale(110, size.width),
-                    imageHeight: SizeUtils.scale(80, size.width),
-                    imageWidth: SizeUtils.scale(80, size.width),
+                    width: SizeUtils.scaleMobile(110, size.width),
+                    height: SizeUtils.scaleMobile(110, size.width),
+                    imageHeight: SizeUtils.scaleMobile(80, size.width),
+                    imageWidth: SizeUtils.scaleMobile(80, size.width),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -56,7 +55,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                 hintText: "Enter your organization name",
                 textController: controller.nameController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Row(
                 children: [
                   Expanded(
@@ -68,7 +67,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: SizeUtils.scale(10, size.width),
+                    width: SizeUtils.scaleMobile(10, size.width),
                   ),
                   Expanded(
                     child: MyTimePickerField(
@@ -80,14 +79,14 @@ class EditOrganizationViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Address",
                 hintText: "Enter your organization address",
                 textController: controller.addressController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               Row(
                 children: [
                   Expanded(
@@ -99,7 +98,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: SizeUtils.scale(10, size.width),
+                    width: SizeUtils.scaleMobile(10, size.width),
                   ),
                   Expanded(
                     child: MyTimePickerField(
@@ -111,7 +110,7 @@ class EditOrganizationViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",
@@ -119,8 +118,8 @@ class EditOrganizationViewMobile extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              SizedBox(height: SizeUtils.scale(30, size.width)),
-              MyButton(
+              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
+              MyAsyncButton(
                 title: "Save",
                 onTap: controller.updateOrganization,
               ),

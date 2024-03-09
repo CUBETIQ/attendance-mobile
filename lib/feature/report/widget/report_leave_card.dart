@@ -1,9 +1,10 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,12 +18,12 @@ class ReportLeaveCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(75, size.width),
+      height: SizeUtils.scaleMobile(75, size.width),
       padding: EdgeInsets.only(
-        right: SizeUtils.scale(20, size.width),
+        right: SizeUtils.scaleMobile(20, size.width),
       ),
       borderRadius: BorderRadius.circular(
-        SizeUtils.scale(
+        SizeUtils.scaleMobile(
           14,
           size.width,
         ),
@@ -30,18 +31,18 @@ class ReportLeaveCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: SizeUtils.scale(35, size.width),
-            height: SizeUtils.scale(75, size.width),
+            width: SizeUtils.scaleMobile(35, size.width),
+            height: SizeUtils.scaleMobile(75, size.width),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(
-                  SizeUtils.scale(
+                  SizeUtils.scaleMobile(
                     14,
                     size.width,
                   ),
                 ),
                 bottomLeft: Radius.circular(
-                  SizeUtils.scale(
+                  SizeUtils.scaleMobile(
                     14,
                     size.width,
                   ),
@@ -51,7 +52,7 @@ class ReportLeaveCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: SizeUtils.scale(15, size.width),
+            width: SizeUtils.scaleMobile(15, size.width),
           ),
           Expanded(
             child: Column(
@@ -66,13 +67,12 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "From",
-                          style: BodyMediumSemi,
+                          style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scale(2, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                         MyText(
-                          text: DateFormatter()
-                              .formatMillisecondsToDOB(leave.from),
-                          style: BodySmallRegular,
+                          text: DateUtil.formatMillisecondsToDOB(leave.from),
+                          style: AppFonts().bodySmallRegular,
                         ),
                       ],
                     ),
@@ -82,13 +82,12 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "To",
-                          style: BodyMediumSemi,
+                          style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scale(2, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                         MyText(
-                          text:
-                              DateFormatter().formatMillisecondsToDOB(leave.to),
-                          style: BodySmallRegular,
+                          text: DateUtil.formatMillisecondsToDOB(leave.to),
+                          style: AppFonts().bodySmallRegular,
                         ),
                       ],
                     ),
@@ -98,20 +97,20 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Status",
-                          style: BodyMediumSemi,
+                          style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scale(2, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                         MyText(
                           text: leave.status?.capitalizeFirst ?? "N/A",
-                          style: BodySmallSemi.copyWith(
-                            color: Colors.green,
-                          ),
+                          style: AppFonts().bodySmallSemi.copyWith(
+                                color: Colors.green,
+                              ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                SizedBox(height: SizeUtils.scale(5, size.width)),
+                SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -119,13 +118,13 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Type: ",
-                          style: BodySmallMedium,
+                          style: AppFonts().bodySmallMedium,
                         ),
                         MyText(
                           text: leave.type?.capitalizeFirst ?? "N/A",
-                          style: BodySmallMedium.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                          style: AppFonts().bodySmallMedium.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         ),
                       ],
                     ),
@@ -133,18 +132,22 @@ class ReportLeaveCard extends StatelessWidget {
                       children: [
                         MyText(
                           text: "Approver: ",
-                          style: BodySmallMedium,
+                          style: AppFonts().bodySmallMedium,
                         ),
                         Container(
                           constraints: BoxConstraints(
-                            maxWidth: SizeUtils.scale(100, size.width),
+                            maxWidth: SizeUtils.scaleMobile(100, size.width),
                           ),
                           child: MyText(
-                            text: leave.updateBy?["name"] ?? "N/A",
-                            overflow: TextOverflow.ellipsis,
-                            style: BodySmallMedium.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
+                            text: StringUtil.getfullname(
+                              leave.updateBy?.firstName,
+                              leave.updateBy?.lastName,
+                              leave.updateBy?.username,
                             ),
+                            overflow: TextOverflow.ellipsis,
+                            style: AppFonts().bodySmallMedium.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                           ),
                         ),
                       ],

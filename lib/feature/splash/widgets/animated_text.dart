@@ -1,5 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:timesync360/constants/font.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedText extends StatelessWidget {
@@ -22,7 +22,7 @@ class AnimatedText extends StatelessWidget {
         WavyAnimatedText(
           title,
           speed: Duration(milliseconds: speed ?? 250),
-          textStyle: textStyle ?? BodyXlargeMedium,
+          textStyle: textStyle ?? AppFonts().bodyXlargeMedium,
           textAlign: TextAlign.center,
         ),
       ],

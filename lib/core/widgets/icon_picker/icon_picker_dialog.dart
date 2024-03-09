@@ -1,10 +1,10 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class IconPicker extends StatefulWidget {
-  final void Function(String?)? onChangeResult;
+  final void Function(IconPickerResult)? onChangeResult;
   const IconPicker({super.key, this.onChangeResult});
 
   @override
@@ -16,6 +16,7 @@ class _IconPickerState extends State<IconPicker> {
   IconData selectedIcon = Icons.task;
   int? selectedIndex;
   String? icon;
+  String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class _IconPickerState extends State<IconPicker> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppSize.borderRadiusLarge *
+                AppSize().borderRadiusLarge *
                     (MediaQuery.of(context).size.width / 375.0),
               ),
               color: Theme.of(context).colorScheme.secondaryContainer,
@@ -44,7 +45,7 @@ class _IconPickerState extends State<IconPicker> {
                       crossAxisCount: 4,
                       mainAxisSpacing: 16,
                     ),
-                    padding: EdgeInsets.all(AppSize.paddingS5 *
+                    padding: EdgeInsets.all(AppSize().paddingS5 *
                         (MediaQuery.of(context).size.width / 375.0)),
                     itemCount: sortedKeys.length,
                     itemBuilder: (context, index) {
@@ -56,7 +57,12 @@ class _IconPickerState extends State<IconPicker> {
                             selectedIndex = index;
                             selectedIcon = iconsMap[sortedKeys[index]]!;
                             icon = selectedIcon.codePoint.toString();
-                            widget.onChangeResult?.call(icon);
+
+                            String iconName = sortedKeys[selectedIndex!];
+                            IconPickerResult result =
+                                IconPickerResult(icon, iconName);
+
+                            widget.onChangeResult?.call(result);
                           });
                         },
                         child: Column(
@@ -116,6 +122,13 @@ class _IconPickerState extends State<IconPicker> {
       ),
     );
   }
+}
+
+class IconPickerResult {
+  final String? iconCode;
+  final String? iconName;
+
+  IconPickerResult(this.iconCode, this.iconName);
 }
 
 final iconsMap = {

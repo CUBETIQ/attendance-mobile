@@ -1,25 +1,25 @@
 import 'dart:async';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/model/attendance_chart_model.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/summary_attendance_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/feature/home/home/model/check_in_model.dart';
-import 'package:timesync360/feature/home/home/model/check_out_model.dart';
-import 'package:timesync360/feature/home/home/model/update_user_status_model.dart';
-import 'package:timesync360/feature/home/home/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/profile/profile/controller/index.dart';
-import 'package:timesync360/utils/attendance_util.dart';
-import 'package:timesync360/utils/types_helper/attendance_method.dart';
-import 'package:timesync360/utils/types_helper/role.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/user_status.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/attendance_chart_model.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/summary_attendance_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/home/home/model/check_in_model.dart';
+import 'package:timesync/feature/home/home/model/check_out_model.dart';
+import 'package:timesync/feature/home/home/model/update_user_status_model.dart';
+import 'package:timesync/feature/home/home/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/profile/profile/controller/index.dart';
+import 'package:timesync/utils/attendance_util.dart';
+import 'package:timesync/types/attendance_method.dart';
+import 'package:timesync/types/role.dart';
+import 'package:timesync/utils/double_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/user_status.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -95,7 +95,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxDouble latePercentage = 0.0.obs;
   RxDouble onTimePercentage = 0.0.obs;
   RxDouble earlyPercentage = 0.0.obs;
-  final _debounce = Debouncer(milliseconds: 500);
 
   @override
   void onInit() {
@@ -111,6 +110,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void onRefresh() {
+    NavigationController.to.getUserLocation();
     getAttendance();
     checkBreakTime();
     getSummarizeAttendance();
@@ -139,8 +139,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
     if (picked != null) {
       selectDate.value = picked;
-      startOfDay.value = DateTimeUtil().getStartOfDayInMilisecond(picked);
-      endOfDay.value = DateTimeUtil().getEndOfDayInMilisecond(picked);
+      startOfDay.value = DateUtil.getStartOfDayInMilisecond(picked);
+      endOfDay.value = DateUtil.getEndOfDayInMilisecond(picked);
       getDashboardChart();
       getAllStaffAttendance();
     }
@@ -185,87 +185,83 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> checkIn() async {
-    _debounce.run(() async {
-      if (await checkUserLocation() == false) {
-        return;
-      }
-      DateTime now = await checkTime();
-      if (now.hour > endHour.value.split(":").first.toInt()) {
-        showErrorSnackBar("Error", "You can't check in after $endHour");
-        return;
-      } else {
-        controller.forward();
-        checkOutTime.value = null;
-        totalHour.value = null;
-        try {
-          LocationModel location = LocationModel(
-            lat: NavigationController.to.userLocation.value?.latitude,
-            lng: NavigationController.to.userLocation.value?.longitude,
-            inOffice: NavigationController.to.isInRange.value,
-          );
-          CheckInModel input = CheckInModel(
-            checkInDateTime: now.millisecondsSinceEpoch,
-            checkInType: AttendanceMethod.manual,
-            checkInStatus:
-                CheckInStatusValidator().getStatus(startHour.value, now),
-            checkInEarly: GetMinute().checkEarlyMinute(startHour.value, now),
-            checkInLate: GetMinute().checkLateMinute(startHour.value, now),
-            checkInLocation: location,
-          );
-          AttendanceModel checkIn = await HomeService().checkIn(input);
-          checkInTime.value = DateFormatter().formatTime(
-            DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
-          );
-          await getAttendance();
-          isCheckedIn.value = true;
-          await getSummarizeAttendance();
-          if (Get.isRegistered<ProfileController>()) {
-            ProfileController.to.getSummarizeAttendance();
-          }
-          getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
-        }
-      }
-    });
-  }
-
-  Future<void> checkOut() async {
-    _debounce.run(() async {
-      if (await checkUserLocation() == false) {
-        return;
-      }
+    final checkLocation = await checkUserLocation();
+    if (checkLocation == false) {
+      return;
+    }
+    DateTime now = await checkTime();
+    final getEndhout = endHour.value.split(":").first;
+    if (now.hour > getEndhout.toInt()) {
+      showErrorSnackBar("Error", "You can't check in after $endHour");
+      return;
+    } else {
       controller.forward();
-      DateTime now = await checkTime();
+      checkOutTime.value = null;
+      totalHour.value = null;
       try {
         LocationModel location = LocationModel(
           lat: NavigationController.to.userLocation.value?.latitude,
           lng: NavigationController.to.userLocation.value?.longitude,
           inOffice: NavigationController.to.isInRange.value,
         );
-
-        CheckOutModel input = CheckOutModel(
-          checkOutDateTime: now.millisecondsSinceEpoch,
-          checkOutType: AttendanceMethod.manual,
-          checkOutStatus:
-              CheckOutStatusValidator().getStatus(endHour.value, now),
-          checkOutEarly: GetMinute().checkEarlyMinute(endHour.value, now),
-          checkOutLate: GetMinute().checkLateMinute(endHour.value, now),
-          checkOutLocation: location,
+        CheckInModel input = CheckInModel(
+          checkInDateTime: now.millisecondsSinceEpoch,
+          checkInType: AttendanceMethod.manual,
+          checkInStatus: CheckInStatusValidator.getStatus(startHour.value, now),
+          checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
+          checkInLate: GetMinute.checkLateMinute(startHour.value, now),
+          checkInLocation: location,
         );
-        AttendanceModel checkOut = await HomeService().checkOut(input);
-        checkOutTime.value = DateFormatter().formatTime(
-          DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
+        AttendanceModel checkIn = await HomeService().checkIn(input);
+        checkInTime.value = DateUtil.formatTime(
+          DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
         );
-        isCheckedIn.value = false;
         await getAttendance();
-        getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+        isCheckedIn.value = true;
+        await getSummarizeAttendance();
+        if (Get.isRegistered<ProfileController>()) {
+          ProfileController.to.getSummarizeAttendance();
+        }
+        getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
       }
-    });
+    }
+  }
+
+  Future<void> checkOut() async {
+    final checkLocation = await checkUserLocation();
+    if (checkLocation == false) {
+      return;
+    }
+    controller.forward();
+    DateTime now = await checkTime();
+    try {
+      LocationModel location = LocationModel(
+        lat: NavigationController.to.userLocation.value?.latitude,
+        lng: NavigationController.to.userLocation.value?.longitude,
+        inOffice: NavigationController.to.isInRange.value,
+      );
+      CheckOutModel input = CheckOutModel(
+        checkOutDateTime: now.millisecondsSinceEpoch,
+        checkOutType: AttendanceMethod.manual,
+        checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
+        checkOutEarly: GetMinute.checkEarlyMinute(endHour.value, now),
+        checkOutLate: GetMinute.checkLateMinute(endHour.value, now),
+        checkOutLocation: location,
+      );
+      AttendanceModel checkOut = await HomeService().checkOut(input);
+      checkOutTime.value = DateUtil.formatTime(
+        DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
+      );
+      isCheckedIn.value = false;
+      await getAttendance();
+      getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> updateUserStatus(String status) async {
@@ -290,11 +286,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       );
       if (attendanceList.isNotEmpty) {
         if (attendanceList.last.checkOutDateTime != null) {
-          totalHour.value = DateFormatter().formatMinutes(
+          totalHour.value = DateUtil.formatMinutes(
             attendanceList.last.duration!,
           );
         }
-        checkInTime.value = DateFormatter().formatTime(
+        checkInTime.value = DateUtil.formatTime(
           DateTime.fromMillisecondsSinceEpoch(
             attendanceList.last.checkInDateTime!,
           ),
@@ -302,7 +298,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
         } else {
-          checkOutTime.value = DateFormatter().formatTime(
+          checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
               attendanceList.last.checkOutDateTime!,
             ),
@@ -351,29 +347,35 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       if (attendanceChart.isNotEmpty) {
         totalStaff.value = attendanceChart.first.totalStaff ?? 0;
         haveNoData.value = false;
-        for (var element in attendanceChart) {
-          totalChartPresent.value += element.totalAttendance ?? 0;
-          totalChartAbsent.value += element.totalAbsent ?? 0;
-          totalChartLeave.value += element.totalLeave ?? 0;
-          totalCheckInLate.value += element.totalCheckinLate ?? 0;
-          totalCheckInOnTime.value += element.totalCheckinOnTime ?? 0;
-          totalCheckInEarly.value += element.totalCheckinEarly ?? 0;
-          totalCheckOutLate.value += element.totalCheckoutLate ?? 0;
-          totalCheckOutOnTime.value += element.totalCheckoutOnTime ?? 0;
-          totalCheckOutEarly.value += element.totalCheckoutEarly ?? 0;
-        }
-        presentPercentage.value =
-            (totalChartPresent.value / totalStaff.value) * 100;
-        absentPercentage.value =
-            (totalChartAbsent.value / totalStaff.value) * 100;
-        onLeavePercentage.value =
-            (totalChartLeave.value / totalStaff.value) * 100;
-        latePercentage.value =
-            ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
-        onTimePercentage.value =
-            ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
-        earlyPercentage.value =
-            ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
+
+        totalChartPresent.value = attendanceChart.first.totalAttendance ?? 0;
+        totalChartAbsent.value = attendanceChart.first.totalAbsent ?? 0;
+        totalChartLeave.value = attendanceChart.first.totalLeave ?? 0;
+        totalCheckInLate.value = attendanceChart.first.totalCheckinLate ?? 0;
+        totalCheckInOnTime.value =
+            attendanceChart.first.totalCheckinOnTime ?? 0;
+        totalCheckInEarly.value = attendanceChart.first.totalCheckinEarly ?? 0;
+        totalCheckOutLate.value = attendanceChart.first.totalCheckoutLate ?? 0;
+        totalCheckOutOnTime.value =
+            attendanceChart.first.totalCheckoutOnTime ?? 0;
+        totalCheckOutEarly.value =
+            attendanceChart.first.totalCheckoutEarly ?? 0;
+
+        // Percentage for attendance chart
+        presentPercentage.value = DoubleUtil.caculatePercentage(
+            totalChartPresent.value, totalStaff.value);
+        absentPercentage.value = DoubleUtil.caculatePercentage(
+            totalChartAbsent.value, totalStaff.value);
+        onLeavePercentage.value = DoubleUtil.caculatePercentage(
+            totalChartLeave.value, totalStaff.value);
+
+        // Percentage for check in and check out
+        latePercentage.value = DoubleUtil.caculatePercentageForProgress(
+            totalCheckInLate.value, totalStaff.value);
+        onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
+            totalCheckInOnTime.value, totalStaff.value);
+        earlyPercentage.value = DoubleUtil.caculatePercentageForProgress(
+            totalCheckInEarly.value, totalStaff.value);
       } else {
         haveNoData.value = true;
       }
@@ -457,18 +459,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         .millisecondsSinceEpoch;
     endOfDay.value = DateTime(date.year, date.month, date.day, 23, 59, 59)
         .millisecondsSinceEpoch;
-
     startOfMonth.value =
         DateTime(date.year, date.month, 1, 0, 0, 0).millisecondsSinceEpoch;
-
     endOfMonth.value = DateTime(date.year, date.month + 1, 0, 23, 59, 59)
         .millisecondsSinceEpoch;
-
     startHour.value =
         NavigationController.to.organization.value.configs?.startHour ?? "8:00";
     endHour.value =
         NavigationController.to.organization.value.configs?.endHour ?? "17:00";
-
     currentDate.value = DateFormat('E, MMM dd').format(date);
   }
 
@@ -521,19 +519,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       isCheckIn.value = !isCheckIn.value;
       if (attendanceChart.isNotEmpty) {
         if (selectedAttendanceType.value == "Check In") {
-          latePercentage.value =
-              ((totalCheckInLate.value / totalStaff.value) * 100) / 100;
-          onTimePercentage.value =
-              ((totalCheckInOnTime.value / totalStaff.value) * 100) / 100;
-          earlyPercentage.value =
-              ((totalCheckInEarly.value / totalStaff.value) * 100) / 100;
+          latePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckInLate.value, totalStaff.value);
+          onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckInOnTime.value, totalStaff.value);
+          earlyPercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckInEarly.value, totalStaff.value);
         } else {
-          latePercentage.value =
-              ((totalCheckOutLate.value / totalStaffs.value) * 100) / 100;
-          onTimePercentage.value =
-              ((totalCheckOutOnTime.value / totalStaffs.value) * 100) / 100;
-          earlyPercentage.value =
-              ((totalCheckOutEarly.value / totalStaffs.value) * 100) / 100;
+          latePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckOutLate.value, totalStaffs.value);
+          onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckOutOnTime.value, totalStaffs.value);
+          earlyPercentage.value = DoubleUtil.caculatePercentageForProgress(
+              totalCheckOutEarly.value, totalStaffs.value);
         }
       }
     }

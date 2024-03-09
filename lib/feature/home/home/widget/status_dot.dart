@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/utils/types_helper/user_status.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/types/user_status.dart';
 import 'package:flutter/material.dart';
 
 class StatusDot extends StatelessWidget {
@@ -22,7 +22,7 @@ class StatusDot extends StatelessWidget {
                     ? Colors.yellow
                     : Colors.red,
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusLarge * (size.width / 375.0),
+          AppSize().borderRadiusLarge * (size.width / 375.0),
         ),
         border: Border.all(
           color: Colors.white,

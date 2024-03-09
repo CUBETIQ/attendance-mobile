@@ -1,24 +1,24 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
-import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/feature/home/home/controller/index.dart';
-import 'package:timesync360/feature/home/home/view/mobile/staff_home_view.dart';
-import 'package:timesync360/feature/home/home/widget/button_card.dart';
-import 'package:timesync360/core/widgets/dropdown_button/date_dropdown.dart';
-import 'package:timesync360/feature/home/home/widget/linear_indicator.dart';
-import 'package:timesync360/feature/home/home/widget/pie_chart_card.dart';
-import 'package:timesync360/feature/home/home/widget/staff_attendance_card.dart';
-import 'package:timesync360/feature/home/home/widget/tab_bar.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/home/home/controller/index.dart';
+import 'package:timesync/feature/home/home/view/mobile/staff_home_view.dart';
+import 'package:timesync/feature/home/home/widget/button_card.dart';
+import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/feature/home/home/widget/linear_indicator.dart';
+import 'package:timesync/feature/home/home/widget/pie_chart_card.dart';
+import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
+import 'package:timesync/feature/home/home/widget/tab_bar.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,16 +44,16 @@ class HomeAdminMobileView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      left: SizeUtils.scale(
-                        AppSize.paddingHorizontalLarge,
+                      left: SizeUtils.scaleMobile(
+                        AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
-                      right: SizeUtils.scale(
-                        AppSize.paddingHorizontalLarge,
+                      right: SizeUtils.scaleMobile(
+                        AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
-                      top: SizeUtils.scale(
-                          AppSize.paddingVerticalLarge, size.width),
+                      top: SizeUtils.scaleMobile(
+                          AppSize().paddingVerticalLarge, size.width),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,10 +63,11 @@ class HomeAdminMobileView extends StatelessWidget {
                           children: [
                             MyText(
                               text: 'Overall Attendance',
-                              style: BodyLargeMedium.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                              ),
+                              style: AppFonts().bodyLargeMedium.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
                             ),
                             Obx(
                               () => DateDropDown(
@@ -77,7 +78,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                         Obx(
                           () => AttendancePieChartCard(
                             onTap: () => Get.toNamed(
@@ -101,7 +102,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             haveNoData: controller.haveNoData.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                         Row(
                           children: [
                             Expanded(
@@ -114,7 +115,8 @@ class HomeAdminMobileView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(width: SizeUtils.scale(20, size.width)),
+                            SizedBox(
+                                width: SizeUtils.scaleMobile(20, size.width)),
                             Expanded(
                               child: ButtonCard(
                                 icon: Icons.timer_rounded,
@@ -133,39 +135,58 @@ class HomeAdminMobileView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             MyText(
-                              text: 'Attendance Statistics'.trString,
-                              style: BodyLargeMedium.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                              ),
+                              text: 'Attendance Statistic',
+                              style: AppFonts().bodyLargeMedium.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
                             ),
                             const Spacer(),
                             Obx(
                               () => MyDropDownButton<String>(
-                                width: SizeUtils.scale(130, size.width),
-                                height: SizeUtils.scale(30, size.width),
+                                width: SizeUtils.scaleMobile(130, size.width),
+                                height: SizeUtils.scaleMobile(30, size.width),
                                 isRoundedCorner: true,
                                 buttonPadding: EdgeInsets.symmetric(
-                                  horizontal: SizeUtils.scale(10, size.width),
+                                  horizontal:
+                                      SizeUtils.scaleMobile(10, size.width),
                                 ),
                                 dropdownPadding: EdgeInsets.symmetric(
-                                  horizontal: SizeUtils.scale(10, size.width),
-                                  vertical: SizeUtils.scale(10, size.width),
+                                  horizontal:
+                                      SizeUtils.scaleMobile(10, size.width),
+                                  vertical:
+                                      SizeUtils.scaleMobile(10, size.width),
                                 ),
                                 label: "Type",
                                 hasLabel: false,
                                 value: controller.selectedAttendanceType.value,
                                 hint: "Choose role",
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                                dropDownBackgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                                iconEnabledColor:
+                                    Theme.of(context).colorScheme.onPrimary,
                                 dropdownItems: controller.attendanceType
                                     .map(
                                       (e) => DropdownMenuItem<String>(
                                         value: e,
-                                        child: Text(e),
+                                        child: MyText(
+                                          text: e.trString,
+                                          style: AppFonts()
+                                              .bodyMediumMedium
+                                              .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary,
+                                              ),
+                                        ),
                                       ),
                                     )
                                     .toList(),
@@ -174,7 +195,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                         Obx(
                           () => LinearIndicator(
                             title: "Early",
@@ -188,7 +209,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             isCheckIn: controller.isCheckIn.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scale(10, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
                         Obx(
                           () => LinearIndicator(
                             title: "On Time",
@@ -202,7 +223,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             isCheckIn: controller.isCheckIn.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scale(10, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
                         Obx(
                           () => LinearIndicator(
                             title: "Late",
@@ -215,14 +236,15 @@ class HomeAdminMobileView extends StatelessWidget {
                             isCheckIn: controller.isCheckIn.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                         MyText(
                           text: 'Employee Attendance'.trString,
-                          style: BodyLargeMedium.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
+                          style: AppFonts().bodyLargeMedium.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
+                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                         Obx(
                           () => MyAsyncWidget(
                             isLoading: controller.isLoadingList.value,
@@ -232,10 +254,10 @@ class HomeAdminMobileView extends StatelessWidget {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.only(
-                                bottom: SizeUtils.scale(20, size.width),
+                                bottom: SizeUtils.scaleMobile(20, size.width),
                               ),
                               separatorBuilder: (context, index) => SizedBox(
-                                height: SizeUtils.scale(10, size.width),
+                                height: SizeUtils.scaleMobile(10, size.width),
                               ),
                               itemCount:
                                   controller.staffAttendanceList.value.length,

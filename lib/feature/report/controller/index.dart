@@ -1,43 +1,47 @@
-import 'package:timesync360/core/model/admin_attendance_report_model.dart';
-import 'package:timesync360/core/model/admin_leave_report_model.dart';
-import 'package:timesync360/core/model/admin_task_report_model.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/report/service/index.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_status.dart';
-import 'package:timesync360/utils/types_helper/role.dart';
+import 'package:timesync/core/model/admin_attendance_report_model.dart';
+import 'package:timesync/core/model/admin_leave_report_model.dart';
+import 'package:timesync/core/model/admin_task_report_model.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/report/service/index.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/role.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ReportController extends GetxController with GetTickerProviderStateMixin {
   static ReportController get to => Get.find();
-  RxList<AdminAttendanceReportModel> staffReports =
-      <AdminAttendanceReportModel>[].obs;
-  RxList<AdminLeaveReportModel> staffLeaveReports =
-      <AdminLeaveReportModel>[].obs;
-  RxList<AdminTaskReportModel> staffTaskReports = <AdminTaskReportModel>[].obs;
-  Rxn<int> startDate = Rxn<int>();
-  Rxn<int> endDate = Rxn<int>();
-  Rx<DateTime> selectedDate = DateTime.now().obs;
-  RxBool isLoading = false.obs;
-  Rx<DateTime> calendarFocusedDay = DateTime.now().obs;
-  Rxn<int> calendarStartOfTheMonth = Rxn<int>();
-  Rxn<int> calendarEndOfTheMonth = Rxn<int>();
-  Rxn<int> calendarStartOfTheDay = Rxn<int>();
-  Rxn<int> calendarEndOfTheDay = Rxn<int>();
-  RxList<AttendanceModel> attendanceList = <AttendanceModel>[].obs;
-  List<AttendanceModel> result = <AttendanceModel>[];
-  RxList<String> tabs = <String>[].obs;
+  final staffReports = <AdminAttendanceReportModel>[].obs;
+  final staffLeaveReports = <AdminLeaveReportModel>[].obs;
+  final staffTaskReports = <AdminTaskReportModel>[].obs;
+  final startDate = Rxn<int>();
+  final endDate = Rxn<int>();
+  final selectedDate = DateTime.now().obs;
+  final isLoading = false.obs;
+  final calendarFocusedDay = DateTime.now().obs;
+  final calendarStartOfTheMonth = Rxn<int>();
+  final calendarEndOfTheMonth = Rxn<int>();
+  final calendarStartOfTheDay = Rxn<int>();
+  final calendarEndOfTheDay = Rxn<int>();
+  final attendanceList = <AttendanceModel>[].obs;
+  final attendanceResult = <AttendanceModel>[].obs;
+  final tabs = <String>[].obs;
   late TabController? tabController;
-  RxMap<DateTime, List> events = <DateTime, List>{}.obs;
-  List<LeaveModel> leaveResult = <LeaveModel>[];
-  RxList<LeaveModel> leaves = <LeaveModel>[].obs;
-  Rx<DateTime> savedSelectedDate = DateTime.now().obs;
-  List<String> reportTab = ["Attendance", "Leave"];
+  final events = <DateTime, List>{}.obs;
+  final leaveResult = <LeaveModel>[].obs;
+  final leaves = <LeaveModel>[].obs;
+  final savedSelectedDate = DateTime.now().obs;
+  final reportTab = ["Attendance", "Leave"];
+  final reportTabIcon = [
+    Icons.work_off_rounded,
+    Icons.task,
+    Icons.person_rounded,
+  ];
+  final selectTabIndex = 2.obs;
 
   @override
   void onInit() {
@@ -128,18 +132,17 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     if (DateTime(date.year, date.month) !=
         DateTime(DateTime.now().year, DateTime.now().month)) {
       calendarStartOfTheMonth.value =
-          DateTimeUtil().getStartOfMonthInMilliseconds(date);
-      calendarEndOfTheMonth.value =
-          DateTimeUtil().getEndOfMonthInMilliseconds(date);
+          DateUtil.getStartOfMonthInMilliseconds(date);
+      calendarEndOfTheMonth.value = DateUtil.getEndOfMonthInMilliseconds(date);
       await getAttendance();
       await getLeave();
       onDaySelected(date, date);
     } else {
       calendarFocusedDay.value = DateTime.now();
       calendarStartOfTheMonth.value =
-          DateTimeUtil().getStartOfMonthInMilliseconds(DateTime.now());
+          DateUtil.getStartOfMonthInMilliseconds(DateTime.now());
       calendarEndOfTheMonth.value =
-          DateTimeUtil().getEndOfMonthInMilliseconds(DateTime.now());
+          DateUtil.getEndOfMonthInMilliseconds(DateTime.now());
       await getAttendance();
       await getLeave();
       onDaySelected(DateTime.now(), DateTime.now());
@@ -148,7 +151,7 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
 
   Future<void> getLeave() async {
     try {
-      leaveResult = await ReportService().getUserLeave(
+      leaveResult.value = await ReportService().getUserLeave(
         startDate: calendarStartOfTheMonth.value,
         endDate: calendarEndOfTheMonth.value,
       );
@@ -156,12 +159,12 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
           .where(
             (element) =>
                 (element.from ?? 0) >=
-                    (DateTimeUtil().getStartOfDayInMilisecond(
+                    (DateUtil.getStartOfDayInMilisecond(
                             savedSelectedDate.value) ??
                         0) &&
                 (element.from ?? 0) <=
-                    (DateTimeUtil()
-                            .getEndOfDayInMilisecond(savedSelectedDate.value) ??
+                    (DateUtil.getEndOfDayInMilisecond(
+                            savedSelectedDate.value) ??
                         0) &&
                 element.status == LeaveStatus.approved,
           )
@@ -192,29 +195,31 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
   Future<void> getAttendance({DateTime? date}) async {
     events.value = {};
     try {
-      result = await ReportService().getAttendance(
+      attendanceResult.value = await ReportService().getAttendance(
         startDate: calendarStartOfTheMonth.value,
         endDate: calendarEndOfTheMonth.value,
       );
-      attendanceList.value = result
+      attendanceList.value = attendanceResult
           .where((element) =>
               (element.checkInDateTime ?? 0) >=
-                  (DateTimeUtil()
-                          .getStartOfDayInMilisecond(savedSelectedDate.value) ??
+                  (DateUtil.getStartOfDayInMilisecond(
+                          savedSelectedDate.value) ??
                       0) &&
               (element.checkInDateTime ?? 0) <=
-                  (DateTimeUtil()
-                          .getEndOfDayInMilisecond(savedSelectedDate.value) ??
+                  (DateUtil.getEndOfDayInMilisecond(savedSelectedDate.value) ??
                       0))
           .toList();
-      for (var i = 0; i < result.length; i++) {
-        if (result[i].checkInDateTime != null) {
+      for (var i = 0; i < attendanceResult.length; i++) {
+        if (attendanceResult[i].checkInDateTime != null) {
           DateTime date = DateTime.utc(
-            DateTime.fromMillisecondsSinceEpoch(result[i].checkInDateTime ?? 0)
+            DateTime.fromMillisecondsSinceEpoch(
+                    attendanceResult[i].checkInDateTime ?? 0)
                 .year,
-            DateTime.fromMillisecondsSinceEpoch(result[i].checkInDateTime ?? 0)
+            DateTime.fromMillisecondsSinceEpoch(
+                    attendanceResult[i].checkInDateTime ?? 0)
                 .month,
-            DateTime.fromMillisecondsSinceEpoch(result[i].checkInDateTime ?? 0)
+            DateTime.fromMillisecondsSinceEpoch(
+                    attendanceResult[i].checkInDateTime ?? 0)
                 .day,
           );
           if (events.value.containsKey(date)) {
@@ -241,43 +246,47 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     );
     if (picked != null) {
       selectedDate.value = picked;
-      startDate.value = DateTimeUtil().getStartOfDayInMilisecond(picked);
-      endDate.value = DateTimeUtil().getEndOfDayInMilisecond(picked);
+      startDate.value = DateUtil.getStartOfDayInMilisecond(picked);
+      endDate.value = DateUtil.getEndOfDayInMilisecond(picked);
       await getStaffAttendanceReport();
+      await getStaffLeaveReport();
+      await getStaffTaskReport();
     }
+  }
+
+  void onTabChange(int index) {
+    selectTabIndex.value = index;
   }
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     attendanceList.value = [];
     calendarFocusedDay.value = selectedDay;
     savedSelectedDate.value = selectedDay;
-    attendanceList.value = result
+    attendanceList.value = attendanceResult
         .where((element) =>
             (element.checkInDateTime ?? 0) >=
-                (DateTimeUtil().getStartOfDayInMilisecond(selectedDay) ?? 0) &&
+                (DateUtil.getStartOfDayInMilisecond(selectedDay) ?? 0) &&
             (element.checkInDateTime ?? 0) <=
-                (DateTimeUtil().getEndOfDayInMilisecond(selectedDay) ?? 0))
+                (DateUtil.getEndOfDayInMilisecond(selectedDay) ?? 0))
         .toList();
     leaves.value = leaveResult
         .where(
           (element) =>
               (element.from ?? 0) >=
-                  (DateTimeUtil().getStartOfDayInMilisecond(selectedDay) ??
-                      0) &&
+                  (DateUtil.getStartOfDayInMilisecond(selectedDay) ?? 0) &&
               (element.from ?? 0) <=
-                  (DateTimeUtil().getEndOfDayInMilisecond(selectedDay) ?? 0) &&
+                  (DateUtil.getEndOfDayInMilisecond(selectedDay) ?? 0) &&
               element.status == LeaveStatus.approved,
         )
         .toList();
   }
 
   void initDate() {
-    startDate.value =
-        DateTimeUtil().getStartOfDayInMilisecond(selectedDate.value);
-    endDate.value = DateTimeUtil().getEndOfDayInMilisecond(selectedDate.value);
+    startDate.value = DateUtil.getStartOfDayInMilisecond(selectedDate.value);
+    endDate.value = DateUtil.getEndOfDayInMilisecond(selectedDate.value);
     calendarStartOfTheMonth.value =
-        DateTimeUtil().getStartOfMonthInMilliseconds(calendarFocusedDay.value);
+        DateUtil.getStartOfMonthInMilliseconds(calendarFocusedDay.value);
     calendarEndOfTheMonth.value =
-        DateTimeUtil().getEndOfMonthInMilliseconds(calendarFocusedDay.value);
+        DateUtil.getEndOfMonthInMilliseconds(calendarFocusedDay.value);
   }
 }

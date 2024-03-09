@@ -1,10 +1,20 @@
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class WorkHourService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = WorkHourService._internal();
+  final dioInstance = DioUtil();
+
+  factory WorkHourService() {
+    return _singleton;
+  }
+
+  WorkHourService._internal() {
+    Logs.t('[WorkHourService] Initialized');
+  }
 
   Future<List<AttendanceModel>> getAllStaffAttendance({
     int? startDate,

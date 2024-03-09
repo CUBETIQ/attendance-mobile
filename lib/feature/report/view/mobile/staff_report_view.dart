@@ -1,13 +1,13 @@
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/feature/report/controller/index.dart';
-import 'package:timesync360/feature/report/widget/attendance_text_title.dart';
-import 'package:timesync360/feature/report/widget/leave_text_title.dart';
-import 'package:timesync360/feature/report/widget/marker_dot.dart';
-import 'package:timesync360/feature/report/widget/report_attendance_card.dart';
-import 'package:timesync360/feature/report/widget/report_leave_card.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:get/get.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/feature/report/controller/index.dart';
+import 'package:timesync/feature/report/widget/attendance_text_title.dart';
+import 'package:timesync/feature/report/widget/leave_text_title.dart';
+import 'package:timesync/feature/report/widget/marker_dot.dart';
+import 'package:timesync/feature/report/widget/report_attendance_card.dart';
+import 'package:timesync/feature/report/widget/report_leave_card.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class StaffReportViewMobile extends StatelessWidget {
@@ -34,7 +34,7 @@ class StaffReportViewMobile extends StatelessWidget {
                     );
                   },
                 ),
-                locale: 'en_US',
+                locale: Get.locale.toString(),
                 headerStyle: const HeaderStyle(
                   formatButtonVisible: false,
                   titleCentered: true,
@@ -48,7 +48,7 @@ class StaffReportViewMobile extends StatelessWidget {
                 calendarStyle: CalendarStyle(
                   outsideDaysVisible: false,
                   markerMargin: EdgeInsets.only(
-                    top: SizeUtils.scale(6, size.width),
+                    top: SizeUtils.scaleMobile(6, size.width),
                   ),
                   holidayDecoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -100,17 +100,17 @@ class StaffReportViewMobile extends StatelessWidget {
                   ? const SizedBox.shrink()
                   : controller.attendanceList.value.isEmpty &&
                           controller.leaves.value.isEmpty
-                      ? MyNoData(paddingTop: SizeUtils.scale(30, size.width))
+                      ? const MyNoData()
                       : ListView.separated(
                           shrinkWrap: true,
                           padding: EdgeInsets.symmetric(
-                            horizontal: SizeUtils.scale(20, size.width),
-                            vertical: SizeUtils.scale(10, size.width),
+                            horizontal: SizeUtils.scaleMobile(20, size.width),
+                            vertical: SizeUtils.scaleMobile(10, size.width),
                           ),
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.attendanceList.value.length,
                           separatorBuilder: (context, index) => SizedBox(
-                            height: SizeUtils.scale(10, size.width),
+                            height: SizeUtils.scaleMobile(10, size.width),
                           ),
                           itemBuilder: (context, index) {
                             return ReportAttendanceCard(
@@ -125,13 +125,13 @@ class StaffReportViewMobile extends StatelessWidget {
               () => ListView.separated(
                 shrinkWrap: true,
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(20, size.width),
-                  vertical: SizeUtils.scale(10, size.width),
+                  horizontal: SizeUtils.scaleMobile(20, size.width),
+                  vertical: SizeUtils.scaleMobile(10, size.width),
                 ),
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.leaves.value.length,
                 separatorBuilder: (context, index) => SizedBox(
-                  height: SizeUtils.scale(10, size.width),
+                  height: SizeUtils.scaleMobile(10, size.width),
                 ),
                 itemBuilder: (context, index) {
                   return ReportLeaveCard(

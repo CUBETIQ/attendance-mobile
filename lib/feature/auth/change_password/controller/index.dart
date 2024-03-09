@@ -1,21 +1,19 @@
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/auth/change_password/model/chnage_password_model.dart';
-import 'package:timesync360/feature/auth/change_password/service/index.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/auth/change_password/model/change_password_model.dart';
+import 'package:timesync/feature/auth/change_password/service/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChangePasswordController extends GetxController {
-  Rx<UserModel> user = UserModel().obs;
-  RxBool isChangeStaffPass = false.obs;
-  TextEditingController oldPasswordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-  RxBool hideOldPassword = true.obs;
-  RxBool hideNewPassword = true.obs;
-  final _debouncer = Debouncer(milliseconds: 500);
+  final user = UserModel().obs;
+  final isChangeStaffPass = false.obs;
+  final oldPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final hideOldPassword = true.obs;
+  final hideNewPassword = true.obs;
 
   @override
   void onInit() {
@@ -30,39 +28,36 @@ class ChangePasswordController extends GetxController {
 
   Future<void> changeStaffPassword() async {
     validate(true);
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('New Password').isValid) {
-        try {
-          await ChangePasswordService().changeStaffPassword(
-            id: user.value.id ?? "",
-            newPassword: newPasswordController.text,
-          );
-          Get.back();
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
-        }
+    if (MyTextFieldFormController.findController('New Password').isValid) {
+      try {
+        await ChangePasswordService().changeStaffPassword(
+          id: user.value.id ?? "",
+          newPassword: newPasswordController.text,
+        );
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   Future<void> changeUserPassword() async {
     validate(true);
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('New Password').isValid) {
-        try {
-          ChangePasswordModel input = ChangePasswordModel(
-            oldPassword: oldPasswordController.text,
-            newPassword: newPasswordController.text,
-          );
-          await ChangePasswordService().changeUserPassword(input);
-          Get.back();
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
-        }
+
+    if (MyTextFieldFormController.findController('New Password').isValid) {
+      try {
+        ChangePasswordModel input = ChangePasswordModel(
+          oldPassword: oldPasswordController.text,
+          newPassword: newPasswordController.text,
+        );
+        await ChangePasswordService().changeUserPassword(input);
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   void validate(bool? isStaffPassword) {

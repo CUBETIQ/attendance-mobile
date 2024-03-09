@@ -1,99 +1,103 @@
-// ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const String fontFamily = 'Inter';
+class AppFonts {
+  static final AppFonts _instance = AppFonts._internal();
 
-double calculateFontSize(BuildContext context, double baseSize) {
-  double screenWidth = MediaQuery.of(context).size.width;
+  factory AppFonts() => _instance;
 
-  // Adjust the base size based on the screen width
-  if (screenWidth >= 414) {
-    // Larger than iPhone 12 Pro Max
-    return baseSize * 1;
-  } else if (screenWidth <= 375) {
-    // Smaller than iPhone 11
-    return baseSize * 0.85;
-  } else {
-    return baseSize;
+  AppFonts._internal();
+
+  static const String fontFamily = 'Inter';
+
+  double calculateFontSize(BuildContext context, double baseSize) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (screenWidth > 450) {
+      return baseSize * 1.5;
+    } else if (screenWidth <= 375) {
+      return baseSize * 0.85;
+    } else {
+      return baseSize;
+    }
   }
+
+  TextStyle generateTextStyle({
+    FontWeight fontWeight = FontWeight.bold,
+    double fontSize = 16,
+  }) {
+    double adjustedFontSize = calculateFontSize(Get.context!, fontSize);
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
+      fontSize: adjustedFontSize,
+      letterSpacing: 0.2,
+    );
+  }
+
+  TextStyle get headingH1 => generateTextStyle(fontSize: 48);
+  TextStyle get headingH2 => generateTextStyle(fontSize: 40);
+  TextStyle get headingH3 => generateTextStyle(fontSize: 32);
+  TextStyle get headingH4 => generateTextStyle(fontSize: 24);
+  TextStyle get headingH5 => generateTextStyle(fontSize: 20);
+
+  TextStyle get bodyXXXlarge => generateTextStyle(fontSize: 26);
+  TextStyle get bodyXXlarge => generateTextStyle(fontSize: 24);
+  TextStyle get bodyXlarge => generateTextStyle(fontSize: 18);
+  TextStyle get bodyLarge => generateTextStyle(fontSize: 16);
+  TextStyle get bodyMedium => generateTextStyle(fontSize: 14);
+  TextStyle get bodySmall => generateTextStyle(fontSize: 12);
+  TextStyle get bodyXSmall => generateTextStyle(fontSize: 10);
+  TextStyle get bodyXXSmall => generateTextStyle(fontSize: 8);
+
+  TextStyle get bodyXXXlargeSemi =>
+      generateTextStyle(fontSize: 24, fontWeight: FontWeight.w600);
+  TextStyle get bodyXXlargeSemi =>
+      generateTextStyle(fontSize: 22, fontWeight: FontWeight.w600);
+  TextStyle get bodyXlargeSemi =>
+      generateTextStyle(fontSize: 18, fontWeight: FontWeight.w600);
+  TextStyle get bodyLargeSemi =>
+      generateTextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+  TextStyle get bodyMediumSemi =>
+      generateTextStyle(fontSize: 14, fontWeight: FontWeight.w600);
+  TextStyle get bodySmallSemi =>
+      generateTextStyle(fontSize: 12, fontWeight: FontWeight.w600);
+  TextStyle get bodyXSmallSemi =>
+      generateTextStyle(fontSize: 10, fontWeight: FontWeight.w600);
+  TextStyle get bodyXXSmallSemi =>
+      generateTextStyle(fontSize: 8, fontWeight: FontWeight.w600);
+
+  TextStyle get bodyXXXlargeMedium =>
+      generateTextStyle(fontSize: 24, fontWeight: FontWeight.w500);
+  TextStyle get bodyXXlargeMedium =>
+      generateTextStyle(fontSize: 22, fontWeight: FontWeight.w500);
+  TextStyle get bodyXlargeMedium =>
+      generateTextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+  TextStyle get bodyLargeMedium =>
+      generateTextStyle(fontSize: 16, fontWeight: FontWeight.w500);
+  TextStyle get bodyMediumMedium =>
+      generateTextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+  TextStyle get bodySmallMedium =>
+      generateTextStyle(fontSize: 12, fontWeight: FontWeight.w500);
+  TextStyle get bodyXSmallMedium =>
+      generateTextStyle(fontSize: 10, fontWeight: FontWeight.w500);
+  TextStyle get bodyXXSmallMedium =>
+      generateTextStyle(fontSize: 8, fontWeight: FontWeight.w500);
+
+  TextStyle get bodyXXXlargeRegular =>
+      generateTextStyle(fontSize: 24, fontWeight: FontWeight.w400);
+  TextStyle get bodyXXlargeRegular =>
+      generateTextStyle(fontSize: 22, fontWeight: FontWeight.w400);
+  TextStyle get bodyXlargeRegular =>
+      generateTextStyle(fontSize: 18, fontWeight: FontWeight.w400);
+  TextStyle get bodyLargeRegular =>
+      generateTextStyle(fontSize: 16, fontWeight: FontWeight.w400);
+  TextStyle get bodyMediumRegular =>
+      generateTextStyle(fontSize: 14, fontWeight: FontWeight.w400);
+  TextStyle get bodySmallRegular =>
+      generateTextStyle(fontSize: 12, fontWeight: FontWeight.w400);
+  TextStyle get bodyXSmallRegular =>
+      generateTextStyle(fontSize: 10, fontWeight: FontWeight.w400);
+  TextStyle get bodyXXSmallRegular =>
+      generateTextStyle(fontSize: 8, fontWeight: FontWeight.w400);
 }
-
-TextStyle generateTextStyle({
-  FontWeight fontWeight = FontWeight.bold,
-  double fontSize = 16,
-}) {
-  double adjustedFontSize = calculateFontSize(Get.context!, fontSize);
-  return TextStyle(
-    fontFamily: fontFamily,
-    fontWeight: fontWeight,
-    fontSize: adjustedFontSize,
-    letterSpacing: 0.2,
-  );
-}
-
-final TextStyle HeadingH1 = generateTextStyle(fontSize: 48);
-final TextStyle HeadingH2 = generateTextStyle(fontSize: 40);
-final TextStyle HeadingH3 = generateTextStyle(fontSize: 32);
-final TextStyle HeadingH4 = generateTextStyle(fontSize: 24);
-final TextStyle HeadingH5 = generateTextStyle(fontSize: 20);
-
-final TextStyle BodyXXXlarge = generateTextStyle(fontSize: 26);
-final TextStyle BodyXXlarge = generateTextStyle(fontSize: 24);
-final TextStyle BodyXlarge = generateTextStyle(fontSize: 18);
-final TextStyle BodyLarge = generateTextStyle(fontSize: 16);
-final TextStyle BodyMedium = generateTextStyle(fontSize: 14);
-final TextStyle BodySmall = generateTextStyle(fontSize: 12);
-final TextStyle BodyXSmall = generateTextStyle(fontSize: 10);
-final TextStyle BodyXXSmall = generateTextStyle(fontSize: 8);
-
-final TextStyle BodyXXXlargeSemi =
-    generateTextStyle(fontSize: 24, fontWeight: FontWeight.w600);
-final TextStyle BodyXXlargeSemi =
-    generateTextStyle(fontSize: 22, fontWeight: FontWeight.w600);
-final TextStyle BodyXlargeSemi =
-    generateTextStyle(fontSize: 18, fontWeight: FontWeight.w600);
-final TextStyle BodyLargeSemi =
-    generateTextStyle(fontSize: 16, fontWeight: FontWeight.w600);
-final TextStyle BodyMediumSemi =
-    generateTextStyle(fontSize: 14, fontWeight: FontWeight.w600);
-final TextStyle BodySmallSemi =
-    generateTextStyle(fontSize: 12, fontWeight: FontWeight.w600);
-final TextStyle BodyXSmallSemi =
-    generateTextStyle(fontSize: 10, fontWeight: FontWeight.w600);
-final TextStyle BodyXXSmallSemi =
-    generateTextStyle(fontSize: 8, fontWeight: FontWeight.w600);
-
-final TextStyle BodyXXXlargeMedium =
-    generateTextStyle(fontSize: 24, fontWeight: FontWeight.w500);
-final TextStyle BodyXXlargeMedium =
-    generateTextStyle(fontSize: 22, fontWeight: FontWeight.w500);
-final TextStyle BodyXlargeMedium =
-    generateTextStyle(fontSize: 18, fontWeight: FontWeight.w500);
-final TextStyle BodyLargeMedium =
-    generateTextStyle(fontSize: 16, fontWeight: FontWeight.w500);
-final TextStyle BodyMediumMedium =
-    generateTextStyle(fontSize: 14, fontWeight: FontWeight.w500);
-final TextStyle BodySmallMedium =
-    generateTextStyle(fontSize: 12, fontWeight: FontWeight.w500);
-final TextStyle BodyXSmallMedium =
-    generateTextStyle(fontSize: 10, fontWeight: FontWeight.w500);
-final TextStyle BodyXXSmallMedium =
-    generateTextStyle(fontSize: 8, fontWeight: FontWeight.w500);
-
-final TextStyle BodyXXXlargeRegular =
-    generateTextStyle(fontSize: 24, fontWeight: FontWeight.w400);
-final TextStyle BodyXXlargeRegular =
-    generateTextStyle(fontSize: 22, fontWeight: FontWeight.w400);
-final TextStyle BodyXlargeRegular =
-    generateTextStyle(fontSize: 18, fontWeight: FontWeight.w400);
-final TextStyle BodyLargeRegular =
-    generateTextStyle(fontSize: 16, fontWeight: FontWeight.w400);
-final TextStyle BodyMediumRegular =
-    generateTextStyle(fontSize: 14, fontWeight: FontWeight.w400);
-final TextStyle BodySmallRegular =
-    generateTextStyle(fontSize: 12, fontWeight: FontWeight.w400);
-final TextStyle BodyXSmallRegular =
-    generateTextStyle(fontSize: 10, fontWeight: FontWeight.w400);
-final TextStyle BodyXXSmallRegular =
-    generateTextStyle(fontSize: 8, fontWeight: FontWeight.w400);

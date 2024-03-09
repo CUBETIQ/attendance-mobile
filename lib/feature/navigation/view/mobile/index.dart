@@ -1,13 +1,13 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/feature/home/home/view/index.dart';
-import 'package:timesync360/feature/leave/leave/view/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/navigation/widget/side_drawer.dart';
-import 'package:timesync360/feature/profile/profile/view/index.dart';
-import 'package:timesync360/feature/report/view/index.dart';
-import 'package:timesync360/feature/task/task/view/index.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/feature/home/home/view/index.dart';
+import 'package:timesync/feature/leave/leave/view/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/navigation/widget/side_drawer.dart';
+import 'package:timesync/feature/profile/profile/view/index.dart';
+import 'package:timesync/feature/report/view/index.dart';
+import 'package:timesync/feature/task/task/view/index.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
@@ -28,7 +28,8 @@ class NavigationViewMobile extends StatelessWidget {
         ),
       ),
       mainScreen: const MainScreen(),
-      borderRadius: SizeUtils.scale(AppSize.borderRadiusLarge, context.width),
+      borderRadius:
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, context.width),
       showShadow: false,
       angle: -10.0,
       androidCloseOnBackTap: true,
@@ -44,7 +45,7 @@ class NavigationViewMobile extends StatelessWidget {
       duration: 300.milliseconds,
       reverseDuration: 200.milliseconds,
       mainScreenTapClose: true,
-      slideWidth: SizeUtils.scale(
+      slideWidth: SizeUtils.scaleMobile(
         238,
         context.width,
       ),
@@ -62,11 +63,19 @@ class MainScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        elevation: 2,
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: controller.toggleDrawer,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Obx(() {
+              return controller.items[controller.selectedIndex.value].action ??
+                  const SizedBox.shrink();
+            }),
+          ),
+        ],
         title: Obx(
           () => MyAppBarTitle(
             title: controller.items[controller.selectedIndex.value].title,
@@ -98,7 +107,6 @@ class MainScreen extends StatelessWidget {
                     Radius.circular(40),
                   ),
                 ),
-                elevation: 2,
                 child: const Icon(Icons.add_rounded),
               ),
       ),

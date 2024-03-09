@@ -1,6 +1,6 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -28,7 +28,7 @@ class OverviewCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSize.borderRadiusMedium * (size.width / 375.0),
+          AppSize().borderRadiusMedium * (size.width / 375.0),
         ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
@@ -75,7 +75,7 @@ class OverviewCard extends StatelessWidget {
               ),
               child: MyText(
                 text: number != null && number != "null" ? number ?? "0" : "0",
-                style: BodyLargeMedium,
+                style: AppFonts().bodyLargeMedium,
               ),
             ),
           ),
@@ -87,7 +87,7 @@ class OverviewCard extends StatelessWidget {
               ),
               child: MyText(
                 text: title ?? "Title",
-                style: BodySmallRegular,
+                style: AppFonts().bodySmallRegular,
               ),
             ),
           ),

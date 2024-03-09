@@ -1,29 +1,31 @@
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/model/summary_leave_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/leave/leave/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/model/summary_leave_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/date_picker/month_picker.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/leave/leave/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LeaveController extends GetxController {
   static LeaveController get to => Get.find();
-  RxList<LeaveModel> leaves = <LeaveModel>[].obs;
-  RxList<SummaryLeaveModel> summarizeLeaves = <SummaryLeaveModel>[].obs;
+  final leaves = <LeaveModel>[].obs;
+  final summarizeLeaves = <SummaryLeaveModel>[].obs;
   var isLoading = false.obs;
-  Rxn<int> startDate = Rxn<int>(null);
-  Rxn<int> endDate = Rxn<int>(null);
-  Rx<int> totalLeave = 0.obs;
-  Rx<int> totalPendingLeave = 0.obs;
-  Rx<int> totalApprovedLeave = 0.obs;
-  Rx<int> totalDeclinedLeave = 0.obs;
-  RxDouble percentagePendingLeave = 0.0.obs;
-  RxDouble percentageApprovedLeave = 0.0.obs;
-  RxDouble percentageDeclinedLeave = 0.0.obs;
+  final startDate = Rxn<int>(null);
+  final endDate = Rxn<int>(null);
+  final totalLeave = 0.obs;
+  final totalPendingLeave = 0.obs;
+  final totalApprovedLeave = 0.obs;
+  final totalDeclinedLeave = 0.obs;
+  final percentagePendingLeave = 0.0.obs;
+  final percentageApprovedLeave = 0.0.obs;
+  final percentageDeclinedLeave = 0.0.obs;
+  final selectDate = DateTime.now().obs;
 
   @override
   void onInit() {
@@ -114,7 +116,7 @@ class LeaveController extends GetxController {
         Get.toNamed(
           Routes.ADD_LEAVE,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "leave": leave,
           },
         );
@@ -163,6 +165,20 @@ class LeaveController extends GetxController {
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
+    }
+  }
+
+  Future<void> onTapDate(BuildContext context) async {
+    final DateTime? picked = await monthPicker(
+      context: context,
+      initialDate: selectDate.value,
+    );
+    if (picked != null) {
+      selectDate.value = picked;
+      startDate.value =
+          DateTime(picked.year, picked.month, 1).millisecondsSinceEpoch;
+      endDate.value =
+          DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
     }
   }
 }

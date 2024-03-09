@@ -1,17 +1,19 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
-import 'package:timesync360/core/widgets/color_picker/rounded_color_picker.dart';
-import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
-import 'package:timesync360/core/widgets/icon_picker/rounded_icon_picker.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/task/add_task/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/attachment/upload_button.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/color_picker/rounded_color_picker.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
+import 'package:timesync/core/widgets/icon_picker/rounded_icon_picker.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/task/add_task/controller/index.dart';
+import 'package:timesync/types/state.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class AddTaskViewMobile extends StatelessWidget {
   const AddTaskViewMobile({super.key});
@@ -30,13 +32,12 @@ class AddTaskViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
@@ -49,39 +50,48 @@ class AddTaskViewMobile extends StatelessWidget {
                 hintText: "Enter your task",
                 textController: controller.taskController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
               Row(
                 children: [
                   Expanded(
                     child: MyDatePickerField(
                       hasLabel: true,
                       label: "Start Date",
-                      hintText: "Enter your start date",
+                      hintText: "Select Date",
                       textController: controller.startDateController,
                       onDateResult: controller.getStartDateInMilliSecond,
                     ),
                   ),
-                  SizedBox(width: size.width * 0.02),
+                  SizedBox(
+                    width:
+                        SizeUtils.scaleMobile(AppSize().paddingS1, size.height),
+                  ),
                   Expanded(
-                    child: Obx(
-                      () => MyDatePickerField(
-                        hasLabel: true,
-                        label: "Due Date",
-                        hintText: "Enter your end date",
-                        initialDate: controller.startDate.value != null
-                            ? DateTime.fromMillisecondsSinceEpoch(
-                                controller.startDate.value!)
-                            : null,
-                        firstDate: DateTime.fromMillisecondsSinceEpoch(
-                            controller.startDate.value!),
-                        textController: controller.endDateController,
-                        onDateResult: controller.getEndDateInMilliSecond,
-                      ),
+                    child: MyDatePickerField(
+                      hasLabel: true,
+                      label: "Due Date",
+                      hintText: "Select Date",
+                      initialDate: controller.startDate.value != null
+                          ? DateTime.fromMillisecondsSinceEpoch(
+                              controller.startDate.value!,
+                            )
+                          : DateTime.now(),
+                      firstDate: controller.startDate.value != null
+                          ? DateTime.fromMillisecondsSinceEpoch(
+                              controller.startDate.value!,
+                            )
+                          : DateTime.now(),
+                      textController: controller.endDateController,
+                      onDateResult: controller.getEndDateInMilliSecond,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Priority",
@@ -91,7 +101,7 @@ class AddTaskViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst),
+                          child: Text(e.capitalizeFirst.trString),
                         ),
                       )
                       .toList(),
@@ -99,7 +109,9 @@ class AddTaskViewMobile extends StatelessWidget {
                       controller.selectPriority.value = value!,
                 ),
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",
@@ -107,29 +119,53 @@ class AddTaskViewMobile extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Obx(
-                    () => RoundedIconPicker(
-                      icon: controller.stringIcon.value,
-                      color: controller.color.value,
-                      onTap: () => controller.onTapPickIcon(context),
+                  Expanded(
+                    child: Obx(
+                      () => RoundedIconPicker(
+                        iconColor: Colors.white,
+                        icon: controller.stringIcon.value,
+                        label: controller.stringIconLabel.value,
+                        baseColor: controller.color.value,
+                        onTap: () => controller.onTapPickIcon(context),
+                      ),
                     ),
                   ),
-                  Obx(
-                    () => RoundedColorPicker(
-                      color: controller.color.value,
-                      onTap: () => controller.onTapPickColor(context),
+                  Expanded(
+                    child: Obx(
+                      () => RoundedColorPicker(
+                        color: controller.color.value,
+                        label: controller.stringColorLabel.value,
+                        onTap: () => controller.onTapPickColor(context),
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: size.height * 0.06),
-              MyButton(
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS3, size.height),
+              ),
+              UploadAttachmentButton(
+                files: controller.attachments,
+              ),
+              SizedBox(
+                height:
+                    SizeUtils.scaleMobile(AppSize().paddingS10, size.height),
+              ),
+              MyAsyncButton(
                 title: "Save",
-                onTap: controller.appState.value == AppState.Edit
+                margin: EdgeInsets.only(
+                  bottom: SizeUtils.scaleMobile(
+                    AppSize().paddingS10,
+                    size.width,
+                  ),
+                ),
+                onTap: controller.appState.value == AppState.edit
                     ? controller.updateTask
                     : controller.addTask,
               ),

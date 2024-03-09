@@ -1,10 +1,20 @@
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class PositionService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = PositionService._internal();
+  final dioInstance = DioUtil();
+
+  factory PositionService() {
+    return _singleton;
+  }
+
+  PositionService._internal() {
+    Logs.t('[PositionService] Initialized');
+  }
 
   Future<List<PositionModel>> getAllPosition(
       {required String organizationId}) async {

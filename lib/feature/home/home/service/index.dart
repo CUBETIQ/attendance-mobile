@@ -1,18 +1,29 @@
-import 'package:timesync360/core/model/attendance_chart_model.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/summary_attendance_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/feature/home/home/model/check_in_model.dart';
-import 'package:timesync360/feature/home/home/model/check_out_model.dart';
-import 'package:timesync360/feature/home/home/model/update_user_status_model.dart';
+import 'package:timesync/core/model/attendance_chart_model.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/summary_attendance_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/home/home/model/check_in_model.dart';
+import 'package:timesync/feature/home/home/model/check_out_model.dart';
+import 'package:timesync/feature/home/home/model/update_user_status_model.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class HomeService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = HomeService._internal();
+  final dioInstance = DioUtil();
+
+  factory HomeService() {
+    return _singleton;
+  }
+
+  HomeService._internal() {
+    Logs.t('[HomeService] Initialized');
+  }
+
   Future<AttendanceModel> checkIn(CheckInModel input) async {
     final AttendanceModel? checkIn;
 

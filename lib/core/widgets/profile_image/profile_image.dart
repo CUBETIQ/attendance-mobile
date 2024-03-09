@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:flutter/material.dart';
 
 class MyProfileImage extends StatelessWidget {

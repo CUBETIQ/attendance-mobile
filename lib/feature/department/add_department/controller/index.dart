@@ -1,31 +1,29 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/department/add_department/model/add_department_model.dart';
-import 'package:timesync360/feature/department/add_department/model/edit_department_model.dart';
-import 'package:timesync360/feature/department/add_department/service/index.dart';
-import 'package:timesync360/feature/department/department/controller/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/department/add_department/model/add_department_model.dart';
+import 'package:timesync/feature/department/add_department/model/edit_department_model.dart';
+import 'package:timesync/feature/department/add_department/service/index.dart';
+import 'package:timesync/feature/department/department/controller/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/types/avatar_type.dart';
+import 'package:timesync/types/state.dart';
 import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
 class AddDepartmentController extends GetxController {
-  RxString title = "Add Department".obs;
-  RxString state = AppState.Create.obs;
-  Rxn<String> image = Rxn<String>(null);
-  Rxn<File> imageFile = Rxn<File>(null);
-  TextEditingController nameController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  Rxn<DepartmentModel> department = Rxn<DepartmentModel>(null);
-  final _debounce = Debouncer(milliseconds: 500);
+  final title = "Add Department".obs;
+  final state = AppState.create.obs;
+  final image = Rxn<String>(null);
+  final imageFile = Rxn<File>(null);
+  final nameController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final department = Rxn<DepartmentModel>(null);
 
   @override
   void onInit() {
@@ -36,7 +34,7 @@ class AddDepartmentController extends GetxController {
   void initArgument() {
     final data = Get.arguments;
     state.value = data["state"];
-    if (state.value == AppState.Edit) {
+    if (state.value == AppState.edit) {
       title.value = "Edit Department";
       department.value = data["department"];
       image.value = department.value?.image;
@@ -46,94 +44,87 @@ class AddDepartmentController extends GetxController {
   }
 
   Future<void> addDepartment() async {
-    _debounce.run(() async {
-      validate();
-      if (!MyTextFieldFormController.findController('name').isValid) {
-        return;
-      }
-      try {
-        final AddDepartmentModel input = AddDepartmentModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
-          organizationId: NavigationController.to.organization.value.id ?? "",
+    validate();
+    if (!MyTextFieldFormController.findController('name').isValid) {
+      return;
+    }
+    try {
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "department",
+          userId: NavigationController.to.user.value.id,
         );
-        department.value = await AddDepartmentService().addDepartment(input);
-        DepartmentController.to.departmentListBackUp.value
-            .add(department.value!);
-        DepartmentController.to.departmentList.value =
-            DepartmentController.to.departmentListBackUp.value;
-        DepartmentController.to.departmentListBackUp.refresh();
-        DepartmentController.to.departmentList.refresh();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
       }
-    });
+      final AddDepartmentModel input = AddDepartmentModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+        organizationId: NavigationController.to.organization.value.id ?? "",
+      );
+      department.value = await AddDepartmentService().addDepartment(input);
+      DepartmentController.to.departmentListBackUp.value.add(department.value!);
+      DepartmentController.to.departmentList.value =
+          DepartmentController.to.departmentListBackUp.value;
+      DepartmentController.to.departmentListBackUp.refresh();
+      DepartmentController.to.departmentList.refresh();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> updateDepartment() async {
-    _debounce.run(() async {
-      validate();
-      if (!MyTextFieldFormController.findController('name').isValid) {
-        return;
-      }
-      try {
-        final EditDepartmentModel input = EditDepartmentModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
+    validate();
+    if (!MyTextFieldFormController.findController('name').isValid) {
+      return;
+    }
+    try {
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "department",
+          userId: NavigationController.to.user.value.id,
         );
-        await AddDepartmentService().updateDepartment(
-          department.value?.id ?? "",
-          input,
-        );
-        await DepartmentController.to.getAllDepartments();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
       }
-    });
+      final EditDepartmentModel input = EditDepartmentModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+      );
+      await AddDepartmentService().updateDepartment(
+        department.value?.id ?? "",
+        input,
+      );
+      await DepartmentController.to.getAllDepartments();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   void pickImage() {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = null;
+      },
+      avatarType: AvatarType.department,
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.position,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   void validate() {

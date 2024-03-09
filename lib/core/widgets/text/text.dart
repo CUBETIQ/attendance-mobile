@@ -1,4 +1,4 @@
-import 'package:timesync360/constants/font.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +28,7 @@ class MyText extends StatelessWidget {
       overflow: overflow ?? TextOverflow.ellipsis,
       textAlign: textAlign ?? TextAlign.start,
       textDirection: textDirection,
-      style: style ?? BodySmallMedium,
+      style: style ?? AppFonts().bodySmallMedium,
     );
   }
 }

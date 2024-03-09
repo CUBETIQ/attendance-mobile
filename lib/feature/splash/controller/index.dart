@@ -1,14 +1,15 @@
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/entities/local_storage.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/splash/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/entities/local_storage.dart';
+import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/splash/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,18 +17,18 @@ import 'package:get/get.dart';
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
   static SplashController get to => Get.find();
-  Rx<UserModel> user = UserModel().obs;
-  Rx<PositionModel> position = PositionModel().obs;
+  final user = UserModel().obs;
+  final position = PositionModel().obs;
   final double frameRate = 70;
-  final String title = 'TimeSync360';
+  final String title = 'timesync';
   late AnimationController controller;
   late Animation<double> animation;
-  final LocalStorageController localDataService =
-      LocalStorageController.getInstance();
-  Rx<LocalStorage> localData = LocalStorage().obs;
-  Rx<DepartmentModel> department = DepartmentModel().obs;
-  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
+  final localDataService = LocalStorageController.getInstance();
+  final localData = LocalStorage().obs;
+  final department = DepartmentModel().obs;
+  final userStatus = UserStatusModel().obs;
+  final organization = OrganizationModel().obs;
+  LocalStorageModel? localStorageData = LocalStorageModel();
 
   @override
   void onInit() {
@@ -58,11 +59,13 @@ class SplashController extends GetxController
         await getDepartment();
       }
     }
+    initRoute();
   }
 
-  Future<void> init() async {
+  void initRoute() {
     if (localData.value.isActivated != true) {
       Get.offNamed(Routes.ACTIVATION);
+      return;
     } else if (localData.value.accessToken != null) {
       Get.offNamed(Routes.NAVIGATION, arguments: {
         "user": user.value,
@@ -71,11 +74,12 @@ class SplashController extends GetxController
         "organization": organization.value,
         "userStatus": userStatus.value,
       });
+      return;
     } else if (localData.value.isFirstTime == false) {
       Get.offNamed(Routes.LOGIN);
-    } else {
-      Get.offNamed(Routes.ONBOARD);
+      return;
     }
+    Get.offNamed(Routes.ONBOARD);
   }
 
   Future<void> getUserStatus() async {
@@ -125,15 +129,19 @@ class SplashController extends GetxController
         Get.offNamed(Routes.ACTIVATION);
         return;
       }
-      if (data?.organizationId == null && data?.isActivated == true) {
+      if (data?.organizationId == null &&
+          data?.isActivated == true &&
+          data?.accessToken == null) {
         Get.offNamed(Routes.LOGIN);
         return;
       }
       organization.value =
           await SplashService().validateOrganization(id: data!.organizationId!);
-      await IsarService().saveLocalData(organizationId: organization.value.id);
+      if (localData.value.organizationId == null) {
+        localStorageData?.organizationId = organization.value.id;
+        await IsarService().saveLocalData(input: localStorageData);
+      }
       await initLocalDb();
-      init();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

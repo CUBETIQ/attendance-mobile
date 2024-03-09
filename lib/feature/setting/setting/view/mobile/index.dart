@@ -1,13 +1,13 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/setting/setting/controller/index.dart';
-import 'package:timesync360/feature/setting/setting/widget/setting_card_button.dart';
-import 'package:timesync360/feature/setting/setting/widget/theme_switch_button.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/setting/setting/controller/index.dart';
+import 'package:timesync/feature/setting/setting/widget/setting_card_button.dart';
+import 'package:timesync/feature/setting/setting/widget/theme_switch_button.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,40 +26,45 @@ class SettingViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: SizeUtils.scale(20, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
               MyText(
                 text: "Appearance",
-                style: BodyXlargeMedium,
+                style: AppFonts().bodyXlargeMedium,
               ),
-              SizedBox(height: SizeUtils.scale(15, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(15, size.width)),
               Obx(
                 () => ThemeSwitchButton(
                   title: "Dark Mode",
-                  description:
-                      "Enable dark mode for a better viewing experience.",
+                  description: "Enable dark mode.",
                   value: controller.isDarkMode.value,
                   onChanged: controller.changeTheme,
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+              SettingCardButton(
+                leadingIcon: Icons.color_lens_rounded,
+                title: "Change Theme",
+                description: "Change the theme of the application.",
+                onTap: () => Get.toNamed(Routes.THEME),
+              ),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               MyText(
                 text: "Preferences",
-                style: BodyXlargeMedium,
+                style: AppFonts().bodyXlargeMedium,
               ),
-              SizedBox(height: SizeUtils.scale(15, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(15, size.width)),
               SettingCardButton(
                 leadingIcon: Icons.language_rounded,
                 title: "Language",

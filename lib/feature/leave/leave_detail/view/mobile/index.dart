@@ -1,16 +1,20 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/leave/leave_detail/controller/index.dart';
-import 'package:timesync360/feature/leave/leave_detail/widget/leave_detail_card.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/leave_duration_type.dart';
-import 'package:timesync360/utils/types_helper/leave_status.dart';
-import 'package:flutter/material.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:get/get.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/widgets/attachment/attachment_card.dart';
+import 'package:timesync/core/widgets/progress_indicator/indicator_with_percentage.dart';
+import 'package:timesync/core/widgets/row/detail_row_data.dart';
+import 'package:timesync/core/widgets/row/detail_row_image.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/leave/leave_detail/controller/index.dart';
+import 'package:flutter/material.dart';
+import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/utils/file_util.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import '../../../../../core/widgets/button/back_button.dart';
 import '../../../../../core/widgets/text/app_bar_title.dart';
 
@@ -29,132 +33,132 @@ class LeaveDetailViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SizedBox(
         height: size.height,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
-              left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 size.width,
               ),
-              right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
-                size.width,
-              ),
-              top: AppSize.paddingTitleSmall,
             ),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
-                  size.width,
-                ),
-                vertical: SizeUtils.scale(
-                  AppSize.paddingVerticalMedium,
-                  size.width,
-                ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  SizeUtils.scale(
-                    AppSize.borderRadiusMedium,
-                    size.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                SizedBox(
+                  width: SizeUtils.scaleMobile(300, size.width),
+                  child: MyText(
+                    text:
+                        "${controller.leave.value.type.capitalizeMaybeNull} Leave Request",
+                    style: AppFonts().bodyXXlarge.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
                 ),
-                color: Theme.of(context).colorScheme.background,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.15),
-                    spreadRadius: 2,
-                    blurRadius: 2,
-                    offset: const Offset(0, 0),
+                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                DetailRowData(
+                  title: "Type",
+                  value: (controller.leave.value.type ?? "").capitalizeFirst,
+                ),
+                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                DetailRowData(
+                  title: "Status",
+                  value: (controller.leave.value.status ?? "").capitalizeFirst,
+                ),
+                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                DetailRowImage(
+                  title: controller.leave.value.status == LeaveStatus.approved
+                      ? "Approved By: "
+                      : controller.leave.value.status == LeaveStatus.rejected
+                          ? "Rejected By: "
+                          : "Pending Approval: ",
+                  name: StringUtil.getfullname(
+                    controller.leave.value.updateBy?.firstName,
+                    controller.leave.value.updateBy?.lastName,
+                    controller.leave.value.updateBy?.username,
                   ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  LeaveDetailCard(
-                    title: "Type: ",
-                    value: controller.leave.value.type?.capitalizeFirst,
-                    valueStyle: BodyLargeMedium.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  LeaveDetailCard(
-                    title: "Status: ",
-                    value: controller.leave.value.status?.capitalizeFirst,
-                    valueStyle: BodyLargeMedium.copyWith(
-                      color:
-                          controller.leave.value.status == LeaveStatus.pending
-                              ? const Color(0XFFBF9705)
-                              : controller.leave.value.status ==
-                                      LeaveStatus.approved
-                                  ? Colors.green
-                                  : Colors.red,
-                    ),
-                  ),
-                  LeaveDetailCard(
-                    title: "Date: ",
-                    value:
-                        "${DateFormatter().formatMillisecondsToDOB(controller.leave.value.from)} - ${DateFormatter().formatMillisecondsToDOB(controller.leave.value.to)}",
-                  ),
-                  LeaveDetailCard(
-                    title: "Duration: ",
-                    value: (controller.leave.value.duration ?? 0) <= 1440
-                        ? controller.leave.value.durationType ==
-                                LeaveTypeDuration.fullDay
-                            ? "1 day"
-                            : "0.5 day"
-                        : DateFormatter().formatMinutesToDays(
-                            controller.leave.value.duration ?? 0),
-                  ),
-                  LeaveDetailCard(
-                    title: controller.leave.value.status == LeaveStatus.approved
-                        ? "Approved By: "
-                        : controller.leave.value.status == LeaveStatus.rejected
-                            ? "Rejected By: "
-                            : "Pending Approval: ",
-                    child: Row(
-                      children: [
-                        MyCacheImage(
-                          imageUrl:
-                              controller.leave.value.updateBy?["image"] ?? "",
-                          width: SizeUtils.scale(45, size.width),
-                          height: SizeUtils.scale(45, size.width),
+                  image: controller.leave.value.updateBy?.image,
+                ),
+                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                DetailRowData(
+                  title: "Duration",
+                  value:
+                      " ${StringUtil.removeTrailingZeros(controller.leave.value.duration)}  ${(controller.leave.value.duration ?? 0) < 2 ? "Day" : "Days"}",
+                ),
+                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                DetailRowData(
+                  title: "Date",
+                  value:
+                      "${DateUtil.formatMillisecondsToDOB(controller.leave.value.from)} - ${DateUtil.formatMillisecondsToDOB(controller.leave.value.to)}",
+                ),
+                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                const Divider(thickness: 1.5),
+                MyText(text: "Reason", style: AppFonts().bodyLargeMedium),
+                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                MyText(
+                  text: controller.leave.value.reason != null &&
+                          controller.leave.value.reason?.isNotEmpty == true
+                      ? controller.leave.value.reason!
+                      : "N/A",
+                  style: AppFonts().bodyMediumRegular,
+                  maxLines: 20,
+                ),
+                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                const Divider(thickness: 1.5),
+                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
+                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                Obx(
+                  () => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.leave.value.attachment?.length ?? 0,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      RxBool fileExist = controller.checkExistFile(index).obs;
+                      RxDouble progress = 0.0.obs;
+                      RxBool isDownloading = false.obs;
+                      final attachment =
+                          controller.leave.value.attachment?[index];
+                      return Obx(
+                        () => AttachmentCard(
+                          data: attachment ?? AttachmentModel(),
+                          trailing: isDownloading.value
+                              ? ProgressIndicatorWithPercentage(
+                                  percentage: progress.value,
+                                )
+                              : null,
+                          icon: fileExist.value
+                              ? Icons.visibility_rounded
+                              : Icons.download_rounded,
+                          onTapIcon: isDownloading.value
+                              ? null
+                              : fileExist.value
+                                  ? () async {
+                                      await FileUtil.openFile(
+                                        attachment?.name ?? "",
+                                      );
+                                    }
+                                  : () async {
+                                      await FileUtil.downloadFile(
+                                        attachment?.name ?? "",
+                                        attachment?.url ?? "",
+                                        isDownloading.value,
+                                        progress.value,
+                                        (value) => isDownloading.value = value,
+                                        (value) => progress.value = value,
+                                      );
+                                      fileExist.value =
+                                          controller.checkExistFile(index);
+                                    },
                         ),
-                        SizedBox(
-                          width: SizeUtils.scale(AppSize.paddingS5, size.width),
-                        ),
-                        Container(
-                          constraints: BoxConstraints(
-                            maxWidth: SizeUtils.scale(200, size.width),
-                          ),
-                          child: MyText(
-                            text: StringUtil().getfullname(
-                              controller.leave.value.updateBy?["firstName"],
-                              controller.leave.value.updateBy?["lastName"],
-                              controller.leave.value.updateBy?["username"],
-                            ),
-                            style: BodyLargeMedium,
-                          ),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                  LeaveDetailCard(
-                    title: "Reason: ",
-                    value: controller.leave.value.reason != "" &&
-                            controller.leave.value.reason != null
-                        ? controller.leave.value.reason ?? "-----"
-                        : "-----",
-                    noDivider: true,
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

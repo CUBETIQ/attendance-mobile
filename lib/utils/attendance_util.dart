@@ -1,7 +1,7 @@
-import 'package:timesync360/utils/types_helper/attendance_status.dart';
+import 'package:timesync/types/attendance_status.dart';
 
 class CheckInStatusValidator {
-  String getStatus(String hour, DateTime checkInTime) {
+  static String getStatus(String hour, DateTime checkInTime) {
     int startHour = int.parse(hour.split(":")[0]);
     int checkInHour = checkInTime.hour;
     int checkInMinute = checkInTime.minute;
@@ -33,7 +33,7 @@ class CheckOutStatusValidator {
 }
 
 class GetMinute {
-  int? checkLateMinute(String hour, DateTime checkInTime) {
+  static int? checkLateMinute(String hour, DateTime checkInTime) {
     int startHour = int.parse(hour.split(":")[0]);
     int startMinute = int.parse(hour.split(":")[1]);
 
@@ -53,7 +53,7 @@ class GetMinute {
     }
   }
 
-  int? checkEarlyMinute(String hour, DateTime checkInTime) {
+  static int? checkEarlyMinute(String hour, DateTime checkInTime) {
     int startHour = int.parse(hour.split(":")[0]);
     int startMinute = int.parse(hour.split(":")[1]);
 

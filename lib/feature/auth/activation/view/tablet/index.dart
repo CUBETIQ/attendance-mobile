@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/lotties.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/auth/activation/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/text_formater.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/lotties.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/feature/auth/activation/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/text_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -23,13 +23,12 @@ class ActivationViewTablet extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              top: AppSize.paddingTitleLarge,
-              left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              left: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              right: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
             ),
@@ -43,48 +42,46 @@ class ActivationViewTablet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: size.height * 0.1),
-                      SizedBox(
-                        width: size.width * 0.8,
-                        child: Lottie.asset(
-                          LottieAssets.lottieActivation,
-                          fit: BoxFit.cover,
+                      Center(
+                        child: SizedBox(
+                          width: size.width * 0.8,
+                          child: Lottie.asset(
+                            LottieAssets.lottieActivation,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       MyText(
                         text: controller.title,
                         maxLines: 1,
-                        style: BodyXXXlarge,
+                        style: AppFonts().bodyXlarge,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyText(
                         text: controller.description,
                         maxLines: 5,
-                        style: BodyLargeMedium,
+                        style: AppFonts().bodySmallMedium,
                       ),
-                      SizedBox(height: size.height * 0.05),
-                      Center(
-                        child: SizedBox(
-                          width: size.width * 0.5,
-                          child: MyTextFieldForm(
-                            hasLabel: false,
-                            textCapitalization: TextCapitalization.characters,
-                            label: "Activation",
-                            hintText: "Enter your activation code",
-                            textController: controller.activationController,
-                            inputFormatters: [UpperCaseTextFormatter()],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: size.height * 0.1),
-                      Center(
-                        child: MyButton(
-                          width: size.width * 0.5,
-                          title: "Activate",
-                          onTap: controller.activation,
-                        ),
+                      SizedBox(height: size.height * 0.01),
+                      MyTextFieldForm(
+                        hasLabel: false,
+                        prefixIcon: Icons.vpn_key_rounded,
+                        textCapitalization: TextCapitalization.characters,
+                        label: "Activation",
+                        hintText: "Enter your activation code",
+                        textController: controller.activationController,
+                        inputFormatters: [UpperCaseTextFormatter()],
                       ),
                     ],
                   ),
+                ),
+                MyAsyncButton(
+                  title: "Activate",
+                  height: SizeUtils.scaleTablet(
+                    50,
+                    MediaQuery.of(context).size.width,
+                  ),
+                  onTap: controller.activation,
                 ),
               ],
             ),

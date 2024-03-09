@@ -1,23 +1,23 @@
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/home/work_hour/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/home/work_hour/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WorkHourController extends GetxController {
   static WorkHourController get to => Get.find();
-  RxList<UserModel> staffs = <UserModel>[].obs;
-  RxList<AttendanceModel> attendances = <AttendanceModel>[].obs;
-  RxList<PositionModel> positions = <PositionModel>[].obs;
-  Rx<DateTime> selectDate = DateTime.now().obs;
-  Rxn<int> startOfDay = Rxn<int>(null);
-  Rxn<int> endOfDay = Rxn<int>(null);
-  RxBool isLoading = false.obs;
+  final staffs = <UserModel>[].obs;
+  final attendances = <AttendanceModel>[].obs;
+  final positions = <PositionModel>[].obs;
+  final selectDate = DateTime.now().obs;
+  final startOfDay = Rxn<int>(null);
+  final endOfDay = Rxn<int>(null);
+  final isLoading = false.obs;
 
   @override
   void onInit() {
@@ -82,8 +82,7 @@ class WorkHourController extends GetxController {
   }
 
   void initDate() {
-    startOfDay.value =
-        DateTimeUtil().getStartOfDayInMilisecond(selectDate.value);
-    endOfDay.value = DateTimeUtil().getEndOfDayInMilisecond(selectDate.value);
+    startOfDay.value = DateUtil.getStartOfDayInMilisecond(selectDate.value);
+    endOfDay.value = DateUtil.getEndOfDayInMilisecond(selectDate.value);
   }
 }

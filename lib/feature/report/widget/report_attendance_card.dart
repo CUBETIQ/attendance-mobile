@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/attendance_status.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/attendance_status.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +19,12 @@ class ReportAttendanceCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(75, size.width),
+      height: SizeUtils.scaleMobile(75, size.width),
       padding: EdgeInsets.only(
-        right: SizeUtils.scale(20, size.width),
+        right: SizeUtils.scaleMobile(20, size.width),
       ),
       borderRadius: BorderRadius.circular(
-        SizeUtils.scale(
+        SizeUtils.scaleMobile(
           14,
           size.width,
         ),
@@ -33,18 +33,18 @@ class ReportAttendanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: SizeUtils.scale(35, size.width),
-            height: SizeUtils.scale(75, size.width),
+            width: SizeUtils.scaleMobile(35, size.width),
+            height: SizeUtils.scaleMobile(75, size.width),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(
-                  SizeUtils.scale(
+                  SizeUtils.scaleMobile(
                     14,
                     size.width,
                   ),
                 ),
                 bottomLeft: Radius.circular(
-                  SizeUtils.scale(
+                  SizeUtils.scaleMobile(
                     14,
                     size.width,
                   ),
@@ -54,7 +54,7 @@ class ReportAttendanceCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: SizeUtils.scale(15, size.width),
+            width: SizeUtils.scaleMobile(15, size.width),
           ),
           Expanded(
             child: Row(
@@ -67,21 +67,21 @@ class ReportAttendanceCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "Attendance",
-                      style: BodyMediumSemi,
+                      style: AppFonts().bodyMediumSemi,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: "Check In",
-                      style: BodySmallMedium.copyWith(
-                        color: MyColor.successColor,
-                      ),
+                      style: AppFonts().bodySmallMedium.copyWith(
+                            color: MyColor.successColor,
+                          ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: "Check Out",
-                      style: BodySmallMedium.copyWith(
-                        color: MyColor.errorColor,
-                      ),
+                      style: AppFonts().bodySmallMedium.copyWith(
+                            color: MyColor.errorColor,
+                          ),
                     ),
                   ],
                 ),
@@ -91,21 +91,21 @@ class ReportAttendanceCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "Time",
-                      style: BodyMediumSemi,
+                      style: AppFonts().bodyMediumSemi,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
-                      text: DateFormatter().formatTimeWithDate(
+                      text: DateUtil.formatTimeWithDate(
                         attendance.checkInDateTime,
                       ),
-                      style: BodySmallRegular,
+                      style: AppFonts().bodySmallRegular,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
-                      text: DateFormatter().formatTimeWithDate(
+                      text: DateUtil.formatTimeWithDate(
                         attendance.checkOutDateTime,
                       ),
-                      style: BodySmallRegular,
+                      style: AppFonts().bodySmallRegular,
                     ),
                   ],
                 ),
@@ -115,40 +115,41 @@ class ReportAttendanceCard extends StatelessWidget {
                   children: [
                     MyText(
                       text: "Status",
-                      style: BodyMediumSemi.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                      style: AppFonts().bodyMediumSemi.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text:
                           attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
-                      style: BodySmallRegular.copyWith(
-                        color: attendance.checkInStatus != null
-                            ? attendance.checkInStatus == AttendanceStatus.early
-                                ? Colors.green
-                                : attendance.checkInStatus ==
-                                        AttendanceStatus.late
-                                    ? Colors.red
-                                    : Colors.orange
-                            : Theme.of(context).colorScheme.onBackground,
-                      ),
+                      style: AppFonts().bodySmallRegular.copyWith(
+                            color: attendance.checkInStatus != null
+                                ? attendance.checkInStatus ==
+                                        AttendanceStatus.early
+                                    ? Colors.green
+                                    : attendance.checkInStatus ==
+                                            AttendanceStatus.late
+                                        ? Colors.red
+                                        : Colors.orange
+                                : Theme.of(context).colorScheme.onBackground,
+                          ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
                     MyText(
                       text: attendance.checkOutStatus?.capitalizeMaybeNull ??
                           "N/A",
-                      style: BodySmallRegular.copyWith(
-                        color: attendance.checkOutStatus != null
-                            ? attendance.checkOutStatus ==
-                                    AttendanceStatus.early
-                                ? Colors.green
-                                : attendance.checkOutStatus ==
-                                        AttendanceStatus.late
-                                    ? Colors.red
-                                    : Colors.orange
-                            : Theme.of(context).colorScheme.onBackground,
-                      ),
+                      style: AppFonts().bodySmallRegular.copyWith(
+                            color: attendance.checkOutStatus != null
+                                ? attendance.checkOutStatus ==
+                                        AttendanceStatus.early
+                                    ? Colors.green
+                                    : attendance.checkOutStatus ==
+                                            AttendanceStatus.late
+                                        ? Colors.red
+                                        : Colors.orange
+                                : Theme.of(context).colorScheme.onBackground,
+                          ),
                     ),
                   ],
                 ),

@@ -1,8 +1,9 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:get/get.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -33,50 +34,55 @@ class LinearIndicator extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(85, size.width),
+      height: SizeUtils.scaleMobile(85, size.width),
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scale(20, size.width),
-        vertical: SizeUtils.scale(10, size.width),
+        horizontal: SizeUtils.scaleMobile(20, size.width),
+        vertical: SizeUtils.scaleMobile(10, size.width),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MyText(text: title ?? "Title", style: BodyMedium),
+          MyText(text: title ?? "Title", style: AppFonts().bodyMedium),
           Row(
             children: [
               Expanded(
                 child: LinearPercentIndicator(
                   animation: true,
                   lineHeight:
-                      indicatorHeight ?? SizeUtils.scale(15, size.width),
+                      indicatorHeight ?? SizeUtils.scaleMobile(15, size.width),
                   animationDuration: 250,
                   padding: EdgeInsets.zero,
                   percent: percent ?? 0,
                   barRadius: Radius.circular(
-                    SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+                    SizeUtils.scaleMobile(
+                        AppSize().borderRadiusLarge, size.width),
                   ),
                   progressColor:
                       indicatorColor ?? Theme.of(context).colorScheme.primary,
                 ),
               ),
-              SizedBox(width: SizeUtils.scale(10, size.width)),
+              SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
               MyText(
                 text: percent != null && percent?.isNaN == false
                     ? '${(percent! * 100).toStringAsFixed(2)}%'
                     : "0.00%",
-                style: BodySmall.copyWith(
-                  color:
-                      indicatorColor ?? Theme.of(context).colorScheme.primary,
-                ),
+                style: AppFonts().bodySmall.copyWith(
+                      color: indicatorColor ??
+                          Theme.of(context).colorScheme.primary,
+                    ),
               ),
             ],
           ),
           Align(
             child: MyText(
-              text:
-                  '${isCheckIn == true ? checkInEmployees : checkOutEmployees} out of $totalEmployees employees are present',
-              style: BodySmallRegular,
+              text: '@employee out of @total employees are present'.trParams({
+                'employee': isCheckIn == true
+                    ? '$checkInEmployees'
+                    : '$checkOutEmployees',
+                'total': '$totalEmployees',
+              }),
+              style: AppFonts().bodySmallRegular,
             ),
           ),
         ],

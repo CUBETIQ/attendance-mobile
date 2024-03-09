@@ -1,4 +1,4 @@
-import 'package:timesync360/feature/onboard/controller/index.dart';
+import 'package:timesync/feature/onboard/controller/index.dart';
 import 'package:get/get.dart';
 
 class OnBoardBinding extends Binding {

@@ -1,13 +1,13 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/image/cache_image.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/string_util.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -30,17 +30,17 @@ class WorkHourCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scale(
-          AppSize.paddingHorizontalLarge,
+        horizontal: SizeUtils.scaleMobile(
+          AppSize().paddingHorizontalLarge,
           size.width,
         ),
-        vertical: SizeUtils.scale(
-          AppSize.paddingVerticalMedium,
+        vertical: SizeUtils.scaleMobile(
+          AppSize().paddingVerticalMedium,
           size.width,
         ),
       ),
       margin: EdgeInsets.only(
-        bottom: SizeUtils.scale(
+        bottom: SizeUtils.scaleMobile(
           10,
           size.width,
         ),
@@ -51,39 +51,39 @@ class WorkHourCard extends StatelessWidget {
             children: [
               MyCacheImage(
                 imageUrl: staff.image,
-                width: SizeUtils.scale(40, size.width),
-                height: SizeUtils.scale(40, size.width),
+                width: SizeUtils.scaleMobile(40, size.width),
+                height: SizeUtils.scaleMobile(40, size.width),
               ),
-              SizedBox(width: SizeUtils.scale(15, size.width)),
+              SizedBox(width: SizeUtils.scaleMobile(15, size.width)),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scale(210, size.width),
+                      maxWidth: SizeUtils.scaleMobile(210, size.width),
                     ),
                     child: MyText(
-                      text: StringUtil().getfullname(
+                      text: StringUtil.getfullname(
                         staff.firstName,
                         staff.lastName,
                         staff.username,
                       ),
-                      style: BodyMediumMedium,
+                      style: AppFonts().bodyMediumMedium,
                     ),
                   ),
                   MyText(
                     text: position.name ?? "N/A",
-                    style: BodyMediumMedium,
+                    style: AppFonts().bodyMediumMedium,
                   ),
                 ],
               ),
             ],
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           LinearPercentIndicator(
             animation: true,
-            lineHeight: SizeUtils.scale(
+            lineHeight: SizeUtils.scaleMobile(
               12,
               size.width,
             ),
@@ -91,21 +91,19 @@ class WorkHourCard extends StatelessWidget {
             padding: EdgeInsets.zero,
             percent: (percentage ?? 0) > 1 ? 1 : percentage ?? 0,
             barRadius: Radius.circular(
-              SizeUtils.scale(
-                AppSize.borderRadiusLarge,
+              SizeUtils.scaleMobile(
+                AppSize().borderRadiusLarge,
                 size.width,
               ),
             ),
             progressColor: Theme.of(context).colorScheme.primary,
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           Row(
             children: [
-              const MyText(text: "Total Hour: "),
-              SizedBox(width: SizeUtils.scale(10, size.width)),
+              const MyText(text: "Total Hour:"),
               MyText(
-                text:
-                    '${DateFormatter().formatMinutes(totalWorkMinute ?? 0)}/8:00',
+                text: ' ${DateUtil.formatMinutes(totalWorkMinute ?? 0)}/8:00',
               )
             ],
           )

@@ -1,13 +1,13 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/organization/organiziation/controller/index.dart';
-import 'package:timesync360/feature/organization/organiziation/widget/company_profile_card.dart';
-import 'package:timesync360/feature/organization/organiziation/widget/info_data_column.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/organization/organiziation/controller/index.dart';
+import 'package:timesync/feature/organization/organiziation/widget/company_profile_card.dart';
+import 'package:timesync/feature/organization/organiziation/widget/info_data_column.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../widget/overview_card.dart';
@@ -25,7 +25,6 @@ class OrganizationViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SizedBox(
         height: size.height,
@@ -40,11 +39,11 @@ class OrganizationViewMobile extends StatelessWidget {
                   onTapEdit: controller.onTabEdit,
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(20, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(
-                    AppSize.paddingHorizontalLarge,
+                  horizontal: SizeUtils.scaleMobile(
+                    AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
                 ),
@@ -58,21 +57,21 @@ class OrganizationViewMobile extends StatelessWidget {
                         totalPosition: controller.positions.length,
                       ),
                     ),
-                    SizedBox(height: SizeUtils.scale(20, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                     MyCard(
                       width: size.width,
                       padding: EdgeInsets.symmetric(
-                        horizontal: SizeUtils.scale(
-                          AppSize.paddingHorizontalMedium,
+                        horizontal: SizeUtils.scaleMobile(
+                          AppSize().paddingHorizontalMedium,
                           size.width,
                         ),
-                        vertical: SizeUtils.scale(
-                          AppSize.paddingVerticalLarge,
+                        vertical: SizeUtils.scaleMobile(
+                          AppSize().paddingVerticalLarge,
                           size.width,
                         ),
                       ),
                       borderRadius: BorderRadius.circular(
-                        SizeUtils.scale(14, size.width),
+                        SizeUtils.scaleMobile(14, size.width),
                       ),
                       child: Obx(
                         () => Column(
@@ -89,7 +88,7 @@ class OrganizationViewMobile extends StatelessWidget {
                                       "00:00",
                                 ),
                                 SizedBox(
-                                  width: SizeUtils.scale(95, size.width),
+                                  width: SizeUtils.scaleMobile(95, size.width),
                                 ),
                                 InfoDataColumn(
                                   icon: Icons.logout_rounded,
@@ -102,7 +101,8 @@ class OrganizationViewMobile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: SizeUtils.scale(15, size.width)),
+                            SizedBox(
+                                height: SizeUtils.scaleMobile(15, size.width)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -126,7 +126,8 @@ class OrganizationViewMobile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: SizeUtils.scale(15, size.width)),
+                            SizedBox(
+                                height: SizeUtils.scaleMobile(15, size.width)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -141,7 +142,8 @@ class OrganizationViewMobile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: SizeUtils.scale(15, size.width)),
+                            SizedBox(
+                                height: SizeUtils.scaleMobile(15, size.width)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

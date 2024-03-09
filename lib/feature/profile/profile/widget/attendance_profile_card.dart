@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class AttendanceProfileCard extends StatelessWidget {
@@ -25,7 +25,7 @@ class AttendanceProfileCard extends StatelessWidget {
       width: size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
         ),
         color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
       ),
@@ -38,14 +38,14 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Present",
-                    style: BodySmallRegular,
+                    style: AppFonts().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAttendance != null
                         ? totalAttendance.toString()
                         : "0",
-                    style: BodyXlargeMedium,
+                    style: AppFonts().bodyXlargeMedium,
                   ),
                 ],
               ),
@@ -58,12 +58,12 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "Absent",
-                    style: BodySmallRegular,
+                    style: AppFonts().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalAbsent != null ? totalAbsent.toString() : "0",
-                    style: BodyXlargeMedium,
+                    style: AppFonts().bodyXlargeMedium,
                   ),
                 ],
               ),
@@ -76,12 +76,12 @@ class AttendanceProfileCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: "On Leave",
-                    style: BodySmallRegular,
+                    style: AppFonts().bodySmallRegular,
                   ),
                   SizedBox(height: size.height * 0.01),
                   MyText(
                     text: totalLeave != null ? totalLeave.toString() : "0",
-                    style: BodyXlargeMedium,
+                    style: AppFonts().bodyXlargeMedium,
                   ),
                 ],
               ),

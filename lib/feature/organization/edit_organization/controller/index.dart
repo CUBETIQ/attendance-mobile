@@ -1,30 +1,29 @@
 import 'dart:io';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/organization/edit_organization/model/update_organization_model.dart';
-import 'package:timesync360/feature/organization/edit_organization/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/organization/edit_organization/model/update_organization_model.dart';
+import 'package:timesync/feature/organization/edit_organization/service/index.dart';
+import 'package:timesync/types/avatar_type.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
 
 class EditOrganizationController extends GetxController {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController startHourController = TextEditingController();
-  TextEditingController endHourController = TextEditingController();
-  TextEditingController breakStartHourController = TextEditingController();
-  TextEditingController breakEndHourController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  Rx<OrganizationModel> organization = OrganizationModel().obs;
-  Rxn<File> imageFile = Rxn<File>(null);
-  Rxn<String> image = Rxn<String>(null);
-  final _debounce = Debouncer(milliseconds: 500);
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final startHourController = TextEditingController();
+  final endHourController = TextEditingController();
+  final breakStartHourController = TextEditingController();
+  final breakEndHourController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final organization = OrganizationModel().obs;
+  final imageFile = Rxn<File>(null);
+  final image = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -46,71 +45,59 @@ class EditOrganizationController extends GetxController {
     image.value = organization.value.image ?? "";
   }
 
-  Future<void> pickImage() async {
+  void pickImage() async {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapCamera: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = file;
+      },
+      avatarType: AvatarType.organization,
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.organization,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   Future<void> updateOrganization() async {
-    _debounce.run(() async {
-      try {
-        ConfigsModel configs = ConfigsModel(
-          startHour: startHourController.text,
-          endHour: endHourController.text,
-          breakTime:
-              "${breakStartHourController.text}-${breakEndHourController.text}",
-          breakDuration: DateTimeUtil().calculateDuration(
-            breakStartHourController.text,
-            breakEndHourController.text,
-          ),
+    try {
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "organization",
+          userId: NavigationController.to.user.value.id,
         );
-        UpdateOrganizationModel input = UpdateOrganizationModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
-          address: addressController.text,
-          configs: configs,
-        );
-        await EditOrganizationService()
-            .updateOrganization(id: organization.value.id!, input: input);
-        Get.back(result: 1);
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
       }
-    });
+      ConfigsModel configs = ConfigsModel(
+        startHour: startHourController.text,
+        endHour: endHourController.text,
+        breakTime:
+            "${breakStartHourController.text}-${breakEndHourController.text}",
+        breakDuration: DateUtil.calculateDuration(
+          breakStartHourController.text,
+          breakEndHourController.text,
+        ),
+      );
+      UpdateOrganizationModel input = UpdateOrganizationModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+        address: addressController.text,
+        configs: configs,
+      );
+      await EditOrganizationService()
+          .updateOrganization(id: organization.value.id!, input: input);
+      Get.back(result: 1);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 }

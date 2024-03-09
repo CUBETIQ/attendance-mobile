@@ -1,13 +1,23 @@
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class StaffService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = StaffService._internal();
+  final dioInstance = DioUtil();
+
+  factory StaffService() {
+    return _singleton;
+  }
+
+  StaffService._internal() {
+    Logs.t('[StaffService] Initialized');
+  }
 
   Future<List<UserModel>> getAllStaffs({required String organizationId}) async {
     final List<UserModel> staffs;

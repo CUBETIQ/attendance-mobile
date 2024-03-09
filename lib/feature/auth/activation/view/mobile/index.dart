@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/lotties.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/text_formater.dart';
-import 'package:timesync360/feature/auth/activation/controller/index.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/lotties.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/text_formater.dart';
+import 'package:timesync/feature/auth/activation/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../core/widgets/textfield/texfield_validate.dart';
@@ -22,12 +22,12 @@ class ActivationViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              left: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              right: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
             ),
@@ -53,13 +53,13 @@ class ActivationViewMobile extends StatelessWidget {
                       MyText(
                         text: controller.title,
                         maxLines: 1,
-                        style: BodyXlarge,
+                        style: AppFonts().bodyXlarge,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyText(
                         text: controller.description,
                         maxLines: 5,
-                        style: BodySmallMedium,
+                        style: AppFonts().bodySmallMedium,
                       ),
                       SizedBox(height: size.height * 0.01),
                       MyTextFieldForm(
@@ -74,7 +74,7 @@ class ActivationViewMobile extends StatelessWidget {
                     ],
                   ),
                 ),
-                MyButton(
+                MyAsyncButton(
                   title: "Activate",
                   onTap: controller.activation,
                 ),

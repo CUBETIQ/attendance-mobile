@@ -1,9 +1,9 @@
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/home/summary_attendance/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/home/summary_attendance/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,15 +11,15 @@ import 'package:get/get.dart';
 class SummaryAttendanceController extends GetxController
     with GetTickerProviderStateMixin {
   static SummaryAttendanceController get to => Get.find();
-  RxList<AttendanceModel> staffAttendanceList = <AttendanceModel>[].obs;
-  RxList<UserModel> staffs = <UserModel>[].obs;
-  RxList<LeaveModel> leaves = <LeaveModel>[].obs;
-  Rxn<int> startOfTheDay = Rxn<int>(null);
-  Rxn<int> endOfTheDay = Rxn<int>(null);
-  RxList<UserModel> getNonAbsentUser = <UserModel>[].obs;
-  RxList<UserModel> absentUser = <UserModel>[].obs;
-  RxBool isLoading = false.obs;
-  RxList<String> tabs = [
+  final staffAttendanceList = <AttendanceModel>[].obs;
+  final staffs = <UserModel>[].obs;
+  final leaves = <LeaveModel>[].obs;
+  final startOfTheDay = Rxn<int>(null);
+  final endOfTheDay = Rxn<int>(null);
+  final getNonAbsentUser = <UserModel>[].obs;
+  final absentUser = <UserModel>[].obs;
+  final isLoading = false.obs;
+  final tabs = [
     "Present",
     "Leave",
     "Absent",

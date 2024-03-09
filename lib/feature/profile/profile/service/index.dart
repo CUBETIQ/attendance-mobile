@@ -1,11 +1,22 @@
-import 'package:timesync360/core/model/summary_attendance_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
+import 'package:timesync/core/model/earn_point_model.dart';
+import 'package:timesync/core/model/summary_attendance_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
-import '../../../../core/network/endpoint.dart';
+import '../../../../core/network/dio/endpoint.dart';
 
 class ProfileService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = ProfileService._internal();
+  final dioInstance = DioUtil();
+
+  factory ProfileService() {
+    return _singleton;
+  }
+
+  ProfileService._internal() {
+    Logs.t('[ProfileService] Initialized');
+  }
 
   Future<List<SummaryAttendanceModel>> getSummrizeAttendance() async {
     List<SummaryAttendanceModel>? summaryAttendance;
@@ -19,5 +30,18 @@ class ProfileService {
       throw Exception("Get attendance failed");
     }
     return summaryAttendance;
+  }
+
+  Future<EarnPointModel> getEarnPoint() async {
+    EarnPointModel? earnPoint;
+    Response response = await dioInstance.dio.get(
+      Endpoints.instance.get_user_earn_point,
+    );
+    if (response.statusCode == 200) {
+      earnPoint = EarnPointModel().fromJson(response.data["data"]);
+    } else {
+      throw Exception("Get earn point failed");
+    }
+    return earnPoint;
   }
 }

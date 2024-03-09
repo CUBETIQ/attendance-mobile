@@ -1,25 +1,28 @@
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/model/summary_task_model.dart';
-import 'package:timesync360/core/model/task_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/task/task/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:flutter/material.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/summary_task_model.dart';
+import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/date_picker/month_picker.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/task/task/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
-  RxList<TaskModel> tasks = <TaskModel>[].obs;
-  RxInt totalTask = 0.obs;
-  RxInt totalCompletedTask = 0.obs;
-  RxInt totalUncompletedTask = 0.obs;
-  RxDouble percentageCompletedTask = 0.0.obs;
-  RxDouble percentageUncompletedTask = 0.0.obs;
-  RxList<SummaryTaskModel> summarizeTasks = <SummaryTaskModel>[].obs;
-  Rxn<int> startDate = Rxn<int>();
-  Rxn<int> endDate = Rxn<int>();
+  final tasks = <TaskModel>[].obs;
+  final totalTask = 0.obs;
+  final totalCompletedTask = 0.obs;
+  final totalUncompletedTask = 0.obs;
+  final percentageCompletedTask = 0.0.obs;
+  final percentageUncompletedTask = 0.0.obs;
+  final summarizeTasks = <SummaryTaskModel>[].obs;
+  final startDate = Rxn<int>();
+  final endDate = Rxn<int>();
+  final selectDate = DateTime.now().obs;
 
   @override
   void onInit() {
@@ -33,7 +36,6 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      totalTask.value = tasks.length;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -47,17 +49,20 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      for (var element in summarizeTasks) {
-        totalCompletedTask.value += element.totalTaskDone!;
-        totalUncompletedTask.value += element.totalTaskNotDone!;
-      }
-      if (totalCompletedTask.value != 0) {
-        percentageCompletedTask.value =
-            (totalCompletedTask.value / totalTask.value * 100) / 100;
-      }
-      if (totalUncompletedTask.value != 0) {
-        percentageUncompletedTask.value =
-            (totalUncompletedTask.value / totalTask.value * 100) / 100;
+      if (summarizeTasks.isNotEmpty) {
+        totalTask.value = summarizeTasks.value.last.totalTask ?? 0;
+        for (var element in summarizeTasks) {
+          totalCompletedTask.value += element.totalTaskDone!;
+          totalUncompletedTask.value += element.totalTaskNotDone!;
+        }
+        if (totalCompletedTask.value != 0) {
+          percentageCompletedTask.value =
+              (totalCompletedTask.value / totalTask.value * 100) / 100;
+        }
+        if (totalUncompletedTask.value != 0) {
+          percentageUncompletedTask.value =
+              (totalUncompletedTask.value / totalTask.value * 100) / 100;
+        }
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -133,7 +138,7 @@ class TaskController extends GetxController {
         Get.toNamed(
           Routes.ADD_TASK,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "task": task,
           },
         );
@@ -165,5 +170,19 @@ class TaskController extends GetxController {
     totalUncompletedTask.value = 0;
     percentageCompletedTask.value = 0;
     percentageUncompletedTask.value = 0;
+  }
+
+  Future<void> onTapDate(BuildContext context) async {
+    final DateTime? picked = await monthPicker(
+      context: context,
+      initialDate: selectDate.value,
+    );
+    if (picked != null) {
+      selectDate.value = picked;
+      startDate.value =
+          DateTime(picked.year, picked.month, 1).millisecondsSinceEpoch;
+      endDate.value =
+          DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
+    }
   }
 }

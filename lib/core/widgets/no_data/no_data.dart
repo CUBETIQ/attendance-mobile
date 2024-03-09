@@ -1,8 +1,9 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/svg.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:timesync/core/widgets/text/text.dart';
 
 class MyNoData extends StatelessWidget {
   const MyNoData({super.key, this.paddingTop});
@@ -26,12 +27,12 @@ class MyNoData extends StatelessWidget {
                 SvgAssets.empty,
               ),
             ),
-            const SizedBox(height: AppSize.paddingS5),
-            Text(
-              "No Data Available",
-              style: BodyLargeMedium,
+            SizedBox(height: AppSize().paddingS5),
+            MyText(
+              text: "No Data Available",
+              style: AppFonts().bodyLargeMedium,
             ),
-            const SizedBox(height: AppSize.paddingS8),
+            SizedBox(height: AppSize().paddingS8),
           ],
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:timesync360/feature/home/work_hour/controller/index.dart';
+import 'package:timesync/feature/home/work_hour/controller/index.dart';
 import 'package:get/get.dart';
 
 class WorkingHourBinding extends Binding {

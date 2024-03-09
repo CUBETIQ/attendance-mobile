@@ -1,9 +1,9 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/feature/home/summary_attendance/controller/index.dart';
-import 'package:timesync360/feature/home/summary_attendance/widget/summary_detail_card.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/feature/home/summary_attendance/controller/index.dart';
+import 'package:timesync/feature/home/summary_attendance/widget/summary_detail_card.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -20,21 +20,21 @@ class AbsentTabMobile extends StatelessWidget {
           : SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scale(
-                    AppSize.paddingHorizontalLarge,
+                  horizontal: SizeUtils.scaleMobile(
+                    AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: SizeUtils.scale(30, size.width)),
+                    SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
                     Obx(
                       () => ListView.separated(
                         itemCount: controller.absentUser.length,
                         shrinkWrap: true,
                         separatorBuilder: (context, index) => SizedBox(
-                          height: SizeUtils.scale(10, size.width),
+                          height: SizeUtils.scaleMobile(10, size.width),
                         ),
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {

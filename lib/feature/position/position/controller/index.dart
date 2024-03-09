@@ -1,21 +1,21 @@
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/position/position/service/index.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/position/position/service/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/state.dart';
 import '../../../../constants/svg.dart';
 
 class PositionController extends GetxController {
   static PositionController get to => Get.find();
-  RxList<PositionModel> positionList = <PositionModel>[].obs;
-  RxList<PositionModel> positionListBackUp = <PositionModel>[].obs;
-  TextEditingController searchController = TextEditingController();
-  RxBool isLoading = false.obs;
+  final positionList = <PositionModel>[].obs;
+  final positionListBackUp = <PositionModel>[].obs;
+  final searchController = TextEditingController();
+  final isLoading = false.obs;
 
   @override
   void onInit() {
@@ -62,7 +62,7 @@ class PositionController extends GetxController {
         Get.toNamed(
           Routes.ADD_POSITION,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "position": position,
           },
         );
@@ -83,7 +83,7 @@ class PositionController extends GetxController {
   }
 
   void onTapAddPosition() {
-    Get.toNamed(Routes.ADD_POSITION, arguments: {"state": AppState.Create});
+    Get.toNamed(Routes.ADD_POSITION, arguments: {"state": AppState.create});
   }
 
   void searchPosition(String value) {

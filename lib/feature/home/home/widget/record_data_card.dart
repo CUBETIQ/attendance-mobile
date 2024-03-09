@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/home/widget/status_card.dart';
-import 'package:timesync360/utils/time_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/home/widget/status_card.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -69,27 +69,27 @@ class RecordDataCard extends StatelessWidget {
                         )
                       : const SizedBox.shrink(),
             ),
-            SizedBox(width: AppSize.paddingS8 * (size.width / 375.0)),
+            SizedBox(width: AppSize().paddingS8 * (size.width / 375.0)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyText(
                   text: time != null
-                      ? DateFormatter().formatTimeNoTrailing(
+                      ? DateUtil.formatTimeNoTrailing(
                           DateTime.fromMillisecondsSinceEpoch(
                           time ?? 0,
                         ))
                       : timeString ?? "--:--",
-                  style: BodyMediumMedium.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                  style: AppFonts().bodyMediumMedium.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
-                const SizedBox(height: AppSize.paddingS2),
+                SizedBox(height: AppSize().paddingS2),
                 MyText(
                   text: time != null ? secondTitle : onNullTitle,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
+                  style: AppFonts().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                 ),
               ],
             ),
@@ -98,12 +98,12 @@ class RecordDataCard extends StatelessWidget {
         Container(
           width: size.width * 0.40,
           height: size.width * 0.15,
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.paddingHorizontalMedium,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize().paddingHorizontalMedium,
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppSize.borderRadiusMedium * (size.width / 375.0),
+                AppSize().borderRadiusMedium * (size.width / 375.0),
               ),
               gradient: gradient ??
                   LinearGradient(
@@ -127,13 +127,13 @@ class RecordDataCard extends StatelessWidget {
                 children: [
                   MyText(
                     text: secondTitle,
-                    style: BodyMediumMedium.copyWith(
-                      color: gradient != null
-                          ? Colors.white
-                          : Theme.of(context).colorScheme.onSurface,
-                    ),
+                    style: AppFonts().bodyMediumMedium.copyWith(
+                          color: gradient != null
+                              ? Colors.white
+                              : Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
-                  const SizedBox(height: AppSize.paddingS1),
+                  SizedBox(height: AppSize().paddingS1),
                   StatusCard(
                     status: status,
                     isBreakTime: isBreakTime,

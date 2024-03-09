@@ -2,12 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+ 	<string>To take user profile image</string>
+	 <key>NSMicrophoneUsageDescription</key>
+	 <string>Used to capture audio for image picker plugin</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	 <string>To choose user profile image or save image</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open.</string>
+	<string>This app needs Location access for for getting accurate location for attendance tracking.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs access to location when in the background.</string>
+	<string>This app needs Location access for getting accurate location for attendance tracking.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>This app needs access to location.</string>
+    <string>This app needs Location access for for getting accurate location for attendance tracking.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

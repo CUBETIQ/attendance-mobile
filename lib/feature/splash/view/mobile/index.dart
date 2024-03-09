@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/image.dart';
-import 'package:timesync360/feature/splash/controller/index.dart';
-import 'package:timesync360/feature/splash/widgets/animated_text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/image.dart';
+import 'package:timesync/feature/splash/controller/index.dart';
+import 'package:timesync/feature/splash/widgets/animated_text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class SplashViewMobile extends StatelessWidget {
@@ -24,15 +24,15 @@ class SplashViewMobile extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    SizeUtils.scale(
-                      AppSize.borderRadiusXLarge,
+                    SizeUtils.scaleMobile(
+                      AppSize().borderRadiusXLarge,
                       size.width,
                     ),
                   ),
                 ),
-                height: SizeUtils.scale(100, size.width),
+                height: SizeUtils.scaleMobile(100, size.width),
                 child: Image.asset(
-                  ImageAssets.logoTimeSync360,
+                  ImageAssets.logotimesync,
                 ),
               ),
             ),

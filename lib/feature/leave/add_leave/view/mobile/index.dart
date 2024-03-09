@@ -1,17 +1,19 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/dropdown_button/dropdown_button.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/date_picker_field.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/leave/add_leave/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/attachment/upload_button.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/leave/add_leave/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/types/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../core/widgets/button/button.dart';
 
 class AddLeaveViewMobile extends StatelessWidget {
   const AddLeaveViewMobile({super.key});
@@ -30,13 +32,12 @@ class AddLeaveViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
@@ -52,7 +53,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e.capitalizeFirst),
+                          child: Text(e.capitalizeFirst.trString),
                         ),
                       )
                       .toList(),
@@ -60,7 +61,9 @@ class AddLeaveViewMobile extends StatelessWidget {
                       controller.selectLeaveType.value = value!,
                 ),
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -92,93 +95,64 @@ class AddLeaveViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
+              Obx(
+                () => TypeAheadField<String>(
+                  focusNode: controller.durationFocusNode,
+                  controller: controller.durationController.value,
+                  builder: (context, textController, focusNode) {
+                    return MyTextFieldForm(
+                      focusNode: focusNode,
+                      hasLabel: true,
+                      label: "Duration",
+                      hintText: "Enter your duration",
+                      textController: controller.durationController.value,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                    );
+                  },
+                  itemBuilder: (context, value) {
+                    return ListTile(
+                      title: Text(value),
+                    );
+                  },
+                  onSelected: (value) {
+                    controller.durationFocusNode?.unfocus();
+                    controller.durationController.value.text = value;
+                  },
+                  suggestionsCallback: (String search) {
+                    return controller.duration;
+                  },
+                ),
+              ),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Reason",
-                hintText: "Enter your Reason",
+                hintText: "Enter your reason",
                 textController: controller.reasonController,
                 maxlines: 5,
               ),
-              const SizedBox(height: AppSize.paddingS5),
-              // ToDo Convert This Into Smaller Widget
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(
-                    text: "Leave Duration Type",
-                    style: BodyMediumMedium,
-                  ),
-                  const SizedBox(height: AppSize.paddingS5),
-                  Container(
-                    height: 48 * (size.width / 375.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        (AppSize.borderRadiusLarge) * (size.width / 375.0),
-                      ),
-                      border: Border.all(
-                        width: 2,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.9),
-                      ),
-                    ),
-                    child: Row(
-                      children: List.generate(
-                        controller.leaveTypeDuration.length,
-                        (index) => Expanded(
-                          child: GestureDetector(
-                            onTap: () =>
-                                controller.onChnageLeaveDurationType(index),
-                            child: Obx(
-                              () => AnimatedContainer(
-                                duration: const Duration(milliseconds: 300),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    (AppSize.borderRadiusLarge) *
-                                        (size.width / 375.0),
-                                  ),
-                                  color: controller
-                                              .selectLeaveDurationType.value ==
-                                          controller.leaveTypeDuration[index]
-                                      ? Theme.of(context)
-                                          .colorScheme
-                                          .primary
-                                          .withOpacity(0.9)
-                                      : Colors.transparent,
-                                ),
-                                child: MyText(
-                                  text: controller.leaveTypeDuration[index],
-                                  style: BodyMediumMedium.copyWith(
-                                    color: controller.selectLeaveDurationType
-                                                .value ==
-                                            controller.leaveTypeDuration[index]
-                                        ? Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .onBackground,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  //
-                  SizedBox(height: size.height * 0.06),
-                  MyButton(
-                    title: "Save",
-                    onTap: controller.appState.value == AppState.Edit
-                        ? controller.updateLeave
-                        : controller.addLeave,
-                  ),
-                ],
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              ),
+              UploadAttachmentButton(
+                files: controller.attachments,
+              ),
+              SizedBox(
+                height: SizeUtils.scaleMobile(AppSize().paddingS10, size.width),
+              ),
+              MyAsyncButton(
+                title: "Save",
+                onTap: controller.appState.value == AppState.edit
+                    ? controller.updateLeave
+                    : controller.addLeave,
               ),
             ],
           ),

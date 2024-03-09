@@ -1,16 +1,16 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/widgets/async_widget/async_base_widget.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/employee/employee/controller/index.dart';
-import 'package:timesync360/feature/employee/employee/widget/staff_card.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/employee/employee/controller/index.dart';
+import 'package:timesync/feature/employee/employee/widget/staff_card.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -29,7 +29,6 @@ class StaffViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: MyRefreshIndicator(
         onRefresh: controller.onRefresh,
@@ -39,17 +38,20 @@ class StaffViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
+                vertical: SizeUtils.scaleMobile(
+                  AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
-                horizontal: AppSize.paddingVerticalLarge,
+                horizontal: AppSize().paddingVerticalLarge,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyText(text: "Employee Overview", style: BodyLargeMedium),
-                  const SizedBox(height: AppSize.paddingS8),
+                  MyText(
+                    text: "Employee Overview",
+                    style: AppFonts().bodyLargeMedium,
+                  ),
+                  SizedBox(height: AppSize().paddingS8),
                   SearchBar(
                     hintText: "Search Employee",
                     elevation: MaterialStateProperty.all<double>(0.8),
@@ -68,7 +70,7 @@ class StaffViewMobile extends StatelessWidget {
                     ],
                     controller: controller.searchController,
                   ),
-                  const SizedBox(height: AppSize.paddingS8),
+                  SizedBox(height: AppSize().paddingS8),
                   Obx(
                     () => MyAsyncWidget(
                       isLoading: controller.isLoading.value,
@@ -79,8 +81,8 @@ class StaffViewMobile extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
-                          height: SizeUtils.scale(
-                            AppSize.paddingS8,
+                          height: SizeUtils.scaleMobile(
+                            AppSize().paddingS8,
                             size.width,
                           ),
                         ),
@@ -118,7 +120,6 @@ class StaffViewMobile extends StatelessWidget {
             Radius.circular(40),
           ),
         ),
-        elevation: 2,
         child: const Icon(Icons.add_rounded),
       ),
     );

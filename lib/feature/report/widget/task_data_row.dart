@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/model/admin_task_report_model.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/extensions/string.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/task_status.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/model/admin_task_report_model.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/task_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,14 +20,16 @@ class TaskDataRowReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: SizeUtils.scale(30, size.width),
-              height: SizeUtils.scale(30, size.width),
+              width: SizeUtils.scaleMobile(30, size.width),
+              height: SizeUtils.scaleMobile(30, size.width),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: data?.color != null
@@ -39,23 +41,24 @@ class TaskDataRowReport extends StatelessWidget {
                     ? IconData(data!.icon!.toInt(), fontFamily: 'MaterialIcons')
                     : Icons.task,
                 color: Colors.white,
+                size: SizeUtils.scaleMobile(18, size.width),
               ),
             ),
-            SizedBox(width: SizeUtils.scale(10, size.width)),
+            SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
             Container(
               constraints: BoxConstraints(
-                maxWidth: SizeUtils.scale(255, size.width),
+                maxWidth: SizeUtils.scaleMobile(255, size.width),
               ),
               child: MyText(
                 text: data?.name?.capitalizeFirst ?? "",
                 overflow: TextOverflow.ellipsis,
-                style: BodyMediumMedium,
+                style: AppFonts().bodyMediumMedium,
                 maxLines: 2,
               ),
             ),
           ],
         ),
-        SizedBox(height: SizeUtils.scale(5, size.width)),
+        SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -64,18 +67,18 @@ class TaskDataRowReport extends StatelessWidget {
                 MyText(
                   text: "Status: ",
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+                  style: AppFonts().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 ),
                 MyText(
                   text: data?.status?.capitalizeFirst ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: data?.status == TaskStatus.completed
-                        ? MyColor.successColor
-                        : MyColor.pendingColor,
-                  ),
+                  style: AppFonts().bodySmallRegular.copyWith(
+                        color: data?.status == TaskStatus.completed
+                            ? MyColor.successColor
+                            : MyColor.pendingColor,
+                      ),
                 ),
               ],
             ),
@@ -84,21 +87,22 @@ class TaskDataRowReport extends StatelessWidget {
                 MyText(
                   text: "Due Date: ",
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+                  style: AppFonts().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 ),
                 MyText(
-                  text: DateFormatter().formatMillisecondsToDOB(data?.endDate),
+                  text: DateUtil.formatMillisecondsToDOB(data?.endDate),
                   overflow: TextOverflow.ellipsis,
-                  style: BodySmallRegular.copyWith(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: AppFonts().bodySmallRegular.copyWith(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
                 ),
               ],
             ),
           ],
         ),
+        SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
       ],
     );
   }

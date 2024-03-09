@@ -1,27 +1,27 @@
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/employee/employee/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/employee/employee/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StaffController extends GetxController {
   static StaffController get to => Get.find();
-  RxList<UserModel> staffsBackUp = <UserModel>[].obs;
-  RxList<UserModel> staffs = <UserModel>[].obs;
-  RxList<PositionModel> positions = <PositionModel>[].obs;
-  RxList<DepartmentModel> departments = <DepartmentModel>[].obs;
-  RxString organizationId = "".obs;
-  RxBool isLoading = false.obs;
-  TextEditingController searchController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
+  final staffsBackUp = <UserModel>[].obs;
+  final staffs = <UserModel>[].obs;
+  final positions = <PositionModel>[].obs;
+  final departments = <DepartmentModel>[].obs;
+  final organizationId = "".obs;
+  final isLoading = false.obs;
+  final searchController = TextEditingController();
+  final newPasswordController = TextEditingController();
 
   @override
   void onInit() {
@@ -104,7 +104,7 @@ class StaffController extends GetxController {
         Get.toNamed(
           Routes.ADD_STAFF,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "positions": positions,
             "departments": departments,
             "staff": staff,
@@ -145,7 +145,7 @@ class StaffController extends GetxController {
     Get.toNamed(
       Routes.ADD_STAFF,
       arguments: {
-        "state": AppState.Create,
+        "state": AppState.create,
         "positions": positions,
         "departments": departments
       },

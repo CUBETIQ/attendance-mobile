@@ -1,11 +1,11 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/image.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/auth/login/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/image.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/feature/auth/login/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,13 +21,13 @@ class LoginViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              top: AppSize.paddingTitleLarge,
-              left: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              top: AppSize().paddingTitleLarge,
+              left: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scale(
-                AppSize.paddingHorizontalLarge,
+              right: SizeUtils.scaleMobile(
+                AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
             ),
@@ -41,19 +41,19 @@ class LoginViewMobile extends StatelessWidget {
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                            SizeUtils.scale(
-                              AppSize.borderRadiusMedium,
+                            SizeUtils.scaleMobile(
+                              AppSize().borderRadiusMedium,
                               size.width,
                             ),
                           ),
                         ),
                         height: 70,
-                        child: Image.asset(ImageAssets.logoTimeSync360),
+                        child: Image.asset(ImageAssets.logotimesync),
                       ),
-                      const SizedBox(height: AppSize.paddingS6),
+                      SizedBox(height: AppSize().paddingS6),
                       MyText(
-                        text: "TimeSync360",
-                        style: BodyLargeMedium,
+                        text: "timesync",
+                        style: AppFonts().bodyLargeMedium,
                       ),
                     ],
                   ),
@@ -61,13 +61,13 @@ class LoginViewMobile extends StatelessWidget {
                 SizedBox(height: size.height * 0.04),
                 MyText(
                   text: "Access your account",
-                  style: BodyXXlarge,
+                  style: AppFonts().bodyXXlarge,
                 ),
                 MyText(
                   text: "Please fill your detail to access your account.",
-                  style: BodyMediumRegular.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
+                  style: AppFonts().bodyMediumRegular.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                 ),
                 SizedBox(height: size.height * 0.05),
                 MyTextFieldForm(
@@ -115,7 +115,7 @@ class LoginViewMobile extends StatelessWidget {
                         SizedBox(width: size.width * 0.01),
                         MyText(
                           text: "Remember me",
-                          style: BodyMediumMedium,
+                          style: AppFonts().bodyMediumMedium,
                         ),
                       ],
                     ),
@@ -123,15 +123,15 @@ class LoginViewMobile extends StatelessWidget {
                       onTap: null,
                       child: MyText(
                         text: "Forgot Password?",
-                        style: BodyMediumMedium.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                        style: AppFonts().bodyMediumMedium.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: size.height * 0.08),
-                MyButton(
+                MyAsyncButton(
                   title: "Login",
                   onTap: controller.login,
                 ),

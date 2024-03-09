@@ -1,4 +1,4 @@
-# timesync360
+# timesync
 
 A new Flutter project.
 

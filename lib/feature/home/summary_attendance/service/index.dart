@@ -1,10 +1,20 @@
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class SummaryAttendanceService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = SummaryAttendanceService._internal();
+  final dioInstance = DioUtil();
+
+  factory SummaryAttendanceService() {
+    return _singleton;
+  }
+
+  SummaryAttendanceService._internal() {
+    Logs.t('[SummaryAttendanceService] Initialized');
+  }
 
   Future<List<LeaveModel>> getAllLeave(
       {int? startDate, int? endDate, required String organizationId}) async {

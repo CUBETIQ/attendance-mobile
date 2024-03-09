@@ -1,9 +1,7 @@
-// ignore_for_file: must_be_immutable
-
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/constants/font.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -26,9 +24,8 @@ class MyDatePickerField extends StatelessWidget {
   final void Function(int?)? onDateResult;
   final DateTime? initialDate;
   final DateTime? firstDate;
-  DateTime? resultDate;
 
-  MyDatePickerField({
+  const MyDatePickerField({
     super.key,
     required this.label,
     required this.textController,
@@ -46,13 +43,13 @@ class MyDatePickerField extends StatelessWidget {
     this.onDateResult,
     this.initialDate,
     this.firstDate,
-    this.resultDate,
   });
 
   @override
   Widget build(BuildContext context) {
     final controller = MyTextFieldFormController.findController(label);
     final size = MediaQuery.of(context).size;
+    DateTime? resultDate;
     return GetBuilder<MyTextFieldFormController>(
       init: controller,
       builder: (_) => Form(
@@ -65,24 +62,26 @@ class MyDatePickerField extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : MyText(
                     text: label,
-                    style: labelStyle ?? BodyMediumMedium,
+                    style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
             const SizedBox(height: 8),
             TextFormField(
               readOnly: true,
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
-                  context: context,
-                  initialDate: initialDate ?? DateTime.now(),
-                  firstDate: firstDate ?? DateTime(1900),
-                  lastDate: DateTime(2100),
-                );
+                    context: context,
+                    initialDate: initialDate ?? DateTime.now(),
+                    firstDate: firstDate ?? DateTime(1900),
+                    lastDate: DateTime(2100),
+                    locale: Get.locale);
                 if (picked != null) {
                   if (label == "Start Date") {
                     resultDate = picked;
-                  } else {
+                  } else if (label == "Due Date" || label == "End Date") {
                     resultDate = DateTime(
                         picked.year, picked.month, picked.day, 23, 59, 59);
+                  } else {
+                    resultDate = picked;
                   }
                   // Throw back the data through the function
                   onDateResult?.call(resultDate!.millisecondsSinceEpoch);
@@ -95,55 +94,59 @@ class MyDatePickerField extends StatelessWidget {
               obscureText: isPassword ?? false,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: (AppSize.paddingS17) * (size.width / 375.0),
-                  vertical: (AppSize.paddingS7) * (size.width / 375.0),
+                  horizontal: (AppSize().paddingS17) * (size.width / 375.0),
+                  vertical: (AppSize().paddingS7) * (size.width / 375.0),
                 ),
                 hintText: hintText,
-                hintStyle: hintStyle ?? BodyMediumMedium,
+                hintStyle: hintStyle ?? AppFonts().bodyMediumMedium,
                 filled: filled ?? false,
                 fillColor: filled == true
-                    ? Theme.of(context).colorScheme.secondaryContainer
+                    ? Theme.of(context).colorScheme.primary.withOpacity(0.095)
                     : null,
                 isDense: true,
                 errorMaxLines: 2,
                 focusedBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
                   borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
+                    width: 1.5,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
                   ),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
                   borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
+                    width: 1.5,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
                   ),
                 ),
                 errorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -154,11 +157,11 @@ class MyDatePickerField extends StatelessWidget {
                 focusedErrorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -166,9 +169,9 @@ class MyDatePickerField extends StatelessWidget {
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
-                errorStyle: errorStyle ?? BodyXSmallMedium,
+                errorStyle: errorStyle ?? AppFonts().bodyXSmallMedium,
               ),
-              style: style ?? BodyMediumMedium,
+              style: style ?? AppFonts().bodyMediumMedium,
               onChanged: (value) {
                 controller.formKey.currentState?.validate();
               },

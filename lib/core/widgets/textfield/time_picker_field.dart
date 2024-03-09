@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/constants/font.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -57,7 +57,7 @@ class MyTimePickerField extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : MyText(
                     text: label,
-                    style: labelStyle ?? BodyMediumMedium,
+                    style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
             const SizedBox(height: 8),
             TextFormField(
@@ -93,55 +93,59 @@ class MyTimePickerField extends StatelessWidget {
               inputFormatters: inputFormatters,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: (AppSize.paddingS17) * (size.width / 375.0),
-                  vertical: (AppSize.paddingS7) * (size.width / 375.0),
+                  horizontal: (AppSize().paddingS17) * (size.width / 375.0),
+                  vertical: (AppSize().paddingS7) * (size.width / 375.0),
                 ),
                 hintText: hintText,
-                hintStyle: hintStyle ?? BodyMediumMedium,
+                hintStyle: hintStyle ?? AppFonts().bodyMediumMedium,
                 filled: filled ?? false,
                 fillColor: filled == true
-                    ? Theme.of(context).colorScheme.secondaryContainer
+                    ? Theme.of(context).colorScheme.primary.withOpacity(0.095)
                     : null,
                 isDense: true,
                 errorMaxLines: 2,
                 focusedBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
                   borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
+                    width: 1.5,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
                   ),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
                   borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant,
+                    width: 1.5,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
                   ),
                 ),
                 errorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -152,11 +156,11 @@ class MyTimePickerField extends StatelessWidget {
                 focusedErrorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize.borderRadiusSmall) *
+                      (borderRadius ?? AppSize().borderRadiusSmall) *
                           (size.width / 375.0),
                     ),
                   ),
@@ -164,9 +168,9 @@ class MyTimePickerField extends StatelessWidget {
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
-                errorStyle: errorStyle ?? BodyXSmallMedium,
+                errorStyle: errorStyle ?? AppFonts().bodyXSmallMedium,
               ),
-              style: style ?? BodyMediumMedium,
+              style: style ?? AppFonts().bodyMediumMedium,
               onChanged: (value) {
                 controller.formKey.currentState?.validate();
               },

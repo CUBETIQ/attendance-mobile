@@ -1,65 +1,61 @@
 import 'dart:io';
-
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/employee/add_employee/model/create_staff_model.dart';
-import 'package:timesync360/feature/employee/add_employee/model/update_staff_model.dart';
-import 'package:timesync360/feature/employee/add_employee/service/index.dart';
-import 'package:timesync360/feature/employee/employee/controller/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
-import 'package:timesync360/utils/types_helper/gender.dart';
-import 'package:timesync360/utils/types_helper/role.dart';
-import 'package:timesync360/utils/types_helper/user_status.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/employee/add_employee/model/create_staff_model.dart';
+import 'package:timesync/feature/employee/add_employee/model/update_staff_model.dart';
+import 'package:timesync/feature/employee/add_employee/service/index.dart';
+import 'package:timesync/feature/employee/employee/controller/index.dart';
+import 'package:timesync/types/state.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/gender.dart';
+import 'package:timesync/types/role.dart';
+import 'package:timesync/types/user_status.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../utils/types_helper/state.dart';
 
 class AddStaffController extends GetxController {
-  RxString title = "Add Employee".obs;
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController lastnameController = TextEditingController();
-  TextEditingController dobController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  List<String> status = [
+  final title = "Add Employee".obs;
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+  final dobController = TextEditingController();
+  final addressController = TextEditingController();
+  final status = [
     UserStatus.active,
     UserStatus.doNotDisturb,
     UserStatus.idle,
   ];
-  RxList<String> genderList = [
+  final genderList = [
     Gender.female,
     Gender.male,
     Gender.other,
   ].obs;
-  RxList<String> roleList = [
+  final roleList = [
     Role.admin,
     Role.staff,
   ].obs;
-  RxList<PositionModel> positionList = <PositionModel>[].obs;
-  RxList<DepartmentModel> departmentList = <DepartmentModel>[].obs;
-  Rxn<PositionModel> selectedPosition = Rxn<PositionModel>(null);
-  Rxn<DepartmentModel> selectedDepartment = Rxn<DepartmentModel>(null);
-  Rxn<String> selectedStatus = Rxn<String>(UserStatus.idle);
-  Rxn<String> selectedRole = Rxn<String>(Role.staff);
-  Rxn<String> selectedGender = Rxn<String>(Gender.male);
-  Rxn<String> image = Rxn<String>(null);
-  Rxn<File> imageFile = Rxn<File>(null);
-  Rx<UserModel> staff = UserModel().obs;
-  Rxn<int> dob = Rxn<int>(null);
-  Rx<String> appState = AppState.Create.obs;
-  final _debouncer = Debouncer(milliseconds: 500);
+  final positionList = <PositionModel>[].obs;
+  final departmentList = <DepartmentModel>[].obs;
+  final selectedPosition = Rxn<PositionModel>(null);
+  final selectedDepartment = Rxn<DepartmentModel>(null);
+  final selectedStatus = Rxn<String>(UserStatus.idle);
+  final selectedRole = Rxn<String>(Role.staff);
+  final selectedGender = Rxn<String>(Gender.male);
+  final image = Rxn<String>(null);
+  final imageFile = Rxn<File>(null);
+  final staff = UserModel().obs;
+  final dob = Rxn<int>(null);
+  final appState = AppState.create.obs;
 
   @override
   void onInit() {
@@ -72,7 +68,7 @@ class AddStaffController extends GetxController {
       appState.value = Get.arguments["state"];
       positionList.value = Get.arguments["positions"];
       departmentList.value = Get.arguments["departments"];
-      if (appState.value == AppState.Edit) {
+      if (appState.value == AppState.edit) {
         title.value = "Edit Employee";
         staff.value = Get.arguments["staff"];
         image.value = staff.value.image;
@@ -82,7 +78,7 @@ class AddStaffController extends GetxController {
         addressController.text = staff.value.address ?? "";
         emailController.text = staff.value.email ?? "";
         dobController.text =
-            DateFormatter().formatMillisecondsToDOB(staff.value.dateOfBirth);
+            DateUtil.formatMillisecondsToDOB(staff.value.dateOfBirth);
         dob.value = staff.value.dateOfBirth;
         selectedRole.value = staff.value.role ?? Role.staff;
         if (staff.value.departmentId != null &&
@@ -104,111 +100,106 @@ class AddStaffController extends GetxController {
 
   Future<void> onTapAddStaff() async {
     validate(true);
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Username').isValid &&
-          MyTextFieldFormController.findController('Password').isValid &&
-          MyTextFieldFormController.findController('Email').isValid) {
-        try {
-          CreateStaffModel input = CreateStaffModel(
-            username: usernameController.text,
-            password: passwordController.text,
-            firstName: firstnameController.text,
-            lastName: lastnameController.text,
-            address: addressController.text,
-            dateOfBirth: dob.value,
-            role: selectedRole.value,
-            gender: selectedGender.value,
-            status: selectedStatus.value,
-            image: image.value,
-            name: "${firstnameController.text} ${lastnameController.text}",
-            departmentId: selectedDepartment.value?.id,
-            organizationId: NavigationController.to.organization.value.id,
-            positionId: selectedPosition.value?.id,
-            email: emailController.text,
+    if (MyTextFieldFormController.findController('Username').isValid &&
+        MyTextFieldFormController.findController('Password').isValid &&
+        MyTextFieldFormController.findController('Email').isValid) {
+      try {
+        if (imageFile.value != null) {
+          final metedata = FileMetadata(
+            source: "profile",
+            userId: NavigationController.to.user.value.id,
           );
-          await AddStaffService().addStaff(input);
-          await StaffController.to.getAllStaffs();
-          Get.back(closeOverlays: true);
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
+          final data =
+              await UploadFileService().uploadFile(imageFile.value!, metedata);
+          if (data != null) {
+            image.value = data.url;
+          }
         }
+        CreateStaffModel input = CreateStaffModel(
+          username: usernameController.text,
+          password: passwordController.text,
+          firstName: firstnameController.text,
+          lastName: lastnameController.text,
+          address: addressController.text,
+          dateOfBirth: dob.value,
+          role: selectedRole.value,
+          gender: selectedGender.value,
+          status: selectedStatus.value,
+          image: image.value,
+          name: "${firstnameController.text} ${lastnameController.text}",
+          departmentId: selectedDepartment.value?.id,
+          organizationId: NavigationController.to.organization.value.id,
+          positionId: selectedPosition.value?.id,
+          email: emailController.text,
+        );
+        await AddStaffService().addStaff(input);
+        await StaffController.to.getAllStaffs();
+        Get.back(closeOverlays: true);
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   Future<void> onTapUpdateStaff() async {
     validate(false);
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Username').isValid) {
-        try {
-          UpdateStaffModel input = UpdateStaffModel(
-            username: usernameController.text,
-            firstName: firstnameController.text,
-            lastName: lastnameController.text,
-            address: addressController.text,
-            dateOfBirth: dob.value,
-            role: selectedRole.value,
-            gender: selectedGender.value,
-            status: selectedStatus.value,
-            name: "${firstnameController.text} ${lastnameController.text}",
-            image: image.value,
-            departmentId: selectedDepartment.value?.id,
-            organizationId: NavigationController.to.organization.value.id,
-            positionId: selectedPosition.value?.id,
-            email: emailController.text,
+    if (MyTextFieldFormController.findController('Username').isValid) {
+      try {
+        if (imageFile.value != null) {
+          final metedata = FileMetadata(
+            source: "profile",
+            userId: NavigationController.to.user.value.id,
           );
-          await AddStaffService()
-              .updateStaff(input: input, id: staff.value.id!);
-          await StaffController.to.getAllStaffs();
-          if (NavigationController.to.user.value.id == staff.value.id) {
-            await NavigationController.to.fetchMe();
+          final data =
+              await UploadFileService().uploadFile(imageFile.value!, metedata);
+          if (data != null) {
+            image.value = data.url;
           }
-          Get.back(closeOverlays: true);
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
         }
+        UpdateStaffModel input = UpdateStaffModel(
+          username: usernameController.text,
+          firstName: firstnameController.text,
+          lastName: lastnameController.text,
+          address: addressController.text,
+          dateOfBirth: dob.value,
+          role: selectedRole.value,
+          gender: selectedGender.value,
+          status: selectedStatus.value,
+          name: "${firstnameController.text} ${lastnameController.text}",
+          image: image.value,
+          departmentId: selectedDepartment.value?.id,
+          organizationId: NavigationController.to.organization.value.id,
+          positionId: selectedPosition.value?.id,
+          email: emailController.text,
+        );
+        await AddStaffService().updateStaff(input: input, id: staff.value.id!);
+        await StaffController.to.getAllStaffs();
+        if (NavigationController.to.user.value.id == staff.value.id) {
+          await NavigationController.to.fetchMe();
+        }
+        Get.back(closeOverlays: true);
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
-  Future<void> pickImage() async {
+  void pickImage() async {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapCamera: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = file;
+      },
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.profile,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   void getDateInMilliSecond(int? date) {

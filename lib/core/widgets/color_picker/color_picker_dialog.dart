@@ -1,6 +1,6 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,15 +19,15 @@ void getColorPickerDialog({
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppSize.borderRadiusLarge *
+                AppSize().borderRadiusLarge *
                     (MediaQuery.of(context).size.width / 375.0),
               ),
               color: Theme.of(context).colorScheme.secondaryContainer,
@@ -61,7 +61,7 @@ void getColorPickerDialog({
                   },
                   heading: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: AppSize.paddingS8),
+                        EdgeInsets.symmetric(vertical: AppSize().paddingS8),
                     child: MyText(
                       text: 'Select color',
                       style: Theme.of(context).textTheme.titleSmall,
@@ -69,7 +69,7 @@ void getColorPickerDialog({
                   ),
                   subheading: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: AppSize.paddingS8),
+                        EdgeInsets.symmetric(vertical: AppSize().paddingS8),
                     child: MyText(
                       text: 'Select color shade',
                       style: Theme.of(context).textTheme.titleSmall,
@@ -78,11 +78,11 @@ void getColorPickerDialog({
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: SizeUtils.scale(
-                      AppSize.paddingHorizontalLarge,
+                    horizontal: SizeUtils.scaleMobile(
+                      AppSize().paddingHorizontalLarge,
                       MediaQuery.of(context).size.width,
                     ),
-                    vertical: AppSize.paddingS4,
+                    vertical: AppSize().paddingS4,
                   ),
                   child: Row(
                     children: [

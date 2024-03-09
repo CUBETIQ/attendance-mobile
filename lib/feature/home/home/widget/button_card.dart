@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class ButtonCard extends StatelessWidget {
@@ -22,11 +22,11 @@ class ButtonCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SizeUtils.scale(150, size.width),
+        height: SizeUtils.scaleMobile(150, size.width),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(
-              AppSize.borderRadiusLarge,
+            SizeUtils.scaleMobile(
+              AppSize().borderRadiusLarge,
               size.width,
             ),
           ),
@@ -44,23 +44,23 @@ class ButtonCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(SizeUtils.scale(10, size.width)),
+              padding: EdgeInsets.all(SizeUtils.scaleMobile(10, size.width)),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.primary,
               ),
               child: Icon(
                 icon,
-                size: SizeUtils.scale(40, size.width),
+                size: SizeUtils.scaleMobile(40, size.width),
                 color: Theme.of(context).colorScheme.background,
               ),
             ),
             SizedBox(
-              height: SizeUtils.scale(10, size.width),
+              height: SizeUtils.scaleMobile(10, size.width),
             ),
             MyText(
               text: title,
-              style: BodyLargeMedium,
+              style: AppFonts().bodyLargeMedium,
             )
           ],
         ),

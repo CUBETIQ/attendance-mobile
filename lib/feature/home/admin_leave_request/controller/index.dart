@@ -1,23 +1,23 @@
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/home/admin_leave_request/model/change_leave_status.dart';
-import 'package:timesync360/feature/home/admin_leave_request/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/date_picker/month_picker.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/home/admin_leave_request/model/change_leave_status.dart';
+import 'package:timesync/feature/home/admin_leave_request/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class AdminLeaveRequestController extends GetxController {
   static AdminLeaveRequestController get to => Get.find();
-  Rx<DateTime> selectDate = DateTime.now().obs;
-  Rxn<int> startDate = Rxn<int>(null);
-  Rxn<int> endDate = Rxn<int>(null);
-  RxList<LeaveModel> leaveList = <LeaveModel>[].obs;
-  RxList<UserModel> staffList = <UserModel>[].obs;
-  RxBool isLoading = false.obs;
+  final selectDate = DateTime.now().obs;
+  final startDate = Rxn<int>(null);
+  final endDate = Rxn<int>(null);
+  final leaveList = <LeaveModel>[].obs;
+  final staffList = <UserModel>[].obs;
+  final isLoading = false.obs;
 
   @override
   void onInit() {
@@ -63,14 +63,9 @@ class AdminLeaveRequestController extends GetxController {
   }
 
   Future<void> onTapDate(BuildContext context) async {
-    final DateTime? picked = await showMonthPicker(
+    final DateTime? picked = await monthPicker(
       context: context,
       initialDate: selectDate.value,
-      firstDate: DateTime(2019),
-      lastDate: DateTime(2050),
-      roundedCornersRadius: 24,
-      animationMilliseconds: 0,
-      dismissible: true,
     );
     if (picked != null) {
       selectDate.value = picked;

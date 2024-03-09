@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/button/button.dart';
-import 'package:timesync360/core/widgets/profile_image/profile_image.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/textfield/texfield_validate.dart';
-import 'package:timesync360/feature/department/add_department/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/profile_image/profile_image.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/feature/department/add_department/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/types/state.dart';
 
 class AddDepartmentViewMobile extends StatelessWidget {
   const AddDepartmentViewMobile({super.key});
@@ -28,41 +28,44 @@ class AddDepartmentViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS17, size.width)),
+              SizedBox(
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS17, size.width)),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
                   () => MyProfileImage(
                     imageFile: controller.imageFile.value,
                     imageUrl: controller.image.value,
-                    width: SizeUtils.scale(110, size.width),
-                    height: SizeUtils.scale(110, size.width),
-                    imageHeight: SizeUtils.scale(70, size.width),
-                    imageWidth: SizeUtils.scale(70, size.width),
+                    width: SizeUtils.scaleMobile(110, size.width),
+                    height: SizeUtils.scaleMobile(110, size.width),
+                    imageHeight: SizeUtils.scaleMobile(70, size.width),
+                    imageWidth: SizeUtils.scaleMobile(70, size.width),
                     defaultImage: SvgAssets.position,
                   ),
                 ),
               ),
-              SizedBox(height: SizeUtils.scale(AppSize.paddingS17, size.width)),
+              SizedBox(
+                  height:
+                      SizeUtils.scaleMobile(AppSize().paddingS17, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "name",
                 hintText: "Enter name",
                 textController: controller.nameController,
               ),
-              const SizedBox(height: AppSize.paddingS5),
+              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",
@@ -70,11 +73,11 @@ class AddDepartmentViewMobile extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              SizedBox(height: SizeUtils.scale(40, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(40, size.width)),
               Obx(
-                () => MyButton(
+                () => MyAsyncButton(
                   title: "Save",
-                  onTap: controller.state.value == AppState.Create
+                  onTap: controller.state.value == AppState.create
                       ? controller.addDepartment
                       : controller.updateDepartment,
                 ),

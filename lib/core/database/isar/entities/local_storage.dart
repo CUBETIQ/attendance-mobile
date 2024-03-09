@@ -13,7 +13,7 @@ class LocalStorage {
   String? language;
   bool? darkTheme;
   bool? isFirstTime = true;
-  bool? isRememberMe;
+  String? isRememberMe;
   String? username;
-  String? languageCode = "en";
+  String? theme;
 }

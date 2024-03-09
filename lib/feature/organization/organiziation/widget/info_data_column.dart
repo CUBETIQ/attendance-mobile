@@ -1,6 +1,6 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class InfoDataColumn extends StatelessWidget {
@@ -30,24 +30,24 @@ class InfoDataColumn extends StatelessWidget {
               color: iconColor,
             ),
             SizedBox(
-              width: SizeUtils.scale(5, size.width),
+              width: SizeUtils.scaleMobile(5, size.width),
             ),
             MyText(
               text: title,
-              style: BodyMediumMedium,
+              style: AppFonts().bodyMediumMedium,
             ),
           ],
         ),
         SizedBox(
-          height: SizeUtils.scale(3, size.width),
+          height: SizeUtils.scaleMobile(3, size.width),
         ),
         Padding(
           padding: EdgeInsets.only(
-            left: SizeUtils.scale(20, size.width),
+            left: SizeUtils.scaleMobile(20, size.width),
           ),
           child: Container(
             constraints: BoxConstraints(
-              maxWidth: SizeUtils.scale(270, size.width),
+              maxWidth: SizeUtils.scaleMobile(270, size.width),
             ),
             child: MyText(
               text: value,

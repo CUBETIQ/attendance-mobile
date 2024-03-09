@@ -1,4 +1,6 @@
-import 'package:timesync360/core/repositories/base_model.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/repositories/base_model.dart';
+import 'package:timesync/extensions/string.dart';
 
 class LeaveModel extends BaseModel<LeaveModel> {
   final String? id;
@@ -11,10 +13,10 @@ class LeaveModel extends BaseModel<LeaveModel> {
   final int? from;
   final int? to;
   final String? status;
-  final List<dynamic>? attachment;
   final String? durationType;
-  final int? duration;
-  final Map<String, dynamic>? updateBy;
+  final double? duration;
+  final UpdateByModel? updateBy;
+  final List<AttachmentModel>? attachment;
 
   LeaveModel({
     this.id,
@@ -38,6 +40,12 @@ class LeaveModel extends BaseModel<LeaveModel> {
     if (json == null) {
       return LeaveModel();
     }
+    double? durations;
+    if (json["duration"] is int) {
+      durations = json["duration"].toString().toDouble();
+    } else {
+      durations = json["duration"];
+    }
     return LeaveModel(
       id: json['id'],
       userId: json['userId'],
@@ -49,10 +57,10 @@ class LeaveModel extends BaseModel<LeaveModel> {
       from: json['from'],
       to: json['to'],
       status: json['status'],
-      attachment: json['attachment'],
       durationType: json['durationType'],
-      duration: json['duration'],
-      updateBy: json['updateBy'],
+      duration: durations,
+      updateBy: UpdateByModel().fromJson(json['updateBy']),
+      attachment: AttachmentModel().fromListJson(json['attachment']),
     );
   }
 

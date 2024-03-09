@@ -1,3 +1,5 @@
+import 'package:timesync/core/model/attachment_model.dart';
+
 class CreateTaskModel {
   final String? name;
   final String? description;
@@ -6,6 +8,7 @@ class CreateTaskModel {
   final String? color;
   final String? icon;
   final String? priority;
+  final List<AttachmentModel>? attachment;
 
   CreateTaskModel({
     this.name,
@@ -15,6 +18,7 @@ class CreateTaskModel {
     this.color,
     this.icon,
     this.priority,
+    this.attachment,
   });
 
   Map<String, dynamic> toJson() {
@@ -26,6 +30,7 @@ class CreateTaskModel {
       "color": color,
       "icon": icon,
       "priority": priority,
+      "attachment": attachment?.map((e) => e.toJson()).toList(),
     };
   }
 }

@@ -1,41 +1,38 @@
 import 'dart:io';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/home/home/controller/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/profile/edit_profile/model/update_profile_model.dart';
-import 'package:timesync360/feature/profile/edit_profile/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/time_util.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
-import 'package:timesync360/utils/types_helper/gender.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/home/home/controller/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/profile/edit_profile/model/update_profile_model.dart';
+import 'package:timesync/feature/profile/edit_profile/service/index.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/types/gender.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EditProfileController extends GetxController {
   static EditProfileController get to => Get.find();
-  Rx<UserModel> user = UserModel().obs;
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController lastnameController = TextEditingController();
-  TextEditingController dobController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  var isLoading = false.obs;
-  Rxn<String> image = Rxn<String>(null);
-  Rxn<String> backUpImage = Rxn<String>(null);
-  Rxn<int> dob = Rxn<int>(null);
-  Rxn<File> imageFile = Rxn<File>(null);
-  RxList<String> genderList = [
+  final user = UserModel().obs;
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+  final dobController = TextEditingController();
+  final addressController = TextEditingController();
+  final isLoading = false.obs;
+  final image = Rxn<String>(null);
+  final backUpImage = Rxn<String>(null);
+  final dob = Rxn<int>(null);
+  final imageFile = Rxn<File>(null);
+  final genderList = [
     Gender.female,
     Gender.male,
     Gender.other,
   ].obs;
-  Rxn<String> selectedGender = Rxn<String>(null);
-  final _debouncer = Debouncer(milliseconds: 500);
+  final selectedGender = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -54,7 +51,7 @@ class EditProfileController extends GetxController {
     if (user.value.dateOfBirth != null &&
         user.value.dateOfBirth.toString().length > 5) {
       dobController.text =
-          DateFormatter().formatMillisecondsToDOB(user.value.dateOfBirth);
+          DateUtil.formatMillisecondsToDOB(user.value.dateOfBirth);
     }
   }
 
@@ -64,10 +61,20 @@ class EditProfileController extends GetxController {
 
   Future<void> updateProfile() async {
     validate();
-    _debouncer.run(() async {});
     if (MyTextFieldFormController.findController('First Name').isValid &&
         MyTextFieldFormController.findController('Last Name').isValid) {
       isLoading.value = true;
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "profile",
+          userId: NavigationController.to.user.value.id,
+        );
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
+      }
       try {
         UpdateProfileModel input = UpdateProfileModel(
           firstname: firstnameController.text,
@@ -93,42 +100,20 @@ class EditProfileController extends GetxController {
     }
   }
 
-  Future<void> pickImage() async {
+  void pickImage() async {
     getPickImageButtomSheet(
       Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapCamera: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = file;
+      },
     );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.profile,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
-    }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
-      }
-    } catch (e) {
-      rethrow;
-    }
   }
 
   void validate() {

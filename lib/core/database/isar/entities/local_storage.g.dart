@@ -40,26 +40,26 @@ const LocalStorageSchema = CollectionSchema(
     r'isRememberMe': PropertySchema(
       id: 4,
       name: r'isRememberMe',
-      type: IsarType.bool,
+      type: IsarType.string,
     ),
     r'language': PropertySchema(
       id: 5,
       name: r'language',
       type: IsarType.string,
     ),
-    r'languageCode': PropertySchema(
-      id: 6,
-      name: r'languageCode',
-      type: IsarType.string,
-    ),
     r'organizationId': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'organizationId',
       type: IsarType.string,
     ),
     r'refreshToken': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'refreshToken',
+      type: IsarType.string,
+    ),
+    r'theme': PropertySchema(
+      id: 8,
+      name: r'theme',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
@@ -95,13 +95,13 @@ int _localStorageEstimateSize(
     }
   }
   {
-    final value = object.language;
+    final value = object.isRememberMe;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.languageCode;
+    final value = object.language;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -114,6 +114,12 @@ int _localStorageEstimateSize(
   }
   {
     final value = object.refreshToken;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.theme;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -137,11 +143,11 @@ void _localStorageSerialize(
   writer.writeBool(offsets[1], object.darkTheme);
   writer.writeBool(offsets[2], object.isActivated);
   writer.writeBool(offsets[3], object.isFirstTime);
-  writer.writeBool(offsets[4], object.isRememberMe);
+  writer.writeString(offsets[4], object.isRememberMe);
   writer.writeString(offsets[5], object.language);
-  writer.writeString(offsets[6], object.languageCode);
-  writer.writeString(offsets[7], object.organizationId);
-  writer.writeString(offsets[8], object.refreshToken);
+  writer.writeString(offsets[6], object.organizationId);
+  writer.writeString(offsets[7], object.refreshToken);
+  writer.writeString(offsets[8], object.theme);
   writer.writeString(offsets[9], object.username);
 }
 
@@ -157,11 +163,11 @@ LocalStorage _localStorageDeserialize(
   object.id = id;
   object.isActivated = reader.readBoolOrNull(offsets[2]);
   object.isFirstTime = reader.readBoolOrNull(offsets[3]);
-  object.isRememberMe = reader.readBoolOrNull(offsets[4]);
+  object.isRememberMe = reader.readStringOrNull(offsets[4]);
   object.language = reader.readStringOrNull(offsets[5]);
-  object.languageCode = reader.readStringOrNull(offsets[6]);
-  object.organizationId = reader.readStringOrNull(offsets[7]);
-  object.refreshToken = reader.readStringOrNull(offsets[8]);
+  object.organizationId = reader.readStringOrNull(offsets[6]);
+  object.refreshToken = reader.readStringOrNull(offsets[7]);
+  object.theme = reader.readStringOrNull(offsets[8]);
   object.username = reader.readStringOrNull(offsets[9]);
   return object;
 }
@@ -182,7 +188,7 @@ P _localStorageDeserializeProp<P>(
     case 3:
       return (reader.readBoolOrNull(offset)) as P;
     case 4:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
@@ -619,11 +625,137 @@ extension LocalStorageQueryFilter
   }
 
   QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      isRememberMeEqualTo(bool? value) {
+      isRememberMeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isRememberMe',
         value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'isRememberMe',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'isRememberMe',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'isRememberMe',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isRememberMe',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isRememberMeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'isRememberMe',
+        value: '',
       ));
     });
   }
@@ -777,160 +909,6 @@ extension LocalStorageQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'language',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'languageCode',
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'languageCode',
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'languageCode',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'languageCode',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'languageCode',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'languageCode',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'languageCode',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'languageCode',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'languageCode',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'languageCode',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'languageCode',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
-      languageCodeIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'languageCode',
         value: '',
       ));
     });
@@ -1245,6 +1223,158 @@ extension LocalStorageQueryFilter
   }
 
   QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      themeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'theme',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      themeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'theme',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition> themeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'theme',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      themeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'theme',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition> themeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'theme',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition> themeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'theme',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      themeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'theme',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition> themeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'theme',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition> themeContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'theme',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition> themeMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'theme',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      themeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'theme',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      themeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'theme',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
       usernameIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1483,19 +1613,6 @@ extension LocalStorageQuerySortBy
     });
   }
 
-  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByLanguageCode() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languageCode', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
-      sortByLanguageCodeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languageCode', Sort.desc);
-    });
-  }
-
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
       sortByOrganizationId() {
     return QueryBuilder.apply(this, (query) {
@@ -1520,6 +1637,18 @@ extension LocalStorageQuerySortBy
       sortByRefreshTokenDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'refreshToken', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByTheme() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByThemeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.desc);
     });
   }
 
@@ -1626,19 +1755,6 @@ extension LocalStorageQuerySortThenBy
     });
   }
 
-  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenByLanguageCode() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languageCode', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
-      thenByLanguageCodeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'languageCode', Sort.desc);
-    });
-  }
-
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
       thenByOrganizationId() {
     return QueryBuilder.apply(this, (query) {
@@ -1663,6 +1779,18 @@ extension LocalStorageQuerySortThenBy
       thenByRefreshTokenDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'refreshToken', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenByTheme() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenByThemeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.desc);
     });
   }
 
@@ -1706,9 +1834,10 @@ extension LocalStorageQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByIsRememberMe() {
+  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByIsRememberMe(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isRememberMe');
+      return query.addDistinctBy(r'isRememberMe', caseSensitive: caseSensitive);
     });
   }
 
@@ -1716,13 +1845,6 @@ extension LocalStorageQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'language', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByLanguageCode(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'languageCode', caseSensitive: caseSensitive);
     });
   }
 
@@ -1738,6 +1860,13 @@ extension LocalStorageQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'refreshToken', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByTheme(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'theme', caseSensitive: caseSensitive);
     });
   }
 
@@ -1781,7 +1910,7 @@ extension LocalStorageQueryProperty
     });
   }
 
-  QueryBuilder<LocalStorage, bool?, QQueryOperations> isRememberMeProperty() {
+  QueryBuilder<LocalStorage, String?, QQueryOperations> isRememberMeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isRememberMe');
     });
@@ -1790,12 +1919,6 @@ extension LocalStorageQueryProperty
   QueryBuilder<LocalStorage, String?, QQueryOperations> languageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'language');
-    });
-  }
-
-  QueryBuilder<LocalStorage, String?, QQueryOperations> languageCodeProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'languageCode');
     });
   }
 
@@ -1809,6 +1932,12 @@ extension LocalStorageQueryProperty
   QueryBuilder<LocalStorage, String?, QQueryOperations> refreshTokenProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'refreshToken');
+    });
+  }
+
+  QueryBuilder<LocalStorage, String?, QQueryOperations> themeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'theme');
     });
   }
 

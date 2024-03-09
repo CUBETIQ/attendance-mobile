@@ -35,4 +35,17 @@ class SvgAssets {
   static const String usFlag = 'assets/svgs/us.svg';
   static const String company = 'assets/svgs/company.svg';
   static const String position = 'assets/svgs/position.svg';
+  static const String scanQR = 'assets/svgs/scan_qr.svg';
+  static const String image = "assets/svgs/image.svg";
+  static const String file = "assets/svgs/file.svg";
+  static const String fileIconCsv = "assets/svgs/icons/csv.svg";
+  static const String fileIconDoc = "assets/svgs/icons/doc.svg";
+  static const String fileIconEpub = "assets/svgs/icons/epub.svg";
+  static const String fileIconGif = "assets/svgs/icons/gif.svg";
+  static const String fileIconMp3 = "assets/svgs/icons/mp3.svg";
+  static const String fileIconMp4 = "assets/svgs/icons/mp4.svg";
+  static const String fileIconPdf = "assets/svgs/icons/pdf.svg";
+  static const String fileIconPpt = "assets/svgs/icons/ppt.svg";
+  static const String fileIconTxt = "assets/svgs/icons/txt.svg";
+  static const String fileIconXls = "assets/svgs/icons/ppt.svg";
 }

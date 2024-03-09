@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/types_helper/attendance_status.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/types/attendance_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 
@@ -24,17 +24,17 @@ class StatusCard extends StatelessWidget {
     return isBreakTime == true
         ? MyText(
             text: breakTimeTitle ?? "Ongoing",
-            style: BodySmallMedium.copyWith(
-              color: Colors.white,
-            ),
+            style: AppFonts().bodySmallMedium.copyWith(
+                  color: Colors.white,
+                ),
           )
         : isBreakTime == false
             ? const SizedBox.shrink()
             : Container(
                 height: size.width * 0.045,
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.paddingS7,
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSize().paddingS7,
                 ),
                 decoration: BoxDecoration(
                   color: status != null
@@ -45,18 +45,18 @@ class StatusCard extends StatelessWidget {
                               : Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.outlineVariant,
                   borderRadius: BorderRadius.circular(
-                    AppSize.borderRadiusMedium * (size.width / 375.0),
+                    AppSize().borderRadiusMedium * (size.width / 375.0),
                   ),
                 ),
                 child: MyText(
                   text: (status ?? "No Status").capitalizeFirst,
-                  style: BodySmallMedium.copyWith(
-                    color: status != null
-                        ? status == AttendanceStatus.early
-                            ? Colors.white
-                            : Theme.of(context).colorScheme.onPrimary
-                        : Theme.of(context).colorScheme.onSurface,
-                  ),
+                  style: AppFonts().bodySmallMedium.copyWith(
+                        color: status != null
+                            ? status == AttendanceStatus.early
+                                ? Colors.white
+                                : Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
               );
   }

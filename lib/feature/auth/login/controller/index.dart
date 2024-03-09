@@ -1,15 +1,16 @@
-import 'package:timesync360/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync360/core/database/isar/service/isar_service.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/model/organization_model.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/model/user_status_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/auth/login/model/index.dart';
-import 'package:timesync360/feature/auth/login/service/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
+import 'package:timesync/config/app_config.dart';
+import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
+import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/model/organization_model.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/auth/login/model/index.dart';
+import 'package:timesync/feature/auth/login/service/index.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,63 +18,68 @@ import '../../../../core/model/user_model.dart';
 
 class LoginController extends GetxController {
   static LoginController get to => Get.find();
-  String title = 'login';
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  RxBool isRememberMe = false.obs;
-  Rx<UserModel> user = UserModel().obs;
-  Rx<PositionModel> position = PositionModel().obs;
-  Rx<DepartmentModel> department = DepartmentModel().obs;
-  Rxn<OrganizationModel> organization = Rxn<OrganizationModel>(null);
-  final LocalStorageController localDataService =
-      LocalStorageController.getInstance();
-  RxBool showPassword = true.obs;
-  Rx<UserStatusModel> userStatus = UserStatusModel().obs;
-  final _debouncer = Debouncer(milliseconds: 500);
+  final String title = 'login';
+  final passwordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final isRememberMe = false.obs;
+  final user = UserModel().obs;
+  final position = PositionModel().obs;
+  final department = DepartmentModel().obs;
+  final organization = Rxn<OrganizationModel>(null);
+  final localDataService = LocalStorageController.getInstance();
+  final showPassword = true.obs;
+  final userStatus = UserStatusModel().obs;
+  LocalStorageModel? localStorageData = LocalStorageModel();
+  final accessToken = Rxn<String>(null);
+  final refreshToken = Rxn<String>(null);
+
+  @override
+  onInit() {
+    super.onInit();
+    initRememberMe();
+  }
 
   Future<void> login() async {
     validate();
-    _debouncer.run(() async {
-      if (MyTextFieldFormController.findController('Username').isValid &&
-          MyTextFieldFormController.findController('Password').isValid) {
-        try {
-          LoginModel input = LoginModel(
-            username: usernameController.text,
-            password: passwordController.text,
-          );
-          var accessToken = await LoginService().login(input);
-          await IsarService().saveLocalData(
-            accessToken: accessToken.first,
-            refreshToken: accessToken.last,
-            organizationId: organization.value?.id,
-          );
-          await fetchMe();
-          await getOrganization(user.value.organizationId!);
-          await getUserStatus();
-          if (organization.value == null) {
-            Get.offNamed(Routes.ACTIVATION);
-          } else {
-            if (user.value.positionId != null && user.value.positionId != "") {
-              await getPosition();
-            }
-            if (user.value.departmentId != null &&
-                user.value.departmentId != "") {
-              await getDepartment();
-            }
-            Get.offNamed(Routes.NAVIGATION, arguments: {
-              "user": user.value,
-              "position": position.value,
-              "department": department.value,
-              "organization": organization.value,
-              "userStatus": userStatus.value,
-            });
+    if (MyTextFieldFormController.findController('Username').isValid &&
+        MyTextFieldFormController.findController('Password').isValid) {
+      try {
+        final storageData = await localDataService.get();
+        LoginModel input = LoginModel(
+          username: usernameController.text,
+          password: passwordController.text,
+        );
+        var token = await LoginService().login(input);
+        accessToken.value = token.first;
+        refreshToken.value = token.last;
+
+        await getOrganization(storageData?.organizationId ?? "");
+        await fetchMe();
+        await getUserStatus();
+        await setRememberMe();
+        if (organization.value == null) {
+          Get.offNamed(Routes.ACTIVATION);
+        } else {
+          if (user.value.positionId != null && user.value.positionId != "") {
+            await getPosition();
           }
-        } on DioException catch (e) {
-          showErrorSnackBar("Error", e.response?.data["message"]);
-          rethrow;
+          if (user.value.departmentId != null &&
+              user.value.departmentId != "") {
+            await getDepartment();
+          }
+          Get.offNamed(Routes.NAVIGATION, arguments: {
+            "user": user.value,
+            "position": position.value,
+            "department": department.value,
+            "organization": organization.value,
+            "userStatus": userStatus.value,
+          });
         }
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
       }
-    });
+    }
   }
 
   void validate() {
@@ -81,10 +87,27 @@ class LoginController extends GetxController {
     MyTextFieldFormController.findController('Password').isValid;
   }
 
+  void initRememberMe() {
+    isRememberMe.value =
+        AppConfig.getLocalData?.isRememberMe?.isNotEmpty == true ? true : false;
+    if (AppConfig.getLocalData?.isRememberMe != null) {
+      usernameController.text = AppConfig.getLocalData?.isRememberMe ?? "";
+    }
+  }
+
+  Future<void> setRememberMe() async {
+    if (isRememberMe.value == true) {
+      if (usernameController.text.isNotEmpty) {
+        localStorageData?.isRememberMe = usernameController.text;
+      }
+    } else {
+      localStorageData?.isRememberMe = '';
+    }
+    await IsarService().saveLocalData(input: localStorageData);
+  }
+
   Future<void> onCheck(bool? value) async {
     isRememberMe.value = value!;
-    await IsarService().saveLocalData(
-        isRememberMe: isRememberMe.value, username: usernameController.text);
   }
 
   Future<void> fetchMe() async {
@@ -117,9 +140,14 @@ class LoginController extends GetxController {
   Future<void> getOrganization(String id) async {
     try {
       organization.value = await LoginService().getOrganization(id: id);
+      localStorageData?.organizationId = organization.value?.id;
       if (organization.value != null) {
-        await IsarService()
-            .saveLocalData(organizationId: organization.value?.id);
+        localStorageData = LocalStorageModel(
+          accessToken: accessToken.value,
+          refreshToken: refreshToken.value,
+          organizationId: organization.value?.id,
+        );
+        await IsarService().saveLocalData(input: localStorageData);
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

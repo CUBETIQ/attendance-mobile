@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/customer_support/model/support_button.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/customer_support/model/support_button.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class SupportButton extends StatelessWidget {
@@ -36,14 +36,14 @@ class SupportButton extends StatelessWidget {
         margin: margin,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+          horizontal: SizeUtils.scaleMobile(
+            AppSize().paddingHorizontalLarge,
             size.width,
           ),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+            SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
           ),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),
@@ -57,16 +57,16 @@ class SupportButton extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 SizedBox(
-                  width: SizeUtils.scale(
-                    AppSize.paddingS8,
+                  width: SizeUtils.scaleMobile(
+                    AppSize().paddingS8,
                     size.width,
                   ),
                 ),
                 MyText(
                   text: buttonModel.title,
-                  style: BodyMediumMedium.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
+                  style: AppFonts().bodyMediumMedium.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                 )
               ],
             ),

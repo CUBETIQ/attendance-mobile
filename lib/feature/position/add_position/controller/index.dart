@@ -1,31 +1,29 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/core/model/position_model.dart';
-import 'package:timesync360/core/widgets/debouncer/debouncer.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/core/widgets/textfield/controller/textfield_controller.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/feature/position/add_position/model/add_position_model.dart';
-import 'package:timesync360/feature/position/add_position/model/edit_position_model.dart';
-import 'package:timesync360/feature/position/add_position/service/index.dart';
-import 'package:timesync360/feature/position/position/controller/index.dart';
-import 'package:timesync360/routes/app_pages.dart';
-import 'package:timesync360/utils/types_helper/avatar_type.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync/core/model/position_model.dart';
+import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
+import 'package:timesync/core/network/file_upload/upload_file_service.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/feature/position/add_position/model/add_position_model.dart';
+import 'package:timesync/feature/position/add_position/model/edit_position_model.dart';
+import 'package:timesync/feature/position/add_position/service/index.dart';
+import 'package:timesync/feature/position/position/controller/index.dart';
+import 'package:timesync/types/avatar_type.dart';
+import 'package:timesync/types/state.dart';
 import '../../../../core/widgets/bottom_sheet/bottom_sheet.dart';
 
 class AddPositionController extends GetxController {
-  RxString title = "Add Position".obs;
-  RxString state = AppState.Create.obs;
-  Rxn<String> image = Rxn<String>(null);
-  Rxn<File> imageFile = Rxn<File>(null);
-  TextEditingController nameController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  Rxn<PositionModel> position = Rxn<PositionModel>(null);
-  final _debounce = Debouncer(milliseconds: 500);
+  final title = "Add Position".obs;
+  final state = AppState.create.obs;
+  final image = Rxn<String>(null);
+  final imageFile = Rxn<File>(null);
+  final nameController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final position = Rxn<PositionModel>(null);
 
   @override
   void onInit() {
@@ -36,7 +34,7 @@ class AddPositionController extends GetxController {
   void initArgument() {
     final data = Get.arguments;
     state.value = data["state"];
-    if (state.value == AppState.Edit) {
+    if (state.value == AppState.edit) {
       title.value = "Edit Position";
       position.value = data["position"];
       image.value = position.value?.image;
@@ -46,93 +44,90 @@ class AddPositionController extends GetxController {
   }
 
   Future<void> addPosition() async {
-    _debounce.run(() async {
-      validate();
-      if (!MyTextFieldFormController.findController('name').isValid) {
-        return;
-      }
-      try {
-        final AddPositionModel input = AddPositionModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
-          organizationId: NavigationController.to.organization.value.id ?? "",
+    validate();
+    if (!MyTextFieldFormController.findController('name').isValid) {
+      return;
+    }
+    try {
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "position",
+          userId: NavigationController.to.user.value.id,
         );
-        position.value = await AddPositionService().addPosition(input);
-        PositionController.to.positionListBackUp.value.add(position.value!);
-        PositionController.to.positionList.value =
-            PositionController.to.positionListBackUp.value;
-        PositionController.to.positionListBackUp.refresh();
-        PositionController.to.positionList.refresh();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
       }
-    });
+      final AddPositionModel input = AddPositionModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+        organizationId: NavigationController.to.organization.value.id ?? "",
+      );
+      position.value = await AddPositionService().addPosition(input);
+      PositionController.to.positionListBackUp.value.add(position.value!);
+      PositionController.to.positionList.value =
+          PositionController.to.positionListBackUp.value;
+      PositionController.to.positionListBackUp.refresh();
+      PositionController.to.positionList.refresh();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> updatePosition() async {
-    _debounce.run(() async {
-      validate();
-      if (!MyTextFieldFormController.findController('name').isValid) {
-        return;
-      }
-      try {
-        final EditPositionModel input = EditPositionModel(
-          name: nameController.text,
-          description: descriptionController.text,
-          image: image.value,
-        );
-        await AddPositionService().updatePosition(
-          position.value?.id ?? "",
-          input,
-        );
-        await PositionController.to.getAllPositions();
-        Get.back();
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
-      }
-    });
-  }
-
-  void pickImage() {
-    getPickImageButtomSheet(
-      Get.context!,
-      onTapGallery: onTapGallery,
-      onTapAvatar: onTapAvatar,
-    );
-  }
-
-  Future<void> onTapAvatar() async {
-    Get.back();
-    final resultImage = await Get.toNamed(
-      Routes.AVATAR,
-      arguments: AvatarType.position,
-    );
-    if (resultImage != null) {
-      image.value = resultImage;
-      imageFile.value = null;
+    validate();
+    if (!MyTextFieldFormController.findController('name').isValid) {
+      return;
     }
-  }
-
-  Future<void> onTapGallery() async {
-    Get.back();
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-      );
-
-      if (result != null) {
-        PlatformFile file = result.files.first;
-        imageFile.value = File(file.path!);
-      } else {
-        return;
+      if (imageFile.value != null) {
+        final metedata = FileMetadata(
+          source: "position",
+          userId: NavigationController.to.user.value.id,
+        );
+        final data =
+            await UploadFileService().uploadFile(imageFile.value!, metedata);
+        if (data != null) {
+          image.value = data.url;
+        }
       }
-    } catch (e) {
+      final EditPositionModel input = EditPositionModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        image: image.value,
+      );
+      await AddPositionService().updatePosition(
+        position.value?.id ?? "",
+        input,
+      );
+      await PositionController.to.getAllPositions();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  void pickImage() async {
+    getPickImageButtomSheet(
+      Get.context!,
+      onTapGallery: (file) {
+        imageFile.value = file;
+      },
+      onTapCamera: (file) {
+        imageFile.value = file;
+      },
+      onTapAvatar: (result, file) {
+        image.value = result;
+        imageFile.value = file;
+      },
+      avatarType: AvatarType.position,
+    );
   }
 
   void validate() {

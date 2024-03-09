@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -36,13 +36,13 @@ class TaskChart extends StatelessWidget {
       width: width,
       height: height ?? 210 * (size.width / 360),
       padding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scale(AppSize.paddingS8, size.width),
-        horizontal: SizeUtils.scale(AppSize.paddingS8, size.width),
+        vertical: SizeUtils.scaleMobile(AppSize().paddingS8, size.width),
+        horizontal: SizeUtils.scaleMobile(AppSize().paddingS8, size.width),
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(
-          SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
         ),
         boxShadow: [
           BoxShadow(
@@ -56,8 +56,8 @@ class TaskChart extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MyText(text: title ?? "MyTask", style: BodyLargeMedium),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
+          MyText(text: title ?? "My Task", style: AppFonts().bodyLargeMedium),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
@@ -78,8 +78,10 @@ class TaskChart extends StatelessWidget {
             backgroundColor: Colors.grey.withOpacity(0.3),
             circularStrokeCap: CircularStrokeCap.round,
           ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
-          MyText(text: textBelow ?? "MyTask", style: BodyMediumRegular),
+          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+          MyText(
+              text: textBelow ?? "My Task",
+              style: AppFonts().bodyMediumRegular),
         ],
       ),
     );

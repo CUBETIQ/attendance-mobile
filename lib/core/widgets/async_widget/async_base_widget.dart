@@ -1,6 +1,6 @@
-import 'package:timesync360/core/widgets/loading/loading.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/core/widgets/loading/loading.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class MyAsyncWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class MyAsyncWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     if (isLoading) {
       return Padding(
-        padding: EdgeInsets.only(top: SizeUtils.scale(40, size.width)),
+        padding: EdgeInsets.only(top: SizeUtils.scaleMobile(40, size.width)),
         child: const MyLoading(),
       );
     } else if (list.isEmpty) {

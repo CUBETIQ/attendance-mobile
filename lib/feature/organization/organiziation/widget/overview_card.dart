@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class OverViewCard extends StatelessWidget {
@@ -23,14 +23,14 @@ class OverViewCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(100, size.width),
+      height: SizeUtils.scaleMobile(100, size.width),
       backgroundColor: Theme.of(context).colorScheme.primary,
       borderRadius: BorderRadius.circular(
-        SizeUtils.scale(14, size.width),
+        SizeUtils.scaleMobile(14, size.width),
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scale(24, size.width),
-        vertical: SizeUtils.scale(16, size.width),
+        horizontal: SizeUtils.scaleMobile(24, size.width),
+        vertical: SizeUtils.scaleMobile(16, size.width),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,19 +41,19 @@ class OverViewCard extends StatelessWidget {
               Icon(
                 Icons.person_rounded,
                 color: Theme.of(context).colorScheme.onPrimary,
-                size: SizeUtils.scale(25, size.width),
+                size: SizeUtils.scaleMobile(25, size.width),
               ),
               MyText(
                 text: "Employee",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppFonts().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
               MyText(
                 text: "${staffs ?? 0}/${totalStaff ?? 0}",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppFonts().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
             ],
           ),
@@ -62,19 +62,19 @@ class OverViewCard extends StatelessWidget {
               Icon(
                 Icons.location_city_rounded,
                 color: Theme.of(context).colorScheme.onPrimary,
-                size: SizeUtils.scale(25, size.width),
+                size: SizeUtils.scaleMobile(25, size.width),
               ),
               MyText(
                 text: "Department",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppFonts().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
               MyText(
                 text: (totalDepartment ?? 0).toString(),
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppFonts().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
             ],
           ),
@@ -83,19 +83,19 @@ class OverViewCard extends StatelessWidget {
               Icon(
                 Icons.work_rounded,
                 color: Theme.of(context).colorScheme.onPrimary,
-                size: SizeUtils.scale(25, size.width),
+                size: SizeUtils.scaleMobile(25, size.width),
               ),
               MyText(
                 text: "Position",
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppFonts().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
               MyText(
                 text: (totalPosition ?? 0).toString(),
-                style: BodyMedium.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: AppFonts().bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
             ],
           ),

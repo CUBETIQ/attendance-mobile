@@ -1,33 +1,35 @@
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/permission_handler.dart';
 
 class NavigationService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = NavigationService._internal();
+  final dioInstance = DioUtil();
   late bool isLocationServiceEnabled;
-  late LocationPermission permission;
 
-  Future<Position> getCurrentLocation() async {
-    isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
-    permission = await Geolocator.checkPermission();
-    if (!isLocationServiceEnabled) {
-      return throw Exception("Please enable location service");
+  factory NavigationService() {
+    return _singleton;
+  }
+
+  NavigationService._internal() {
+    Logs.t('[NavigationService] Initialized');
+  }
+
+  Future<Position?> getCurrentLocation() async {
+    final locationPermission =
+        await PermissonHandler.requestLocationPermission();
+    if (locationPermission) {
+      isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!isLocationServiceEnabled) {
+        return throw Exception("Please enable location service");
+      }
+      return await Geolocator.getCurrentPosition();
     }
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      Future.delayed(const Duration(seconds: 1), () {
-        openAppSettings();
-      });
-    }
-
-    return await Geolocator.getCurrentPosition();
+    return null;
   }
 
   Future<UserModel> fetchMe() async {

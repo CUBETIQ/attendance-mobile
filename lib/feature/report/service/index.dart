@@ -1,14 +1,24 @@
-import 'package:timesync360/core/model/admin_attendance_report_model.dart';
-import 'package:timesync360/core/model/admin_leave_report_model.dart';
-import 'package:timesync360/core/model/admin_task_report_model.dart';
-import 'package:timesync360/core/model/attendance_model.dart';
-import 'package:timesync360/core/model/leave_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
+import 'package:timesync/core/model/admin_attendance_report_model.dart';
+import 'package:timesync/core/model/admin_leave_report_model.dart';
+import 'package:timesync/core/model/admin_task_report_model.dart';
+import 'package:timesync/core/model/attendance_model.dart';
+import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/utils/logger.dart';
 
 class ReportService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = ReportService._internal();
+  final dioInstance = DioUtil();
+
+  factory ReportService() {
+    return _singleton;
+  }
+
+  ReportService._internal() {
+    Logs.t('[ReportService] Initialized');
+  }
 
   Future<List<AdminAttendanceReportModel>> getStaffAttendanceReport(
       {required String organizationId, int? startDate, int? endDate}) async {

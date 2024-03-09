@@ -1,15 +1,15 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/model/user_model.dart';
-import 'package:timesync360/core/widgets/button/back_button.dart';
-import 'package:timesync360/core/widgets/dropdown_button/date_dropdown.dart';
-import 'package:timesync360/core/widgets/no_data/no_data.dart';
-import 'package:timesync360/core/widgets/pull_refresh/refresh_indicator.dart';
-import 'package:timesync360/core/widgets/text/app_bar_title.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/admin_leave_request/controller/index.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:timesync360/utils/types_helper/leave_status.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/user_model.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/admin_leave_request/controller/index.dart';
+import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/types/leave_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../../../../core/widgets/async_widget/async_base_widget.dart';
@@ -30,17 +30,6 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
-        elevation: 2,
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: SizeUtils.scale(15, size.width)),
-            child: Icon(
-              Icons.filter_list,
-              color: Theme.of(context).colorScheme.onBackground,
-              size: 25 * (size.width / 375.0),
-            ),
-          ),
-        ],
       ),
       body: MyRefreshIndicator(
         onRefresh: controller.onRefresh,
@@ -50,21 +39,23 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: SizeUtils.scale(
-                  AppSize.paddingHorizontalLarge,
+                horizontal: SizeUtils.scaleMobile(
+                  AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
               ),
               child: Column(
                 children: [
                   SizedBox(
-                    height: SizeUtils.scale(
-                        AppSize.paddingVerticalLarge, size.width),
+                    height: SizeUtils.scaleMobile(
+                        AppSize().paddingVerticalLarge, size.width),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      MyText(text: "Employee Leave", style: BodyXlargeMedium),
+                      MyText(
+                          text: "Employee Leave",
+                          style: AppFonts().bodyXlargeMedium),
                       Obx(
                         () => DateDropDown(
                           date: controller.selectDate.value,
@@ -75,17 +66,19 @@ class AdminLeaveRequestViewMobile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: SizeUtils.scale(20, size.width)),
+                  SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
                   Obx(
                     () => MyAsyncWidget(
                       isLoading: controller.isLoading.value,
                       list: controller.leaveList,
-                      noDataWidget: const MyNoData(),
+                      noDataWidget: MyNoData(
+                        paddingTop: SizeUtils.scaleMobile(180, size.width),
+                      ),
                       builderWidget: ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: SizeUtils.scale(10, size.width)),
+                        separatorBuilder: (context, index) => SizedBox(
+                            height: SizeUtils.scaleMobile(10, size.width)),
                         itemCount: controller.leaveList.value.length,
                         itemBuilder: (context, index) {
                           final leave = controller.leaveList.value[index];

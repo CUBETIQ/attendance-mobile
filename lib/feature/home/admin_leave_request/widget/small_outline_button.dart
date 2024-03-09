@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class SmallOutlineButton extends StatelessWidget {
@@ -23,11 +23,11 @@ class SmallOutlineButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SizeUtils.scale(30, size.width),
+        height: SizeUtils.scaleMobile(30, size.width),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize.borderRadiusMedium * (size.width / 375.0),
+            AppSize().borderRadiusMedium * (size.width / 375.0),
           ),
           border: Border.all(
             color: Theme.of(context).colorScheme.error,
@@ -36,7 +36,7 @@ class SmallOutlineButton extends StatelessWidget {
         ),
         child: MyText(
           text: title,
-          style: BodySmallMedium,
+          style: AppFonts().bodySmallMedium,
         ),
       ),
     );

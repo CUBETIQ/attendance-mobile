@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {
@@ -13,6 +13,8 @@ class MyCard extends StatelessWidget {
     this.margin,
     this.borderRadius,
     this.boxShadow,
+    this.clip,
+    this.alignment,
   });
 
   final double? width;
@@ -23,6 +25,8 @@ class MyCard extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final BorderRadiusGeometry? borderRadius;
   final List<BoxShadow>? boxShadow;
+  final Clip? clip;
+  final AlignmentGeometry? alignment;
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +35,19 @@ class MyCard extends StatelessWidget {
       margin: margin,
       width: width ?? size.width,
       height: height,
+      alignment: alignment,
       padding: padding ??
           EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(AppSize.paddingS1, size.width),
-            vertical:
-                SizeUtils.scale(AppSize.paddingVerticalMedium, size.width),
+            horizontal: SizeUtils.scaleMobile(AppSize().paddingS1, size.width),
+            vertical: SizeUtils.scaleMobile(
+                AppSize().paddingVerticalMedium, size.width),
           ),
+      clipBehavior: clip ?? Clip.none,
       decoration: BoxDecoration(
         borderRadius: borderRadius ??
             BorderRadius.circular(
-              SizeUtils.scale(
-                AppSize.borderRadiusLarge,
+              SizeUtils.scaleMobile(
+                AppSize().borderRadiusLarge,
                 size.width,
               ),
             ),

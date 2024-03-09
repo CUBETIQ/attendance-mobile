@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class KpiScoreCard extends StatelessWidget {
@@ -17,52 +17,52 @@ class KpiScoreCard extends StatelessWidget {
       children: [
         Container(
           width: size.width - 48,
-          height: SizeUtils.scale(50, size.width),
+          height: SizeUtils.scaleMobile(50, size.width),
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalMedium,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalMedium,
               size.width,
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+              SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
             ),
-            color: Theme.of(context).colorScheme.outline.darken(),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
           ),
           child: Row(
             children: [
               Icon(
                 Icons.star_rounded,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
                 size: size.width * 0.1,
               ),
-              SizedBox(width: SizeUtils.scale(10, size.width)),
+              SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
               MyText(
-                text: "Performance Score: $score",
-                style: BodyLargeSemi.copyWith(
-                  color: Colors.white,
-                ),
+                text: "${"Performance Score:".trString} $score",
+                style: AppFonts().bodyLargeSemi.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
             ],
           ),
         ),
         Positioned(
-          right: SizeUtils.scale(10, size.width),
-          top: SizeUtils.scale(10, size.width),
+          right: SizeUtils.scaleMobile(10, size.width),
+          top: SizeUtils.scaleMobile(10, size.width),
           child: Icon(
             Icons.star_rounded,
-            color: Colors.grey.darken(),
-            size: SizeUtils.scale(25, size.width),
+            color: Theme.of(context).colorScheme.onPrimary,
+            size: SizeUtils.scaleMobile(25, size.width),
           ),
         ),
         Positioned(
-          right: SizeUtils.scale(22, size.width),
-          top: SizeUtils.scale(22, size.width),
+          right: SizeUtils.scaleMobile(20, size.width),
+          top: SizeUtils.scaleMobile(18, size.width),
           child: Icon(
             Icons.star_rounded,
-            color: Colors.grey.darken(),
-            size: SizeUtils.scale(48, size.width),
+            color: Theme.of(context).colorScheme.onPrimary,
+            size: SizeUtils.scaleMobile(48, size.width),
           ),
         ),
       ],

@@ -1,9 +1,9 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/constants/color.dart';
-import 'package:timesync360/core/widgets/card/my_card.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/home/home/widget/attendance_info_widget.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/home/home/widget/attendance_info_widget.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -44,14 +44,14 @@ class AttendancePieChartCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: cardWidth ?? size.width,
-      height: cardHeight ?? SizeUtils.scale(150, size.width),
+      height: cardHeight ?? SizeUtils.scaleMobile(150, size.width),
       child: Row(
         children: [
           GestureDetector(
             onTap: onTap,
             child: Container(
-              width: cardWidth ?? SizeUtils.scale(150, size.width),
-              height: cardHeight ?? SizeUtils.scale(150, size.width),
+              width: cardWidth ?? SizeUtils.scaleMobile(150, size.width),
+              height: cardHeight ?? SizeUtils.scaleMobile(150, size.width),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.background,
@@ -73,11 +73,11 @@ class AttendancePieChartCard extends StatelessWidget {
                             color: Theme.of(context).colorScheme.outlineVariant,
                             value: 100,
                             title: "No Data",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            radius: chartRadius ??
+                                SizeUtils.scaleMobile(59, size.width),
+                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                         ],
                       )
@@ -91,33 +91,33 @@ class AttendancePieChartCard extends StatelessWidget {
                             color: MyColor.successColor,
                             value: presentPercentage ?? 0,
                             title: "Present",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            radius: chartRadius ??
+                                SizeUtils.scaleMobile(59, size.width),
+                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                           PieChartSectionData(
                             showTitle: false,
                             color: MyColor.pendingColor,
                             value: onLeavePercentage ?? 0,
                             title: "On Leave",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            radius: chartRadius ??
+                                SizeUtils.scaleMobile(59, size.width),
+                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                           PieChartSectionData(
                             showTitle: false,
                             color: MyColor.errorColor,
                             value: absentPercentage ?? 0,
                             title: "Absent",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: BodyMediumRegular.copyWith(
-                              color: Colors.white,
-                            ),
+                            radius: chartRadius ??
+                                SizeUtils.scaleMobile(59, size.width),
+                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                         ],
                       ),
@@ -126,25 +126,25 @@ class AttendancePieChartCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: SizeUtils.scale(30, size.width)),
+          SizedBox(width: SizeUtils.scaleMobile(30, size.width)),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyText(text: "Summary ", style: BodyLargeMedium),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              MyText(text: "Summary", style: AppFonts().bodyLargeMedium),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.successColor,
                 title: "Present: ",
                 value: totalPresent,
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.pendingColor,
                 title: "Leave: ",
                 value: totalOnLeave,
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.errorColor,
                 title: "Absent: ",

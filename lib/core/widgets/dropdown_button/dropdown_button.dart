@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +41,9 @@ class MyDropDownButton<T> extends StatelessWidget {
     this.width,
     this.height,
     this.isRoundedCorner = false,
+    this.backgroundColor,
+    this.hintStyle,
+    this.dropDownBackgroundColor,
   });
 
   final String? hint;
@@ -75,6 +78,9 @@ class MyDropDownButton<T> extends StatelessWidget {
   final double? width;
   final double? height;
   final bool isRoundedCorner;
+  final Color? backgroundColor;
+  final Color? dropDownBackgroundColor;
+  final TextStyle? hintStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -86,25 +92,25 @@ class MyDropDownButton<T> extends StatelessWidget {
             ? const SizedBox.shrink()
             : MyText(
                 text: label,
-                style: labelStyle ?? BodyMediumMedium,
+                style: labelStyle ?? AppFonts().bodyMediumMedium,
               ),
         const SizedBox(height: 8),
         SizedBox(
           width: width ?? double.infinity,
-          height: height ?? SizeUtils.scale(47.7, size.width),
+          height: height ?? SizeUtils.scaleMobile(47.7, size.width),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.
               isExpanded: true,
-              style: BodyMediumMedium.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+              style: AppFonts().bodyMediumMedium.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
               hint: Container(
                 alignment: hintAlignment,
                 child: MyText(
                   text: hint ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: BodyMediumMedium,
+                  style: hintStyle ?? AppFonts().bodyMediumMedium,
                 ),
               ),
               value: value,
@@ -116,31 +122,40 @@ class MyDropDownButton<T> extends StatelessWidget {
                 width: buttonWidth ?? 60,
                 padding: buttonPadding ??
                     EdgeInsets.symmetric(
-                      horizontal: (AppSize.paddingS17) * (size.width / 375.0),
+                      horizontal: (AppSize().paddingS17) * (size.width / 375.0),
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      color: backgroundColor ??
+                          Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.095),
                       borderRadius: isRoundedCorner == true
                           ? BorderRadius.circular(
-                              (borderRadius ?? AppSize.borderRadiusLarge) *
+                              (borderRadius ?? AppSize().borderRadiusLarge) *
                                   (size.width / 375.0),
                             )
                           : BorderRadius.only(
                               topLeft: Radius.circular(
-                                (borderRadius ?? AppSize.borderRadiusSmall) *
+                                (borderRadius ?? AppSize().borderRadiusSmall) *
                                     (size.width / 375.0),
                               ),
                               topRight: Radius.circular(
-                                (borderRadius ?? AppSize.borderRadiusSmall) *
+                                (borderRadius ?? AppSize().borderRadiusSmall) *
                                     (size.width / 375.0),
                               ),
                             ),
                       border: Border(
-                        bottom: BorderSide(
-                          color: Theme.of(context).colorScheme.outlineVariant,
-                          width: 1.0,
-                        ),
+                        bottom: isRoundedCorner == true
+                            ? BorderSide.none
+                            : BorderSide(
+                                width: 1.5,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.9),
+                              ),
                       ),
                     ),
                 elevation: buttonElevation,
@@ -158,20 +173,21 @@ class MyDropDownButton<T> extends StatelessWidget {
                 useRootNavigator: false,
                 padding: dropdownPadding ??
                     EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(
-                        AppSize.paddingHorizontalLarge,
+                      horizontal: SizeUtils.scaleMobile(
+                        AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
-                      vertical: SizeUtils.scale(
-                        AppSize.paddingVerticalMedium,
+                      vertical: SizeUtils.scaleMobile(
+                        AppSize().paddingVerticalMedium,
                         size.width,
                       ),
                     ),
                 decoration: dropdownDecoration ??
                     BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      color: dropDownBackgroundColor ??
+                          Theme.of(context).colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(
-                        AppSize.borderRadiusLarge * (size.width / 375.0),
+                        AppSize().borderRadiusLarge * (size.width / 375.0),
                       ),
                     ),
                 elevation: dropdownElevation ?? 2,

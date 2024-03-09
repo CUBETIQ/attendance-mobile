@@ -1,8 +1,8 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/feature/profile/profile/model/option_model.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/feature/profile/profile/model/option_model.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class OptionButton extends StatelessWidget {
@@ -19,17 +19,17 @@ class OptionButton extends StatelessWidget {
         width: size.width,
         height: size.width * 0.15,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scale(
-            AppSize.paddingHorizontalLarge,
+          horizontal: SizeUtils.scaleMobile(
+            AppSize().paddingHorizontalLarge,
             MediaQuery.of(context).size.width,
           ),
         ),
-        margin: const EdgeInsets.only(
-          bottom: AppSize.paddingS5,
+        margin: EdgeInsets.only(
+          bottom: AppSize().paddingS5,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scale(AppSize.borderRadiusLarge, size.width),
+            SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
           ),
           color: Theme.of(context).colorScheme.primary.withOpacity(0.065),
         ),
@@ -38,18 +38,18 @@ class OptionButton extends StatelessWidget {
             Icon(
               option.icon,
               color: Theme.of(context).colorScheme.primary,
-              size: SizeUtils.scale(20, size.width),
+              size: SizeUtils.scaleMobile(20, size.width),
             ),
-            const SizedBox(width: AppSize.paddingS8),
+            SizedBox(width: AppSize().paddingS8),
             MyText(
               text: option.title ?? "--------",
-              style: BodyMedium,
+              style: AppFonts().bodyMedium,
             ),
             const Spacer(),
             Icon(
               Icons.arrow_forward_ios,
               color: Theme.of(context).colorScheme.primary,
-              size: SizeUtils.scale(16, size.width),
+              size: SizeUtils.scaleMobile(16, size.width),
             ),
           ],
         ),

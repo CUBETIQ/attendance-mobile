@@ -1,21 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync360/constants/svg.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/widgets/bottom_sheet/bottom_sheet.dart';
-import 'package:timesync360/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync360/feature/department/department/service/index.dart';
-import 'package:timesync360/feature/navigation/controller/index.dart';
-import 'package:timesync360/utils/types_helper/state.dart';
+import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/department/department/service/index.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/types/state.dart';
 import '../../../../routes/app_pages.dart';
 
 class DepartmentController extends GetxController {
   static DepartmentController get to => Get.find();
-  RxList<DepartmentModel> departmentList = <DepartmentModel>[].obs;
-  RxList<DepartmentModel> departmentListBackUp = <DepartmentModel>[].obs;
-  RxBool isLoading = false.obs;
-  TextEditingController searchController = TextEditingController();
+  final departmentList = <DepartmentModel>[].obs;
+  final departmentListBackUp = <DepartmentModel>[].obs;
+  final isLoading = false.obs;
+  final searchController = TextEditingController();
 
   @override
   void onInit() {
@@ -66,7 +66,7 @@ class DepartmentController extends GetxController {
   }
 
   void onTapAddDepartment() {
-    Get.toNamed(Routes.ADD_DEPARTMENT, arguments: {"state": AppState.Create});
+    Get.toNamed(Routes.ADD_DEPARTMENT, arguments: {"state": AppState.create});
   }
 
   void clearSearch() {
@@ -88,7 +88,7 @@ class DepartmentController extends GetxController {
         Get.toNamed(
           Routes.ADD_DEPARTMENT,
           arguments: {
-            "state": AppState.Edit,
+            "state": AppState.edit,
             "department": department,
           },
         );

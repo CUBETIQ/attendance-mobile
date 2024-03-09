@@ -1,12 +1,22 @@
 import 'package:dio/dio.dart';
-import 'package:timesync360/core/model/department_model.dart';
-import 'package:timesync360/core/network/dio_util.dart';
-import 'package:timesync360/core/network/endpoint.dart';
-import 'package:timesync360/feature/department/add_department/model/add_department_model.dart';
-import 'package:timesync360/feature/department/add_department/model/edit_department_model.dart';
+import 'package:timesync/core/model/department_model.dart';
+import 'package:timesync/core/network/dio/dio_util.dart';
+import 'package:timesync/core/network/dio/endpoint.dart';
+import 'package:timesync/feature/department/add_department/model/add_department_model.dart';
+import 'package:timesync/feature/department/add_department/model/edit_department_model.dart';
+import 'package:timesync/utils/logger.dart';
 
 class AddDepartmentService {
-  DioUtil dioInstance = DioUtil();
+  static final _singleton = AddDepartmentService._internal();
+  final dioInstance = DioUtil();
+
+  factory AddDepartmentService() {
+    return _singleton;
+  }
+
+  AddDepartmentService._internal() {
+    Logs.t('[AddDepartmentService] Initialized');
+  }
 
   Future<DepartmentModel> addDepartment(AddDepartmentModel input) async {
     final DepartmentModel department;

@@ -1,7 +1,7 @@
-import 'package:timesync360/constants/app_size.dart';
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
-import 'package:timesync360/utils/size_util.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -40,8 +40,8 @@ class MyPage extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize.paddingHorizontalLarge,
+            horizontal: SizeUtils.scaleMobile(
+              AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
@@ -50,14 +50,14 @@ class MyPage extends StatelessWidget {
             children: [
               MyText(
                 text: title ?? "Title",
-                style: titleStyle ?? BodyXXlargeMedium,
+                style: titleStyle ?? AppFonts().bodyXXlargeMedium,
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: size.height * 0.02),
               MyText(
                 text: description ?? "Description",
-                style: descriptionStyle ?? BodyMediumMedium,
+                style: descriptionStyle ?? AppFonts().bodyMediumMedium,
                 maxLines: 8,
                 textAlign: TextAlign.center,
               ),

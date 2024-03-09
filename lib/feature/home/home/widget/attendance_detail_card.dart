@@ -1,5 +1,5 @@
-import 'package:timesync360/constants/font.dart';
-import 'package:timesync360/core/widgets/text/text.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -36,11 +36,11 @@ class AttendanceDetailCard extends StatelessWidget {
         ),
         MyText(
           text: time == null || time == "null" ? "--:--" : time!,
-          style: timeStyle ?? BodyMediumRegular,
+          style: timeStyle ?? AppFonts().bodyMediumRegular,
         ),
         MyText(
           text: title,
-          style: titleStyle ?? BodyMediumRegular,
+          style: titleStyle ?? AppFonts().bodyMediumRegular,
         ),
       ],
     );

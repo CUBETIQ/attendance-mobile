@@ -185,7 +185,64 @@ class EarnPointViewMobile extends StatelessWidget {
                             ),
                             MyText(
                               text: "Earn point by check in",
-                              style: AppFonts().bodyLarge.copyWith(
+                              style: AppFonts().bodyLargeMedium.copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                            ),
+                          ],
+                        ),
+                        MyText(
+                          text: "+1pts",
+                          style: AppFonts().bodyLarge.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                  MyCard(
+                    width: size.width,
+                    boxShadow: const [],
+                    padding: EdgeInsets.symmetric(
+                      horizontal: SizeUtils.scaleMobile(
+                        AppSize().paddingHorizontalMedium,
+                        size.width,
+                      ),
+                    ),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondary,
+                      ],
+                    ),
+                    height: SizeUtils.scaleMobile(80, size.width),
+                    border: Border.all(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .outline
+                          .withOpacity(0.15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              SvgAssets.coin,
+                              width: SizeUtils.scaleMobile(35, size.width),
+                              height: SizeUtils.scaleMobile(35, size.width),
+                            ),
+                            SizedBox(
+                              width: SizeUtils.scaleMobile(10, size.width),
+                            ),
+                            MyText(
+                              text: "Earn point by Complete task",
+                              style: AppFonts().bodyLargeMedium.copyWith(
                                     color:
                                         Theme.of(context).colorScheme.onPrimary,
                                   ),

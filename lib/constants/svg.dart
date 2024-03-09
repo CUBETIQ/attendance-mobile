@@ -17,6 +17,7 @@ class SvgAssets {
   static const String leaving = 'assets/svgs/leaving.svg';
   static const String absent = 'assets/svgs/absent.svg';
   static const String onLeave = 'assets/svgs/onLeave.svg';
+  static const String coin = 'assets/svgs/coin.svg';
   static const String present = 'assets/svgs/present.svg';
   static const String empty = 'assets/svgs/empty.svg';
   static const String tap = 'assets/svgs/tap.svg';

@@ -6,7 +6,6 @@ class LottieAssets {
   }
 
   LottieAssets._internal();
-
   static const String lottieSplash = 'assets/lotties/splash.json';
   static const String lottieActivation = 'assets/lotties/activation.json';
   static const String loadingLight = 'assets/lotties/loading_light.json';

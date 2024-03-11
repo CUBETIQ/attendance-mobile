@@ -208,9 +208,7 @@ class EarnPointViewMobile extends StatelessWidget {
                     boxShadow: const [],
                     padding: EdgeInsets.symmetric(
                       horizontal: SizeUtils.scaleMobile(
-                        AppSize().paddingHorizontalMedium,
-                        size.width,
-                      ),
+                          AppSize().paddingHorizontalMedium, size.width),
                     ),
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,

@@ -1,4 +1,3 @@
-import 'package:timesync/core/model/earn_point_model.dart';
 import 'package:timesync/core/model/summary_attendance_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
@@ -9,7 +8,6 @@ import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync/utils/logger.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get to => Get.find();
@@ -21,7 +19,6 @@ class ProfileController extends GetxController {
   final totalAttendance = Rxn<int>(null);
   final totalAbsent = Rxn<int>(null);
   final totalLeave = Rxn<int>(null);
-  final point = EarnPointModel().obs;
 
   @override
   void onInit() {
@@ -40,7 +37,6 @@ class ProfileController extends GetxController {
         onTap: changePassword,
       ),
     ];
-    getEarnPoint();
     getSummarizeAttendance();
   }
 
@@ -93,16 +89,6 @@ class ProfileController extends GetxController {
         totalAttendance.value = (totalAttendance.value ?? 0) +
             (summaryAttendance[i].totalAttendance ?? 0);
       }
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
-  }
-
-  Future<void> getEarnPoint() async {
-    try {
-      point.value = await ProfileService().getEarnPoint();
-      Logs.t(point.value.toJson());
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

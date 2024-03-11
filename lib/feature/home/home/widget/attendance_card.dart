@@ -122,20 +122,23 @@ class AttendanceCard extends StatelessWidget {
                                       Theme.of(context).colorScheme.primary,
                                       Theme.of(context)
                                           .colorScheme
-                                          .onTertiaryContainer
-                                          .darken(10),
+                                          .secondary
+                                          .darken(12),
                                     ]
                                   : [
                                       Theme.of(context).colorScheme.primary,
                                       Theme.of(context)
                                           .colorScheme
-                                          .onTertiaryContainer
-                                          .lighten(30),
+                                          .secondary
+                                          .lighten(12),
                                     ]
                           : [
                               const Color.fromARGB(255, 122, 122, 122),
                               const Color.fromARGB(255, 122, 122, 122),
                             ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      tileMode: TileMode.mirror,
                     ),
                   ),
                   child: Column(

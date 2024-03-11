@@ -30,7 +30,7 @@ class LoadingDialog extends StatelessWidget {
                   text: title,
                   style: AppFonts().bodyLargeMedium,
                 ),
-                SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+                const Spacer(),
                 LoadingAnimationWidget.flickr(
                   leftDotColor: Theme.of(Get.context!).colorScheme.onBackground,
                   rightDotColor: Theme.of(Get.context!).colorScheme.primary,

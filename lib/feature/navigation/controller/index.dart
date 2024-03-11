@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
@@ -37,7 +38,7 @@ class NavigationController extends GetxController {
       title: 'Home',
       icon: Icons.home_rounded,
       selectedIcon: Icons.home_rounded,
-      action: InkWell(
+      action: GestureDetector(
           onTap: () => Get.toNamed(Routes.SCANQR),
           child: SvgPicture.asset(SvgAssets.scanQR)),
     ),
@@ -60,6 +61,19 @@ class NavigationController extends GetxController {
       title: 'Profile',
       icon: Icons.person_rounded,
       selectedIcon: Icons.person_rounded,
+      action: GestureDetector(
+        onTap: () => Get.toNamed(Routes.POINT),
+        child: Container(
+          width:
+              SizeUtils.scaleMobile(22, MediaQuery.of(Get.context!).size.width),
+          height:
+              SizeUtils.scaleMobile(22, MediaQuery.of(Get.context!).size.width),
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            SvgAssets.coin,
+          ),
+        ),
+      ),
     ),
   ];
 

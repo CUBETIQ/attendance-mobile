@@ -13,4 +13,5 @@ class LottieAssets {
   static const String loadingDark = 'assets/lotties/loading_dark.json';
   static const String error404 = 'assets/lotties/error404.json';
   static const String customerService = 'assets/lotties/customer_support.json';
+  static const String coin = 'assets/lotties/coin.json';
 }

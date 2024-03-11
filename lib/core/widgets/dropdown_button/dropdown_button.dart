@@ -122,7 +122,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                 width: buttonWidth ?? 60,
                 padding: buttonPadding ??
                     EdgeInsets.symmetric(
-                      horizontal: (AppSize().paddingS17) * (size.width / 375.0),
+                      horizontal: SizeUtils.scale(30.0, size.width),
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
@@ -162,7 +162,7 @@ class MyDropDownButton<T> extends StatelessWidget {
               ),
               iconStyleData: IconStyleData(
                 icon: icon ?? const Icon(Icons.arrow_forward_ios_outlined),
-                iconSize: (iconSize ?? 14) * (size.width / 375.0),
+                iconSize: SizeUtils.scale(iconSize ?? 14, size.width),
                 iconEnabledColor: iconEnabledColor,
                 iconDisabledColor: iconDisabledColor,
               ),

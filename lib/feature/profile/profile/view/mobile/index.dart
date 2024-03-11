@@ -1,6 +1,5 @@
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
-import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
@@ -10,6 +9,7 @@ import 'package:timesync/feature/profile/profile/widget/job_company_title.dart';
 import 'package:timesync/feature/profile/profile/widget/kpi_score_card.dart';
 import 'package:timesync/feature/profile/profile/widget/option_button.dart';
 import 'package:timesync/feature/profile/profile/widget/profile_detail_row.dart';
+import 'package:timesync/feature/profile/profile/widget/profile_image.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
 import 'package:timesync/utils/date_util.dart';
@@ -67,29 +67,8 @@ class ProfileViewMobile extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 3,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              offset: const Offset(0, 0),
-                              blurRadius: 1,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        child: Obx(
-                          () => MyCacheImage(
-                            imageUrl: controller.user.value.image ?? "",
-                            width: SizeUtils.scaleMobile(100, size.width),
-                            height: SizeUtils.scaleMobile(100, size.width),
-                          ),
-                        ),
+                      ProfielImage(
+                        imageUrl: controller.user.value.image,
                       ),
                       SizedBox(height: size.height * 0.01),
                       Container(

@@ -42,6 +42,8 @@ import 'package:timesync/feature/position/position/position_binding.dart';
 import 'package:timesync/feature/position/position/view/index.dart';
 import 'package:timesync/feature/position/position_detail/position_detail_binding.dart';
 import 'package:timesync/feature/position/position_detail/view/index.dart';
+import 'package:timesync/feature/profile/earn_point/earn_point_binding.dart';
+import 'package:timesync/feature/profile/earn_point/view/index.dart';
 import 'package:timesync/feature/profile/edit_profile/view/index.dart';
 import 'package:timesync/feature/profile/profile/profile_binding.dart';
 import 'package:timesync/feature/qr_scan/scan_qr_binding.dart';
@@ -226,6 +228,11 @@ class AppPages {
       name: Routes.CATEGORY_DETAIL,
       page: () => const CategoryDetailView(),
       binding: CategoryDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.POINT,
+      page: () => const EarnPointView(),
+      binding: EarnPointBinding(),
     ),
     GetPage(
       name: Routes.SCANQR,

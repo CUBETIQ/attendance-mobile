@@ -5,6 +5,7 @@ import 'package:timesync/feature/home/home/widget/status_card.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class RecordDataCard extends StatelessWidget {
   final int? time;
@@ -47,8 +48,8 @@ class RecordDataCard extends StatelessWidget {
         Row(
           children: [
             Container(
-              width: size.width * 0.045,
-              height: size.width * 0.045,
+              width: SizeUtils.scale(20, size.width),
+              height: SizeUtils.scale(20, size.width),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -60,16 +61,18 @@ class RecordDataCard extends StatelessWidget {
               child: time != null
                   ? SvgPicture.asset(
                       svgIcon,
-                      fit: BoxFit.fill,
+                      width: SizeUtils.scale(20, size.width),
+                      height: SizeUtils.scale(20, size.width),
                     )
                   : isBreakTime == true
                       ? SvgPicture.asset(
                           svgIcon,
-                          fit: BoxFit.fill,
+                          width: SizeUtils.scale(20, size.width),
+                          height: SizeUtils.scale(20, size.width),
                         )
                       : const SizedBox.shrink(),
             ),
-            SizedBox(width: AppSize().paddingS8 * (size.width / 375.0)),
+            SizedBox(width: SizeUtils.scale(AppSize().paddingS8, size.width)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -84,7 +87,9 @@ class RecordDataCard extends StatelessWidget {
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
-                SizedBox(height: AppSize().paddingS2),
+                SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS2, size.width),
+                ),
                 MyText(
                   text: time != null ? secondTitle : onNullTitle,
                   style: AppFonts().bodySmallRegular.copyWith(
@@ -103,7 +108,7 @@ class RecordDataCard extends StatelessWidget {
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppSize().borderRadiusMedium * (size.width / 375.0),
+                SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
               ),
               gradient: gradient ??
                   LinearGradient(
@@ -133,7 +138,9 @@ class RecordDataCard extends StatelessWidget {
                               : Theme.of(context).colorScheme.onSurface,
                         ),
                   ),
-                  SizedBox(height: AppSize().paddingS1),
+                  SizedBox(
+                    height: SizeUtils.scale(AppSize().paddingS1, size.width),
+                  ),
                   StatusCard(
                     status: status,
                     isBreakTime: isBreakTime,
@@ -143,7 +150,7 @@ class RecordDataCard extends StatelessWidget {
               ),
               Icon(
                 icon,
-                size: 20 * (size.width / 375.0),
+                size: SizeUtils.scale(20, size.width),
                 color: iconColor,
               ),
             ],

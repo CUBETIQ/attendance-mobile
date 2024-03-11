@@ -3,6 +3,7 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class OverviewCard extends StatelessWidget {
   final String image;
@@ -22,13 +23,13 @@ class OverviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: height ?? size.width * 0.25,
+      height: height ?? SizeUtils.scale(100, size.width),
       padding: EdgeInsets.symmetric(
-        horizontal: size.width * 0.02,
+        horizontal: SizeUtils.scale(5, size.width),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSize().borderRadiusMedium * (size.width / 375.0),
+          SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
         ),
         color: Theme.of(context).colorScheme.surface,
         boxShadow: [
@@ -41,6 +42,7 @@ class OverviewCard extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Align(
             alignment: Alignment.topRight,
@@ -48,8 +50,7 @@ class OverviewCard extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               alignment: Alignment.center,
               margin: EdgeInsets.only(
-                top: size.height * 0.01,
-                right: size.width * 0.02,
+                right: SizeUtils.scale(5, size.width),
               ),
               width: size.height * 0.05,
               height: size.height * 0.05,

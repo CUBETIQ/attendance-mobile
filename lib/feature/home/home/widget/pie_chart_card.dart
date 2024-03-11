@@ -44,7 +44,7 @@ class AttendancePieChartCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: cardWidth ?? size.width,
-      height: cardHeight ?? SizeUtils.scale(150, size.width),
+      height: cardHeight ?? SizeUtils.scale(155, size.width),
       child: Row(
         children: [
           GestureDetector(
@@ -126,7 +126,7 @@ class AttendancePieChartCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: SizeUtils.scale(30, size.width)),
+          SizedBox(width: SizeUtils.scale(20, size.width)),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

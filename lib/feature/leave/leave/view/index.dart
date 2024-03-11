@@ -74,23 +74,21 @@ class LeaveView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.03),
-                      child: Expanded(
-                        child: Obx(
-                          () => LeaveChart(
-                            title: "Approved",
-                            radius: 38,
-                            centerText:
-                                "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(controller.percentageApprovedLeave.value == 0 ? 0 : 2)}%",
-                            percent: controller.percentageApprovedLeave.value,
-                            textBelow: "${controller.totalApprovedLeave.value}/"
-                                "${controller.totalLeave.value}",
-                          ),
+                    SizedBox(width: SizeUtils.scale(8, size.width)),
+                    Expanded(
+                      child: Obx(
+                        () => LeaveChart(
+                          title: "Approved",
+                          radius: 38,
+                          centerText:
+                              "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(controller.percentageApprovedLeave.value == 0 ? 0 : 2)}%",
+                          percent: controller.percentageApprovedLeave.value,
+                          textBelow: "${controller.totalApprovedLeave.value}/"
+                              "${controller.totalLeave.value}",
                         ),
                       ),
                     ),
+                    SizedBox(width: SizeUtils.scale(8, size.width)),
                     Expanded(
                       child: Obx(
                         () => LeaveChart(

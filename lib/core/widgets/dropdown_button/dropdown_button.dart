@@ -97,7 +97,8 @@ class MyDropDownButton<T> extends StatelessWidget {
         const SizedBox(height: 8),
         SizedBox(
           width: width ?? double.infinity,
-          height: height ?? SizeUtils.scale(47.7, size.width),
+          height: height ??
+              SizeUtils.scale(size.width < 600 ? 47.7 : 51, size.width),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.

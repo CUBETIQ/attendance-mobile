@@ -34,7 +34,10 @@ class TaskView extends StatelessWidget {
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              horizontal: AppSize().paddingVerticalLarge,
+              horizontal: SizeUtils.scale(
+                AppSize().paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

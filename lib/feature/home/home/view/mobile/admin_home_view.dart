@@ -44,15 +44,15 @@ class HomeAdminMobileView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      left: SizeUtils.scaleMobile(
+                      left: SizeUtils.scale(
                         AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
-                      right: SizeUtils.scaleMobile(
+                      right: SizeUtils.scale(
                         AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
-                      top: SizeUtils.scaleMobile(
+                      top: SizeUtils.scale(
                           AppSize().paddingVerticalLarge, size.width),
                     ),
                     child: Column(
@@ -78,7 +78,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                        SizedBox(height: SizeUtils.scale(20, size.width)),
                         Obx(
                           () => AttendancePieChartCard(
                             onTap: () => Get.toNamed(
@@ -102,7 +102,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             haveNoData: controller.haveNoData.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                        SizedBox(height: SizeUtils.scale(20, size.width)),
                         Row(
                           children: [
                             Expanded(
@@ -115,8 +115,7 @@ class HomeAdminMobileView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                                width: SizeUtils.scaleMobile(20, size.width)),
+                            SizedBox(width: SizeUtils.scale(20, size.width)),
                             Expanded(
                               child: ButtonCard(
                                 icon: Icons.timer_rounded,
@@ -135,7 +134,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                        SizedBox(height: SizeUtils.scale(20, size.width)),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -150,18 +149,15 @@ class HomeAdminMobileView extends StatelessWidget {
                             const Spacer(),
                             Obx(
                               () => MyDropDownButton<String>(
-                                width: SizeUtils.scaleMobile(130, size.width),
-                                height: SizeUtils.scaleMobile(30, size.width),
+                                width: SizeUtils.scale(130, size.width),
+                                height: SizeUtils.scale(30, size.width),
                                 isRoundedCorner: true,
                                 buttonPadding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      SizeUtils.scaleMobile(10, size.width),
+                                  horizontal: SizeUtils.scale(10, size.width),
                                 ),
                                 dropdownPadding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      SizeUtils.scaleMobile(10, size.width),
-                                  vertical:
-                                      SizeUtils.scaleMobile(10, size.width),
+                                  horizontal: SizeUtils.scale(10, size.width),
+                                  vertical: SizeUtils.scale(10, size.width),
                                 ),
                                 label: "Type",
                                 hasLabel: false,
@@ -195,7 +191,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                        SizedBox(height: SizeUtils.scale(20, size.width)),
                         Obx(
                           () => LinearIndicator(
                             title: "Early",
@@ -209,7 +205,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             isCheckIn: controller.isCheckIn.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                        SizedBox(height: SizeUtils.scale(10, size.width)),
                         Obx(
                           () => LinearIndicator(
                             title: "On Time",
@@ -223,7 +219,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             isCheckIn: controller.isCheckIn.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                        SizedBox(height: SizeUtils.scale(10, size.width)),
                         Obx(
                           () => LinearIndicator(
                             title: "Late",
@@ -236,7 +232,7 @@ class HomeAdminMobileView extends StatelessWidget {
                             isCheckIn: controller.isCheckIn.value,
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                        SizedBox(height: SizeUtils.scale(20, size.width)),
                         MyText(
                           text: 'Employee Attendance'.trString,
                           style: AppFonts().bodyLargeMedium.copyWith(
@@ -244,7 +240,7 @@ class HomeAdminMobileView extends StatelessWidget {
                                     Theme.of(context).colorScheme.onBackground,
                               ),
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                        SizedBox(height: SizeUtils.scale(20, size.width)),
                         Obx(
                           () => MyAsyncWidget(
                             isLoading: controller.isLoadingList.value,
@@ -254,10 +250,10 @@ class HomeAdminMobileView extends StatelessWidget {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.only(
-                                bottom: SizeUtils.scaleMobile(20, size.width),
+                                bottom: SizeUtils.scale(20, size.width),
                               ),
                               separatorBuilder: (context, index) => SizedBox(
-                                height: SizeUtils.scaleMobile(10, size.width),
+                                height: SizeUtils.scale(10, size.width),
                               ),
                               itemCount:
                                   controller.staffAttendanceList.value.length,

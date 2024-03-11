@@ -55,7 +55,8 @@ class MyAsyncButton extends StatelessWidget {
             : null,
         child: Container(
           width: width ?? double.infinity,
-          height: height ?? SizeUtils.scaleMobile(48, size.width),
+          height:
+              height ?? SizeUtils.scale(size.width < 600 ? 48 : 50, size.width),
           margin: margin,
           alignment: Alignment.center,
           decoration: BoxDecoration(

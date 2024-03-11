@@ -32,7 +32,7 @@ class AddPositionViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
@@ -40,25 +40,23 @@ class AddPositionViewMobile extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                  height:
-                      SizeUtils.scaleMobile(AppSize().paddingS17, size.width)),
+                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
                   () => MyProfileImage(
                     imageFile: controller.imageFile.value,
                     imageUrl: controller.image.value,
-                    width: SizeUtils.scaleMobile(110, size.width),
-                    height: SizeUtils.scaleMobile(110, size.width),
-                    imageHeight: SizeUtils.scaleMobile(70, size.width),
-                    imageWidth: SizeUtils.scaleMobile(70, size.width),
+                    width: SizeUtils.scale(110, size.width),
+                    height: SizeUtils.scale(110, size.width),
+                    imageHeight: SizeUtils.scale(70, size.width),
+                    imageWidth: SizeUtils.scale(70, size.width),
                     defaultImage: SvgAssets.position,
                   ),
                 ),
               ),
               SizedBox(
-                  height:
-                      SizeUtils.scaleMobile(AppSize().paddingS17, size.width)),
+                  height: SizeUtils.scale(AppSize().paddingS17, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "name",
@@ -73,7 +71,7 @@ class AddPositionViewMobile extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(40, size.width)),
+              SizedBox(height: SizeUtils.scale(40, size.width)),
               Obx(
                 () => MyAsyncButton(
                   title: "Save",

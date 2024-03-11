@@ -23,9 +23,9 @@ class EmployeeTaskReportCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MyCacheImage(imageUrl: data.image ?? ""),
-          SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+          SizedBox(width: SizeUtils.scale(10, size.width)),
           SizedBox(
-            width: SizeUtils.scaleMobile(110, size.width),
+            width: SizeUtils.scale(110, size.width),
             child: MyText(
               text: StringUtil.getfullname(
                   data.firstName, data.lastName, data.username),
@@ -39,11 +39,11 @@ class EmployeeTaskReportCard extends StatelessWidget {
       initiallyExpanded: true,
       expandedAlignment: Alignment.centerLeft,
       childrenPadding: EdgeInsets.symmetric(
-        vertical: SizeUtils.scaleMobile(
+        vertical: SizeUtils.scale(
           5,
           MediaQuery.of(context).size.width,
         ),
-        horizontal: SizeUtils.scaleMobile(
+        horizontal: SizeUtils.scale(
           10,
           MediaQuery.of(context).size.width,
         ),
@@ -60,7 +60,7 @@ class EmployeeTaskReportCard extends StatelessWidget {
           : [
               Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scaleMobile(10, size.width),
+                  vertical: SizeUtils.scale(10, size.width),
                 ),
                 child: Center(
                   child: Row(
@@ -69,7 +69,7 @@ class EmployeeTaskReportCard extends StatelessWidget {
                         Icons.info,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(width: SizeUtils.scaleMobile(5, size.width)),
+                      SizedBox(width: SizeUtils.scale(5, size.width)),
                       MyText(
                         text: "No Task",
                         style: AppFonts().bodyMediumMedium,

@@ -2,6 +2,7 @@ import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class MyButton extends StatelessWidget {
   final double? width;
@@ -38,7 +39,7 @@ class MyButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? double.infinity,
-        height: height ?? 48 * (size.width / 375.0),
+        height: height ?? SizeUtils.scale(48, size.width),
         margin: margin,
         alignment: Alignment.center,
         decoration: BoxDecoration(

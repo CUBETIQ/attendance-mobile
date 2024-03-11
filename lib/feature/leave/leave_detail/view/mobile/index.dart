@@ -39,7 +39,7 @@ class LeaveDetailViewMobile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: SizeUtils.scaleMobile(
+              horizontal: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
                 size.width,
               ),
@@ -47,9 +47,9 @@ class LeaveDetailViewMobile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                SizedBox(height: SizeUtils.scale(20, size.width)),
                 SizedBox(
-                  width: SizeUtils.scaleMobile(300, size.width),
+                  width: SizeUtils.scale(300, size.width),
                   child: MyText(
                     text:
                         "${controller.leave.value.type.capitalizeMaybeNull} Leave Request",
@@ -58,17 +58,17 @@ class LeaveDetailViewMobile extends StatelessWidget {
                         ),
                   ),
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                SizedBox(height: SizeUtils.scale(20, size.width)),
                 DetailRowData(
                   title: "Type",
                   value: (controller.leave.value.type ?? "").capitalizeFirst,
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(height: SizeUtils.scale(10, size.width)),
                 DetailRowData(
                   title: "Status",
                   value: (controller.leave.value.status ?? "").capitalizeFirst,
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(height: SizeUtils.scale(10, size.width)),
                 DetailRowImage(
                   title: controller.leave.value.status == LeaveStatus.approved
                       ? "Approved By: "
@@ -82,22 +82,22 @@ class LeaveDetailViewMobile extends StatelessWidget {
                   ),
                   image: controller.leave.value.updateBy?.image,
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(height: SizeUtils.scale(10, size.width)),
                 DetailRowData(
                   title: "Duration",
                   value:
                       " ${StringUtil.removeTrailingZeros(controller.leave.value.duration)}  ${(controller.leave.value.duration ?? 0) < 2 ? "Day" : "Days"}",
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(height: SizeUtils.scale(10, size.width)),
                 DetailRowData(
                   title: "Date",
                   value:
                       "${DateUtil.formatMillisecondsToDOB(controller.leave.value.from)} - ${DateUtil.formatMillisecondsToDOB(controller.leave.value.to)}",
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                SizedBox(height: SizeUtils.scale(20, size.width)),
                 const Divider(thickness: 1.5),
                 MyText(text: "Reason", style: AppFonts().bodyLargeMedium),
-                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(height: SizeUtils.scale(10, size.width)),
                 MyText(
                   text: controller.leave.value.reason != null &&
                           controller.leave.value.reason?.isNotEmpty == true
@@ -106,11 +106,11 @@ class LeaveDetailViewMobile extends StatelessWidget {
                   style: AppFonts().bodyMediumRegular,
                   maxLines: 20,
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                SizedBox(height: SizeUtils.scale(20, size.width)),
                 const Divider(thickness: 1.5),
-                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(height: SizeUtils.scale(10, size.width)),
                 MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
-                SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(height: SizeUtils.scale(10, size.width)),
                 Obx(
                   () => ListView.builder(
                     shrinkWrap: true,

@@ -97,7 +97,7 @@ class MyDropDownButton<T> extends StatelessWidget {
         const SizedBox(height: 8),
         SizedBox(
           width: width ?? double.infinity,
-          height: height ?? SizeUtils.scaleMobile(47.7, size.width),
+          height: height ?? SizeUtils.scale(47.7, size.width),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.
@@ -173,11 +173,11 @@ class MyDropDownButton<T> extends StatelessWidget {
                 useRootNavigator: false,
                 padding: dropdownPadding ??
                     EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scaleMobile(
+                      horizontal: SizeUtils.scale(
                         AppSize().paddingHorizontalLarge,
                         size.width,
                       ),
-                      vertical: SizeUtils.scaleMobile(
+                      vertical: SizeUtils.scale(
                         AppSize().paddingVerticalMedium,
                         size.width,
                       ),

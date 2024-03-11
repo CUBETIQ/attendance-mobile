@@ -22,11 +22,11 @@ class LoginViewMobile extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
               top: AppSize().paddingTitleLarge,
-              left: SizeUtils.scaleMobile(
+              left: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scaleMobile(
+              right: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
@@ -41,7 +41,7 @@ class LoginViewMobile extends StatelessWidget {
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                            SizeUtils.scaleMobile(
+                            SizeUtils.scale(
                               AppSize().borderRadiusMedium,
                               size.width,
                             ),

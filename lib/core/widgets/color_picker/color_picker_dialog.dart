@@ -19,7 +19,7 @@ void getColorPickerDialog({
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -78,7 +78,7 @@ void getColorPickerDialog({
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: SizeUtils.scaleMobile(
+                    horizontal: SizeUtils.scale(
                       AppSize().paddingHorizontalLarge,
                       MediaQuery.of(context).size.width,
                     ),

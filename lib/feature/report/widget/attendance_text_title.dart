@@ -22,12 +22,12 @@ class AttendanceTextTitle extends StatelessWidget {
           ? const SizedBox.shrink()
           : Padding(
               padding: EdgeInsets.only(
-                left: SizeUtils.scaleMobile(
+                left: SizeUtils.scale(
                   AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
-                top: SizeUtils.scaleMobile(10, size.width),
-                bottom: SizeUtils.scaleMobile(10, size.width),
+                top: SizeUtils.scale(10, size.width),
+                bottom: SizeUtils.scale(10, size.width),
               ),
               child: MyText(
                 text: 'My Attendance',

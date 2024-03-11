@@ -31,10 +31,9 @@ class StaffAttendanceCard extends StatelessWidget {
     return MyCard(
       width: size.width - 10,
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scaleMobile(
-            AppSize().paddingHorizontalLarge - 2, size.width),
-        vertical:
-            SizeUtils.scaleMobile(AppSize().paddingVerticalMedium, size.width),
+        horizontal:
+            SizeUtils.scale(AppSize().paddingHorizontalLarge - 2, size.width),
+        vertical: SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,16 +42,16 @@ class StaffAttendanceCard extends StatelessWidget {
             children: [
               MyCacheImage(
                 imageUrl: staff.image ?? "",
-                width: SizeUtils.scaleMobile(50, size.width),
-                height: SizeUtils.scaleMobile(50, size.width),
+                width: SizeUtils.scale(50, size.width),
+                height: SizeUtils.scale(50, size.width),
               ),
-              SizedBox(width: SizeUtils.scaleMobile(15, size.width)),
+              SizedBox(width: SizeUtils.scale(15, size.width)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scaleMobile(200, size.width),
+                      maxWidth: SizeUtils.scale(200, size.width),
                     ),
                     child: MyText(
                       text: StringUtil.getfullname(
@@ -71,9 +70,9 @@ class StaffAttendanceCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+          SizedBox(height: SizeUtils.scale(5, size.width)),
           const Divider(),
-          SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+          SizedBox(height: SizeUtils.scale(5, size.width)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -84,12 +83,12 @@ class StaffAttendanceCard extends StatelessWidget {
                     text: "Attendance",
                     style: AppFonts().bodyMediumSemi,
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: "Check In",
                     style: AppFonts().bodySmallMedium,
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: "Check Out",
                     style: AppFonts().bodySmallMedium,
@@ -103,14 +102,14 @@ class StaffAttendanceCard extends StatelessWidget {
                     text: "Time",
                     style: AppFonts().bodyMediumSemi,
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: DateUtil.formatTimeWithDate(
                       attendance.checkInDateTime,
                     ),
                     style: AppFonts().bodySmallRegular,
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: DateUtil.formatTimeWithDate(
                       attendance.checkOutDateTime,
@@ -126,7 +125,7 @@ class StaffAttendanceCard extends StatelessWidget {
                     text: "Status",
                     style: AppFonts().bodyMediumSemi,
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text: attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
                     style: AppFonts().bodySmallRegular.copyWith(
@@ -141,7 +140,7 @@ class StaffAttendanceCard extends StatelessWidget {
                               : Theme.of(context).colorScheme.onBackground,
                         ),
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                  SizedBox(height: SizeUtils.scale(2, size.width)),
                   MyText(
                     text:
                         attendance.checkOutStatus.capitalizeMaybeNull ?? "N/A",

@@ -36,18 +36,18 @@ class TaskCard extends StatelessWidget {
       child: Container(
         width: size.width,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scaleMobile(
+          horizontal: SizeUtils.scale(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
-          vertical: SizeUtils.scaleMobile(
+          vertical: SizeUtils.scale(
             AppSize().paddingS4,
             size.width,
           ),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
+            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
           ),
           border: Border.all(
             color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
@@ -63,7 +63,7 @@ class TaskCard extends StatelessWidget {
                 ignoring: task.status == TaskStatus.completed ? true : false,
                 child: MSHCheckbox(
                   value: task.status == TaskStatus.completed ? true : false,
-                  size: SizeUtils.scaleMobile(20, size.width),
+                  size: SizeUtils.scale(20, size.width),
                   onChanged: onCheck,
                   colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
                     checkedColor: Theme.of(context).colorScheme.primary,
@@ -73,15 +73,14 @@ class TaskCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: SizeUtils.scaleMobile(AppSize().paddingS8, size.width),
+                width: SizeUtils.scale(AppSize().paddingS8, size.width),
               ),
               Container(
                 constraints: BoxConstraints(
-                  maxWidth: SizeUtils.scaleMobile(260, size.width),
+                  maxWidth: SizeUtils.scale(260, size.width),
                 ),
                 padding: EdgeInsets.symmetric(
-                  vertical:
-                      SizeUtils.scaleMobile(AppSize().paddingS4, size.width),
+                  vertical: SizeUtils.scale(AppSize().paddingS4, size.width),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,8 +100,7 @@ class TaskCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: SizeUtils.scaleMobile(
-                          AppSize().paddingS1, size.width),
+                      height: SizeUtils.scale(AppSize().paddingS1, size.width),
                     ),
                     MyText(
                       text: task.endDate != null
@@ -121,8 +119,8 @@ class TaskCard extends StatelessWidget {
               ),
               const Spacer(),
               Container(
-                width: SizeUtils.scaleMobile(40, size.width),
-                height: SizeUtils.scaleMobile(40, size.width),
+                width: SizeUtils.scale(40, size.width),
+                height: SizeUtils.scale(40, size.width),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Theme.of(context).colorScheme.secondary,
@@ -133,7 +131,7 @@ class TaskCard extends StatelessWidget {
                           fontFamily: 'MaterialIcons')
                       : Icons.task,
                   color: Colors.white,
-                  size: SizeUtils.scaleMobile(
+                  size: SizeUtils.scale(
                     16,
                     size.width,
                   ),

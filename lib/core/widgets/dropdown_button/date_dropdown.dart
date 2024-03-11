@@ -32,18 +32,18 @@ class DateDropDown extends StatelessWidget {
         height: height,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scaleMobile(
+          horizontal: SizeUtils.scale(
             AppSize().paddingS5,
             size.width,
           ),
-          vertical: SizeUtils.scaleMobile(
+          vertical: SizeUtils.scale(
             AppSize().paddingS2,
             size.width,
           ),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scaleMobile(
+            SizeUtils.scale(
               AppSize().borderRadiusLarge,
               size.width,
             ),
@@ -62,7 +62,7 @@ class DateDropDown extends StatelessWidget {
                   ),
             ),
             SizedBox(
-              width: SizeUtils.scaleMobile(
+              width: SizeUtils.scale(
                 AppSize().paddingS1,
                 size.width,
               ),

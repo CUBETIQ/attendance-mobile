@@ -25,9 +25,9 @@ class SummaryDetailCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scaleMobile(60, size.width),
+      height: SizeUtils.scale(60, size.width),
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scaleMobile(
+        horizontal: SizeUtils.scale(
           AppSize().paddingHorizontalLarge,
           size.width,
         ),
@@ -38,10 +38,10 @@ class SummaryDetailCard extends StatelessWidget {
             children: [
               MyCacheImage(
                 imageUrl: staff.image,
-                width: SizeUtils.scaleMobile(40, size.width),
-                height: SizeUtils.scaleMobile(40, size.width),
+                width: SizeUtils.scale(40, size.width),
+                height: SizeUtils.scale(40, size.width),
               ),
-              SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
                 text: StringUtil.getfullname(
                   staff.firstName,

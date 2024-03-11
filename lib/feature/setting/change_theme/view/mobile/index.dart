@@ -27,18 +27,18 @@ class ChangeThemeViewMobile extends StatelessWidget {
         height: size.height,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
-            vertical: SizeUtils.scaleMobile(
+            vertical: SizeUtils.scale(
               AppSize().paddingVerticalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Wrap(
-            spacing: SizeUtils.scaleMobile(15, size.width),
-            runSpacing: SizeUtils.scaleMobile(15, size.width),
+            spacing: SizeUtils.scale(15, size.width),
+            runSpacing: SizeUtils.scale(15, size.width),
             children: [
               ...List.generate(
                 controller.list.length,
@@ -51,6 +51,6 @@ class ChangeThemeViewMobile extends StatelessWidget {
           ),
         ),
       ),
-    );  
+    );
   }
 }

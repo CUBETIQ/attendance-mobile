@@ -26,8 +26,7 @@ class ProfileDetailRow extends StatelessWidget {
         ),
         Flexible(
           child: Container(
-            padding:
-                EdgeInsets.only(right: SizeUtils.scaleMobile(10, size.width)),
+            padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
             alignment: Alignment.centerRight,
             child: MyText(
               text: value != "" && value != null

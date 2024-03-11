@@ -25,13 +25,13 @@ class AvatarViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
-            top: SizeUtils.scaleMobile(10, size.height),
+            top: SizeUtils.scale(10, size.height),
           ),
           child: Center(
             child: Obx(
               () => Wrap(
-                spacing: SizeUtils.scaleMobile(10, size.width),
-                runSpacing: SizeUtils.scaleMobile(20, size.width),
+                spacing: SizeUtils.scale(10, size.width),
+                runSpacing: SizeUtils.scale(20, size.width),
                 children: [
                   ...controller.avatars.map((e) => AvatarCard(
                         avatarType: controller.avatarType.value,

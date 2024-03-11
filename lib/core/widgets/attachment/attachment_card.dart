@@ -38,18 +38,18 @@ class AttachmentCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width ?? size.width,
-      height: height ?? SizeUtils.scaleMobile(60, size.width),
+      height: height ?? SizeUtils.scale(60, size.width),
       margin: EdgeInsets.only(
-        bottom: SizeUtils.scaleMobile(AppSize().paddingS2, size.width),
+        bottom: SizeUtils.scale(AppSize().paddingS2, size.width),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MyCard(
-            width: imageWidth ?? SizeUtils.scaleMobile(60, size.width),
-            height: imageHeight ?? SizeUtils.scaleMobile(60, size.width),
+            width: imageWidth ?? SizeUtils.scale(60, size.width),
+            height: imageHeight ?? SizeUtils.scale(60, size.width),
             borderRadius: BorderRadius.circular(
-              SizeUtils.scaleMobile(AppSize().borderRadiusMedium, size.width),
+              SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
             ),
             backgroundColor: Theme.of(context).colorScheme.primary,
             padding: EdgeInsets.zero,
@@ -70,8 +70,8 @@ class AttachmentCard extends StatelessWidget {
                         fit: BoxFit.cover,
                       )
                     : SizedBox(
-                        width: SizeUtils.scaleMobile(35, size.width),
-                        height: SizeUtils.scaleMobile(35, size.width),
+                        width: SizeUtils.scale(35, size.width),
+                        height: SizeUtils.scale(35, size.width),
                         child: SvgPicture.asset(
                           SvgUtil.getSvgByExtenion(extension(data.file!.path)),
                           fit: BoxFit.cover,
@@ -83,8 +83,8 @@ class AttachmentCard extends StatelessWidget {
                         fit: BoxFit.cover,
                       )
                     : SizedBox(
-                        width: SizeUtils.scaleMobile(35, size.width),
-                        height: SizeUtils.scaleMobile(35, size.width),
+                        width: SizeUtils.scale(35, size.width),
+                        height: SizeUtils.scale(35, size.width),
                         child: SvgPicture.asset(
                           SvgUtil.getSvgByExtenion(data.extension),
                           fit: BoxFit.cover,
@@ -92,11 +92,11 @@ class AttachmentCard extends StatelessWidget {
                       ),
           ),
           SizedBox(
-            width: SizeUtils.scaleMobile(10, size.width),
+            width: SizeUtils.scale(10, size.width),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.scaleMobile(2.5, size.width),
+              vertical: SizeUtils.scale(2.5, size.width),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,7 +104,7 @@ class AttachmentCard extends StatelessWidget {
               children: [
                 Container(
                   constraints: BoxConstraints(
-                    maxWidth: SizeUtils.scaleMobile(200, size.width),
+                    maxWidth: SizeUtils.scale(200, size.width),
                   ),
                   child: MyText(
                     text: data.file != null

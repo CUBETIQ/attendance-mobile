@@ -30,8 +30,8 @@ class ProfielImage extends StatelessWidget {
       ),
       child: MyCacheImage(
         imageUrl: imageUrl,
-        width: width ?? SizeUtils.scaleMobile(100, size.width),
-        height: height ?? SizeUtils.scaleMobile(100, size.width),
+        width: width ?? SizeUtils.scale(100, size.width),
+        height: height ?? SizeUtils.scale(100, size.width),
       ),
     );
   }

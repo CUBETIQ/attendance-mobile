@@ -32,20 +32,20 @@ class SideDrawer extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scaleMobile(20, size.width),
-          top: SizeUtils.scaleMobile(40, size.height),
+          left: SizeUtils.scale(20, size.width),
+          top: SizeUtils.scale(40, size.height),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             MyCacheImage(
               imageUrl: imageUrl ?? "",
-              width: SizeUtils.scaleMobile(100, size.width),
-              height: SizeUtils.scaleMobile(100, size.width),
-              imageHeight: SizeUtils.scaleMobile(100, size.width),
-              imageWidth: SizeUtils.scaleMobile(100, size.width),
+              width: SizeUtils.scale(100, size.width),
+              height: SizeUtils.scale(100, size.width),
+              imageHeight: SizeUtils.scale(100, size.width),
+              imageWidth: SizeUtils.scale(100, size.width),
             ),
-            SizedBox(height: SizeUtils.scaleMobile(5, size.height)),
+            SizedBox(height: SizeUtils.scale(5, size.height)),
             MyText(
               text: StringUtil.getfullname(
                 user.firstName,
@@ -62,17 +62,16 @@ class SideDrawer extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   ),
             ),
-            SizedBox(height: SizeUtils.scaleMobile(10, size.height)),
+            SizedBox(height: SizeUtils.scale(10, size.height)),
             ...List.generate(
               drawerItems.length,
               (index) => ListTile(
                 dense: true,
                 contentPadding: EdgeInsets.symmetric(
-                    horizontal: SizeUtils.scaleMobile(20, size.width)),
+                    horizontal: SizeUtils.scale(20, size.width)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
-                    SizeUtils.scaleMobile(
-                        AppSize().borderRadiusLarge, size.width),
+                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
                   ),
                 ),
                 onTap: () {
@@ -93,10 +92,10 @@ class SideDrawer extends StatelessWidget {
             ),
             const Spacer(),
             Transform.translate(
-              offset: Offset(SizeUtils.scaleMobile(70, size.width), 0),
+              offset: Offset(SizeUtils.scale(70, size.width), 0),
               child: Padding(
                 padding: EdgeInsets.only(
-                  bottom: SizeUtils.scaleMobile(20, size.height),
+                  bottom: SizeUtils.scale(20, size.height),
                 ),
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -107,9 +106,9 @@ class SideDrawer extends StatelessWidget {
                       Icon(
                         Icons.copyright_rounded,
                         color: Theme.of(context).colorScheme.secondary,
-                        size: SizeUtils.scaleMobile(24, size.width),
+                        size: SizeUtils.scale(24, size.width),
                       ),
-                      SizedBox(width: SizeUtils.scaleMobile(3, size.width)),
+                      SizedBox(width: SizeUtils.scale(3, size.width)),
                       MyText(
                         text: "TimeSync 360 V1.0.0",
                         style: AppFonts().bodyMediumMedium.copyWith(

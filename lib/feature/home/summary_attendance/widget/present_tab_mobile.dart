@@ -19,7 +19,7 @@ class PresentTabMobile extends StatelessWidget {
         : SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: SizeUtils.scaleMobile(
+                horizontal: SizeUtils.scale(
                   AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
@@ -27,12 +27,12 @@ class PresentTabMobile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
+                  SizedBox(height: SizeUtils.scale(30, size.width)),
                   ListView.separated(
                     itemCount: controller.staffAttendanceList.length,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => SizedBox(
-                      height: SizeUtils.scaleMobile(10, size.width),
+                      height: SizeUtils.scale(10, size.width),
                     ),
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {

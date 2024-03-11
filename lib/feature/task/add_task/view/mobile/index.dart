@@ -36,7 +36,7 @@ class AddTaskViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -51,7 +51,7 @@ class AddTaskViewMobile extends StatelessWidget {
                 textController: controller.taskController,
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+                height: SizeUtils.scale(AppSize().paddingS2, size.height),
               ),
               Row(
                 children: [
@@ -65,8 +65,7 @@ class AddTaskViewMobile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width:
-                        SizeUtils.scaleMobile(AppSize().paddingS1, size.height),
+                    width: SizeUtils.scale(AppSize().paddingS1, size.height),
                   ),
                   Expanded(
                     child: MyDatePickerField(
@@ -90,7 +89,7 @@ class AddTaskViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+                height: SizeUtils.scale(AppSize().paddingS2, size.height),
               ),
               Obx(
                 () => MyDropDownButton<String>(
@@ -110,7 +109,7 @@ class AddTaskViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+                height: SizeUtils.scale(AppSize().paddingS2, size.height),
               ),
               MyTextFieldForm(
                 hasLabel: true,
@@ -120,7 +119,7 @@ class AddTaskViewMobile extends StatelessWidget {
                 maxlines: 5,
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS2, size.height),
+                height: SizeUtils.scale(AppSize().paddingS2, size.height),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -148,19 +147,18 @@ class AddTaskViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS3, size.height),
+                height: SizeUtils.scale(AppSize().paddingS3, size.height),
               ),
               UploadAttachmentButton(
                 files: controller.attachments,
               ),
               SizedBox(
-                height:
-                    SizeUtils.scaleMobile(AppSize().paddingS10, size.height),
+                height: SizeUtils.scale(AppSize().paddingS10, size.height),
               ),
               MyAsyncButton(
                 title: "Save",
                 margin: EdgeInsets.only(
-                  bottom: SizeUtils.scaleMobile(
+                  bottom: SizeUtils.scale(
                     AppSize().paddingS10,
                     size.width,
                   ),

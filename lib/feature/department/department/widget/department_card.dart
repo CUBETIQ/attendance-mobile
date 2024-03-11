@@ -27,10 +27,10 @@ class DepartmentCard extends StatelessWidget {
       onTap: onTap,
       child: MyCard(
         width: size.width,
-        height: SizeUtils.scaleMobile(60, size.width),
+        height: SizeUtils.scale(60, size.width),
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scaleMobile(
-              AppSize().paddingHorizontalLarge, size.width),
+          horizontal:
+              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,12 +41,12 @@ class DepartmentCard extends StatelessWidget {
                 MyCacheImage(
                   imageUrl: department.image ?? "",
                   defaultImage: SvgAssets.position,
-                  width: SizeUtils.scaleMobile(45, size.width),
-                  height: SizeUtils.scaleMobile(45, size.width),
-                  imageWidth: SizeUtils.scaleMobile(30, size.width),
-                  imageHeight: SizeUtils.scaleMobile(30, size.width),
+                  width: SizeUtils.scale(45, size.width),
+                  height: SizeUtils.scale(45, size.width),
+                  imageWidth: SizeUtils.scale(30, size.width),
+                  imageHeight: SizeUtils.scale(30, size.width),
                 ),
-                SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+                SizedBox(width: SizeUtils.scale(10, size.width)),
                 MyText(
                   text: department.name ?? "",
                   style: AppFonts().bodyMediumMedium,
@@ -57,7 +57,7 @@ class DepartmentCard extends StatelessWidget {
               onTap: onTapViewDetail,
               child: Container(
                 padding: EdgeInsets.all(
-                  SizeUtils.scaleMobile(5, size.width),
+                  SizeUtils.scale(5, size.width),
                 ),
                 child: Row(
                   children: [
@@ -67,10 +67,10 @@ class DepartmentCard extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primary,
                           ),
                     ),
-                    SizedBox(width: SizeUtils.scaleMobile(5, size.width)),
+                    SizedBox(width: SizeUtils.scale(5, size.width)),
                     Icon(
                       Icons.arrow_forward_ios_rounded,
-                      size: SizeUtils.scaleMobile(15, size.width),
+                      size: SizeUtils.scale(15, size.width),
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ],

@@ -21,16 +21,16 @@ class AttendanceInfoWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: SizeUtils.scaleMobile(12, size.width),
-          height: SizeUtils.scaleMobile(12, size.width),
+          width: SizeUtils.scale(12, size.width),
+          height: SizeUtils.scale(12, size.width),
           decoration: BoxDecoration(
             color: color ?? Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(
-              SizeUtils.scaleMobile(10, size.width),
+              SizeUtils.scale(10, size.width),
             ),
           ),
         ),
-        SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+        SizedBox(width: SizeUtils.scale(10, size.width)),
         MyText(
           text: title,
           style: AppFonts().bodyMediumRegular,

@@ -71,7 +71,7 @@ class MyTextFieldForm extends StatelessWidget {
                     style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
             SizedBox(
-              height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+              height: SizeUtils.scale(AppSize().paddingS5, size.width),
             ),
             Theme(
               data: Theme.of(context).copyWith(
@@ -88,13 +88,12 @@ class MyTextFieldForm extends StatelessWidget {
                 keyboardType: keyboardType,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
-                    vertical:
-                        SizeUtils.scaleMobile(AppSize().paddingS7, size.width),
+                    vertical: SizeUtils.scale(AppSize().paddingS7, size.width),
                   ),
                   prefix: prefixIcon == null
                       ? Padding(
                           padding: EdgeInsets.only(
-                            left: SizeUtils.scaleMobile(
+                            left: SizeUtils.scale(
                               AppSize().paddingS17,
                               size.width,
                             ),
@@ -104,7 +103,7 @@ class MyTextFieldForm extends StatelessWidget {
                   suffix: prefixIcon == null
                       ? Padding(
                           padding: EdgeInsets.only(
-                            left: SizeUtils.scaleMobile(
+                            left: SizeUtils.scale(
                               AppSize().paddingS17,
                               size.width,
                             ),
@@ -120,7 +119,7 @@ class MyTextFieldForm extends StatelessWidget {
                   suffixIcon: haveSuffixIcon == true
                       ? Padding(
                           padding: EdgeInsets.only(
-                            right: SizeUtils.scaleMobile(10, size.width),
+                            right: SizeUtils.scale(10, size.width),
                           ),
                           child: GestureDetector(
                             onTap: onTapShowPassword,
@@ -129,7 +128,7 @@ class MyTextFieldForm extends StatelessWidget {
                                   ? Icons.visibility_off_rounded
                                   : Icons.visibility_rounded,
                               color: Theme.of(context).colorScheme.onBackground,
-                              size: SizeUtils.scaleMobile(20, size.width),
+                              size: SizeUtils.scale(20, size.width),
                             ),
                           ),
                         )

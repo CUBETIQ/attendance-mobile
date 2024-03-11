@@ -29,11 +29,11 @@ class LeaveViewMobile extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.scaleMobile(
+              left: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
-              right: SizeUtils.scaleMobile(
+              right: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
@@ -58,7 +58,7 @@ class LeaveViewMobile extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                SizedBox(height: SizeUtils.scale(20, size.width)),
                 Row(
                   children: [
                     Expanded(

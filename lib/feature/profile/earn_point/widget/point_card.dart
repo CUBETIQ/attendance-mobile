@@ -19,10 +19,10 @@ class PointCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scaleMobile(155, size.width),
+      height: SizeUtils.scale(155, size.width),
       backgroundColor: Theme.of(context).colorScheme.primary,
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scaleMobile(
+        horizontal: SizeUtils.scale(
           AppSize().paddingHorizontalLarge,
           size.width,
         ),
@@ -35,10 +35,10 @@ class PointCard extends StatelessWidget {
             children: [
               LottieBuilder.asset(
                 LottieAssets.coin,
-                width: SizeUtils.scaleMobile(50, size.width),
-                height: SizeUtils.scaleMobile(50, size.width),
+                width: SizeUtils.scale(50, size.width),
+                height: SizeUtils.scale(50, size.width),
               ),
-              SizedBox(width: SizeUtils.scaleMobile(15, size.width)),
+              SizedBox(width: SizeUtils.scale(15, size.width)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -69,21 +69,21 @@ class PointCard extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
           ),
-          SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+          SizedBox(height: SizeUtils.scale(5, size.width)),
           Container(
             padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.scaleMobile(
+              vertical: SizeUtils.scale(
                 AppSize().paddingS1,
                 size.width,
               ),
-              horizontal: SizeUtils.scaleMobile(
+              horizontal: SizeUtils.scale(
                 AppSize().paddingS5,
                 size.width,
               ),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                SizeUtils.scaleMobile(
+                SizeUtils.scale(
                   AppSize().borderRadiusMedium,
                   size.width,
                 ),

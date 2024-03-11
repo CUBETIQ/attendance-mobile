@@ -24,8 +24,8 @@ class AvatarCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: width ?? SizeUtils.scaleMobile(80, size.width),
-        height: height ?? SizeUtils.scaleMobile(80, size.width),
+        width: width ?? SizeUtils.scale(80, size.width),
+        height: height ?? SizeUtils.scale(80, size.width),
         alignment: Alignment.center,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class AvatarCard extends StatelessWidget {
         ),
         child: Image.asset(
           image,
-          width: SizeUtils.scaleMobile(
+          width: SizeUtils.scale(
             avatarType == AvatarType.profile
                 ? 75
                 : avatarType == AvatarType.organization
@@ -42,7 +42,7 @@ class AvatarCard extends StatelessWidget {
                     : 60,
             size.width,
           ),
-          height: SizeUtils.scaleMobile(
+          height: SizeUtils.scale(
             avatarType == AvatarType.profile
                 ? 75
                 : avatarType == AvatarType.organization

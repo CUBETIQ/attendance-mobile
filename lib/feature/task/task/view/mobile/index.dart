@@ -31,7 +31,7 @@ class TaskViewMobile extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.scaleMobile(
+              vertical: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
               ),
@@ -57,7 +57,7 @@ class TaskViewMobile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: SizeUtils.scaleMobile(20, size.width),
+                  height: SizeUtils.scale(20, size.width),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +112,7 @@ class TaskViewMobile extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
-                        height: SizeUtils.scaleMobile(
+                        height: SizeUtils.scale(
                           AppSize().paddingS6,
                           size.width,
                         ),

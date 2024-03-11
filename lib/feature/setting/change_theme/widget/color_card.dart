@@ -24,12 +24,12 @@ class ColorCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: SizeUtils.scaleMobile(70, size.width),
-        height: SizeUtils.scaleMobile(70, size.width),
+        width: SizeUtils.scale(70, size.width),
+        height: SizeUtils.scale(70, size.width),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scaleMobile(
+            SizeUtils.scale(
               18,
               size.width,
             ),
@@ -41,18 +41,16 @@ class ColorCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    height:
-                        colorHeight ?? SizeUtils.scaleMobile(34.5, size.width),
+                    height: colorHeight ?? SizeUtils.scale(34.5, size.width),
                     decoration: BoxDecoration(
                       color: data.primary,
                     ),
                   ),
                 ),
-                SizedBox(width: SizeUtils.scaleMobile(1, size.width)),
+                SizedBox(width: SizeUtils.scale(1, size.width)),
                 Expanded(
                   child: Container(
-                    height:
-                        colorHeight ?? SizeUtils.scaleMobile(34.5, size.width),
+                    height: colorHeight ?? SizeUtils.scale(34.5, size.width),
                     decoration: BoxDecoration(
                       color: data.secondary,
                     ),
@@ -60,23 +58,21 @@ class ColorCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: SizeUtils.scaleMobile(1, size.width)),
+            SizedBox(height: SizeUtils.scale(1, size.width)),
             Row(
               children: [
                 Expanded(
                   child: Container(
-                    height:
-                        colorHeight ?? SizeUtils.scaleMobile(34.5, size.width),
+                    height: colorHeight ?? SizeUtils.scale(34.5, size.width),
                     decoration: BoxDecoration(
                       color: data.primaryContainer,
                     ),
                   ),
                 ),
-                SizedBox(width: SizeUtils.scaleMobile(1, size.width)),
+                SizedBox(width: SizeUtils.scale(1, size.width)),
                 Expanded(
                   child: Container(
-                    height:
-                        colorHeight ?? SizeUtils.scaleMobile(34.5, size.width),
+                    height: colorHeight ?? SizeUtils.scale(34.5, size.width),
                     decoration: BoxDecoration(
                       color: data.tertiary,
                     ),

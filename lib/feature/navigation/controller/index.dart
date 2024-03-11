@@ -64,10 +64,8 @@ class NavigationController extends GetxController {
       action: GestureDetector(
         onTap: () => Get.toNamed(Routes.POINT),
         child: Container(
-          width:
-              SizeUtils.scaleMobile(22, MediaQuery.of(Get.context!).size.width),
-          height:
-              SizeUtils.scaleMobile(22, MediaQuery.of(Get.context!).size.width),
+          width: SizeUtils.scale(22, MediaQuery.of(Get.context!).size.width),
+          height: SizeUtils.scale(22, MediaQuery.of(Get.context!).size.width),
           alignment: Alignment.center,
           child: SvgPicture.asset(
             SvgAssets.coin,

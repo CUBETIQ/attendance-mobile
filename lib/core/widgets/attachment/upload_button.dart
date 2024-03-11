@@ -68,7 +68,7 @@ class UploadAttachmentButton extends StatelessWidget {
               borderType: BorderType.RRect,
               radius: dotRadius ??
                   Radius.circular(
-                    SizeUtils.scaleMobile(
+                    SizeUtils.scale(
                       AppSize().borderRadiusMedium,
                       size.width,
                     ),
@@ -77,13 +77,13 @@ class UploadAttachmentButton extends StatelessWidget {
               strokeCap: StrokeCap.round,
               child: Container(
                 width: width ?? size.width,
-                height: height ?? SizeUtils.scaleMobile(120, size.width),
+                height: height ?? SizeUtils.scale(120, size.width),
                 decoration: BoxDecoration(
                   color:
                       Theme.of(context).colorScheme.primary.withOpacity(0.08),
                   borderRadius: childBorderRadius ??
                       BorderRadius.circular(
-                        SizeUtils.scaleMobile(
+                        SizeUtils.scale(
                           AppSize().borderRadiusMedium,
                           size.width,
                         ),
@@ -95,7 +95,7 @@ class UploadAttachmentButton extends StatelessWidget {
                     Icon(
                       Icons.upload_file,
                       color: Theme.of(context).colorScheme.primary,
-                      size: iconSize ?? SizeUtils.scaleMobile(40, size.width),
+                      size: iconSize ?? SizeUtils.scale(40, size.width),
                     ),
                     MyText(
                       text: "Upload your files here",
@@ -117,9 +117,7 @@ class UploadAttachmentButton extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-              height:
-                  SizeUtils.scaleMobile(files.isEmpty ? 0 : 10, size.width)),
+          SizedBox(height: SizeUtils.scale(files.isEmpty ? 0 : 10, size.width)),
           files.isEmpty
               ? const SizedBox.shrink()
               : MyText(
@@ -128,7 +126,7 @@ class UploadAttachmentButton extends StatelessWidget {
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                 ),
-          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+          SizedBox(height: SizeUtils.scale(10, size.width)),
           ...List.generate(
             files.value.length,
             (index) => AttachmentCard(

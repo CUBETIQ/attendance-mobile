@@ -36,7 +36,7 @@ class AddLeaveViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -62,7 +62,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+                height: SizeUtils.scale(AppSize().paddingS5, size.width),
               ),
               Row(
                 children: [
@@ -96,7 +96,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+                height: SizeUtils.scale(AppSize().paddingS5, size.width),
               ),
               Obx(
                 () => TypeAheadField<String>(
@@ -130,7 +130,7 @@ class AddLeaveViewMobile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+                height: SizeUtils.scale(AppSize().paddingS5, size.width),
               ),
               MyTextFieldForm(
                 hasLabel: true,
@@ -140,13 +140,13 @@ class AddLeaveViewMobile extends StatelessWidget {
                 maxlines: 5,
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS5, size.width),
+                height: SizeUtils.scale(AppSize().paddingS5, size.width),
               ),
               UploadAttachmentButton(
                 files: controller.attachments,
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(AppSize().paddingS10, size.width),
+                height: SizeUtils.scale(AppSize().paddingS10, size.width),
               ),
               MyAsyncButton(
                 title: "Save",

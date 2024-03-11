@@ -17,16 +17,16 @@ class KpiScoreCard extends StatelessWidget {
       children: [
         Container(
           width: size.width - 48,
-          height: SizeUtils.scaleMobile(50, size.width),
+          height: SizeUtils.scale(50, size.width),
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalMedium,
               size.width,
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
+              SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
             ),
             color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
           ),
@@ -37,7 +37,7 @@ class KpiScoreCard extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onPrimary,
                 size: size.width * 0.1,
               ),
-              SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
                 text: "${"Performance Score:".trString} $score",
                 style: AppFonts().bodyLargeSemi.copyWith(
@@ -48,21 +48,21 @@ class KpiScoreCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: SizeUtils.scaleMobile(10, size.width),
-          top: SizeUtils.scaleMobile(10, size.width),
+          right: SizeUtils.scale(10, size.width),
+          top: SizeUtils.scale(10, size.width),
           child: Icon(
             Icons.star_rounded,
             color: Theme.of(context).colorScheme.onPrimary,
-            size: SizeUtils.scaleMobile(25, size.width),
+            size: SizeUtils.scale(25, size.width),
           ),
         ),
         Positioned(
-          right: SizeUtils.scaleMobile(20, size.width),
-          top: SizeUtils.scaleMobile(18, size.width),
+          right: SizeUtils.scale(20, size.width),
+          top: SizeUtils.scale(18, size.width),
           child: Icon(
             Icons.star_rounded,
             color: Theme.of(context).colorScheme.onPrimary,
-            size: SizeUtils.scaleMobile(48, size.width),
+            size: SizeUtils.scale(48, size.width),
           ),
         ),
       ],

@@ -36,7 +36,7 @@ class DepartmentViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: SizeUtils.scaleMobile(
+                vertical: SizeUtils.scale(
                   AppSize().paddingHorizontalLarge,
                   size.width,
                 ),
@@ -79,7 +79,7 @@ class DepartmentViewMobile extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
-                          height: SizeUtils.scaleMobile(
+                          height: SizeUtils.scale(
                             AppSize().paddingS8,
                             size.width,
                           ),

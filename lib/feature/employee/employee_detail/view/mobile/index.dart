@@ -31,25 +31,25 @@ class StaffDetailViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Obx(
                     () => MyCacheImage(
                       imageUrl: controller.staff.value.image ?? "",
-                      width: SizeUtils.scaleMobile(80, size.width),
-                      height: SizeUtils.scaleMobile(80, size.width),
+                      width: SizeUtils.scale(80, size.width),
+                      height: SizeUtils.scale(80, size.width),
                     ),
                   ),
-                  SizedBox(width: SizeUtils.scaleMobile(20, size.width)),
+                  SizedBox(width: SizeUtils.scale(20, size.width)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -73,7 +73,7 @@ class StaffDetailViewMobile extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: SizeUtils.scaleMobile(25, size.width)),
+              SizedBox(height: SizeUtils.scale(25, size.width)),
               LabelDetailCard(
                 title: "First Name",
                 value: controller.staff.value.firstName,
@@ -98,7 +98,7 @@ class StaffDetailViewMobile extends StatelessWidget {
                       value: controller.staff.value.gender,
                     ),
                   ),
-                  SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+                  SizedBox(width: SizeUtils.scale(10, size.width)),
                   Expanded(
                     child: LabelDetailCard(
                       title: "Date Of Birth",

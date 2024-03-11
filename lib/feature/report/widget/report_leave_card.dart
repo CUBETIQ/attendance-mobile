@@ -18,12 +18,12 @@ class ReportLeaveCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scaleMobile(75, size.width),
+      height: SizeUtils.scale(75, size.width),
       padding: EdgeInsets.only(
-        right: SizeUtils.scaleMobile(20, size.width),
+        right: SizeUtils.scale(20, size.width),
       ),
       borderRadius: BorderRadius.circular(
-        SizeUtils.scaleMobile(
+        SizeUtils.scale(
           14,
           size.width,
         ),
@@ -31,18 +31,18 @@ class ReportLeaveCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: SizeUtils.scaleMobile(35, size.width),
-            height: SizeUtils.scaleMobile(75, size.width),
+            width: SizeUtils.scale(35, size.width),
+            height: SizeUtils.scale(75, size.width),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(
-                  SizeUtils.scaleMobile(
+                  SizeUtils.scale(
                     14,
                     size.width,
                   ),
                 ),
                 bottomLeft: Radius.circular(
-                  SizeUtils.scaleMobile(
+                  SizeUtils.scale(
                     14,
                     size.width,
                   ),
@@ -52,7 +52,7 @@ class ReportLeaveCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: SizeUtils.scaleMobile(15, size.width),
+            width: SizeUtils.scale(15, size.width),
           ),
           Expanded(
             child: Column(
@@ -69,7 +69,7 @@ class ReportLeaveCard extends StatelessWidget {
                           text: "From",
                           style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                        SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: DateUtil.formatMillisecondsToDOB(leave.from),
                           style: AppFonts().bodySmallRegular,
@@ -84,7 +84,7 @@ class ReportLeaveCard extends StatelessWidget {
                           text: "To",
                           style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                        SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: DateUtil.formatMillisecondsToDOB(leave.to),
                           style: AppFonts().bodySmallRegular,
@@ -99,7 +99,7 @@ class ReportLeaveCard extends StatelessWidget {
                           text: "Status",
                           style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scaleMobile(2, size.width)),
+                        SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: leave.status?.capitalizeFirst ?? "N/A",
                           style: AppFonts().bodySmallSemi.copyWith(
@@ -110,7 +110,7 @@ class ReportLeaveCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+                SizedBox(height: SizeUtils.scale(5, size.width)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -136,7 +136,7 @@ class ReportLeaveCard extends StatelessWidget {
                         ),
                         Container(
                           constraints: BoxConstraints(
-                            maxWidth: SizeUtils.scaleMobile(100, size.width),
+                            maxWidth: SizeUtils.scale(100, size.width),
                           ),
                           child: MyText(
                             text: StringUtil.getfullname(

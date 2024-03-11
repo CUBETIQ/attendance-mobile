@@ -26,7 +26,7 @@ class CategoryDetailViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -34,20 +34,16 @@ class CategoryDetailViewMobile extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: SizeUtils.scaleMobile(
-                    30, MediaQuery.of(context).size.width),
+                height: SizeUtils.scale(30, MediaQuery.of(context).size.width),
               ),
               IconCard(
                 icon: controller.categories.value.icon,
                 bgColor: controller.categories.value.color,
-                width: SizeUtils.scaleMobile(
-                    100, MediaQuery.of(context).size.width),
-                height: SizeUtils.scaleMobile(
-                    100, MediaQuery.of(context).size.width),
+                width: SizeUtils.scale(100, MediaQuery.of(context).size.width),
+                height: SizeUtils.scale(100, MediaQuery.of(context).size.width),
               ),
               SizedBox(
-                height: SizeUtils.scaleMobile(
-                    30, MediaQuery.of(context).size.width),
+                height: SizeUtils.scale(30, MediaQuery.of(context).size.width),
               ),
               LabelDetailCard(
                 title: "Name",

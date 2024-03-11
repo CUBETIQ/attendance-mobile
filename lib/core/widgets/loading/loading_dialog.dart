@@ -12,15 +12,15 @@ class LoadingDialog extends StatelessWidget {
     Get.dialog(
       Center(
         child: Container(
-          width: SizeUtils.scaleMobile(240, size.width),
-          height: SizeUtils.scaleMobile(60, size.width),
+          width: SizeUtils.scale(240, size.width),
+          height: SizeUtils.scale(60, size.width),
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(20, size.width),
+            horizontal: SizeUtils.scale(20, size.width),
           ),
           decoration: BoxDecoration(
             color: Theme.of(Get.context!).colorScheme.background,
             borderRadius: BorderRadius.circular(
-              SizeUtils.scaleMobile(24, size.width),
+              SizeUtils.scale(24, size.width),
             ),
           ),
           child: Material(
@@ -34,7 +34,7 @@ class LoadingDialog extends StatelessWidget {
                 LoadingAnimationWidget.flickr(
                   leftDotColor: Theme.of(Get.context!).colorScheme.onBackground,
                   rightDotColor: Theme.of(Get.context!).colorScheme.primary,
-                  size: SizeUtils.scaleMobile(40, size.width),
+                  size: SizeUtils.scale(40, size.width),
                 ),
               ],
             ),

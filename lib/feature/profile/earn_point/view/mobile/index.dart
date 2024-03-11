@@ -33,11 +33,11 @@ class EarnPointViewMobile extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
               padding: EdgeInsets.only(
-                left: SizeUtils.scaleMobile(
+                left: SizeUtils.scale(
                     AppSize().paddingHorizontalLarge, size.width),
-                right: SizeUtils.scaleMobile(
+                right: SizeUtils.scale(
                     AppSize().paddingHorizontalLarge, size.width),
-                top: SizeUtils.scaleMobile(AppSize().paddingS17, size.width),
+                top: SizeUtils.scale(AppSize().paddingS17, size.width),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,20 +47,20 @@ class EarnPointViewMobile extends StatelessWidget {
                       point: controller.point.value.points,
                     ),
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                  SizedBox(height: SizeUtils.scale(20, size.width)),
                   MyText(
                     text: "Earn More Points",
                     style: AppFonts().bodyXlargeMedium.copyWith(
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                  SizedBox(height: SizeUtils.scale(10, size.width)),
                   EarnPointCard(
                     onTap: controller.onTapCheckIn,
                     title: "Check In Daily",
                     point: 2,
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+                  SizedBox(height: SizeUtils.scale(10, size.width)),
                   EarnPointCard(
                     onTap: controller.onTapTask,
                     title: "Complete Task",

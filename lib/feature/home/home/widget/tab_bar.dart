@@ -34,7 +34,7 @@ class MyTabBar extends StatelessWidget {
       indicator: BoxDecoration(
         borderRadius: isCircleBorder == true
             ? BorderRadius.circular(
-                SizeUtils.scaleMobile(15, size.width),
+                SizeUtils.scale(15, size.width),
               )
             : null,
         color: isCircleBorder == true
@@ -45,7 +45,7 @@ class MyTabBar extends StatelessWidget {
             : Border(
                 bottom: BorderSide(
                   color: Theme.of(context).colorScheme.primary,
-                  width: SizeUtils.scaleMobile(3, size.width),
+                  width: SizeUtils.scale(3, size.width),
                 ),
               ),
       ),

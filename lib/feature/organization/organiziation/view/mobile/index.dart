@@ -39,10 +39,10 @@ class OrganizationViewMobile extends StatelessWidget {
                   onTapEdit: controller.onTabEdit,
                 ),
               ),
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeUtils.scaleMobile(
+                  horizontal: SizeUtils.scale(
                     AppSize().paddingHorizontalLarge,
                     size.width,
                   ),
@@ -57,21 +57,21 @@ class OrganizationViewMobile extends StatelessWidget {
                         totalPosition: controller.positions.length,
                       ),
                     ),
-                    SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                    SizedBox(height: SizeUtils.scale(20, size.width)),
                     MyCard(
                       width: size.width,
                       padding: EdgeInsets.symmetric(
-                        horizontal: SizeUtils.scaleMobile(
+                        horizontal: SizeUtils.scale(
                           AppSize().paddingHorizontalMedium,
                           size.width,
                         ),
-                        vertical: SizeUtils.scaleMobile(
+                        vertical: SizeUtils.scale(
                           AppSize().paddingVerticalLarge,
                           size.width,
                         ),
                       ),
                       borderRadius: BorderRadius.circular(
-                        SizeUtils.scaleMobile(14, size.width),
+                        SizeUtils.scale(14, size.width),
                       ),
                       child: Obx(
                         () => Column(
@@ -88,7 +88,7 @@ class OrganizationViewMobile extends StatelessWidget {
                                       "00:00",
                                 ),
                                 SizedBox(
-                                  width: SizeUtils.scaleMobile(95, size.width),
+                                  width: SizeUtils.scale(95, size.width),
                                 ),
                                 InfoDataColumn(
                                   icon: Icons.logout_rounded,
@@ -101,8 +101,7 @@ class OrganizationViewMobile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                                height: SizeUtils.scaleMobile(15, size.width)),
+                            SizedBox(height: SizeUtils.scale(15, size.width)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -126,8 +125,7 @@ class OrganizationViewMobile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                                height: SizeUtils.scaleMobile(15, size.width)),
+                            SizedBox(height: SizeUtils.scale(15, size.width)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -142,8 +140,7 @@ class OrganizationViewMobile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                                height: SizeUtils.scaleMobile(15, size.width)),
+                            SizedBox(height: SizeUtils.scale(15, size.width)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

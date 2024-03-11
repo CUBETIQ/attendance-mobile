@@ -15,7 +15,7 @@ class DetailRowData extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: SizeUtils.scaleMobile(160, size.width),
+          width: SizeUtils.scale(160, size.width),
           child: MyText(
             text: title ?? "status",
             style: AppFonts().bodyMediumMedium.copyWith(

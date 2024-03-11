@@ -40,13 +40,12 @@ class LeaveRequestCard extends StatelessWidget {
           EdgeInsets.only(bottom: AppSize().paddingS4 * (size.width / 375.0)),
       padding: EdgeInsets.symmetric(
         horizontal:
-            SizeUtils.scaleMobile(AppSize().paddingHorizontalLarge, size.width),
-        vertical:
-            SizeUtils.scaleMobile(AppSize().paddingVerticalMedium, size.width),
+            SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+        vertical: SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
+          SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
         ),
         color: Theme.of(context).colorScheme.background,
         boxShadow: [
@@ -66,10 +65,10 @@ class LeaveRequestCard extends StatelessWidget {
               Row(
                 children: [
                   MyCacheImage(imageUrl: staff.image),
-                  SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+                  SizedBox(width: SizeUtils.scale(10, size.width)),
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scaleMobile(130, size.width),
+                      maxWidth: SizeUtils.scale(130, size.width),
                     ),
                     child: MyText(
                       text: StringUtil.getfullname(
@@ -162,10 +161,10 @@ class LeaveRequestCard extends StatelessWidget {
                           color: Theme.of(context).colorScheme.outline,
                         ),
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+                  SizedBox(height: SizeUtils.scale(5, size.width)),
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scaleMobile(90, size.width),
+                      maxWidth: SizeUtils.scale(90, size.width),
                     ),
                     child: MyText(
                       text: StringUtil.getfullname(
@@ -183,7 +182,7 @@ class LeaveRequestCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+          SizedBox(height: SizeUtils.scale(10, size.width)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -198,7 +197,7 @@ class LeaveRequestCard extends StatelessWidget {
                   : const SizedBox.shrink(),
               leave.status == LeaveStatus.pending
                   ? SizedBox(
-                      width: SizeUtils.scaleMobile(5, size.width),
+                      width: SizeUtils.scale(5, size.width),
                     )
                   : const SizedBox.shrink(),
               leave.status == LeaveStatus.pending
@@ -212,7 +211,7 @@ class LeaveRequestCard extends StatelessWidget {
                   : const SizedBox.shrink(),
               leave.status == LeaveStatus.pending
                   ? SizedBox(
-                      width: SizeUtils.scaleMobile(5, size.width),
+                      width: SizeUtils.scale(5, size.width),
                     )
                   : const SizedBox.shrink(),
               Expanded(

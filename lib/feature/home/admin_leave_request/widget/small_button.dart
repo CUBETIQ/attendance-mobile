@@ -24,7 +24,7 @@ class SmallButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SizeUtils.scaleMobile(30, size.width),
+        height: SizeUtils.scale(30, size.width),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(

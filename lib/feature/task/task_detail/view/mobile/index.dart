@@ -36,7 +36,7 @@ class TaskDetailViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
@@ -44,7 +44,7 @@ class TaskDetailViewMobile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               MyText(
                 text: controller.task.value?.name ?? "Title",
                 style: AppFonts().bodyXXlargeMedium.copyWith(
@@ -53,39 +53,39 @@ class TaskDetailViewMobile extends StatelessWidget {
                 textAlign: TextAlign.start,
                 maxLines: 5,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               DetailRowData(
                 title: "Status",
                 value: controller.task.value?.status?.capitalizeFirst,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowImage(
                 title: "Assignee",
                 name: NavigationController.to.fullname.value,
                 image: NavigationController.to.user.value.image,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowData(
                 title: "Due",
                 value: DateUtil.formatMillisecondsToDOB(
                   controller.task.value?.endDate,
                 ),
               ),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowData(
                 title: "Priority",
                 value: controller.task.value?.priority?.capitalizeFirst,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowCategory(
                 title: "Category",
                 icon: controller.task.value?.icon,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               const Divider(thickness: 1.5),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(text: "Description", style: AppFonts().bodyLargeMedium),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(
                 text: controller.task.value?.description != null &&
                         controller.task.value?.description?.isNotEmpty == true
@@ -94,11 +94,11 @@ class TaskDetailViewMobile extends StatelessWidget {
                 style: AppFonts().bodyMediumRegular,
                 maxLines: 20,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               const Divider(thickness: 1.5),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               Obx(
                 () => ListView.builder(
                   shrinkWrap: true,

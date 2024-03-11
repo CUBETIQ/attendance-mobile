@@ -28,7 +28,7 @@ class ToggleButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width: size.width,
-      height: SizeUtils.scaleMobile(50, size.width),
+      height: SizeUtils.scale(50, size.width),
       child: AnimatedToggleSwitch<int>.size(
         textDirection: TextDirection.rtl,
         current: currentIndex,
@@ -37,12 +37,12 @@ class ToggleButton extends StatelessWidget {
         selectedIconScale: 1,
         indicatorAppearingBuilder: (context, value, indicator) {
           return Container(
-            width: SizeUtils.scaleMobile(300, size.width),
-            height: SizeUtils.scaleMobile(50, size.width),
+            width: SizeUtils.scale(300, size.width),
+            height: SizeUtils.scale(50, size.width),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(
-                SizeUtils.scaleMobile(
+                SizeUtils.scale(
                   AppSize().borderRadiusLarge,
                   size.width,
                 ),
@@ -54,7 +54,7 @@ class ToggleButton extends StatelessWidget {
             color: selectedIndex == i
                 ? Theme.of(context).colorScheme.onPrimary
                 : Theme.of(context).colorScheme.secondary,
-            size: SizeUtils.scaleMobile(
+            size: SizeUtils.scale(
               22,
               size.width,
             )),
@@ -64,7 +64,7 @@ class ToggleButton extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           borderColor: Colors.transparent,
           borderRadius: BorderRadius.circular(
-            SizeUtils.scaleMobile(
+            SizeUtils.scale(
               AppSize().borderRadiusLarge,
               size.width,
             ),

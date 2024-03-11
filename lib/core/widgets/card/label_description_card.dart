@@ -26,25 +26,25 @@ class LabelDescriptionCard extends StatelessWidget {
         Container(
           width: double.infinity,
           height: value != null && (value?.length ?? 0) < 200
-              ? SizeUtils.scaleMobile(150, size.width)
+              ? SizeUtils.scale(150, size.width)
               : null,
           margin: EdgeInsets.only(
-            top: SizeUtils.scaleMobile(10, size.width),
-            bottom: SizeUtils.scaleMobile(15, size.width),
+            top: SizeUtils.scale(10, size.width),
+            bottom: SizeUtils.scale(15, size.width),
           ),
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
-            vertical: SizeUtils.scaleMobile(
+            vertical: SizeUtils.scale(
               AppSize().paddingVerticalMedium,
               size.width,
             ),
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
+              SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
             ),
             color: Theme.of(context).colorScheme.primary.withOpacity(0.07),
           ),

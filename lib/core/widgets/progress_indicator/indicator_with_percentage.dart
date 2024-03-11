@@ -26,8 +26,8 @@ class ProgressIndicatorWithPercentage extends StatelessWidget {
       children: <Widget>[
         Center(
           child: SizedBox(
-            width: SizeUtils.scaleMobile(25, size.width),
-            height: SizeUtils.scaleMobile(25, size.width),
+            width: SizeUtils.scale(25, size.width),
+            height: SizeUtils.scale(25, size.width),
             child: CircularProgressIndicator(
               strokeWidth: 3.5,
               value: percentage,

@@ -33,11 +33,11 @@ class HomeStaffMobileView extends StatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(
-            left: SizeUtils.scaleMobile(
+            left: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
-            right: SizeUtils.scaleMobile(
+            right: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
@@ -47,7 +47,7 @@ class HomeStaffMobileView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: SizeUtils.scaleMobile(55, size.width),
+                height: SizeUtils.scale(55, size.width),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -57,8 +57,8 @@ class HomeStaffMobileView extends StatelessWidget {
                           () => MyCacheImage(
                             imageUrl:
                                 NavigationController.to.user.value.image ?? "",
-                            width: SizeUtils.scaleMobile(55, size.width),
-                            height: SizeUtils.scaleMobile(55, size.width),
+                            width: SizeUtils.scale(55, size.width),
+                            height: SizeUtils.scale(55, size.width),
                           ),
                         ),
                         Positioned(
@@ -96,7 +96,7 @@ class HomeStaffMobileView extends StatelessWidget {
                         Obx(
                           () => Container(
                             constraints: BoxConstraints(
-                              maxWidth: SizeUtils.scaleMobile(240, size.width),
+                              maxWidth: SizeUtils.scale(240, size.width),
                             ),
                             child: MyText(
                               text: StringUtil.getfullname(

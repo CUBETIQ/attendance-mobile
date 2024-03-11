@@ -23,7 +23,7 @@ class EarnPointCard extends StatelessWidget {
         width: size.width,
         boxShadow: const [],
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scaleMobile(
+          horizontal: SizeUtils.scale(
             AppSize().paddingHorizontalMedium,
             size.width,
           ),
@@ -36,7 +36,7 @@ class EarnPointCard extends StatelessWidget {
             Theme.of(context).colorScheme.secondary,
           ],
         ),
-        height: SizeUtils.scaleMobile(80, size.width),
+        height: SizeUtils.scale(80, size.width),
         border: Border.all(
           color: Theme.of(context).colorScheme.outline.withOpacity(0.15),
         ),
@@ -47,11 +47,11 @@ class EarnPointCard extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   SvgAssets.coin,
-                  width: SizeUtils.scaleMobile(35, size.width),
-                  height: SizeUtils.scaleMobile(35, size.width),
+                  width: SizeUtils.scale(35, size.width),
+                  height: SizeUtils.scale(35, size.width),
                 ),
                 SizedBox(
-                  width: SizeUtils.scaleMobile(10, size.width),
+                  width: SizeUtils.scale(10, size.width),
                 ),
                 MyText(
                   text: title ?? "Title",

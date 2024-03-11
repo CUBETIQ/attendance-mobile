@@ -30,7 +30,7 @@ class SettingViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -38,12 +38,12 @@ class SettingViewMobile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               MyText(
                 text: "Appearance",
                 style: AppFonts().bodyXlargeMedium,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(15, size.width)),
+              SizedBox(height: SizeUtils.scale(15, size.width)),
               Obx(
                 () => ThemeSwitchButton(
                   title: "Dark Mode",
@@ -52,19 +52,19 @@ class SettingViewMobile extends StatelessWidget {
                   onChanged: controller.changeTheme,
                 ),
               ),
-              SizedBox(height: SizeUtils.scaleMobile(5, size.width)),
+              SizedBox(height: SizeUtils.scale(5, size.width)),
               SettingCardButton(
                 leadingIcon: Icons.color_lens_rounded,
                 title: "Change Theme",
                 description: "Change the theme of the application.",
                 onTap: () => Get.toNamed(Routes.THEME),
               ),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(
                 text: "Preferences",
                 style: AppFonts().bodyXlargeMedium,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(15, size.width)),
+              SizedBox(height: SizeUtils.scale(15, size.width)),
               SettingCardButton(
                 leadingIcon: Icons.language_rounded,
                 title: "Language",

@@ -29,8 +29,8 @@ class MyCacheImage extends StatelessWidget {
     return imageUrl != "" && imageUrl != null
         ? imageUrl?.startsWith('assets') == true
             ? Container(
-                width: width ?? SizeUtils.scaleMobile(55, getWidth),
-                height: height ?? SizeUtils.scaleMobile(55, getWidth),
+                width: width ?? SizeUtils.scale(55, getWidth),
+                height: height ?? SizeUtils.scale(55, getWidth),
                 clipBehavior: Clip.antiAlias,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -41,12 +41,9 @@ class MyCacheImage extends StatelessWidget {
                       .withOpacity(0.5),
                 ),
                 child: SizedBox(
-                  width: imageWidth ??
-                      width ??
-                      SizeUtils.scaleMobile(55, getWidth),
-                  height: imageHeight ??
-                      height ??
-                      SizeUtils.scaleMobile(55, getWidth),
+                  width: imageWidth ?? width ?? SizeUtils.scale(55, getWidth),
+                  height:
+                      imageHeight ?? height ?? SizeUtils.scale(55, getWidth),
                   child: Image.asset(
                     imageUrl ?? "",
                   ),
@@ -55,8 +52,8 @@ class MyCacheImage extends StatelessWidget {
             : CachedNetworkImage(
                 imageUrl: imageUrl!,
                 imageBuilder: (context, imageProvider) => Container(
-                  width: width ?? SizeUtils.scaleMobile(55, getWidth),
-                  height: height ?? SizeUtils.scaleMobile(55, getWidth),
+                  width: width ?? SizeUtils.scale(55, getWidth),
+                  height: height ?? SizeUtils.scale(55, getWidth),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -94,8 +91,8 @@ class MyCacheImage extends StatelessWidget {
                     ],
                   ),
                   child: SizedBox(
-                    width: SizeUtils.scaleMobile(width ?? 55, getWidth) / 2.5,
-                    height: SizeUtils.scaleMobile(height ?? 55, getWidth) / 2.5,
+                    width: SizeUtils.scale(width ?? 55, getWidth) / 2.5,
+                    height: SizeUtils.scale(height ?? 55, getWidth) / 2.5,
                     child: CircularProgressIndicator(
                       color: Theme.of(context).colorScheme.primary,
                     ),

@@ -31,7 +31,7 @@ class EditProfileViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
@@ -45,8 +45,8 @@ class EditProfileViewMobile extends StatelessWidget {
                   () => MyProfileImage(
                     imageFile: controller.imageFile.value,
                     imageUrl: controller.image.value,
-                    width: SizeUtils.scaleMobile(110, size.width),
-                    height: SizeUtils.scaleMobile(110, size.width),
+                    width: SizeUtils.scale(110, size.width),
+                    height: SizeUtils.scale(110, size.width),
                   ),
                 ),
               ),

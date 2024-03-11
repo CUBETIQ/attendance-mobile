@@ -26,7 +26,7 @@ class DetailRowImage extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: SizeUtils.scaleMobile(160, size.width),
+          width: SizeUtils.scale(160, size.width),
           child: MyText(
             text: title ?? "status",
             style: AppFonts().bodyMediumMedium.copyWith(
@@ -36,10 +36,10 @@ class DetailRowImage extends StatelessWidget {
         ),
         MyCacheImage(
           imageUrl: image ?? "",
-          width: imageWidth ?? SizeUtils.scaleMobile(25, size.width),
-          height: imageHeight ?? SizeUtils.scaleMobile(25, size.width),
+          width: imageWidth ?? SizeUtils.scale(25, size.width),
+          height: imageHeight ?? SizeUtils.scale(25, size.width),
         ),
-        SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+        SizedBox(width: SizeUtils.scale(10, size.width)),
         Expanded(
           child: MyText(
             text: name ?? "name",

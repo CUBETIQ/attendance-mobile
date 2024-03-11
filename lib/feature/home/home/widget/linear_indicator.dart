@@ -34,10 +34,10 @@ class LinearIndicator extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scaleMobile(85, size.width),
+      height: SizeUtils.scale(85, size.width),
       padding: EdgeInsets.symmetric(
-        horizontal: SizeUtils.scaleMobile(20, size.width),
-        vertical: SizeUtils.scaleMobile(10, size.width),
+        horizontal: SizeUtils.scale(20, size.width),
+        vertical: SizeUtils.scale(10, size.width),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,19 +50,18 @@ class LinearIndicator extends StatelessWidget {
                 child: LinearPercentIndicator(
                   animation: true,
                   lineHeight:
-                      indicatorHeight ?? SizeUtils.scaleMobile(15, size.width),
+                      indicatorHeight ?? SizeUtils.scale(15, size.width),
                   animationDuration: 250,
                   padding: EdgeInsets.zero,
                   percent: percent ?? 0,
                   barRadius: Radius.circular(
-                    SizeUtils.scaleMobile(
-                        AppSize().borderRadiusLarge, size.width),
+                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
                   ),
                   progressColor:
                       indicatorColor ?? Theme.of(context).colorScheme.primary,
                 ),
               ),
-              SizedBox(width: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(
                 text: percent != null && percent?.isNaN == false
                     ? '${(percent! * 100).toStringAsFixed(2)}%'

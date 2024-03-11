@@ -27,16 +27,15 @@ class ChangeLanguageViewMobile extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scaleMobile(
+          left: SizeUtils.scale(
             AppSize().paddingHorizontalLarge,
             MediaQuery.of(context).size.width,
           ),
-          right: SizeUtils.scaleMobile(
+          right: SizeUtils.scale(
             AppSize().paddingHorizontalLarge,
             MediaQuery.of(context).size.width,
           ),
-          top:
-              SizeUtils.scaleMobile(AppSize().paddingVerticalLarge, size.width),
+          top: SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +44,7 @@ class ChangeLanguageViewMobile extends StatelessWidget {
               text: "Choose your language",
               style: AppFonts().bodyXXlargeMedium,
             ),
-            SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+            SizedBox(height: SizeUtils.scale(10, size.width)),
             MyText(
               text:
                   "Choose a language that suits your style and make your app journey uniquely yours. Whether it's Khmer or English, your preferences matter.",
@@ -54,7 +53,7 @@ class ChangeLanguageViewMobile extends StatelessWidget {
                     color: Theme.of(context).colorScheme.outline,
                   ),
             ),
-            SizedBox(height: SizeUtils.scaleMobile(50, size.width)),
+            SizedBox(height: SizeUtils.scale(50, size.width)),
             ...List.generate(
               controller.language.value.length,
               (index) => Obx(

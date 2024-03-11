@@ -28,25 +28,25 @@ class PositionDetailViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(
+            horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               size.width,
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
+              SizedBox(height: SizeUtils.scale(30, size.width)),
               Center(
                 child: MyCacheImage(
                   imageUrl: controller.position.value?.image,
-                  width: SizeUtils.scaleMobile(100, size.width),
-                  height: SizeUtils.scaleMobile(100, size.width),
+                  width: SizeUtils.scale(100, size.width),
+                  height: SizeUtils.scale(100, size.width),
                   defaultImage: SvgAssets.position,
-                  imageHeight: SizeUtils.scaleMobile(75, size.width),
-                  imageWidth: SizeUtils.scaleMobile(75, size.width),
+                  imageHeight: SizeUtils.scale(75, size.width),
+                  imageWidth: SizeUtils.scale(75, size.width),
                 ),
               ),
-              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
+              SizedBox(height: SizeUtils.scale(30, size.width)),
               LabelDetailCard(
                 title: "Name",
                 value: controller.position.value?.name,

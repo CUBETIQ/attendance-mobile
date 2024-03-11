@@ -40,16 +40,16 @@ class WorkingHourViewMobile extends StatelessWidget {
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                left: SizeUtils.scaleMobile(
+                left: SizeUtils.scale(
                   AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
-                right: SizeUtils.scaleMobile(
+                right: SizeUtils.scale(
                   AppSize().paddingHorizontalLarge,
                   MediaQuery.of(context).size.width,
                 ),
-                top: SizeUtils.scaleMobile(
-                    AppSize().paddingVerticalLarge, size.width),
+                top:
+                    SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
               ),
               child: Column(
                 children: [
@@ -69,7 +69,7 @@ class WorkingHourViewMobile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+                  SizedBox(height: SizeUtils.scale(20, size.width)),
                   Obx(
                     () => MyAsyncWidget(
                       list: controller.staffs.value,

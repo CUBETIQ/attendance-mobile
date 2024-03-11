@@ -42,15 +42,15 @@ class MyCard extends StatelessWidget {
       alignment: alignment,
       padding: padding ??
           EdgeInsets.symmetric(
-            horizontal: SizeUtils.scaleMobile(AppSize().paddingS1, size.width),
-            vertical: SizeUtils.scaleMobile(
-                AppSize().paddingVerticalMedium, size.width),
+            horizontal: SizeUtils.scale(AppSize().paddingS1, size.width),
+            vertical:
+                SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
           ),
       clipBehavior: clip ?? Clip.none,
       decoration: BoxDecoration(
         borderRadius: borderRadius ??
             BorderRadius.circular(
-              SizeUtils.scaleMobile(
+              SizeUtils.scale(
                 AppSize().borderRadiusLarge,
                 size.width,
               ),

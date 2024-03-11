@@ -36,14 +36,14 @@ class SupportButton extends StatelessWidget {
         margin: margin,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scaleMobile(
+          horizontal: SizeUtils.scale(
             AppSize().paddingHorizontalLarge,
             size.width,
           ),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            SizeUtils.scaleMobile(AppSize().borderRadiusLarge, size.width),
+            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
           ),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),
@@ -57,7 +57,7 @@ class SupportButton extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 SizedBox(
-                  width: SizeUtils.scaleMobile(
+                  width: SizeUtils.scale(
                     AppSize().paddingS8,
                     size.width,
                   ),

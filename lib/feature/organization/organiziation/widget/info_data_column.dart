@@ -30,7 +30,7 @@ class InfoDataColumn extends StatelessWidget {
               color: iconColor,
             ),
             SizedBox(
-              width: SizeUtils.scaleMobile(5, size.width),
+              width: SizeUtils.scale(5, size.width),
             ),
             MyText(
               text: title,
@@ -39,15 +39,15 @@ class InfoDataColumn extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: SizeUtils.scaleMobile(3, size.width),
+          height: SizeUtils.scale(3, size.width),
         ),
         Padding(
           padding: EdgeInsets.only(
-            left: SizeUtils.scaleMobile(20, size.width),
+            left: SizeUtils.scale(20, size.width),
           ),
           child: Container(
             constraints: BoxConstraints(
-              maxWidth: SizeUtils.scaleMobile(270, size.width),
+              maxWidth: SizeUtils.scale(270, size.width),
             ),
             child: MyText(
               text: value,

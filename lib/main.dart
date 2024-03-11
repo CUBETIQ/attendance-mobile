@@ -11,10 +11,10 @@ import 'package:timesync/core/database/local_path/app_path_controller.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/utils/logger.dart';
 
-// using SizeUits.scaleMobile for make the bigger device and smalller device have same Ui size we need for mobile
+// using SizeUits.scale for make the bigger device and smalller device have same Ui size we need for mobile
 
 // using SizeUits.scaleTablet for make the bigger device and smalller device have same Ui size we need
-
+  
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 

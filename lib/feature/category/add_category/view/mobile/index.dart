@@ -32,12 +32,12 @@ class AddCategoryViewMobile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: SizeUtils.scaleMobile(10, size.width),
-            horizontal: SizeUtils.scaleMobile(24, size.width),
+            vertical: SizeUtils.scale(10, size.width),
+            horizontal: SizeUtils.scale(24, size.width),
           ),
           child: Column(
             children: [
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               Obx(
                 () => RoundedIconPicker(
                   hasOpacity: true,
@@ -45,18 +45,18 @@ class AddCategoryViewMobile extends StatelessWidget {
                   haslabel: false,
                   color: controller.color.value,
                   icon: controller.stringIcon.value,
-                  width: SizeUtils.scaleMobile(100, size.width),
-                  height: SizeUtils.scaleMobile(100, size.width),
-                  iconSize: SizeUtils.scaleMobile(40, size.width),
+                  width: SizeUtils.scale(100, size.width),
+                  height: SizeUtils.scale(100, size.width),
+                  iconSize: SizeUtils.scale(40, size.width),
                 ),
               ),
-              SizedBox(height: SizeUtils.scaleMobile(30, size.width)),
+              SizedBox(height: SizeUtils.scale(30, size.width)),
               MyTextFieldForm(
                 label: "Name",
                 hasLabel: true,
                 textController: controller.nameController,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
                   isRoundedCorner: false,
@@ -75,14 +75,14 @@ class AddCategoryViewMobile extends StatelessWidget {
                   onChanged: controller.onchangeCategoryType,
                 ),
               ),
-              SizedBox(height: SizeUtils.scaleMobile(10, size.width)),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
               MyTextFieldForm(
                 label: "Description",
                 hasLabel: true,
                 maxlines: 5,
                 textController: controller.descriptionController,
               ),
-              SizedBox(height: SizeUtils.scaleMobile(20, size.width)),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               MyAsyncButton(
                 title: "Save",
                 onTap: controller.appState.value == AppState.create

@@ -18,6 +18,7 @@ class NavigationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = NavigationController.to;
+
     return ZoomDrawer(
       controller: controller.zoomDrawerController,
       menuScreen: Obx(
@@ -58,6 +59,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = NavigationController.to;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -93,21 +95,28 @@ class MainScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Obx(
-        () => controller.selectedIndex.value != 2 &&
-                controller.selectedIndex.value != 3
-            ? const SizedBox.shrink()
-            : FloatingActionButton(
-                onPressed: controller.selectedIndex.value == 2
-                    ? controller.onTapAddTask
-                    : controller.onTapAddLeave,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
+      floatingActionButton: SizedBox(
+        height: SizeUtils.scale(40, size.width),
+        width: SizeUtils.scale(40, size.width),
+        child: Obx(
+          () => controller.selectedIndex.value != 2 &&
+                  controller.selectedIndex.value != 3
+              ? const SizedBox.shrink()
+              : FloatingActionButton(
+                  onPressed: controller.selectedIndex.value == 2
+                      ? controller.onTapAddTask
+                      : controller.onTapAddLeave,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(40),
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.add_rounded,
+                    size: SizeUtils.scale(24, size.width),
                   ),
                 ),
-                child: const Icon(Icons.add_rounded),
-              ),
+        ),
       ),
       bottomNavigationBar: Obx(
         () => NavigationBar(
@@ -116,8 +125,9 @@ class MainScreen extends StatelessWidget {
           destinations: controller.items
               .map(
                 (item) => NavigationDestination(
-                  icon: Icon(item.icon),
-                  selectedIcon: Icon(item.selectedIcon),
+                  icon: Icon(item.icon, size: SizeUtils.scale(22, size.width)),
+                  selectedIcon: Icon(item.selectedIcon,
+                      size: SizeUtils.scale(22, size.width)),
                   label: item.title.tr,
                 ),
               )

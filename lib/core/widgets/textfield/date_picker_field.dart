@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class MyDatePickerField extends StatelessWidget {
   final String label;
@@ -94,9 +95,8 @@ class MyDatePickerField extends StatelessWidget {
               obscureText: isPassword ?? false,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: (AppSize().paddingS17) * (size.width / 375.0),
-                  vertical: (AppSize().paddingS7) * (size.width / 375.0),
-                ),
+                    horizontal: SizeUtils.scale(30.0, size.width),
+                    vertical: SizeUtils.scale(14.0, size.width)),
                 hintText: hintText,
                 hintStyle: hintStyle ?? AppFonts().bodyMediumMedium,
                 filled: filled ?? false,

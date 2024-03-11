@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class MyBackButton extends StatelessWidget {
   const MyBackButton({super.key});
@@ -9,11 +10,9 @@ class MyBackButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => Get.back(closeOverlays: true),
-      child: Icon(
-        Icons.arrow_back_ios_rounded,
-        color: Theme.of(context).colorScheme.onBackground,
-        size: 20 * (size.width / 375.0),
-      ),
+      child: Icon(Icons.arrow_back_ios_rounded,
+          color: Theme.of(context).colorScheme.onBackground,
+          size: SizeUtils.scale(20, size.width)),
     );
   }
 }

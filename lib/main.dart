@@ -8,7 +8,7 @@ import 'package:timesync/app.dart';
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/database/local_path/app_path_controller.dart';
-import 'package:timesync/firebase_options.dart';
+import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/utils/logger.dart';
 
 // using SizeUits.scaleMobile for make the bigger device and smalller device have same Ui size we need for mobile
@@ -17,7 +17,9 @@ import 'package:timesync/utils/logger.dart';
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // initialize the app config
+  await AppConfig.initAppConfig();
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -30,9 +32,6 @@ Future<void> main() async {
   await initService();
   await AppPathController.initPath();
 
-  // initialize the app config
-  await AppConfig.initAppConfig();
-
   runApp(const MyApp());
   FlutterNativeSplash.remove();
 }
@@ -44,9 +43,9 @@ Future<void> initService() async {
 Future<void> firebaseInit() async {
   Logs.t('[firebaseInitialized] Initializing Firebase');
   // Initialize Firebase App and Messaging
-  // await NotificationService.initializeFirebase();
-  // Initialize Firebase Messaging Background Handler
-  // NotificationService.initializeFirebaseMessagingBackgroundHandler();
+  await Firebase.initializeApp();
+  NotificationIntegration.initializeNotificationBackground();
+  await NotificationIntegration.requestSettings();
 
   //////////// Firebase Crashlytics ////////////
   FirebaseCrashlytics.instance

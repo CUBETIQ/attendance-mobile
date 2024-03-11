@@ -42,4 +42,5 @@ abstract class Routes {
   static const SCANQR = '/scanqr';
   static const THEME = '/theme';
   static const POINT = '/point';
+  static const NOTIFICATION = '/notification';
 }

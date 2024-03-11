@@ -18,8 +18,8 @@ import 'package:timesync/utils/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeStaffMobileView extends StatelessWidget {
-  const HomeStaffMobileView({super.key});
+class HomeStaffView extends StatelessWidget {
+  const HomeStaffView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +62,8 @@ class HomeStaffMobileView extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          bottom: 0,
-                          right: 2,
+                          bottom: SizeUtils.scale(0, size.width),
+                          right: SizeUtils.scale(2, size.width),
                           child: PopupMenuButton<String>(
                             onSelected: controller.onSelectStatus,
                             splashRadius: null,

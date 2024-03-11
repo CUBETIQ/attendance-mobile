@@ -21,7 +21,7 @@ class AttendanceProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.width * 0.25,
+      height: SizeUtils.scale(100, size.width),
       width: size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(

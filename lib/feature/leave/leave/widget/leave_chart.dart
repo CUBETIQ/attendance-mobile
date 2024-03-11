@@ -32,7 +32,6 @@ class LeaveChart extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width,
-      height: height ?? SizeUtils.scale(160, size.width),
       padding: EdgeInsets.symmetric(
         vertical: SizeUtils.scale(AppSize().paddingS5, size.width),
         horizontal: SizeUtils.scale(AppSize().paddingS8, size.width),
@@ -59,7 +58,7 @@ class LeaveChart extends StatelessWidget {
             animation: true,
             animationDuration: 500,
             radius: radius * (size.width / 360),
-            lineWidth: lineWidth ?? 12.0,
+            lineWidth: SizeUtils.scale(lineWidth ?? 12.0, size.width),
             percent: percent?.isNegative == true
                 ? 0.0
                 : (percent ?? 0) > 1

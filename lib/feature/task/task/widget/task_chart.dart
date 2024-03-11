@@ -34,7 +34,6 @@ class TaskChart extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width,
-      height: height ?? 210 * (size.width / 360),
       padding: EdgeInsets.symmetric(
         vertical: SizeUtils.scale(AppSize().paddingS8, size.width),
         horizontal: SizeUtils.scale(AppSize().paddingS8, size.width),
@@ -61,8 +60,8 @@ class TaskChart extends StatelessWidget {
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
-            radius: radius * (size.width / 360),
-            lineWidth: lineWidth ?? 20.0,
+            radius: SizeUtils.scale(radius, size.width),
+            lineWidth: SizeUtils.scale(lineWidth ?? 20.0, size.width),
             percent: percent?.isNegative == true
                 ? 0
                 : (percent ?? 0) > 1

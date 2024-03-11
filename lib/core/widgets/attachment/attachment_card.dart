@@ -135,7 +135,11 @@ class AttachmentCard extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: onTapIcon,
-            child: trailing ?? Icon(icon ?? Icons.delete_forever_rounded),
+            child: trailing ??
+                Icon(
+                  icon ?? Icons.delete_forever_rounded,
+                  size: SizeUtils.scale(22, size.width),
+                ),
           )
         ],
       ),

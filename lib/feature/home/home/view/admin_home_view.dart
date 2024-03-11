@@ -10,7 +10,7 @@ import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
-import 'package:timesync/feature/home/home/view/mobile/staff_home_view.dart';
+import 'package:timesync/feature/home/home/view/staff_home_view.dart';
 import 'package:timesync/feature/home/home/widget/button_card.dart';
 import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync/feature/home/home/widget/linear_indicator.dart';
@@ -22,8 +22,8 @@ import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeAdminMobileView extends StatelessWidget {
-  const HomeAdminMobileView({super.key});
+class HomeAdminView extends StatelessWidget {
+  const HomeAdminView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -283,7 +283,7 @@ class HomeAdminMobileView extends StatelessWidget {
                   ),
                 ),
               ),
-              const HomeStaffMobileView(),
+              const HomeStaffView(),
             ],
           ),
         ),

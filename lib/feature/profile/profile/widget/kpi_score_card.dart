@@ -35,7 +35,7 @@ class KpiScoreCard extends StatelessWidget {
               Icon(
                 Icons.star_rounded,
                 color: Theme.of(context).colorScheme.onPrimary,
-                size: size.width * 0.1,
+                size: SizeUtils.scale(30, size.width),
               ),
               SizedBox(width: SizeUtils.scale(10, size.width)),
               MyText(

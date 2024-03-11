@@ -17,16 +17,14 @@ class OptionButton extends StatelessWidget {
       onTap: option.onTap,
       child: Container(
         width: size.width,
-        height: size.width * 0.15,
+        height: SizeUtils.scale(55, size.width),
         padding: EdgeInsets.symmetric(
           horizontal: SizeUtils.scale(
             AppSize().paddingHorizontalLarge,
             MediaQuery.of(context).size.width,
           ),
         ),
-        margin: EdgeInsets.only(
-          bottom: AppSize().paddingS5,
-        ),
+        margin: EdgeInsets.only(bottom: SizeUtils.scale(10, size.width)),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             SizeUtils.scale(AppSize().borderRadiusLarge, size.width),

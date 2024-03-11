@@ -24,11 +24,11 @@ class ActivationView extends StatelessWidget {
             padding: EdgeInsets.only(
               left: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
-                MediaQuery.of(context).size.width,
+                size.width,
               ),
               right: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
-                MediaQuery.of(context).size.width,
+                size.width,
               ),
             ),
             child: Column(
@@ -67,15 +67,31 @@ class ActivationView extends StatelessWidget {
                   hintText: "Enter your activation code",
                   textController: controller.activationController,
                   inputFormatters: [UpperCaseTextFormatter()],
-                ),
-                SizedBox(height: SizeUtils.scale(40, size.width)),
-                MyAsyncButton(
-                  title: "Activate",
-                  onTap: controller.activation,
+                  iconSize: SizeUtils.scale(16, size.width),
                 ),
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          bottom: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+        ),
+        child: MyAsyncButton(
+          title: "Activate",
+          onTap: controller.activation,
         ),
       ),
     );

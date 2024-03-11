@@ -23,34 +23,35 @@ class MyTextFieldForm extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool? isPassword;
   final IconData? prefixIcon;
+  final double? iconSize;
   final int? maxlines;
   final bool? haveSuffixIcon;
   final void Function()? onTapShowPassword;
   final FocusNode? focusNode;
   final TextInputType? keyboardType;
 
-  const MyTextFieldForm({
-    super.key,
-    required this.label,
-    required this.textController,
-    this.filled = true,
-    this.borderRadius,
-    this.style,
-    this.errorStyle,
-    this.hintText,
-    this.hintStyle,
-    this.hasLabel = false,
-    this.labelStyle,
-    this.textCapitalization,
-    this.inputFormatters,
-    this.isPassword,
-    this.prefixIcon,
-    this.maxlines,
-    this.focusNode,
-    this.onTapShowPassword,
-    this.haveSuffixIcon,
-    this.keyboardType,
-  });
+  const MyTextFieldForm(
+      {super.key,
+      required this.label,
+      required this.textController,
+      this.filled = true,
+      this.borderRadius,
+      this.style,
+      this.errorStyle,
+      this.hintText,
+      this.hintStyle,
+      this.hasLabel = false,
+      this.labelStyle,
+      this.textCapitalization,
+      this.inputFormatters,
+      this.isPassword,
+      this.prefixIcon,
+      this.maxlines,
+      this.focusNode,
+      this.onTapShowPassword,
+      this.haveSuffixIcon,
+      this.keyboardType,
+      this.iconSize});
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +115,7 @@ class MyTextFieldForm extends StatelessWidget {
                       ? null
                       : Icon(
                           prefixIcon,
+                          size: iconSize,
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
                   suffixIcon: haveSuffixIcon == true

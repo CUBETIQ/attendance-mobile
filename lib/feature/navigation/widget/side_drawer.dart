@@ -1,15 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/navigation/model/drawer_model.dart';
+import 'package:timesync/types/role.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
-import 'package:timesync/types/role.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:get/get.dart';
 
 class SideDrawer extends StatelessWidget {
   final String? imageUrl;
@@ -63,32 +63,36 @@ class SideDrawer extends StatelessWidget {
                   ),
             ),
             SizedBox(height: SizeUtils.scale(10, size.height)),
-            ...List.generate(
-              drawerItems.length,
-              (index) => ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(
-                    horizontal: SizeUtils.scale(20, size.width)),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+            ListView.builder(
+              itemCount: drawerItems.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                      horizontal: SizeUtils.scale(20, size.width),
+                      vertical: SizeUtils.scale(5, size.width)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+                    ),
                   ),
-                ),
-                onTap: () {
-                  ZoomDrawer.of(context)?.close();
-                  drawerItems[index].onTap!();
-                },
-                leading: Icon(
-                  drawerItems[index].icon,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                title: MyText(
-                  text: drawerItems[index].title,
-                  style: AppFonts().bodyMediumMedium.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                ),
-              ),
+                  onTap: () {
+                    ZoomDrawer.of(context)?.close();
+                    drawerItems[index].onTap!();
+                  },
+                  leading: Icon(
+                    drawerItems[index].icon,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: MyText(
+                    text: drawerItems[index].title,
+                    style: AppFonts().bodyMediumMedium.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                  ),
+                );
+              },
             ),
             const Spacer(),
             Transform.translate(

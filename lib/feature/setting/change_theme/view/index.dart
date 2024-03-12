@@ -40,8 +40,8 @@ class ChangeThemeView extends StatelessWidget {
           child: Align(
             alignment: Alignment.topCenter,
             child: Wrap(
-              spacing: SizeUtils.scale(10, size.width),
-              runSpacing: SizeUtils.scale(10, size.width),
+              spacing: SizeUtils.scale(15, size.width),
+              runSpacing: SizeUtils.scale(15, size.width),
               children: [
                 ...List.generate(
                   controller.list.length,

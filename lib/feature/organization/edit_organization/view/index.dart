@@ -118,10 +118,13 @@ class EditOrganizationView extends StatelessWidget {
                 textController: controller.descriptionController,
                 maxlines: 5,
               ),
-              SizedBox(height: SizeUtils.scale(30, size.width)),
-              MyAsyncButton(
-                title: "Save",
-                onTap: controller.updateOrganization,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: SizeUtils.scale(30, size.width)),
+                child: MyAsyncButton(
+                  title: "Save",
+                  onTap: controller.updateOrganization,
+                ),
               ),
             ],
           ),

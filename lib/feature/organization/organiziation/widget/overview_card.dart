@@ -23,7 +23,6 @@ class OverViewCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(100, size.width),
       backgroundColor: Theme.of(context).colorScheme.primary,
       borderRadius: BorderRadius.circular(
         SizeUtils.scale(14, size.width),

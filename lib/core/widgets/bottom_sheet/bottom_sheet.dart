@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:isar/isar.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/svg.dart';
@@ -628,7 +627,6 @@ void getOptionsBottomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    ignoreSafeArea: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(50 * (size.width / 375.0)),

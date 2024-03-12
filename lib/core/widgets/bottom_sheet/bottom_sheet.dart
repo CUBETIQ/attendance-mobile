@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:isar/isar.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/svg.dart';
@@ -627,6 +628,7 @@ void getOptionsBottomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
+    ignoreSafeArea: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(50 * (size.width / 375.0)),
@@ -634,55 +636,67 @@ void getOptionsBottomSheet(
       ),
     ),
     isDismissible: isDismissible ?? true,
-    Container(
-      width: size.width,
-      height: SizeUtils.scale(430, size.width),
-      color: Theme.of(context).colorScheme.surface,
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: SizeUtils.scale(
-            AppSize().paddingHorizontalLarge,
-            size.width,
-          ),
-          right: SizeUtils.scale(
-            AppSize().paddingHorizontalLarge,
-            size.width,
-          ),
-          top: SizeUtils.scale(AppSize().paddingTitleSmall, size.width),
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              width: SizeUtils.scale(200, size.width),
-              height: SizeUtils.scale(140, size.width),
-              child: SvgPicture.asset(
-                image,
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          color: Theme.of(context).colorScheme.surface,
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: SizeUtils.scale(
+                AppSize().paddingHorizontalLarge,
+                size.width,
               ),
+              right: SizeUtils.scale(
+                AppSize().paddingHorizontalLarge,
+                size.width,
+              ),
+              top: SizeUtils.scale(AppSize().paddingTitleSmall, size.width),
             ),
-            SizedBox(height: SizeUtils.scale(40, size.width)),
-            MyButton(
-              isIconButton: true,
-              icon: Icons.key_rounded,
-              title: "Change Password",
-              onTap: onTapChangePassword,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: SizeUtils.scale(200, size.width),
+                  height: SizeUtils.scale(140, size.width),
+                  child: SvgPicture.asset(
+                    image,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: SizeUtils.scale(40, size.width)),
+                  child: Column(
+                    children: [
+                      MyButton(
+                        isIconButton: true,
+                        icon: Icons.key_rounded,
+                        title: "Change Password",
+                        onTap: onTapChangePassword,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeUtils.scale(10, size.width)),
+                        child: MyButton(
+                          isIconButton: true,
+                          icon: Icons.edit_rounded,
+                          title: "Edit",
+                          onTap: onTapEdit,
+                        ),
+                      ),
+                      MyButton(
+                        isIconButton: true,
+                        icon: Icons.delete_rounded,
+                        title: "Delete",
+                        onTap: onTapDelete,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
-            MyButton(
-              isIconButton: true,
-              icon: Icons.edit_rounded,
-              title: "Edit",
-              onTap: onTapEdit,
-            ),
-            SizedBox(height: SizeUtils.scale(10, size.width)),
-            MyButton(
-              isIconButton: true,
-              icon: Icons.delete_rounded,
-              title: "Delete",
-              onTap: onTapDelete,
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     ),
   );
 }

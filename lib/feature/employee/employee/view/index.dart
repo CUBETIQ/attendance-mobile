@@ -52,24 +52,41 @@ class StaffView extends StatelessWidget {
                     style: AppFonts().bodyLargeMedium,
                   ),
                   SizedBox(height: AppSize().paddingS8),
-                  SearchBar(
-                    hintText: "Search Employee",
-                    elevation: MaterialStateProperty.all<double>(0.8),
-                    onSubmitted: controller.searchStaff,
-                    constraints: BoxConstraints.loose(size),
-                    leading: IconButton(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onPressed: () {},
-                      icon: const Icon(Icons.search_rounded),
-                    ),
-                    trailing: [
-                      IconButton(
-                        onPressed: controller.clearSearch,
-                        icon: const Icon(Icons.cancel_rounded),
+                  SizedBox(
+                    height: SizeUtils.scale(50, size.width),
+                    child: SearchBar(
+                      hintText: "Search Employee",
+                      elevation: MaterialStateProperty.all<double>(0.8),
+                      onSubmitted: controller.searchStaff,
+                      constraints: BoxConstraints.loose(size),
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        AppFonts().bodyMediumMedium.copyWith(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
                       ),
-                    ],
-                    controller: controller.searchController,
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.symmetric(
+                          horizontal: SizeUtils.scale(
+                            AppSize().paddingS5,
+                            size.width,
+                          ),
+                        ),
+                      ),
+                      leading: IconButton(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onPressed: () {},
+                        icon: const Icon(Icons.search_rounded),
+                        iconSize: SizeUtils.scale(20, size.width),
+                      ),
+                      trailing: [
+                        IconButton(
+                          onPressed: controller.clearSearch,
+                          icon: const Icon(Icons.cancel_rounded),
+                        ),
+                      ],
+                      controller: controller.searchController,
+                    ),
                   ),
                   SizedBox(height: AppSize().paddingS8),
                   Obx(

@@ -35,92 +35,93 @@ class SideDrawer extends StatelessWidget {
           left: SizeUtils.scale(20, size.width),
           top: SizeUtils.scale(40, size.height),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            MyCacheImage(
-              imageUrl: imageUrl ?? "",
-              width: SizeUtils.scale(100, size.width),
-              height: SizeUtils.scale(100, size.width),
-              imageHeight: SizeUtils.scale(100, size.width),
-              imageWidth: SizeUtils.scale(100, size.width),
-            ),
-            SizedBox(height: SizeUtils.scale(5, size.height)),
-            MyText(
-              text: StringUtil.getfullname(
-                user.firstName,
-                user.lastName,
-                user.username,
-              ),
-              style: AppFonts().bodyLarge.copyWith(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-            ),
-            MyText(
-              text: (user.role ?? Role.admin).capitalizeFirst,
-              style: AppFonts().bodyMediumRegular.copyWith(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-            ),
-            SizedBox(height: SizeUtils.scale(10, size.height)),
-            ListView.builder(
-              itemCount: drawerItems.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(20, size.width),
-                      vertical: SizeUtils.scale(5, size.width)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
-                    ),
-                  ),
-                  onTap: () {
-                    ZoomDrawer.of(context)?.close();
-                    drawerItems[index].onTap!();
-                  },
-                  leading: Icon(
-                    drawerItems[index].icon,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  title: MyText(
-                    text: drawerItems[index].title,
-                    style: AppFonts().bodyMediumMedium.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                  ),
-                );
-              },
-            ),
-            const Spacer(),
-            Transform.translate(
-              offset: Offset(SizeUtils.scale(70, size.width), 0),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  bottom: SizeUtils.scale(20, size.height),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MyCacheImage(
+                  imageUrl: imageUrl ?? "",
+                  width: SizeUtils.scale(100, size.width),
+                  height: SizeUtils.scale(100, size.width),
+                  imageHeight: SizeUtils.scale(100, size.width),
+                  imageWidth: SizeUtils.scale(100, size.width),
                 ),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.copyright_rounded,
+                SizedBox(height: SizeUtils.scale(5, size.height)),
+                MyText(
+                  text: StringUtil.getfullname(
+                    user.firstName,
+                    user.lastName,
+                    user.username,
+                  ),
+                  style: AppFonts().bodyLarge.copyWith(
                         color: Theme.of(context).colorScheme.secondary,
-                        size: SizeUtils.scale(24, size.width),
                       ),
-                      SizedBox(width: SizeUtils.scale(3, size.width)),
-                      MyText(
-                        text: "TimeSync 360 V1.0.0",
+                ),
+                MyText(
+                  text: (user.role ?? Role.admin).capitalizeFirst,
+                  style: AppFonts().bodyMediumRegular.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                ),
+                SizedBox(height: SizeUtils.scale(10, size.height)),
+                ListView.builder(
+                  itemCount: drawerItems.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: SizeUtils.scale(20, size.width),
+                          vertical: SizeUtils.scale(5, size.width)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          SizeUtils.scale(
+                              AppSize().borderRadiusLarge, size.width),
+                        ),
+                      ),
+                      onTap: () {
+                        ZoomDrawer.of(context)?.close();
+                        drawerItems[index].onTap!();
+                      },
+                      leading: Icon(
+                        drawerItems[index].icon,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      title: MyText(
+                        text: drawerItems[index].title,
                         style: AppFonts().bodyMediumMedium.copyWith(
                               color: Theme.of(context).colorScheme.secondary,
                             ),
                       ),
-                    ],
-                  ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            Transform.translate(
+              offset:
+                  Offset(SizeUtils.scale(size.width / 5.5, size.width), -25),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.copyright_rounded,
+                      color: Theme.of(context).colorScheme.secondary,
+                      size: SizeUtils.scale(24, size.width),
+                    ),
+                    SizedBox(width: SizeUtils.scale(3, size.width)),
+                    MyText(
+                      text: "TimeSync 360 V1.0.0",
+                      style: AppFonts().bodyMediumMedium.copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                    ),
+                  ],
                 ),
               ),
             )

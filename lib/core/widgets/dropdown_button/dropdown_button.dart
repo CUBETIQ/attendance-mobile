@@ -193,7 +193,8 @@ class MyDropDownButton<T> extends StatelessWidget {
                       color: dropDownBackgroundColor ??
                           Theme.of(context).colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(
-                        AppSize().borderRadiusLarge * (size.width / 375.0),
+                        SizeUtils.scale(
+                            (AppSize().borderRadiusLarge), size.width),
                       ),
                     ),
                 elevation: dropdownElevation ?? 2,

@@ -13,8 +13,6 @@ import 'package:timesync/utils/size_util.dart';
 
 class AddCategoryView extends StatelessWidget {
   const AddCategoryView({super.key});
-  
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +41,14 @@ class AddCategoryView extends StatelessWidget {
               Obx(
                 () => RoundedIconPicker(
                   hasOpacity: true,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   onTap: () => controller.onTapImage(context),
                   haslabel: false,
                   color: controller.color.value,
                   icon: controller.stringIcon.value,
                   width: SizeUtils.scale(100, size.width),
                   height: SizeUtils.scale(100, size.width),
-                  iconSize: SizeUtils.scale(40, size.width),
+                  iconSize: 50,
                 ),
               ),
               SizedBox(height: SizeUtils.scale(30, size.width)),

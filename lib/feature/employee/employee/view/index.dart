@@ -83,6 +83,7 @@ class StaffView extends StatelessWidget {
                         IconButton(
                           onPressed: controller.clearSearch,
                           icon: const Icon(Icons.cancel_rounded),
+                          iconSize: SizeUtils.scale(20, size.width),
                         ),
                       ],
                       controller: controller.searchController,

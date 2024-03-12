@@ -69,6 +69,7 @@ class SideDrawer extends StatelessWidget {
                 ListView.builder(
                   itemCount: drawerItems.length,
                   shrinkWrap: true,
+                  padding: EdgeInsets.zero,
                   itemBuilder: (context, index) {
                     return ListTile(
                       dense: true,

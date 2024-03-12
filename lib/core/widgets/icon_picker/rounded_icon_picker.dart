@@ -18,6 +18,7 @@ class RoundedIconPicker extends StatelessWidget {
   final bool? hasOpacity;
   final Color? iconColor;
   final String? label;
+  final MainAxisAlignment? mainAxisAlignment;
 
   const RoundedIconPicker(
       {super.key,
@@ -31,7 +32,8 @@ class RoundedIconPicker extends StatelessWidget {
       this.hasOpacity = false,
       this.iconColor,
       this.baseColor,
-      this.label});
+      this.label,
+      this.mainAxisAlignment});
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +41,14 @@ class RoundedIconPicker extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Row(
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
         children: [
           Padding(
             padding: EdgeInsets.only(
                 right: haslabel == true ? AppSize().paddingS5 : 0),
             child: Container(
-              width: SizeUtils.scale(55, size.width),
-              height: SizeUtils.scale(55, size.width),
+              width: width ?? SizeUtils.scale(55, size.width),
+              height: height ?? SizeUtils.scale(55, size.width),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: baseColor ??

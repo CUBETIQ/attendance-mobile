@@ -36,8 +36,8 @@ class LeaveRequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin:
-          EdgeInsets.only(bottom: AppSize().paddingS4 * (size.width / 375.0)),
+      margin: EdgeInsets.only(
+          bottom: SizeUtils.scale(AppSize().paddingS4, size.width)),
       padding: EdgeInsets.symmetric(
         horizontal:
             SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
@@ -82,12 +82,12 @@ class LeaveRequestCard extends StatelessWidget {
                 ],
               ),
               Container(
-                height: 20 * (size.width / 375.0),
-                width: 80 * (size.width / 375.0),
+                height: SizeUtils.scale(20, size.width),
+                width: SizeUtils.scale(90, size.width),
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(
-                  horizontal:
-                      AppSize().paddingHorizontalSmall * (size.width / 375.0),
+                  horizontal: SizeUtils.scale(
+                      AppSize().paddingHorizontalSmall, size.width),
                 ),
                 decoration: BoxDecoration(
                   color: leave.status == LeaveStatus.pending
@@ -109,7 +109,7 @@ class LeaveRequestCard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 10 * (size.width / 375.0),
+            height: SizeUtils.scale(10, size.width),
           ),
           Row(
             children: [

@@ -16,11 +16,11 @@ class MarkerDot extends StatelessWidget {
       itemBuilder: (context, index) {
         return Container(
           margin: EdgeInsets.only(
-            top: SizeUtils.scale(30, size.width),
+            top: SizeUtils.scale(24, size.width),
           ),
           child: Container(
-            height: SizeUtils.scale(8, size.width),
-            width: SizeUtils.scale(8, size.width),
+            height: SizeUtils.scale(7, size.width),
+            width: SizeUtils.scale(7, size.width),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: events[index] == 'Present'

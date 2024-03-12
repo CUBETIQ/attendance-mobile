@@ -108,12 +108,14 @@ class MyDatePickerField extends StatelessWidget {
                 focusedBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                   ),
                   borderSide: BorderSide(
@@ -125,12 +127,14 @@ class MyDatePickerField extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                   ),
                   borderSide: BorderSide(
@@ -142,12 +146,14 @@ class MyDatePickerField extends StatelessWidget {
                 errorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                   ),
                   borderSide: BorderSide(
@@ -157,12 +163,14 @@ class MyDatePickerField extends StatelessWidget {
                 focusedErrorBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                     topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                      SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width),
                     ),
                   ),
                   borderSide: BorderSide(

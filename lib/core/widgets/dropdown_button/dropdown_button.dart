@@ -98,7 +98,7 @@ class MyDropDownButton<T> extends StatelessWidget {
         SizedBox(
           width: width ?? double.infinity,
           height: height ??
-              SizeUtils.scale(size.width < 600 ? 47.7 : 51, size.width),
+              SizeUtils.scale(size.width < 600 ? 47.7 : 50, size.width),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.
@@ -135,20 +135,20 @@ class MyDropDownButton<T> extends StatelessWidget {
                       borderRadius: isRoundedCorner == true
                           ? BorderRadius.circular(
                               SizeUtils.scale(
-                                  (borderRadius ?? AppSize().borderRadiusLarge),
+                                  (borderRadius ?? AppSize().borderRadiusSmall),
                                   size.width),
                             )
                           : BorderRadius.only(
                               topLeft: Radius.circular(
                                 SizeUtils.scale(
                                     (borderRadius ??
-                                        AppSize().borderRadiusLarge),
+                                        AppSize().borderRadiusSmall),
                                     size.width),
                               ),
                               topRight: Radius.circular(
                                 SizeUtils.scale(
                                     (borderRadius ??
-                                        AppSize().borderRadiusLarge),
+                                        AppSize().borderRadiusSmall),
                                     size.width),
                               ),
                             ),

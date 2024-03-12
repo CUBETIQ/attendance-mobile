@@ -24,11 +24,11 @@ class SmallButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SizeUtils.scale(30, size.width),
+        height: SizeUtils.scale(35, size.width),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize().borderRadiusMedium * (size.width / 375.0),
+            SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
           ),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),

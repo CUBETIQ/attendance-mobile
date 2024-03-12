@@ -5,6 +5,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/types/attendance_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class StatusCard extends StatelessWidget {
   final String? status;
@@ -31,7 +32,7 @@ class StatusCard extends StatelessWidget {
         : isBreakTime == false
             ? const SizedBox.shrink()
             : Container(
-                height: size.width * 0.045,
+                height: SizeUtils.scale(25, size.width),
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(
                   horizontal: AppSize().paddingS7,

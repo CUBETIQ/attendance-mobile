@@ -7,7 +7,7 @@ import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/home/home/widget/tab_bar.dart';
 import 'package:timesync/feature/report/controller/index.dart';
-import 'package:timesync/feature/report/view/mobile/staff_report_view.dart';
+import 'package:timesync/feature/report/view/staff_report_view.dart';
 import 'package:timesync/feature/report/widget/employee_attendance_report_card.dart';
 import 'package:timesync/feature/report/widget/employee_leave_report_card.dart';
 import 'package:timesync/feature/report/widget/employee_task_report_card.dart';

@@ -65,7 +65,7 @@ class LeaveView extends StatelessWidget {
                       child: Obx(
                         () => LeaveChart(
                           title: "Pending",
-                          radius: 38,
+                          radius: size.width < 600 ? 40 : 60,
                           centerText:
                               "${(controller.percentagePendingLeave.value * 100).toStringAsFixed(controller.percentagePendingLeave.value == 0 ? 0 : 2)}%",
                           percent: controller.percentagePendingLeave.value,
@@ -79,7 +79,7 @@ class LeaveView extends StatelessWidget {
                       child: Obx(
                         () => LeaveChart(
                           title: "Approved",
-                          radius: 38,
+                          radius: size.width < 600 ? 40 : 60,
                           centerText:
                               "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(controller.percentageApprovedLeave.value == 0 ? 0 : 2)}%",
                           percent: controller.percentageApprovedLeave.value,
@@ -93,7 +93,7 @@ class LeaveView extends StatelessWidget {
                       child: Obx(
                         () => LeaveChart(
                           title: "Rejected",
-                          radius: 38,
+                          radius: size.width < 600 ? 40 : 60,
                           centerText:
                               "${(controller.percentageDeclinedLeave.value * 100).toStringAsFixed(controller.percentageDeclinedLeave.value == 0 ? 0 : 2)}%",
                           percent: controller.percentageDeclinedLeave.value,

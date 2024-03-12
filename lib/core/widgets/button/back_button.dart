@@ -10,9 +10,11 @@ class MyBackButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => Get.back(closeOverlays: true),
-      child: Icon(Icons.arrow_back_ios_rounded,
-          color: Theme.of(context).colorScheme.onBackground,
-          size: SizeUtils.scale(20, size.width)),
+      child: Icon(
+        Icons.arrow_back_ios_rounded,
+        color: Theme.of(context).colorScheme.onBackground,
+        size: SizeUtils.scale(18, size.width),
+      ),
     );
   }
 }

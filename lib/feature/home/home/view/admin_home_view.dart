@@ -159,6 +159,7 @@ class HomeAdminView extends StatelessWidget {
                                   horizontal: SizeUtils.scale(10, size.width),
                                   vertical: SizeUtils.scale(10, size.width),
                                 ),
+                                borderRadius: SizeUtils.scale(24, size.width),
                                 label: "Type",
                                 hasLabel: false,
                                 value: controller.selectedAttendanceType.value,

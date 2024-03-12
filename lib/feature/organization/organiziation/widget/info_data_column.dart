@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/utils/size_util.dart';
-import 'package:flutter/material.dart';
 
 class InfoDataColumn extends StatelessWidget {
   const InfoDataColumn({
@@ -22,6 +22,7 @@ class InfoDataColumn extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
       children: [
         Row(
           children: [
@@ -45,14 +46,10 @@ class InfoDataColumn extends StatelessWidget {
           padding: EdgeInsets.only(
             left: SizeUtils.scale(20, size.width),
           ),
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: SizeUtils.scale(270, size.width),
-            ),
-            child: MyText(
-              text: value,
-              maxLines: 10,
-            ),
+          child: MyText(
+            text: value,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 10,
           ),
         ),
       ],

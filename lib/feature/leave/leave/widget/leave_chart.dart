@@ -57,7 +57,7 @@ class LeaveChart extends StatelessWidget {
           CircularPercentIndicator(
             animation: true,
             animationDuration: 500,
-            radius: radius * (size.width / 360),
+            radius: SizeUtils.scale(radius, size.width),
             lineWidth: SizeUtils.scale(lineWidth ?? 12.0, size.width),
             percent: percent?.isNegative == true
                 ? 0.0

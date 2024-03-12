@@ -1,15 +1,65 @@
-import 'package:timesync/core/widgets/layout_builder/responsive_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync/feature/category/category_detail/view/mobile/index.dart';
-import 'package:timesync/feature/category/category_detail/view/tablet/index.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/card/label_description_card.dart';
+import 'package:timesync/core/widgets/card/label_detail_card.dart';
+import 'package:timesync/core/widgets/text/app_bar_title.dart';
+import 'package:timesync/feature/category/category_detail/controller/index.dart';
+import 'package:timesync/feature/category/category_detail/widget/icon_card.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class CategoryDetailView extends StatelessWidget {
   const CategoryDetailView({super.key});
-  @override
+ @override
   Widget build(BuildContext context) {
-    return const ResponsiveLayout(
-      tablet: CategoryDetailViewTablet(),
-      mobile: CategoryDetailViewMobile(),
+    final controller = CategoryDetailController.to;
+    return Scaffold(
+      appBar: AppBar(
+        title: const MyAppBarTitle(
+          title: "Category Detail",
+        ),
+        centerTitle: true,
+        leading: const MyBackButton(),
+        automaticallyImplyLeading: false,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeUtils.scale(
+              AppSize().paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
+          ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: SizeUtils.scale(30, MediaQuery.of(context).size.width),
+              ),
+              IconCard(
+                icon: controller.categories.value.icon,
+                bgColor: controller.categories.value.color,
+                width: SizeUtils.scale(100, MediaQuery.of(context).size.width),
+                height: SizeUtils.scale(100, MediaQuery.of(context).size.width),
+              ),
+              SizedBox(
+                height: SizeUtils.scale(30, MediaQuery.of(context).size.width),
+              ),
+              LabelDetailCard(
+                title: "Name",
+                value: controller.categories.value.name,
+              ),
+              LabelDetailCard(
+                title: "Type",
+                value: controller.categories.value.type,
+              ),
+              LabelDescriptionCard(
+                title: "Description",
+                value: controller.categories.value.description,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

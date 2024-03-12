@@ -67,8 +67,10 @@ class ProfileView extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      ProfielImage(
-                        imageUrl: controller.user.value.image,
+                      Obx(
+                        () => ProfielImage(
+                          imageUrl: controller.user.value.image,
+                        ),
                       ),
                       SizedBox(height: size.height * 0.01),
                       Container(

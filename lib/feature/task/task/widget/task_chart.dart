@@ -61,7 +61,7 @@ class TaskChart extends StatelessWidget {
             animation: true,
             animationDuration: 500,
             radius: SizeUtils.scale(radius, size.width),
-            lineWidth: SizeUtils.scale(lineWidth ?? 20.0, size.width),
+            lineWidth: SizeUtils.scale(lineWidth ?? 15, size.width),
             percent: percent?.isNegative == true
                 ? 0
                 : (percent ?? 0) > 1

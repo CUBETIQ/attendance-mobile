@@ -101,8 +101,8 @@ class RecordDataCard extends StatelessWidget {
           ],
         ),
         Container(
-          width: size.width * 0.40,
-          height: size.width * 0.15,
+          width: SizeUtils.scale(160, size.width),
+          height: SizeUtils.scale(75, size.width),
           padding: EdgeInsets.symmetric(
             horizontal: AppSize().paddingHorizontalMedium,
           ),

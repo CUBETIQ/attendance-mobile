@@ -44,14 +44,14 @@ class AttendancePieChartCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: cardWidth ?? size.width,
-      height: cardHeight ?? SizeUtils.scale(155, size.width),
+      height: cardHeight ?? SizeUtils.scale(150, size.width),
       child: Row(
         children: [
           GestureDetector(
             onTap: onTap,
             child: Container(
-              width: cardWidth ?? SizeUtils.scale(150, size.width),
-              height: cardHeight ?? SizeUtils.scale(150, size.width),
+              width: cardWidth ?? SizeUtils.scale(140, size.width),
+              height: cardHeight ?? SizeUtils.scale(140, size.width),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.background,
@@ -132,19 +132,19 @@ class AttendancePieChartCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MyText(text: "Summary", style: AppFonts().bodyLargeMedium),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scale(8, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.successColor,
                 title: "Present: ",
                 value: totalPresent,
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scale(8, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.pendingColor,
                 title: "Leave: ",
                 value: totalOnLeave,
               ),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              SizedBox(height: SizeUtils.scale(8, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.errorColor,
                 title: "Absent: ",

@@ -2,6 +2,7 @@ import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class RoundedColorPicker extends StatelessWidget {
   final void Function()? onTap;
@@ -28,8 +29,8 @@ class RoundedColorPicker extends StatelessWidget {
             padding: EdgeInsets.only(
                 right: haslabel == true ? AppSize().paddingS5 : 0),
             child: Container(
-              width: 55 * (size.width / 375.0),
-              height: 55 * (size.width / 375.0),
+              width: SizeUtils.scale(55, size.width),
+              height: SizeUtils.scale(55, size.width),
               decoration: BoxDecoration(
                 color: color ?? Theme.of(context).colorScheme.primary,
                 shape: BoxShape.circle,

@@ -57,9 +57,16 @@ class ThemeSwitchButton extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Switch(
-                value: value,
-                onChanged: onChanged,
+              SizedBox(
+                width: SizeUtils.scale(55, size.width),
+                height: SizeUtils.scale(40, size.width),
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Switch(
+                    value: value,
+                    onChanged: onChanged,
+                  ),
+                ),
               ),
             ],
           ),

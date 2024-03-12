@@ -32,12 +32,15 @@ class SupportButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? double.infinity,
-        height: height ?? 48 * (size.width / 375.0),
         margin: margin,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
           horizontal: SizeUtils.scale(
             AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          vertical: SizeUtils.scale(
+            AppSize().paddingS10,
             size.width,
           ),
         ),
@@ -55,6 +58,10 @@ class SupportButton extends StatelessWidget {
                 Icon(
                   buttonModel.leadingIcon,
                   color: Theme.of(context).colorScheme.onPrimary,
+                  size: SizeUtils.scale(
+                    AppSize().iconSizeLarge,
+                    size.width,
+                  ),
                 ),
                 SizedBox(
                   width: SizeUtils.scale(
@@ -73,6 +80,10 @@ class SupportButton extends StatelessWidget {
             Icon(
               buttonModel.trailingIcon,
               color: Theme.of(context).colorScheme.onPrimary,
+              size: SizeUtils.scale(
+                AppSize().iconSizeLarge,
+                size.width,
+              ),
             )
           ],
         ),

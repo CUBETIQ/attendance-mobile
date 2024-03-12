@@ -27,17 +27,15 @@ class ToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: size.width,
       height: SizeUtils.scale(50, size.width),
       child: AnimatedToggleSwitch<int>.size(
         textDirection: TextDirection.rtl,
         current: currentIndex,
         values: values,
-        indicatorSize: const Size.fromWidth(100),
+        indicatorSize: Size.fromWidth(SizeUtils.scale(200, size.width)),
         selectedIconScale: 1,
         indicatorAppearingBuilder: (context, value, indicator) {
           return Container(
-            width: SizeUtils.scale(300, size.width),
             height: SizeUtils.scale(50, size.width),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,

@@ -69,7 +69,7 @@ class TaskView extends StatelessWidget {
                         () => TaskChart(
                           title: "Pending",
                           size: size,
-                          radius: 60,
+                          radius: size.width < 600 ? 60 : 65,
                           centerWidget: MyText(
                             text:
                                 "${(controller.percentageUncompletedTask.value * 100).toStringAsFixed(2)}%",
@@ -87,7 +87,7 @@ class TaskView extends StatelessWidget {
                         () => TaskChart(
                           title: "Completed",
                           size: size,
-                          radius: 60,
+                          radius: size.width < 600 ? 60 : 65,
                           centerWidget: MyText(
                             text:
                                 "${(controller.percentageCompletedTask.value * 100).toStringAsFixed(2)}%",

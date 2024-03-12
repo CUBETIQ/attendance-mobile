@@ -3,6 +3,7 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/utils/color_utils.dart';
+import 'package:timesync/utils/size_util.dart';
 import '../text/text.dart';
 
 class RoundedIconPicker extends StatelessWidget {
@@ -17,6 +18,7 @@ class RoundedIconPicker extends StatelessWidget {
   final bool? hasOpacity;
   final Color? iconColor;
   final String? label;
+  final MainAxisAlignment? mainAxisAlignment;
 
   const RoundedIconPicker(
       {super.key,
@@ -30,7 +32,8 @@ class RoundedIconPicker extends StatelessWidget {
       this.hasOpacity = false,
       this.iconColor,
       this.baseColor,
-      this.label});
+      this.label,
+      this.mainAxisAlignment});
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +41,14 @@ class RoundedIconPicker extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Row(
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
         children: [
           Padding(
             padding: EdgeInsets.only(
                 right: haslabel == true ? AppSize().paddingS5 : 0),
             child: Container(
-              width: width ?? 55 * (size.width / 375.0),
-              height: height ?? 55 * (size.width / 375.0),
+              width: width ?? SizeUtils.scale(55, size.width),
+              height: height ?? SizeUtils.scale(55, size.width),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: baseColor ??
@@ -69,7 +73,7 @@ class RoundedIconPicker extends StatelessWidget {
                       color ?? Theme.of(context).colorScheme.primary,
                       20,
                     ),
-                size: iconSize ?? 26 * (size.width / 375.0),
+                size: SizeUtils.scale(iconSize ?? 26, size.width),
               ),
             ),
           ),

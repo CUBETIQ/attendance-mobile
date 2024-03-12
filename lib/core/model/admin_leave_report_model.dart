@@ -1,4 +1,5 @@
 import 'package:timesync/core/repositories/base_model.dart';
+import 'package:timesync/extensions/string.dart';
 
 class AdminLeaveReportModel extends BaseModel<AdminLeaveReportModel> {
   final String? username;
@@ -89,6 +90,12 @@ class LeaveReportModel extends BaseModel<LeaveReportModel> {
     if (json == null) {
       return LeaveReportModel();
     }
+    double? durations;
+    if (json["duration"] is int) {
+      durations = json["duration"].toString().toDouble();
+    } else {
+      durations = json["duration"];
+    }
     return LeaveReportModel(
       type: json['type'],
       reason: json['reason'],
@@ -96,7 +103,7 @@ class LeaveReportModel extends BaseModel<LeaveReportModel> {
       to: json['to'],
       status: json['status'],
       durationType: json['durationType'],
-      duration: json['duration'],
+      duration: durations,
     );
   }
 

@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
@@ -8,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class MyTimePickerField extends StatelessWidget {
   final String label;
@@ -93,8 +92,8 @@ class MyTimePickerField extends StatelessWidget {
               inputFormatters: inputFormatters,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  horizontal: (AppSize().paddingS17) * (size.width / 375.0),
-                  vertical: (AppSize().paddingS7) * (size.width / 375.0),
+                  horizontal: SizeUtils.scale(AppSize().paddingS17, size.width),
+                  vertical: SizeUtils.scale(AppSize().paddingS7, size.width),
                 ),
                 hintText: hintText,
                 hintStyle: hintStyle ?? AppFonts().bodyMediumMedium,

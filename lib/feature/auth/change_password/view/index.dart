@@ -87,7 +87,7 @@ class ChangePasswordView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: SizeUtils.scale(10, size.height),
+                height: SizeUtils.scale(30, size.height),
               ),
               MyAsyncButton(
                 onTap: controller.isChangeStaffPass.value == true

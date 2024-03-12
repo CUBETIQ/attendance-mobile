@@ -30,9 +30,9 @@ class LeaveCard extends StatelessWidget {
     return GestureDetector(
       onTap: leave.status != LeaveStatus.pending ? null : onTap,
       child: Container(
-        height: SizeUtils.scale(170, size.width),
-        margin:
-            EdgeInsets.only(bottom: AppSize().paddingS8 * (size.width / 375.0)),
+        height: SizeUtils.scale(175, size.width),
+        margin: EdgeInsets.only(
+            bottom: SizeUtils.scale(AppSize().paddingS8, size.width)),
         padding: EdgeInsets.symmetric(
           horizontal:
               SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
@@ -41,7 +41,7 @@ class LeaveCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize().borderRadiusMedium * (size.width / 375.0),
+            SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
           ),
           color: Theme.of(context).colorScheme.background,
           boxShadow: [
@@ -85,7 +85,7 @@ class LeaveCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: SizeUtils.scale(10, size.width),
+                  height: SizeUtils.scale(8, size.width),
                 ),
                 MyText(
                   text:
@@ -129,9 +129,6 @@ class LeaveCard extends StatelessWidget {
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: Theme.of(context).colorScheme.outline,
                           ),
-                    ),
-                    SizedBox(
-                      height: SizeUtils.scale(5, size.width),
                     ),
                     Container(
                       constraints: BoxConstraints(

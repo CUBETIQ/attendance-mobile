@@ -139,9 +139,9 @@ class HomeStaffView extends StatelessWidget {
               SizedBox(height: size.height * 0.02),
               MyCard(
                 width: double.infinity,
-                height: size.height * 0.12,
+                height: SizeUtils.scale(90, size.width),
                 padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.018,
+                  vertical: SizeUtils.scale(10, size.width),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

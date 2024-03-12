@@ -7,6 +7,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class AttendanceCard extends StatelessWidget {
   final bool? isCheckedIn;
@@ -41,10 +42,10 @@ class AttendanceCard extends StatelessWidget {
     return Obx(
       () => Container(
         width: width ?? double.infinity,
-        height: height ?? size.height * 0.30,
+        height: height ?? SizeUtils.scale(280, size.width),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            AppSize().borderRadiusLarge * (size.width / 375.0),
+            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
           ),
           color: Theme.of(context).colorScheme.surface,
           boxShadow: [
@@ -67,7 +68,7 @@ class AttendanceCard extends StatelessWidget {
               text: currentDate,
               style: AppFonts().bodyMediumRegular,
             ),
-            SizedBox(height: size.height * 0.01),
+            SizedBox(height: SizeUtils.scale(20, size.width)),
             GestureDetector(
               onTap: isDisableButton.value == true
                   ? null
@@ -98,8 +99,8 @@ class AttendanceCard extends StatelessWidget {
                 scale: scale,
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  width: buttonSize ?? size.height * 0.16,
-                  height: buttonSize ?? size.height * 0.16,
+                  width: buttonSize ?? SizeUtils.scale(130, size.width),
+                  height: buttonSize ?? SizeUtils.scale(130, size.width),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     boxShadow: [

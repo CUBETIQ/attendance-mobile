@@ -134,17 +134,22 @@ class MyDropDownButton<T> extends StatelessWidget {
                               .withOpacity(0.095),
                       borderRadius: isRoundedCorner == true
                           ? BorderRadius.circular(
-                              (borderRadius ?? AppSize().borderRadiusLarge) *
-                                  (size.width / 375.0),
+                              SizeUtils.scale(
+                                  (borderRadius ?? AppSize().borderRadiusLarge),
+                                  size.width),
                             )
                           : BorderRadius.only(
                               topLeft: Radius.circular(
-                                (borderRadius ?? AppSize().borderRadiusSmall) *
-                                    (size.width / 375.0),
+                                SizeUtils.scale(
+                                    (borderRadius ??
+                                        AppSize().borderRadiusLarge),
+                                    size.width),
                               ),
                               topRight: Radius.circular(
-                                (borderRadius ?? AppSize().borderRadiusSmall) *
-                                    (size.width / 375.0),
+                                SizeUtils.scale(
+                                    (borderRadius ??
+                                        AppSize().borderRadiusLarge),
+                                    size.width),
                               ),
                             ),
                       border: Border(

@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class MyCacheImageOrganization extends StatelessWidget {
   final String? imageUrl;
@@ -24,11 +25,12 @@ class MyCacheImageOrganization extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return imageUrl != "" && imageUrl != null
         ? imageUrl?.startsWith('assets') == true
             ? Container(
-                width: width ?? 55,
-                height: height ?? 55,
+                width: SizeUtils.scale(width ?? 55, size.width),
+                height: SizeUtils.scale(height ?? 55, size.width),
                 clipBehavior: Clip.antiAlias,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -39,8 +41,9 @@ class MyCacheImageOrganization extends StatelessWidget {
                       .withOpacity(0.5),
                 ),
                 child: SizedBox(
-                  width: imageWidth ?? width ?? 55,
-                  height: imageHeight ?? height ?? 55,
+                  width: SizeUtils.scale(imageWidth ?? width ?? 55, size.width),
+                  height:
+                      SizeUtils.scale(imageHeight ?? height ?? 55, size.width),
                   child: Image.asset(
                     imageUrl ?? "",
                   ),
@@ -49,8 +52,8 @@ class MyCacheImageOrganization extends StatelessWidget {
             : CachedNetworkImage(
                 imageUrl: imageUrl!,
                 imageBuilder: (context, imageProvider) => Container(
-                  width: width ?? 55,
-                  height: height ?? 55,
+                  width: SizeUtils.scale(width ?? 55, size.width),
+                  height: SizeUtils.scale(height ?? 55, size.width),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -72,8 +75,8 @@ class MyCacheImageOrganization extends StatelessWidget {
                   ),
                 ),
                 placeholder: (context, url) => Container(
-                  width: width ?? 55,
-                  height: height ?? 55,
+                  width: SizeUtils.scale(width ?? 55, size.width),
+                  height: SizeUtils.scale(height ?? 55, size.width),
                   clipBehavior: Clip.antiAlias,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -90,16 +93,16 @@ class MyCacheImageOrganization extends StatelessWidget {
                     ],
                   ),
                   child: SizedBox(
-                    width: (width ?? 55) / 4,
-                    height: (height ?? 55) / 4,
+                    width: (SizeUtils.scale(width ?? 55, size.width)) / 4,
+                    height: (SizeUtils.scale(height ?? 55, size.width)) / 4,
                     child: CircularProgressIndicator(
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
                 errorWidget: (context, url, error) => Container(
-                  width: width ?? 55,
-                  height: height ?? 55,
+                  width: SizeUtils.scale(width ?? 55, size.width),
+                  height: SizeUtils.scale(height ?? 55, size.width),
                   clipBehavior: Clip.antiAlias,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -108,15 +111,13 @@ class MyCacheImageOrganization extends StatelessWidget {
                         Theme.of(context).colorScheme.primary.withOpacity(0.5),
                   ),
                   child: SizedBox(
-                    child: SvgPicture.asset(
-                      SvgAssets.company,
-                    ),
+                    child: SvgPicture.asset(SvgAssets.company),
                   ),
                 ),
               )
         : Container(
-            width: width ?? 55,
-            height: height ?? 55,
+            width: SizeUtils.scale(width ?? 55, size.width),
+            height: SizeUtils.scale(height ?? 55, size.width),
             clipBehavior: Clip.antiAlias,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -124,8 +125,8 @@ class MyCacheImageOrganization extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
             ),
             child: SizedBox(
-              width: imageWidth ?? width ?? 55,
-              height: imageHeight ?? height ?? 55,
+              width: SizeUtils.scale(imageWidth ?? width ?? 55, size.width),
+              height: SizeUtils.scale(imageHeight ?? height ?? 55, size.width),
               child: SvgPicture.asset(
                 SvgAssets.company,
               ),

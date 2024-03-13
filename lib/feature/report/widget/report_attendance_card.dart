@@ -62,21 +62,19 @@ class ReportAttendanceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MyText(
                       text: "Attendance",
                       style: AppFonts().bodyMediumSemi,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
                     MyText(
                       text: "Check In",
                       style: AppFonts().bodySmallMedium.copyWith(
                             color: MyColor.successColor,
                           ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
                     MyText(
                       text: "Check Out",
                       style: AppFonts().bodySmallMedium.copyWith(
@@ -86,21 +84,19 @@ class ReportAttendanceCard extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MyText(
                       text: "Time",
                       style: AppFonts().bodyMediumSemi,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
                     MyText(
                       text: DateUtil.formatTimeWithDate(
                         attendance.checkInDateTime,
                       ),
                       style: AppFonts().bodySmallRegular,
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
                     MyText(
                       text: DateUtil.formatTimeWithDate(
                         attendance.checkOutDateTime,
@@ -111,7 +107,7 @@ class ReportAttendanceCard extends StatelessWidget {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     MyText(
                       text: "Status",
@@ -135,7 +131,6 @@ class ReportAttendanceCard extends StatelessWidget {
                                 : Theme.of(context).colorScheme.onBackground,
                           ),
                     ),
-                    SizedBox(height: SizeUtils.scale(2, size.width)),
                     MyText(
                       text: attendance.checkOutStatus?.capitalizeMaybeNull ??
                           "N/A",

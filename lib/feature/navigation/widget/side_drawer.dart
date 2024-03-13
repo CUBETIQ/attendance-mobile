@@ -27,13 +27,13 @@ class SideDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
         padding: EdgeInsets.only(
-          left: SizeUtils.scale(20, size.width),
-          top: SizeUtils.scale(40, size.height),
+          left: SizeUtils.scale(20, mediaQuery.size.width),
+          top: SizeUtils.scale(40, mediaQuery.size.height),
         ),
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -43,12 +43,12 @@ class SideDrawer extends StatelessWidget {
               children: [
                 MyCacheImage(
                   imageUrl: imageUrl ?? "",
-                  width: SizeUtils.scale(100, size.width),
-                  height: SizeUtils.scale(100, size.width),
-                  imageHeight: SizeUtils.scale(100, size.width),
-                  imageWidth: SizeUtils.scale(100, size.width),
+                  width: SizeUtils.scale(100, mediaQuery.size.width),
+                  height: SizeUtils.scale(100, mediaQuery.size.width),
+                  imageHeight: SizeUtils.scale(100, mediaQuery.size.width),
+                  imageWidth: SizeUtils.scale(100, mediaQuery.size.width),
                 ),
-                SizedBox(height: SizeUtils.scale(5, size.height)),
+                SizedBox(height: SizeUtils.scale(5, mediaQuery.size.height)),
                 MyText(
                   text: StringUtil.getfullname(
                     user.firstName,
@@ -65,7 +65,7 @@ class SideDrawer extends StatelessWidget {
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                 ),
-                SizedBox(height: SizeUtils.scale(10, size.height)),
+                SizedBox(height: SizeUtils.scale(10, mediaQuery.size.height)),
                 ListView.builder(
                   itemCount: drawerItems.length,
                   shrinkWrap: true,
@@ -74,12 +74,13 @@ class SideDrawer extends StatelessWidget {
                     return ListTile(
                       dense: true,
                       contentPadding: EdgeInsets.symmetric(
-                          horizontal: SizeUtils.scale(20, size.width),
-                          vertical: SizeUtils.scale(5, size.width)),
+                          horizontal:
+                              SizeUtils.scale(20, mediaQuery.size.width),
+                          vertical: SizeUtils.scale(5, mediaQuery.size.width)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                          SizeUtils.scale(
-                              AppSize().borderRadiusLarge, size.width),
+                          SizeUtils.scale(AppSize().borderRadiusLarge,
+                              mediaQuery.size.width),
                         ),
                       ),
                       onTap: () {
@@ -102,8 +103,14 @@ class SideDrawer extends StatelessWidget {
               ],
             ),
             Transform.translate(
-              offset:
-                  Offset(SizeUtils.scale(size.width / 5.5, size.width), -25),
+              offset: Offset(
+                  SizeUtils.scale(
+                      MediaQuery.of(context).orientation ==
+                              Orientation.landscape
+                          ? mediaQuery.size.width / 4.05
+                          : mediaQuery.size.width / 5.5,
+                      mediaQuery.size.width),
+                  -25),
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
@@ -113,9 +120,9 @@ class SideDrawer extends StatelessWidget {
                     Icon(
                       Icons.copyright_rounded,
                       color: Theme.of(context).colorScheme.secondary,
-                      size: SizeUtils.scale(24, size.width),
+                      size: SizeUtils.scale(24, mediaQuery.size.width),
                     ),
-                    SizedBox(width: SizeUtils.scale(3, size.width)),
+                    SizedBox(width: SizeUtils.scale(3, mediaQuery.size.width)),
                     MyText(
                       text: "TimeSync 360 V1.0.0",
                       style: AppFonts().bodyMediumMedium.copyWith(

@@ -12,6 +12,7 @@ class ThemeSwitchButton extends StatelessWidget {
     required this.description,
     this.onChanged,
     this.value = false,
+    this.icon,
   });
 
   final double? width;
@@ -20,6 +21,7 @@ class ThemeSwitchButton extends StatelessWidget {
   final String description;
   final bool value;
   final void Function(bool)? onChanged;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class ThemeSwitchButton extends StatelessWidget {
           Row(
             children: [
               Icon(
-                Icons.dark_mode_rounded,
+                icon ?? Icons.dark_mode_rounded,
                 size: SizeUtils.scale(30, size.width),
                 color: Theme.of(context).colorScheme.primary,
               ),

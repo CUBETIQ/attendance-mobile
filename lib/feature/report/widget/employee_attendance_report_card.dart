@@ -27,7 +27,13 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          MyCacheImage(imageUrl: data.image ?? ""),
+          MyCacheImage(
+            imageUrl: data.image ?? "",
+            width: SizeUtils.scale(50, size.width),
+            height: SizeUtils.scale(50, size.width),
+            imageHeight: SizeUtils.scale(50, size.width),
+            imageWidth: SizeUtils.scale(50, size.width),
+          ),
           SizedBox(width: SizeUtils.scale(10, size.width)),
           SizedBox(
             width: SizeUtils.scale(110, size.width),

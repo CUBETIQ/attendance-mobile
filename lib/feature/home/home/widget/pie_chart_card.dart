@@ -128,23 +128,20 @@ class AttendancePieChartCard extends StatelessWidget {
           ),
           SizedBox(width: SizeUtils.scale(20, size.width)),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MyText(text: "Summary", style: AppFonts().bodyLargeMedium),
-              SizedBox(height: SizeUtils.scale(8, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.successColor,
                 title: "Present: ",
                 value: totalPresent,
               ),
-              SizedBox(height: SizeUtils.scale(8, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.pendingColor,
                 title: "Leave: ",
                 value: totalOnLeave,
               ),
-              SizedBox(height: SizeUtils.scale(8, size.width)),
               AttendanceInfoWidget(
                 color: MyColor.errorColor,
                 title: "Absent: ",

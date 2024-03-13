@@ -56,7 +56,7 @@ class ReportLeaveCard extends StatelessWidget {
           ),
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,7 +69,6 @@ class ReportLeaveCard extends StatelessWidget {
                           text: "From",
                           style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: DateUtil.formatMillisecondsToDOB(leave.from),
                           style: AppFonts().bodySmallRegular,
@@ -84,7 +83,6 @@ class ReportLeaveCard extends StatelessWidget {
                           text: "To",
                           style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: DateUtil.formatMillisecondsToDOB(leave.to),
                           style: AppFonts().bodySmallRegular,
@@ -93,13 +91,12 @@ class ReportLeaveCard extends StatelessWidget {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         MyText(
                           text: "Status",
                           style: AppFonts().bodyMediumSemi,
                         ),
-                        SizedBox(height: SizeUtils.scale(2, size.width)),
                         MyText(
                           text: leave.status?.capitalizeFirst ?? "N/A",
                           style: AppFonts().bodySmallSemi.copyWith(
@@ -110,7 +107,6 @@ class ReportLeaveCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: SizeUtils.scale(5, size.width)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

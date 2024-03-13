@@ -145,12 +145,13 @@ class AttendanceCard extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(
-                        SvgAssets.tap,
-                        width: iconSize ?? size.height * 0.05,
-                        height: iconSize ?? size.height * 0.05,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
+                      SvgPicture.asset(SvgAssets.tap,
+                          width: iconSize ?? size.height * 0.05,
+                          height: iconSize ?? size.height * 0.05,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.onPrimary,
+                            BlendMode.srcIn,
+                          )),
                       SizedBox(height: AppSize().paddingS4),
                       MyText(
                         text: isCheckedIn == true ? "Check Out" : "Check In",

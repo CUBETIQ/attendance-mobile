@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/widgets/loading/loading_dialog.dart';
 import 'package:timesync/feature/setting/choose_language/model/language_button_model.dart';

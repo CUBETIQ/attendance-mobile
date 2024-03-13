@@ -104,7 +104,7 @@ class HomeStaffView extends StatelessWidget {
                                 controller.user.value.lastName,
                                 controller.user.value.username,
                               ),
-                              style: AppFonts().bodyXlargeMedium,
+                              style: AppFonts().bodyLargeMedium,
                             ),
                           ),
                         ),
@@ -112,7 +112,7 @@ class HomeStaffView extends StatelessWidget {
                           () => MyText(
                             text: NavigationController.to.position.value.name ??
                                 "-----",
-                            style: AppFonts().bodyMediumRegular,
+                            style: AppFonts().bodySmallRegular,
                           ),
                         )
                       ],

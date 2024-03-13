@@ -1,4 +1,5 @@
 class LocalStorageModel {
+  String? userId;
   bool? isFirstTime;
   String? accessToken;
   bool? darkTheme;
@@ -10,8 +11,11 @@ class LocalStorageModel {
   String? organizationId;
   String? languageCode;
   String? theme;
+  bool? isEnableNotification;
+  String? userRole;
 
   LocalStorageModel({
+    this.userId,
     this.isFirstTime,
     this.accessToken,
     this.darkTheme,
@@ -23,5 +27,7 @@ class LocalStorageModel {
     this.organizationId,
     this.languageCode,
     this.theme,
+    this.isEnableNotification,
+    this.userRole,
   });
 }

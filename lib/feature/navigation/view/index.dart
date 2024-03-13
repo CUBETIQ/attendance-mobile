@@ -18,7 +18,7 @@ class NavigationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = NavigationController.to;
-
+    final mediaQuery = MediaQuery.of(context);
     return ZoomDrawer(
       controller: controller.zoomDrawerController,
       menuScreen: Obx(
@@ -46,8 +46,11 @@ class NavigationView extends StatelessWidget {
       reverseDuration: 200.milliseconds,
       mainScreenTapClose: true,
       slideWidth: SizeUtils.scale(
-        238,
-        context.width,
+        mediaQuery.orientation == Orientation.landscape &&
+                mediaQuery.size.width < 1150
+            ? mediaQuery.size.width * 0.31
+            : 238,
+        mediaQuery.size.width,
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
@@ -68,11 +70,16 @@ class LeaveChart extends StatelessWidget {
               text: centerText ?? "0%",
               style: AppFonts().bodySmallRegular,
             ),
-            linearGradient: const LinearGradient(
-              colors: [
-                Color(0xFF4049E0),
-                Color(0XFF7653C9),
-              ],
+            linearGradient: LinearGradient(
+              colors: Get.isDarkMode
+                  ? [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.secondary.darken(12),
+                    ]
+                  : [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.secondary.lighten(12),
+                    ],
             ),
             backgroundColor: Colors.grey.withOpacity(0.3),
             circularStrokeCap: CircularStrokeCap.round,

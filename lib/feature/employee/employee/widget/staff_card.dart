@@ -34,11 +34,10 @@ class StaffCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: cardWidth ?? size.width,
-        height: cardHeight ?? SizeUtils.scale(60, size.width),
         padding: EdgeInsets.symmetric(
           horizontal:
               SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
-          vertical: SizeUtils.scale(AppSize().paddingS1, size.width),
+          vertical: SizeUtils.scale(AppSize().paddingS2, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(

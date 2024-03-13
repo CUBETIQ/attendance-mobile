@@ -8,7 +8,6 @@ class SubscriptTopic {
   static const String all = 'all';
   static const String news = 'news';
   static const String event = 'event';
-  static const String promotion = 'promotion';
   static const String system = 'system';
   static const String other = 'other';
 
@@ -16,7 +15,6 @@ class SubscriptTopic {
     all,
     news,
     event,
-    promotion,
     system,
     other,
   ];
@@ -29,8 +27,6 @@ class SubscriptTopic {
         return news;
       case 'event':
         return event;
-      case 'promotion':
-        return promotion;
       case 'system':
         return system;
       case 'other':

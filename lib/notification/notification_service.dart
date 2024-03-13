@@ -17,9 +17,9 @@ class NotificationIntegration {
   NotificationIntegration._internal();
 
   static late AndroidNotificationChannel _channel;
+  static final FirebaseMessaging messaging = FirebaseMessaging.instance;
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  static final FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   static Future<void> initializeFirebase() async {
     if (Firebase.apps.isNotEmpty) {
@@ -51,8 +51,26 @@ class NotificationIntegration {
     }
   }
 
+  //Background Notification
   static void _onListenMessageInBackground() {
     FirebaseMessaging.onMessageOpenedApp.listen(_receiveMessageByData);
+  }
+
+  //Terminated Notification
+  static Future<void> setupInteractedMessage() async {
+    RemoteMessage? initialMessage = await messaging.getInitialMessage();
+    if (initialMessage != null) {
+      _receiveMessageByData(initialMessage);
+    }
+
+    FirebaseMessaging.onMessageOpenedApp.listen(_receiveMessageByData);
+  }
+
+  // Foreground Notification
+  static void onListenAndShowNotificationInForeground() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      showAndroidNotification(message);
+    });
   }
 
   static Future<void> requestSettings() async {
@@ -79,16 +97,6 @@ class NotificationIntegration {
     NotifyRoutePage.pushToOtherPagesFromBackground(message);
 
     /// ==========> end <====================
-  }
-
-  static Future<void> setupInteractedMessage() async {
-    RemoteMessage? initialMessage = await messaging.getInitialMessage();
-    if (initialMessage != null) {
-      _receiveMessageByData(initialMessage);
-    }
-
-    /// Stream listener
-    _onListenMessageInBackground();
   }
 
   static Future<void> _initSettings() async {
@@ -169,12 +177,6 @@ class NotificationIntegration {
     );
   }
 
-  static void onListenAndShowNotificationInForeground() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      showAndroidNotification(message);
-    });
-  }
-
   static Future<String?> getTokenFCM() async {
     if (Platform.isIOS) {
       final token = await messaging.getAPNSToken();
@@ -187,12 +189,13 @@ class NotificationIntegration {
   static Future<void> initializeInApplication() async {
     if (AppConfig.getLocalData?.isEnableNotification == true) {
       NotificationIntegration.onListenAndShowNotificationInForeground();
+      NotificationIntegration._onListenMessageInBackground();
+      await NotificationIntegration.setupInteractedMessage();
       NotificationTopic.subscribe([
         NotificationTopic.allDevicesTopic,
         NotificationTopic.getPlatformDevicesTopic(
             isIOS: Platform.isIOS, version: AppVersion.version.toString())
       ]);
-      await NotificationIntegration.setupInteractedMessage();
     } else {
       NotificationTopic.unsubscribeAll();
     }

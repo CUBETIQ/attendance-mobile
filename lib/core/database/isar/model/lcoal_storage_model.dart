@@ -1,4 +1,5 @@
 class LocalStorageModel {
+  String? userId;
   bool? isFirstTime;
   String? accessToken;
   bool? darkTheme;
@@ -12,6 +13,7 @@ class LocalStorageModel {
   String? theme;
 
   LocalStorageModel({
+    this.userId,
     this.isFirstTime,
     this.accessToken,
     this.darkTheme,

@@ -18,7 +18,7 @@ class ReportLeaveCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MyCard(
       width: size.width,
-      height: SizeUtils.scale(75, size.width),
+      height: SizeUtils.scale(77, size.width),
       padding: EdgeInsets.only(
         right: SizeUtils.scale(20, size.width),
       ),

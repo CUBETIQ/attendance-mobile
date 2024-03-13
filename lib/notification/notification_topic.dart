@@ -7,7 +7,7 @@ class NotificationTopic {
   factory NotificationTopic() => _instance;
 
   // Variables
-  static final List<String> _subscribedTopics = [];
+  static final List<String> _subscribedTopics = <String>[];
   static List<String> get subscribedTopics => _subscribedTopics;
 
   static bool isDevelopment = false;
@@ -62,9 +62,9 @@ class NotificationTopic {
   static unsubscribeAll() {
     for (var topic in _subscribedTopics) {
       if (topic.isNotEmpty) {
-        _subscribedTopics.remove(topic);
         FirebaseMessaging.instance.unsubscribeFromTopic(topic);
       }
     }
+    _subscribedTopics.clear();
   }
 }

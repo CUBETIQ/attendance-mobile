@@ -1,5 +1,5 @@
 import 'package:timesync/constants/svg.dart';
-import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/feature/onboard/model/onboard_model.dart';
 import 'package:flutter/material.dart';

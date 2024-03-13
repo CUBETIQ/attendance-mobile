@@ -11,6 +11,7 @@ class LocalStorageModel {
   String? organizationId;
   String? languageCode;
   String? theme;
+  bool? isEnableNotification;
 
   LocalStorageModel({
     this.userId,
@@ -25,5 +26,6 @@ class LocalStorageModel {
     this.organizationId,
     this.languageCode,
     this.theme,
+    this.isEnableNotification,
   });
 }

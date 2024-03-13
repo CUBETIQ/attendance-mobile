@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
-import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/model/activation_model.dart';
 import 'package:timesync/core/model/organization_model.dart';

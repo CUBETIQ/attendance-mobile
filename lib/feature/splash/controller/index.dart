@@ -94,6 +94,11 @@ class SplashController extends GetxController
   Future<void> fetchMe() async {
     try {
       user.value = await SplashService().fetchMe();
+      localStorageData = LocalStorageModel(
+        userId: user.value.id,
+        organizationId: user.value.organizationId,
+      );
+      await IsarService().saveLocalData(input: localStorageData);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -137,10 +142,6 @@ class SplashController extends GetxController
       }
       organization.value =
           await SplashService().validateOrganization(id: data!.organizationId!);
-      if (localData.value.organizationId == null) {
-        localStorageData?.organizationId = organization.value.id;
-        await IsarService().saveLocalData(input: localStorageData);
-      }
       await initLocalDb();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

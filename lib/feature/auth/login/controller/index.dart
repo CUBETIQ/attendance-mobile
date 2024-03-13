@@ -49,10 +49,9 @@ class LoginController extends GetxController {
           username: usernameController.text,
           password: passwordController.text,
         );
-        var token = await LoginService().login(input);
+        final token = await LoginService().login(input);
         accessToken.value = token.first;
         refreshToken.value = token.last;
-
         await getOrganization(storageData?.organizationId ?? "");
         await fetchMe();
         await getUserStatus();
@@ -113,6 +112,10 @@ class LoginController extends GetxController {
   Future<void> fetchMe() async {
     try {
       user.value = await LoginService().fetchMe();
+      localStorageData = LocalStorageModel(
+        userId: user.value.id,
+      );
+      await IsarService().saveLocalData(input: localStorageData);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -140,7 +143,6 @@ class LoginController extends GetxController {
   Future<void> getOrganization(String id) async {
     try {
       organization.value = await LoginService().getOrganization(id: id);
-      localStorageData?.organizationId = organization.value?.id;
       if (organization.value != null) {
         localStorageData = LocalStorageModel(
           accessToken: accessToken.value,

@@ -40,5 +40,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+              <!--To update FCM to user our own channel rather than default FCM on. -->
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="high_importance_channel" />
+        <!-- End FCM -->
     </application>
 </manifest>

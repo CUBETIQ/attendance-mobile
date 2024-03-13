@@ -51,6 +51,7 @@ import 'package:timesync/feature/qr_scan/view/index.dart';
 import 'package:timesync/feature/report/report_binding.dart';
 import 'package:timesync/feature/setting/change_theme/view/index.dart';
 import 'package:timesync/feature/setting/choose_language/view/index.dart';
+import 'package:timesync/feature/setting/notification_setting/view/index.dart';
 import 'package:timesync/feature/setting/setting/setting_binding.dart';
 import 'package:timesync/feature/setting/setting/view/index.dart';
 import 'package:timesync/feature/splash/splash_binding.dart';
@@ -242,6 +243,10 @@ class AppPages {
     GetPage(
       name: Routes.THEME,
       page: () => const ChangeThemeView(),
+    ),
+        GetPage(
+      name: Routes.NOTIFICATION_SETTING,
+      page: () => const NotificationSettingView(),
     ),
   ];
 }

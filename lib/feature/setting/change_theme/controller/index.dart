@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/svg.dart';
-import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 

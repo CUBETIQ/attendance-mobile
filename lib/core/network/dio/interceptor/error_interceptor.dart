@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
-import 'package:timesync/core/database/isar/model/lcoal_storage_model.dart';
+import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/network/dio/dio_util.dart';
 import 'package:timesync/core/network/dio/endpoint.dart';

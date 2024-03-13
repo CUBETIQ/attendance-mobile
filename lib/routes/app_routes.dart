@@ -43,4 +43,5 @@ abstract class Routes {
   static const THEME = '/theme';
   static const POINT = '/point';
   static const NOTIFICATION = '/notification';
+  static const NOTIFICATION_SETTING = '/notification_setting';
 }

@@ -69,6 +69,7 @@ class ActivationView extends StatelessWidget {
                   inputFormatters: [UpperCaseTextFormatter()],
                   iconSize: SizeUtils.scale(16, size.width),
                 ),
+                SizedBox(height: size.height * 0.05),
               ],
             ),
           ),

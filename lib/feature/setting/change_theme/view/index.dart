@@ -10,7 +10,7 @@ import 'package:timesync/utils/size_util.dart';
 class ChangeThemeView extends StatelessWidget {
   const ChangeThemeView({super.key});
 
- @override
+  @override
   Widget build(BuildContext context) {
     final controller = Get.put(ChangeThemeController());
     final size = MediaQuery.of(context).size;
@@ -24,6 +24,7 @@ class ChangeThemeView extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: SizedBox(
+        width: size.width,
         height: size.height,
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -36,18 +37,21 @@ class ChangeThemeView extends StatelessWidget {
               MediaQuery.of(context).size.width,
             ),
           ),
-          child: Wrap(
-            spacing: SizeUtils.scale(15, size.width),
-            runSpacing: SizeUtils.scale(15, size.width),
-            children: [
-              ...List.generate(
-                controller.list.length,
-                (index) => ColorCard(
-                  onTap: () => controller.onTap(index),
-                  data: controller.list[index],
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Wrap(
+              spacing: SizeUtils.scale(15, size.width),
+              runSpacing: SizeUtils.scale(15, size.width),
+              children: [
+                ...List.generate(
+                  controller.list.length,
+                  (index) => ColorCard(
+                    onTap: () => controller.onTap(index),
+                    data: controller.list[index],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:timesync/config/app_config.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
@@ -9,10 +10,12 @@ import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/splash/service/index.dart';
+import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/types/role.dart';
 
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -29,6 +32,7 @@ class SplashController extends GetxController
   final userStatus = UserStatusModel().obs;
   final organization = OrganizationModel().obs;
   LocalStorageModel? localStorageData = LocalStorageModel();
+  final isAdmin = false.obs;
 
   @override
   void onInit() {
@@ -67,6 +71,7 @@ class SplashController extends GetxController
       Get.offNamed(Routes.ACTIVATION);
       return;
     } else if (localData.value.accessToken != null) {
+      handleNotification(isAdmin.value);
       Get.offNamed(Routes.NAVIGATION, arguments: {
         "user": user.value,
         "position": position.value,
@@ -80,6 +85,14 @@ class SplashController extends GetxController
       return;
     }
     Get.offNamed(Routes.ONBOARD);
+  }
+
+  void handleNotification(bool isAdmin) {
+    if (AppConfig.getLocalData?.isEnableNotification == true) {
+      NotificationTopic.subscribe([
+        NotificationTopic.getUserTypeTopic(isAdmin: isAdmin, id: user.value.id),
+      ]);
+    }
   }
 
   Future<void> getUserStatus() async {
@@ -97,7 +110,11 @@ class SplashController extends GetxController
       localStorageData = LocalStorageModel(
         userId: user.value.id,
         organizationId: user.value.organizationId,
+        userRole: user.value.role,
       );
+      if (user.value.role == Role.admin) {
+        isAdmin.value = true;
+      }
       await IsarService().saveLocalData(input: localStorageData);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

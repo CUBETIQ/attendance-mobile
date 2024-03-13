@@ -26,7 +26,8 @@ class SettingCardButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
+      child: Container(
+        color: Colors.transparent,
         width: width ?? size.width,
         height: height,
         child: Column(

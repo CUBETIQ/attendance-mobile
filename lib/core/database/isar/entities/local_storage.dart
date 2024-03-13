@@ -18,4 +18,5 @@ class LocalStorage {
   String? userId;
   String? theme;
   bool? isEnableNotification;
+  String? userRole;
 }

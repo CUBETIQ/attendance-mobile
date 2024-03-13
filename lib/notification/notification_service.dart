@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timesync/config/app_config.dart';
-import 'package:timesync/notification/subscription_topic.dart';
+import 'package:timesync/app_version.dart';
+import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/notiification_route.dart';
 import '../../firebase_options.dart';
 
@@ -184,11 +184,11 @@ class NotificationIntegration {
 
   static Future<void> initializeInApplication() async {
     NotificationIntegration.onListenAndShowNotificationInForeground();
-    final userId = AppConfig.getLocalData?.username;
-    SubscriptTopic.subscribeAll();
-    if (userId != null) {
-      SubscriptTopic.subscribe(userId);
-    }
+    NotificationTopic.subscribe([
+      NotificationTopic.allDevicesTopic,
+      NotificationTopic.getPlatformDevicesTopic(
+          isIOS: Platform.isIOS, version: AppVersion.version.toString())
+    ]);
     await NotificationIntegration.setupInteractedMessage();
   }
 }

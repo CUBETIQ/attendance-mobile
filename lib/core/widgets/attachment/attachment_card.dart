@@ -38,7 +38,7 @@ class AttachmentCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width ?? size.width,
-      height: height ?? SizeUtils.scale(60, size.width),
+      height: height ?? SizeUtils.scale(70, size.width),
       margin: EdgeInsets.only(
         bottom: SizeUtils.scale(AppSize().paddingS2, size.width),
       ),
@@ -92,15 +92,15 @@ class AttachmentCard extends StatelessWidget {
                       ),
           ),
           SizedBox(
-            width: SizeUtils.scale(10, size.width),
+            width: SizeUtils.scale(20, size.width),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
               vertical: SizeUtils.scale(2.5, size.width),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   constraints: BoxConstraints(

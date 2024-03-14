@@ -32,55 +32,55 @@ class DepartmentView extends StatelessWidget {
         onRefresh: controller.onRefresh,
         child: SizedBox(
           height: size.height,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: SizeUtils.scale(
-                  AppSize().paddingHorizontalLarge,
-                  size.width,
-                ),
-                horizontal: AppSize().paddingVerticalLarge,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: SizeUtils.scale(
+                AppSize().paddingHorizontalLarge,
+                size.width,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(
-                    text: "Department Overview",
-                    style: AppFonts().bodyLargeMedium,
-                  ),
-                  SizedBox(height: AppSize().paddingS8),
-                  SizedBox(
-                    height: SizeUtils.scale(50, size.width),
-                    child: SearchBar(
-                      hintText: "Search Department",
-                      elevation: MaterialStateProperty.all<double>(0.2),
-                      textStyle: MaterialStateProperty.all<TextStyle>(
-                        AppFonts().bodyMediumMedium.copyWith(
-                              color: Theme.of(context).colorScheme.onBackground,
-                            ),
-                      ),
-                      constraints: BoxConstraints.loose(size),
-                      onSubmitted: controller.searchDepartment,
-                      leading: IconButton(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onPressed: () {},
-                        icon: const Icon(Icons.search_rounded),
+              horizontal: AppSize().paddingVerticalLarge,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                MyText(
+                  text: "Department Overview",
+                  style: AppFonts().bodyLargeMedium,
+                ),
+                SizedBox(height: AppSize().paddingS8),
+                SizedBox(
+                  height: SizeUtils.scale(50, size.width),
+                  child: SearchBar(
+                    hintText: "Search Department",
+                    elevation: MaterialStateProperty.all<double>(0.2),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      AppFonts().bodyMediumMedium.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                    ),
+                    constraints: BoxConstraints.loose(size),
+                    onSubmitted: controller.searchDepartment,
+                    leading: IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onPressed: () {},
+                      icon: const Icon(Icons.search_rounded),
+                      iconSize: SizeUtils.scale(20, size.width),
+                    ),
+                    trailing: [
+                      IconButton(
+                        onPressed: controller.clearSearch,
+                        icon: const Icon(Icons.cancel_rounded),
                         iconSize: SizeUtils.scale(20, size.width),
                       ),
-                      trailing: [
-                        IconButton(
-                          onPressed: controller.clearSearch,
-                          icon: const Icon(Icons.cancel_rounded),
-                          iconSize: SizeUtils.scale(20, size.width),
-                        ),
-                      ],
-                      controller: controller.searchController,
-                    ),
+                    ],
+                    controller: controller.searchController,
                   ),
-                  SizedBox(height: AppSize().paddingS8),
-                  Obx(
+                ),
+                SizedBox(height: AppSize().paddingS8),
+                Expanded(
+                  child: Obx(
                     () => MyAsyncWidget(
                       isLoading: controller.isLoading.value,
                       list: controller.departmentList.value,
@@ -88,7 +88,7 @@ class DepartmentView extends StatelessWidget {
                       builderWidget: ListView.separated(
                         itemCount: controller.departmentList.length,
                         shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: const AlwaysScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
                           height: SizeUtils.scale(
                             AppSize().paddingS8,
@@ -110,8 +110,8 @@ class DepartmentView extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

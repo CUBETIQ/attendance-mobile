@@ -17,23 +17,26 @@ class MyNoData extends StatelessWidget {
         top: paddingTop ?? 0,
       ),
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 85,
-              height: 85,
-              child: SvgPicture.asset(
-                SvgAssets.empty,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 85,
+                height: 85,
+                child: SvgPicture.asset(
+                  SvgAssets.empty,
+                ),
               ),
-            ),
-            SizedBox(height: AppSize().paddingS5),
-            MyText(
-              text: "No Data Available",
-              style: AppFonts().bodyLargeMedium,
-            ),
-            SizedBox(height: AppSize().paddingS8),
-          ],
+              SizedBox(height: AppSize().paddingS5),
+              MyText(
+                text: "No Data Available",
+                style: AppFonts().bodyLargeMedium,
+              ),
+              SizedBox(height: AppSize().paddingS8),
+            ],
+          ),
         ),
       ),
     );

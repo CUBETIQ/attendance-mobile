@@ -26,85 +26,83 @@ class TaskView extends StatelessWidget {
       },
       child: SizedBox(
         height: size.height,
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.scale(
-                AppSize().paddingHorizontalLarge,
-                MediaQuery.of(context).size.width,
-              ),
-              horizontal: SizeUtils.scale(
-                AppSize().paddingHorizontalLarge,
-                MediaQuery.of(context).size.width,
-              ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: SizeUtils.scale(
+              AppSize().paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MyText(
-                        text: "Task Summary",
-                        style: AppFonts().bodyLargeMedium),
-                    Obx(
-                      () => DateDropDown(
-                        date: controller.selectDate.value,
+            horizontal: SizeUtils.scale(
+              AppSize().paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyText(
+                      text: "Task Summary", style: AppFonts().bodyLargeMedium),
+                  Obx(
+                    () => DateDropDown(
+                      date: controller.selectDate.value,
+                      size: size,
+                      isShowday: false,
+                      onTap: () => controller.onTapDate(context),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: SizeUtils.scale(20, size.width),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Obx(
+                      () => TaskChart(
+                        title: "Pending",
                         size: size,
-                        isShowday: false,
-                        onTap: () => controller.onTapDate(context),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: SizeUtils.scale(20, size.width),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Obx(
-                        () => TaskChart(
-                          title: "Pending",
-                          size: size,
-                          radius: size.width < 600 ? 60 : 65,
-                          centerWidget: MyText(
-                            text:
-                                "${(controller.percentageUncompletedTask.value * 100).toStringAsFixed(2)}%",
-                            style: AppFonts().bodyMediumRegular,
-                          ),
-                          percent: controller.percentageUncompletedTask.value,
-                          textBelow:
-                              "${"Task:".trString} ${controller.totalUncompletedTask}/${controller.totalTask.value}",
+                        radius: size.width < 600 ? 60 : 65,
+                        centerWidget: MyText(
+                          text:
+                              "${(controller.percentageUncompletedTask.value * 100).toStringAsFixed(2)}%",
+                          style: AppFonts().bodyMediumRegular,
                         ),
+                        percent: controller.percentageUncompletedTask.value,
+                        textBelow:
+                            "${"Task:".trString} ${controller.totalUncompletedTask}/${controller.totalTask.value}",
                       ),
                     ),
-                    SizedBox(width: size.width * 0.03),
-                    Expanded(
-                      child: Obx(
-                        () => TaskChart(
-                          title: "Completed",
-                          size: size,
-                          radius: size.width < 600 ? 60 : 65,
-                          centerWidget: MyText(
-                            text:
-                                "${(controller.percentageCompletedTask.value * 100).toStringAsFixed(2)}%",
-                            style: AppFonts().bodyMediumRegular,
-                          ),
-                          percent: controller.percentageCompletedTask.value,
-                          textBelow:
-                              "${"Task:".trString} ${controller.totalCompletedTask}/${controller.totalTask.value}",
+                  ),
+                  SizedBox(width: size.width * 0.03),
+                  Expanded(
+                    child: Obx(
+                      () => TaskChart(
+                        title: "Completed",
+                        size: size,
+                        radius: size.width < 600 ? 60 : 65,
+                        centerWidget: MyText(
+                          text:
+                              "${(controller.percentageCompletedTask.value * 100).toStringAsFixed(2)}%",
+                          style: AppFonts().bodyMediumRegular,
                         ),
+                        percent: controller.percentageCompletedTask.value,
+                        textBelow:
+                            "${"Task:".trString} ${controller.totalCompletedTask}/${controller.totalTask.value}",
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: AppSize().paddingS11),
-                MyText(text: "My Task", style: AppFonts().bodyLargeMedium),
-                SizedBox(height: AppSize().paddingS8),
-                Obx(
+                  ),
+                ],
+              ),
+              SizedBox(height: AppSize().paddingS11),
+              MyText(text: "My Task", style: AppFonts().bodyLargeMedium),
+              SizedBox(height: AppSize().paddingS8),
+              Expanded(
+                child: Obx(
                   () => MyAsyncWidget(
                     isLoading: false,
                     list: controller.tasks,
@@ -112,7 +110,7 @@ class TaskView extends StatelessWidget {
                     builderWidget: ListView.separated(
                       itemCount: controller.tasks.length,
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
                         height: SizeUtils.scale(
                           AppSize().paddingS6,
@@ -137,8 +135,8 @@ class TaskView extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

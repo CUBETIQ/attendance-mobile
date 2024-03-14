@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/department_model.dart';
 import 'package:timesync/core/widgets/button/async_button.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
 import 'package:timesync/core/widgets/profile_image/profile_image.dart';
@@ -10,6 +11,8 @@ import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync/feature/position/add_position/controller/index.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/utils/size_util.dart';
+
+import '../../../../core/widgets/dropdown_button/dropdown_button.dart';
 
 class AddPositionView extends StatelessWidget {
   const AddPositionView({super.key});
@@ -63,7 +66,27 @@ class AddPositionView extends StatelessWidget {
                 hintText: "Enter name",
                 textController: controller.nameController,
               ),
-              SizedBox(height: AppSize().paddingS5),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
+              Obx(
+                () => MyDropDownButton<DepartmentModel>(
+                  label: "Department",
+                  value: controller.selectedDepartment.value,
+                  hint: "Choose department",
+                  dropdownItems: controller.departmentList
+                      .map(
+                        (e) => DropdownMenuItem<DepartmentModel>(
+                          value: e,
+                          child: Text((e.name ?? "").capitalizeFirst),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) =>
+                      controller.selectedDepartment.value = value!,
+                ),
+              ),
+              SizedBox(
+                  height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Description",

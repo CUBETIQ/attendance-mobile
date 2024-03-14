@@ -149,17 +149,17 @@ class AddStaffView extends StatelessWidget {
                   height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
-                label: "First Name",
-                hintText: "Enter your firstname",
-                textController: controller.firstnameController,
+                label: "Last Name",
+                hintText: "Enter your lastname",
+                textController: controller.lastnameController,
               ),
               SizedBox(
                   height: SizeUtils.scale(AppSize().paddingS5, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
-                label: "Last Name",
-                hintText: "Enter your lastname",
-                textController: controller.lastnameController,
+                label: "First Name",
+                hintText: "Enter your firstname",
+                textController: controller.firstnameController,
               ),
               SizedBox(
                   height: SizeUtils.scale(AppSize().paddingS5, size.width)),

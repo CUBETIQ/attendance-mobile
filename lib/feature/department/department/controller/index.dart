@@ -43,11 +43,20 @@ class DepartmentController extends GetxController {
 
   Future<void> deleteDepartment(String id) async {
     try {
-      await DepartmentService().deleteDepartment(id);
-      departmentListBackUp.value.removeWhere((element) => element.id == id);
-      departmentList.value = departmentListBackUp.value;
-      departmentListBackUp.refresh();
-      departmentList.refresh();
+      getConfirmBottomSheet(
+        Get.context!,
+        title: "Delete Department",
+        description: "Are you sure to delete this Department?",
+        onTapConfirm: () async {
+          await DepartmentService().deleteDepartment(id);
+          departmentListBackUp.value.removeWhere((element) => element.id == id);
+          departmentList.value = departmentListBackUp.value;
+          departmentListBackUp.refresh();
+          departmentList.refresh();
+          Get.back();
+        },
+        image: SvgAssets.delete,
+      );
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -95,8 +104,8 @@ class DepartmentController extends GetxController {
         Get.back();
       },
       onTapDelete: () async {
-        await deleteDepartment(department.id ?? "");
         Get.back();
+        await deleteDepartment(department.id ?? "");
       },
     );
   }

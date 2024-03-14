@@ -136,7 +136,7 @@ class NavigationController extends GetxController {
             organizationLocation.value!, AppConfig.defaultLocationRadius);
       }
     } on Exception catch (e) {
-      showErrorSnackBar("Error", e.toString());
+      showWarningSnackBar("Location disabled", e.toString());
       rethrow;
     }
   }
@@ -213,13 +213,16 @@ class NavigationController extends GetxController {
         DrawerModel(
           title: "Log out",
           icon: Icons.logout_rounded,
-          onTap: () {
+          onTap: () async {
             getLogOutBottomSheet(
               Get.context!,
               image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
-                Get.offNamed(Routes.LOGIN);
+                Get.offNamed(
+                  Routes.LOGIN,
+                  arguments: {"organization": organization.value},
+                );
               },
             );
           },
@@ -250,7 +253,10 @@ class NavigationController extends GetxController {
               image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
-                Get.offNamed(Routes.LOGIN);
+                Get.offNamed(
+                  Routes.LOGIN,
+                  arguments: {"organization": organization.value},
+                );
               },
             );
           },

@@ -5,6 +5,7 @@ import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/image.dart';
 import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync/feature/auth/login/controller/index.dart';
@@ -38,23 +39,42 @@ class LoginView extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            SizeUtils.scale(
-                              AppSize().borderRadiusMedium,
-                              size.width,
+                      Obx(
+                        () => Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              SizeUtils.scale(
+                                AppSize().borderRadiusMedium,
+                                size.width,
+                              ),
                             ),
                           ),
+                          height: SizeUtils.scale(80, size.width),
+                          child: controller.organization.value?.image != null &&
+                                  controller.organization.value?.image
+                                          ?.isNotEmpty ==
+                                      true
+                              ? MyCacheImage(
+                                  isRounded: false,
+                                  imageUrl:
+                                      controller.organization.value?.image ??
+                                          "",
+                                  height: SizeUtils.scale(80, size.width),
+                                  width: SizeUtils.scale(80, size.width),
+                                  imageHeight: SizeUtils.scale(70, size.width),
+                                  imageWidth: SizeUtils.scale(70, size.width),
+                                )
+                              : Image.asset(ImageAssets.logotimesync),
                         ),
-                        height: SizeUtils.scale(70, size.width),
-                        child: Image.asset(ImageAssets.logotimesync),
                       ),
                       SizedBox(height: AppSize().paddingS6),
-                      MyText(
-                        text: "timesync",
-                        style: AppFonts().bodyLargeMedium,
+                      Obx(
+                        () => MyText(
+                          text:
+                              controller.organization.value?.name ?? "TimeSync",
+                          style: AppFonts().bodyLargeMedium,
+                        ),
                       ),
                     ],
                   ),
@@ -66,6 +86,7 @@ class LoginView extends StatelessWidget {
                 ),
                 MyText(
                   text: "Please fill your detail to access your account.",
+                  maxLines: 2,
                   style: AppFonts().bodyMediumRegular.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),

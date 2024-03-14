@@ -12,6 +12,7 @@ class MyCacheImage extends StatelessWidget {
   final double? imageWidth;
   final double? imageHeight;
   final String? defaultImage;
+  final bool isRounded;
 
   const MyCacheImage({
     super.key,
@@ -21,6 +22,7 @@ class MyCacheImage extends StatelessWidget {
     this.imageWidth,
     this.imageHeight,
     this.defaultImage,
+    this.isRounded = true,
   });
 
   @override
@@ -34,11 +36,8 @@ class MyCacheImage extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(Get.context!)
-                      .colorScheme
-                      .primary
-                      .withOpacity(0.5),
+                  shape: isRounded ? BoxShape.circle : BoxShape.rectangle,
+                  color: Theme.of(Get.context!).colorScheme.primary,
                 ),
                 child: SizedBox(
                   width: imageWidth ?? width ?? SizeUtils.scale(55, getWidth),
@@ -56,7 +55,7 @@ class MyCacheImage extends StatelessWidget {
                   height: height ?? SizeUtils.scale(55, getWidth),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
+                    shape: isRounded ? BoxShape.circle : BoxShape.rectangle,
                     color:
                         Theme.of(context).colorScheme.primary.withOpacity(0.5),
                     image: DecorationImage(
@@ -78,7 +77,7 @@ class MyCacheImage extends StatelessWidget {
                   height: height ?? 55,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
+                    shape: isRounded ? BoxShape.circle : BoxShape.rectangle,
                     color:
                         Theme.of(context).colorScheme.primary.withOpacity(0.5),
                     boxShadow: [

@@ -81,27 +81,20 @@ class AddStaffController extends GetxController {
             DateUtil.formatMillisecondsToDOB(staff.value.dateOfBirth);
         dob.value = staff.value.dateOfBirth;
         selectedRole.value = staff.value.role ?? Role.staff;
-        if (departmentList.value.isNotEmpty) {
-          if (staff.value.departmentId != null &&
-              staff.value.departmentId != "") {
-            selectedDepartment.value = departmentList.value.firstWhere(
-              (element) => element.id == staff.value.departmentId,
-              orElse: () => departmentList.value.first,
-            );
-          }
-        } else {
-          selectedDepartment.value = null;
+
+        if (staff.value.departmentId != null) {
+          selectedDepartment.value = departmentList.value.firstWhereOrNull(
+            (element) => element.id == staff.value.departmentId,
+          );
         }
-        if (positionList.value.isNotEmpty) {
-          if (staff.value.positionId != null && staff.value.positionId != "") {
-            selectedPosition.value = positionList.value.firstWhere(
-              (element) => element.id == staff.value.positionId,
-              orElse: () => positionList.value.first,
-            );
-          }
-        } else {
-          selectedPosition.value = null;
+
+        if (staff.value.positionId != null) {
+          selectedPosition.value = positionList.value.firstWhereOrNull(
+            (element) => element.id == staff.value.positionId,
+          );
         }
+      } else {
+        selectedPosition.value = null;
       }
     }
   }

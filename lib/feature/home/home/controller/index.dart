@@ -7,7 +7,6 @@ import 'package:timesync/core/model/summary_attendance_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/home/home/model/check_in_model.dart';
 import 'package:timesync/feature/home/home/model/check_out_model.dart';
 import 'package:timesync/feature/home/home/model/update_user_status_model.dart';
@@ -190,44 +189,44 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       return;
     }
     DateTime now = await checkTime();
-    final getEndhout = endHour.value.split(":").first;
-    if (now.hour > getEndhout.toInt()) {
-      showErrorSnackBar("Error", "You can't check in after $endHour");
-      return;
-    } else {
-      controller.forward();
-      checkOutTime.value = null;
-      totalHour.value = null;
-      try {
-        LocationModel location = LocationModel(
-          lat: NavigationController.to.userLocation.value?.latitude,
-          lng: NavigationController.to.userLocation.value?.longitude,
-          inOffice: NavigationController.to.isInRange.value,
-        );
-        CheckInModel input = CheckInModel(
-          checkInDateTime: now.millisecondsSinceEpoch,
-          checkInType: AttendanceMethod.manual,
-          checkInStatus: CheckInStatusValidator.getStatus(startHour.value, now),
-          checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
-          checkInLate: GetMinute.checkLateMinute(startHour.value, now),
-          checkInLocation: location,
-        );
-        AttendanceModel checkIn = await HomeService().checkIn(input);
-        checkInTime.value = DateUtil.formatTime(
-          DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
-        );
-        await getAttendance();
-        isCheckedIn.value = true;
-        await getSummarizeAttendance();
-        if (Get.isRegistered<ProfileController>()) {
-          ProfileController.to.getSummarizeAttendance();
-        }
-        getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
-      } on DioException catch (e) {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-        rethrow;
+    // final getEndhout = endHour.value.split(":").first;
+    // if (now.hour > getEndhout.toInt()) {
+    //   showErrorSnackBar("Error", "You can't check in after $endHour");
+    //   return;
+    // } else {
+    controller.forward();
+    checkOutTime.value = null;
+    totalHour.value = null;
+    try {
+      LocationModel location = LocationModel(
+        lat: NavigationController.to.userLocation.value?.latitude,
+        lng: NavigationController.to.userLocation.value?.longitude,
+        inOffice: NavigationController.to.isInRange.value,
+      );
+      CheckInModel input = CheckInModel(
+        checkInDateTime: now.millisecondsSinceEpoch,
+        checkInType: AttendanceMethod.manual,
+        checkInStatus: CheckInStatusValidator.getStatus(startHour.value, now),
+        checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
+        checkInLate: GetMinute.checkLateMinute(startHour.value, now),
+        checkInLocation: location,
+      );
+      AttendanceModel checkIn = await HomeService().checkIn(input);
+      checkInTime.value = DateUtil.formatTime(
+        DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
+      );
+      await getAttendance();
+      isCheckedIn.value = true;
+      await getSummarizeAttendance();
+      if (Get.isRegistered<ProfileController>()) {
+        ProfileController.to.getSummarizeAttendance();
       }
+      getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
     }
+    // }
   }
 
   Future<void> checkOut() async {

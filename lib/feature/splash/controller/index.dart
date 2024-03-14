@@ -1,4 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
@@ -8,13 +13,11 @@ import 'package:timesync/core/model/organization_model.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/splash/service/index.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:timesync/types/role.dart';
 
 class SplashController extends GetxController
@@ -23,7 +26,7 @@ class SplashController extends GetxController
   final user = UserModel().obs;
   final position = PositionModel().obs;
   final double frameRate = 70;
-  final String title = 'timesync';
+  final String title = 'TimeSync';
   late AnimationController controller;
   late Animation<double> animation;
   final localDataService = LocalStorageController.getInstance();
@@ -53,7 +56,8 @@ class SplashController extends GetxController
   }
 
   Future<void> initLocalDb() async {
-    if (localData.value.accessToken != null) {
+    if (localData.value.accessToken != null &&
+        localData.value.accessToken != "") {
       await fetchMe();
       await getUserStatus();
       if (user.value.positionId != null && user.value.positionId != "") {
@@ -70,18 +74,27 @@ class SplashController extends GetxController
     if (localData.value.isActivated != true) {
       Get.offNamed(Routes.ACTIVATION);
       return;
-    } else if (localData.value.accessToken != null) {
+    } else if (localData.value.accessToken != null &&
+        localData.value.accessToken != "") {
       handleNotification(isAdmin.value);
-      Get.offNamed(Routes.NAVIGATION, arguments: {
-        "user": user.value,
-        "position": position.value,
-        "department": department.value,
-        "organization": organization.value,
-        "userStatus": userStatus.value,
-      });
+      Get.offNamed(
+        Routes.NAVIGATION,
+        arguments: {
+          "user": user.value,
+          "position": position.value,
+          "department": department.value,
+          "organization": organization.value,
+          "userStatus": userStatus.value,
+        },
+      );
       return;
     } else if (localData.value.isFirstTime == false) {
-      Get.offNamed(Routes.LOGIN);
+      Get.offNamed(
+        Routes.LOGIN,
+        arguments: {
+          "organization": organization.value,
+        },
+      );
       return;
     }
     Get.offNamed(Routes.ONBOARD);
@@ -162,7 +175,27 @@ class SplashController extends GetxController
       await initLocalDb();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
+      Get.offNamed(Routes.ACTIVATION);
+      await IsarService().clearLocalData(
+        deleteToken: true,
+        unactivate: true,
+        deleteOrganization: true,
+      );
       rethrow;
     }
+  }
+
+  void onResetApp() {
+    getConfirmBottomSheet(
+      Get.context!,
+      image: SvgAssets.empty,
+      title: "Reset App",
+      description: "Are you sure you want to reset the app?",
+      onTapConfirm: () async {
+        await IsarService().clearDataBase();
+        NotificationTopic.unsubscribeAll();
+        Restart.restartApp();
+      },
+    );
   }
 }

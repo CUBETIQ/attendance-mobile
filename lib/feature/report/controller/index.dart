@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:timesync/core/model/admin_attendance_report_model.dart';
 import 'package:timesync/core/model/admin_leave_report_model.dart';
 import 'package:timesync/core/model/admin_task_report_model.dart';
@@ -42,6 +44,11 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     Icons.person_rounded,
   ];
   final selectTabIndex = 2.obs;
+  // Define a timer variable to keep track of the debounce period.
+  Timer? _debounceTimer;
+
+  // Define a duration for the debounce period.
+  final Duration debounceDuration = const Duration(milliseconds: 500);
 
   @override
   void onInit() {
@@ -124,29 +131,38 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  List<Object?> eventLoader(DateTime day) {
+  List<dynamic> eventLoader(DateTime day) {
     return events.value[day] ?? [];
   }
 
   Future<void> onPageChanged(DateTime date) async {
-    if (DateTime(date.year, date.month) !=
-        DateTime(DateTime.now().year, DateTime.now().month)) {
-      calendarStartOfTheMonth.value =
-          DateUtil.getStartOfMonthInMilliseconds(date);
-      calendarEndOfTheMonth.value = DateUtil.getEndOfMonthInMilliseconds(date);
-      await getAttendance();
-      await getLeave();
-      onDaySelected(date, date);
-    } else {
-      calendarFocusedDay.value = DateTime.now();
-      calendarStartOfTheMonth.value =
-          DateUtil.getStartOfMonthInMilliseconds(DateTime.now());
-      calendarEndOfTheMonth.value =
-          DateUtil.getEndOfMonthInMilliseconds(DateTime.now());
-      await getAttendance();
-      await getLeave();
-      onDaySelected(DateTime.now(), DateTime.now());
-    }
+    _debounceTimer?.cancel();
+
+    // Start a new debounce timer.
+    _debounceTimer = Timer(
+      debounceDuration,
+      () async {
+        if (DateTime(date.year, date.month) !=
+            DateTime(DateTime.now().year, DateTime.now().month)) {
+          calendarStartOfTheMonth.value =
+              DateUtil.getStartOfMonthInMilliseconds(date);
+          calendarEndOfTheMonth.value =
+              DateUtil.getEndOfMonthInMilliseconds(date);
+          await getAttendance();
+          await getLeave();
+          onDaySelected(date, date);
+        } else {
+          calendarFocusedDay.value = DateTime.now();
+          calendarStartOfTheMonth.value =
+              DateUtil.getStartOfMonthInMilliseconds(DateTime.now());
+          calendarEndOfTheMonth.value =
+              DateUtil.getEndOfMonthInMilliseconds(DateTime.now());
+          await getAttendance();
+          await getLeave();
+          onDaySelected(DateTime.now(), DateTime.now());
+        }
+      },
+    );
   }
 
   Future<void> getLeave() async {

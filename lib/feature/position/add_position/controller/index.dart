@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/core/model/department_model.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/network/file_upload/model/file_metadata.dart';
 import 'package:timesync/core/network/file_upload/upload_file_service.dart';
@@ -24,6 +25,8 @@ class AddPositionController extends GetxController {
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
   final position = Rxn<PositionModel>(null);
+  final selectedDepartment = Rxn<DepartmentModel>(null);
+  final departmentList = <DepartmentModel>[].obs;
 
   @override
   void onInit() {

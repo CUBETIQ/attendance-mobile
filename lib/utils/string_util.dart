@@ -3,7 +3,7 @@ class StringUtil {
       String? firstName, String? lastName, String? username) {
     if ((firstName != null && firstName.isNotEmpty) &&
         (lastName != null && lastName.isNotEmpty)) {
-      return "$firstName $lastName";
+      return "$lastName $firstName";
     } else if ((firstName != null && firstName.isNotEmpty) &&
         (lastName == null || lastName.isEmpty == true)) {
       return firstName;

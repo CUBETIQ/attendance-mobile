@@ -37,6 +37,8 @@ import 'package:timesync/feature/onboard/view/index.dart';
 import 'package:timesync/feature/organization/edit_organization/view/index.dart';
 import 'package:timesync/feature/organization/organiziation/organization_binding.dart';
 import 'package:timesync/feature/organization/organiziation/view/index.dart';
+import 'package:timesync/feature/permission/app_permission_binding.dart';
+import 'package:timesync/feature/permission/view/index.dart';
 import 'package:timesync/feature/position/add_position/view/index.dart';
 import 'package:timesync/feature/position/position/position_binding.dart';
 import 'package:timesync/feature/position/position/view/index.dart';
@@ -51,6 +53,11 @@ import 'package:timesync/feature/qr_scan/view/index.dart';
 import 'package:timesync/feature/report/report_binding.dart';
 import 'package:timesync/feature/setting/change_theme/view/index.dart';
 import 'package:timesync/feature/setting/choose_language/view/index.dart';
+import 'package:timesync/feature/setting/developer_mode/device_info/device_info_binding.dart';
+import 'package:timesync/feature/setting/developer_mode/device_info/view/index.dart';
+import 'package:timesync/feature/setting/developer_mode/storage_management/storage_management_binding.dart';
+import 'package:timesync/feature/setting/developer_mode/storage_management/view/index.dart';
+import 'package:timesync/feature/setting/developer_mode/view/index.dart';
 import 'package:timesync/feature/setting/notification_setting/view/index.dart';
 import 'package:timesync/feature/setting/setting/setting_binding.dart';
 import 'package:timesync/feature/setting/setting/view/index.dart';
@@ -244,9 +251,25 @@ class AppPages {
       name: Routes.THEME,
       page: () => const ChangeThemeView(),
     ),
-        GetPage(
+    GetPage(
       name: Routes.NOTIFICATION_SETTING,
       page: () => const NotificationSettingView(),
     ),
+    GetPage(
+      name: Routes.DEVELOPER_MODE,
+      page: () => const DeveloperModeView(),
+    ),
+    GetPage(
+        name: Routes.APP_PERMISSION,
+        page: () => const AppPermissionView(),
+        binding: AppPermissionBinding()),
+    GetPage(
+        name: Routes.DEVICE_INFO,
+        page: () => const DeviceInfoView(),
+        binding: DeviceInfoBinding()),
+    GetPage(
+        name: Routes.STORAGE_MANAGEMENT,
+        page: () => const StorageManagementView(),
+        binding: StorageMangementBinding()),
   ];
 }

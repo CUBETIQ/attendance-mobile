@@ -44,4 +44,8 @@ abstract class Routes {
   static const POINT = '/point';
   static const NOTIFICATION = '/notification';
   static const NOTIFICATION_SETTING = '/notification_setting';
+  static const DEVELOPER_MODE = '/developer_mode';
+  static const APP_PERMISSION= '/app_permission';
+  static const DEVICE_INFO = '/device_info';
+  static const STORAGE_MANAGEMENT = '/storage_management';
 }

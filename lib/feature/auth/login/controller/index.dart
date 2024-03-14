@@ -39,6 +39,7 @@ class LoginController extends GetxController {
   @override
   onInit() {
     super.onInit();
+    initArguments();
     initRememberMe();
   }
 
@@ -186,5 +187,11 @@ class LoginController extends GetxController {
 
   void onTapShowPassword() {
     showPassword.value = !showPassword.value;
+  }
+
+  void initArguments() {
+    if (Get.arguments != null) {
+      organization.value = Get.arguments["organization"];
+    }
   }
 }

@@ -111,7 +111,9 @@ class AddLeaveView extends StatelessWidget {
                       textController: controller.durationController.value,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'),
+                        ),
                       ],
                     );
                   },

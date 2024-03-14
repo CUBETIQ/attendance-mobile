@@ -20,39 +20,42 @@ class InfoDataColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Row(
-          children: [
-            Icon(
-              icon,
-              color: iconColor,
-            ),
-            SizedBox(
-              width: SizeUtils.scale(5, size.width),
-            ),
-            MyText(
-              text: title,
-              style: AppFonts().bodyMediumMedium,
-            ),
-          ],
-        ),
-        SizedBox(
-          height: SizeUtils.scale(3, size.width),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: SizeUtils.scale(20, size.width),
+    return Padding(
+      padding: EdgeInsets.only(bottom: SizeUtils.scale(10, size.width)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            icon,
+            color: iconColor,
           ),
-          child: MyText(
-            text: value,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 10,
+          SizedBox(
+            width: SizeUtils.scale(5, size.width),
           ),
-        ),
-      ],
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                MyText(
+                  text: title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 5,
+                  style: AppFonts().bodyMediumMedium,
+                ),
+                SizedBox(
+                  height: SizeUtils.scale(3, size.width),
+                ),
+                MyText(
+                  text: value,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 20,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

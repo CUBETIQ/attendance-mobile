@@ -54,7 +54,7 @@ class KpiScoreCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: SizeUtils.scale(10, size.width),
+          right: SizeUtils.scale(8, size.width),
           top: SizeUtils.scale(10, size.width),
           child: Icon(
             Icons.star_rounded,
@@ -63,8 +63,8 @@ class KpiScoreCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: SizeUtils.scale(20, size.width),
-          top: SizeUtils.scale(18, size.width),
+          right: SizeUtils.scale(15, size.width),
+          top: SizeUtils.scale(20, size.width),
           child: Icon(
             Icons.star_rounded,
             color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),

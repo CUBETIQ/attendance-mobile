@@ -53,7 +53,8 @@ class SplashController extends GetxController
   }
 
   Future<void> initLocalDb() async {
-    if (localData.value.accessToken != null) {
+    if (localData.value.accessToken != null &&
+        localData.value.accessToken != "") {
       await fetchMe();
       await getUserStatus();
       if (user.value.positionId != null && user.value.positionId != "") {
@@ -70,15 +71,19 @@ class SplashController extends GetxController
     if (localData.value.isActivated != true) {
       Get.offNamed(Routes.ACTIVATION);
       return;
-    } else if (localData.value.accessToken != null) {
+    } else if (localData.value.accessToken != null &&
+        localData.value.accessToken != "") {
       handleNotification(isAdmin.value);
-      Get.offNamed(Routes.NAVIGATION, arguments: {
-        "user": user.value,
-        "position": position.value,
-        "department": department.value,
-        "organization": organization.value,
-        "userStatus": userStatus.value,
-      });
+      Get.offNamed(
+        Routes.NAVIGATION,
+        arguments: {
+          "user": user.value,
+          "position": position.value,
+          "department": department.value,
+          "organization": organization.value,
+          "userStatus": userStatus.value,
+        },
+      );
       return;
     } else if (localData.value.isFirstTime == false) {
       Get.offNamed(
@@ -168,7 +173,7 @@ class SplashController extends GetxController
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       Get.offNamed(Routes.ACTIVATION);
-      IsarService().clearLocalData(
+      await IsarService().clearLocalData(
         deleteToken: true,
         unactivate: true,
         deleteOrganization: true,

@@ -72,6 +72,7 @@ class SideDrawer extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   itemBuilder: (context, index) {
                     return ListTile(
+                      visualDensity: VisualDensity.compact,
                       dense: true,
                       contentPadding: EdgeInsets.symmetric(
                           horizontal:

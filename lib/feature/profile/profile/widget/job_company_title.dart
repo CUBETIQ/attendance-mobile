@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class JobCompanyTitle extends StatelessWidget {
   final String organization;
-  final String position;
+  final String? position;
 
   const JobCompanyTitle({
     super.key,
@@ -29,18 +29,20 @@ class JobCompanyTitle extends StatelessWidget {
                 ),
           ),
         ),
-        MyText(
-          text: " | ",
-          style: AppFonts().bodyMediumRegular.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-        ),
+        position != null
+            ? MyText(
+                text: " | ",
+                style: AppFonts().bodyMediumRegular.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+              )
+            : const SizedBox.shrink(),
         Container(
           constraints: BoxConstraints(
             maxWidth: size.width * 0.35,
           ),
           child: MyText(
-            text: position,
+            text: position ?? "",
             style: AppFonts().bodyMediumRegular.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),

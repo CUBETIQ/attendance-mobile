@@ -86,6 +86,7 @@ class LoginView extends StatelessWidget {
                 ),
                 MyText(
                   text: "Please fill your detail to access your account.",
+                  maxLines: 2,
                   style: AppFonts().bodyMediumRegular.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),

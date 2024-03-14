@@ -213,7 +213,7 @@ class NavigationController extends GetxController {
         DrawerModel(
           title: "Log out",
           icon: Icons.logout_rounded,
-          onTap: () {
+          onTap: () async {
             getLogOutBottomSheet(
               Get.context!,
               image: SvgAssets.leaving,

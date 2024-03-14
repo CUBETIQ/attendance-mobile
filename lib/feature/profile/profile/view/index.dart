@@ -94,9 +94,7 @@ class ProfileView extends StatelessWidget {
                           organization:
                               NavigationController.to.organization.value.name ??
                                   "Comapny",
-                          position:
-                              NavigationController.to.position.value.name ??
-                                  "Position",
+                          position: NavigationController.to.position.value.name,
                         ),
                       ),
                       SizedBox(height: size.height * 0.015),

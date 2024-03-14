@@ -2,12 +2,10 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timesync/utils/file_util.dart';
-import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/permission_handler.dart';
 
 class PickFileHandler {
   static Future<File?> openGallery() async {
-    Logs.i("File size is valid");
     File? file;
     final permission = Platform.isIOS
         ? await PermissonHandler.requestPhotoPermission()
@@ -18,13 +16,12 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.gallery);
         if (result != null) {
           file = File(result.path);
-          Logs.i(file);
-          // final validateFileSize = await FileUtil.validateFileSize(file);
-          // if (validateFileSize) {
-          return file;
-          // } else {
-          //   return null;
-          // }
+          final validateFileSize = await FileUtil.validateFileSize(file);
+          if (validateFileSize) {
+            return file;
+          } else {
+            return null;
+          }
         } else {
           return null;
         }

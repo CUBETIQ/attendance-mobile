@@ -136,7 +136,7 @@ class NavigationController extends GetxController {
             organizationLocation.value!, AppConfig.defaultLocationRadius);
       }
     } on Exception catch (e) {
-      showErrorSnackBar("Error", e.toString());
+      showWarningSnackBar("Location disabled", e.toString());
       rethrow;
     }
   }

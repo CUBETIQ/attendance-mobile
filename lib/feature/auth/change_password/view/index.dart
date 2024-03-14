@@ -83,6 +83,27 @@ class ChangePasswordView extends StatelessWidget {
                   hasLabel: true,
                   isPassword: controller.hideNewPassword.value,
                   onTapShowPassword: controller.onTapShowNewPassword,
+                  onChanged: (value) =>
+                      controller.onValidateConfirmPassword(value),
+                  haveSuffixIcon: true,
+                ),
+              ),
+              SizedBox(
+                height: SizeUtils.scale(5, size.height),
+              ),
+              Obx(
+                () => MyTextFieldForm(
+                  label: "Confirm Password",
+                  prefixIcon: Icons.lock_rounded,
+                  iconSize: SizeUtils.scale(16, size.width),
+                  textController: controller.confirmPasswordController,
+                  hintText: "Enter confirm password",
+                  hasLabel: true,
+                  isPassword: controller.hideNewPassword.value,
+                  onTapShowPassword: controller.onTapShowNewPassword,
+                  errorText: controller.validator.value,
+                  onChanged: (value) =>
+                      controller.onValidateConfirmPassword(value),
                   haveSuffixIcon: true,
                 ),
               ),

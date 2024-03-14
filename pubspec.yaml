@@ -44,7 +44,7 @@ dependencies:
   flutter_zoom_drawer: ^3.1.1
   ntp: ^2.0.0
   month_picker_dialog: ^2.4.0
-  table_calendar: ^3.0.9
+  table_calendar: ^3.1.0
   http_parser: ^4.0.2
   mime: ^1.0.4
   permission_handler: ^11.2.0

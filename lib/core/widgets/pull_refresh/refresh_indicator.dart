@@ -24,7 +24,17 @@ class MyRefreshIndicator extends StatelessWidget {
             return false;
           },
           child: ScrollConfiguration(
-              behavior: const ScrollBehavior(), child: child)),
+              behavior: const ScrollBehavior(),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: Container(
+                        height: size.height,
+                      )),
+                  child,
+                ],
+              ))),
     );
   }
 }

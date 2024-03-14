@@ -26,6 +26,7 @@ class MyTextFieldForm extends StatelessWidget {
   final double? iconSize;
   final int? maxlines;
   final bool? haveSuffixIcon;
+  final String? errorText;
   final void Function()? onTapShowPassword;
   final FocusNode? focusNode;
   final TextInputType? keyboardType;
@@ -48,6 +49,7 @@ class MyTextFieldForm extends StatelessWidget {
       this.isPassword,
       this.prefixIcon,
       this.maxlines,
+      this.errorText,
       this.focusNode,
       this.onTapShowPassword,
       this.haveSuffixIcon,
@@ -144,6 +146,7 @@ class MyTextFieldForm extends StatelessWidget {
                   fillColor: filled == true
                       ? Theme.of(context).colorScheme.primary.withOpacity(0.095)
                       : null,
+                  errorText: errorText,
                   errorMaxLines: 2,
                   focusedBorder: UnderlineInputBorder(
                     borderRadius: BorderRadius.only(
@@ -227,6 +230,7 @@ class MyTextFieldForm extends StatelessWidget {
                 ),
                 style: style ?? AppFonts().bodyMediumMedium,
                 onChanged: (value) {
+                  onChanged?.call(value);
                   controller.formKey.currentState?.validate();
                   onChanged?.call(value);
                 },

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
@@ -34,6 +35,8 @@ class AppConfig {
 
   static bool isDarkMode = false;
 
+  static final Rx<bool> isDevMode = false.obs;
+
   static String? theme;
 
   static bool? isActivated = false;
@@ -42,11 +45,13 @@ class AppConfig {
 
   static const double defaultLocationRadius = 200;
 
+  static PackageInfo? packageInfo;
+
   static Future<void> initAppConfig() async {
     _localData = await LocalStorageController.getInstance().get();
-    final packageInfo = await PackageInfo.fromPlatform();
+    packageInfo = await PackageInfo.fromPlatform();
     _userAgent =
-        "TimeSyncApi:SDK-Dart/${packageInfo.version} (${Platform.isAndroid ? 'Android' : 'iOS'})";
+        "TimeSyncApi:SDK-Dart/${packageInfo?.version} (${Platform.isAndroid ? 'Android' : 'iOS'})";
     accessToken = _localData?.accessToken;
     isFirstTime = _localData?.isFirstTime;
     isActivated = _localData?.isActivated;

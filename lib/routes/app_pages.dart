@@ -53,6 +53,9 @@ import 'package:timesync/feature/qr_scan/view/index.dart';
 import 'package:timesync/feature/report/report_binding.dart';
 import 'package:timesync/feature/setting/change_theme/view/index.dart';
 import 'package:timesync/feature/setting/choose_language/view/index.dart';
+import 'package:timesync/feature/setting/developer_mode/device_info/device_info_binding.dart';
+import 'package:timesync/feature/setting/developer_mode/device_info/view/index.dart';
+import 'package:timesync/feature/setting/developer_mode/view/index.dart';
 import 'package:timesync/feature/setting/notification_setting/view/index.dart';
 import 'package:timesync/feature/setting/setting/setting_binding.dart';
 import 'package:timesync/feature/setting/setting/view/index.dart';
@@ -251,9 +254,16 @@ class AppPages {
       page: () => const NotificationSettingView(),
     ),
     GetPage(
-      name: Routes.APP_PERMISSION,
-      page: () => const AppPermissionView(),
-      binding: AppPermissionBinding()
+      name: Routes.DEVELOPER_MODE,
+      page: () => const DeveloperModeView(),
     ),
+    GetPage(
+        name: Routes.APP_PERMISSION,
+        page: () => const AppPermissionView(),
+        binding: AppPermissionBinding()),
+    GetPage(
+        name: Routes.DEVICE_INFO,
+        page: () => const DeviceInfoView(),
+        binding: DeviceInfoBinding()),
   ];
 }

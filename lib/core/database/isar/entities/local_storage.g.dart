@@ -32,53 +32,58 @@ const LocalStorageSchema = CollectionSchema(
       name: r'isActivated',
       type: IsarType.bool,
     ),
-    r'isEnableNotification': PropertySchema(
+    r'isDevMode': PropertySchema(
       id: 3,
+      name: r'isDevMode',
+      type: IsarType.bool,
+    ),
+    r'isEnableNotification': PropertySchema(
+      id: 4,
       name: r'isEnableNotification',
       type: IsarType.bool,
     ),
     r'isFirstTime': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'isFirstTime',
       type: IsarType.bool,
     ),
     r'isRememberMe': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'isRememberMe',
       type: IsarType.string,
     ),
     r'language': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'language',
       type: IsarType.string,
     ),
     r'organizationId': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'organizationId',
       type: IsarType.string,
     ),
     r'refreshToken': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'refreshToken',
       type: IsarType.string,
     ),
     r'theme': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'theme',
       type: IsarType.string,
     ),
     r'userId': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'userId',
       type: IsarType.string,
     ),
     r'userRole': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'userRole',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'username',
       type: IsarType.string,
     )
@@ -169,16 +174,17 @@ void _localStorageSerialize(
   writer.writeString(offsets[0], object.accessToken);
   writer.writeBool(offsets[1], object.darkTheme);
   writer.writeBool(offsets[2], object.isActivated);
-  writer.writeBool(offsets[3], object.isEnableNotification);
-  writer.writeBool(offsets[4], object.isFirstTime);
-  writer.writeString(offsets[5], object.isRememberMe);
-  writer.writeString(offsets[6], object.language);
-  writer.writeString(offsets[7], object.organizationId);
-  writer.writeString(offsets[8], object.refreshToken);
-  writer.writeString(offsets[9], object.theme);
-  writer.writeString(offsets[10], object.userId);
-  writer.writeString(offsets[11], object.userRole);
-  writer.writeString(offsets[12], object.username);
+  writer.writeBool(offsets[3], object.isDevMode);
+  writer.writeBool(offsets[4], object.isEnableNotification);
+  writer.writeBool(offsets[5], object.isFirstTime);
+  writer.writeString(offsets[6], object.isRememberMe);
+  writer.writeString(offsets[7], object.language);
+  writer.writeString(offsets[8], object.organizationId);
+  writer.writeString(offsets[9], object.refreshToken);
+  writer.writeString(offsets[10], object.theme);
+  writer.writeString(offsets[11], object.userId);
+  writer.writeString(offsets[12], object.userRole);
+  writer.writeString(offsets[13], object.username);
 }
 
 LocalStorage _localStorageDeserialize(
@@ -192,16 +198,17 @@ LocalStorage _localStorageDeserialize(
   object.darkTheme = reader.readBoolOrNull(offsets[1]);
   object.id = id;
   object.isActivated = reader.readBoolOrNull(offsets[2]);
-  object.isEnableNotification = reader.readBoolOrNull(offsets[3]);
-  object.isFirstTime = reader.readBoolOrNull(offsets[4]);
-  object.isRememberMe = reader.readStringOrNull(offsets[5]);
-  object.language = reader.readStringOrNull(offsets[6]);
-  object.organizationId = reader.readStringOrNull(offsets[7]);
-  object.refreshToken = reader.readStringOrNull(offsets[8]);
-  object.theme = reader.readStringOrNull(offsets[9]);
-  object.userId = reader.readStringOrNull(offsets[10]);
-  object.userRole = reader.readStringOrNull(offsets[11]);
-  object.username = reader.readStringOrNull(offsets[12]);
+  object.isDevMode = reader.readBoolOrNull(offsets[3]);
+  object.isEnableNotification = reader.readBoolOrNull(offsets[4]);
+  object.isFirstTime = reader.readBoolOrNull(offsets[5]);
+  object.isRememberMe = reader.readStringOrNull(offsets[6]);
+  object.language = reader.readStringOrNull(offsets[7]);
+  object.organizationId = reader.readStringOrNull(offsets[8]);
+  object.refreshToken = reader.readStringOrNull(offsets[9]);
+  object.theme = reader.readStringOrNull(offsets[10]);
+  object.userId = reader.readStringOrNull(offsets[11]);
+  object.userRole = reader.readStringOrNull(offsets[12]);
+  object.username = reader.readStringOrNull(offsets[13]);
   return object;
 }
 
@@ -223,7 +230,7 @@ P _localStorageDeserializeProp<P>(
     case 4:
       return (reader.readBoolOrNull(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 6:
       return (reader.readStringOrNull(offset)) as P;
     case 7:
@@ -237,6 +244,8 @@ P _localStorageDeserializeProp<P>(
     case 11:
       return (reader.readStringOrNull(offset)) as P;
     case 12:
+      return (reader.readStringOrNull(offset)) as P;
+    case 13:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -612,6 +621,34 @@ extension LocalStorageQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isActivated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isDevModeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'isDevMode',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isDevModeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'isDevMode',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      isDevModeEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isDevMode',
         value: value,
       ));
     });
@@ -1949,6 +1986,18 @@ extension LocalStorageQuerySortBy
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByIsDevMode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isDevMode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByIsDevModeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isDevMode', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
       sortByIsEnableNotification() {
     return QueryBuilder.apply(this, (query) {
@@ -2129,6 +2178,18 @@ extension LocalStorageQuerySortThenBy
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenByIsDevMode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isDevMode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenByIsDevModeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isDevMode', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
       thenByIsEnableNotification() {
     return QueryBuilder.apply(this, (query) {
@@ -2278,6 +2339,12 @@ extension LocalStorageQueryWhereDistinct
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByIsDevMode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isDevMode');
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QDistinct>
       distinctByIsEnableNotification() {
     return QueryBuilder.apply(this, (query) {
@@ -2372,6 +2439,12 @@ extension LocalStorageQueryProperty
   QueryBuilder<LocalStorage, bool?, QQueryOperations> isActivatedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isActivated');
+    });
+  }
+
+  QueryBuilder<LocalStorage, bool?, QQueryOperations> isDevModeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isDevMode');
     });
   }
 

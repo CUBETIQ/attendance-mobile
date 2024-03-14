@@ -83,12 +83,9 @@ class StaffReportViewMobile extends StatelessWidget {
                 },
                 selectedDayPredicate: (day) =>
                     isSameDay(day, controller.selectedDate.value),
-                    
                 onDaySelected: controller.onDaySelected,
                 onPageChanged: controller.onPageChanged,
-                eventLoader: (day) {
-                  return controller.events.value[day] ?? [];
-                },
+                eventLoader: controller.eventLoader,
               ),
             ),
             AttendanceTextTitle(

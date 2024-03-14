@@ -23,7 +23,7 @@ class SplashController extends GetxController
   final user = UserModel().obs;
   final position = PositionModel().obs;
   final double frameRate = 70;
-  final String title = 'timesync';
+  final String title = 'TimeSync';
   late AnimationController controller;
   late Animation<double> animation;
   final localDataService = LocalStorageController.getInstance();
@@ -81,7 +81,12 @@ class SplashController extends GetxController
       });
       return;
     } else if (localData.value.isFirstTime == false) {
-      Get.offNamed(Routes.LOGIN);
+      Get.offNamed(
+        Routes.LOGIN,
+        arguments: {
+          "organization": organization.value,
+        },
+      );
       return;
     }
     Get.offNamed(Routes.ONBOARD);
@@ -162,6 +167,12 @@ class SplashController extends GetxController
       await initLocalDb();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
+      Get.offNamed(Routes.ACTIVATION);
+      IsarService().clearLocalData(
+        deleteToken: true,
+        unactivate: true,
+        deleteOrganization: true,
+      );
       rethrow;
     }
   }

@@ -124,7 +124,7 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  List<Object?> eventLoader(DateTime day) {
+  List<dynamic> eventLoader(DateTime day) {
     return events.value[day] ?? [];
   }
 

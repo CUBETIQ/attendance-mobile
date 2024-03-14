@@ -30,6 +30,7 @@ class OrganizationController extends GetxController {
       organization.value = await OrganizationService().getOrganization(
         id: NavigationController.to.organization.value.id!,
       );
+      NavigationController.to.organization.value = organization.value;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

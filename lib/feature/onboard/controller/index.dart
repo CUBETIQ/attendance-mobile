@@ -4,6 +4,7 @@ import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/feature/onboard/model/onboard_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/routes/app_pages.dart';
 
 class OnBoardController extends GetxController {
   static OnBoardController get to => Get.find();
@@ -41,7 +42,7 @@ class OnBoardController extends GetxController {
     if (currentIndex.value == 2) {
       localStorageData?.isFirstTime = false;
       await IsarService().saveLocalData(input: localStorageData);
-      Get.offNamed('/login');
+      Get.offNamed(Routes.APP_PERMISSION);
     } else {
       pageController!.nextPage(
         duration: const Duration(milliseconds: 500),

@@ -37,6 +37,8 @@ import 'package:timesync/feature/onboard/view/index.dart';
 import 'package:timesync/feature/organization/edit_organization/view/index.dart';
 import 'package:timesync/feature/organization/organiziation/organization_binding.dart';
 import 'package:timesync/feature/organization/organiziation/view/index.dart';
+import 'package:timesync/feature/permission/app_permission_binding.dart';
+import 'package:timesync/feature/permission/view/index.dart';
 import 'package:timesync/feature/position/add_position/view/index.dart';
 import 'package:timesync/feature/position/position/position_binding.dart';
 import 'package:timesync/feature/position/position/view/index.dart';
@@ -244,9 +246,14 @@ class AppPages {
       name: Routes.THEME,
       page: () => const ChangeThemeView(),
     ),
-        GetPage(
+    GetPage(
       name: Routes.NOTIFICATION_SETTING,
       page: () => const NotificationSettingView(),
+    ),
+    GetPage(
+      name: Routes.APP_PERMISSION,
+      page: () => const AppPermissionView(),
+      binding: AppPermissionBinding()
     ),
   ];
 }

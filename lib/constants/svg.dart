@@ -49,4 +49,6 @@ class SvgAssets {
   static const String fileIconPpt = "assets/svgs/icons/ppt.svg";
   static const String fileIconTxt = "assets/svgs/icons/txt.svg";
   static const String fileIconXls = "assets/svgs/icons/ppt.svg";
+  static const String locationPermission = "assets/svgs/location_permission.svg";
+  static const String notificationPermission = "assets/svgs/notification_permission.svg";
 }

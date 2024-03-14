@@ -39,7 +39,6 @@ class NotificationIntegration {
         initializeMessageListener(value);
       }
     });
-    // requestPermission();
     initializeInApplication();
   }
 
@@ -54,9 +53,9 @@ class NotificationIntegration {
 
       const DarwinInitializationSettings initializationSettingsIOS =
           DarwinInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
+        requestAlertPermission: false,
+        requestBadgePermission: false,
+        requestSoundPermission: false,
         onDidReceiveLocalNotification: onDidReceiveLocalNotification,
       );
 

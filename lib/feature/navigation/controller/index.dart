@@ -219,7 +219,10 @@ class NavigationController extends GetxController {
               image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
-                Get.offNamed(Routes.LOGIN);
+                Get.offNamed(
+                  Routes.LOGIN,
+                  arguments: {"organization": organization.value},
+                );
               },
             );
           },
@@ -250,7 +253,10 @@ class NavigationController extends GetxController {
               image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
-                Get.offNamed(Routes.LOGIN);
+                Get.offNamed(
+                  Routes.LOGIN,
+                  arguments: {"organization": organization.value},
+                );
               },
             );
           },

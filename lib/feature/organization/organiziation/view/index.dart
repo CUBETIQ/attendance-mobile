@@ -58,8 +58,9 @@ class OrganizationView extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: SizeUtils.scale(20, size.width)),
+                      padding: EdgeInsets.only(
+                          top: SizeUtils.scale(20, size.width),
+                          bottom: SizeUtils.scale(10, size.width)),
                       child: MyCard(
                         width: size.width,
                         padding: EdgeInsets.symmetric(
@@ -83,69 +84,74 @@ class OrganizationView extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      InfoDataColumn(
-                                        icon: Icons.login_rounded,
-                                        iconColor: MyColor.successColor,
-                                        title: "Start Hour",
-                                        value: controller.organization.value
-                                                .configs?.startHour ??
-                                            "00:00",
-                                      ),
-                                      InfoDataColumn(
-                                        icon: Icons.coffee_rounded,
-                                        iconColor: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        title: "Break Time",
-                                        value: controller.organization.value
-                                                .configs?.breakTime ??
-                                            "00:00",
-                                      ),
-                                      InfoDataColumn(
-                                        icon: Icons.location_on_rounded,
-                                        iconColor: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        title: "Company's Address",
-                                        value: controller
-                                                .organization.value.address ??
-                                            "N/A",
-                                      ),
-                                    ],
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        InfoDataColumn(
+                                          icon: Icons.login_rounded,
+                                          iconColor: MyColor.successColor,
+                                          title: "Start Hour",
+                                          value: controller.organization.value
+                                                  .configs?.startHour ??
+                                              "00:00",
+                                        ),
+                                        InfoDataColumn(
+                                          icon: Icons.coffee_rounded,
+                                          iconColor: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          title: "Break Time",
+                                          value: controller.organization.value
+                                                  .configs?.breakTime ??
+                                              "00:00",
+                                        ),
+                                        InfoDataColumn(
+                                          icon: Icons.location_on_rounded,
+                                          iconColor: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          title: "Company's Address",
+                                          value: controller
+                                                  .organization.value.address ??
+                                              "N/A",
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      InfoDataColumn(
-                                        icon: Icons.logout_rounded,
-                                        iconColor:
-                                            Theme.of(context).colorScheme.error,
-                                        title: "End Hour",
-                                        value: controller.organization.value
-                                                .configs?.endHour ??
-                                            "00:00",
-                                      ),
-                                      InfoDataColumn(
-                                        icon: Icons.timer_rounded,
-                                        iconColor: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        title: "Break Duration",
-                                        value: controller.organization.value
-                                                .configs?.breakDuration ??
-                                            "00:00",
-                                      ),
-                                    ],
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        InfoDataColumn(
+                                          icon: Icons.logout_rounded,
+                                          iconColor: Theme.of(context)
+                                              .colorScheme
+                                              .error,
+                                          title: "End Hour",
+                                          value: controller.organization.value
+                                                  .configs?.endHour ??
+                                              "00:00",
+                                        ),
+                                        InfoDataColumn(
+                                          icon: Icons.timer_rounded,
+                                          iconColor: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          title: "Break Duration",
+                                          value: controller.organization.value
+                                                  .configs?.breakDuration ??
+                                              "00:00",
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: SizeUtils.scale(15, size.width)),
                               InfoDataColumn(
                                 icon: Icons.description_rounded,
                                 iconColor:

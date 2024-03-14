@@ -29,6 +29,7 @@ class MyTextFieldForm extends StatelessWidget {
   final void Function()? onTapShowPassword;
   final FocusNode? focusNode;
   final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
 
   const MyTextFieldForm(
       {super.key,
@@ -51,7 +52,8 @@ class MyTextFieldForm extends StatelessWidget {
       this.onTapShowPassword,
       this.haveSuffixIcon,
       this.keyboardType,
-      this.iconSize});
+      this.iconSize,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -226,6 +228,7 @@ class MyTextFieldForm extends StatelessWidget {
                 style: style ?? AppFonts().bodyMediumMedium,
                 onChanged: (value) {
                   controller.formKey.currentState?.validate();
+                  onChanged?.call(value);
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {

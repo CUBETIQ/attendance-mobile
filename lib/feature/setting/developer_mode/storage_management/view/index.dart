@@ -68,7 +68,7 @@ Widget buildCacheBlock(
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Theme.of(Get.context!).colorScheme.shadow.withOpacity(0.1),
+            color: Theme.of(Get.context!).colorScheme.shadow.withOpacity(0.08),
             spreadRadius: 1,
             blurRadius: 10,
             offset: const Offset(0, 5),

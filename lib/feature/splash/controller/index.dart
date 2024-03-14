@@ -1,4 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
@@ -8,13 +13,11 @@ import 'package:timesync/core/model/organization_model.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/splash/service/index.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:timesync/types/role.dart';
 
 class SplashController extends GetxController
@@ -180,5 +183,19 @@ class SplashController extends GetxController
       );
       rethrow;
     }
+  }
+
+  void onResetApp() {
+    getConfirmBottomSheet(
+      Get.context!,
+      image: SvgAssets.empty,
+      title: "Reset App",
+      description: "Are you sure you want to reset the app?",
+      onTapConfirm: () async {
+        await IsarService().clearDataBase();
+        NotificationTopic.unsubscribeAll();
+        Restart.restartApp();
+      },
+    );
   }
 }

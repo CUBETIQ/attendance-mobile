@@ -18,22 +18,26 @@ class SplashView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            FadeTransition(
-              opacity: controller.animation,
-              child: Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    SizeUtils.scale(
-                      AppSize().borderRadiusXLarge,
-                      size.width,
+            InkWell(
+              onLongPress: controller.onResetApp,
+              splashColor: Colors.transparent,
+              child: FadeTransition(
+                opacity: controller.animation,
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      SizeUtils.scale(
+                        AppSize().borderRadiusXLarge,
+                        size.width,
+                      ),
                     ),
                   ),
-                ),
-                height: SizeUtils.scale(100, size.width),
-                child: Image.asset(
-                  ImageAssets.logotimesync,
-                  fit: BoxFit.cover,
+                  height: SizeUtils.scale(100, size.width),
+                  child: Image.asset(
+                    ImageAssets.logotimesync,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

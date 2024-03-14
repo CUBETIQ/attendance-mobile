@@ -45,10 +45,14 @@ class ChangeThemeView extends StatelessWidget {
               children: [
                 ...List.generate(
                   controller.list.length,
-                  (index) => ColorCard(
-                    onTap: () => controller.onTap(index),
-                    data: controller.list[index],
-                  ),
+                  (index) => Obx(() {
+                    return ColorCard(
+                      onTap: () => controller.onTap(index),
+                      data: controller.list[index],
+                      selected: controller.selectedTheme.value ==
+                          controller.list[index].color,
+                    );
+                  }),
                 ),
               ],
             ),

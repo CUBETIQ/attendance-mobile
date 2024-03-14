@@ -93,7 +93,8 @@ class SettingView extends StatelessWidget {
                                   leadingIcon: Icons.developer_mode_rounded,
                                   title: "Developer",
                                   description: "Access the developer features.",
-                                  onTap: () => Get.toNamed(Routes.DEVELOPER_MODE),
+                                  onTap: () =>
+                                      Get.toNamed(Routes.DEVELOPER_MODE),
                                 ),
                               ],
                             );
@@ -103,24 +104,28 @@ class SettingView extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: [
-              Obx(() {
-                return AppConfig.isDevMode.value == false
-                    ? const SizedBox.shrink()
-                    : MyText(
-                        text: 'Developer Mode',
-                        style: AppFonts().bodyLargeMedium.copyWith(
-                            color: Theme.of(context).colorScheme.primary));
-              }),
-              DeveloperMode(
-                child: Obx(() => MyText(
-                    text:
-                        '${'Version'.trString}: ${AppConfig.packageInfo?.version ?? '0.0.0'}',
-                    style: AppFonts().bodyMediumRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline))),
-              ),
-            ],
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: SizeUtils.scale(10, MediaQuery.of(context).size.width)),
+            child: Column(
+              children: [
+                Obx(() {
+                  return AppConfig.isDevMode.value == false
+                      ? const SizedBox.shrink()
+                      : MyText(
+                          text: 'Developer Mode',
+                          style: AppFonts().bodyLargeMedium.copyWith(
+                              color: Theme.of(context).colorScheme.primary));
+                }),
+                DeveloperMode(
+                  child: Obx(() => MyText(
+                      text:
+                          '${'Version'.trString}: ${AppConfig.packageInfo?.version ?? '0.0.0'}',
+                      style: AppFonts().bodyMediumRegular.copyWith(
+                          color: Theme.of(context).colorScheme.outline))),
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -53,6 +53,8 @@ class IsarService extends GetxService {
       appConfig.theme = input?.theme ?? appConfig.theme;
       appConfig.isEnableNotification =
           input?.isEnableNotification ?? appConfig.isEnableNotification ?? true;
+      appConfig.userId = input?.userId ?? appConfig.userId;
+      appConfig.userRole = input?.userRole ?? appConfig.userRole;
       AppConfig.setConfig(appConfig);
       await _localStorage.insert(appConfig);
     } catch (e) {
@@ -91,6 +93,8 @@ class IsarService extends GetxService {
       appConfig.language = appConfig.language;
       appConfig.isRememberMe = appConfig.isRememberMe;
       appConfig.username = appConfig.username;
+      appConfig.userId = null;
+      appConfig.userRole = null;
       await _localStorage.insert(appConfig);
     } catch (e) {
       rethrow;

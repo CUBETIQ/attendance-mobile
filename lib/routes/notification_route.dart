@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
-import 'package:timesync/config/app_config.dart';
 import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/string_util.dart';
 
 import '../core/database/isar/controller/local_storage_controller.dart';
 
@@ -25,15 +23,14 @@ class NotifyRoutePage {
   static void pushToOtherPagesFromForeground(
       NotificationResponse message) async {
     if (message.payload == null || message.payload?.isEmpty == true) return;
-    Logs.e('pushToOtherPagesFromBackground: ${message.payload}');
-    final payload = jsonDecode(message.payload ?? '');
-
-    handlePayload(payload);
+    final payload =
+        StringUtil.convertToJsonStringQuotes(raw: message.payload ?? "{}");
+    final decodedPayload = json.decode(payload);
+    handlePayload(decodedPayload["type"]);
   }
 
   static void handlePayload(String? key) {
-    final currentRoute = Get.currentRoute;
-    final userId = AppConfig.getLocalData?.username;
-    //TODO: handle payload
+    // final currentRoute = Get.currentRoute;
+    // final userId = AppConfig.getLocalData?.userId;
   }
 }

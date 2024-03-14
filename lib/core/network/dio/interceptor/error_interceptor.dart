@@ -79,7 +79,7 @@ class ErrorInterceptor extends dio.Interceptor {
       refreshToken = response.data["data"]["refreshToken"];
       localStorageData = LocalStorageModel(
           accessToken: accessToken, refreshToken: refreshToken);
-      await IsarService().saveLocalData(input: localStorageData);
+      await IsarService.to.saveLocalData(input: localStorageData);
     } else {
       await IsarService().clearLocalData(deleteToken: true);
       Get.offNamed(Routes.LOGIN);

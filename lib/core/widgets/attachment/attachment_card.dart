@@ -38,7 +38,6 @@ class AttachmentCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: width ?? size.width,
-      height: height ?? SizeUtils.scale(70, size.width),
       margin: EdgeInsets.only(
         bottom: SizeUtils.scale(AppSize().paddingS2, size.width),
       ),
@@ -46,8 +45,8 @@ class AttachmentCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MyCard(
-            width: imageWidth ?? SizeUtils.scale(60, size.width),
-            height: imageHeight ?? SizeUtils.scale(60, size.width),
+            width: imageWidth ?? SizeUtils.scale(70, size.width),
+            height: imageHeight ?? SizeUtils.scale(70, size.width),
             borderRadius: BorderRadius.circular(
               SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
             ),
@@ -100,7 +99,6 @@ class AttachmentCard extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   constraints: BoxConstraints(

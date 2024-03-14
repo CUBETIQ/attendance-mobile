@@ -30,7 +30,7 @@ class LeaveCard extends StatelessWidget {
     return GestureDetector(
       onTap: leave.status != LeaveStatus.pending ? null : onTap,
       child: Container(
-        height: SizeUtils.scale(175, size.width),
+        height: SizeUtils.scale(178, size.width),
         margin: EdgeInsets.only(
             bottom: SizeUtils.scale(AppSize().paddingS8, size.width)),
         padding: EdgeInsets.symmetric(
@@ -83,9 +83,6 @@ class LeaveCard extends StatelessWidget {
                           color: Colors.white,
                         ),
                   ),
-                ),
-                SizedBox(
-                  height: SizeUtils.scale(8, size.width),
                 ),
                 MyText(
                   text:

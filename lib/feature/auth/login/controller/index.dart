@@ -10,10 +10,12 @@ import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync/feature/auth/login/model/index.dart';
 import 'package:timesync/feature/auth/login/service/index.dart';
+import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/types/role.dart';
 import '../../../../core/model/user_model.dart';
 
 class LoginController extends GetxController {
@@ -32,6 +34,7 @@ class LoginController extends GetxController {
   LocalStorageModel? localStorageData = LocalStorageModel();
   final accessToken = Rxn<String>(null);
   final refreshToken = Rxn<String>(null);
+  final isAdmin = false.obs;
 
   @override
   onInit() {
@@ -49,10 +52,9 @@ class LoginController extends GetxController {
           username: usernameController.text,
           password: passwordController.text,
         );
-        var token = await LoginService().login(input);
+        final token = await LoginService().login(input);
         accessToken.value = token.first;
         refreshToken.value = token.last;
-
         await getOrganization(storageData?.organizationId ?? "");
         await fetchMe();
         await getUserStatus();
@@ -67,6 +69,7 @@ class LoginController extends GetxController {
               user.value.departmentId != "") {
             await getDepartment();
           }
+          handleNotification(isAdmin.value);
           Get.offNamed(Routes.NAVIGATION, arguments: {
             "user": user.value,
             "position": position.value,
@@ -79,6 +82,14 @@ class LoginController extends GetxController {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
       }
+    }
+  }
+
+  void handleNotification(bool isAdmin) {
+    if (AppConfig.getLocalData?.isEnableNotification == true) {
+      NotificationTopic.subscribe([
+        NotificationTopic.getUserTypeTopic(isAdmin: isAdmin, id: user.value.id),
+      ]);
     }
   }
 
@@ -113,6 +124,14 @@ class LoginController extends GetxController {
   Future<void> fetchMe() async {
     try {
       user.value = await LoginService().fetchMe();
+      if (user.value.role == Role.admin) {
+        isAdmin.value = true;
+      }
+      localStorageData = LocalStorageModel(
+        userId: user.value.id,
+        userRole: user.value.role,
+      );
+      await IsarService().saveLocalData(input: localStorageData);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -140,7 +159,6 @@ class LoginController extends GetxController {
   Future<void> getOrganization(String id) async {
     try {
       organization.value = await LoginService().getOrganization(id: id);
-      localStorageData?.organizationId = organization.value?.id;
       if (organization.value != null) {
         localStorageData = LocalStorageModel(
           accessToken: accessToken.value,

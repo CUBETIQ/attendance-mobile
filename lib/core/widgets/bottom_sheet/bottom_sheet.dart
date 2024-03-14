@@ -649,7 +649,7 @@ void getOptionsBottomSheet(
                 AppSize().paddingHorizontalLarge,
                 size.width,
               ),
-              top: SizeUtils.scale(AppSize().paddingTitleSmall, size.width),
+              top: SizeUtils.scale(20, size.width),
             ),
             child: Column(
               children: [
@@ -673,7 +673,7 @@ void getOptionsBottomSheet(
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            vertical: SizeUtils.scale(10, size.width)),
+                            vertical: SizeUtils.scale(6, size.width)),
                         child: MyButton(
                           isIconButton: true,
                           icon: Icons.edit_rounded,

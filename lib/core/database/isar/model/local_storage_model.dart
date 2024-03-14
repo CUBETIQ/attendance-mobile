@@ -13,6 +13,7 @@ class LocalStorageModel {
   String? theme;
   bool? isEnableNotification;
   String? userRole;
+  bool? isDevMode;
 
   LocalStorageModel({
     this.userId,
@@ -29,5 +30,6 @@ class LocalStorageModel {
     this.theme,
     this.isEnableNotification,
     this.userRole,
+    this.isDevMode,
   });
 }

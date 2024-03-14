@@ -1,3 +1,4 @@
+import 'package:get/get_navigation/src/routes/new_path_route.dart';
 import 'package:timesync/constants/svg.dart';
 
 class SvgUtil {
@@ -18,10 +19,14 @@ class SvgUtil {
       'pptx': SvgAssets.fileIconPpt,
       'txt': SvgAssets.fileIconTxt,
       'xls': SvgAssets.fileIconXls,
+      'heic': SvgAssets.fileIconJpg,
     };
 
-    final entry =
-        svgMap.entries.firstWhere((entry) => (extension).contains(entry.key));
+    final entry = svgMap.entries
+        .firstWhereOrNull((entry) => (extension).contains(entry.key));
+    if (entry == null) {
+      return "";
+    }
     return entry.value;
   }
 }

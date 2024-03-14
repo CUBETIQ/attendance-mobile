@@ -14,7 +14,6 @@ class OnBoardView extends StatelessWidget {
     final controller = OnBoardController.to;
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

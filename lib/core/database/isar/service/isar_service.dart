@@ -27,6 +27,7 @@ class IsarService extends GetxService {
     AppConfig.theme = appConfig?.theme;
     AppConfig.isFirstTime = appConfig?.isFirstTime ?? false;
     AppConfig.isDarkMode = appConfig?.darkTheme ?? false;
+    AppConfig.isDevMode.value = appConfig?.isDevMode ?? false;
   }
 
   Future<void> clearDataBase() async {
@@ -55,6 +56,7 @@ class IsarService extends GetxService {
           input?.isEnableNotification ?? appConfig.isEnableNotification ?? true;
       appConfig.userId = input?.userId ?? appConfig.userId;
       appConfig.userRole = input?.userRole ?? appConfig.userRole;
+      appConfig.isDevMode = input?.isDevMode ?? appConfig.isDevMode ?? false;
       AppConfig.setConfig(appConfig);
       await _localStorage.insert(appConfig);
     } catch (e) {

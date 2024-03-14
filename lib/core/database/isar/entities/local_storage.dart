@@ -8,15 +8,16 @@ class LocalStorage {
   Id? id;
   String? organizationId;
   bool? isActivated = false;
+  bool? isFirstTime = true;
+  bool? isEnableNotification;
+  bool? isDevMode;
+  bool? darkTheme;
   String? accessToken;
   String? refreshToken;
   String? language;
-  bool? darkTheme;
-  bool? isFirstTime = true;
   String? isRememberMe;
   String? username;
   String? userId;
   String? theme;
-  bool? isEnableNotification;
   String? userRole;
 }

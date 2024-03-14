@@ -42,6 +42,12 @@ class DeveloperModeView extends StatelessWidget {
                   description: "Show device information.",
                   onTap: () => Get.toNamed(Routes.DEVICE_INFO),
                 ),
+                SettingCardButton(
+                  leadingIcon: Icons.storage_rounded,
+                  title: "Storage Management",
+                  description: "Show storage information.",
+                  onTap: () => Get.toNamed(Routes.STORAGE_MANAGEMENT),
+                ),
               ],
             ),
           ),

@@ -55,6 +55,8 @@ import 'package:timesync/feature/setting/change_theme/view/index.dart';
 import 'package:timesync/feature/setting/choose_language/view/index.dart';
 import 'package:timesync/feature/setting/developer_mode/device_info/device_info_binding.dart';
 import 'package:timesync/feature/setting/developer_mode/device_info/view/index.dart';
+import 'package:timesync/feature/setting/developer_mode/storage_management/storage_management_binding.dart';
+import 'package:timesync/feature/setting/developer_mode/storage_management/view/index.dart';
 import 'package:timesync/feature/setting/developer_mode/view/index.dart';
 import 'package:timesync/feature/setting/notification_setting/view/index.dart';
 import 'package:timesync/feature/setting/setting/setting_binding.dart';
@@ -265,5 +267,9 @@ class AppPages {
         name: Routes.DEVICE_INFO,
         page: () => const DeviceInfoView(),
         binding: DeviceInfoBinding()),
+    GetPage(
+        name: Routes.STORAGE_MANAGEMENT,
+        page: () => const StorageManagementView(),
+        binding: StorageMangementBinding()),
   ];
 }

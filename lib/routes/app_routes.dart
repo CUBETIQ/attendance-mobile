@@ -47,4 +47,5 @@ abstract class Routes {
   static const DEVELOPER_MODE = '/developer_mode';
   static const APP_PERMISSION= '/app_permission';
   static const DEVICE_INFO = '/device_info';
+  static const STORAGE_MANAGEMENT = '/storage_management';
 }

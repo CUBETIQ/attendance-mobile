@@ -7,6 +7,7 @@ import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/employee/employee/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/role.dart';
 import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class StaffController extends GetxController {
       staffsBackUp.value = await StaffService()
           .getAllStaffs(organizationId: organizationId.value);
       staffs.value = staffsBackUp.value;
+      staffs.value.removeWhere((element) => element.role == Role.superadmin);
     } on DioException catch (e) {
       isLoading.value = false;
       showErrorSnackBar("Error", e.response?.data["message"]);

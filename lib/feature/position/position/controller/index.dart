@@ -43,11 +43,20 @@ class PositionController extends GetxController {
 
   Future<void> deletePosition(String id) async {
     try {
-      await PositionService().deletePosition(id);
-      positionListBackUp.value.removeWhere((element) => element.id == id);
-      positionList.value = positionListBackUp.value;
-      positionListBackUp.refresh();
-      positionList.refresh();
+      getConfirmBottomSheet(
+        Get.context!,
+        title: "Delete Position",
+        description: "Are you sure to delete this position?",
+        onTapConfirm: () async {
+          await PositionService().deletePosition(id);
+          positionListBackUp.value.removeWhere((element) => element.id == id);
+          positionList.value = positionListBackUp.value;
+          positionListBackUp.refresh();
+          positionList.refresh();
+          Get.back();
+        },
+        image: SvgAssets.delete,
+      );
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -69,8 +78,8 @@ class PositionController extends GetxController {
         Get.back();
       },
       onTapDelete: () async {
-        await deletePosition(position.id ?? "");
         Get.back();
+        await deletePosition(position.id ?? "");
       },
     );
   }

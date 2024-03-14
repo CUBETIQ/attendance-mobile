@@ -67,7 +67,7 @@ void getCheckInBottomSheet(BuildContext context,
             Padding(
               padding: EdgeInsets.only(bottom: size.height * 0.05),
               child: MyButton(
-                title: "Confirm",
+                title: "Close",
                 onTap: () => Get.back(),
               ),
             ),
@@ -133,7 +133,7 @@ void getCheckOutBottomSheet(BuildContext context,
             Padding(
               padding: EdgeInsets.only(bottom: size.height * 0.05),
               child: MyButton(
-                title: "Confirm",
+                title: "Close",
                 onTap: () => Get.back(),
               ),
             ),

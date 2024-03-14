@@ -18,7 +18,7 @@ class KpiScoreCard extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(
-              AppSize().paddingHorizontalMedium,
+              AppSize().paddingHorizontalSmall,
               size.width,
             ),
             vertical: SizeUtils.scale(

@@ -5,8 +5,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/utils/logger.dart';
+
 import '../core/database/isar/controller/local_storage_controller.dart';
-import 'app_pages.dart';
 
 class NotifyRoutePage {
   static final NotifyRoutePage instance = NotifyRoutePage._();

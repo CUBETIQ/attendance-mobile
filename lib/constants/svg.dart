@@ -49,7 +49,9 @@ class SvgAssets {
   static const String fileIconPpt = "assets/svgs/icons/ppt.svg";
   static const String fileIconTxt = "assets/svgs/icons/txt.svg";
   static const String fileIconXls = "assets/svgs/icons/ppt.svg";
-  static const String fileIconHeic = "assets/svgs/icons/heic.svg";
-  static const String locationPermission = "assets/svgs/location_permission.svg";
-  static const String notificationPermission = "assets/svgs/notification_permission.svg";
+  static const String fileIconJpg = "assets/svgs/icons/jpg.svg";
+  static const String locationPermission =
+      "assets/svgs/location_permission.svg";
+  static const String notificationPermission =
+      "assets/svgs/notification_permission.svg";
 }

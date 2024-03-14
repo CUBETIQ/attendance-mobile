@@ -19,7 +19,7 @@ class SvgUtil {
       'pptx': SvgAssets.fileIconPpt,
       'txt': SvgAssets.fileIconTxt,
       'xls': SvgAssets.fileIconXls,
-      'heic': SvgAssets.fileIconHeic,
+      'heic': SvgAssets.fileIconJpg,
     };
 
     final entry = svgMap.entries

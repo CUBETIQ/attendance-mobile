@@ -27,12 +27,14 @@ class FileUtil {
   static bool checkFileImageExtension(String? extension) {
     if (extension == null) return false;
 
-    if (extension == '.jpg' ||
-        extension == '.jpeg' ||
+    if (extension == 'jpg' ||
+        extension == '.jpg' ||
         extension == '.png' ||
-        extension == 'jpg' ||
+        extension == 'png' ||
         extension == 'jpeg' ||
-        extension == 'png') {
+        extension == '.jpeg' ||
+        extension == 'heic' ||
+        extension == '.heic') {
       return true;
     }
     return false;

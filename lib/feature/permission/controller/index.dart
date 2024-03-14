@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/database/isar/model/local_storage_model.dart';
+import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/feature/navigation/service/index.dart';
 import 'package:timesync/feature/onboard/model/onboard_model.dart';
 import 'package:timesync/notification/notification_service.dart';
+import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
 
 class AppPermissionController extends GetxController {
@@ -32,8 +35,10 @@ class AppPermissionController extends GetxController {
     pageController = PageController();
   }
 
-  void maybeLater() {
+  Future<void> maybeLater() async {
     if (currentIndex.value == 0) {
+      await IsarService().saveLocalData(input: LocalStorageModel(isEnableNotification: false));
+      NotificationTopic.unsubscribeAll();
       pageController!.nextPage(
         duration: const Duration(milliseconds: 500),
         curve: Curves.ease,

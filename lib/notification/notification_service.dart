@@ -39,7 +39,7 @@ class NotificationIntegration {
         initializeMessageListener(value);
       }
     });
-    requestPermission();
+    // requestPermission();
     initializeInApplication();
   }
 

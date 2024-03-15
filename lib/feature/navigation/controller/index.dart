@@ -73,7 +73,7 @@ class NavigationController extends GetxController {
     items.addAll(
       [
         BottomBarModel(
-            title: 'Home',  
+            title: 'Home',
             icon: Icons.home_rounded,
             selectedIcon: Icons.home_rounded,
             actionIcon: getUserRole.value == Role.admin

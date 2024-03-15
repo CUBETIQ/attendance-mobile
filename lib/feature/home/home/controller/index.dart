@@ -13,6 +13,7 @@ import 'package:timesync/feature/home/home/model/update_user_status_model.dart';
 import 'package:timesync/feature/home/home/service/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
+import 'package:timesync/feature/qr/service/index.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
@@ -24,6 +25,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
+import 'package:timesync/utils/validator.dart';
+import 'package:uni_links/uni_links.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   static HomeController get to => Get.find();
@@ -98,14 +101,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   @override
   void onInit() {
     super.onInit();
+    initData();
+  }
+
+  Future<void> initData() async {
     initDate();
     initAnimation();
     initTabWithRole();
-    getAttendance();
     checkBreakTime();
     getUsername();
+    await getAttendance();
     getSummarizeAttendance();
     checkTime();
+    listenToDeepLink();
   }
 
   void onRefresh() {
@@ -113,6 +121,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     getAttendance();
     checkBreakTime();
     getSummarizeAttendance();
+  }
+
+  void listenToDeepLink() {
+    uriLinkStream.listen((Uri? uri) async {
+      if (uri != null) {
+        QRService().initDeepLink();
+      }
+    });
+
+    if (!Validator.isValNull(QRService().deepLinkUrl.value)) {
+      QRService()
+          .initDeepLink()
+          .whenComplete(() => QRService().deepLinkUrl.value = null);
+    }
   }
 
   void initAnimation() {

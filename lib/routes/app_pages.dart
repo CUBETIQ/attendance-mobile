@@ -48,8 +48,8 @@ import 'package:timesync/feature/profile/earn_point/earn_point_binding.dart';
 import 'package:timesync/feature/profile/earn_point/view/index.dart';
 import 'package:timesync/feature/profile/edit_profile/view/index.dart';
 import 'package:timesync/feature/profile/profile/profile_binding.dart';
-import 'package:timesync/feature/qr_scan/scan_qr_binding.dart';
-import 'package:timesync/feature/qr_scan/view/index.dart';
+import 'package:timesync/feature/qr/scan_qr_binding.dart';
+import 'package:timesync/feature/qr/view/index.dart';
 import 'package:timesync/feature/report/report_binding.dart';
 import 'package:timesync/feature/setting/change_theme/view/index.dart';
 import 'package:timesync/feature/setting/choose_language/view/index.dart';
@@ -243,9 +243,9 @@ class AppPages {
       binding: EarnPointBinding(),
     ),
     GetPage(
-      name: Routes.SCANQR,
-      page: () => const ScanQRView(),
-      binding: ScanQRBinding(),
+      name: Routes.QR,
+      page: () => const MyQRView(),
+      binding: QRBinding(),
     ),
     GetPage(
       name: Routes.THEME,

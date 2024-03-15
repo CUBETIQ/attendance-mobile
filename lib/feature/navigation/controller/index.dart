@@ -4,7 +4,6 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:timesync/config/app_config.dart';
-import 'package:timesync/constants/bottom_bar_item.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/model/department_model.dart';
@@ -14,6 +13,7 @@ import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/navigation/model/bottom_bar_model.dart';
 import 'package:timesync/feature/navigation/model/drawer_model.dart';
 import 'package:timesync/feature/navigation/service/index.dart';
 import 'package:timesync/notification/notification_topic.dart';
@@ -22,6 +22,7 @@ import 'package:timesync/types/role.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/location_util.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
@@ -32,7 +33,8 @@ class NavigationController extends GetxController {
   final getUserRole = "".obs;
   late List<DrawerModel> drawerItems;
   final titles = ['Home', 'Task', 'Profile'];
-  final items = MyBottomBarItem.bottomBatItems;
+  final items = RxList<BottomBarModel>([]);
+
   final organizationLocation = Rxn<OranizationLocationModel>(null);
   final userLocation = Rxn<Position>(null);
   final isInRange = false.obs;
@@ -61,9 +63,56 @@ class NavigationController extends GetxController {
     getUserRole.value = user.value.role ?? Role.staff;
     fullname.value =
         "${user.value.firstName ?? user.value.username!} ${user.value.lastName ?? ""}";
+    initItems();
     getUserLocation();
     getOrganizationTotalWorkHour();
     initSideBarMenu();
+  }
+
+  void initItems() {
+    items.addAll(
+      [
+        BottomBarModel(
+            title: 'Home',
+            icon: Icons.home_rounded,
+            selectedIcon: Icons.home_rounded,
+            actionIcon: getUserRole.value == Role.admin
+                ? SvgAssets.qr
+                : SvgAssets.scanQR,
+            actionOnTap: () {
+              Get.toNamed(Routes.QR, arguments: {"role": getUserRole.value});
+            }),
+        BottomBarModel(
+          title: 'Report',
+          icon: Icons.bar_chart_outlined,
+          selectedIcon: Icons.bar_chart_rounded,
+        ),
+        BottomBarModel(
+          title: 'Task',
+          icon: Icons.task_rounded,
+          selectedIcon: Icons.task_rounded,
+        ),
+        BottomBarModel(
+          title: 'Leave',
+          icon: Icons.work_off_rounded,
+          selectedIcon: Icons.work_off_rounded,
+        ),
+        BottomBarModel(
+          title: 'Profile',
+          icon: Icons.person_rounded,
+          selectedIcon: Icons.person_rounded,
+          actionIcon: SvgAssets.coin,
+          hasColor: true,
+          actionHeight:
+              SizeUtils.scale(22, MediaQuery.of(Get.context!).size.width),
+          actionWidth:
+              SizeUtils.scale(22, MediaQuery.of(Get.context!).size.width),
+          actionOnTap: () {
+            Get.toNamed(Routes.POINT);
+          },
+        ),
+      ],
+    );
   }
 
   void onDestinationSelected(int index) {

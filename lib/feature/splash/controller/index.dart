@@ -15,10 +15,13 @@ import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/qr/service/index.dart';
 import 'package:timesync/feature/splash/service/index.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/role.dart';
+import 'package:timesync/utils/logger.dart';
+import 'package:uni_links/uni_links.dart';
 
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -41,6 +44,7 @@ class SplashController extends GetxController
   void onInit() {
     super.onInit();
     validateOrganization();
+    initDeepLink();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -53,6 +57,14 @@ class SplashController extends GetxController
   void onClose() {
     super.onClose();
     controller.dispose();
+  }
+
+  Future<void> initDeepLink() async {
+    try {
+      QRService().deepLinkUrl.value = await getInitialLink();
+    } catch (e) {
+      Logs.e('[SplashController.initDeepLInk] Error', error: e);
+    }
   }
 
   Future<void> initLocalDb() async {

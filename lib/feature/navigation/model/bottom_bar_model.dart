@@ -4,12 +4,20 @@ class BottomBarModel {
   final String title;
   final IconData icon;
   final IconData selectedIcon;
-  final Widget? action;
+  final String? actionIcon;
+  final Function()? actionOnTap;
+  final double? actionHeight;
+  final double? actionWidth;
+  final bool? hasColor;
 
   BottomBarModel({
     required this.title,
     required this.icon,
     required this.selectedIcon,
-    this.action,
+    this.actionIcon,
+    this.actionHeight,
+    this.actionWidth,
+    this.hasColor,
+    this.actionOnTap,
   });
 }

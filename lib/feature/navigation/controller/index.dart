@@ -1,3 +1,8 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/bottom_bar_item.dart';
 import 'package:timesync/constants/svg.dart';
@@ -11,16 +16,12 @@ import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/navigation/model/drawer_model.dart';
 import 'package:timesync/feature/navigation/service/index.dart';
+import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/utils/location_util.dart';
-import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/types/state.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/utils/location_util.dart';
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
@@ -178,6 +179,12 @@ class NavigationController extends GetxController {
               image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
+                NotificationTopic.unsubscribe([
+                  NotificationTopic.getUserTypeTopic(
+                    isAdmin: true,
+                    id: AppConfig.getLocalData?.userId,
+                  ),
+                ]);
                 Get.offNamed(
                   Routes.LOGIN,
                   arguments: {"organization": organization.value},
@@ -212,6 +219,12 @@ class NavigationController extends GetxController {
               image: SvgAssets.leaving,
               onTapLogOut: () async {
                 await IsarService().clearLocalData(deleteToken: true);
+                NotificationTopic.unsubscribe([
+                  NotificationTopic.getUserTypeTopic(
+                    isAdmin: false,
+                    id: AppConfig.getLocalData?.userId,
+                  ),
+                ]);
                 Get.offNamed(
                   Routes.LOGIN,
                   arguments: {"organization": organization.value},

@@ -11,7 +11,7 @@ import 'package:timesync/utils/size_util.dart';
 
 class DepartmentDetailView extends StatelessWidget {
   const DepartmentDetailView({super.key});
- @override
+  @override
   Widget build(BuildContext context) {
     final controller = DepartmentDetailController.to;
     final size = MediaQuery.of(context).size;

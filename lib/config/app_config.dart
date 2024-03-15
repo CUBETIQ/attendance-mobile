@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
@@ -6,6 +7,8 @@ import 'package:timesync/core/database/isar/entities/local_storage.dart';
 import 'package:timesync/key.dart';
 import 'package:timesync/utils/encrypt_util.dart';
 import 'package:timesync/utils/file_util.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 class AppConfig {
   static const String baseUrl = "http://192.168.1.104:3000/api";
@@ -18,6 +21,8 @@ class AppConfig {
   static String? appLocalPath;
 
   static const String appName = "timesync";
+
+  static String? time;
 
   // Setup the local storage for fetching while using the app
   static LocalStorage? _localData = LocalStorage();
@@ -48,6 +53,10 @@ class AppConfig {
   static PackageInfo? packageInfo;
 
   static Future<void> initAppConfig() async {
+    // init timezone
+    tz.initializeTimeZones();
+    final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(currentTimeZone));
     _localData = await LocalStorageController.getInstance().get();
     packageInfo = await PackageInfo.fromPlatform();
     _userAgent =

@@ -57,6 +57,7 @@ class PositionView extends StatelessWidget {
                   ),
                   constraints: BoxConstraints.loose(size),
                   onSubmitted: controller.searchPosition,
+                  onChanged: controller.searchPosition,
                   leading: IconButton(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
@@ -84,6 +85,7 @@ class PositionView extends StatelessWidget {
                     builderWidget: ListView.separated(
                       itemCount: controller.positionList.length,
                       shrinkWrap: true,
+                      padding: EdgeInsets.all(SizeUtils.scale(1, size.width)),
                       physics: const AlwaysScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
                         height: SizeUtils.scale(

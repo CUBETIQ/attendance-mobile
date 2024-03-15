@@ -142,8 +142,8 @@ class StaffController extends GetxController {
 
   void onTapViewDetail(
     UserModel staff,
-    PositionModel position,
-    DepartmentModel department,
+    PositionModel? position,
+    DepartmentModel? department,
   ) {
     Get.toNamed(
       Routes.STAFF_DETAIL,

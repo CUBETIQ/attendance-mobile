@@ -27,10 +27,10 @@ class DepartmentCard extends StatelessWidget {
       onTap: onTap,
       child: MyCard(
         width: size.width,
-        height: SizeUtils.scale(60, size.width),
         padding: EdgeInsets.symmetric(
           horizontal:
               SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+          vertical: SizeUtils.scale(AppSize().paddingS4, size.width),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

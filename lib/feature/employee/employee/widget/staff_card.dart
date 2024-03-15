@@ -37,7 +37,7 @@ class StaffCard extends StatelessWidget {
         padding: EdgeInsets.symmetric(
           horizontal:
               SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
-          vertical: SizeUtils.scale(AppSize().paddingS2, size.width),
+          vertical: SizeUtils.scale(AppSize().paddingS4, size.width),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(

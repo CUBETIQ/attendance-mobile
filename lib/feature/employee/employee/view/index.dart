@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
-import 'package:timesync/core/model/department_model.dart';
-import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
@@ -55,6 +53,7 @@ class StaffView extends StatelessWidget {
                   hintText: "Search Employee",
                   elevation: MaterialStateProperty.all<double>(0.8),
                   onSubmitted: controller.searchStaff,
+                  onChanged: controller.searchStaff,
                   constraints: BoxConstraints.loose(size),
                   textStyle: MaterialStateProperty.all<TextStyle>(
                     AppFonts().bodyMediumMedium.copyWith(
@@ -96,6 +95,7 @@ class StaffView extends StatelessWidget {
                     builderWidget: ListView.separated(
                       itemCount: controller.staffs.length,
                       shrinkWrap: true,
+                      padding: EdgeInsets.all(SizeUtils.scale(1, size.width)),
                       physics: const AlwaysScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
                         height: SizeUtils.scale(
@@ -105,20 +105,19 @@ class StaffView extends StatelessWidget {
                       ),
                       itemBuilder: (context, index) {
                         final staff = controller.staffs[index];
-                        final position = controller.positions.firstWhere(
+                        final position = controller.positions.firstWhereOrNull(
                           (element) => element.id == staff.positionId,
-                          orElse: () => PositionModel(),
                         );
-                        final department = controller.departments.firstWhere(
+                        final department =
+                            controller.departments.firstWhereOrNull(
                           (element) => element.id == staff.departmentId,
-                          orElse: () => DepartmentModel(),
                         );
                         return StaffCard(
                           onTapViewDetail: () => controller.onTapViewDetail(
                               staff, position, department),
                           onTap: () => controller.onTapStaff(staff),
                           staff: controller.staffs[index],
-                          position: position.name,
+                          position: position?.name,
                         );
                       },
                     ),

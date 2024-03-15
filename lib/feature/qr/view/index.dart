@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/image.dart';
+import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
@@ -26,51 +29,70 @@ class MyQRView extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
+        actions: [
+          !controller.isAdmin
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding:
+                      EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
+                  child: GestureDetector(
+                    onTap: controller.onTapShare,
+                    child: SvgPicture.asset(
+                      SvgAssets.share,
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.onBackground,
+                          BlendMode.srcIn),
+                    ),
+                  ),
+                ),
+        ],
       ),
       body: controller.isAdmin
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      QrImageView(
-                        data:
-                            'timesyncmobile://myqr.timesync.com/${NavigationController.to.organization.value.name?.replaceAll(' ', '_')}/checkin',
-                        version: QrVersions.auto,
-                        size: SizeUtils.scale(180, size.width),
-                        // ignore: deprecated_member_use
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onBackground,
-                        eyeStyle: QrEyeStyle(
-                            eyeShape: QrEyeShape.circle,
-                            color: Theme.of(context).colorScheme.primary),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: SizeUtils.scale(30, size.width),
-                        width: SizeUtils.scale(30, size.width),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 2,
-                          ),
-                          image: const DecorationImage(
-                            image: AssetImage(ImageAssets.logotimesync),
-                            fit: BoxFit.cover,
-                          ),
+          ? Screenshot(
+              controller: controller.screenshotController,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        QrImageView(
+                          data: controller.link,
+                          version: QrVersions.auto,
+                          size: SizeUtils.scale(180, size.width),
+                          // ignore: deprecated_member_use
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onBackground,
+                          eyeStyle: QrEyeStyle(
+                              eyeShape: QrEyeShape.circle,
+                              color: Theme.of(context).colorScheme.primary),
                         ),
-                        child: MyCacheImage(
-                          imageUrl:
-                              NavigationController.to.organization.value.image,
-                          defaultImage: '',
-                          isRounded: false,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                        Container(
+                          alignment: Alignment.center,
+                          height: SizeUtils.scale(30, size.width),
+                          width: SizeUtils.scale(30, size.width),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                            image: const DecorationImage(
+                              image: AssetImage(ImageAssets.logotimesync),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: MyCacheImage(
+                            imageUrl: NavigationController
+                                .to.organization.value.image,
+                            defaultImage: '',
+                            isRounded: false,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           : Stack(

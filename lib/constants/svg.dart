@@ -38,6 +38,7 @@ class SvgAssets {
   static const String position = 'assets/svgs/position.svg';
   static const String scanQR = 'assets/svgs/scan_qr.svg';
   static const String qr = 'assets/svgs/qr.svg';
+  static const String share = 'assets/svgs/share.svg';
   static const String image = "assets/svgs/image.svg";
   static const String file = "assets/svgs/file.svg";
   static const String fileIconCsv = "assets/svgs/icons/csv.svg";

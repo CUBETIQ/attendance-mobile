@@ -74,7 +74,7 @@ class MainScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
             child: Obx(() {
               return controller
                           .items[controller.selectedIndex.value].actionIcon ==

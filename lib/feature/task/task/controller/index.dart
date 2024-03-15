@@ -150,15 +150,6 @@ class TaskController extends GetxController {
     );
   }
 
-  void onTapCompleteTask(TaskModel task) {
-    Get.toNamed(
-      Routes.TASK_DETAIL,
-      arguments: {
-        "task": task,
-      },
-    );
-  }
-
   void initDate() {
     DateTime now = DateTime.now();
     startDate.value = DateTime(now.year, now.month, 1).millisecondsSinceEpoch;

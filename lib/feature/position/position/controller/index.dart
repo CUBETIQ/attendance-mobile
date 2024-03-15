@@ -1,6 +1,8 @@
+import 'package:timesync/core/model/department_model.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/department/department/service/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/position/position/service/index.dart';
 import 'package:dio/dio.dart';
@@ -16,11 +18,30 @@ class PositionController extends GetxController {
   final positionListBackUp = <PositionModel>[].obs;
   final searchController = TextEditingController();
   final isLoading = false.obs;
+  final departmentList = <DepartmentModel>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    getAllPositions();
+    onInitPosition();
+    onInitDepartment();
+  }
+
+  void onInitPosition() {
+    if (NavigationController.to.positions.isNotEmpty) {
+      positionListBackUp.value = NavigationController.to.positions.value;
+      positionList.value = positionListBackUp.value;
+    } else {
+      getAllPositions();
+    }
+  }
+
+  void onInitDepartment() {
+    if (NavigationController.to.departments.isNotEmpty) {
+      departmentList.value = NavigationController.to.departments.value;
+    } else {
+      getAllDepartments();
+    }
   }
 
   Future<void> onRefresh() async {
@@ -33,6 +54,21 @@ class PositionController extends GetxController {
       positionListBackUp.value = await PositionService().getAllPosition(
           organizationId: NavigationController.to.organization.value.id ?? "");
       positionList.value = positionListBackUp.value;
+      NavigationController.to.positions.value = positionListBackUp.value;
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> getAllDepartments() async {
+    isLoading.value = true;
+    try {
+      departmentList.value = await DepartmentService().getAllDepartment(
+          organizationId: NavigationController.to.organization.value.id ?? "");
+      NavigationController.to.departments.value = departmentList.value;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -73,6 +109,7 @@ class PositionController extends GetxController {
           arguments: {
             "state": AppState.edit,
             "position": position,
+            "departments": departmentList.value
           },
         );
         Get.back();
@@ -92,7 +129,10 @@ class PositionController extends GetxController {
   }
 
   void onTapAddPosition() {
-    Get.toNamed(Routes.ADD_POSITION, arguments: {"state": AppState.create});
+    Get.toNamed(Routes.ADD_POSITION, arguments: {
+      "state": AppState.create,
+      "departments": departmentList.value
+    });
   }
 
   void searchPosition(String value) {

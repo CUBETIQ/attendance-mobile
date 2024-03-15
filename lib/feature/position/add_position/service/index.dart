@@ -35,10 +35,12 @@ class AddPositionService {
 
   Future<void> updatePosition(String id, EditPositionModel input) async {
     Map<String, dynamic> inputData = input.toJson();
+
     Response response = await dioInstance.dio.put(
       Endpoints.instance.get_position + id,
       data: inputData,
     );
+
     if (response.statusCode != 200) {
       throw Exception("Update position failed");
     }

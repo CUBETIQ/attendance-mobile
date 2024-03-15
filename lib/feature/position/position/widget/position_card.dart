@@ -30,7 +30,7 @@ class PositionCard extends StatelessWidget {
         height: SizeUtils.scale(60, size.width),
         padding: EdgeInsets.symmetric(
           horizontal:
-              SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+              SizeUtils.scale(AppSize().paddingHorizontalMedium, size.width),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -4,8 +4,10 @@ import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/department/department/service/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/employee/employee/service/index.dart';
+import 'package:timesync/feature/position/position/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/types/state.dart';
@@ -59,23 +61,33 @@ class StaffController extends GetxController {
   }
 
   Future<void> getAllPositions() async {
-    isLoading.value = true;
-    try {
-      positions.value = await StaffService()
-          .getAllPosition(organizationId: organizationId.value);
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
+    if (NavigationController.to.positions.value.isNotEmpty) {
+      positions.value = NavigationController.to.positions.value;
+    } else {
+      isLoading.value = true;
+      try {
+        positions.value = await PositionService()
+            .getAllPosition(organizationId: organizationId.value);
+        NavigationController.to.positions.value = positions.value;
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
+      }
     }
   }
 
   Future<void> getAllDepartments() async {
-    try {
-      departments.value = await StaffService()
-          .getDepartment(organizationId: organizationId.value);
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
+    if (NavigationController.to.departments.value.isNotEmpty) {
+      departments.value = NavigationController.to.departments.value;
+    } else {
+      try {
+        departments.value = await DepartmentService()
+            .getAllDepartment(organizationId: organizationId.value);
+        NavigationController.to.departments.value = departments.value;
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+        rethrow;
+      }
     }
   }
 
@@ -130,8 +142,8 @@ class StaffController extends GetxController {
 
   void onTapViewDetail(
     UserModel staff,
-    PositionModel position,
-    DepartmentModel department,
+    PositionModel? position,
+    DepartmentModel? department,
   ) {
     Get.toNamed(
       Routes.STAFF_DETAIL,

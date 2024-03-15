@@ -61,6 +61,7 @@ class DepartmentView extends StatelessWidget {
                     ),
                     constraints: BoxConstraints.loose(size),
                     onSubmitted: controller.searchDepartment,
+                    onChanged: controller.searchDepartment,
                     leading: IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
@@ -88,6 +89,7 @@ class DepartmentView extends StatelessWidget {
                       builderWidget: ListView.separated(
                         itemCount: controller.departmentList.length,
                         shrinkWrap: true,
+                        padding: EdgeInsets.all(SizeUtils.scale(1, size.width)),
                         physics: const AlwaysScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => SizedBox(
                           height: SizeUtils.scale(

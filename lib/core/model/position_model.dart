@@ -6,6 +6,7 @@ class PositionModel extends BaseModel<PositionModel> {
   final String? description;
   final String? image;
   final String? organizationId;
+  final String? departmentId;
 
   PositionModel({
     this.id,
@@ -13,6 +14,7 @@ class PositionModel extends BaseModel<PositionModel> {
     this.description,
     this.image,
     this.organizationId,
+    this.departmentId,
   });
 
   @override
@@ -26,6 +28,7 @@ class PositionModel extends BaseModel<PositionModel> {
       description: json['description'],
       image: json['image'],
       organizationId: json['organizationId'],
+      departmentId: json['departmentId'],
     );
   }
 
@@ -45,6 +48,7 @@ class PositionModel extends BaseModel<PositionModel> {
       "description": description,
       "image": image,
       "organizationId": organizationId,
+      "departmentId": departmentId,
     };
   }
 }

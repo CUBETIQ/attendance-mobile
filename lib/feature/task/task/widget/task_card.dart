@@ -14,7 +14,6 @@ class TaskCard extends StatelessWidget {
   final TaskModel task;
   final void Function()? onTap;
   final void Function(bool) onCheck;
-  final void Function()? onTapCompleted;
   final String? color;
   final String? icon;
 
@@ -25,14 +24,13 @@ class TaskCard extends StatelessWidget {
     required this.onCheck,
     this.color,
     this.icon,
-    this.onTapCompleted,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: task.status == TaskStatus.completed ? onTapCompleted : onTap,
+      onTap: onTap,
       child: Container(
         width: size.width,
         padding: EdgeInsets.symmetric(

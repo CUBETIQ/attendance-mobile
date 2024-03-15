@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/utils.dart';
@@ -73,10 +74,32 @@ class MainScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
             child: Obx(() {
-              return controller.items[controller.selectedIndex.value].action ??
-                  const SizedBox.shrink();
+              return controller
+                          .items[controller.selectedIndex.value].actionIcon ==
+                      null
+                  ? const SizedBox.shrink()
+                  : GestureDetector(
+                      onTap: controller
+                          .items[controller.selectedIndex.value].actionOnTap,
+                      child: SvgPicture.asset(
+                        height: controller
+                            .items[controller.selectedIndex.value].actionHeight,
+                        width: controller
+                            .items[controller.selectedIndex.value].actionWidth,
+                        controller
+                            .items[controller.selectedIndex.value].actionIcon!,
+                        colorFilter: controller
+                                    .items[controller.selectedIndex.value]
+                                    .hasColor ==
+                                true
+                            ? null
+                            : ColorFilter.mode(
+                                Theme.of(context).colorScheme.onBackground,
+                                BlendMode.srcIn),
+                      ),
+                    );
             }),
           ),
         ],

@@ -37,11 +37,15 @@ class AddPositionController extends GetxController {
   void initArgument() {
     final data = Get.arguments;
     state.value = data["state"];
+    departmentList.value = data["departments"];
     if (state.value == AppState.edit) {
       title.value = "Edit Position";
       position.value = data["position"];
       image.value = position.value?.image;
       nameController.text = position.value?.name ?? "";
+      selectedDepartment.value = departmentList.firstWhereOrNull(
+        (element) => element.id == position.value?.departmentId,
+      );
       descriptionController.text = position.value?.description ?? "";
     }
   }
@@ -68,6 +72,7 @@ class AddPositionController extends GetxController {
         description: descriptionController.text,
         image: image.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
+        departmentId: selectedDepartment.value?.id ?? "",
       );
       position.value = await AddPositionService().addPosition(input);
       PositionController.to.positionListBackUp.value.add(position.value!);
@@ -103,6 +108,7 @@ class AddPositionController extends GetxController {
         name: nameController.text,
         description: descriptionController.text,
         image: image.value,
+        departmentId: selectedDepartment.value?.id ?? "",
       );
       await AddPositionService().updatePosition(
         position.value?.id ?? "",

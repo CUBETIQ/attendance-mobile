@@ -46,12 +46,8 @@ class NotificationTopic {
   static unsubscribe(List<String> topics) {
     for (var topic in topics) {
       if (topic.isNotEmpty) {
-        if (_subscribedTopics.contains(topic)) {
-          Logs.t(
-              '[unsubscribeToTopic] Already unsubscribed to topic: $topic, just skip');
-          continue;
-        }
         _subscribedTopics.remove(topic);
+        Logs.t('[unsubscribeToTopic] Unsubscribed to topic: $topic');
         FirebaseMessaging.instance.unsubscribeFromTopic(topic);
       } else {
         Logs.t('[unsubscribeToTopic] Topic is empty, just skip');

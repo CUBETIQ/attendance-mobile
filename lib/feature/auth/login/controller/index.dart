@@ -70,7 +70,8 @@ class LoginController extends GetxController {
               user.value.departmentId != "") {
             await getDepartment();
           }
-          handleNotification(isAdmin.value);
+          final isAdmin = user.value.role == Role.admin ? true : false;
+          handleNotification(isAdmin);
           Get.offNamed(Routes.NAVIGATION, arguments: {
             "user": user.value,
             "position": position.value,

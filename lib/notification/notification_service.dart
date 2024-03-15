@@ -2,11 +2,14 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timesync/app_version.dart';
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/notification_route.dart';
+import 'package:timesync/utils/logger.dart';
 import '../../firebase_options.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationIntegration {
   static final NotificationIntegration _instance =
@@ -167,6 +170,36 @@ class NotificationIntegration {
     NotifyRoutePage.pushToOtherPagesFromBackground(message);
 
     /// ==========> end <====================
+  }
+
+  static Future<void> scheduleNotification(
+      {int id = 0,
+      String? title,
+      String? body,
+      String? payLoad,
+      DateTime? scheduledNotificationDateTime}) async {
+    final timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
+    Logs.e(tz.TZDateTime.now(tz.local).toString());
+    return _flutterLocalNotificationsPlugin.zonedSchedule(
+        id,
+        title ?? 'Timesync',
+        body ?? 'Body',
+        payload: 'payload',
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+        NotificationDetails(
+          // Android details
+          android: AndroidNotificationDetails(
+              _channel?.id ?? 'high_importance_channel',
+              _channel?.name ?? 'High Importance Notifications',
+              channelDescription: _channel?.description,
+              importance: Importance.max),
+          // iOS details
+          iOS: const DarwinNotificationDetails(),
+        ),
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
   }
 
   static Future<void> showAndroidNotification(RemoteMessage message) async {

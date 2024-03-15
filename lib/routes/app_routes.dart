@@ -39,13 +39,13 @@ abstract class Routes {
   static const CATEGORY = '/category';
   static const ADD_CATEGORY = '/add_category';
   static const CATEGORY_DETAIL = '/category_detail';
-  static const SCANQR = '/scanqr';
+  static const QR = '/qr';
   static const THEME = '/theme';
   static const POINT = '/point';
   static const NOTIFICATION = '/notification';
   static const NOTIFICATION_SETTING = '/notification_setting';
   static const DEVELOPER_MODE = '/developer_mode';
-  static const APP_PERMISSION= '/app_permission';
+  static const APP_PERMISSION = '/app_permission';
   static const DEVICE_INFO = '/device_info';
   static const STORAGE_MANAGEMENT = '/storage_management';
 }

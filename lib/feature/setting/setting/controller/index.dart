@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SettingController extends GetxController {
   static SettingController get to => Get.find();

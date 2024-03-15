@@ -20,7 +20,16 @@ class DepartmentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getAllDepartments();
+    onInitDepartment();
+  }
+
+  void onInitDepartment() {
+    if (NavigationController.to.departments.isNotEmpty) {
+      departmentListBackUp.value = NavigationController.to.departments.value;
+      departmentList.value = departmentListBackUp.value;
+    } else {
+      getAllDepartments();
+    }
   }
 
   Future<void> onRefresh() async {
@@ -33,6 +42,7 @@ class DepartmentController extends GetxController {
       departmentListBackUp.value = await DepartmentService().getAllDepartment(
           organizationId: NavigationController.to.organization.value.id ?? "");
       departmentList.value = departmentListBackUp.value;
+      NavigationController.to.departments.value = departmentListBackUp.value;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

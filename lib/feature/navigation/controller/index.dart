@@ -1,5 +1,5 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/bottom_bar_item.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/model/department_model.dart';
@@ -9,7 +9,6 @@ import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync/feature/navigation/model/bottom_bar_model.dart';
 import 'package:timesync/feature/navigation/model/drawer_model.dart';
 import 'package:timesync/feature/navigation/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
@@ -22,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:timesync/utils/size_util.dart';
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
@@ -33,48 +31,7 @@ class NavigationController extends GetxController {
   final getUserRole = "".obs;
   late List<DrawerModel> drawerItems;
   final titles = ['Home', 'Task', 'Profile'];
-  final items = [
-    BottomBarModel(
-      title: 'Home',
-      icon: Icons.home_rounded,
-      selectedIcon: Icons.home_rounded,
-      action: GestureDetector(
-          onTap: () => Get.toNamed(Routes.SCANQR),
-          child: SvgPicture.asset(SvgAssets.scanQR)),
-    ),
-    BottomBarModel(
-      title: 'Report',
-      icon: Icons.bar_chart_outlined,
-      selectedIcon: Icons.bar_chart_rounded,
-    ),
-    BottomBarModel(
-      title: 'Task',
-      icon: Icons.task_rounded,
-      selectedIcon: Icons.task_rounded,
-    ),
-    BottomBarModel(
-      title: 'Leave',
-      icon: Icons.work_off_rounded,
-      selectedIcon: Icons.work_off_rounded,
-    ),
-    BottomBarModel(
-      title: 'Profile',
-      icon: Icons.person_rounded,
-      selectedIcon: Icons.person_rounded,
-      action: GestureDetector(
-        onTap: () => Get.toNamed(Routes.POINT),
-        child: Container(
-          width: SizeUtils.scale(22, MediaQuery.of(Get.context!).size.width),
-          height: SizeUtils.scale(22, MediaQuery.of(Get.context!).size.width),
-          alignment: Alignment.center,
-          child: SvgPicture.asset(
-            SvgAssets.coin,
-          ),
-        ),
-      ),
-    ),
-  ];
-
+  final items = MyBottomBarItem.bottomBatItems;
   final organizationLocation = Rxn<OranizationLocationModel>(null);
   final userLocation = Rxn<Position>(null);
   final isInRange = false.obs;
@@ -85,6 +42,8 @@ class NavigationController extends GetxController {
   final fullname = Rxn<String>(null);
   final zoomDrawerController = ZoomDrawerController();
   final totalWorkMinutes = 0.obs;
+  final departments = <DepartmentModel>[].obs;
+  final positions = <PositionModel>[].obs;
 
   void toggleDrawer() {
     zoomDrawerController.toggle?.call();

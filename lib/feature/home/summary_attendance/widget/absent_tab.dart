@@ -7,15 +7,15 @@ import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-class LeaveTabMobile extends StatelessWidget {
-  const LeaveTabMobile({super.key});
+class AbsentTab extends StatelessWidget {
+  const AbsentTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final controller = SummaryAttendanceController.to;
     return Obx(
-      () => controller.leaves.value.isEmpty
+      () => controller.absentUser.value.isEmpty
           ? const MyNoData()
           : SingleChildScrollView(
               child: Padding(
@@ -31,23 +31,23 @@ class LeaveTabMobile extends StatelessWidget {
                     SizedBox(height: SizeUtils.scale(30, size.width)),
                     Obx(
                       () => ListView.separated(
-                        itemCount: controller.leaves.length,
+                        itemCount: controller.absentUser.length,
                         shrinkWrap: true,
                         separatorBuilder: (context, index) => SizedBox(
                           height: SizeUtils.scale(10, size.width),
                         ),
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          final staff = controller
-                              .getStaffForLeave(controller.leaves[index]);
+                          final staff = controller.absentUser[index];
                           return SummaryDetailCard(
                             staff: staff,
-                            status: "On Leave",
-                            valueColor: MyColor.pendingColor,
+                            status: "Absent",
+                            valueColor: MyColor.errorColor,
                           );
                         },
                       ),
                     ),
+                    SizedBox(height: SizeUtils.scale(10, size.width)),
                   ],
                 ),
               ),

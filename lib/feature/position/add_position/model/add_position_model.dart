@@ -3,12 +3,14 @@ class AddPositionModel {
   final String? description;
   final String? image;
   final String? organizationId;
+  final String? departmentId;
 
   AddPositionModel({
     this.name,
     this.description,
     this.image,
     this.organizationId,
+    this.departmentId,
   });
 
   Map<String, dynamic> toJson() {
@@ -17,6 +19,7 @@ class AddPositionModel {
       "description": description,
       "image": image,
       "organizationId": organizationId,
+      "departmentId": departmentId,
     };
   }
 }

@@ -4,8 +4,10 @@ import 'package:timesync/core/model/summary_leave_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:timesync/feature/leave/leave/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/leave_status.dart';
 import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +149,11 @@ class LeaveController extends GetxController {
     Get.toNamed(Routes.LEAVE_DETAIL, arguments: leaves[index]);
   }
 
-  void onTapCancel(String id) {
+  void onTapCancel(LeaveModel? leave) {
+    ChangeLeaveStatusModel data = ChangeLeaveStatusModel(
+      status: LeaveStatus.cancelled,
+      updatedDate: leave?.from ?? DateTime.now().millisecondsSinceEpoch,
+    );
     try {
       getConfirmBottomSheet(
         Get.context!,
@@ -155,7 +161,7 @@ class LeaveController extends GetxController {
         titleColor: Theme.of(Get.context!).colorScheme.error,
         description: "Are you sure that you want to cancel this Leave Request?",
         onTapConfirm: () async {
-          await LeaveService().deleteLeave(id);
+          await LeaveService().cancelLeave(input: data, id: leave?.id ?? "");
           await getUserLeave();
           getUserSummarizeLeave();
           Get.back();

@@ -92,7 +92,7 @@ class CompanyProfileCard extends StatelessWidget {
                       width: SizeUtils.scale(2, size.width),
                     ),
                   ),
-                  SizedBox(width: SizeUtils.scale(50, size.width)),
+                  SizedBox(width: SizeUtils.scale(40, size.width)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +123,7 @@ class CompanyProfileCard extends StatelessWidget {
                           ),
                           Container(
                             constraints: BoxConstraints(
-                              maxWidth: SizeUtils.scale(120, size.width),
+                              maxWidth: SizeUtils.scale(110, size.width),
                             ),
                             child: MyText(
                               text: StringUtil.getfullname(

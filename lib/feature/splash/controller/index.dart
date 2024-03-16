@@ -15,7 +15,7 @@ import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync/feature/qr/service/index.dart';
+import 'package:timesync/feature/scan_qr/service/index.dart';
 import 'package:timesync/feature/splash/service/index.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';

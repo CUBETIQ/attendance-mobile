@@ -15,6 +15,24 @@ class StringUtil {
     }
   }
 
+  static String doubleToPercentageString(double value) {
+    // Convert the double to a string with two decimal places
+    String stringValue = value.toStringAsFixed(2);
+
+    // Remove trailing zeros after the decimal point
+    if (stringValue.contains('.')) {
+      stringValue = stringValue.replaceAll(RegExp(r'0*$'), '');
+    }
+
+    // Remove the decimal point if there are no decimal values remaining
+    if (stringValue.endsWith('.')) {
+      stringValue = stringValue.substring(0, stringValue.length - 1);
+    }
+
+    // Add a percentage sign at the end
+    return '$stringValue%';
+  }
+
   static String convertToJsonStringQuotes({required String raw}) {
     /// remove space
     String jsonString = raw.replaceAll(" ", "");

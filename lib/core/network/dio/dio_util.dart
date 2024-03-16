@@ -47,8 +47,8 @@ class DioUtil {
     _dio
       ..options = BaseOptions(
         baseUrl: Endpoints.baseUrl,
-        connectTimeout: const Duration(seconds: AppTimeouts.connectTimeout),
-        receiveTimeout: const Duration(seconds: AppTimeouts.receiveTimeout),
+        connectTimeout: const Duration(seconds: AppTime.connectTimeout),
+        receiveTimeout: const Duration(seconds: AppTime.receiveTimeout),
       )
       ..interceptors.addAll(interceptors);
   }

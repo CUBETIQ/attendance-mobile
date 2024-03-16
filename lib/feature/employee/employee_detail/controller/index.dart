@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 
 class StaffDetailController extends GetxController {
   final staff = UserModel().obs;
-  final position = PositionModel().obs;
-  final department = DepartmentModel().obs;
+  final position = Rxn<PositionModel>(null);
+  final department = Rxn<DepartmentModel>(null);
 
   @override
   void onInit() {

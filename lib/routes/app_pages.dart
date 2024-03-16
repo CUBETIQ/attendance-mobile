@@ -35,6 +35,8 @@ import 'package:timesync/feature/navigation/view/index.dart';
 import 'package:timesync/feature/onboard/onboard_binding.dart';
 import 'package:timesync/feature/onboard/view/index.dart';
 import 'package:timesync/feature/organization/edit_organization/view/index.dart';
+import 'package:timesync/feature/organization/generate_qr/generate_qr_binding.dart';
+import 'package:timesync/feature/organization/generate_qr/view/index.dart';
 import 'package:timesync/feature/organization/organiziation/organization_binding.dart';
 import 'package:timesync/feature/organization/organiziation/view/index.dart';
 import 'package:timesync/feature/permission/app_permission_binding.dart';
@@ -48,8 +50,8 @@ import 'package:timesync/feature/profile/earn_point/earn_point_binding.dart';
 import 'package:timesync/feature/profile/earn_point/view/index.dart';
 import 'package:timesync/feature/profile/edit_profile/view/index.dart';
 import 'package:timesync/feature/profile/profile/profile_binding.dart';
-import 'package:timesync/feature/qr/scan_qr_binding.dart';
-import 'package:timesync/feature/qr/view/index.dart';
+import 'package:timesync/feature/scan_qr/scan_qr_binding.dart';
+import 'package:timesync/feature/scan_qr/view/index.dart';
 import 'package:timesync/feature/report/report_binding.dart';
 import 'package:timesync/feature/setting/change_theme/view/index.dart';
 import 'package:timesync/feature/setting/choose_language/view/index.dart';
@@ -243,9 +245,14 @@ class AppPages {
       binding: EarnPointBinding(),
     ),
     GetPage(
-      name: Routes.QR,
-      page: () => const MyQRView(),
-      binding: QRBinding(),
+      name: Routes.SCAN_QR,
+      page: () => const ScanQRView(),
+      binding: ScanQRBinding(),
+    ),
+        GetPage(
+      name: Routes.GENERATE_QR,
+      page: () => const GenerateQRView(),
+      binding: GenerateQRBinding(),
     ),
     GetPage(
       name: Routes.THEME,

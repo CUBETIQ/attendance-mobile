@@ -16,6 +16,7 @@ import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/navigation/model/bottom_bar_model.dart';
 import 'package:timesync/feature/navigation/model/drawer_model.dart';
 import 'package:timesync/feature/navigation/service/index.dart';
+import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/role.dart';
@@ -67,6 +68,8 @@ class NavigationController extends GetxController {
     getUserLocation();
     getOrganizationTotalWorkHour();
     initSideBarMenu();
+    NotificationSchedule.checkInReminder();
+    NotificationSchedule.checkOutReminder();
   }
 
   void initItems() {
@@ -76,11 +79,10 @@ class NavigationController extends GetxController {
             title: 'Home',
             icon: Icons.home_rounded,
             selectedIcon: Icons.home_rounded,
-            actionIcon: getUserRole.value == Role.admin
-                ? SvgAssets.qr
-                : SvgAssets.scanQR,
+            actionIcon: SvgAssets.scanQR,
             actionOnTap: () {
-              Get.toNamed(Routes.QR, arguments: {"role": getUserRole.value});
+              Get.toNamed(Routes.SCAN_QR,
+                  arguments: {"role": getUserRole.value});
             }),
         BottomBarModel(
           title: 'Report',
@@ -198,13 +200,13 @@ class NavigationController extends GetxController {
             Get.toNamed(Routes.DEPARTMENT);
           },
         ),
-        DrawerModel(
-          title: "Category",
-          icon: Icons.category_rounded,
-          onTap: () {
-            Get.toNamed(Routes.CATEGORY);
-          },
-        ),
+        // DrawerModel(
+        //   title: "Category",
+        //   icon: Icons.category_rounded,
+        //   onTap: () {
+        //     Get.toNamed(Routes.CATEGORY);
+        //   },
+        // ),
         DrawerModel(
           title: "Support",
           icon: Icons.support_agent_rounded,
@@ -234,6 +236,7 @@ class NavigationController extends GetxController {
                     id: AppConfig.getLocalData?.userId,
                   ),
                 ]);
+                NotificationSchedule.cancelAllReminder();
                 Get.offNamed(
                   Routes.LOGIN,
                   arguments: {"organization": organization.value},
@@ -274,6 +277,7 @@ class NavigationController extends GetxController {
                     id: AppConfig.getLocalData?.userId,
                   ),
                 ]);
+                NotificationSchedule.cancelAllReminder();
                 Get.offNamed(
                   Routes.LOGIN,
                   arguments: {"organization": organization.value},

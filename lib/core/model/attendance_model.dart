@@ -111,9 +111,23 @@ class LocationModel extends BaseModel<LocationModel> {
     if (json == null) {
       return LocationModel();
     }
+    var lat = json['lat'];
+    if (json['lat'] is int) {
+      lat = double.parse(json['lat']);
+    } else {
+      lat = json['lat'];
+    }
+
+    var lng = json['lng'];
+    if (json['lng'] is int) {
+      lng = double.parse(json['lng']);
+    } else {
+      lng = json['lng'];
+    }
+
     return LocationModel(
-      lat: json['lat'],
-      lng: json['lng'],
+      lat: lat,
+      lng: lng,
       inOffice: json['inOffice'],
     );
   }

@@ -17,8 +17,7 @@ class SettingController extends GetxController {
   }
 
   Future<void> initFunction() async {
-    final data = await localDataService.get();
-    isDarkMode.value = data?.darkTheme ?? false;
+    isDarkMode.value = Get.isDarkMode;
   }
 
   Future<void> changeTheme(bool value) async {

@@ -10,7 +10,7 @@ class MyAsyncButton extends StatelessWidget {
   final double? width;
   final double? height;
   final String title;
-  final Future<void> Function() onTap;
+  final Future<void> Function()? onTap;
   final TextStyle? style;
   final Color? backgroundColor;
   final double? borderRadius;
@@ -44,7 +44,7 @@ class MyAsyncButton extends StatelessWidget {
             ? () async {
                 try {
                   isDisableButton.value = true;
-                  await onTap();
+                  await onTap!();
                 } catch (e) {
                   Logger().e(e);
                   return;

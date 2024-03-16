@@ -40,7 +40,7 @@ class LeaveRequestCard extends StatelessWidget {
           bottom: SizeUtils.scale(AppSize().paddingS4, size.width)),
       padding: EdgeInsets.symmetric(
         horizontal:
-            SizeUtils.scale(AppSize().paddingHorizontalLarge, size.width),
+            SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
         vertical: SizeUtils.scale(AppSize().paddingVerticalMedium, size.width),
       ),
       decoration: BoxDecoration(
@@ -64,11 +64,17 @@ class LeaveRequestCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  MyCacheImage(imageUrl: staff.image),
+                  MyCacheImage(
+                    imageUrl: staff.image,
+                    height: SizeUtils.scale(50, size.width),
+                    width: SizeUtils.scale(50, size.width),
+                    imageHeight: SizeUtils.scale(50, size.width),
+                    imageWidth: SizeUtils.scale(50, size.width),
+                  ),
                   SizedBox(width: SizeUtils.scale(10, size.width)),
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: SizeUtils.scale(130, size.width),
+                      maxWidth: SizeUtils.scale(120, size.width),
                     ),
                     child: MyText(
                       text: StringUtil.getfullname(

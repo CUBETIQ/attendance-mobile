@@ -56,21 +56,26 @@ class StaffDetailView extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MyText(
-                        text: StringUtil.getfullname(
-                          controller.staff.value.firstName,
-                          controller.staff.value.lastName,
-                          controller.staff.value.username,
+                      Obx(
+                        () => MyText(
+                          text: StringUtil.getfullname(
+                            controller.staff.value.firstName,
+                            controller.staff.value.lastName,
+                            controller.staff.value.username,
+                          ),
+                          style: AppFonts().bodyXlargeSemi.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         ),
-                        style: AppFonts().bodyXlargeSemi.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
                       ),
-                      MyText(
-                        text: controller.position.value.name ?? "No Position",
-                        style: AppFonts().bodyMediumRegular.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
+                      Obx(
+                        () => MyText(
+                          text:
+                              controller.position.value?.name ?? "No Position",
+                          style: AppFonts().bodyMediumRegular.copyWith(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                        ),
                       ),
                     ],
                   ),
@@ -91,7 +96,7 @@ class StaffDetailView extends StatelessWidget {
               ),
               LabelDetailCard(
                 title: "Department",
-                value: controller.department.value.name,
+                value: controller.department.value?.name,
               ),
               Row(
                 children: [

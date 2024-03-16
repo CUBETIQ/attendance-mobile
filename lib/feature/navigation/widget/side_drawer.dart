@@ -49,15 +49,20 @@ class SideDrawer extends StatelessWidget {
                   imageWidth: SizeUtils.scale(100, mediaQuery.size.width),
                 ),
                 SizedBox(height: SizeUtils.scale(5, mediaQuery.size.height)),
-                MyText(
-                  text: StringUtil.getfullname(
-                    user.firstName,
-                    user.lastName,
-                    user.username,
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: SizeUtils.scale(20, mediaQuery.size.width)),
+                  child: MyText(
+                    text: StringUtil.getfullname(
+                      user.firstName,
+                      user.lastName,
+                      user.username,
+                    ),
+                    maxLines: 3,
+                    style: AppFonts().bodyLarge.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                   ),
-                  style: AppFonts().bodyLarge.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
                 ),
                 MyText(
                   text: (user.role ?? Role.admin).capitalizeFirst,

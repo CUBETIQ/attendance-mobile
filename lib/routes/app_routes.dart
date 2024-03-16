@@ -39,7 +39,8 @@ abstract class Routes {
   static const CATEGORY = '/category';
   static const ADD_CATEGORY = '/add_category';
   static const CATEGORY_DETAIL = '/category_detail';
-  static const QR = '/qr';
+  static const SCAN_QR = '/scan_qr';
+  static const GENERATE_QR = '/generate_qr';
   static const THEME = '/theme';
   static const POINT = '/point';
   static const NOTIFICATION = '/notification';

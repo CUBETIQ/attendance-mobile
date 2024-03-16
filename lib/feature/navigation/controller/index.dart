@@ -76,11 +76,10 @@ class NavigationController extends GetxController {
             title: 'Home',
             icon: Icons.home_rounded,
             selectedIcon: Icons.home_rounded,
-            actionIcon: getUserRole.value == Role.admin
-                ? SvgAssets.qr
-                : SvgAssets.scanQR,
+            actionIcon: SvgAssets.scanQR,
             actionOnTap: () {
-              Get.toNamed(Routes.QR, arguments: {"role": getUserRole.value});
+              Get.toNamed(Routes.SCAN_QR,
+                  arguments: {"role": getUserRole.value});
             }),
         BottomBarModel(
           title: 'Report',

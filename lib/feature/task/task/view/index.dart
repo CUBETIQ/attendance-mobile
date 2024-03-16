@@ -28,10 +28,6 @@ class TaskView extends StatelessWidget {
         height: size.height,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: SizeUtils.scale(
-              AppSize().paddingHorizontalLarge,
-              MediaQuery.of(context).size.width,
-            ),
             horizontal: SizeUtils.scale(
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
@@ -40,6 +36,10 @@ class TaskView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height:
+                    SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -109,8 +109,7 @@ class TaskView extends StatelessWidget {
                     noDataWidget: const MyNoData(),
                     builderWidget: ListView.separated(
                       itemCount: controller.tasks.length,
-                      shrinkWrap: true,
-                      physics: const AlwaysScrollableScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       separatorBuilder: (context, index) => SizedBox(
                         height: SizeUtils.scale(
                           AppSize().paddingS6,

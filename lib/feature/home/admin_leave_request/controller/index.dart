@@ -37,6 +37,8 @@ class AdminLeaveRequestController extends GetxController {
         endDate: endDate.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
+      // leaveList.value
+      //     .removeWhere((element) => element.status != LeaveStatus.pending);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

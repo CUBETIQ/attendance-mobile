@@ -77,6 +77,7 @@ class AddStaffController extends GetxController {
         lastnameController.text = staff.value.lastName ?? "";
         addressController.text = staff.value.address ?? "";
         emailController.text = staff.value.email ?? "";
+        selectedStatus.value = staff.value.status ?? UserStatus.idle;
         dobController.text =
             DateUtil.formatMillisecondsToDOB(staff.value.dateOfBirth);
         dob.value = staff.value.dateOfBirth;

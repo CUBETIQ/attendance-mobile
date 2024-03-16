@@ -118,8 +118,7 @@ class LeaveView extends StatelessWidget {
                     list: controller.leaves,
                     noDataWidget: const MyNoData(),
                     builderWidget: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const AlwaysScrollableScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemCount: controller.leaves.length,
                       itemBuilder: (context, index) {
                         return LeaveCard(

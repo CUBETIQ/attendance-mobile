@@ -47,7 +47,8 @@ class GenerateQRController extends GetxController {
   ) async {
     final box = Get.context!.findRenderObject() as RenderBox?;
     await Share.shareXFiles(files,
-        text: 'Hello, this is my payment check for purchasing a subscription.',
+        text:
+            'Hello, this QR code facilitates easy check-in and out for attendance purposes. Simply scan it to mark your presence. See you there!',
         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
     isSharing.value = false;
   }

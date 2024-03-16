@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
 
 class ScanQRController extends GetxController {
@@ -44,7 +43,6 @@ class ScanQRController extends GetxController {
     try {
       controller.scannedDataStream.listen(
         (scanData) async {
-          showSuccessSnackBar("Here", scanned.toString());
           if (scanned == false) {
             HapticFeedback.heavyImpact();
             await controller.pauseCamera();
@@ -54,6 +52,7 @@ class ScanQRController extends GetxController {
         cancelOnError: true,
       );
     } catch (e) {
+      controller.resumeCamera();
       log('Error: $e');
     }
   }

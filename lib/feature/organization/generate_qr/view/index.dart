@@ -48,7 +48,7 @@ class GenerateQRView extends StatelessWidget {
                       ),
                       color: Theme.of(context).colorScheme.onPrimary,
                       borderRadius: BorderRadius.circular(
-                          SizeUtils.scale(52, size.width)),
+                          SizeUtils.scale(24, size.width)),
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(SizeUtils.scale(24, size.width)),

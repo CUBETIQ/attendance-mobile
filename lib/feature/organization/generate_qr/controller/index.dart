@@ -18,7 +18,7 @@ class GenerateQRController extends GetxController {
   final savedColor = Rxn<Color>(null);
 
   String link =
-      "${DeepLink.app}/${OrganizationController.to.organization.value.name?.replaceAll(' ', '_')}";
+      "${DeepLink.app}/${OrganizationController.to.organization.value.name?.replaceAll(' ', '_')}?lat=${OrganizationController.to.organization.value.location?.lat}&long=${OrganizationController.to.organization.value.location?.lng}";
 
   ScreenshotController screenshotController = ScreenshotController();
 

@@ -13,6 +13,7 @@ import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/validator.dart';
 
 class QRService {
   static final _singleton = QRService._internal();
@@ -29,6 +30,14 @@ class QRService {
   final deepLinkUrl = Rxn<String>(null);
 
   Future<void> initDeepLink() async {
+    double? lat;
+    double? lng;
+    if (!Validator.isValNull(deepLinkUrl.value)) {
+      final Uri uri = Uri.parse(deepLinkUrl.value ?? '');
+      lat = double.tryParse(uri.queryParameters['lat'] ?? '');
+      lng = double.tryParse(uri.queryParameters['long'] ?? '');
+    }
+
     if (Get.isRegistered<NavigationController>()) {
       // Get.until((route) => Get.currentRoute == Routes.NAVIGATION);
       Get.offNamed(Routes.NAVIGATION);
@@ -39,7 +48,7 @@ class QRService {
       if (NavigationController.to.getUserRole.value == Role.admin) {
         HomeController.to.tabController?.animateTo(1);
       }
-      QRService().scanQR().then((value) async {
+      QRService().scanQR(lat: lat, lng: lng).then((value) async {
         if (value != null) {
           await HomeController.to.getAttendance();
           HomeController.to.isCheckedIn.value = true;
@@ -55,14 +64,14 @@ class QRService {
     }
   }
 
-  Future<AttendanceModel?> scanQR() async {
+  Future<AttendanceModel?> scanQR({double? lat, double? lng}) async {
     final AttendanceModel? result;
 
     DateTime now = await HomeController.to.checkTime();
     String? startHour = HomeController.to.startHour.value;
     LocationModel location = LocationModel(
-      lat: NavigationController.to.userLocation.value?.latitude,
-      lng: NavigationController.to.userLocation.value?.longitude,
+      lat: lat ?? NavigationController.to.userLocation.value?.latitude,
+      lng: lng ?? NavigationController.to.userLocation.value?.longitude,
       inOffice: NavigationController.to.isInRange.value,
     );
 

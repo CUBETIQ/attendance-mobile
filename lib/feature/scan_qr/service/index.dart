@@ -51,14 +51,15 @@ class QRService {
       QRService().scanQR(lat: lat, lng: lng).then((value) async {
         if (value != null) {
           await HomeController.to.getAttendance();
-          HomeController.to.isCheckedIn.value = true;
           await HomeController.to.getSummarizeAttendance();
           if (Get.isRegistered<ProfileController>()) {
             ProfileController.to.getSummarizeAttendance();
           }
-          value.checkInDateTime != null
-              ? getCheckInBottomSheet(Get.context!, image: SvgAssets.working)
-              : getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+          if (value.checkOutDateTime == null) {
+            getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
+          } else {
+            getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+          }
         }
       });
     }

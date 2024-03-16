@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/color.dart';
+import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
 import 'package:timesync/core/widgets/card/my_card.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
@@ -10,6 +12,7 @@ import 'package:timesync/feature/organization/organiziation/controller/index.dar
 import 'package:timesync/feature/organization/organiziation/widget/company_profile_card.dart';
 import 'package:timesync/feature/organization/organiziation/widget/info_data_column.dart';
 import 'package:timesync/feature/organization/organiziation/widget/overview_card.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class OrganizationView extends StatelessWidget {
@@ -25,6 +28,22 @@ class OrganizationView extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.GENERATE_QR);
+              },
+              child: SvgPicture.asset(
+                SvgAssets.qr,
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.onBackground,
+                    BlendMode.srcIn),
+              ),
+            ),
+          ),
+        ],
       ),
       body: SizedBox(
         height: size.height,

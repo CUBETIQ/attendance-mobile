@@ -13,7 +13,7 @@ import 'package:timesync/feature/home/home/model/update_user_status_model.dart';
 import 'package:timesync/feature/home/home/service/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
-import 'package:timesync/feature/qr/service/index.dart';
+import 'package:timesync/feature/scan_qr/service/index.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
@@ -110,7 +110,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     initTabWithRole();
     checkBreakTime();
     getUsername();
-    await getAttendance();
+    getAttendance();
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();

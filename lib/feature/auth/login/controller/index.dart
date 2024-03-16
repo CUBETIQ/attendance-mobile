@@ -87,6 +87,8 @@ class LoginController extends GetxController {
     }
   }
 
+  Future<void> loginWithSSO() async {}
+
   void handleNotification(bool isAdmin) {
     if (AppConfig.getLocalData?.isEnableNotification == true) {
       NotificationTopic.subscribe([

@@ -154,10 +154,16 @@ class LoginView extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: size.height * 0.08),
+                SizedBox(height: SizeUtils.scale(40, size.width)),
                 MyAsyncButton(
                   title: "Login",
                   onTap: controller.login,
+                ),
+                SizedBox(height: SizeUtils.scale(5, size.width)),
+                MyAsyncButton(
+                  title: "Login With SSO",
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  onTap: controller.loginWithSSO,
                 ),
               ],
             ),

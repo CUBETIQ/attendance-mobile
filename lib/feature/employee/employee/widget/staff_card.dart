@@ -7,7 +7,6 @@ import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
 import 'package:timesync/types/user_status.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class StaffCard extends StatelessWidget {
   final double? cardWidth;
@@ -55,10 +54,40 @@ class StaffCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            MyCacheImage(
-              imageUrl: staff.image ?? "",
-              width: SizeUtils.scale(40, size.width),
-              height: SizeUtils.scale(40, size.width),
+            Stack(
+              children: [
+                SizedBox(
+                  width: SizeUtils.scale(40, size.width),
+                  height: SizeUtils.scale(40, size.width),
+                ),
+                MyCacheImage(
+                  imageUrl: staff.image ?? "",
+                  width: SizeUtils.scale(40, size.width),
+                  height: SizeUtils.scale(40, size.width),
+                ),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: SizeUtils.scale(12, size.width),
+                    height: SizeUtils.scale(12, size.width),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: staff.status != null
+                          ? staff.status == UserStatus.active
+                              ? Colors.green
+                              : staff.status == UserStatus.idle
+                                  ? Colors.orange
+                                  : Colors.red
+                          : Colors.green,
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.background,
+                        width: SizeUtils.scale(1.5, size.width),
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
             SizedBox(width: SizeUtils.scale(AppSize().paddingS5, size.width)),
             Column(
@@ -85,58 +114,38 @@ class StaffCard extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                MyText(
-                  text: (staff.status ?? UserStatus.active).capitalizeFirst,
-                  style: AppFonts().bodyMediumRegular.copyWith(
-                        color: staff.status != null
-                            ? staff.status == UserStatus.active
-                                ? Colors.green
-                                : staff.status == UserStatus.idle
-                                    ? Colors.orange
-                                    : Colors.red
-                            : Colors.green,
-                      ),
+            GestureDetector(
+              onTap: onTapViewDetail,
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeUtils.scale(5, size.width),
+                  vertical: SizeUtils.scale(2, size.width),
                 ),
-                SizedBox(height: SizeUtils.scale(4, size.width)),
-                GestureDetector(
-                  onTap: onTapViewDetail,
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(5, size.width),
-                      vertical: SizeUtils.scale(2, size.width),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        SizeUtils.scale(
-                            AppSize().borderRadiusLarge, size.width),
-                      ),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        MyText(
-                          text: "View Detail",
-                          style: AppFonts().bodySmallRegular.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
-                        ),
-                        SizedBox(width: SizeUtils.scale(2, size.width)),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: SizeUtils.scale(10, size.width),
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        )
-                      ],
-                    ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
                   ),
-                )
-              ],
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    MyText(
+                      text: "View Detail",
+                      style: AppFonts().bodySmallRegular.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                    ),
+                    SizedBox(width: SizeUtils.scale(2, size.width)),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: SizeUtils.scale(10, size.width),
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    )
+                  ],
+                ),
+              ),
             )
           ],
         ),

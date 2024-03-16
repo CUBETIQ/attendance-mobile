@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:timesync/feature/leave/leave/widget/leave_card.dart';
 import 'package:timesync/feature/leave/leave/widget/leave_chart.dart';
 import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
 
 class LeaveView extends StatelessWidget {
   const LeaveView({super.key});
@@ -63,8 +64,8 @@ class LeaveView extends StatelessWidget {
                       () => LeaveChart(
                         title: "Pending",
                         radius: size.width < 600 ? 40 : 60,
-                        centerText:
-                            "${(controller.percentagePendingLeave.value * 100).toStringAsFixed(controller.percentagePendingLeave.value == 0 ? 0 : 2)}%",
+                        centerText: StringUtil.doubleToPercentageString(
+                            controller.percentagePendingLeave.value * 100),
                         percent: controller.percentagePendingLeave.value,
                         textBelow: "${controller.totalPendingLeave.value}/"
                             "${controller.totalLeave.value}",
@@ -77,8 +78,8 @@ class LeaveView extends StatelessWidget {
                       () => LeaveChart(
                         title: "Approved",
                         radius: size.width < 600 ? 40 : 60,
-                        centerText:
-                            "${(controller.percentageApprovedLeave.value * 100).toStringAsFixed(controller.percentageApprovedLeave.value == 0 ? 0 : 2)}%",
+                        centerText: StringUtil.doubleToPercentageString(
+                            controller.percentageApprovedLeave.value * 100),
                         percent: controller.percentageApprovedLeave.value,
                         textBelow: "${controller.totalApprovedLeave.value}/"
                             "${controller.totalLeave.value}",
@@ -91,8 +92,8 @@ class LeaveView extends StatelessWidget {
                       () => LeaveChart(
                         title: "Rejected",
                         radius: size.width < 600 ? 40 : 60,
-                        centerText:
-                            "${(controller.percentageDeclinedLeave.value * 100).toStringAsFixed(controller.percentageDeclinedLeave.value == 0 ? 0 : 2)}%",
+                        centerText: StringUtil.doubleToPercentageString(
+                            controller.percentageDeclinedLeave.value * 100),
                         percent: controller.percentageDeclinedLeave.value,
                         textBelow: "${controller.totalDeclinedLeave.value}/"
                             "${controller.totalLeave.value}",

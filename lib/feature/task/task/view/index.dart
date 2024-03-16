@@ -12,6 +12,7 @@ import 'package:timesync/feature/task/task/controller/index.dart';
 import 'package:timesync/feature/task/task/widget/task_card.dart';
 import 'package:timesync/feature/task/task/widget/task_chart.dart';
 import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
 
 class TaskView extends StatelessWidget {
   const TaskView({super.key});
@@ -68,8 +69,8 @@ class TaskView extends StatelessWidget {
                         size: size,
                         radius: size.width < 600 ? 60 : 65,
                         centerWidget: MyText(
-                          text:
-                              "${(controller.percentageUncompletedTask.value * 100).toStringAsFixed(2)}%",
+                          text: StringUtil.doubleToPercentageString(
+                              controller.percentageUncompletedTask.value * 100),
                           style: AppFonts().bodyMediumRegular,
                         ),
                         percent: controller.percentageUncompletedTask.value,
@@ -86,8 +87,8 @@ class TaskView extends StatelessWidget {
                         size: size,
                         radius: size.width < 600 ? 60 : 65,
                         centerWidget: MyText(
-                          text:
-                              "${(controller.percentageCompletedTask.value * 100).toStringAsFixed(2)}%",
+                          text: StringUtil.doubleToPercentageString(
+                              controller.percentageCompletedTask.value * 100),
                           style: AppFonts().bodyMediumRegular,
                         ),
                         percent: controller.percentageCompletedTask.value,

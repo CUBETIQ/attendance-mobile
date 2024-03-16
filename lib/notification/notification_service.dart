@@ -8,6 +8,7 @@ import 'package:timesync/config/app_config.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/notification_route.dart';
 import 'package:timesync/utils/logger.dart';
+import 'package:timezone/timezone.dart';
 import '../../firebase_options.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -177,7 +178,7 @@ class NotificationIntegration {
       String? title,
       String? body,
       String? payLoad,
-      DateTime? scheduledNotificationDateTime}) async {
+      TZDateTime? scheduledNotificationDateTime}) async {
     final timeZoneName = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
     Logs.e(tz.TZDateTime.now(tz.local).toString());
@@ -186,7 +187,8 @@ class NotificationIntegration {
         title ?? 'Timesync',
         body ?? 'Body',
         payload: 'payload',
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+        scheduledNotificationDateTime ??
+            tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
         NotificationDetails(
           // Android details
           android: AndroidNotificationDetails(

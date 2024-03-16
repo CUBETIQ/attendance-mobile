@@ -105,7 +105,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> initData() async {
-    
     initDate();
     initAnimation();
     initTabWithRole();

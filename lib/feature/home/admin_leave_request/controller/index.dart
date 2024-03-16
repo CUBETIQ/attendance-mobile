@@ -9,6 +9,7 @@ import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/types/leave_status.dart';
 
 class AdminLeaveRequestController extends GetxController {
   static AdminLeaveRequestController get to => Get.find();
@@ -37,8 +38,8 @@ class AdminLeaveRequestController extends GetxController {
         endDate: endDate.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
-      // leaveList.value
-      //     .removeWhere((element) => element.status != LeaveStatus.pending);
+      leaveList.value
+          .removeWhere((element) => element.status == LeaveStatus.cancelled);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

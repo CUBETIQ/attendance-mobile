@@ -128,8 +128,8 @@ class LeaveView extends StatelessWidget {
                           ),
                           leave: controller.leaves[index],
                           onTapView: () => controller.onTapView(index),
-                          onTapCancel: () => controller
-                              .onTapCancel(controller.leaves[index].id!),
+                          onTapCancel: () =>
+                              controller.onTapCancel(controller.leaves[index]),
                         );
                       },
                     ),

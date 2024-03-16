@@ -16,6 +16,7 @@ import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/navigation/model/bottom_bar_model.dart';
 import 'package:timesync/feature/navigation/model/drawer_model.dart';
 import 'package:timesync/feature/navigation/service/index.dart';
+import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/role.dart';
@@ -23,6 +24,7 @@ import 'package:timesync/types/state.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/location_util.dart';
 import 'package:timesync/utils/size_util.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class NavigationController extends GetxController {
   static NavigationController get to => Get.find();
@@ -67,6 +69,19 @@ class NavigationController extends GetxController {
     getUserLocation();
     getOrganizationTotalWorkHour();
     initSideBarMenu();
+    NotificationIntegration.scheduleNotification(
+      title: "Reminder",
+      body: "You have not checked in yet, please check in now",
+      scheduledNotificationDateTime: tz.TZDateTime(
+          tz.local,
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          11,
+          30,
+          00),
+      id: 199,
+    );
   }
 
   void initItems() {

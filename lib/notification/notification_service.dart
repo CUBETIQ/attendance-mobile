@@ -202,6 +202,14 @@ class NotificationIntegration {
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
   }
 
+  static Future<void> cancelNotification(int id) async {
+    await _flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  static Future<void> cancelAllNotification() async {
+    await _flutterLocalNotificationsPlugin.cancelAll();
+  }
+
   static Future<void> showAndroidNotification(RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;

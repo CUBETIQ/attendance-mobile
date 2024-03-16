@@ -187,8 +187,8 @@ class FileUtil {
           headers: {HttpHeaders.acceptEncodingHeader: "*"},
           responseType: ResponseType.bytes,
           followRedirects: false,
-          sendTimeout: const Duration(seconds: AppTimeouts.connectTimeout),
-          receiveTimeout: const Duration(seconds: AppTimeouts.receiveTimeout),
+          sendTimeout: const Duration(seconds: AppTime.connectTimeout),
+          receiveTimeout: const Duration(seconds: AppTime.receiveTimeout),
           validateStatus: (status) {
             return status! < 500;
           },

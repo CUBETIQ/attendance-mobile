@@ -87,7 +87,9 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> loginWithSSO() async {}
+  Future<void> loginWithSSO() async {
+    showWarningSnackBar("Not Avaliable", "This feature is not available yet");
+  }
 
   void handleNotification(bool isAdmin) {
     if (AppConfig.getLocalData?.isEnableNotification == true) {

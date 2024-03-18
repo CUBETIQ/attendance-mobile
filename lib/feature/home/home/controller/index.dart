@@ -14,6 +14,7 @@ import 'package:timesync/feature/home/home/service/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
+import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
@@ -110,7 +111,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     initTabWithRole();
     checkBreakTime();
     getUsername();
-    getAttendance();
+    await getAttendance();
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();
@@ -205,6 +206,52 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  // This function is used to cancel the notification reminder when user check in/out early
+  void cancelNotificationReminder({bool? checkOut}) {
+    if (NavigationController.to.organization.value.configs == null) return;
+    String? time;
+    int? hour;
+    int? min;
+
+    if (checkOut == true) {
+      time = NavigationController.to.organization.value.configs?.endHour;
+    } else {
+      time = NavigationController.to.organization.value.configs?.startHour;
+    }
+
+    if (time != null) {
+      final split = time.split(":");
+      hour = int.parse(split[0]);
+      min = int.parse(split[1]);
+
+      if (checkOut == true) {
+        if (DateTime.now().hour <= hour &&
+            DateTime.now().minute <= min &&
+            // !Validator.isValNull(checkOutTime.value)
+            isCheckedIn.value == false) {
+          NotificationSchedule.cancelCheckOutReminder();
+
+          // Init check in reminder
+          NotificationSchedule.checkInReminder(
+              time: NavigationController
+                  .to.organization.value.configs?.startHour);
+        }
+      } else {
+        if (DateTime.now().hour <= hour &&
+            DateTime.now().minute <= min &&
+            // !Validator.isValNull(checkInTime.value)
+            isCheckedIn.value == true) {
+          NotificationSchedule.cancelCheckInReminder();
+
+          // Init check out reminder
+          NotificationSchedule.checkOutReminder(
+              time:
+                  NavigationController.to.organization.value.configs?.endHour);
+        }
+      }
+    }
+  }
+
   Future<void> checkIn() async {
     final checkLocation = await checkUserLocation();
     if (checkLocation == false) {
@@ -243,6 +290,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       if (Get.isRegistered<ProfileController>()) {
         ProfileController.to.getSummarizeAttendance();
       }
+      cancelNotificationReminder();
       getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -278,6 +326,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       );
       isCheckedIn.value = false;
       await getAttendance();
+      cancelNotificationReminder(checkOut: true);
       getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

@@ -13,12 +13,22 @@ class NotificationSchedule {
   static const int checkInId = 100;
   static const int checkOutId = 101;
 
-  static Future<void> checkInReminder({int? hour, int? min}) async {
+  static Future<void> checkInReminder({String? time}) async {
+    int? hour;
+    int? min;
+
+    if (time != null) {
+      final split = time.split(":");
+      hour = int.parse(split[0]);
+      min = int.parse(split[1]);
+    }
+
     try {
       NotificationIntegration.scheduleNotification(
         title: "Reminder",
         body: "You have not checked in yet, please check in now",
-        scheduledNotificationDateTime: AppTime.scheduleTimeForCheckin,
+        scheduledNotificationDateTime:
+            AppTime.scheduleTimeForCheckin(hour: hour, min: min),
         id: checkInId,
       );
     } catch (e) {
@@ -26,12 +36,22 @@ class NotificationSchedule {
     }
   }
 
-  static Future<void> checkOutReminder({int? hour, int? min}) async {
+  static Future<void> checkOutReminder({String? time}) async {
+    int? hour;
+    int? min;
+
+    if (time != null) {
+      final split = time.split(":");
+      hour = int.parse(split[0]);
+      min = int.parse(split[1]);
+    }
+
     try {
       NotificationIntegration.scheduleNotification(
         title: "Reminder",
         body: "You have not checked out yet, please check out now",
-        scheduledNotificationDateTime: AppTime.scheduleTimeForCheckout,
+        scheduledNotificationDateTime:
+            AppTime.scheduleTimeForCheckout(hour: hour, min: min),
         id: checkOutId,
       );
     } catch (e) {

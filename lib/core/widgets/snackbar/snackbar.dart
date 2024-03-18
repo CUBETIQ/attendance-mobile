@@ -135,3 +135,32 @@ showWarningSnackBar(String title, String message,
     );
   }
 }
+
+showExitSnackBar(String title, String message,
+    {SnackPosition? snackPosition, Color? bgColor}) {
+  return !Get.isSnackbarOpen
+      ? Get.snackbar(
+          title.trString,
+          '',
+          titleText: Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: MyText(
+                text: title,
+                textAlign: TextAlign.left,
+                style:
+                    AppFonts().bodyMediumRegular.copyWith(color: Colors.white)),
+          ),
+          messageText: const SizedBox.shrink(),
+          maxWidth: 300,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          snackPosition: snackPosition ?? SnackPosition.bottom,
+          backgroundColor: bgColor ?? Colors.grey.withOpacity(0.5),
+          borderRadius: 20,
+          margin: const EdgeInsets.all(15),
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+          isDismissible: true,
+          forwardAnimationCurve: Curves.easeOutBack,
+        )
+      : const SizedBox.shrink();
+}

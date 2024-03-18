@@ -4,6 +4,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/utils.dart';
 import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/core/widgets/pop_scope/my_pop_scope.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/feature/home/home/view/index.dart';
 import 'package:timesync/feature/leave/leave/view/index.dart';
@@ -20,38 +21,41 @@ class NavigationView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = NavigationController.to;
     final mediaQuery = MediaQuery.of(context);
-    return ZoomDrawer(
-      controller: controller.zoomDrawerController,
-      menuScreen: Obx(
-        () => SideDrawer(
-          imageUrl: controller.user.value.image,
-          drawerItems: controller.drawerItems,
-          user: controller.user.value,
+    return MyPopScope(
+      child: ZoomDrawer(
+        controller: controller.zoomDrawerController,
+        menuScreen: Obx(
+          () => SideDrawer(
+            imageUrl: controller.user.value.image,
+            drawerItems: controller.drawerItems,
+            user: controller.user.value,
+          ),
         ),
-      ),
-      mainScreen: const MainScreen(),
-      borderRadius: SizeUtils.scale(AppSize().borderRadiusLarge, context.width),
-      showShadow: false,
-      angle: -10.0,
-      androidCloseOnBackTap: true,
-      boxShadow: [
-        BoxShadow(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.10),
-          spreadRadius: 4,
-          blurRadius: 4,
-          offset: const Offset(-5, 10),
+        mainScreen: const MainScreen(),
+        borderRadius:
+            SizeUtils.scale(AppSize().borderRadiusLarge, context.width),
+        showShadow: false,
+        angle: -10.0,
+        androidCloseOnBackTap: true,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.outline.withOpacity(0.10),
+            spreadRadius: 4,
+            blurRadius: 4,
+            offset: const Offset(-5, 10),
+          ),
+        ],
+        menuBackgroundColor: Theme.of(context).colorScheme.background,
+        duration: 300.milliseconds,
+        reverseDuration: 200.milliseconds,
+        mainScreenTapClose: true,
+        slideWidth: SizeUtils.scale(
+          mediaQuery.orientation == Orientation.landscape &&
+                  mediaQuery.size.width < 1150
+              ? mediaQuery.size.width * 0.31
+              : 238,
+          mediaQuery.size.width,
         ),
-      ],
-      menuBackgroundColor: Theme.of(context).colorScheme.background,
-      duration: 300.milliseconds,
-      reverseDuration: 200.milliseconds,
-      mainScreenTapClose: true,
-      slideWidth: SizeUtils.scale(
-        mediaQuery.orientation == Orientation.landscape &&
-                mediaQuery.size.width < 1150
-            ? mediaQuery.size.width * 0.31
-            : 238,
-        mediaQuery.size.width,
       ),
     );
   }

@@ -15,7 +15,7 @@ class ScanQRView extends StatelessWidget {
     final controller = ScanQRController.to;
     return Scaffold(
       appBar: AppBar(
-        title: const MyAppBarTitle(title: 'Scan QR'),
+        title: const MyAppBarTitle(title: 'Scan QR Attendance'),
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,

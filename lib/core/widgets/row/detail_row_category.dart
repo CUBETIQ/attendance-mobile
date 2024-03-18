@@ -5,11 +5,18 @@ import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class DetailRowCategory extends StatelessWidget {
-  const DetailRowCategory({super.key, this.title, this.icon, this.color});
+  const DetailRowCategory({
+    super.key,
+    this.title,
+    this.icon,
+    this.color,
+    this.category,
+  });
 
   final String? title;
   final String? icon;
   final String? color;
+  final String? category;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,7 @@ class DetailRowCategory extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: SizeUtils.scale(160, size.width),
+          width: SizeUtils.scale(150, size.width),
           child: MyText(
             text: title ?? "category",
             style: AppFonts().bodyMediumMedium.copyWith(
@@ -46,6 +53,12 @@ class DetailRowCategory extends StatelessWidget {
           ),
         ),
         SizedBox(width: SizeUtils.scale(10, size.width)),
+        Expanded(
+          child: MyText(
+            text: category ?? "Task",
+            style: AppFonts().bodyMediumMedium,
+          ),
+        ),
       ],
     );
   }

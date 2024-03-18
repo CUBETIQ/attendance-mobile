@@ -12,23 +12,28 @@ class AppTime {
   static const int connectTimeout = 30;
   static const int receiveTimeout = 30;
 
-  static tz.TZDateTime scheduleTimeForCheckin = tz.TZDateTime(
-    tz.local,
-    DateTime.now().year,
-    DateTime.now().month,
-    DateTime.now().day,
-    12,
-    18,
-    30,
-  );
+  static tz.TZDateTime scheduleTimeForCheckin({int? hour, int? min}) {
+    
+    return tz.TZDateTime(
+      tz.local,
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      hour ?? 12,
+      min ?? 00,
+      00,
+    );
+  }
 
-  static tz.TZDateTime scheduleTimeForCheckout = tz.TZDateTime(
-    tz.local,
-    DateTime.now().year,
-    DateTime.now().month,
-    DateTime.now().day,
-    21,
-    00,
-    00,
-  );
+  static tz.TZDateTime scheduleTimeForCheckout({int? hour, int? min}) {
+    return tz.TZDateTime(
+      tz.local,
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      hour ?? 21,
+      min ?? 00,
+      00,
+    );
+  }
 }

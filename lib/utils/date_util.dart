@@ -39,7 +39,9 @@ class DateUtil {
 
   static String formatTime(DateTime dateTime) {
     // Define the desired time format
-    final DateFormat formatter = DateFormat('h:mm a', Get.locale?.languageCode);
+    final DateFormat formatter = DateFormat(
+      'h:mm a',
+    );
 
     // Format the DateTime
     return formatter.format(dateTime);

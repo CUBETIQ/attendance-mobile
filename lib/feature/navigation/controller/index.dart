@@ -35,7 +35,6 @@ class NavigationController extends GetxController {
   late List<DrawerModel> drawerItems;
   final titles = ['Home', 'Task', 'Profile'];
   final items = RxList<BottomBarModel>([]);
-
   final organizationLocation = Rxn<OranizationLocationModel>(null);
   final userLocation = Rxn<Position>(null);
   final isInRange = false.obs;
@@ -68,8 +67,7 @@ class NavigationController extends GetxController {
     getUserLocation();
     getOrganizationTotalWorkHour();
     initSideBarMenu();
-    NotificationSchedule.checkInReminder();
-    NotificationSchedule.checkOutReminder();
+    initNotificationScheduleReminder();
   }
 
   void initItems() {
@@ -115,6 +113,15 @@ class NavigationController extends GetxController {
         ),
       ],
     );
+  }
+
+  void initNotificationScheduleReminder() {
+    if (organization.value.configs == null) return;
+
+    NotificationSchedule.checkInReminder(
+        time: organization.value.configs?.startHour);
+    NotificationSchedule.checkOutReminder(
+        time: organization.value.configs?.endHour);
   }
 
   void onDestinationSelected(int index) {

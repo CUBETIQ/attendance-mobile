@@ -1,6 +1,7 @@
 import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/model/leave_model.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/leave/add_leave/model/create_leave_model.dart';
 import 'package:timesync/feature/leave/add_leave/model/update_leave_model.dart';
@@ -111,54 +112,64 @@ class AddLeaveController extends GetxController
   }
 
   Future<void> addLeave() async {
-    try {
-      final result =
-          await UploadFileUtil.uploadFiles(attachments.value, "leave");
-      attachments.value = result;
-      CreateLeaveModel input = CreateLeaveModel(
-        type: selectLeaveType.value,
-        durationType: selectLeaveDurationType.value,
-        from: startDate.value,
-        to: endDate.value,
-        reason: reasonController.text,
-        duration: durationController.value.text.isNotEmpty
-            ? durationController.value.text.toDouble()
-            : 1,
-        requestDate: DateTime.now().millisecondsSinceEpoch,
-        attachment: attachments.value,
-      );
-      await AddLeaveService().addLeave(input);
-      await LeaveController.to.getUserLeave();
-      LeaveController.to.getUserSummarizeLeave();
-      Get.back();
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response!.data["message"]);
-      rethrow;
+    validate();
+    if (MyTextFieldFormController.findController('Reason').isValid) {
+      try {
+        final result =
+            await UploadFileUtil.uploadFiles(attachments.value, "leave");
+        attachments.value = result;
+        CreateLeaveModel input = CreateLeaveModel(
+          type: selectLeaveType.value,
+          durationType: selectLeaveDurationType.value,
+          from: startDate.value,
+          to: endDate.value,
+          reason: reasonController.text,
+          duration: durationController.value.text.isNotEmpty
+              ? durationController.value.text.toDouble()
+              : 1,
+          requestDate: DateTime.now().millisecondsSinceEpoch,
+          attachment: attachments.value,
+        );
+        await AddLeaveService().addLeave(input);
+        await LeaveController.to.getUserLeave();
+        LeaveController.to.getUserSummarizeLeave();
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response!.data["message"]);
+        rethrow;
+      }
     }
   }
 
   Future<void> updateLeave() async {
-    try {
-      final result =
-          await UploadFileUtil.uploadFiles(attachments.value, "leave");
-      attachments.value = result;
-      UpdateLeaveModel input = UpdateLeaveModel(
-        type: selectLeaveType.value,
-        durationType: selectLeaveDurationType.value,
-        from: startDate.value,
-        to: endDate.value,
-        reason: reasonController.text,
-        duration: durationController.value.text.isNotEmpty
-            ? durationController.value.text.toDouble()
-            : 1,
-        attachment: attachments.value,
-      );
-      await AddLeaveService().updateLeave(leave.value!.id!, input);
-      LeaveController.to.getUserLeave();
-      Get.back();
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response!.data["message"]);
-      rethrow;
+    validate();
+    if (MyTextFieldFormController.findController('Reason').isValid) {
+      try {
+        final result =
+            await UploadFileUtil.uploadFiles(attachments.value, "leave");
+        attachments.value = result;
+        UpdateLeaveModel input = UpdateLeaveModel(
+          type: selectLeaveType.value,
+          durationType: selectLeaveDurationType.value,
+          from: startDate.value,
+          to: endDate.value,
+          reason: reasonController.text,
+          duration: durationController.value.text.isNotEmpty
+              ? durationController.value.text.toDouble()
+              : 1,
+          attachment: attachments.value,
+        );
+        await AddLeaveService().updateLeave(leave.value!.id!, input);
+        LeaveController.to.getUserLeave();
+        Get.back();
+      } on DioException catch (e) {
+        showErrorSnackBar("Error", e.response!.data["message"]);
+        rethrow;
+      }
     }
+  }
+
+  void validate() {
+    MyTextFieldFormController.findController('Reason').isValid;
   }
 }

@@ -50,23 +50,26 @@ class MyButton extends StatelessWidget {
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
         ),
         child: isIconButton == true
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    icon ?? Icons.check_circle_outline_rounded,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    size: iconSize,
-                  ),
-                  SizedBox(width: size.width * 0.01),
-                  MyText(
-                    text: title,
-                    style: style ??
-                        AppFonts().bodyLargeMedium.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                  ),
-                ],
+            ? Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeUtils.scale(24, size.width)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(
+                      text: title,
+                      style: style ??
+                          AppFonts().bodyLargeMedium.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                    ),
+                    Icon(
+                      icon ?? Icons.check_circle_outline_rounded,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      size: iconSize,
+                    ),
+                  ],
+                ),
               )
             : MyText(
                 text: title,

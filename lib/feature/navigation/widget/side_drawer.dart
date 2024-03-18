@@ -58,7 +58,7 @@ class SideDrawer extends StatelessWidget {
                       user.lastName,
                       user.username,
                     ),
-                    maxLines: 3,
+                    maxLines: 2,
                     style: AppFonts().bodyLarge.copyWith(
                           color: Theme.of(context).colorScheme.secondary,
                         ),

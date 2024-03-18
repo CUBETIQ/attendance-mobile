@@ -122,6 +122,7 @@ class ProfileView extends StatelessWidget {
                         () => ProfileDetailRow(
                           title: "Address",
                           value: controller.user.value.address,
+                          maxline: 2,
                         ),
                       ),
                       SizedBox(height: size.height * 0.02),

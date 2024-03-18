@@ -779,8 +779,10 @@ void getPickAttachmentButtomSheet(
               title: secondButtonTitle ?? "Open File",
               onTap: () async {
                 Get.back();
-                final file = await PickFileHandler.openFileFolder() ?? File("");
-                onTapFile?.call(file);
+                final file = await PickFileHandler.openFileFolder();
+                if (file != null) {
+                  onTapFile?.call(file);
+                }
               },
             ),
           ],

@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 class ProfileDetailRow extends StatelessWidget {
   final String? title;
   final String? value;
+  final int? maxline;
 
-  const ProfileDetailRow({super.key, this.title, this.value});
+  const ProfileDetailRow({super.key, this.title, this.value, this.maxline});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,7 @@ class ProfileDetailRow extends StatelessWidget {
               text: value != "" && value != null
                   ? value.capitalizeMaybeNull ?? "N/A"
                   : "N/A",
+              maxLines: maxline ?? 1,
               overflow: TextOverflow.ellipsis,
               style: AppFonts().bodyMediumRegular,
             ),

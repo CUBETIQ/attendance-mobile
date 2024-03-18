@@ -184,9 +184,9 @@ class NotificationIntegration {
         id,
         title ?? 'Timesync',
         body ?? 'Body',
-        payload: 'payload',
+        payload: payLoad ?? 'payload',
         scheduledNotificationDateTime ??
-            tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+            tz.TZDateTime.now(tz.local).add(const Duration(seconds: 1)),
         NotificationDetails(
           // Android details
           android: AndroidNotificationDetails(

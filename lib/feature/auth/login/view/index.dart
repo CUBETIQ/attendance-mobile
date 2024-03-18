@@ -73,6 +73,7 @@ class LoginView extends StatelessWidget {
                         () => MyText(
                           text:
                               controller.organization.value?.name ?? "TimeSync",
+                          maxLines: 2,
                           style: AppFonts().bodyLargeMedium,
                         ),
                       ),

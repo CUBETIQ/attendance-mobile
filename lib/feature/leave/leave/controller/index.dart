@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/leave_model.dart';
 import 'package:timesync/core/model/summary_leave_model.dart';
@@ -9,9 +12,6 @@ import 'package:timesync/feature/leave/leave/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/leave_status.dart';
 import 'package:timesync/types/state.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class LeaveController extends GetxController {
   static LeaveController get to => Get.find();
@@ -36,18 +36,19 @@ class LeaveController extends GetxController {
   }
 
   Future<void> initFunction() async {
-    // initDate();
+    initDate();
     await getUserLeave();
     getUserSummarizeLeave();
   }
 
-  void onRefresh() {
-    initFunction();
+  Future<void> onRefresh() async {
+    await getUserLeave();
+    getUserSummarizeLeave();
   }
 
   Future<void> getUserLeave() async {
     isLoading.value = true;
-    totalLeave.value = 0;
+    totalLeave.value = 0; 
     try {
       leaves.value = await LeaveService().getUserLeave(
         startDate: startDate.value,
@@ -69,6 +70,7 @@ class LeaveController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
+
       if (summarizeLeaves.isNotEmpty && totalLeave.value != 0) {
         for (var element in summarizeLeaves) {
           totalPendingLeave.value += element.totalPendingLeave!;
@@ -185,6 +187,8 @@ class LeaveController extends GetxController {
           DateTime(picked.year, picked.month, 1).millisecondsSinceEpoch;
       endDate.value =
           DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
+      await getUserLeave();
+      getUserSummarizeLeave();
     }
   }
 }

@@ -35,7 +35,6 @@ class NavigationController extends GetxController {
   late List<DrawerModel> drawerItems;
   final titles = ['Home', 'Task', 'Profile'];
   final items = RxList<BottomBarModel>([]);
-
   final organizationLocation = Rxn<OranizationLocationModel>(null);
   final userLocation = Rxn<Position>(null);
   final isInRange = false.obs;

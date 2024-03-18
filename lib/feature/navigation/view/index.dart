@@ -32,8 +32,7 @@ class NavigationView extends StatelessWidget {
           ),
         ),
         mainScreen: const MainScreen(),
-        borderRadius:
-            SizeUtils.scale(AppSize().borderRadiusLarge, context.width),
+        borderRadius: SizeUtils.scale(AppSize().borderRadiusLarge, context.width),
         showShadow: false,
         angle: -10.0,
         androidCloseOnBackTap: true,

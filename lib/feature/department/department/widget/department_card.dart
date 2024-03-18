@@ -47,9 +47,14 @@ class DepartmentCard extends StatelessWidget {
                   imageHeight: SizeUtils.scale(30, size.width),
                 ),
                 SizedBox(width: SizeUtils.scale(10, size.width)),
-                MyText(
-                  text: department.name ?? "",
-                  style: AppFonts().bodyMediumMedium,
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: SizeUtils.scale(140, size.width),
+                  ),
+                  child: MyText(
+                    text: department.name ?? "",
+                    style: AppFonts().bodyMediumMedium,
+                  ),
                 ),
               ],
             ),

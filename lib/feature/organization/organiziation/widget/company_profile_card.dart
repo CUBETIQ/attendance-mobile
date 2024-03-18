@@ -99,7 +99,7 @@ class CompanyProfileCard extends StatelessWidget {
                     children: [
                       Container(
                         constraints: BoxConstraints(
-                          maxWidth: SizeUtils.scale(145, size.width),
+                          maxWidth: SizeUtils.scale(140, size.width),
                         ),
                         child: MyText(
                           text: companyName ?? "Organization Name",

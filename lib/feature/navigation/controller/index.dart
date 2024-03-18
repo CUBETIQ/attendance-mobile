@@ -67,8 +67,7 @@ class NavigationController extends GetxController {
     getUserLocation();
     getOrganizationTotalWorkHour();
     initSideBarMenu();
-    NotificationSchedule.checkInReminder();
-    NotificationSchedule.checkOutReminder();
+    initNotificationScheduleReminder();
   }
 
   void initItems() {
@@ -114,6 +113,15 @@ class NavigationController extends GetxController {
         ),
       ],
     );
+  }
+
+  void initNotificationScheduleReminder() {
+    if (organization.value.configs == null) return;
+
+    NotificationSchedule.checkInReminder(
+        time: organization.value.configs?.startHour);
+    NotificationSchedule.checkOutReminder(
+        time: organization.value.configs?.endHour);
   }
 
   void onDestinationSelected(int index) {

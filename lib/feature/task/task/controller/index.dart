@@ -91,13 +91,14 @@ class TaskController extends GetxController {
   }
 
   Future<void> initFunction() async {
-    // initDate();
-    await getUserTasks();
+    initDate();
+    getUserTasks();
     getUserSummarizeLeave();
   }
 
   void onRefresh() {
-    initFunction();
+    getUserTasks();
+    getUserSummarizeLeave();
   }
 
   Future<void> deleteTask(String id) async {
@@ -174,6 +175,8 @@ class TaskController extends GetxController {
           DateTime(picked.year, picked.month, 1).millisecondsSinceEpoch;
       endDate.value =
           DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
+      getUserTasks();
+      getUserSummarizeLeave();
     }
   }
 }

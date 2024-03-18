@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:timesync/constants/notification_type.dart';
 import 'package:timesync/constants/time.dart';
+import 'package:timesync/core/model/notification_model.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/utils/logger.dart';
 
@@ -30,6 +34,15 @@ class NotificationSchedule {
         scheduledNotificationDateTime:
             AppTime.scheduleTimeForCheckin(hour: hour, min: min),
         id: checkInId,
+        payLoad: jsonEncode(
+          NotificationPayloadModel(
+            payload: PayloadModel(
+              type: NotificationType.checkIn,
+              data: PayloadDataModel(
+                  subtype: NotificationSubType.checkInLate, prop: {}),
+            ),
+          ).toJson(),
+        ),
       );
     } catch (e) {
       Logs.e(e);
@@ -53,6 +66,15 @@ class NotificationSchedule {
         scheduledNotificationDateTime:
             AppTime.scheduleTimeForCheckout(hour: hour, min: min),
         id: checkOutId,
+        payLoad: jsonEncode(
+          NotificationPayloadModel(
+            payload: PayloadModel(
+              type: NotificationType.checkOut,
+              data: PayloadDataModel(
+                  subtype: NotificationSubType.checkOutLate, prop: {}),
+            ),
+          ).toJson(),
+        ),
       );
     } catch (e) {
       Logs.e(e);

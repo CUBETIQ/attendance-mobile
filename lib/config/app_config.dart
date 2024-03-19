@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
-import 'package:timesync/key.dart';
+import 'package:timesync/config/key.dart';
 import 'package:timesync/utils/encrypt_util.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timezone/timezone.dart' as tz;

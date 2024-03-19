@@ -293,7 +293,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       cancelNotificationReminder();
       getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
     } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
+      if (e.response?.data["message"].toString().contains("Please check out") ==
+          true) {
+        getForgetCheckOutBottomSheet(
+          Get.context!,
+          isDismissible: true,
+          image: SvgAssets.leaving,
+          onTap: () async {
+            Get.back();
+            await checkOut();
+          },
+        );
+      } else {
+        showErrorSnackBar("Error", e.response?.data["message"]);
+      }
       rethrow;
     }
     // }

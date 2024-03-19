@@ -52,6 +52,7 @@ class EditProfileController extends GetxController {
         user.value.dateOfBirth.toString().length > 5) {
       dobController.text =
           DateUtil.formatMillisecondsToDOB(user.value.dateOfBirth);
+      dob.value = user.value.dateOfBirth;
     }
   }
 

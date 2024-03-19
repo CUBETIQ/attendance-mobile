@@ -20,12 +20,13 @@ class AppConfig {
   // static const String uploadUrl =
   //     "https://timesync-usercontent-prod.cubetiq.app";
 
+  // FIREBASE
+  static const String appName = "Timesync 365";
+
   static const String xUploadApiKey = Key.vfsClientApiKey;
   static String? xApiHash;
 
   static String? appLocalPath;
-
-  static const String appName = "timesync";
 
   static String? time;
 

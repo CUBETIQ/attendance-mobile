@@ -1,0 +1,4 @@
+storePassword=$Cube17tiq@007
+keyPassword=$Cube17tiq@007
+keyAlias=key
+storeFile=cubetiq.jks

@@ -11,11 +11,15 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
 class AppConfig {
-  // static const String baseUrl = "http://192.168.1.104:3000/api";
-  static const String baseUrl = "https://timesync-api-uat.ctdn.dev/api";
-  static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";
+  // DEV
+  static const String baseUrl = "http://192.168.1.104:3000/api";
+  static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";  
 
-  static const String xUploadApiKey = Key.xApiKey;
+  // PROD - UAT
+  // static const String baseUrl = "https://timesync-api-uat.ctdn.dev/api";
+  // static const String uploadUrl = "https://timesync-usercontent-prod.cubetiq.app";
+
+  static const String xUploadApiKey = Key.vfsClientApiKey;
   static String? xApiHash;
 
   static String? appLocalPath;
@@ -65,6 +69,6 @@ class AppConfig {
     isFirstTime = _localData?.isFirstTime;
     isActivated = _localData?.isActivated;
     appLocalPath = await FileUtil.getLocalPath();
-    xApiHash = EncryptUtil.createHash(Key.xApiKey, Key.publicKey);
+    xApiHash = EncryptUtil.createHash(Key.vfsClientApiKey, Key.vfsClientPublicKey);
   }
 }

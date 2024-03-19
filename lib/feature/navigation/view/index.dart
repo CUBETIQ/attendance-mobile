@@ -66,7 +66,7 @@ class MainScreen extends StatelessWidget {
     return BackButtonListener(
       onBackButtonPressed: () async {
         if (Get.currentRoute == '/navigation') {
-          return true;
+          return false;
         } else {
           return false;
         }

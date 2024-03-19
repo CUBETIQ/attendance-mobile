@@ -31,12 +31,15 @@ class MyPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
       children: [
-        SizedBox(
-          width: width,
-          height: height,
-          child: SvgPicture.asset(
-            image ?? "",
+        Flexible(
+          child: SizedBox(
+            width: width,
+            height: height,
+            child: SvgPicture.asset(
+              image ?? "",
+            ),
           ),
         ),
         Padding(

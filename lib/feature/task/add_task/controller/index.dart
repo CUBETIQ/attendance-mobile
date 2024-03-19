@@ -68,7 +68,7 @@ class AddTaskController extends GetxController {
             await UploadFileUtil.uploadFiles(attachments.value, "task");
         attachments.value = result;
         CreateTaskModel input = CreateTaskModel(
-          name: taskController.text,
+          name: taskController.text.trim(),
           description: descriptionController.text,
           startDate: startDate.value,
           endDate: endDate.value,

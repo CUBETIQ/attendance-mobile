@@ -8,6 +8,7 @@ import 'package:timesync/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/profile/edit_profile/controller/index.dart';
 import 'package:timesync/utils/size_util.dart';
@@ -35,10 +36,13 @@ class EditProfileView extends StatelessWidget {
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
+            vertical: SizeUtils.scale(
+              AppSize().paddingVerticalLarge,
+              MediaQuery.of(context).size.width,
+            ),
           ),
           child: Column(
             children: [
-              SizedBox(height: AppSize().paddingS17),
               GestureDetector(
                 onTap: controller.pickImage,
                 child: Obx(
@@ -50,21 +54,18 @@ class EditProfileView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: AppSize().paddingS17),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "First Name",
                 hintText: "Enter your firstname",
                 textController: controller.firstnameController,
               ),
-              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Last Name",
                 hintText: "Enter your lastname",
                 textController: controller.lastnameController,
               ),
-              SizedBox(height: AppSize().paddingS5),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Gender",
@@ -82,20 +83,17 @@ class EditProfileView extends StatelessWidget {
                       controller.selectedGender.value = value!,
                 ),
               ),
-              SizedBox(height: AppSize().paddingS5),
               MyDatePickerField(
-                initialDate: controller.dobController.text.isEmpty
-                    ? DateTime.now()
-                    : DateTime.fromMillisecondsSinceEpoch(
-                        controller.dob.value ?? 0,
-                      ),
                 hasLabel: true,
                 label: "Date of birth",
                 hintText: "Enter your date of birth".trString,
                 textController: controller.dobController,
+                initialDate: controller.dob.value == null
+                    ? DateTime.now()
+                    : DateTime.fromMillisecondsSinceEpoch(
+                        controller.dob.value!),
                 onDateResult: controller.getDateInMilliSecond,
               ),
-              SizedBox(height: AppSize().paddingS5),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Address",
@@ -107,8 +105,9 @@ class EditProfileView extends StatelessWidget {
                 title: "Save",
                 onTap: controller.updateProfile,
               ),
-              const SizedBox(height: 10)
-            ],
+            ].withSpaceBetween(
+              height: SizeUtils.scale(AppSize().paddingS5, size.width),
+            ),
           ),
         ),
       ),

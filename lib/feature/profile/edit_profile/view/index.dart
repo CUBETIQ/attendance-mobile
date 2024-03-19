@@ -84,6 +84,11 @@ class EditProfileView extends StatelessWidget {
               ),
               SizedBox(height: AppSize().paddingS5),
               MyDatePickerField(
+                initialDate: controller.dobController.text.isEmpty
+                    ? DateTime.now()
+                    : DateTime.fromMillisecondsSinceEpoch(
+                        controller.dob.value ?? 0,
+                      ),
                 hasLabel: true,
                 label: "Date of birth",
                 hintText: "Enter your date of birth".trString,

@@ -53,6 +53,7 @@ class PositionCard extends StatelessWidget {
                   ),
                   child: MyText(
                     text: position.name ?? "",
+                    maxLines: 2,
                     style: AppFonts().bodyMediumMedium,
                   ),
                 ),

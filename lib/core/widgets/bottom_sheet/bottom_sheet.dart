@@ -581,7 +581,7 @@ void getPickImageButtomSheet(
             MyButton(
               isIconButton: true,
               icon: thirdButtonIcon ?? Icons.camera_rounded,
-              title: secondButtonTitle ?? "Open Camcera",
+              title: secondButtonTitle ?? "Open Camera",
               onTap: () async {
                 Get.back();
                 final file = await PickFileHandler.openCamera();
@@ -829,7 +829,7 @@ void getPickAttachmentButtomSheet(
             MyButton(
               isIconButton: true,
               icon: thirdButtonIcon ?? Icons.camera_rounded,
-              title: secondButtonTitle ?? "Open Camcera",
+              title: secondButtonTitle ?? "Open Camera",
               onTap: () async {
                 Get.back();
                 final file = await PickFileHandler.openCamera();

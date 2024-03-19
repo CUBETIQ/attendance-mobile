@@ -1,8 +1,12 @@
+import 'package:get/get.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/admin_task_report_model.dart';
+import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/report/widget/task_data_row.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +62,34 @@ class EmployeeTaskReportCard extends StatelessWidget {
           ? [
               ...List.generate(
                 data.task?.length ?? 0,
-                (index) => TaskDataRowReport(
-                  data: data.task?[index],
+                (index) => GestureDetector(
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.TASK_DETAIL,
+                      arguments: {
+                        "task": TaskModel(
+                          color: data.task?[index].color,
+                          completedDate: data.task?[index].completedDate,
+                          description: data.task?[index].description,
+                          endDate: data.task?[index].endDate,
+                          name: data.task?[index].name,
+                          priority: data.task?[index].priority,
+                          startDate: data.task?[index].startDate,
+                          status: data.task?[index].status,
+                          icon: data.task?[index].icon,
+                        ),
+                        "user": UserModel(
+                          firstName: data.firstName,
+                          lastName: data.lastName,
+                          username: data.username,
+                          image: data.image,
+                        ),
+                      },
+                    );
+                  },
+                  child: TaskDataRowReport(
+                    data: data.task?[index],
+                  ),
                 ),
               ),
             ]

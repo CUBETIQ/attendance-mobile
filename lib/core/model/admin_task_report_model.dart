@@ -1,3 +1,4 @@
+import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/repositories/base_model.dart';
 
 class AdminTaskReportModel extends BaseModel<AdminTaskReportModel> {
@@ -73,7 +74,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
   final int? startDate;
   final int? endDate;
   final int? completedDate;
-  final List<String>? attachment;
+  final List<AttachmentModel>? attachment;
   final String? color;
   final String? icon;
 
@@ -103,7 +104,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
       startDate: json['startDate'],
       endDate: json['endDate'],
       completedDate: json['completedDate'],
-      attachment: json['attachment'].cast<String>(),
+      attachment: AttachmentModel().fromListJson(json['attachment']),
       color: json['color'],
       icon: json['icon'],
     );
@@ -127,7 +128,7 @@ class TaskReportModel extends BaseModel<TaskReportModel> {
       "startDate": startDate,
       "endDate": endDate,
       "completedDate": completedDate,
-      "attachment": attachment,
+      "attachment": attachment?.map((e) => e.toJson()).toList(),
       "color": color,
       "icon": icon,
     };

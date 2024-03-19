@@ -131,6 +131,7 @@ class TaskController extends GetxController {
           Routes.TASK_DETAIL,
           arguments: {
             "task": task,
+            "user": null,
           },
         );
       },
@@ -158,6 +159,7 @@ class TaskController extends GetxController {
   }
 
   void clearData() {
+    totalTask.value = 0;
     totalCompletedTask.value = 0;
     totalUncompletedTask.value = 0;
     percentageCompletedTask.value = 0;

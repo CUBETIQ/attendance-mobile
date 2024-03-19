@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -249,7 +251,28 @@ class DateUtil {
     int differenceInMinutes = now.difference(dateTime).inMinutes;
 
     // Check if the difference is greater than or equal to 5 minutes
-    return differenceInMinutes < 1;
+    return differenceInMinutes < 5;
+  }
+
+  static void scheduleTaskAfterFiveMinutes(
+      DateTime originalDateTime, int minute) {
+    // Calculate the duration until 5 minutes from the original datetime
+    Duration durationUntilFiveMinutesLater = originalDateTime
+        .add(Duration(minutes: minute))
+        .difference(DateTime.now());
+
+    // Declare the timer variable
+    Timer? timer;
+
+    // Schedule a timer to run after the calculated duration
+    timer = Timer(durationUntilFiveMinutesLater, () {
+      // This block of code will run after 5 minutes from the original datetime
+      print('Task is executed after 5 minutes.');
+      // You can perform your task here
+
+      // Cancel the timer
+      timer?.cancel();
+    });
   }
 }
 

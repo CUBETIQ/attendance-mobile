@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/attendance_chart_model.dart';
 import 'package:timesync/core/model/attendance_model.dart';
@@ -26,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -385,6 +387,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           isCheckedIn.value = true;
           disableButton.value =
               DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+          if (disableButton.value == true) {
+            final duration = AppConfig.delayTimeInMinute -
+                DateUtil.calculateDurationInMinutes(
+                    attendanceList.last.checkInDateTime!,
+                    DateTime.now().millisecondsSinceEpoch);
+            Logs.e(duration);
+          }
         } else {
           checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(

@@ -231,10 +231,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             isCheckedIn.value == false) {
           NotificationSchedule.cancelCheckOutReminder();
 
-          // Init check in reminder
-          NotificationSchedule.checkInReminder(
-              time: NavigationController
-                  .to.organization.value.configs?.startHour);
+          // Init check out reminder for next day
+          NotificationSchedule.checkOutReminder(
+              toNextDay: true,
+              time:
+                  NavigationController.to.organization.value.configs?.endHour);
         }
       } else {
         if (DateTime.now().hour <= hour &&
@@ -243,10 +244,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             isCheckedIn.value == true) {
           NotificationSchedule.cancelCheckInReminder();
 
-          // Init check out reminder
-          NotificationSchedule.checkOutReminder(
-              time:
-                  NavigationController.to.organization.value.configs?.endHour);
+          // Init check in reminder for next day
+          NotificationSchedule.checkInReminder(
+              toNextDay: true,
+              time: NavigationController
+                  .to.organization.value.configs?.startHour);
         }
       }
     }

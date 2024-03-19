@@ -164,7 +164,9 @@ class HomeStaffView extends StatelessWidget {
                     Obx(
                       () => AttendanceDetailCard(
                         image: SvgAssets.clock,
-                        time: controller.totalHour.value ?? "--:--",
+                        time: controller.totalHour.value ??
+                            controller.workingHour.value ??
+                            "--:--",
                         title: "Total Hour",
                       ),
                     ),

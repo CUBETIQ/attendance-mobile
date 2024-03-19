@@ -47,7 +47,9 @@ class AppConfig {
 
   static bool isDarkMode = false;
 
-  static final Rx<bool> isDevMode = false.obs;
+  static final isDevMode = false.obs;
+
+  static final confirmCheckIn = (_localData?.confirmCheckIn ?? true).obs;
 
   static String? theme;
 

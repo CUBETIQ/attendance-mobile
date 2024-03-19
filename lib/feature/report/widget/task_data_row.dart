@@ -75,7 +75,7 @@ class TaskDataRowReport extends StatelessWidget {
                   text: data?.status?.capitalizeFirst ?? "",
                   overflow: TextOverflow.ellipsis,
                   style: AppFonts().bodySmallRegular.copyWith(
-                        color: data?.status == TaskStatus.completed
+                        color: data?.status == TaskStatus.done
                             ? MyColor.successColor
                             : MyColor.pendingColor,
                       ),

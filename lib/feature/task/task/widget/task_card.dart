@@ -58,9 +58,9 @@ class TaskCard extends StatelessWidget {
           child: Row(
             children: [
               IgnorePointer(
-                ignoring: task.status == TaskStatus.completed ? true : false,
+                ignoring: task.status == TaskStatus.done ? true : false,
                 child: MSHCheckbox(
-                  value: task.status == TaskStatus.completed ? true : false,
+                  value: task.status == TaskStatus.done ? true : false,
                   size: SizeUtils.scale(20, size.width),
                   onChanged: onCheck,
                   colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
@@ -107,7 +107,7 @@ class TaskCard extends StatelessWidget {
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: task.endDate == null
                                 ? Theme.of(context).colorScheme.secondary
-                                : task.status == TaskStatus.completed
+                                : task.status == TaskStatus.done
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.error,
                           ),

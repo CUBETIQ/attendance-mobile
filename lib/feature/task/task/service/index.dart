@@ -59,7 +59,7 @@ class TaskService {
 
   Future<void> completeTask(String id) async {
     Map<String, dynamic> data = {
-      "status": TaskStatus.completed,
+      "status": TaskStatus.done,
       "completedDate": DateTime.now().millisecondsSinceEpoch,
     };
 

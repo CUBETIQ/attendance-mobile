@@ -12,13 +12,13 @@ import 'package:timezone/data/latest.dart' as tz;
 
 class AppConfig {
   // DEV
-  // static const String baseUrl = "http://192.168.1.104:3000/api";
-  // static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";
+  static const String baseUrl = "http://192.168.1.104:3000/api";
+  static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";
 
   // PROD - UAT
-  static const String baseUrl = "https://timesync-api-uat.ctdn.dev/api";
-  static const String uploadUrl =
-      "https://timesync-usercontent-prod.cubetiq.app";
+  // static const String baseUrl = "https://timesync-api-uat.ctdn.dev/api";
+  // static const String uploadUrl =
+  //     "https://timesync-usercontent-prod.cubetiq.app";
 
   static const String xUploadApiKey = Key.vfsClientApiKey;
   static String? xApiHash;

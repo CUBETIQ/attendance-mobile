@@ -1,4 +1,5 @@
 class TaskStatus {
-  static const pending = "pending";
-  static const completed = "completed";
+  static const todo = "todo";
+  static const progress = "progress";
+  static const done = "done";
 }

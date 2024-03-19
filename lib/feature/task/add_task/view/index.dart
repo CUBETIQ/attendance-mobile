@@ -9,6 +9,7 @@ import 'package:timesync/core/widgets/icon_picker/rounded_icon_picker.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/task/add_task/controller/index.dart';
 import 'package:flutter/material.dart';
@@ -40,19 +41,18 @@ class AddTaskView extends StatelessWidget {
               AppSize().paddingHorizontalLarge,
               MediaQuery.of(context).size.width,
             ),
+            vertical: SizeUtils.scale(
+              AppSize().paddingHorizontalLarge,
+              MediaQuery.of(context).size.width,
+            ),
           ),
           child: Column(
             children: [
-              SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS5, size.height)),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Task",
                 hintText: "Enter your task",
                 textController: controller.taskController,
-              ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS2, size.height),
               ),
               Row(
                 children: [
@@ -89,9 +89,6 @@ class AddTaskView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS2, size.height),
-              ),
               Obx(
                 () => MyDropDownButton<String>(
                   label: "Priority",
@@ -109,8 +106,21 @@ class AddTaskView extends StatelessWidget {
                       controller.selectPriority.value = value!,
                 ),
               ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS2, size.height),
+              Obx(
+                () => MyDropDownButton<String>(
+                  label: "Status",
+                  value: controller.selectStatus.value,
+                  hint: "Choose status",
+                  dropdownItems: controller.status
+                      .map(
+                        (e) => DropdownMenuItem<String>(
+                          value: e,
+                          child: Text(e.capitalizeFirst.trString),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) => controller.selectStatus.value = value!,
+                ),
               ),
               MyTextFieldForm(
                 hasLabel: true,
@@ -118,9 +128,6 @@ class AddTaskView extends StatelessWidget {
                 hintText: "Enter your description",
                 textController: controller.descriptionController,
                 maxlines: 5,
-              ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS5, size.height),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -147,9 +154,6 @@ class AddTaskView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS5, size.height),
-              ),
               UploadAttachmentButton(
                 files: controller.attachments,
               ),
@@ -168,7 +172,8 @@ class AddTaskView extends StatelessWidget {
                     ? controller.updateTask
                     : controller.addTask,
               ),
-            ],
+            ].withSpaceBetween(
+                height: SizeUtils.scale(AppSize().paddingS5, size.height)),
           ),
         ),
       ),

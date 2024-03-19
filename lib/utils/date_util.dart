@@ -232,6 +232,25 @@ class DateUtil {
 
     return formattedDuration;
   }
+
+  static bool isWithinFiveMinutes(int? dateTimeInMillis) {
+    // Check if the parameter is null
+    if (dateTimeInMillis == null) {
+      return false;
+    }
+
+    // Convert parameter dateTimeInMillis to DateTime object
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(dateTimeInMillis);
+
+    // Get the current DateTime
+    DateTime now = DateTime.now();
+
+    // Calculate the difference in minutes
+    int differenceInMinutes = now.difference(dateTime).inMinutes;
+
+    // Check if the difference is greater than or equal to 5 minutes
+    return differenceInMinutes < 1;
+  }
 }
 
 /////////////////////////////////

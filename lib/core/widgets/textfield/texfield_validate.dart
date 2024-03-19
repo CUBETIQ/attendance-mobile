@@ -26,10 +26,12 @@ class MyTextFieldForm extends StatelessWidget {
   final double? iconSize;
   final int? maxlines;
   final bool? haveSuffixIcon;
+  final Widget? suffixIcon;
   final String? errorText;
   final void Function()? onTapShowPassword;
   final FocusNode? focusNode;
   final TextInputType? keyboardType;
+  final GestureTapCallback? onTap;
   final void Function(String)? onChanged;
 
   const MyTextFieldForm(
@@ -53,8 +55,10 @@ class MyTextFieldForm extends StatelessWidget {
       this.focusNode,
       this.onTapShowPassword,
       this.haveSuffixIcon,
+      this.suffixIcon,
       this.keyboardType,
       this.iconSize,
+      this.onTap,
       this.onChanged});
 
   @override
@@ -91,6 +95,7 @@ class MyTextFieldForm extends StatelessWidget {
                 obscureText: isPassword ?? false,
                 maxLines: maxlines ?? 1,
                 keyboardType: keyboardType,
+                onTap: onTap,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     vertical: SizeUtils.scale(AppSize().paddingS7, size.width),
@@ -127,16 +132,19 @@ class MyTextFieldForm extends StatelessWidget {
                           padding: EdgeInsets.only(
                             right: SizeUtils.scale(10, size.width),
                           ),
-                          child: GestureDetector(
-                            onTap: onTapShowPassword,
-                            child: Icon(
-                              isPassword == false
-                                  ? Icons.visibility_off_rounded
-                                  : Icons.visibility_rounded,
-                              color: Theme.of(context).colorScheme.onBackground,
-                              size: SizeUtils.scale(20, size.width),
-                            ),
-                          ),
+                          child: suffixIcon ??
+                              GestureDetector(
+                                onTap: onTapShowPassword,
+                                child: Icon(
+                                  isPassword == false
+                                      ? Icons.visibility_off_rounded
+                                      : Icons.visibility_rounded,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  size: SizeUtils.scale(20, size.width),
+                                ),
+                              ),
                         )
                       : null,
                   hintText: hintText?.trString,
@@ -230,7 +238,6 @@ class MyTextFieldForm extends StatelessWidget {
                 ),
                 style: style ?? AppFonts().bodyMediumMedium,
                 onChanged: (value) {
-                  onChanged?.call(value);
                   controller.formKey.currentState?.validate();
                   onChanged?.call(value);
                 },

@@ -7,9 +7,12 @@ import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
+import 'package:timesync/core/widgets/textfield/input_date_picker_field.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/profile/edit_profile/controller/index.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class EditProfileView extends StatelessWidget {
@@ -20,93 +23,97 @@ class EditProfileView extends StatelessWidget {
     final controller = Get.put(EditProfileController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const MyAppBarTitle(
-          title: "Edit Profile",
-        ),
-        centerTitle: true,
-        leading: const MyBackButton(),
-        automaticallyImplyLeading: false,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.scale(
-              AppSize().paddingHorizontalLarge,
-              MediaQuery.of(context).size.width,
-            ),
+        appBar: AppBar(
+          title: const MyAppBarTitle(
+            title: "Edit Profile",
           ),
-          child: Column(
-            children: [
-              SizedBox(height: AppSize().paddingS17),
-              GestureDetector(
-                onTap: controller.pickImage,
-                child: Obx(
-                  () => MyProfileImage(
-                    imageFile: controller.imageFile.value,
-                    imageUrl: controller.image.value,
-                    width: SizeUtils.scale(110, size.width),
-                    height: SizeUtils.scale(110, size.width),
+          centerTitle: true,
+          leading: const MyBackButton(),
+          automaticallyImplyLeading: false,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeUtils.scale(
+                AppSize().paddingHorizontalLarge,
+                MediaQuery.of(context).size.width,
+              ),
+              vertical: SizeUtils.scale(
+                AppSize().paddingVerticalLarge,
+                MediaQuery.of(context).size.width,
+              ),
+            ),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: controller.pickImage,
+                  child: Obx(
+                    () => MyProfileImage(
+                      imageFile: controller.imageFile.value,
+                      imageUrl: controller.image.value,
+                      width: SizeUtils.scale(110, size.width),
+                      height: SizeUtils.scale(110, size.width),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: AppSize().paddingS17),
-              MyTextFieldForm(
-                hasLabel: true,
-                label: "First Name",
-                hintText: "Enter your firstname",
-                textController: controller.firstnameController,
-              ),
-              SizedBox(height: AppSize().paddingS5),
-              MyTextFieldForm(
-                hasLabel: true,
-                label: "Last Name",
-                hintText: "Enter your lastname",
-                textController: controller.lastnameController,
-              ),
-              SizedBox(height: AppSize().paddingS5),
-              Obx(
-                () => MyDropDownButton<String>(
-                  label: "Gender",
-                  value: controller.selectedGender.value,
-                  hint: "Choose Gender",
-                  dropdownItems: controller.genderList
-                      .map(
-                        (e) => DropdownMenuItem<String>(
-                          value: e,
-                          child: Text(e.capitalizeFirst.trString),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) =>
-                      controller.selectedGender.value = value!,
+                MyTextFieldForm(
+                  hasLabel: true,
+                  label: "First Name",
+                  hintText: "Enter your firstname",
+                  textController: controller.firstnameController,
                 ),
+                MyTextFieldForm(
+                  hasLabel: true,
+                  label: "Last Name",
+                  hintText: "Enter your lastname",
+                  textController: controller.lastnameController,
+                ),
+                Obx(
+                  () => MyDropDownButton<String>(
+                    label: "Gender",
+                    value: controller.selectedGender.value,
+                    hint: "Choose Gender",
+                    dropdownItems: controller.genderList
+                        .map(
+                          (e) => DropdownMenuItem<String>(
+                            value: e,
+                            child: Text(e.capitalizeFirst.trString),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) =>
+                        controller.selectedGender.value = value!,
+                  ),
+                ),
+                MyDatePickerField(
+                  hasLabel: true,
+                  label: "Date of birth",
+                  hintText: "Enter your date of birth".trString,
+                  textController: controller.dobController,
+                  onDateResult: controller.getDateInMilliSecond,
+                ),
+                InputDatePickerField(
+                  onComplete: (date) {
+                    controller.dob.value = date?.millisecondsSinceEpoch;
+                    Logs.e(date);
+                  },
+                ),
+                MyTextFieldForm(
+                  hasLabel: true,
+                  label: "Address",
+                  hintText: "Enter your address",
+                  textController: controller.addressController,
+                ),
+                SizedBox(height: size.height * 0.06),
+                MyAsyncButton(
+                  title: "Save",
+                  onTap: controller.updateProfile,
+                ),
+              ].withSpaceBetween(
+                height: SizeUtils.scale(AppSize().paddingS5, size.width),
               ),
-              SizedBox(height: AppSize().paddingS5),
-              MyDatePickerField(
-                hasLabel: true,
-                label: "Date of birth",
-                hintText: "Enter your date of birth".trString,
-                textController: controller.dobController,
-                onDateResult: controller.getDateInMilliSecond,
-              ),
-              SizedBox(height: AppSize().paddingS5),
-              MyTextFieldForm(
-                hasLabel: true,
-                label: "Address",
-                hintText: "Enter your address",
-                textController: controller.addressController,
-              ),
-              SizedBox(height: size.height * 0.06),
-              MyAsyncButton(
-                title: "Save",
-                onTap: controller.updateProfile,
-              ),
-              const SizedBox(height: 10)
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

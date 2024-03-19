@@ -46,7 +46,7 @@ class FileUtil {
     return FormData.fromMap(
       {
         'metadata': metadata?.toJson(),
-        'bucket_id': 'timesync',
+        'bucket_id': AppConfig.getLocalData?.userId ?? 'timesync',
         "file": MultipartFile.fromFileSync(
           file.path,
           filename: fileName,

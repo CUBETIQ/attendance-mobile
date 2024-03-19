@@ -9,6 +9,7 @@ import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
 import 'package:timesync/feature/task/add_task/service/index.dart';
 import 'package:timesync/feature/task/task/controller/index.dart';
+import 'package:timesync/types/task_status.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/types/task_priority.dart';
@@ -19,27 +20,38 @@ import 'package:timesync/utils/upload_file_util.dart';
 
 class AddTaskController extends GetxController {
   final title = "Add Task".obs;
+  final task = Rxn<TaskModel>(null);
+  final appState = AppState.create.obs;
+  final attachments = <AttachmentModel>[].obs;
+
+  final color = Rxn<Color>(null);
+  final stringColor = Rxn<String>(null);
+  final stringColorLabel = Rxn<String>(null);
+  late Color screenPickerColor;
+  final stringIcon = Rxn<String>(null);
+  final stringIconLabel = Rxn<String>(null);
+
   final startDate = Rxn<int>(null);
   final endDate = Rxn<int>(null);
+
   final taskController = TextEditingController();
   final startDateController = TextEditingController();
   final endDateController = TextEditingController();
   final descriptionController = TextEditingController();
-  final color = Rxn<Color>(null);
-  final stringColor = Rxn<String>(null);
-  final stringColorLabel = Rxn<String>(null);
-  final stringIcon = Rxn<String>(null);
-  final stringIconLabel = Rxn<String>(null);
-  final appState = AppState.create.obs;
-  final task = Rxn<TaskModel>(null);
+
+  final selectPriority = TaskPriority.low.obs;
   final priority = [
     TaskPriority.low,
     TaskPriority.medium,
     TaskPriority.high,
   ];
-  final selectPriority = TaskPriority.low.obs;
-  late Color screenPickerColor;
-  final attachments = <AttachmentModel>[].obs;
+
+  final selectStatus = TaskStatus.todo.obs;
+  final status = [
+    TaskStatus.todo,
+    TaskStatus.progress,
+    TaskStatus.done,
+  ];
 
   @override
   void onInit() {

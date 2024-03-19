@@ -15,36 +15,19 @@ class OnBoardView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: SizeUtils.scale(
-                  600,
-                  size.width,
+        child: PageView(
+          onPageChanged: controller.onChange,
+          controller: controller.pageController,
+          children: controller.onBoardList
+              .map(
+                (e) => MyPage(
+                  image: e.image,
+                  width: size.width,
+                  title: e.title,
+                  description: e.description,
                 ),
-                child: PageView(
-                  onPageChanged: controller.onChange,
-                  controller: controller.pageController,
-                  children: controller.onBoardList
-                      .map(
-                        (e) => MyPage(
-                          image: e.image,
-                          width: size.width,
-                          height: SizeUtils.scale(
-                            450,
-                            size.width,
-                          ),
-                          title: e.title,
-                          description: e.description,
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-            ],
-          ),
+              )
+              .toList(),
         ),
       ),
       bottomNavigationBar: Padding(

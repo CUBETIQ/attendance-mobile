@@ -255,7 +255,9 @@ class DateUtil {
   }
 
   static void scheduleTaskAfterFiveMinutes(
-      DateTime originalDateTime, int minute) {
+      DateTime originalDateTime, int minute, void Function(bool) task) {
+    bool isDisable = true;
+
     // Calculate the duration until 5 minutes from the original datetime
     Duration durationUntilFiveMinutesLater = originalDateTime
         .add(Duration(minutes: minute))
@@ -267,8 +269,9 @@ class DateUtil {
     // Schedule a timer to run after the calculated duration
     timer = Timer(durationUntilFiveMinutesLater, () {
       // This block of code will run after 5 minutes from the original datetime
-      print('Task is executed after 5 minutes.');
       // You can perform your task here
+      isDisable = false;
+      task.call(isDisable);
 
       // Cancel the timer
       timer?.cancel();

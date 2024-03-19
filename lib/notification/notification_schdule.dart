@@ -17,7 +17,7 @@ class NotificationSchedule {
   static const int checkInId = 100;
   static const int checkOutId = 101;
 
-  static Future<void> checkInReminder({String? time}) async {
+  static Future<void> checkInReminder({String? time, bool? toNextDay}) async {
     int? hour;
     int? min;
 
@@ -31,8 +31,8 @@ class NotificationSchedule {
       NotificationIntegration.scheduleNotification(
         title: "Reminder",
         body: "You have not checked in yet, please check in now",
-        scheduledNotificationDateTime:
-            AppTime.scheduleTimeForCheckin(hour: hour, min: min),
+        scheduledNotificationDateTime: AppTime.scheduleTimeForCheckin(
+            hour: hour, min: min, toNextDay: toNextDay),
         id: checkInId,
         payLoad: jsonEncode(
           NotificationPayloadModel(
@@ -49,7 +49,7 @@ class NotificationSchedule {
     }
   }
 
-  static Future<void> checkOutReminder({String? time}) async {
+  static Future<void> checkOutReminder({String? time, bool? toNextDay}) async {
     int? hour;
     int? min;
 
@@ -63,8 +63,8 @@ class NotificationSchedule {
       NotificationIntegration.scheduleNotification(
         title: "Reminder",
         body: "You have not checked out yet, please check out now",
-        scheduledNotificationDateTime:
-            AppTime.scheduleTimeForCheckout(hour: hour, min: min),
+        scheduledNotificationDateTime: AppTime.scheduleTimeForCheckout(
+            hour: hour, min: min, toNextDay: true),
         id: checkOutId,
         payLoad: jsonEncode(
           NotificationPayloadModel(

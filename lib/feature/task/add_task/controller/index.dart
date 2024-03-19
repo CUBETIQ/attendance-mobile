@@ -74,6 +74,7 @@ class AddTaskController extends GetxController {
           endDate: endDate.value,
           color: stringColor.value,
           icon: stringIcon.value,
+          status: selectStatus.value,
           priority: selectPriority.value,
           attachment: attachments.value,
         );
@@ -102,6 +103,7 @@ class AddTaskController extends GetxController {
           endDate: endDate.value,
           color: stringColor.value,
           icon: stringIcon.value,
+          status: selectStatus.value,
           priority: selectPriority.value,
           attachment: attachments.value,
         );

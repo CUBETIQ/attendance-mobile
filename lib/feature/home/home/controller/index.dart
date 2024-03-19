@@ -101,6 +101,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final earlyPercentage = 0.0.obs;
   final disableButton = false.obs;
 
+  Timer? timer;
+  final workingHour = Rxn<String>();
+
   @override
   void onInit() {
     super.onInit();
@@ -117,6 +120,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();
+    // initTimer();
+  }
+
+  void initTimer() {
+    if (checkInTime.value != null && checkOutTime.value == null) {
+      const oneSec = Duration(seconds: 1);
+      Timer.periodic(
+        oneSec,
+        (Timer timer) {
+          Logs.e(timer.tick);
+          Logs.e(checkInTime.value);
+        },
+      );
+    }
   }
 
   void onRefresh() {
@@ -233,10 +250,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             isCheckedIn.value == false) {
           NotificationSchedule.cancelCheckOutReminder();
 
-          // Init check in reminder
-          NotificationSchedule.checkInReminder(
-              time: NavigationController
-                  .to.organization.value.configs?.startHour);
+          // Init check out reminder for next day
+          NotificationSchedule.checkOutReminder(
+              toNextDay: true,
+              time:
+                  NavigationController.to.organization.value.configs?.endHour);
         }
       } else {
         if (DateTime.now().hour <= hour &&
@@ -245,10 +263,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             isCheckedIn.value == true) {
           NotificationSchedule.cancelCheckInReminder();
 
-          // Init check out reminder
-          NotificationSchedule.checkOutReminder(
-              time:
-                  NavigationController.to.organization.value.configs?.endHour);
+          // Init check in reminder for next day
+          NotificationSchedule.checkInReminder(
+              toNextDay: true,
+              time: NavigationController
+                  .to.organization.value.configs?.startHour);
         }
       }
     }
@@ -286,8 +305,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       checkInTime.value = DateUtil.formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
       );
-      disableButton.value =
-          DateUtil.isWithinFiveMinutes(checkIn.checkInDateTime);
+      onDisableButton(checkIn.checkInDateTime ?? 0);
       await getAttendance();
       isCheckedIn.value = true;
       await getSummarizeAttendance();
@@ -385,15 +403,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
-          disableButton.value =
-              DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
-          if (disableButton.value == true) {
-            final duration = AppConfig.delayTimeInMinute -
-                DateUtil.calculateDurationInMinutes(
-                    attendanceList.last.checkInDateTime!,
-                    DateTime.now().millisecondsSinceEpoch);
-            Logs.e(duration);
-          }
+          onDisableButton(attendanceList.last.checkInDateTime ?? 0);
         } else {
           checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
@@ -631,6 +641,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
               totalCheckOutEarly.value, totalStaffs.value);
         }
       }
+    }
+  }
+
+  void onDisableButton(int dateTimeInMillis) {
+    disableButton.value =
+        DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+    if (disableButton.value == true) {
+      final duration = AppConfig.delayTimeInMinute -
+          DateUtil.calculateDurationInMinutes(
+              attendanceList.last.checkInDateTime!,
+              DateTime.now().millisecondsSinceEpoch);
+      final orinalDateTime = DateTime.fromMillisecondsSinceEpoch(
+          attendanceList.last.checkInDateTime!);
+      DateUtil.scheduleTaskAfterFiveMinutes(orinalDateTime, duration, (value) {
+        disableButton.value = value;
+      });
     }
   }
 }

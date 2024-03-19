@@ -24,6 +24,8 @@ class NotificationIntegration {
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
+  static List<PendingNotificationRequest> pendingNotificationRequests = [];
+
   static Future<void> initializeFirebase() async {
     if (Firebase.apps.isNotEmpty) {
       return;
@@ -41,6 +43,9 @@ class NotificationIntegration {
       }
     });
     initializeInApplication();
+
+    pendingNotificationRequests =
+        await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
   }
 
   static Future<InitializationSettings?> _initSettings() async {

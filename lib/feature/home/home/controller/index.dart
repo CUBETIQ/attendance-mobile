@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
+import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/attendance_chart_model.dart';
 import 'package:timesync/core/model/attendance_model.dart';
@@ -313,8 +314,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       checkInTime.value = DateUtil.formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
       );
-      disableButton.value =
-          DateUtil.isWithinFiveMinutes(checkIn.checkInDateTime);
+      onDisableButton(checkIn.checkInDateTime ?? 0);
       await getAttendance();
       isCheckedIn.value = true;
       await getSummarizeAttendance();
@@ -413,8 +413,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
-          disableButton.value =
-              DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+          onDisableButton(attendanceList.last.checkInDateTime ?? 0);
         } else {
           timer?.cancel();
           checkOutTime.value = DateUtil.formatTime(
@@ -653,6 +652,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
               totalCheckOutEarly.value, totalStaffs.value);
         }
       }
+    }
+  }
+
+  void onDisableButton(int dateTimeInMillis) {
+    disableButton.value =
+        DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+    if (disableButton.value == true) {
+      final duration = AppConfig.delayTimeInMinute -
+          DateUtil.calculateDurationInMinutes(
+              attendanceList.last.checkInDateTime!,
+              DateTime.now().millisecondsSinceEpoch);
+      final orinalDateTime = DateTime.fromMillisecondsSinceEpoch(
+          attendanceList.last.checkInDateTime!);
+      DateUtil.scheduleTaskAfterFiveMinutes(orinalDateTime, duration, (value) {
+        disableButton.value = value;
+      });
     }
   }
 }

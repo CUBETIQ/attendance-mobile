@@ -1,4 +1,10 @@
 import 'dart:async';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:ntp/ntp.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/attendance_chart_model.dart';
 import 'package:timesync/core/model/attendance_model.dart';
@@ -15,18 +21,12 @@ import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
-import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
-import 'package:timesync/utils/double_util.dart';
-import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/types/user_status.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:ntp/ntp.dart';
-import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/attendance_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/utils/double_util.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -119,17 +119,26 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();
-    // initTimer();
+    workingHourDuration();
   }
 
-  void initTimer() {
+  void workingHourDuration() {
     if (checkInTime.value != null && checkOutTime.value == null) {
-      const oneSec = Duration(seconds: 1);
-      Timer.periodic(
-        oneSec,
+      final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
+        attendanceList.last.checkInDateTime!,
+      );
+      // Update the working hour value every second
+      timer = Timer.periodic(
+        const Duration(seconds: 1),
         (Timer timer) {
-          Logs.e(timer.tick);
-          Logs.e(checkInTime.value);
+          var duration = DateTime.now().difference(checkInDateTime);
+          var hours = duration.inHours;
+          var minutes = duration.inMinutes.remainder(60);
+          var formattedMinutes = minutes.toString().padLeft(2, '0');
+          var seconds = duration.inSeconds.remainder(60);
+          var formattedSeconds = seconds.toString().padLeft(2, '0');
+
+          workingHour.value = "$hours:$formattedMinutes:$formattedSeconds";
         },
       );
     }
@@ -312,6 +321,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       if (Get.isRegistered<ProfileController>()) {
         ProfileController.to.getSummarizeAttendance();
       }
+      workingHourDuration();
       cancelNotificationReminder();
       getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
     } on DioException catch (e) {
@@ -406,6 +416,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           disableButton.value =
               DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
         } else {
+          timer?.cancel();
           checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
               attendanceList.last.checkOutDateTime!,

@@ -26,6 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -99,6 +100,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final earlyPercentage = 0.0.obs;
   final disableButton = false.obs;
 
+  Timer? timer;
+  final workingHour = Rxn<String>();
+
   @override
   void onInit() {
     super.onInit();
@@ -115,6 +119,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();
+    // initTimer();
+  }
+
+  void initTimer() {
+    if (checkInTime.value != null && checkOutTime.value == null) {
+      const oneSec = Duration(seconds: 1);
+      Timer.periodic(
+        oneSec,
+        (Timer timer) {
+          Logs.e(timer.tick);
+          Logs.e(checkInTime.value);
+        },
+      );
+    }
   }
 
   void onRefresh() {

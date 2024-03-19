@@ -17,6 +17,7 @@ import 'package:timesync/feature/navigation/model/bottom_bar_model.dart';
 import 'package:timesync/feature/navigation/model/drawer_model.dart';
 import 'package:timesync/feature/navigation/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
+import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/notification/notification_topic.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/role.dart';
@@ -118,10 +119,25 @@ class NavigationController extends GetxController {
   void initNotificationScheduleReminder() {
     if (organization.value.configs == null) return;
 
-    NotificationSchedule.checkInReminder(
-        time: organization.value.configs?.startHour);
-    NotificationSchedule.checkOutReminder(
-        time: organization.value.configs?.endHour);
+    final List<int> ids = NotificationIntegration.pendingNotificationRequests
+        .map((e) => e.id)
+        .toList();
+
+    bool containsCheckIn = ids.contains(NotificationSchedule.checkInId);
+    bool containsCheckOut = ids.contains(NotificationSchedule.checkOutId);
+
+    if (ids.isEmpty) {
+      NotificationSchedule.checkInReminder(
+          time: organization.value.configs?.startHour);
+      NotificationSchedule.checkOutReminder(
+          time: organization.value.configs?.endHour);
+    } else if (!containsCheckIn) {
+      NotificationSchedule.checkInReminder(
+          time: organization.value.configs?.startHour);
+    } else if (!containsCheckOut) {
+      NotificationSchedule.checkOutReminder(
+          time: organization.value.configs?.endHour);
+    }
   }
 
   void onDestinationSelected(int index) {

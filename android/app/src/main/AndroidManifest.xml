@@ -42,7 +42,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="myqr.timesync.com"
+                    android:host="mytimesync360.cubetiq.app"
                     android:scheme="https" />
             </intent-filter>
             <!-- Deep Links: http -->
@@ -53,7 +53,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="myqr.timesync.com"
+                    android:host="mytimesync360.cubetiq.app"
                     android:scheme="timesyncmobile" />
             </intent-filter>
         </activity>

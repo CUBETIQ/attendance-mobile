@@ -287,61 +287,63 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     if (checkLocation == false) {
       return;
     }
-    DateTime now = await checkTime();
-    // final getEndhout = endHour.value.split(":").first;
-    // if (now.hour > getEndhout.toInt()) {
-    //   showErrorSnackBar("Error", "You can't check in after $endHour");
-    //   return;
-    // } else {
-    controller.forward();
-    checkOutTime.value = null;
-    totalHour.value = null;
-    try {
-      LocationModel location = LocationModel(
-        lat: NavigationController.to.userLocation.value?.latitude,
-        lng: NavigationController.to.userLocation.value?.longitude,
-        inOffice: NavigationController.to.isInRange.value,
-      );
-      CheckInModel input = CheckInModel(
-        checkInDateTime: now.millisecondsSinceEpoch,
-        checkInType: AttendanceMethod.manual,
-        checkInStatus: CheckInStatusValidator.getStatus(startHour.value, now),
-        checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
-        checkInLate: GetMinute.checkLateMinute(startHour.value, now),
-        checkInLocation: location,
-      );
-      AttendanceModel checkIn = await HomeService().checkIn(input);
-      checkInTime.value = DateUtil.formatTime(
-        DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
-      );
-      onDisableButton(checkIn.checkInDateTime ?? 0);
-      await getAttendance();
-      isCheckedIn.value = true;
-      await getSummarizeAttendance();
-      if (Get.isRegistered<ProfileController>()) {
-        ProfileController.to.getSummarizeAttendance();
-      }
-      workingHourDuration();
-      cancelNotificationReminder();
-      getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
-    } on DioException catch (e) {
-      if (e.response?.data["message"].toString().contains("Please check out") ==
-          true) {
-        getForgetCheckOutBottomSheet(
-          Get.context!,
-          isDismissible: true,
-          image: SvgAssets.leaving,
-          onTap: () async {
-            Get.back();
-            await checkOut();
-          },
-        );
-      } else {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-      }
-      rethrow;
-    }
-    // }
+    getConfirmCheckInOutBottomSheet(
+      confirmCheckIn: AppConfig.confirmCheckIn.value,
+      onTapConfirm: () async {
+        DateTime now = await checkTime();
+        controller.forward();
+        checkOutTime.value = null;
+        totalHour.value = null;
+        try {
+          LocationModel location = LocationModel(
+            lat: NavigationController.to.userLocation.value?.latitude,
+            lng: NavigationController.to.userLocation.value?.longitude,
+            inOffice: NavigationController.to.isInRange.value,
+          );
+          CheckInModel input = CheckInModel(
+            checkInDateTime: now.millisecondsSinceEpoch,
+            checkInType: AttendanceMethod.manual,
+            checkInStatus:
+                CheckInStatusValidator.getStatus(startHour.value, now),
+            checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
+            checkInLate: GetMinute.checkLateMinute(startHour.value, now),
+            checkInLocation: location,
+          );
+          AttendanceModel checkIn = await HomeService().checkIn(input);
+          checkInTime.value = DateUtil.formatTime(
+            DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
+          );
+          onDisableButton(checkIn.checkInDateTime ?? 0);
+          await getAttendance();
+          isCheckedIn.value = true;
+          await getSummarizeAttendance();
+          if (Get.isRegistered<ProfileController>()) {
+            ProfileController.to.getSummarizeAttendance();
+          }
+          workingHourDuration();
+          cancelNotificationReminder();
+          getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
+        } on DioException catch (e) {
+          if (e.response?.data["message"]
+                  .toString()
+                  .contains("Please check out") ==
+              true) {
+            getForgetCheckOutBottomSheet(
+              Get.context!,
+              isDismissible: true,
+              image: SvgAssets.leaving,
+              onTap: () async {
+                Get.back();
+                await checkOut();
+              },
+            );
+          } else {
+            showErrorSnackBar("Error", e.response?.data["message"]);
+          }
+          rethrow;
+        }
+      },
+    );
   }
 
   Future<void> checkOut() async {
@@ -349,34 +351,41 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     if (checkLocation == false) {
       return;
     }
-    controller.forward();
-    DateTime now = await checkTime();
-    try {
-      LocationModel location = LocationModel(
-        lat: NavigationController.to.userLocation.value?.latitude,
-        lng: NavigationController.to.userLocation.value?.longitude,
-        inOffice: NavigationController.to.isInRange.value,
-      );
-      CheckOutModel input = CheckOutModel(
-        checkOutDateTime: now.millisecondsSinceEpoch,
-        checkOutType: AttendanceMethod.manual,
-        checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
-        checkOutEarly: GetMinute.checkEarlyMinute(endHour.value, now),
-        checkOutLate: GetMinute.checkLateMinute(endHour.value, now),
-        checkOutLocation: location,
-      );
-      AttendanceModel checkOut = await HomeService().checkOut(input);
-      checkOutTime.value = DateUtil.formatTime(
-        DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
-      );
-      isCheckedIn.value = false;
-      await getAttendance();
-      cancelNotificationReminder(checkOut: true);
-      getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
+    getConfirmCheckInOutBottomSheet(
+      isCheckOut: true,
+      confirmCheckIn: AppConfig.confirmCheckIn.value,
+      onTapConfirm: () async {
+        controller.forward();
+        DateTime now = await checkTime();
+        try {
+          LocationModel location = LocationModel(
+            lat: NavigationController.to.userLocation.value?.latitude,
+            lng: NavigationController.to.userLocation.value?.longitude,
+            inOffice: NavigationController.to.isInRange.value,
+          );
+          CheckOutModel input = CheckOutModel(
+            checkOutDateTime: now.millisecondsSinceEpoch,
+            checkOutType: AttendanceMethod.manual,
+            checkOutStatus:
+                CheckOutStatusValidator().getStatus(endHour.value, now),
+            checkOutEarly: GetMinute.checkEarlyMinute(endHour.value, now),
+            checkOutLate: GetMinute.checkLateMinute(endHour.value, now),
+            checkOutLocation: location,
+          );
+          AttendanceModel checkOut = await HomeService().checkOut(input);
+          checkOutTime.value = DateUtil.formatTime(
+            DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
+          );
+          isCheckedIn.value = false;
+          await getAttendance();
+          cancelNotificationReminder(checkOut: true);
+          getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+        } on DioException catch (e) {
+          showErrorSnackBar("Error", e.response?.data["message"]);
+          rethrow;
+        }
+      },
+    );
   }
 
   Future<void> updateUserStatus(String status) async {

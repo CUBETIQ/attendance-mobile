@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/attendance_chart_model.dart';
 import 'package:timesync/core/model/attendance_model.dart';
@@ -26,78 +27,79 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   static HomeController get to => Get.find();
   late TabController? tabController;
-  RxString getUserRole = "".obs;
-  DateTime date = DateTime.now();
-  RxBool isCheckedIn = false.obs;
-  Rxn<String> checkInTime = Rxn<String>(null);
-  Rxn<String> checkOutTime = Rxn<String>(null);
-  Rxn<int> dateInMiliSecond = Rxn<int>(null);
-  Rxn<int> startOfDay = Rxn<int>(null);
-  Rxn<int> endOfDay = Rxn<int>(null);
-  Rx<int> startOfMonth = 0.obs;
-  Rx<int> endOfMonth = 0.obs;
-  RxList<AttendanceModel> attendanceList = <AttendanceModel>[].obs;
-  RxList<AttendanceModel> staffAttendanceList = <AttendanceModel>[].obs;
-  RxList<PositionModel> positionList = <PositionModel>[].obs;
-  var isLoadingList = false.obs;
-  var isLoadingStaffAttendance = false.obs;
-  RxString startHour = "8:00".obs;
-  RxString endHour = "17:00".obs;
-  Rxn<String> totalHour = Rxn<String>(null);
-  RxString currentDate = "".obs;
+  final getUserRole = "".obs;
+  final date = DateTime.now();
+  final isCheckedIn = false.obs;
+  final checkInTime = Rxn<String>(null);
+  final checkOutTime = Rxn<String>(null);
+  final dateInMiliSecond = Rxn<int>(null);
+  final startOfDay = Rxn<int>(null);
+  final endOfDay = Rxn<int>(null);
+  final startOfMonth = 0.obs;
+  final endOfMonth = 0.obs;
+  final attendanceList = <AttendanceModel>[].obs;
+  final staffAttendanceList = <AttendanceModel>[].obs;
+  final positionList = <PositionModel>[].obs;
+  final isLoadingList = false.obs;
+  final isLoadingStaffAttendance = false.obs;
+  final startHour = "8:00".obs;
+  final endHour = "17:00".obs;
+  final totalHour = Rxn<String>(null);
+  final currentDate = "".obs;
   late AnimationController controller;
   late Animation<double> scaleAnimation;
-  RxBool isInRange = false.obs;
-  RxBool isBreakTime = false.obs;
-  Rxn<String> breakTimeTitle = Rxn<String>(null);
-  Rx<UserModel> user = UserModel().obs;
-  RxList<SummaryAttendanceModel> summaryAttendance =
-      <SummaryAttendanceModel>[].obs;
-  RxList<String> attendanceType = <String>[
+  final isInRange = false.obs;
+  final isBreakTime = false.obs;
+  final breakTimeTitle = Rxn<String>(null);
+  final user = UserModel().obs;
+  final summaryAttendance = <SummaryAttendanceModel>[].obs;
+  final attendanceType = <String>[
     "Check In",
     "Check Out",
   ].obs;
-  RxList<String> status = <String>[
+  final status = <String>[
     UserStatus.active,
     UserStatus.doNotDisturb,
     UserStatus.idle,
   ].obs;
-  RxString selectedStatus = UserStatus.active.obs;
-  RxString selectedAttendanceType = "Check In".obs;
-  Rxn<String> name = Rxn<String>(null);
-  var isLoadingSummary = false.obs;
-  Rxn<int> totalAttendance = Rxn<int>(null);
-  Rxn<int> totalAbsent = Rxn<int>(null);
-  Rxn<int> totalLeave = Rxn<int>(null);
-  RxList<AttendanceChartModel> attendanceChart = <AttendanceChartModel>[].obs;
-  Rx<int> totalChartPresent = 0.obs;
-  Rx<int> totalChartAbsent = 0.obs;
-  Rx<int> totalChartLeave = 0.obs;
-  RxDouble presentPercentage = 0.0.obs;
-  RxDouble absentPercentage = 0.0.obs;
-  RxDouble onLeavePercentage = 0.0.obs;
-  RxInt totalStaff = 0.obs;
-  Rx<DateTime> selectDate = DateTime.now().obs;
-  RxBool haveNoData = false.obs;
-  RxList<String> tabs = <String>[].obs;
-  RxList<UserModel> staffs = <UserModel>[].obs;
-  RxInt totalStaffs = 0.obs;
-  RxInt totalCheckInLate = 0.obs;
-  RxInt totalCheckInOnTime = 0.obs;
-  RxInt totalCheckInEarly = 0.obs;
-  RxInt totalCheckOutLate = 0.obs;
-  RxInt totalCheckOutOnTime = 0.obs;
-  RxInt totalCheckOutEarly = 0.obs;
-  RxBool isCheckIn = true.obs;
-  RxDouble latePercentage = 0.0.obs;
-  RxDouble onTimePercentage = 0.0.obs;
-  RxDouble earlyPercentage = 0.0.obs;
+  final selectedStatus = UserStatus.active.obs;
+  final selectedAttendanceType = "Check In".obs;
+  final name = Rxn<String>(null);
+  final isLoadingSummary = false.obs;
+  final totalAttendance = Rxn<int>(null);
+  final totalAbsent = Rxn<int>(null);
+  final totalLeave = Rxn<int>(null);
+  final attendanceChart = <AttendanceChartModel>[].obs;
+  final totalChartPresent = 0.obs;
+  final totalChartAbsent = 0.obs;
+  final totalChartLeave = 0.obs;
+  final presentPercentage = 0.0.obs;
+  final absentPercentage = 0.0.obs;
+  final onLeavePercentage = 0.0.obs;
+  final totalStaff = 0.obs;
+  final selectDate = DateTime.now().obs;
+  final haveNoData = false.obs;
+  final tabs = <String>[].obs;
+  final staffs = <UserModel>[].obs;
+  final totalStaffs = 0.obs;
+  final totalCheckInLate = 0.obs;
+  final totalCheckInOnTime = 0.obs;
+  final totalCheckInEarly = 0.obs;
+  final totalCheckOutLate = 0.obs;
+  final totalCheckOutOnTime = 0.obs;
+  final totalCheckOutEarly = 0.obs;
+  final isCheckIn = true.obs;
+  final latePercentage = 0.0.obs;
+  final onTimePercentage = 0.0.obs;
+  final earlyPercentage = 0.0.obs;
+  final disableButton = false.obs;
 
   @override
   void onInit() {
@@ -284,6 +286,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       checkInTime.value = DateUtil.formatTime(
         DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
       );
+      disableButton.value =
+          DateUtil.isWithinFiveMinutes(checkIn.checkInDateTime);
       await getAttendance();
       isCheckedIn.value = true;
       await getSummarizeAttendance();
@@ -378,8 +382,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             attendanceList.last.checkInDateTime!,
           ),
         );
+
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
+          disableButton.value =
+              DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+          if (disableButton.value == true) {
+            final duration = AppConfig.delayTimeInMinute -
+                DateUtil.calculateDurationInMinutes(
+                    attendanceList.last.checkInDateTime!,
+                    DateTime.now().millisecondsSinceEpoch);
+            Logs.e(duration);
+          }
         } else {
           checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(

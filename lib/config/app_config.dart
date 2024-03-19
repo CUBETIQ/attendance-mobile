@@ -24,11 +24,12 @@ class AppConfig {
   static const String appName = "Timesync 365";
 
   static const String xUploadApiKey = Key.vfsClientApiKey;
+
   static String? xApiHash;
 
   static String? appLocalPath;
 
-  static String? time;
+  static int delayTimeInMinute = 5;
 
   // Setup the local storage for fetching while using the app
   static LocalStorage? _localData = LocalStorage();

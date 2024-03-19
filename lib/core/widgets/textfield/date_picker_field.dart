@@ -74,7 +74,6 @@ class MyDatePickerField extends StatelessWidget {
                     initialDate: initialDate ?? DateTime.now(),
                     firstDate: firstDate ?? DateTime(1900),
                     lastDate: DateTime(2100),
-                  
                     locale: Get.locale);
                 if (picked != null) {
                   if (label == "Start Date") {

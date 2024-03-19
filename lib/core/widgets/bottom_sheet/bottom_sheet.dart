@@ -144,6 +144,110 @@ void getCheckOutBottomSheet(BuildContext context,
   );
 }
 
+void getConfirmCheckInOutBottomSheet({
+  bool? confirmCheckIn,
+  bool? isDismissible,
+  void Function()? onTapConfirm,
+  String? title,
+  Color? titleColor,
+  bool? isCheckOut,
+}) {
+  final context = Get.context!;
+  final size = MediaQuery.of(context).size;
+  confirmCheckIn == true
+      ? {
+          Get.bottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50 * (size.width / 375.0)),
+                topRight: Radius.circular(50 * (size.width / 375.0)),
+              ),
+            ),
+            isDismissible: isDismissible ?? true,
+            Container(
+              width: size.width,
+              height: SizeUtils.scale(400, size.width),
+              color: Theme.of(context).colorScheme.surface,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: SizeUtils.scale(
+                    AppSize().paddingHorizontalLarge,
+                    size.width,
+                  ),
+                  right: SizeUtils.scale(
+                    AppSize().paddingHorizontalLarge,
+                    size.width,
+                  ),
+                  top: AppSize().paddingTitleSmall,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              // width: size.width * 0.65,
+                              // height: size.height * 0.25,
+                              child: SvgPicture.asset(
+                                isCheckOut == true
+                                    ? SvgAssets.leaving
+                                    : SvgAssets.working,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: SizeUtils.scale(20, size.width)),
+                            child: MyText(
+                              text: title ??
+                                  (isCheckOut == true
+                                      ? "Are you sure you wanna check out?"
+                                      : "Are you sure you wanna check in?"),
+                              style: AppFonts().bodyMediumMedium.copyWith(
+                                    color: titleColor,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: SizeUtils.scale(20, size.width)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: MyButton(
+                              title: "Cancel",
+                              onTap: () => Get.back(),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.error,
+                            ),
+                          ),
+                          SizedBox(width: size.width * 0.02),
+                          Expanded(
+                            child: MyButton(
+                              title: "Confirm",
+                              onTap: () {
+                                onTapConfirm?.call();
+                                Get.back();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        }
+      : onTapConfirm?.call();
+}
+
 void getForgetCheckOutBottomSheet(BuildContext context,
     {bool? isDismissible, required String image, void Function()? onTap}) {
   final size = MediaQuery.of(context).size;
@@ -581,7 +685,7 @@ void getPickImageButtomSheet(
             MyButton(
               isIconButton: true,
               icon: thirdButtonIcon ?? Icons.camera_rounded,
-              title: secondButtonTitle ?? "Open Camcera",
+              title: secondButtonTitle ?? "Open Camera",
               onTap: () async {
                 Get.back();
                 final file = await PickFileHandler.openCamera();
@@ -829,7 +933,7 @@ void getPickAttachmentButtomSheet(
             MyButton(
               isIconButton: true,
               icon: thirdButtonIcon ?? Icons.camera_rounded,
-              title: secondButtonTitle ?? "Open Camcera",
+              title: secondButtonTitle ?? "Open Camera",
               onTap: () async {
                 Get.back();
                 final file = await PickFileHandler.openCamera();

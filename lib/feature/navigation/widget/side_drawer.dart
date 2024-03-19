@@ -28,9 +28,8 @@ class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Padding(
+    return Material(
+      child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(20, mediaQuery.size.width),
           top: SizeUtils.scale(40, mediaQuery.size.height),

@@ -49,7 +49,6 @@
 			<string>timesync.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.590156562021-fh79njddtt8fqcvf4ts5qd13te98rdii</string>
 				<string>timesyncmobile</string>
 			</array>
 		</dict>

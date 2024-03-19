@@ -14,6 +14,7 @@ class LocalStorageModel {
   bool? isEnableNotification;
   String? userRole;
   bool? isDevMode;
+  bool? confirmCheckIn;
 
   LocalStorageModel({
     this.userId,
@@ -31,5 +32,6 @@ class LocalStorageModel {
     this.isEnableNotification,
     this.userRole,
     this.isDevMode,
+    this.confirmCheckIn,
   });
 }

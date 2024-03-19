@@ -22,68 +22,73 @@ const LocalStorageSchema = CollectionSchema(
       name: r'accessToken',
       type: IsarType.string,
     ),
-    r'darkTheme': PropertySchema(
+    r'confirmCheckIn': PropertySchema(
       id: 1,
+      name: r'confirmCheckIn',
+      type: IsarType.bool,
+    ),
+    r'darkTheme': PropertySchema(
+      id: 2,
       name: r'darkTheme',
       type: IsarType.bool,
     ),
     r'isActivated': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'isActivated',
       type: IsarType.bool,
     ),
     r'isDevMode': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'isDevMode',
       type: IsarType.bool,
     ),
     r'isEnableNotification': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'isEnableNotification',
       type: IsarType.bool,
     ),
     r'isFirstTime': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'isFirstTime',
       type: IsarType.bool,
     ),
     r'isRememberMe': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'isRememberMe',
       type: IsarType.string,
     ),
     r'language': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'language',
       type: IsarType.string,
     ),
     r'organizationId': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'organizationId',
       type: IsarType.string,
     ),
     r'refreshToken': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'refreshToken',
       type: IsarType.string,
     ),
     r'theme': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'theme',
       type: IsarType.string,
     ),
     r'userId': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'userId',
       type: IsarType.string,
     ),
     r'userRole': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'userRole',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'username',
       type: IsarType.string,
     )
@@ -172,19 +177,20 @@ void _localStorageSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.accessToken);
-  writer.writeBool(offsets[1], object.darkTheme);
-  writer.writeBool(offsets[2], object.isActivated);
-  writer.writeBool(offsets[3], object.isDevMode);
-  writer.writeBool(offsets[4], object.isEnableNotification);
-  writer.writeBool(offsets[5], object.isFirstTime);
-  writer.writeString(offsets[6], object.isRememberMe);
-  writer.writeString(offsets[7], object.language);
-  writer.writeString(offsets[8], object.organizationId);
-  writer.writeString(offsets[9], object.refreshToken);
-  writer.writeString(offsets[10], object.theme);
-  writer.writeString(offsets[11], object.userId);
-  writer.writeString(offsets[12], object.userRole);
-  writer.writeString(offsets[13], object.username);
+  writer.writeBool(offsets[1], object.confirmCheckIn);
+  writer.writeBool(offsets[2], object.darkTheme);
+  writer.writeBool(offsets[3], object.isActivated);
+  writer.writeBool(offsets[4], object.isDevMode);
+  writer.writeBool(offsets[5], object.isEnableNotification);
+  writer.writeBool(offsets[6], object.isFirstTime);
+  writer.writeString(offsets[7], object.isRememberMe);
+  writer.writeString(offsets[8], object.language);
+  writer.writeString(offsets[9], object.organizationId);
+  writer.writeString(offsets[10], object.refreshToken);
+  writer.writeString(offsets[11], object.theme);
+  writer.writeString(offsets[12], object.userId);
+  writer.writeString(offsets[13], object.userRole);
+  writer.writeString(offsets[14], object.username);
 }
 
 LocalStorage _localStorageDeserialize(
@@ -195,20 +201,21 @@ LocalStorage _localStorageDeserialize(
 ) {
   final object = LocalStorage();
   object.accessToken = reader.readStringOrNull(offsets[0]);
-  object.darkTheme = reader.readBoolOrNull(offsets[1]);
+  object.confirmCheckIn = reader.readBoolOrNull(offsets[1]);
+  object.darkTheme = reader.readBoolOrNull(offsets[2]);
   object.id = id;
-  object.isActivated = reader.readBoolOrNull(offsets[2]);
-  object.isDevMode = reader.readBoolOrNull(offsets[3]);
-  object.isEnableNotification = reader.readBoolOrNull(offsets[4]);
-  object.isFirstTime = reader.readBoolOrNull(offsets[5]);
-  object.isRememberMe = reader.readStringOrNull(offsets[6]);
-  object.language = reader.readStringOrNull(offsets[7]);
-  object.organizationId = reader.readStringOrNull(offsets[8]);
-  object.refreshToken = reader.readStringOrNull(offsets[9]);
-  object.theme = reader.readStringOrNull(offsets[10]);
-  object.userId = reader.readStringOrNull(offsets[11]);
-  object.userRole = reader.readStringOrNull(offsets[12]);
-  object.username = reader.readStringOrNull(offsets[13]);
+  object.isActivated = reader.readBoolOrNull(offsets[3]);
+  object.isDevMode = reader.readBoolOrNull(offsets[4]);
+  object.isEnableNotification = reader.readBoolOrNull(offsets[5]);
+  object.isFirstTime = reader.readBoolOrNull(offsets[6]);
+  object.isRememberMe = reader.readStringOrNull(offsets[7]);
+  object.language = reader.readStringOrNull(offsets[8]);
+  object.organizationId = reader.readStringOrNull(offsets[9]);
+  object.refreshToken = reader.readStringOrNull(offsets[10]);
+  object.theme = reader.readStringOrNull(offsets[11]);
+  object.userId = reader.readStringOrNull(offsets[12]);
+  object.userRole = reader.readStringOrNull(offsets[13]);
+  object.username = reader.readStringOrNull(offsets[14]);
   return object;
 }
 
@@ -232,7 +239,7 @@ P _localStorageDeserializeProp<P>(
     case 5:
       return (reader.readBoolOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
@@ -246,6 +253,8 @@ P _localStorageDeserializeProp<P>(
     case 12:
       return (reader.readStringOrNull(offset)) as P;
     case 13:
+      return (reader.readStringOrNull(offset)) as P;
+    case 14:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -496,6 +505,34 @@ extension LocalStorageQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'accessToken',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      confirmCheckInIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'confirmCheckIn',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      confirmCheckInIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'confirmCheckIn',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      confirmCheckInEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'confirmCheckIn',
+        value: value,
       ));
     });
   }
@@ -1961,6 +1998,20 @@ extension LocalStorageQuerySortBy
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      sortByConfirmCheckIn() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmCheckIn', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      sortByConfirmCheckInDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmCheckIn', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByDarkTheme() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'darkTheme', Sort.asc);
@@ -2138,6 +2189,20 @@ extension LocalStorageQuerySortThenBy
       thenByAccessTokenDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'accessToken', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      thenByConfirmCheckIn() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmCheckIn', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      thenByConfirmCheckInDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmCheckIn', Sort.desc);
     });
   }
 
@@ -2327,6 +2392,13 @@ extension LocalStorageQueryWhereDistinct
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QDistinct>
+      distinctByConfirmCheckIn() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'confirmCheckIn');
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByDarkTheme() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'darkTheme');
@@ -2427,6 +2499,12 @@ extension LocalStorageQueryProperty
   QueryBuilder<LocalStorage, String?, QQueryOperations> accessTokenProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'accessToken');
+    });
+  }
+
+  QueryBuilder<LocalStorage, bool?, QQueryOperations> confirmCheckInProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'confirmCheckIn');
     });
   }
 

@@ -16,6 +16,7 @@ import 'package:timesync/feature/task/task_detail/controller/index.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
 
 class TaskDetailView extends StatelessWidget {
   const TaskDetailView({super.key});
@@ -61,8 +62,16 @@ class TaskDetailView extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowImage(
                 title: "Assignee",
-                name: NavigationController.to.fullname.value,
-                image: NavigationController.to.user.value.image,
+                name: controller.user.value != null
+                    ? StringUtil.getfullname(
+                        controller.user.value?.firstName,
+                        controller.user.value?.lastName,
+                        controller.user.value?.username,
+                      )
+                    : NavigationController.to.fullname.value,
+                image: controller.user.value != null
+                    ? controller.user.value?.image
+                    : NavigationController.to.user.value.image,
               ),
               SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowData(

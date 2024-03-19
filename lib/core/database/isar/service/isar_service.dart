@@ -57,6 +57,8 @@ class IsarService extends GetxService {
       appConfig.userId = input?.userId ?? appConfig.userId;
       appConfig.userRole = input?.userRole ?? appConfig.userRole;
       appConfig.isDevMode = input?.isDevMode ?? appConfig.isDevMode ?? false;
+      appConfig.confirmCheckIn =
+          input?.confirmCheckIn ?? appConfig.confirmCheckIn ?? true;
       AppConfig.setConfig(appConfig);
       await _localStorage.insert(appConfig);
     } catch (e) {

@@ -1,4 +1,10 @@
 import 'dart:async';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:ntp/ntp.dart';
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/attendance_chart_model.dart';
@@ -16,18 +22,12 @@ import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
-import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
-import 'package:timesync/utils/double_util.dart';
-import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/types/user_status.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:ntp/ntp.dart';
-import 'package:timesync/utils/logger.dart';
+import 'package:timesync/utils/attendance_util.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/utils/double_util.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -101,6 +101,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final earlyPercentage = 0.0.obs;
   final disableButton = false.obs;
 
+  Timer? timer;
+  final workingHour = Rxn<String>();
+
   @override
   void onInit() {
     super.onInit();
@@ -117,6 +120,29 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();
+    workingHourDuration();
+  }
+
+  void workingHourDuration() {
+    if (checkInTime.value != null && checkOutTime.value == null) {
+      final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
+        attendanceList.last.checkInDateTime!,
+      );
+      // Update the working hour value every second
+      timer = Timer.periodic(
+        const Duration(seconds: 1),
+        (Timer timer) {
+          var duration = DateTime.now().difference(checkInDateTime);
+          var hours = duration.inHours;
+          var minutes = duration.inMinutes.remainder(60);
+          var formattedMinutes = minutes.toString().padLeft(2, '0');
+          var seconds = duration.inSeconds.remainder(60);
+          var formattedSeconds = seconds.toString().padLeft(2, '0');
+
+          workingHour.value = "$hours:$formattedMinutes:$formattedSeconds";
+        },
+      );
+    }
   }
 
   void onRefresh() {
@@ -233,10 +259,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             isCheckedIn.value == false) {
           NotificationSchedule.cancelCheckOutReminder();
 
-          // Init check in reminder
-          NotificationSchedule.checkInReminder(
-              time: NavigationController
-                  .to.organization.value.configs?.startHour);
+          // Init check out reminder for next day
+          NotificationSchedule.checkOutReminder(
+              toNextDay: true,
+              time:
+                  NavigationController.to.organization.value.configs?.endHour);
         }
       } else {
         if (DateTime.now().hour <= hour &&
@@ -245,10 +272,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             isCheckedIn.value == true) {
           NotificationSchedule.cancelCheckInReminder();
 
-          // Init check out reminder
-          NotificationSchedule.checkOutReminder(
-              time:
-                  NavigationController.to.organization.value.configs?.endHour);
+          // Init check in reminder for next day
+          NotificationSchedule.checkInReminder(
+              toNextDay: true,
+              time: NavigationController
+                  .to.organization.value.configs?.startHour);
         }
       }
     }
@@ -259,61 +287,63 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     if (checkLocation == false) {
       return;
     }
-    DateTime now = await checkTime();
-    // final getEndhout = endHour.value.split(":").first;
-    // if (now.hour > getEndhout.toInt()) {
-    //   showErrorSnackBar("Error", "You can't check in after $endHour");
-    //   return;
-    // } else {
-    controller.forward();
-    checkOutTime.value = null;
-    totalHour.value = null;
-    try {
-      LocationModel location = LocationModel(
-        lat: NavigationController.to.userLocation.value?.latitude,
-        lng: NavigationController.to.userLocation.value?.longitude,
-        inOffice: NavigationController.to.isInRange.value,
-      );
-      CheckInModel input = CheckInModel(
-        checkInDateTime: now.millisecondsSinceEpoch,
-        checkInType: AttendanceMethod.manual,
-        checkInStatus: CheckInStatusValidator.getStatus(startHour.value, now),
-        checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
-        checkInLate: GetMinute.checkLateMinute(startHour.value, now),
-        checkInLocation: location,
-      );
-      AttendanceModel checkIn = await HomeService().checkIn(input);
-      checkInTime.value = DateUtil.formatTime(
-        DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
-      );
-      disableButton.value =
-          DateUtil.isWithinFiveMinutes(checkIn.checkInDateTime);
-      await getAttendance();
-      isCheckedIn.value = true;
-      await getSummarizeAttendance();
-      if (Get.isRegistered<ProfileController>()) {
-        ProfileController.to.getSummarizeAttendance();
-      }
-      cancelNotificationReminder();
-      getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
-    } on DioException catch (e) {
-      if (e.response?.data["message"].toString().contains("Please check out") ==
-          true) {
-        getForgetCheckOutBottomSheet(
-          Get.context!,
-          isDismissible: true,
-          image: SvgAssets.leaving,
-          onTap: () async {
-            Get.back();
-            await checkOut();
-          },
-        );
-      } else {
-        showErrorSnackBar("Error", e.response?.data["message"]);
-      }
-      rethrow;
-    }
-    // }
+    getConfirmCheckInOutBottomSheet(
+      confirmCheckIn: AppConfig.confirmCheckIn.value,
+      onTapConfirm: () async {
+        DateTime now = await checkTime();
+        controller.forward();
+        checkOutTime.value = null;
+        totalHour.value = null;
+        try {
+          LocationModel location = LocationModel(
+            lat: NavigationController.to.userLocation.value?.latitude,
+            lng: NavigationController.to.userLocation.value?.longitude,
+            inOffice: NavigationController.to.isInRange.value,
+          );
+          CheckInModel input = CheckInModel(
+            checkInDateTime: now.millisecondsSinceEpoch,
+            checkInType: AttendanceMethod.manual,
+            checkInStatus:
+                CheckInStatusValidator.getStatus(startHour.value, now),
+            checkInEarly: GetMinute.checkEarlyMinute(startHour.value, now),
+            checkInLate: GetMinute.checkLateMinute(startHour.value, now),
+            checkInLocation: location,
+          );
+          AttendanceModel checkIn = await HomeService().checkIn(input);
+          checkInTime.value = DateUtil.formatTime(
+            DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
+          );
+          onDisableButton(checkIn.checkInDateTime ?? 0);
+          await getAttendance();
+          isCheckedIn.value = true;
+          await getSummarizeAttendance();
+          if (Get.isRegistered<ProfileController>()) {
+            ProfileController.to.getSummarizeAttendance();
+          }
+          workingHourDuration();
+          cancelNotificationReminder();
+          getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
+        } on DioException catch (e) {
+          if (e.response?.data["message"]
+                  .toString()
+                  .contains("Please check out") ==
+              true) {
+            getForgetCheckOutBottomSheet(
+              Get.context!,
+              isDismissible: true,
+              image: SvgAssets.leaving,
+              onTap: () async {
+                Get.back();
+                await checkOut();
+              },
+            );
+          } else {
+            showErrorSnackBar("Error", e.response?.data["message"]);
+          }
+          rethrow;
+        }
+      },
+    );
   }
 
   Future<void> checkOut() async {
@@ -321,34 +351,41 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     if (checkLocation == false) {
       return;
     }
-    controller.forward();
-    DateTime now = await checkTime();
-    try {
-      LocationModel location = LocationModel(
-        lat: NavigationController.to.userLocation.value?.latitude,
-        lng: NavigationController.to.userLocation.value?.longitude,
-        inOffice: NavigationController.to.isInRange.value,
-      );
-      CheckOutModel input = CheckOutModel(
-        checkOutDateTime: now.millisecondsSinceEpoch,
-        checkOutType: AttendanceMethod.manual,
-        checkOutStatus: CheckOutStatusValidator().getStatus(endHour.value, now),
-        checkOutEarly: GetMinute.checkEarlyMinute(endHour.value, now),
-        checkOutLate: GetMinute.checkLateMinute(endHour.value, now),
-        checkOutLocation: location,
-      );
-      AttendanceModel checkOut = await HomeService().checkOut(input);
-      checkOutTime.value = DateUtil.formatTime(
-        DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
-      );
-      isCheckedIn.value = false;
-      await getAttendance();
-      cancelNotificationReminder(checkOut: true);
-      getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
+    getConfirmCheckInOutBottomSheet(
+      isCheckOut: true,
+      confirmCheckIn: AppConfig.confirmCheckIn.value,
+      onTapConfirm: () async {
+        controller.forward();
+        DateTime now = await checkTime();
+        try {
+          LocationModel location = LocationModel(
+            lat: NavigationController.to.userLocation.value?.latitude,
+            lng: NavigationController.to.userLocation.value?.longitude,
+            inOffice: NavigationController.to.isInRange.value,
+          );
+          CheckOutModel input = CheckOutModel(
+            checkOutDateTime: now.millisecondsSinceEpoch,
+            checkOutType: AttendanceMethod.manual,
+            checkOutStatus:
+                CheckOutStatusValidator().getStatus(endHour.value, now),
+            checkOutEarly: GetMinute.checkEarlyMinute(endHour.value, now),
+            checkOutLate: GetMinute.checkLateMinute(endHour.value, now),
+            checkOutLocation: location,
+          );
+          AttendanceModel checkOut = await HomeService().checkOut(input);
+          checkOutTime.value = DateUtil.formatTime(
+            DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
+          );
+          isCheckedIn.value = false;
+          await getAttendance();
+          cancelNotificationReminder(checkOut: true);
+          getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+        } on DioException catch (e) {
+          showErrorSnackBar("Error", e.response?.data["message"]);
+          rethrow;
+        }
+      },
+    );
   }
 
   Future<void> updateUserStatus(String status) async {
@@ -385,16 +422,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
-          disableButton.value =
-              DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
-          if (disableButton.value == true) {
-            final duration = AppConfig.delayTimeInMinute -
-                DateUtil.calculateDurationInMinutes(
-                    attendanceList.last.checkInDateTime!,
-                    DateTime.now().millisecondsSinceEpoch);
-            Logs.e(duration);
-          }
+          onDisableButton(attendanceList.last.checkInDateTime ?? 0);
         } else {
+          timer?.cancel();
           checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
               attendanceList.last.checkOutDateTime!,
@@ -631,6 +661,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
               totalCheckOutEarly.value, totalStaffs.value);
         }
       }
+    }
+  }
+
+  void onDisableButton(int dateTimeInMillis) {
+    disableButton.value =
+        DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+    if (disableButton.value == true) {
+      final duration = AppConfig.delayTimeInMinute -
+          DateUtil.calculateDurationInMinutes(
+              attendanceList.last.checkInDateTime!,
+              DateTime.now().millisecondsSinceEpoch);
+      final orinalDateTime = DateTime.fromMillisecondsSinceEpoch(
+          attendanceList.last.checkInDateTime!);
+      DateUtil.scheduleTaskAfterFiveMinutes(orinalDateTime, duration, (value) {
+        disableButton.value = value;
+      });
     }
   }
 }

@@ -54,6 +54,7 @@ class DepartmentCard extends StatelessWidget {
                   child: MyText(
                     text: department.name ?? "",
                     style: AppFonts().bodyMediumMedium,
+                    maxLines: 2,
                   ),
                 ),
               ],

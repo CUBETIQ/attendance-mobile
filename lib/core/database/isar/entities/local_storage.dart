@@ -12,6 +12,7 @@ class LocalStorage {
   bool? isEnableNotification;
   bool? isDevMode;
   bool? darkTheme;
+  bool? confirmCheckIn = true;
   String? accessToken;
   String? refreshToken;
   String? language;

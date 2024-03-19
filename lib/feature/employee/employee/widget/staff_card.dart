@@ -105,11 +105,18 @@ class StaffCard extends StatelessWidget {
                       staff.username,
                     ),
                     style: AppFonts().bodyMediumSemi,
+                    maxLines: 2,
                   ),
                 ),
-                MyText(
-                  text: position ?? "N/A",
-                  style: AppFonts().bodyMediumRegular,
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: SizeUtils.scale(140, size.width),
+                  ),
+                  child: MyText(
+                    maxLines: 2,
+                    text: position ?? "N/A",
+                    style: AppFonts().bodyMediumRegular,
+                  ),
                 ),
               ],
             ),

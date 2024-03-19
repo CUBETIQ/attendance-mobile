@@ -27,9 +27,9 @@ class AppConfig {
 
   static String? xApiHash;
 
-  static String? appLocalPath;
+  static String? appLocalPath;  
 
-  static int delayTimeInMinute = 5;
+  static int delayTimeInMinute = 3;
 
   // Setup the local storage for fetching while using the app
   static LocalStorage? _localData = LocalStorage();
@@ -47,7 +47,9 @@ class AppConfig {
 
   static bool isDarkMode = false;
 
-  static final Rx<bool> isDevMode = false.obs;
+  static final isDevMode = false.obs;
+
+  static final confirmCheckIn = (_localData?.confirmCheckIn ?? true).obs;
 
   static String? theme;
 

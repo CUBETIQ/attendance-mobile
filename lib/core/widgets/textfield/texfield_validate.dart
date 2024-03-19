@@ -223,11 +223,9 @@ class MyTextFieldForm extends StatelessWidget {
                             borderRadius ?? AppSize().borderRadiusSmall,
                             size.width),
                       ),
-                      topRight: Radius.circular(
-                        SizeUtils.scale(
-                            borderRadius ?? AppSize().borderRadiusSmall,
-                            size.width),
-                      ),
+                      topRight: Radius.circular(SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width)),
                     ),
                     borderSide: BorderSide(
                       width: 1.5,

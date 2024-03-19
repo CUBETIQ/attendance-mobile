@@ -16,7 +16,7 @@ class MarkerDot extends StatelessWidget {
       itemBuilder: (context, index) {
         return Container(
           margin: EdgeInsets.only(
-            top: SizeUtils.scale(24, size.width),
+            top: SizeUtils.scale(26, size.width),
           ),
           child: Container(
             height: SizeUtils.scale(7, size.width),

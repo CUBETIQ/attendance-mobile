@@ -29,6 +29,7 @@ class AdminTaskReportModel extends BaseModel<AdminTaskReportModel> {
     if (json == null) {
       return AdminTaskReportModel();
     }
+
     return AdminTaskReportModel(
       username: json['username'],
       organizationId: json['organizationId'],

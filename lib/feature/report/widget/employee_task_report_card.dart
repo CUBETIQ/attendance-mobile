@@ -77,6 +77,7 @@ class EmployeeTaskReportCard extends StatelessWidget {
                           startDate: data.task?[index].startDate,
                           status: data.task?[index].status,
                           icon: data.task?[index].icon,
+                          attachment: data.task?[index].attachment,
                         ),
                         "user": UserModel(
                           firstName: data.firstName,

@@ -62,7 +62,7 @@ class AddPositionView extends StatelessWidget {
                   height: SizeUtils.scale(AppSize().paddingS17, size.width)),
               MyTextFieldForm(
                 hasLabel: true,
-                label: "name",
+                label: "Name",
                 hintText: "Enter name",
                 textController: controller.nameController,
               ),

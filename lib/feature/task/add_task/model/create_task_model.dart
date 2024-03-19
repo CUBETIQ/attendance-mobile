@@ -10,6 +10,7 @@ class CreateTaskModel {
   final String? priority;
   final String? status;
   final List<AttachmentModel>? attachment;
+  final int? completedDate;
 
   CreateTaskModel({
     this.name,
@@ -21,6 +22,7 @@ class CreateTaskModel {
     this.status,
     this.priority,
     this.attachment,
+    this.completedDate,
   });
 
   Map<String, dynamic> toJson() {
@@ -34,6 +36,7 @@ class CreateTaskModel {
       "status": status,
       "priority": priority,
       "attachment": attachment?.map((e) => e.toJson()).toList(),
+      "completedDate": completedDate,
     };
   }
 }

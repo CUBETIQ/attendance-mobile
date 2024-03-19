@@ -13,7 +13,6 @@ class AppTime {
   static const int receiveTimeout = 30;
 
   static tz.TZDateTime scheduleTimeForCheckin({int? hour, int? min}) {
-    
     return tz.TZDateTime(
       tz.local,
       DateTime.now().year,

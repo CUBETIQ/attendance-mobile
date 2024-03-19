@@ -144,6 +144,72 @@ void getCheckOutBottomSheet(BuildContext context,
   );
 }
 
+void getForgetCheckOutBottomSheet(BuildContext context,
+    {bool? isDismissible, required String image, void Function()? onTap}) {
+  final size = MediaQuery.of(context).size;
+  Get.bottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50 * (size.width / 375.0)),
+        topRight: Radius.circular(50 * (size.width / 375.0)),
+      ),
+    ),
+    isDismissible: isDismissible ?? true,
+    Container(
+      width: size.width,
+      height: size.height * 0.8,
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          top: AppSize().paddingTitleSmall,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width * 0.65,
+              height: size.height * 0.25,
+              child: SvgPicture.asset(
+                image,
+              ),
+            ),
+            SizedBox(height: size.height * 0.01),
+            MyText(
+              text: "You Have not checked out!",
+              style: AppFonts().bodyLarge.copyWith(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+            ),
+            SizedBox(height: size.height * 0.01),
+            MyText(
+              text: "Are you sure you want to check out?",
+              style: AppFonts().bodyMediumRegular,
+              maxLines: 3,
+              textAlign: TextAlign.center,
+            ),
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.only(bottom: size.height * 0.05),
+              child: MyButton(
+                backgroundColor: Theme.of(context).colorScheme.error,
+                title: "Check Out",
+                onTap: onTap,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 void getLogOutBottomSheet(
   BuildContext context, {
   bool? isDismissible,

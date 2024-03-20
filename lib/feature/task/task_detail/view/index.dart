@@ -13,6 +13,8 @@ import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/task/task_detail/controller/index.dart';
+import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/state.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timesync/utils/size_util.dart';
@@ -33,6 +35,20 @@ class TaskDetailView extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.edit_rounded,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            onPressed: () {
+              Get.toNamed(Routes.ADD_TASK, arguments: {
+                "state": AppState.edit,
+                "task": controller.task.value,
+              });
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -104,10 +120,20 @@ class TaskDetailView extends StatelessWidget {
                 maxLines: 20,
               ),
               SizedBox(height: SizeUtils.scale(20, size.width)),
-              const Divider(thickness: 1.5),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
-              MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              controller.task.value?.attachment?.isEmpty == true
+                  ? const SizedBox.shrink()
+                  : Column(
+                      children: [
+                        const Divider(thickness: 1.5),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeUtils.scale(10, size.width)),
+                          child: MyText(
+                              text: "Attachment",
+                              style: AppFonts().bodyLargeMedium),
+                        ),
+                      ],
+                    ),
               Obx(
                 () => ListView.builder(
                   shrinkWrap: true,

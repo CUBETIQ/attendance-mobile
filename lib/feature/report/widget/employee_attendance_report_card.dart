@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/admin_attendance_report_model.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/report/widget/attendance_data_row.dart';
+import 'package:timesync/utils/color_utils.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
-import 'package:timesync/utils/date_util.dart';
-import 'package:timesync/types/attendance_status.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class EmployeeAttendanceReportCard extends StatelessWidget {
   const EmployeeAttendanceReportCard({
@@ -75,11 +75,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
               : "N/A",
           textColor:
               data.attendance != null && data.attendance?.checkInStatus != null
-                  ? data.attendance?.checkInStatus == AttendanceStatus.early
-                      ? Colors.green
-                      : data.attendance?.checkInStatus == AttendanceStatus.late
-                          ? Colors.red
-                          : Colors.orange
+                  ? ColorUtil.getStatusColor(data.attendance?.checkInStatus)
                   : Theme.of(context).colorScheme.onBackground,
         ),
         SizedBox(
@@ -119,11 +115,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                 : "N/A",
             textColor: data.attendance != null &&
                     data.attendance?.checkOutStatus != null
-                ? data.attendance?.checkOutStatus == AttendanceStatus.early
-                    ? Colors.green
-                    : data.attendance?.checkOutStatus == AttendanceStatus.late
-                        ? Colors.red
-                        : Colors.orange
+                ? ColorUtil.getStatusColor(data.attendance?.checkOutStatus, isCheckOut: true)
                 : Theme.of(context).colorScheme.onBackground),
         SizedBox(
           height: SizeUtils.scale(data.attendance != null ? 2 : 0, size.width),

@@ -160,17 +160,38 @@ class AddTaskView extends StatelessWidget {
               SizedBox(
                 height: SizeUtils.scale(AppSize().paddingS10, size.height),
               ),
-              MyAsyncButton(
-                title: "Save",
-                margin: EdgeInsets.only(
+              Padding(
+                padding: EdgeInsets.only(
                   bottom: SizeUtils.scale(
                     AppSize().paddingS10,
                     size.width,
                   ),
                 ),
-                onTap: controller.appState.value == AppState.edit
-                    ? controller.updateTask
-                    : controller.addTask,
+                child: Column(
+                  children: [
+                    controller.appState.value == AppState.edit
+                        ? MyAsyncButton(
+                            title: "Delete",
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
+                            margin: EdgeInsets.only(
+                              bottom: SizeUtils.scale(
+                                AppSize().paddingS4,
+                                size.height,
+                              ),
+                            ),
+                            onTap: () => controller
+                                .deleteTask(controller.task.value!.id),
+                          )
+                        : const SizedBox.shrink(),
+                    MyAsyncButton(
+                      title: "Save",
+                      onTap: controller.appState.value == AppState.edit
+                          ? controller.updateTask
+                          : controller.addTask,
+                    ),
+                  ],
+                ),
               ),
             ].withSpaceBetween(
                 height: SizeUtils.scale(AppSize().paddingS5, size.height)),

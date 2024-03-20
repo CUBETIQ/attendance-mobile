@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/summary_task_model.dart';
 import 'package:timesync/core/model/task_model.dart';
@@ -7,9 +9,6 @@ import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/state.dart';
-import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
@@ -101,53 +100,12 @@ class TaskController extends GetxController {
     getUserSummarizeTask();
   }
 
-  Future<void> deleteTask(String id) async {
-    try {
-      getConfirmBottomSheet(
-        Get.context!,
-        title: "Delete Task",
-        description: "Are you sure to delete this task?",
-        onTapConfirm: () async {
-          await TaskService().deleteTask(id);
-          await getUserTasks();
-          getUserSummarizeTask();
-          Get.back();
-        },
-        image: SvgAssets.delete,
-      );
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
-  }
-
   void onTapTask(TaskModel task) {
-    getEditDeleteViewBottomSheet(
-      Get.context!,
-      image: SvgAssets.option,
-      onTapView: () {
-        Get.back();
-        Get.toNamed(
-          Routes.TASK_DETAIL,
-          arguments: {
-            "task": task,
-            "user": null,
-          },
-        );
-      },
-      onTapEdit: () {
-        Get.back();
-        Get.toNamed(
-          Routes.ADD_TASK,
-          arguments: {
-            "state": AppState.edit,
-            "task": task,
-          },
-        );
-      },
-      onTapDelete: () {
-        Get.back();
-        deleteTask(task.id!);
+    Get.toNamed(
+      Routes.TASK_DETAIL,
+      arguments: {
+        "task": task,
+        "user": null,
       },
     );
   }

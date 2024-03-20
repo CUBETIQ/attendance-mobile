@@ -1,10 +1,14 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timesync/utils/permission_handler.dart';
 
 class PickFileHandler {
+  static int imgCompressedQuality = 90;
+
   static Future<File?> openGallery() async {
     File? file;
     final permission = Platform.isIOS
@@ -16,6 +20,14 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.gallery);
         if (result != null) {
           file = File(result.path);
+
+          Uint8List? compressedBytes =
+              await FlutterImageCompress.compressWithFile(
+            file.path,
+            quality: imgCompressedQuality,
+          );
+          await file.writeAsBytes(compressedBytes!.cast<int>());
+
           final validateFileSize = await FileUtil.validateFileSize(file);
           if (validateFileSize) {
             return file;
@@ -42,6 +54,14 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.camera);
         if (result != null) {
           file = File(result.path);
+
+          Uint8List? compressedBytes =
+              await FlutterImageCompress.compressWithFile(
+            file.path,
+            quality: imgCompressedQuality,
+          );
+          await file.writeAsBytes(compressedBytes!.cast<int>());
+
           final validateFileSize = await FileUtil.validateFileSize(file);
           if (validateFileSize) {
             return file;

@@ -18,9 +18,9 @@ import 'package:get/get.dart';
 class ActivationController extends GetxController {
   static ActivationController get to => Get.find();
   final activationController = TextEditingController();
-  final title = "Please enter the activation code";
+  final title = "Enter the activation code";
   final description =
-      "To unlock the flow of time with timesync: Where every moment counts, and attendance becomes a seamless journey through the fabric of efficiency.";
+      "Enter the activation code to unlock TimeSync 360, an efficient tool that optimizes time management and streamlines attendance.";
   final activate = Rxn<ActivationModel>(null);
   final androidInfo = Rxn<AndroidDeviceInfo>(null);
   final iosInfo = Rxn<IosDeviceInfo>(null);

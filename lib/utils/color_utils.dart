@@ -49,7 +49,7 @@ class ColorUtil {
       case AttendanceStatus.early || AttendanceStatus.onTime:
         return Colors.green;
       case AttendanceStatus.late:
-        return isCheckOut ? Colors.green : Colors.red;
+        return isCheckOut == true ? Colors.green : Colors.red;
       case AttendanceStatus.overtime:
         return Colors.orange;
       default:

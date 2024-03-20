@@ -1,13 +1,13 @@
-import 'package:timesync/constants/font.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:timesync/constants/color.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/attendance_model.dart';
 import 'package:timesync/core/widgets/card/my_card.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/color_utils.dart';
 import 'package:timesync/utils/date_util.dart';
-import 'package:timesync/types/attendance_status.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:flutter/material.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class ReportAttendanceCard extends StatelessWidget {
   const ReportAttendanceCard({super.key, required this.attendance});
@@ -121,13 +121,8 @@ class ReportAttendanceCard extends StatelessWidget {
                           attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: attendance.checkInStatus != null
-                                ? attendance.checkInStatus ==
-                                        AttendanceStatus.early
-                                    ? Colors.green
-                                    : attendance.checkInStatus ==
-                                            AttendanceStatus.late
-                                        ? Colors.red
-                                        : Colors.orange
+                                ? ColorUtil.getStatusColor(
+                                    attendance.checkInStatus)
                                 : Theme.of(context).colorScheme.onBackground,
                           ),
                     ),
@@ -136,13 +131,8 @@ class ReportAttendanceCard extends StatelessWidget {
                           "N/A",
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: attendance.checkOutStatus != null
-                                ? attendance.checkOutStatus ==
-                                        AttendanceStatus.early
-                                    ? Colors.green
-                                    : attendance.checkOutStatus ==
-                                            AttendanceStatus.late
-                                        ? Colors.red
-                                        : Colors.orange
+                                ? ColorUtil.getStatusColor(
+                                    attendance.checkOutStatus)
                                 : Theme.of(context).colorScheme.onBackground,
                           ),
                     ),

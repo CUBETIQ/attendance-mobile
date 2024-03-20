@@ -128,7 +128,7 @@ class HomeStaffView extends StatelessWidget {
               SizedBox(height: size.height * 0.015),
               Obx(
                 () => AttendanceCard(
-                  disableButton: false,
+                  disableButton: controller.disableButton.value,
                   isInOfficeRange: NavigationController.to.isInRange.value,
                   scale: controller.scaleAnimation,
                   onCheckIn: controller.checkIn,

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -523,14 +522,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     myTime = DateTime.now().toLocal();
 
     /// Or get NTP offset (in milliseconds) and add it yourself
-    final int offset = await NTP.getNtpOffset(localTime: DateTime.now());
+    final int offset =
+        await NTP.getNtpOffset(localTime: DateTime.now().toLocal());
     ntpTime = myTime.add(Duration(milliseconds: offset));
 
-    if (myTime.difference(ntpTime).inMinutes > 1) {
-      result = ntpTime;
-    } else {
-      result = myTime;
-    }
+    result = ntpTime;
+
     return result;
   }
 

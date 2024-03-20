@@ -42,7 +42,7 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> getUserSummarizeLeave() async {
+  Future<void> getUserSummarizeTask() async {
     clearData();
     try {
       summarizeTasks.value = await TaskService().getUserTaskSummarize(
@@ -79,7 +79,7 @@ class TaskController extends GetxController {
         onTapConfirm: () async {
           await TaskService().completeTask(id);
           await getUserTasks();
-          getUserSummarizeLeave();
+          getUserSummarizeTask();
           Get.back();
         },
         image: SvgAssets.checkIn,
@@ -93,12 +93,12 @@ class TaskController extends GetxController {
   Future<void> initFunction() async {
     initDate();
     getUserTasks();
-    getUserSummarizeLeave();
+    getUserSummarizeTask();
   }
 
   void onRefresh() {
     getUserTasks();
-    getUserSummarizeLeave();
+    getUserSummarizeTask();
   }
 
   Future<void> deleteTask(String id) async {
@@ -110,7 +110,7 @@ class TaskController extends GetxController {
         onTapConfirm: () async {
           await TaskService().deleteTask(id);
           await getUserTasks();
-          getUserSummarizeLeave();
+          getUserSummarizeTask();
           Get.back();
         },
         image: SvgAssets.delete,
@@ -178,7 +178,7 @@ class TaskController extends GetxController {
       endDate.value =
           DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
       getUserTasks();
-      getUserSummarizeLeave();
+      getUserSummarizeTask();
     }
   }
 }

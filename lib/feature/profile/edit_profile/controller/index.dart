@@ -56,10 +56,6 @@ class EditProfileController extends GetxController {
     }
   }
 
-  void getDateInMilliSecond(int? date) {
-    dob.value = date;
-  }
-
   Future<void> updateProfile() async {
     validate();
     if (MyTextFieldFormController.findController('First Name').isValid &&

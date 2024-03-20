@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
-
-/// [DateFormatType] enum specifies the formating option for the date format
-/// field.
-///
-/// example:
-///
-/// The date -> 2nd November 2022 is displayed in the different types as:
-///
-/// [type1] => 02/11/22
-/// [type2] => 02/11/2022
-/// [type3] => 02-11-22
-/// [type4] => 02-11-2022
 
 enum DateFormatType {
   type1, // 12/02/22
@@ -22,137 +8,149 @@ enum DateFormatType {
   type4, // 12-02-2022
 }
 
-class InputDatePickerField extends StatelessWidget {
-  InputDatePickerField({
+class InputDatePickerField extends StatefulWidget {
+  const InputDatePickerField({
     super.key,
-    this.label,
     required this.onComplete,
     this.type = DateFormatType.type2,
     this.addCalendar = true,
     this.decoration,
+    this.controller,
+    this.initialDate,
     this.firstDate,
-    this.calendarColor,
-    this.hintText,
-  }) : _dobFormater = TextEditingController();
+    this.lastDate,
+    this.label,
+    this.focusNode,
+  });
 
-  final String? label;
   final InputDecoration? decoration;
   final DateFormatType? type;
   final Function(DateTime?) onComplete;
   final bool addCalendar;
-  final TextEditingController _dobFormater;
+  final DateTime? initialDate;
+  final DateTime? lastDate;
   final DateTime? firstDate;
-  final String? hintText;
-  final Color? calendarColor;
-  final initialDate = Rxn<DateTime>();
+  final FocusNode? focusNode;
+  final String? label;
+  final TextEditingController? controller;
+
+  @override
+  State<InputDatePickerField> createState() => _InputDatePickerFieldState();
+}
+
+class _InputDatePickerFieldState extends State<InputDatePickerField> {
+  late final TextEditingController _dobFormater;
+
+  @override
+  void initState() {
+    _dobFormater = widget.controller ?? TextEditingController();
+    super.initState();
+  }
+
+  InputDecoration? decoration() {
+    if (!widget.addCalendar) return widget.decoration;
+
+    if (widget.decoration == null) {
+      return InputDecoration(
+        suffixIcon: IconButton(
+          onPressed: pickDate,
+          icon: const Icon(Icons.calendar_month),
+        ),
+      );
+    }
+
+    return widget.decoration!.copyWith(
+      suffixIcon: IconButton(
+        onPressed: pickDate,
+        icon: const Icon(Icons.calendar_month),
+      ),
+    );
+  }
+
+  void formatInput(String value) {
+    /// formater for the text input field
+    DateTime? completeDate;
+    switch (widget.type) {
+      case DateFormatType.type1:
+        completeDate = Formater.type1(value, _dobFormater);
+        break;
+      case DateFormatType.type2:
+        completeDate = Formater.type2(value, _dobFormater);
+        break;
+      case DateFormatType.type3:
+        completeDate = Formater.type3(value, _dobFormater);
+        break;
+      case DateFormatType.type4:
+        completeDate = Formater.type4(value, _dobFormater);
+        break;
+      default:
+    }
+    setState(() {
+      // update the datetime
+      widget.onComplete(completeDate);
+    });
+  }
+
+  Future<void> pickDate() async {
+    /// pick the date directly from the screen
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: widget.initialDate,
+      firstDate: widget.firstDate ?? DateTime(1800),
+      lastDate: widget.lastDate ?? DateTime(3000),
+    );
+    if (picked != null) {
+      String inputText;
+      switch (widget.type) {
+        case DateFormatType.type1:
+          inputText =
+              '${padDayMonth(picked.day)}/${padDayMonth(picked.month)}/${picked.year % 100}';
+          break;
+        case DateFormatType.type2:
+          inputText =
+              '${padDayMonth(picked.day)}/${padDayMonth(picked.month)}/${picked.year}';
+          break;
+        case DateFormatType.type3:
+          inputText =
+              '${padDayMonth(picked.day)}-${padDayMonth(picked.month)}-${picked.year % 100}';
+          break;
+        case DateFormatType.type4:
+          inputText =
+              '${padDayMonth(picked.day)}-${padDayMonth(picked.month)}-${picked.year}';
+          break;
+        default:
+          inputText = '';
+      }
+      setState(() {
+        _dobFormater.text = inputText;
+      });
+      widget.onComplete(picked);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    void formatInput(String value) {
-      DateTime? completeDate;
-      switch (type) {
-        case DateFormatType.type1:
-          completeDate = Formater.type1(value, _dobFormater);
-          break;
-        case DateFormatType.type2:
-          completeDate = Formater.type2(value, _dobFormater);
-          break;
-        case DateFormatType.type3:
-          completeDate = Formater.type3(value, _dobFormater);
-          break;
-        case DateFormatType.type4:
-          completeDate = Formater.type4(value, _dobFormater);
-          break;
-        default:
-      }
-      initialDate.value = completeDate;
-      onComplete(completeDate);
-    }
-
-    Future<void> pickDate({DateTime? initDate}) async {
-      bool isValidYear(int year) {
-        return year >= 1900 && year <= 2100;
-      }
-
-      if (initDate != null) {
-        final selectedYear = initDate.year;
-        if (!isValidYear(selectedYear)) {
-          // Show an error message for an invalid initial date
-          showErrorSnackBar('Invalid Date', ' ');
-          return; // Exit the function early
-        }
-      }
-
-      if (firstDate != null && initDate != null) {
-        if (initDate.isBefore(firstDate!)) {
-          initDate = firstDate;
-          // showErrorSnackBar('Inavlid Date', 'Please select a valid date');
-          // return;
-        }
-      }
-
-      final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: firstDate ?? initDate ?? DateTime.now(),
-        firstDate: firstDate ?? DateTime(2015, 8),
-        lastDate: DateTime(2101),
-      );
-
-      if (picked != null && picked != DateTime.now()) {
-        String inputText;
-
-        initialDate.value = picked;
-        switch (type) {
-          case DateFormatType.type1:
-            inputText =
-                '${picked.day}/${picked.month.isLowerThan(10) ? '0${picked.month}' : picked.month}/${picked.year % 100}';
-            break;
-          case DateFormatType.type2:
-            inputText =
-                '${picked.day}/${picked.month.isLowerThan(10) ? '0${picked.month}' : picked.month}/${picked.year}';
-            break;
-          case DateFormatType.type3:
-            inputText =
-                '${picked.day}-${picked.month.isLowerThan(10) ? '0${picked.month}' : picked.month}-${picked.year % 100}';
-            break;
-          case DateFormatType.type4:
-            inputText =
-                '${picked.day}-${picked.month.isLowerThan(10) ? '0${picked.month}' : picked.month}-${picked.year}';
-            break;
-          default:
-            inputText = '';
-        }
-        onComplete(picked);
-        _dobFormater.text = inputText;
-      }
-    }
-
     return MyTextFieldForm(
-      label: 'Date',
+      hasLabel: true,
+      label: widget.label ?? 'Date',
       textController: _dobFormater,
       onTap: () {
         _dobFormater.selection = TextSelection.fromPosition(
           TextPosition(offset: _dobFormater.text.length),
         );
       },
-      hasLabel: true,
-      hintText: hintText,
-      haveSuffixIcon: true,
-      suffixIcon: addCalendar
-          ? IconButton(
-              onPressed: () {
-                pickDate(initDate: initialDate.value);
-              },
-              icon: Icon(
-                Icons.calendar_today,
-                color:
-                    calendarColor ?? Theme.of(context).colorScheme.onBackground,
-              ))
-          : null,
+      focusNode: widget.focusNode,
       keyboardType: TextInputType.datetime,
       onChanged: formatInput,
+      haveSuffixIcon: true,
+      suffixIcon: IconButton(
+        onPressed: pickDate,
+        icon: const Icon(Icons.calendar_month),
+      ),
     );
   }
+
+  String padDayMonth(int value) => value.toString().padLeft(2, '0');
 }
 
 class Formater {

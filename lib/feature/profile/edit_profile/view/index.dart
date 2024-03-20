@@ -6,13 +6,11 @@ import 'package:timesync/core/widgets/button/back_button.dart';
 import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/profile_image/profile_image.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
-import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync/core/widgets/textfield/input_date_picker_field.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/profile/edit_profile/controller/index.dart';
-import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class EditProfileView extends StatelessWidget {
@@ -85,19 +83,16 @@ class EditProfileView extends StatelessWidget {
                         controller.selectedGender.value = value!,
                   ),
                 ),
-                MyDatePickerField(
-                  hasLabel: true,
-                  label: "Date of birth",
-                  hintText: "Enter your date of birth".trString,
-                  textController: controller.dobController,
-                  onDateResult: controller.getDateInMilliSecond,
-                ),
                 InputDatePickerField(
-                  onComplete: (date) {
-                    controller.dob.value = date?.millisecondsSinceEpoch;
-                    Logs.e(date);
-                  },
-                ),
+                    label: "Date of birth",
+                    initialDate: DateTime.fromMillisecondsSinceEpoch(
+                        controller.dob.value ??
+                            DateTime.now().millisecondsSinceEpoch),
+                    lastDate: DateTime.now(),
+                    controller: controller.dobController,
+                    onComplete: (date) {
+                      controller.dob.value = date?.millisecondsSinceEpoch;
+                    }),
                 MyTextFieldForm(
                   hasLabel: true,
                   label: "Address",

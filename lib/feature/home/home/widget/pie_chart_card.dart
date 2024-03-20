@@ -183,27 +183,25 @@ class _Badge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Flexible(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Colors.white.withOpacity(0.7),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white.withOpacity(0.7),
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.scale(2, size.width),
-              horizontal: SizeUtils.scale(6, size.width)),
-          child: MyText(
-            text: '${percentage ?? 0}%',
-            style: AppFonts().bodySmallRegular.copyWith(
-                  color: color ?? Theme.of(context).colorScheme.onBackground,
-                ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white.withOpacity(0.7),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.7),
           ),
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: SizeUtils.scale(2, size.width),
+            horizontal: SizeUtils.scale(6, size.width)),
+        child: MyText(
+          text: '${percentage ?? 0}%',
+          style: AppFonts().bodySmallRegular.copyWith(
+                color: color ?? Theme.of(context).colorScheme.onBackground,
+              ),
         ),
       ),
     );

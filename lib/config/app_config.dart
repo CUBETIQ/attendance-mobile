@@ -2,9 +2,10 @@ import 'dart:io';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:timesync/app_version.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
-import 'package:timesync/key.dart';
+import 'package:timesync/config/key.dart';
 import 'package:timesync/utils/encrypt_util.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -69,7 +70,7 @@ class AppConfig {
     _localData = await LocalStorageController.getInstance().get();
     packageInfo = await PackageInfo.fromPlatform();
     _userAgent =
-        "TimeSyncApi:SDK-Dart/${packageInfo?.version} (${Platform.isAndroid ? 'Android' : 'iOS'})";
+        "TimeSyncApi:SDK-Dart/${packageInfo?.version}-${AppVersion.version} (${Platform.isAndroid ? 'Android' : 'iOS'})";
     accessToken = _localData?.accessToken;
     isFirstTime = _localData?.isFirstTime;
     isActivated = _localData?.isActivated;

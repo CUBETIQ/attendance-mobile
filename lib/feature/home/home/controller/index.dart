@@ -662,15 +662,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void onDisableButton(int dateTimeInMillis) {
-    disableButton.value =
-        DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+    disableButton.value = DateUtil.isWithinFiveMinutes(dateTimeInMillis);
     if (disableButton.value == true) {
       final duration = AppConfig.delayTimeInMinute -
           DateUtil.calculateDurationInMinutes(
-              attendanceList.last.checkInDateTime!,
-              DateTime.now().millisecondsSinceEpoch);
-      final orinalDateTime = DateTime.fromMillisecondsSinceEpoch(
-          attendanceList.last.checkInDateTime!);
+              dateTimeInMillis, DateTime.now().millisecondsSinceEpoch);
+      final orinalDateTime =
+          DateTime.fromMillisecondsSinceEpoch(dateTimeInMillis);
       DateUtil.scheduleTaskAfterFiveMinutes(orinalDateTime, duration, (value) {
         disableButton.value = value;
       });

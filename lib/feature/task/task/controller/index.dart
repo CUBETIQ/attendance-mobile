@@ -35,6 +35,9 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
+      tasks.value
+          .sort((a, b) => (b.startDate ?? 0).compareTo(a.startDate ?? 0));
+      tasks.value.sort((a, b) => (b.status ?? "").compareTo(a.status ?? ""));
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

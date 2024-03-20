@@ -122,16 +122,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     workingHourDuration();
   }
 
-  void workingHourDuration() {
+  Future<void> workingHourDuration() async {
     if (checkInTime.value != null && checkOutTime.value == null) {
       final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
         attendanceList.last.checkInDateTime!,
       );
+
       // Update the working hour value every second
       timer = Timer.periodic(
         const Duration(seconds: 1),
-        (Timer timer) {
-          var duration = DateTime.now().difference(checkInDateTime);
+        (Timer timer) async {
+          var duration = await checkTime()
+              .then((value) => value.difference(checkInDateTime));
           var hours = duration.inHours;
           var minutes = duration.inMinutes.remainder(60);
           var formattedMinutes = minutes.toString().padLeft(2, '0');

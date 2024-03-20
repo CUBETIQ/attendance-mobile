@@ -132,7 +132,7 @@ class ReportAttendanceCard extends StatelessWidget {
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: attendance.checkOutStatus != null
                                 ? ColorUtil.getStatusColor(
-                                    attendance.checkOutStatus)
+                                    attendance.checkOutStatus, isCheckOut: true)
                                 : Theme.of(context).colorScheme.onBackground,
                           ),
                     ),

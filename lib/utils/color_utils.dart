@@ -44,12 +44,12 @@ class ColorUtil {
         c.blue + ((255 - c.blue) * p).round());
   }
 
-  static Color getStatusColor(String? status) {
+  static Color getStatusColor(String? status, {isCheckOut}) {
     switch (status) {
       case AttendanceStatus.early || AttendanceStatus.onTime:
         return Colors.green;
       case AttendanceStatus.late:
-        return Colors.red;
+        return isCheckOut ? Colors.green : Colors.red;
       case AttendanceStatus.overtime:
         return Colors.orange;
       default:

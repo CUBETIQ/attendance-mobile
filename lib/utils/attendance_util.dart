@@ -27,7 +27,7 @@ class CheckOutStatusValidator {
     } else if (checkOutHour == endHour && checkOutMinute <= 10) {
       return AttendanceStatus.onTime;
     } else {
-      return AttendanceStatus.overtime;
+      return AttendanceStatus.late;
     }
   }
 }

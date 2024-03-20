@@ -120,10 +120,20 @@ class TaskDetailView extends StatelessWidget {
                 maxLines: 20,
               ),
               SizedBox(height: SizeUtils.scale(20, size.width)),
-              const Divider(thickness: 1.5),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
-              MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
-              SizedBox(height: SizeUtils.scale(10, size.width)),
+              controller.task.value?.attachment?.isEmpty == true
+                  ? const SizedBox.shrink()
+                  : Column(
+                      children: [
+                        const Divider(thickness: 1.5),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeUtils.scale(10, size.width)),
+                          child: MyText(
+                              text: "Attachment",
+                              style: AppFonts().bodyLargeMedium),
+                        ),
+                      ],
+                    ),
               Obx(
                 () => ListView.builder(
                   shrinkWrap: true,

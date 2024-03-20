@@ -83,7 +83,7 @@ class AddTaskController extends GetxController {
         );
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
-        TaskController.to.getUserSummarizeLeave();
+        TaskController.to.getUserSummarizeTask();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
@@ -115,6 +115,7 @@ class AddTaskController extends GetxController {
         );
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
+        TaskController.to.getUserSummarizeTask();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
@@ -136,6 +137,7 @@ class AddTaskController extends GetxController {
         attachments.value = task.value?.attachment ?? [];
         taskController.text = task.value?.name ?? '';
         selectPriority.value = task.value?.priority ?? TaskPriority.low;
+        selectStatus.value = task.value?.status ?? TaskStatus.todo;
         startDateController.text =
             DateUtil.formatMillisecondsToDOB(task.value?.startDate ?? 0);
         endDateController.text =

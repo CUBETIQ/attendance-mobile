@@ -68,7 +68,7 @@ class AddTaskController extends GetxController {
             await UploadFileUtil.uploadFiles(attachments.value, "task");
         attachments.value = result;
         CreateTaskModel input = CreateTaskModel(
-          name: taskController.text,
+          name: taskController.text.trim(),
           description: descriptionController.text,
           startDate: startDate.value,
           endDate: endDate.value,
@@ -77,6 +77,9 @@ class AddTaskController extends GetxController {
           status: selectStatus.value,
           priority: selectPriority.value,
           attachment: attachments.value,
+          completedDate: selectStatus.value == TaskStatus.done
+              ? DateTime.now().millisecondsSinceEpoch
+              : null,
         );
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
@@ -106,6 +109,9 @@ class AddTaskController extends GetxController {
           status: selectStatus.value,
           priority: selectPriority.value,
           attachment: attachments.value,
+          completedDate: selectStatus.value == TaskStatus.done
+              ? DateTime.now().millisecondsSinceEpoch
+              : null,
         );
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();

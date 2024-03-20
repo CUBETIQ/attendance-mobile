@@ -250,8 +250,8 @@ class DateUtil {
     // Calculate the difference in minutes
     int differenceInMinutes = now.difference(dateTime).inMinutes;
 
-    // Check if the difference is greater than or equal to 5 minutes
-    return differenceInMinutes < 5;
+    // Check if the difference is greater than or equal to 3 minutes
+    return differenceInMinutes < 3;
   }
 
   static void scheduleTaskAfterFiveMinutes(

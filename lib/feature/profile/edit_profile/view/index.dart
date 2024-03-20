@@ -84,7 +84,7 @@ class EditProfileView extends StatelessWidget {
                   ),
                 ),
                 InputDatePickerField(
-                    label: "Date of birth",
+                    type: DateFormatType.type1,
                     initialDate: DateTime.fromMillisecondsSinceEpoch(
                         controller.dob.value ??
                             DateTime.now().millisecondsSinceEpoch),

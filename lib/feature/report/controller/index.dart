@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:timesync/core/model/admin_attendance_report_model.dart';
 import 'package:timesync/core/model/admin_leave_report_model.dart';
 import 'package:timesync/core/model/admin_task_report_model.dart';
@@ -48,7 +47,7 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
   Timer? _debounceTimer;
 
   // Define a duration for the debounce period.
-  final Duration debounceDuration = const Duration(milliseconds: 500);
+  final Duration debounceDuration = const Duration(milliseconds: 1000);
 
   @override
   void onInit() {
@@ -152,7 +151,6 @@ class ReportController extends GetxController with GetTickerProviderStateMixin {
           await getLeave();
           onDaySelected(date, date);
         } else {
-          calendarFocusedDay.value = DateTime.now();
           calendarStartOfTheMonth.value =
               DateUtil.getStartOfMonthInMilliseconds(DateTime.now());
           calendarEndOfTheMonth.value =

@@ -7,6 +7,7 @@ import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/types/role.dart';
 
 class SummaryAttendanceController extends GetxController
     with GetTickerProviderStateMixin {
@@ -64,8 +65,10 @@ class SummaryAttendanceController extends GetxController
   }
 
   void getArgument() {
+    List<UserModel> updatedStaffs = Get.arguments["staffs"];
+    staffs.value.addAll(
+        updatedStaffs.where((element) => element.role != Role.superadmin));
     final List<AttendanceModel> allAttendances = Get.arguments["attendances"];
-    staffs.value = Get.arguments["staffs"];
     staffAttendanceList.value = removeDuplicateAttendances(allAttendances);
     startOfTheDay.value = Get.arguments["startDate"];
     endOfTheDay.value = Get.arguments["endDate"];

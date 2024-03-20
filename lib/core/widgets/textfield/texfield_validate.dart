@@ -223,11 +223,9 @@ class MyTextFieldForm extends StatelessWidget {
                             borderRadius ?? AppSize().borderRadiusSmall,
                             size.width),
                       ),
-                      topRight: Radius.circular(
-                        SizeUtils.scale(
-                            borderRadius ?? AppSize().borderRadiusSmall,
-                            size.width),
-                      ),
+                      topRight: Radius.circular(SizeUtils.scale(
+                          borderRadius ?? AppSize().borderRadiusSmall,
+                          size.width)),
                     ),
                     borderSide: BorderSide(
                       width: 1.5,
@@ -242,7 +240,7 @@ class MyTextFieldForm extends StatelessWidget {
                   onChanged?.call(value);
                 },
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return '$label is required';
                   }
                   return null;

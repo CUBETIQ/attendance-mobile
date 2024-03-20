@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/icon.dart';
 import 'package:timesync/constants/image.dart';
 import 'package:timesync/core/widgets/button/async_button.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
@@ -10,6 +11,8 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync/feature/auth/login/controller/index.dart';
 import 'package:timesync/utils/size_util.dart';
+
+import '../../../../core/widgets/icon/svg_icon.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -95,7 +98,11 @@ class LoginView extends StatelessWidget {
                 SizedBox(height: size.height * 0.05),
                 MyTextFieldForm(
                   hasLabel: true,
-                  prefixIcon: Icons.person_rounded,
+                  prefixWidget: SvgIcon(
+                    icon: IconAssets.profile,
+                    width: SizeUtils.scale(20, size.width),
+                    height: SizeUtils.scale(20, size.width),
+                  ),
                   label: "Username",
                   hintText: "Enter your username",
                   iconSize: SizeUtils.scale(16, size.width),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timesync/types/attendance_status.dart';
 
 class ColorUtil {
   static bool isColorBright(Color color) {
@@ -41,5 +42,18 @@ class ColorUtil {
         c.red + ((255 - c.red) * p).round(),
         c.green + ((255 - c.green) * p).round(),
         c.blue + ((255 - c.blue) * p).round());
+  }
+
+  static Color getStatusColor(String? status, {isCheckOut}) {
+    switch (status) {
+      case AttendanceStatus.early || AttendanceStatus.onTime:
+        return Colors.green;
+      case AttendanceStatus.late:
+        return isCheckOut == true ? Colors.green : Colors.red;
+      case AttendanceStatus.overtime:
+        return Colors.orange;
+      default:
+        return Colors.blue;
+    }
   }
 }

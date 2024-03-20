@@ -1,6 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/color_picker/color_picker_dialog.dart';
 import 'package:timesync/core/widgets/icon_picker/icon_picker_dialog.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
@@ -9,13 +14,11 @@ import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
 import 'package:timesync/feature/task/add_task/service/index.dart';
 import 'package:timesync/feature/task/task/controller/index.dart';
-import 'package:timesync/types/task_status.dart';
-import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/types/task_priority.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:timesync/types/task_status.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/upload_file_util.dart';
 
 class AddTaskController extends GetxController {
@@ -83,7 +86,7 @@ class AddTaskController extends GetxController {
         );
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
-        TaskController.to.getUserSummarizeLeave();
+        TaskController.to.getUserSummarizeTask();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
@@ -115,6 +118,7 @@ class AddTaskController extends GetxController {
         );
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
+        TaskController.to.getUserSummarizeTask();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
@@ -136,6 +140,7 @@ class AddTaskController extends GetxController {
         attachments.value = task.value?.attachment ?? [];
         taskController.text = task.value?.name ?? '';
         selectPriority.value = task.value?.priority ?? TaskPriority.low;
+        selectStatus.value = task.value?.status ?? TaskStatus.todo;
         startDateController.text =
             DateUtil.formatMillisecondsToDOB(task.value?.startDate ?? 0);
         endDateController.text =
@@ -206,5 +211,26 @@ class AddTaskController extends GetxController {
         },
       ),
     );
+  }
+
+  Future<void> deleteTask(String? id) async {
+    if (id == null) return;
+    try {
+      getConfirmBottomSheet(
+        Get.context!,
+        title: "Delete Task",
+        description: "Are you sure to delete this task?",
+        onTapConfirm: () async {
+          await TaskService().deleteTask(id);
+          await TaskController.to.getUserTasks();
+          TaskController.to.getUserSummarizeTask();
+          Navigator.of(Get.context!).popUntil((route) => route.isFirst);
+        },
+        image: SvgAssets.delete,
+      );
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
   }
 }

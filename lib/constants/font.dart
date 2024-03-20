@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -80,7 +82,7 @@ class AppFonts {
   TextStyle get bodySmallMedium =>
       generateTextStyle(fontSize: 12, fontWeight: FontWeight.w500);
   TextStyle get bodyXSmallMedium =>
-      generateTextStyle(fontSize: 10, fontWeight: FontWeight.w500);
+      generateTextStyle(fontSize: 12, fontWeight: FontWeight.w500);
   TextStyle get bodyXXSmallMedium =>
       generateTextStyle(fontSize: 8, fontWeight: FontWeight.w500);
 
@@ -97,7 +99,18 @@ class AppFonts {
   TextStyle get bodySmallRegular =>
       generateTextStyle(fontSize: 12, fontWeight: FontWeight.w400);
   TextStyle get bodyXSmallRegular =>
-      generateTextStyle(fontSize: 10, fontWeight: FontWeight.w400);
+      generateTextStyle(fontSize: 12, fontWeight: FontWeight.w400);
   TextStyle get bodyXXSmallRegular =>
       generateTextStyle(fontSize: 8, fontWeight: FontWeight.w400);
+
+  // New Style From Figma
+
+  TextStyle get TitleSmall =>
+      generateTextStyle(fontSize: 14, fontWeight: FontWeight.w600);
+
+  TextStyle get LabelMedium =>
+      generateTextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+
+  TextStyle get BodyXSmall =>
+      generateTextStyle(fontSize: 12, fontWeight: FontWeight.w400);
 }

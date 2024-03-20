@@ -42,87 +42,107 @@ class AttendancePieChartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final customChartRadius = SizeUtils.scale(34, size.width);
     return MyCard(
       width: cardWidth ?? size.width,
       height: cardHeight ?? SizeUtils.scale(150, size.width),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-              width: cardWidth ?? SizeUtils.scale(140, size.width),
-              height: cardHeight ?? SizeUtils.scale(140, size.width),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.background,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 3,
-                    blurRadius: 2,
-                    offset: const Offset(0, 0),
-                  ),
-                ],
-              ),
-              child: PieChart(
-                haveNoData == true
-                    ? PieChartData(
-                        sections: [
-                          PieChartSectionData(
-                            showTitle: false,
-                            color: Theme.of(context).colorScheme.outlineVariant,
-                            value: 100,
-                            title: "No Data",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                  color: Colors.white,
-                                ),
+          Padding(
+            padding: EdgeInsets.only(left: SizeUtils.scale(20, size.width)),
+            child: GestureDetector(
+              onTap: onTap,
+              child: Container(
+                width: cardWidth ?? SizeUtils.scale(120, size.width),
+                height: cardHeight ?? SizeUtils.scale(120, size.width),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).colorScheme.background,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 3,
+                      blurRadius: 2,
+                      offset: const Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: PieChart(
+                  haveNoData == true
+                      ? PieChartData(
+                          sectionsSpace: 0,
+                          sections: [
+                            PieChartSectionData(
+                              showTitle: false,
+                              color:
+                                  Theme.of(context).colorScheme.outlineVariant,
+                              value: 100,
+                              title: "No Data",
+                              radius: chartRadius ??
+                                  SizeUtils.scale(59, size.width),
+                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                    color: Colors.white,
+                                  ),
+                            ),
+                          ],
+                        )
+                      : PieChartData(
+                          sectionsSpace: 0,
+                          centerSpaceRadius: SizeUtils.scale(28, size.width),
+                          borderData: FlBorderData(
+                            show: false,
                           ),
-                        ],
-                      )
-                    : PieChartData(
-                        borderData: FlBorderData(
-                          show: false,
+                          sections: [
+                            PieChartSectionData(
+                              showTitle: false,
+                              color: MyColor.successColor,
+                              value: presentPercentage ?? 0,
+                              title: "Present",
+                              radius: chartRadius ?? customChartRadius,
+                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                    color: Colors.white,
+                                  ),
+                              badgeWidget: _Badge(
+                                percentage: presentPercentage,
+                                color: MyColor.successColor,
+                              ),
+                              badgePositionPercentageOffset: .98,
+                            ),
+                            PieChartSectionData(
+                              showTitle: false,
+                              color: MyColor.pendingColor,
+                              value: onLeavePercentage ?? 0,
+                              title: "On Leave",
+                              radius: chartRadius ?? customChartRadius,
+                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                    color: Colors.white,
+                                  ),
+                              badgeWidget: _Badge(
+                                percentage: onLeavePercentage,
+                                color: MyColor.pendingColor,
+                              ),
+                              badgePositionPercentageOffset: .98,
+                            ),
+                            PieChartSectionData(
+                              showTitle: false,
+                              color: MyColor.errorColor,
+                              value: absentPercentage ?? 0,
+                              title: "Absent",
+                              radius: chartRadius ?? customChartRadius,
+                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                    color: Colors.white,
+                                  ),
+                              badgeWidget: _Badge(
+                                percentage: absentPercentage,
+                                color: MyColor.errorColor,
+                              ),
+                              badgePositionPercentageOffset: .98,
+                            ),
+                          ],
                         ),
-                        sections: [
-                          PieChartSectionData(
-                            showTitle: false,
-                            color: MyColor.successColor,
-                            value: presentPercentage ?? 0,
-                            title: "Present",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                  color: Colors.white,
-                                ),
-                          ),
-                          PieChartSectionData(
-                            showTitle: false,
-                            color: MyColor.pendingColor,
-                            value: onLeavePercentage ?? 0,
-                            title: "On Leave",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                  color: Colors.white,
-                                ),
-                          ),
-                          PieChartSectionData(
-                            showTitle: false,
-                            color: MyColor.errorColor,
-                            value: absentPercentage ?? 0,
-                            title: "Absent",
-                            radius:
-                                chartRadius ?? SizeUtils.scale(59, size.width),
-                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ],
-                      ),
-                swapAnimationDuration: const Duration(milliseconds: 150),
-                swapAnimationCurve: Curves.linear,
+                  swapAnimationDuration: const Duration(milliseconds: 150),
+                  swapAnimationCurve: Curves.linear,
+                ),
               ),
             ),
           ),
@@ -150,6 +170,39 @@ class AttendancePieChartCard extends StatelessWidget {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class _Badge extends StatelessWidget {
+  const _Badge({this.percentage, this.color});
+
+  final double? percentage;
+  final Color? color;
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white.withOpacity(0.7),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.7),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: SizeUtils.scale(2, size.width),
+            horizontal: SizeUtils.scale(6, size.width)),
+        child: MyText(
+          text: '${percentage ?? 0}%',
+          style: AppFonts().bodySmallRegular.copyWith(
+                color: color ?? Theme.of(context).colorScheme.onBackground,
+              ),
+        ),
       ),
     );
   }

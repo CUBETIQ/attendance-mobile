@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -123,16 +122,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     workingHourDuration();
   }
 
-  void workingHourDuration() {
+  Future<void> workingHourDuration() async {
     if (checkInTime.value != null && checkOutTime.value == null) {
       final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
         attendanceList.last.checkInDateTime!,
       );
+
       // Update the working hour value every second
       timer = Timer.periodic(
         const Duration(seconds: 1),
-        (Timer timer) {
-          var duration = DateTime.now().difference(checkInDateTime);
+        (Timer timer) async {
+          var duration = await checkTime()
+              .then((value) => value.difference(checkInDateTime));
           var hours = duration.inHours;
           var minutes = duration.inMinutes.remainder(60);
           var formattedMinutes = minutes.toString().padLeft(2, '0');
@@ -521,14 +522,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     myTime = DateTime.now().toLocal();
 
     /// Or get NTP offset (in milliseconds) and add it yourself
-    final int offset = await NTP.getNtpOffset(localTime: DateTime.now());
+    final int offset =
+        await NTP.getNtpOffset(localTime: DateTime.now().toLocal());
     ntpTime = myTime.add(Duration(milliseconds: offset));
 
-    if (myTime.difference(ntpTime).inMinutes > 1) {
-      result = ntpTime;
-    } else {
-      result = myTime;
-    }
+    result = ntpTime;
+
     return result;
   }
 
@@ -665,15 +664,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void onDisableButton(int dateTimeInMillis) {
-    disableButton.value =
-        DateUtil.isWithinFiveMinutes(attendanceList.last.checkInDateTime);
+    disableButton.value = DateUtil.isWithinFiveMinutes(dateTimeInMillis);
     if (disableButton.value == true) {
       final duration = AppConfig.delayTimeInMinute -
           DateUtil.calculateDurationInMinutes(
-              attendanceList.last.checkInDateTime!,
-              DateTime.now().millisecondsSinceEpoch);
-      final orinalDateTime = DateTime.fromMillisecondsSinceEpoch(
-          attendanceList.last.checkInDateTime!);
+              dateTimeInMillis, DateTime.now().millisecondsSinceEpoch);
+      final orinalDateTime =
+          DateTime.fromMillisecondsSinceEpoch(dateTimeInMillis);
       DateUtil.scheduleTaskAfterFiveMinutes(orinalDateTime, duration, (value) {
         disableButton.value = value;
       });

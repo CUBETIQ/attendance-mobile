@@ -15,7 +15,7 @@ class AppSize {
   // Padding Horizontal
   double get paddingHorizontalSmall => 8.0;
   double get paddingHorizontalMedium => 16.0;
-  double get paddingHorizontalLarge => 24.0;
+  double get paddingHorizontalLarge => 20;
 
   // Padding for title
   double get paddingTitleSmall => 30.0;

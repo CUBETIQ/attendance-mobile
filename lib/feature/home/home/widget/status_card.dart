@@ -1,10 +1,10 @@
-import 'package:timesync/constants/app_size.dart';
-import 'package:timesync/constants/font.dart';
-import 'package:timesync/constants/color.dart';
-import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/types/attendance_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/types/attendance_status.dart';
+import 'package:timesync/utils/color_utils.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class StatusCard extends StatelessWidget {
@@ -39,11 +39,7 @@ class StatusCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: status != null
-                      ? status == AttendanceStatus.early
-                          ? const Color(MyColor.success)
-                          : status == AttendanceStatus.late
-                              ? Theme.of(context).colorScheme.error
-                              : Theme.of(context).colorScheme.primary
+                      ? ColorUtil.getStatusColor(status)
                       : Theme.of(context).colorScheme.outlineVariant,
                   borderRadius: BorderRadius.circular(
                     AppSize().borderRadiusMedium * (size.width / 375.0),

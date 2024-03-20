@@ -69,6 +69,7 @@ dependencies:
   share_plus: ^7.2.2
   table_calendar: ^3.0.9
   uni_links: ^0.5.1
+  flutter_image_compress: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/icons/
     - assets/lotties/
     - assets/svgs/
     - assets/svgs/icons/

@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/summary_task_model.dart';
 import 'package:timesync/core/model/task_model.dart';
@@ -7,9 +9,6 @@ import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/state.dart';
-import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
@@ -36,13 +35,16 @@ class TaskController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
+      tasks.value
+          .sort((a, b) => (b.startDate ?? 0).compareTo(a.startDate ?? 0));
+      tasks.value.sort((a, b) => (b.status ?? "").compareTo(a.status ?? ""));
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
   }
 
-  Future<void> getUserSummarizeLeave() async {
+  Future<void> getUserSummarizeTask() async {
     clearData();
     try {
       summarizeTasks.value = await TaskService().getUserTaskSummarize(
@@ -79,7 +81,7 @@ class TaskController extends GetxController {
         onTapConfirm: () async {
           await TaskService().completeTask(id);
           await getUserTasks();
-          getUserSummarizeLeave();
+          getUserSummarizeTask();
           Get.back();
         },
         image: SvgAssets.checkIn,
@@ -93,61 +95,20 @@ class TaskController extends GetxController {
   Future<void> initFunction() async {
     initDate();
     getUserTasks();
-    getUserSummarizeLeave();
+    getUserSummarizeTask();
   }
 
   void onRefresh() {
     getUserTasks();
-    getUserSummarizeLeave();
-  }
-
-  Future<void> deleteTask(String id) async {
-    try {
-      getConfirmBottomSheet(
-        Get.context!,
-        title: "Delete Task",
-        description: "Are you sure to delete this task?",
-        onTapConfirm: () async {
-          await TaskService().deleteTask(id);
-          await getUserTasks();
-          getUserSummarizeLeave();
-          Get.back();
-        },
-        image: SvgAssets.delete,
-      );
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
+    getUserSummarizeTask();
   }
 
   void onTapTask(TaskModel task) {
-    getEditDeleteViewBottomSheet(
-      Get.context!,
-      image: SvgAssets.option,
-      onTapView: () {
-        Get.back();
-        Get.toNamed(
-          Routes.TASK_DETAIL,
-          arguments: {
-            "task": task,
-            "user": null,
-          },
-        );
-      },
-      onTapEdit: () {
-        Get.back();
-        Get.toNamed(
-          Routes.ADD_TASK,
-          arguments: {
-            "state": AppState.edit,
-            "task": task,
-          },
-        );
-      },
-      onTapDelete: () {
-        Get.back();
-        deleteTask(task.id!);
+    Get.toNamed(
+      Routes.TASK_DETAIL,
+      arguments: {
+        "task": task,
+        "user": null,
       },
     );
   }
@@ -178,7 +139,7 @@ class TaskController extends GetxController {
       endDate.value =
           DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
       getUserTasks();
-      getUserSummarizeLeave();
+      getUserSummarizeTask();
     }
   }
 }

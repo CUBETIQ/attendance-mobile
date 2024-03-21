@@ -1,4 +1,5 @@
 import 'package:timesync/core/repositories/base_model.dart';
+import 'package:timesync/extensions/string.dart';
 
 class OrganizationModel extends BaseModel<OrganizationModel> {
   final String? id;
@@ -78,9 +79,10 @@ class OranizationLocationModel {
     if (json == null) {
       return OranizationLocationModel();
     }
+
     return OranizationLocationModel(
-      lat: json['lat'],
-      lng: json['lng'],
+      lat: json['lat'] is int ? json['lat'].toString().toDouble() : json['lat'],
+      lng: json['lng'] is int ? json['lng'].toString().toDouble() : json['lng'],
     );
   }
 

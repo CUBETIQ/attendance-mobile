@@ -14,11 +14,15 @@ class AuthInterceptor extends Interceptor {
         'content-type': 'application/json',
         'Authorization': "Bearer ${localData?.accessToken}",
         'User-Agent': AppConfig.getUserAgent,
+        'x-organization-id':
+            AppConfig.getLocalData?.organizationId ?? "default",
       });
     } else {
       options.headers.addAll({
         'content-type': 'application/json',
         'User-Agent': AppConfig.getUserAgent,
+        'x-organization-id':
+            AppConfig.getLocalData?.organizationId ?? "default",
       });
     }
     return super.onRequest(options, handler);

@@ -19,7 +19,7 @@ class DetailRowData extends StatelessWidget {
           child: MyText(
             text: title ?? "status",
             style: AppFonts().bodyMediumMedium.copyWith(
-                  color: Theme.of(context).colorScheme.outline,
+                  color: Theme.of(context).colorScheme.outlineVariant,
                 ),
           ),
         ),

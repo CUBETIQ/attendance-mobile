@@ -16,6 +16,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/types/role.dart';
+import 'package:timesync/utils/logger.dart';
 import '../../../../core/model/user_model.dart';
 
 class LoginController extends GetxController {
@@ -57,7 +58,7 @@ class LoginController extends GetxController {
         accessToken.value = token.first;
         refreshToken.value = token.last;
         await getOrganization(storageData?.organizationId ?? "");
-        await fetchMe();
+        await fetchMe(organizationId: storageData?.organizationId);
         await getUserStatus();
         await setRememberMe();
         if (organization.value == null) {
@@ -123,15 +124,21 @@ class LoginController extends GetxController {
     await IsarService().saveLocalData(input: localStorageData);
   }
 
-  Future<void> onCheck(bool? value) async {
-    isRememberMe.value = value!;
+  void onCheckRememberMe() {
+    isRememberMe.value = !isRememberMe.value;
   }
 
-  Future<void> fetchMe() async {
+  Future<void> fetchMe({String? organizationId}) async {
     try {
       user.value = await LoginService().fetchMe();
       if (user.value.role == Role.admin) {
         isAdmin.value = true;
+      }
+      if (user.value.organizationId != null &&
+          user.value.organizationId != organizationId) {
+        Logs.e(["user.value.organizationId", user.value.organizationId]);
+        showErrorSnackBar("Error", "Incorrect username or password");
+        return;
       }
       localStorageData = LocalStorageModel(
         userId: user.value.id,

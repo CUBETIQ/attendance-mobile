@@ -48,7 +48,7 @@ class ReportLeaveCard extends StatelessWidget {
                   ),
                 ),
               ),
-              color: Colors.orange,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           SizedBox(

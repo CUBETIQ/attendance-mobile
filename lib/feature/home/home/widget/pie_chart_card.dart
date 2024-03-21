@@ -1,11 +1,10 @@
-import 'package:timesync/constants/font.dart';
-import 'package:timesync/constants/color.dart';
-import 'package:timesync/core/widgets/card/my_card.dart';
-import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/feature/home/home/widget/attendance_info_widget.dart';
-import 'package:timesync/utils/size_util.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/padding.dart';
+import 'package:timesync/feature/home/home/widget/attendance_info_widget.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class AttendancePieChartCard extends StatelessWidget {
   final double? cardWidth;
@@ -43,133 +42,131 @@ class AttendancePieChartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final customChartRadius = SizeUtils.scale(34, size.width);
-    return MyCard(
-      width: cardWidth ?? size.width,
-      height: cardHeight ?? SizeUtils.scale(150, size.width),
-      child: Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: SizeUtils.scale(20, size.width)),
-            child: GestureDetector(
-              onTap: onTap,
-              child: Container(
-                width: cardWidth ?? SizeUtils.scale(120, size.width),
-                height: cardHeight ?? SizeUtils.scale(120, size.width),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.background,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 3,
-                      blurRadius: 2,
-                      offset: const Offset(0, 0),
-                    ),
-                  ],
-                ),
-                child: PieChart(
-                  haveNoData == true
-                      ? PieChartData(
-                          sectionsSpace: 0,
-                          sections: [
-                            PieChartSectionData(
-                              showTitle: false,
-                              color:
-                                  Theme.of(context).colorScheme.outlineVariant,
-                              value: 100,
-                              title: "No Data",
-                              radius: chartRadius ??
-                                  SizeUtils.scale(59, size.width),
-                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                    color: Colors.white,
-                                  ),
-                            ),
-                          ],
-                        )
-                      : PieChartData(
-                          sectionsSpace: 0,
-                          centerSpaceRadius: SizeUtils.scale(28, size.width),
-                          borderData: FlBorderData(
-                            show: false,
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: Colors.transparent,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: cardWidth ?? SizeUtils.scale(120, size.width),
+              height: cardHeight ?? SizeUtils.scale(120, size.width),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.background,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 3,
+                    blurRadius: 2,
+                    offset: const Offset(0, 0),
+                  ),
+                ],
+              ),
+              child: PieChart(
+                haveNoData == true
+                    ? PieChartData(
+                        sectionsSpace: 0,
+                        sections: [
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: Theme.of(context).colorScheme.primary,
+                            value: 100,
+                            title: "No Data",
+                            radius: chartRadius ?? customChartRadius,
+                            titleStyle: AppFonts().bodyMediumRegular.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
-                          sections: [
-                            PieChartSectionData(
-                              showTitle: false,
-                              color: MyColor.successColor,
-                              value: presentPercentage ?? 0,
-                              title: "Present",
-                              radius: chartRadius ?? customChartRadius,
-                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                    color: Colors.white,
-                                  ),
-                              badgeWidget: _Badge(
-                                percentage: presentPercentage,
-                                color: MyColor.successColor,
-                              ),
-                              badgePositionPercentageOffset: .98,
-                            ),
-                            PieChartSectionData(
-                              showTitle: false,
-                              color: MyColor.pendingColor,
-                              value: onLeavePercentage ?? 0,
-                              title: "On Leave",
-                              radius: chartRadius ?? customChartRadius,
-                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                    color: Colors.white,
-                                  ),
-                              badgeWidget: _Badge(
-                                percentage: onLeavePercentage,
-                                color: MyColor.pendingColor,
-                              ),
-                              badgePositionPercentageOffset: .98,
-                            ),
-                            PieChartSectionData(
-                              showTitle: false,
-                              color: MyColor.errorColor,
-                              value: absentPercentage ?? 0,
-                              title: "Absent",
-                              radius: chartRadius ?? customChartRadius,
-                              titleStyle: AppFonts().bodyMediumRegular.copyWith(
-                                    color: Colors.white,
-                                  ),
-                              badgeWidget: _Badge(
-                                percentage: absentPercentage,
-                                color: MyColor.errorColor,
-                              ),
-                              badgePositionPercentageOffset: .98,
-                            ),
-                          ],
+                        ],
+                      )
+                    : PieChartData(
+                        sectionsSpace: 0,
+                        centerSpaceRadius: SizeUtils.scale(28, size.width),
+                        borderData: FlBorderData(
+                          show: false,
                         ),
-                  swapAnimationDuration: const Duration(milliseconds: 150),
-                  swapAnimationCurve: Curves.linear,
-                ),
+                        sections: [
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: Theme.of(context).colorScheme.primary,
+                            value: presentPercentage ?? 0,
+                            title: "Present",
+                            radius: chartRadius ?? customChartRadius,
+                            titleStyle: AppFonts.TitleXXSmall.copyWith(
+                              color: Colors.white,
+                            ),
+                            badgeWidget: _Badge(
+                              percentage: presentPercentage,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            badgePositionPercentageOffset: .98,
+                          ),
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: Theme.of(context).colorScheme.secondary,
+                            value: onLeavePercentage ?? 0,
+                            title: "Leave",
+                            radius: chartRadius ?? customChartRadius,
+                            titleStyle: AppFonts.TitleXXSmall.copyWith(
+                              color: Colors.white,
+                            ),
+                            badgeWidget: _Badge(
+                              percentage: onLeavePercentage,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            badgePositionPercentageOffset: .98,
+                          ),
+                          PieChartSectionData(
+                            showTitle: false,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
+                            value: absentPercentage ?? 0,
+                            title: "Absent",
+                            radius: chartRadius ?? customChartRadius,
+                            titleStyle: AppFonts.TitleXXSmall.copyWith(
+                              color: Colors.white,
+                            ),
+                            badgeWidget: _Badge(
+                              percentage: absentPercentage,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                            ),
+                            badgePositionPercentageOffset: .98,
+                          ),
+                        ],
+                      ),
+                swapAnimationDuration: const Duration(milliseconds: 150),
+                swapAnimationCurve: Curves.linear,
               ),
             ),
-          ),
-          SizedBox(width: SizeUtils.scale(20, size.width)),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MyText(text: "Summary", style: AppFonts().bodyLargeMedium),
-              AttendanceInfoWidget(
-                color: MyColor.successColor,
-                title: "Present: ",
-                value: totalPresent,
+            SizedBox(width: SizeUtils.scale(28.5, size.width)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MyText(text: "Summary", style: AppFonts.TitleMedium),
+                AttendanceInfoWidget(
+                  color: Theme.of(context).colorScheme.primary,
+                  title: "Present",
+                ),
+                AttendanceInfoWidget(
+                  color: Theme.of(context).colorScheme.secondary,
+                  title: "Leave",
+                ),
+                AttendanceInfoWidget(
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  title: "Absent",
+                ),
+              ].withSpaceBetween(
+                height: SizeUtils.scale(8, size.width),
               ),
-              AttendanceInfoWidget(
-                color: MyColor.pendingColor,
-                title: "Leave: ",
-                value: totalOnLeave,
-              ),
-              AttendanceInfoWidget(
-                color: MyColor.errorColor,
-                title: "Absent: ",
-                value: totalAbsent,
-              ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -198,10 +195,10 @@ class _Badge extends StatelessWidget {
             vertical: SizeUtils.scale(2, size.width),
             horizontal: SizeUtils.scale(6, size.width)),
         child: MyText(
-          text: '${percentage ?? 0}%',
-          style: AppFonts().bodySmallRegular.copyWith(
-                color: color ?? Theme.of(context).colorScheme.onBackground,
-              ),
+          text: '${(percentage ?? 0).toStringAsFixed(0)}%',
+          style: AppFonts.TitleXXSmall.copyWith(
+            color: color ?? Theme.of(context).colorScheme.onBackground,
+          ),
         ),
       ),
     );

@@ -1,39 +1,32 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/color.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:timesync/utils/theme_utils.dart';
 
 // Light theme data
 ThemeData lightThemeData() {
   return FlexThemeData.light(
     // user for override
-    // colors: const FlexSchemeColor(
-    //   primary: Color(0xff065808),
-    //   primaryContainer: Color(0xff9ee29f),
-    //   secondary: Color(0xff365b37),
-    //   secondaryContainer: Color(0xffaebdaf),
-    //   tertiary: Color(0xff2c7e2e),
-    //   tertiaryContainer: Color(0xffb8e6b9),
-    //   appBarColor: Color(0xffb8e6b9),
-    //   error: Color(0xffb00020),
-    // ),
-    scheme: ThemeUtil.getFlexScheme(AppConfig.theme),
+    colors: const FlexSchemeColor(
+      primary: Color(0xff065808),
+      primaryContainer: Color(0xff9ee29f),
+      secondary: Color(0xff365b37),
+      secondaryContainer: Color(0xffaebdaf),
+      tertiary: Color(0xff2c7e2e),
+      tertiaryContainer: Color(0xffb8e6b9),
+      appBarColor: Color(0xffb8e6b9),
+      error: Color(0xffb00020),
+    ),
+    // scheme: ThemeUtil.getFlexScheme(AppConfig.theme),
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-    // scaffoldBackground: const Color(0xFFFFFFFF),
+    scaffoldBackground: const Color(0xFFFFFFFF),
     blendLevel: 7,
     appBarElevation: 1,
-    subThemesData: const FlexSubThemesData(
-      blendOnLevel: 10,
-      blendOnColors: false,
-      useTextTheme: true,
-      useM2StyleDividerInM3: true,
-      alignedDropdown: true,
-      useInputDecoratorThemeInDialogs: true,
-    ),
-    primary: const Color(0xff633FE8),
-    onBackground: const Color(0xff24262B),
+
     keyColors: const FlexKeyColors(),
-    // visualDensity: FlexColorScheme.comfortablePlatformDensity,
+    visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
     swapLegacyOnMaterial3: true,
   );
@@ -42,17 +35,6 @@ ThemeData lightThemeData() {
 // Dark theme data
 ThemeData darkThemeData() {
   return FlexThemeData.dark(
-    // user for override
-    // colors: const FlexSchemeColor(
-    //   primary: Color(0xff065808),
-    //   primaryContainer: Color(0xff9ee29f),
-    //   secondary: Color(0xff365b37),
-    //   secondaryContainer: Color(0xffaebdaf),
-    //   tertiary: Color(0xff2c7e2e),
-    //   tertiaryContainer: Color(0xffb8e6b9),
-    //   appBarColor: Color(0xffb8e6b9),
-    //   error: Color(0xffb00020),
-    // ),
     scheme: ThemeUtil.getFlexScheme(AppConfig.theme),
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     // scaffoldBackground: const Color(0xff121212),
@@ -72,3 +54,100 @@ ThemeData darkThemeData() {
     swapLegacyOnMaterial3: true,
   );
 }
+
+// Color Scheme
+
+// Light theme
+ThemeData lightTheme =
+    ThemeData.from(colorScheme: flexSchemeLight, useMaterial3: true).copyWith(
+  appBarTheme: const AppBarTheme(
+    backgroundColor: MyColor.scaffoldBackground,
+    elevation: 0,
+  ),
+  scaffoldBackgroundColor: MyColor.scaffoldBackground,
+  navigationBarTheme: NavigationBarThemeData(
+    backgroundColor: MyColor.scaffoldBackground,
+    elevation: 0,
+    labelTextStyle: MaterialStateProperty.resolveWith(
+      (state) {
+        if (state.contains(MaterialState.selected)) {
+          return AppFonts.TitleXXSmall.copyWith(color: flexSchemeLight.primary);
+        }
+        return AppFonts.TitleXXSmall.copyWith(
+          color: flexSchemeLight.outlineVariant,
+        );
+      },
+    ),
+  ),
+);
+
+const ColorScheme flexSchemeLight = ColorScheme(
+  brightness: Brightness.light,
+  primary: MyColor.primary,
+  onPrimary: MyColor.onPrimary,
+  primaryContainer: MyColor.primaryContainer,
+  onPrimaryContainer: Color(0xff121314),
+  secondary: MyColor.secondaryIndigo,
+  onSecondary: Color(0xffffffff),
+  secondaryContainer: MyColor.secondaryRed,
+  onSecondaryContainer: Color(0xff121314),
+  tertiary: MyColor.success,
+  onTertiary: MyColor.onSuccess,
+  tertiaryContainer: Color(0xffa9d4d6),
+  onTertiaryContainer: Color(0xff0e1212),
+  error: MyColor.error,
+  onError: MyColor.onError,
+  errorContainer: Color(0xffffdad6),
+  onErrorContainer: Color(0xff141212),
+  background: Color(0xfff9fafd),
+  onBackground: Color(0xff090909),
+  surface: Color(0xfff9fafd),
+  onSurface: Color(0xff090909),
+  surfaceVariant: Color(0xffe4e5eb),
+  onSurfaceVariant: Color(0xff111112),
+  outline: Color(0xFF636363),
+  outlineVariant: Color(0xff7c7c7c),
+  shadow: Color(0xff000000),
+  scrim: Color(0xff000000),
+  inverseSurface: Color(0xff121215),
+  onInverseSurface: Color(0xfff5f5f5),
+  inversePrimary: Color.fromARGB(255, 218, 208, 255),
+  surfaceTint: Color(0xff4355b9),
+);
+
+// Dark theme
+ThemeData darkTheme =
+    ThemeData.from(colorScheme: flexSchemeDark, useMaterial3: true);
+const ColorScheme flexSchemeDark = ColorScheme(
+  brightness: Brightness.dark,
+  primary: Color(0xffbac3ff),
+  onPrimary: Color(0xff121314),
+  primaryContainer: Color(0xff293ca0),
+  onPrimaryContainer: Color(0xffe6e9f8),
+  secondary: Color(0xffaec6ff),
+  onSecondary: Color(0xff111314),
+  secondaryContainer: Color(0xff14448d),
+  onSecondaryContainer: Color(0xffe2eaf5),
+  tertiary: Color(0xffa9cdcf),
+  onTertiary: Color(0xff111414),
+  tertiaryContainer: Color(0xff2a4c4e),
+  onTertiaryContainer: Color(0xffe6ebec),
+  error: Color(0xffffb4ab),
+  onError: Color(0xff141211),
+  errorContainer: Color(0xff93000a),
+  onErrorContainer: Color(0xfff6dfe1),
+  background: Color(0xff191a1d),
+  onBackground: Color(0xffeceded),
+  surface: Color(0xff191a1d),
+  onSurface: Color(0xffeceded),
+  surfaceVariant: Color(0xff3f4046),
+  onSurfaceVariant: Color(0xffe0e1e1),
+  outline: Color.fromARGB(255, 232, 232, 232),
+  outlineVariant: Color.fromARGB(255, 207, 207, 207),
+  shadow: Color(0xff000000),
+  scrim: Color(0xff000000),
+  inverseSurface: Color(0xfffbfbff),
+  onInverseSurface: Color(0xff131314),
+  inversePrimary: Color(0xff5e6277),
+  surfaceTint: Color(0xffbac3ff),
+);

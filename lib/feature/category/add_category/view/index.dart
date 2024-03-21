@@ -60,9 +60,9 @@ class AddCategoryView extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(10, size.width)),
               Obx(
                 () => MyDropDownButton<String>(
-                  isRoundedCorner: false,
                   label: "Type",
                   hasLabel: true,
+                  width: double.infinity,
                   value: controller.selectedCategoryType.value,
                   hint: "Choose Category",
                   dropdownItems: controller.categoryTypes

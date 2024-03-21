@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-
 class BottomBarModel {
   final String title;
-  final IconData icon;
-  final IconData selectedIcon;
+  final String bottomIcon;
   final String? actionIcon;
   final Function()? actionOnTap;
   final double? actionHeight;
@@ -12,8 +9,7 @@ class BottomBarModel {
 
   BottomBarModel({
     required this.title,
-    required this.icon,
-    required this.selectedIcon,
+    required this.bottomIcon,
     this.actionIcon,
     this.actionHeight,
     this.actionWidth,

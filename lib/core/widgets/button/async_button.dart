@@ -81,7 +81,7 @@ class MyAsyncButton extends StatelessWidget {
                     MyText(
                       text: title,
                       style: style ??
-                          AppFonts().TitleSmall.copyWith(
+                          AppFonts.TitleSmall.copyWith(
                                 color: isDisableButton.value == true
                                     ? Theme.of(context).colorScheme.outline
                                     : Theme.of(context).colorScheme.onPrimary,

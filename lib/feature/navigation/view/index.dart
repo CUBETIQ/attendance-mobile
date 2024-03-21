@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/icon.dart';
+import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/feature/home/home/view/index.dart';
 import 'package:timesync/feature/leave/leave/view/index.dart';
@@ -11,6 +12,7 @@ import 'package:timesync/feature/navigation/widget/side_drawer.dart';
 import 'package:timesync/feature/profile/profile/view/index.dart';
 import 'package:timesync/feature/report/view/index.dart';
 import 'package:timesync/feature/task/task/view/index.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class NavigationView extends StatelessWidget {
@@ -65,7 +67,7 @@ class MainScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return BackButtonListener(
       onBackButtonPressed: () async {
-        if (Get.currentRoute == '/navigation') {
+        if (Get.currentRoute == Routes.NAVIGATION) {
           return false;
         } else {
           return false;
@@ -75,13 +77,17 @@ class MainScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: controller.toggleDrawer,
+          leading: Padding(
+            padding: EdgeInsets.only(left: SizeUtils.scale(10, size.width)),
+            child: InkWell(
+                onTap: controller.toggleDrawer,
+                child: SvgIcon(
+                    icon: IconAssets.menu,
+                    color: Theme.of(context).colorScheme.onBackground)),
           ),
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: SizeUtils.scale(10, size.width)),
+              padding: EdgeInsets.only(right: SizeUtils.scale(20, size.width)),
               child: Obx(() {
                 return controller
                             .items[controller.selectedIndex.value].actionIcon ==
@@ -90,25 +96,22 @@ class MainScreen extends StatelessWidget {
                     : GestureDetector(
                         onTap: controller
                             .items[controller.selectedIndex.value].actionOnTap,
-                        child: SvgPicture.asset(
+                        child: SvgIcon(
+                          icon: controller.items[controller.selectedIndex.value]
+                              .actionIcon!,
                           height: controller
                               .items[controller.selectedIndex.value]
                               .actionHeight,
                           width: controller
                               .items[controller.selectedIndex.value]
                               .actionWidth,
-                          controller.items[controller.selectedIndex.value]
-                              .actionIcon!,
-                          colorFilter: controller
+                          color: controller
                                       .items[controller.selectedIndex.value]
                                       .hasColor ==
                                   true
                               ? null
-                              : ColorFilter.mode(
-                                  Theme.of(context).colorScheme.onBackground,
-                                  BlendMode.srcIn),
-                        ),
-                      );
+                              : Theme.of(context).colorScheme.onBackground,
+                        ));
               }),
             ),
           ],
@@ -157,13 +160,33 @@ class MainScreen extends StatelessWidget {
           () => NavigationBar(
             onDestinationSelected: controller.onDestinationSelected,
             selectedIndex: controller.selectedIndex.value,
+            indicatorColor: Colors.transparent,
             destinations: controller.items
                 .map(
                   (item) => NavigationDestination(
-                    icon:
-                        Icon(item.icon, size: SizeUtils.scale(22, size.width)),
-                    selectedIcon: Icon(item.selectedIcon,
-                        size: SizeUtils.scale(22, size.width)),
+                    icon: SvgIcon(
+                        icon: item.bottomIcon,
+                        height: SizeUtils.scale(22, size.width),
+                        width: SizeUtils.scale(22, size.width),
+                        color: Theme.of(context).colorScheme.outlineVariant),
+                    selectedIcon: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        SvgIcon(
+                            icon: item.bottomIcon,
+                            height: SizeUtils.scale(22, size.width),
+                            width: SizeUtils.scale(22, size.width),
+                            color: Theme.of(context).colorScheme.primary),
+                        Transform.translate(
+                          offset: Offset(0, SizeUtils.scale(32, size.width)),
+                          child: Container(
+                            height: SizeUtils.scale(2, size.width),
+                            width: SizeUtils.scale(22 * 3, size.width),
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        )
+                      ],
+                    ),
                     label: item.title.tr,
                   ),
                 )

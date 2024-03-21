@@ -61,7 +61,10 @@ class MyPage extends StatelessWidget {
               SizedBox(height: size.height * 0.02),
               MyText(
                 text: description ?? "Description",
-                style: descriptionStyle ?? AppFonts().bodyMediumMedium,
+                style: descriptionStyle ??
+                    AppFonts().bodyMediumMedium.copyWith(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
                 maxLines: 8,
                 textAlign: TextAlign.center,
               ),

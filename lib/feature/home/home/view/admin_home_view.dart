@@ -1,6 +1,5 @@
-import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
-import 'package:timesync/constants/color.dart';
+import 'package:timesync/constants/icon.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
@@ -8,6 +7,7 @@ import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
 import 'package:timesync/feature/home/home/view/staff_home_view.dart';
@@ -43,83 +43,85 @@ class HomeAdminView extends StatelessWidget {
                 onRefresh: controller.initAdminFunction,
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.only(
-                      left: SizeUtils.scale(
-                        AppSize().paddingHorizontalLarge,
-                        size.width,
-                      ),
-                      right: SizeUtils.scale(
-                        AppSize().paddingHorizontalLarge,
-                        size.width,
-                      ),
-                      top: SizeUtils.scale(
-                          AppSize().paddingVerticalLarge, size.width),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: SizeUtils.scale(20, size.width),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            MyText(
-                              text: 'Overall Attendance',
-                              style: AppFonts().bodyLargeMedium.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground,
-                                  ),
-                            ),
-                            Obx(
-                              () => DateDropDown(
-                                date: controller.selectDate.value,
-                                size: size,
-                                onTap: controller.onTapDate,
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: SizeUtils.scale(15, size.width)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              MyText(
+                                text: 'Overall Attendance',
+                                style: AppFonts.TitleSmall.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
-                        Obx(
-                          () => AttendancePieChartCard(
-                            onTap: () => Get.toNamed(
-                              Routes.ADMIN_SUMMARY_ATTENDANCE,
-                              arguments: {
-                                "staffs": controller.staffs.value,
-                                "attendances":
-                                    controller.staffAttendanceList.value,
-                                "startDate": controller.startOfDay.value,
-                                "endDate": controller.endOfDay.value,
-                              },
-                            ),
-                            presentPercentage:
-                                controller.presentPercentage.value,
-                            absentPercentage: controller.absentPercentage.value,
-                            onLeavePercentage:
-                                controller.onLeavePercentage.value,
-                            totalPresent: controller.totalChartPresent.value,
-                            totalOnLeave: controller.totalChartLeave.value,
-                            totalAbsent: controller.totalChartAbsent.value,
-                            haveNoData: controller.haveNoData.value,
+                              Obx(
+                                () => DateDropDown(
+                                  date: controller.selectDate.value,
+                                  size: size,
+                                  onTap: controller.onTapDate,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ButtonCard(
-                                icon: Icons.edit_document,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeUtils.scale(20, size.width)),
+                          child: Obx(
+                            () => AttendancePieChartCard(
+                              onTap: () => Get.toNamed(
+                                Routes.ADMIN_SUMMARY_ATTENDANCE,
+                                arguments: {
+                                  "staffs": controller.staffs.value,
+                                  "attendances":
+                                      controller.staffAttendanceList.value,
+                                  "startDate": controller.startOfDay.value,
+                                  "endDate": controller.endOfDay.value,
+                                },
+                              ),
+                              presentPercentage:
+                                  controller.presentPercentage.value,
+                              absentPercentage:
+                                  controller.absentPercentage.value,
+                              onLeavePercentage:
+                                  controller.onLeavePercentage.value,
+                              totalPresent: controller.totalChartPresent.value,
+                              totalOnLeave: controller.totalChartLeave.value,
+                              totalAbsent: controller.totalChartAbsent.value,
+                              haveNoData: controller.haveNoData.value,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: SizeUtils.scale(16, size.width)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ButtonCard(
+                                svgIcon: IconAssets.document,
                                 title: "Leave",
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 onTap: () => Get.toNamed(
                                   Routes.ADMIN_LEAVE_REQUEST,
                                   arguments: controller.staffs.value,
                                 ),
                               ),
-                            ),
-                            SizedBox(width: SizeUtils.scale(20, size.width)),
-                            Expanded(
-                              child: ButtonCard(
-                                icon: Icons.timer_rounded,
+                              ButtonCard(
+                                svgIcon: IconAssets.timeCircle,
                                 title: "Work Hour",
+                                color: Theme.of(context).colorScheme.secondary,
                                 onTap: () => Get.toNamed(
                                   Routes.WORKING_HOUR,
                                   arguments: {
@@ -131,117 +133,128 @@ class HomeAdminView extends StatelessWidget {
                                   },
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            MyText(
-                              text: 'Attendance Statistic',
-                              style: AppFonts().bodyLargeMedium.copyWith(
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: SizeUtils.scale(14, size.width)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: MyText(
+                                  text: 'Attendance Statistic',
+                                  style: AppFonts.TitleSmall.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme
                                         .onBackground,
                                   ),
-                            ),
-                            const Spacer(),
-                            Obx(
-                              () => MyDropDownButton<String>(
-                                width: SizeUtils.scale(130, size.width),
-                                height: SizeUtils.scale(30, size.width),
-                                isRoundedCorner: true,
-                                buttonPadding: EdgeInsets.symmetric(
-                                  horizontal: SizeUtils.scale(10, size.width),
                                 ),
-                                dropdownPadding: EdgeInsets.symmetric(
-                                  horizontal: SizeUtils.scale(10, size.width),
-                                  vertical: SizeUtils.scale(10, size.width),
-                                ),
-                                borderRadius: SizeUtils.scale(24, size.width),
-                                label: "Type",
-                                hasLabel: false,
-                                value: controller.selectedAttendanceType.value,
-                                hint: "Choose role",
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.primary,
-                                dropDownBackgroundColor:
-                                    Theme.of(context).colorScheme.primary,
-                                iconEnabledColor:
-                                    Theme.of(context).colorScheme.onPrimary,
-                                dropdownItems: controller.attendanceType
-                                    .map(
-                                      (e) => DropdownMenuItem<String>(
-                                        value: e,
-                                        child: MyText(
-                                          text: e.trString,
-                                          style: AppFonts()
-                                              .bodyMediumMedium
-                                              .copyWith(
+                              ),
+                              Flexible(
+                                child: Obx(
+                                  () => MyDropDownButton<String>(
+                                    width: SizeUtils.scale(120, size.width),
+                                    borderColor:
+                                        Theme.of(context).colorScheme.primary,
+                                    buttonPadding: EdgeInsets.only(
+                                      left: SizeUtils.scale(0, size.width),
+                                      right: SizeUtils.scale(10, size.width),
+                                      top: SizeUtils.scale(1, size.width),
+                                      bottom: SizeUtils.scale(1, size.width),
+                                    ),
+                                    dropdownPadding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            SizeUtils.scale(10, size.width)),
+                                    borderRadius:
+                                        SizeUtils.scale(24, size.width),
+                                    label: "Type",
+                                    hasLabel: false,
+                                    value:
+                                        controller.selectedAttendanceType.value,
+                                    hint: "Choose Type",
+                                    dropdownItems: controller.attendanceType
+                                        .map(
+                                          (e) => DropdownMenuItem<String>(
+                                            value: e,
+                                            child: MyText(
+                                              text: e.trString,
+                                              style:
+                                                  AppFonts.LabelSmall.copyWith(
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .onPrimary,
+                                                    .onBackground,
                                               ),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                                onChanged: controller.onChanged,
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                    onChanged: controller.onChanged,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Obx(
+                              () => LinearIndicator(
+                                title: "Early",
+                                color: Theme.of(context).colorScheme.tertiary,
+                                percent: controller.earlyPercentage.value,
+                                totalEmployees: controller.totalStaffs.value,
+                                checkInEmployees:
+                                    controller.totalCheckInEarly.value,
+                                checkOutEmployees:
+                                    controller.totalCheckOutEarly.value,
+                                isCheckIn: controller.isCheckIn.value,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
-                        Obx(
-                          () => LinearIndicator(
-                            title: "Early",
-                            indicatorColor: MyColor.successColor,
-                            percent: controller.earlyPercentage.value,
-                            totalEmployees: controller.totalStaffs.value,
-                            checkInEmployees:
-                                controller.totalCheckInEarly.value,
-                            checkOutEmployees:
-                                controller.totalCheckOutEarly.value,
-                            isCheckIn: controller.isCheckIn.value,
-                          ),
-                        ),
-                        SizedBox(height: SizeUtils.scale(10, size.width)),
-                        Obx(
-                          () => LinearIndicator(
-                            title: "On Time",
-                            indicatorColor: MyColor.pendingColor,
-                            percent: controller.onTimePercentage.value,
-                            totalEmployees: controller.totalStaffs.value,
-                            checkInEmployees:
-                                controller.totalCheckInOnTime.value,
-                            checkOutEmployees:
-                                controller.totalCheckOutOnTime.value,
-                            isCheckIn: controller.isCheckIn.value,
-                          ),
-                        ),
-                        SizedBox(height: SizeUtils.scale(10, size.width)),
-                        Obx(
-                          () => LinearIndicator(
-                            title: "Late",
-                            indicatorColor: MyColor.errorColor,
-                            percent: controller.latePercentage.value,
-                            totalEmployees: controller.totalStaffs.value,
-                            checkInEmployees: controller.totalCheckInLate.value,
-                            checkOutEmployees:
-                                controller.totalCheckOutLate.value,
-                            isCheckIn: controller.isCheckIn.value,
-                          ),
-                        ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
-                        MyText(
-                          text: 'Employee Attendance'.trString,
-                          style: AppFonts().bodyLargeMedium.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
+                            Obx(
+                              () => LinearIndicator(
+                                title: "On Time",
+                                color: Theme.of(context).colorScheme.secondary,
+                                percent: controller.onTimePercentage.value,
+                                totalEmployees: controller.totalStaffs.value,
+                                checkInEmployees:
+                                    controller.totalCheckInOnTime.value,
+                                checkOutEmployees:
+                                    controller.totalCheckOutOnTime.value,
+                                isCheckIn: controller.isCheckIn.value,
                               ),
+                            ),
+                            Obx(
+                              () => LinearIndicator(
+                                title: "Late",
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
+                                percent: controller.latePercentage.value,
+                                totalEmployees: controller.totalStaffs.value,
+                                checkInEmployees:
+                                    controller.totalCheckInLate.value,
+                                checkOutEmployees:
+                                    controller.totalCheckOutLate.value,
+                                isCheckIn: controller.isCheckIn.value,
+                              ),
+                            ),
+                          ].withSpaceBetween(
+                              height: SizeUtils.scale(14, size.width)),
                         ),
-                        SizedBox(height: SizeUtils.scale(20, size.width)),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: SizeUtils.scale(16, size.width),
+                              bottom: SizeUtils.scale(14, size.width)),
+                          child: MyText(
+                            text: 'Attendance Log'.trString,
+                            style: AppFonts.TitleSmall.copyWith(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
+                          ),
+                        ),
                         Obx(
                           () => MyAsyncWidget(
                             isLoading: controller.isLoadingList.value,
@@ -251,7 +264,7 @@ class HomeAdminView extends StatelessWidget {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.only(
-                                bottom: SizeUtils.scale(20, size.width),
+                                bottom: SizeUtils.scale(14, size.width),
                               ),
                               separatorBuilder: (context, index) => SizedBox(
                                 height: SizeUtils.scale(10, size.width),

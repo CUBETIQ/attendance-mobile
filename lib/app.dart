@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       locale: Get.locale,
       fallbackLocale: const Locale('en'),
       getPages: AppPages.routes,
-      theme: lightThemeData(),
-      darkTheme: darkThemeData(),
+      theme: lightTheme,
+      darkTheme: darkTheme,
     );
   }
 }

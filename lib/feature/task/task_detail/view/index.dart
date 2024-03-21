@@ -5,6 +5,7 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/widgets/attachment/attachment_card.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/divider/dividers.dart';
 import 'package:timesync/core/widgets/progress_indicator/indicator_with_percentage.dart';
 import 'package:timesync/core/widgets/row/detail_row_category.dart';
 import 'package:timesync/core/widgets/row/detail_row_data.dart';
@@ -107,7 +108,7 @@ class TaskDetailView extends StatelessWidget {
                 icon: controller.task.value?.icon,
               ),
               SizedBox(height: SizeUtils.scale(20, size.width)),
-              const Divider(thickness: 1.5),
+              const MyDivider(),
               SizedBox(height: SizeUtils.scale(10, size.width)),
               MyText(text: "Description", style: AppFonts().bodyLargeMedium),
               SizedBox(height: SizeUtils.scale(10, size.width)),
@@ -124,7 +125,7 @@ class TaskDetailView extends StatelessWidget {
                   ? const SizedBox.shrink()
                   : Column(
                       children: [
-                        const Divider(thickness: 1.5),
+                        const MyDivider(),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: SizeUtils.scale(10, size.width)),

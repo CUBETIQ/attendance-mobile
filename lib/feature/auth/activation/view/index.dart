@@ -36,7 +36,7 @@ class ActivationView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: SizeUtils.scale(50, size.width)),
+                SizedBox(height: SizeUtils.scale(44, size.width)),
                 Center(
                   child: SizedBox(
                     width: SizeUtils.scale(
@@ -54,13 +54,13 @@ class ActivationView extends StatelessWidget {
                   textAlign: TextAlign.center,
                   text: controller.title,
                   maxLines: 2,
-                  style: AppFonts().TitleSmall,
+                  style: AppFonts.TitleSmall,
                 ),
                 SizedBox(height: SizeUtils.scale(7, size.width)),
                 MyText(
                   text: controller.description,
                   maxLines: 5,
-                  style: AppFonts().BodyXSmall,
+                  style: AppFonts.BodyXSmall,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeUtils.scale(23, size.width)),
@@ -93,7 +93,7 @@ class ActivationView extends StatelessWidget {
             size.width,
           ),
           bottom: SizeUtils.scale(
-            AppSize().paddingHorizontalLarge,
+            55,
             size.width,
           ),
         ),

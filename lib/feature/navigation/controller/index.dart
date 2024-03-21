@@ -4,6 +4,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/icon.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/model/department_model.dart';
@@ -24,6 +25,7 @@ import 'package:timesync/types/role.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/location_util.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class NavigationController extends GetxController {
@@ -76,32 +78,27 @@ class NavigationController extends GetxController {
       [
         BottomBarModel(
             title: 'Home',
-            icon: Icons.home_rounded,
-            selectedIcon: Icons.home_rounded,
-            actionIcon: SvgAssets.scanQR,
+            bottomIcon: IconAssets.home,
+            actionIcon: IconAssets.scan,
             actionOnTap: () {
               Get.toNamed(Routes.SCAN_QR,
                   arguments: {"role": getUserRole.value});
             }),
         BottomBarModel(
           title: 'Report',
-          icon: Icons.bar_chart_outlined,
-          selectedIcon: Icons.bar_chart_rounded,
+          bottomIcon: IconAssets.report,
         ),
         BottomBarModel(
           title: 'Task',
-          icon: Icons.task_rounded,
-          selectedIcon: Icons.task_rounded,
+          bottomIcon: IconAssets.task,
         ),
         BottomBarModel(
           title: 'Leave',
-          icon: Icons.work_off_rounded,
-          selectedIcon: Icons.work_off_rounded,
+          bottomIcon: IconAssets.calendar,
         ),
         BottomBarModel(
           title: 'Profile',
-          icon: Icons.person_rounded,
-          selectedIcon: Icons.person_rounded,
+          bottomIcon: IconAssets.profile,
           actionIcon: SvgAssets.coin,
           hasColor: true,
           actionHeight:
@@ -148,10 +145,12 @@ class NavigationController extends GetxController {
     String startHour = organization.value.configs?.startHour ?? "08:00";
     String endHour = organization.value.configs?.endHour ?? "17:00";
 
+    Logs.e(organization.value);
+
     startBreakTime.value =
         organization.value.configs?.breakTime?.split("-")[0] ?? "12:00";
     endBreakTime.value =
-        organization.value.configs?.breakTime?.split("-")[1] ?? "13:00";
+        organization.value.configs?.breakTime?.split("-")[0] ?? "13:00";
 
     int totalMinuteBreakTime = DateUtil.calculateTotalMinutes(
         startBreakTime.value, endBreakTime.value);

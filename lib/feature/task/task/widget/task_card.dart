@@ -48,7 +48,7 @@ class TaskCard extends StatelessWidget {
             SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
           ),
           border: Border.all(
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
           ),
           color: color != null
               ? Color(color!.toInt()).withOpacity(0.20)
@@ -65,7 +65,7 @@ class TaskCard extends StatelessWidget {
                   onChanged: onCheck,
                   colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
                     checkedColor: Theme.of(context).colorScheme.primary,
-                    uncheckedColor: Theme.of(context).colorScheme.secondary,
+                    uncheckedColor: Theme.of(context).colorScheme.outline,
                   ),
                   style: MSHCheckboxStyle.fillScaleColor,
                 ),
@@ -93,7 +93,7 @@ class TaskCard extends StatelessWidget {
                         text: (task.name ?? "Task Name").capitalizeFirst,
                         maxLines: 2,
                         style: AppFonts().bodyLarge.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
+                              color: Theme.of(context).colorScheme.outline,
                             ),
                       ),
                     ),
@@ -106,9 +106,9 @@ class TaskCard extends StatelessWidget {
                           : "Due: N/A",
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: task.endDate == null
-                                ? Theme.of(context).colorScheme.secondary
+                                ? Theme.of(context).colorScheme.outline
                                 : task.status == TaskStatus.done
-                                    ? Theme.of(context).colorScheme.secondary
+                                    ? Theme.of(context).colorScheme.outline
                                     : Theme.of(context).colorScheme.error,
                           ),
                     ),
@@ -121,7 +121,7 @@ class TaskCard extends StatelessWidget {
                 height: SizeUtils.scale(40, size.width),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.outline,
                 ),
                 child: Icon(
                   task.icon?.isEmpty == false || icon != null

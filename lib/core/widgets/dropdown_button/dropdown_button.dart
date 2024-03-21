@@ -1,5 +1,7 @@
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/icon.dart';
+import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -40,10 +42,10 @@ class MyDropDownButton<T> extends StatelessWidget {
     super.key,
     this.width,
     this.height,
-    this.isRoundedCorner = false,
     this.backgroundColor,
     this.hintStyle,
     this.dropDownBackgroundColor,
+    this.borderColor,
   });
 
   final String? hint;
@@ -77,10 +79,10 @@ class MyDropDownButton<T> extends StatelessWidget {
   final String label;
   final double? width;
   final double? height;
-  final bool isRoundedCorner;
   final Color? backgroundColor;
   final Color? dropDownBackgroundColor;
   final TextStyle? hintStyle;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -97,21 +99,23 @@ class MyDropDownButton<T> extends StatelessWidget {
         const SizedBox(height: 8),
         SizedBox(
           width: width ?? double.infinity,
-          height: height ??
-              SizeUtils.scale(size.width < 600 ? 47.7 : 50, size.width),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.
               isExpanded: true,
-              style: AppFonts().bodyMediumMedium.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+              isDense: false,
+              style: AppFonts.TitleXSmall.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
               hint: Container(
                 alignment: hintAlignment,
                 child: MyText(
                   text: hint ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: hintStyle ?? AppFonts().bodyMediumMedium,
+                  style: hintStyle ??
+                      AppFonts.TitleXSmall.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 ),
               ),
               value: value,
@@ -119,79 +123,47 @@ class MyDropDownButton<T> extends StatelessWidget {
               onChanged: onChanged,
               selectedItemBuilder: selectedItemBuilder,
               buttonStyleData: ButtonStyleData(
-                height: buttonHeight ?? double.infinity,
-                width: buttonWidth ?? 60,
                 padding: buttonPadding ??
-                    EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(30.0, size.width),
+                    EdgeInsets.only(
+                      top: SizeUtils.scale(4.5, size.width),
+                      bottom: SizeUtils.scale(4.5, size.width),
+                      left: SizeUtils.scale(5.0, size.width),
+                      right: SizeUtils.scale(12.0, size.width),
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
-                      color: backgroundColor ??
-                          Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.095),
-                      borderRadius: isRoundedCorner == true
-                          ? BorderRadius.circular(
-                              SizeUtils.scale(
-                                  (borderRadius ?? AppSize().borderRadiusSmall),
-                                  size.width),
-                            )
-                          : BorderRadius.only(
-                              topLeft: Radius.circular(
-                                SizeUtils.scale(
-                                    (borderRadius ??
-                                        AppSize().borderRadiusSmall),
-                                    size.width),
-                              ),
-                              topRight: Radius.circular(
-                                SizeUtils.scale(
-                                    (borderRadius ??
-                                        AppSize().borderRadiusSmall),
-                                    size.width),
-                              ),
-                            ),
-                      border: Border(
-                        bottom: isRoundedCorner == true
-                            ? BorderSide.none
-                            : BorderSide(
-                                width: 1.5,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.9),
-                              ),
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(
+                        SizeUtils.scale(
+                            (borderRadius ?? AppSize().borderRadiusSmall),
+                            size.width),
                       ),
+                      border: Border.all(
+                          color: borderColor ??
+                              Theme.of(context).colorScheme.onBackground),
                     ),
                 elevation: buttonElevation,
               ),
               iconStyleData: IconStyleData(
-                icon: icon ?? const Icon(Icons.arrow_forward_ios_outlined),
-                iconSize: SizeUtils.scale(iconSize ?? 14, size.width),
+                icon: icon ??
+                    SvgIcon(
+                      icon: IconAssets.arrowDown,
+                      height: SizeUtils.scale(iconSize ?? 18, size.width),
+                    ),
                 iconEnabledColor: iconEnabledColor,
                 iconDisabledColor: iconDisabledColor,
               ),
               dropdownStyleData: DropdownStyleData(
-                //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
                 maxHeight: dropdownHeight ?? 200,
                 isOverButton: false,
                 useRootNavigator: false,
-                padding: dropdownPadding ??
-                    EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(
-                        AppSize().paddingHorizontalLarge,
-                        size.width,
-                      ),
-                      vertical: SizeUtils.scale(
-                        AppSize().paddingVerticalMedium,
-                        size.width,
-                      ),
-                    ),
                 decoration: dropdownDecoration ??
                     BoxDecoration(
-                      color: dropDownBackgroundColor ??
-                          Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(context).colorScheme.background,
+                      border: Border.all(
+                        color: borderColor ??
+                            Theme.of(context).colorScheme.onBackground,
+                      ),
                       borderRadius: BorderRadius.circular(
                         SizeUtils.scale(
                             (AppSize().borderRadiusLarge), size.width),
@@ -212,8 +184,6 @@ class MyDropDownButton<T> extends StatelessWidget {
               ),
               menuItemStyleData: MenuItemStyleData(
                 height: itemHeight ?? 40,
-                padding:
-                    itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
               ),
             ),
           ),

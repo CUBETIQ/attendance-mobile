@@ -52,7 +52,7 @@ class AddPositionController extends GetxController {
 
   Future<void> addPosition() async {
     validate();
-    if (!MyTextFieldFormController.findController('name').isValid) {
+    if (!MyTextFieldFormController.findController('Name').isValid) {
       return;
     }
     try {

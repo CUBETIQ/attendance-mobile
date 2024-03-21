@@ -18,7 +18,7 @@ class MyNoData extends StatelessWidget {
       ),
       child: Center(
         child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

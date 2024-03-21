@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:msh_checkbox/msh_checkbox.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/icon.dart';
 import 'package:timesync/constants/image.dart';
 import 'package:timesync/core/widgets/button/async_button.dart';
+import 'package:timesync/core/widgets/check_box/check_box.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
 import 'package:timesync/feature/auth/login/controller/index.dart';
 import 'package:timesync/utils/size_util.dart';
-
 import '../../../../core/widgets/icon/svg_icon.dart';
 
 class LoginView extends StatelessWidget {
@@ -24,9 +23,10 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+          clipBehavior: Clip.none,
           child: Padding(
             padding: EdgeInsets.only(
-              top: AppSize().paddingTitleLarge,
+              top: SizeUtils.scale(44, size.width),
               left: SizeUtils.scale(
                 AppSize().paddingHorizontalLarge,
                 MediaQuery.of(context).size.width,
@@ -37,7 +37,6 @@ class LoginView extends StatelessWidget {
               ),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
                   child: Column(
@@ -53,7 +52,8 @@ class LoginView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          height: SizeUtils.scale(80, size.width),
+                          width: SizeUtils.scale(100, size.width),
+                          height: SizeUtils.scale(100, size.width),
                           child: controller.organization.value?.image != null &&
                                   controller.organization.value?.image
                                           ?.isNotEmpty ==
@@ -63,15 +63,15 @@ class LoginView extends StatelessWidget {
                                   imageUrl:
                                       controller.organization.value?.image ??
                                           "",
-                                  height: SizeUtils.scale(80, size.width),
-                                  width: SizeUtils.scale(80, size.width),
-                                  imageHeight: SizeUtils.scale(70, size.width),
-                                  imageWidth: SizeUtils.scale(70, size.width),
+                                  height: SizeUtils.scale(100, size.width),
+                                  width: SizeUtils.scale(100, size.width),
+                                  imageHeight: SizeUtils.scale(90, size.width),
+                                  imageWidth: SizeUtils.scale(90, size.width),
                                 )
                               : Image.asset(ImageAssets.logotimesync),
                         ),
                       ),
-                      SizedBox(height: AppSize().paddingS6),
+                      SizedBox(height: SizeUtils.scale(16, size.width)),
                       Obx(
                         () => MyText(
                           text:
@@ -83,21 +83,22 @@ class LoginView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: size.height * 0.04),
+                SizedBox(height: SizeUtils.scale(65, size.width)),
                 MyText(
                   text: "Access your account",
-                  style: AppFonts().bodyXXlarge,
+                  style: AppFonts.TitleSmall,
+                  textAlign: TextAlign.center,
                 ),
+                SizedBox(height: SizeUtils.scale(7, size.width)),
                 MyText(
-                  text: "Please fill your detail to access your account.",
-                  maxLines: 2,
-                  style: AppFonts().bodyMediumRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
+                  text: "Enter your login details to access your account.",
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                  style: AppFonts.BodyXSmall,
                 ),
-                SizedBox(height: size.height * 0.05),
+                SizedBox(height: SizeUtils.scale(23, size.width)),
                 MyTextFieldForm(
-                  hasLabel: true,
+                  hasLabel: false,
                   prefixWidget: SvgIcon(
                     icon: IconAssets.profile,
                     width: SizeUtils.scale(20, size.width),
@@ -108,12 +109,16 @@ class LoginView extends StatelessWidget {
                   iconSize: SizeUtils.scale(16, size.width),
                   textController: controller.usernameController,
                 ),
-                SizedBox(height: size.height * 0.02),
+                SizedBox(height: SizeUtils.scale(16, size.width)),
                 Obx(
                   () => MyTextFieldForm(
-                    hasLabel: true,
+                    hasLabel: false,
                     isPassword: controller.showPassword.value,
-                    prefixIcon: Icons.lock_rounded,
+                    prefixWidget: SvgIcon(
+                      icon: IconAssets.lock,
+                      width: SizeUtils.scale(20, size.width),
+                      height: SizeUtils.scale(20, size.width),
+                    ),
                     iconSize: SizeUtils.scale(16, size.width),
                     label: "Password",
                     hintText: "Enter your password",
@@ -122,32 +127,22 @@ class LoginView extends StatelessWidget {
                     onTapShowPassword: controller.onTapShowPassword,
                   ),
                 ),
-                SizedBox(height: size.height * 0.02),
+                SizedBox(height: SizeUtils.scale(16, size.width)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: SizeUtils.scale(10, size.width)),
-                          child: Obx(() => MSHCheckbox(
-                                value: controller.isRememberMe.value,
-                                size: SizeUtils.scale(15, size.width),
-                                onChanged: controller.onCheck,
-                                colorConfig:
-                                    MSHColorConfig.fromCheckedUncheckedDisabled(
-                                  checkedColor:
-                                      Theme.of(context).colorScheme.primary,
-                                  uncheckedColor:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                                style: MSHCheckboxStyle.fillScaleColor,
-                              )),
+                        Obx(
+                          () => MyCheckBox(
+                            isChecked: controller.isRememberMe.value,
+                            onTap: controller.onCheckRememberMe,
+                          ),
                         ),
+                        SizedBox(width: SizeUtils.scale(6, size.width)),
                         MyText(
                           text: "Remember me",
-                          style: AppFonts().bodyMediumMedium,
+                          style: AppFonts.LabelSmall,
                         ),
                       ],
                     ),
@@ -155,27 +150,36 @@ class LoginView extends StatelessWidget {
                       onTap: null,
                       child: MyText(
                         text: "Forgot Password?",
-                        style: AppFonts().bodyMediumMedium.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                        style: AppFonts.LabelSmall.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: SizeUtils.scale(40, size.width)),
-                MyAsyncButton(
-                  title: "Login",
-                  onTap: controller.login,
-                ),
-                // SizedBox(height: SizeUtils.scale(5, size.width)),
-                // MyAsyncButton(
-                //   title: "Login With SSO",
-                //   backgroundColor: Theme.of(context).colorScheme.secondary,
-                //   onTap: controller.loginWithSSO,
-                // ),
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          left: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          right: SizeUtils.scale(
+            AppSize().paddingHorizontalLarge,
+            size.width,
+          ),
+          bottom: SizeUtils.scale(
+            55,
+            size.width,
+          ),
+        ),
+        child: MyAsyncButton(
+          title: "Login",
+          onTap: controller.login,
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
-import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/home/home/widget/record_data_card.dart';
@@ -77,7 +76,7 @@ class RecordCard extends StatelessWidget {
             onNullTitle: "Check in time",
             secondTitle: "Check in",
             status: checkInStatus,
-            iconColor: const Color(MyColor.success),
+            iconColor: const Color(0xFF198754),
             icon: Icons.login,
           ),
           SizedBox(height: SizeUtils.scale(AppSize().paddingS5, size.width)),
@@ -112,7 +111,7 @@ class RecordCard extends StatelessWidget {
             onNullTitle: "Check out time",
             secondTitle: "Check out",
             icon: Icons.logout,
-            iconColor: const Color(MyColor.error),
+            iconColor: Theme.of(context).colorScheme.error,
             status: checkOutStatus,
           ),
         ],

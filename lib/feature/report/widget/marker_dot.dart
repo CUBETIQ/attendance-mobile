@@ -24,10 +24,10 @@ class MarkerDot extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: events[index] == 'Present'
-                  ? Colors.green
+                  ? Theme.of(context).colorScheme.primary
                   : events[index] == 'Leave'
-                      ? Colors.orange
-                      : Colors.red,
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.secondaryContainer,
             ),
           ),
         );

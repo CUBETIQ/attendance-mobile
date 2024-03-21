@@ -10,15 +10,27 @@ class MyColor {
 
   MyColor._internal();
 
-  static const int success = 0xFF198754;
   static const int darkSuccess = 0xFF1D6E20;
-  static const int error = 0xFFBA1A1A;
   static const int warning = 0xFFE0A800;
 
   static const Color pendingColor = Color(0XFFBF9705);
   static const Color successColor = Color(0xFF08B80E);
   static const Color errorColor = Color(0xFFD72E08);
 
+  // App Color Scheme
+  static const Color scaffoldBackground = Color(0xFFFFFFFF);
+  static const Color onBackground = Color(0xff24262B);
+  static const Color primary = Color(0xff633FE8);
+  static const Color onPrimary = Color(0xFFFFFFFF);
+  static const Color success = Color(0xff3BBA6A);
+  static const Color onSuccess = Color(0xFFFFFFFF);
+  static const Color error = Color(0xffF75656);
+  static const Color onError = Color(0xFFFFFFFF);
+  static const Color secondaryIndigo = Color(0xff48AFFA);
+  static const Color secondaryRed = Color(0xffD85681);
+  static const Color primaryContainer = Color(0xffF1ECFF);
+
+  // Theme Color Name
   static String get purple => "purpleM3";
   static String get red => "redM3";
   static String get pink => "pinkM3";
@@ -41,7 +53,7 @@ class MyColor {
   static String get greyLaw => "greyLaw";
   static String get wasabi => "wasabi";
   static String get mango => "mango";
-  static String get amber => "amber"; 
+  static String get amber => "amber";
 
   // Color used for change theme
   static final themeLists = <ThemeModel>[

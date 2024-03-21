@@ -59,14 +59,14 @@ class SideDrawer extends StatelessWidget {
                     ),
                     maxLines: 2,
                     style: AppFonts().bodyLarge.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                   ),
                 ),
                 MyText(
                   text: (user.role ?? Role.admin).capitalizeFirst,
                   style: AppFonts().bodyMediumRegular.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.outline,
                       ),
                 ),
                 SizedBox(height: SizeUtils.scale(10, mediaQuery.size.height)),
@@ -94,12 +94,12 @@ class SideDrawer extends StatelessWidget {
                       },
                       leading: Icon(
                         drawerItems[index].icon,
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.outline,
                       ),
                       title: MyText(
                         text: drawerItems[index].title,
                         style: AppFonts().bodyMediumMedium.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
+                              color: Theme.of(context).colorScheme.outline,
                             ),
                       ),
                     );
@@ -124,14 +124,14 @@ class SideDrawer extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.copyright_rounded,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.outline,
                       size: SizeUtils.scale(24, mediaQuery.size.width),
                     ),
                     SizedBox(width: SizeUtils.scale(3, mediaQuery.size.width)),
                     MyText(
                       text: "TimeSync 360 V1.0.0",
                       style: AppFonts().bodyMediumMedium.copyWith(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                     ),
                   ],

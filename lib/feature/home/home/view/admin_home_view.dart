@@ -143,46 +143,54 @@ class HomeAdminView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              MyText(
-                                text: 'Attendance Statistic',
-                                style: AppFonts.TitleSmall.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
+                              Expanded(
+                                child: MyText(
+                                  text: 'Attendance Statistic',
+                                  style: AppFonts.TitleSmall.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
                                 ),
                               ),
-                              Obx(
-                                () => MyDropDownButton<String>(
-                                  width: SizeUtils.scale(130, size.width),
-                                  buttonPadding: EdgeInsets.symmetric(
-                                    horizontal: SizeUtils.scale(12, size.width),
-                                    vertical: SizeUtils.scale(1, size.width),
-                                  ),
-                                  dropdownPadding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          SizeUtils.scale(10, size.width)),
-                                  borderRadius: SizeUtils.scale(24, size.width),
-                                  label: "Type",
-                                  hasLabel: false,
-                                  value:
-                                      controller.selectedAttendanceType.value,
-                                  hint: "Choose role",
-                                  dropdownItems: controller.attendanceType
-                                      .map(
-                                        (e) => DropdownMenuItem<String>(
-                                          value: e,
-                                          child: MyText(
-                                            text: e.trString,
-                                            style: AppFonts.LabelSmall.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onBackground,
+                              Flexible(
+                                child: Obx(
+                                  () => MyDropDownButton<String>(
+                                    width: SizeUtils.scale(120, size.width),
+                                    buttonPadding: EdgeInsets.only(
+                                      left: SizeUtils.scale(0, size.width),
+                                      right: SizeUtils.scale(10, size.width),
+                                      top: SizeUtils.scale(1, size.width),
+                                      bottom: SizeUtils.scale(1, size.width),
+                                    ),
+                                    dropdownPadding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            SizeUtils.scale(10, size.width)),
+                                    borderRadius:
+                                        SizeUtils.scale(24, size.width),
+                                    label: "Type",
+                                    hasLabel: false,
+                                    value:
+                                        controller.selectedAttendanceType.value,
+                                    hint: "Choose role",
+                                    dropdownItems: controller.attendanceType
+                                        .map(
+                                          (e) => DropdownMenuItem<String>(
+                                            value: e,
+                                            child: MyText(
+                                              text: e.trString,
+                                              style:
+                                                  AppFonts.LabelSmall.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      )
-                                      .toList(),
-                                  onChanged: controller.onChanged,
+                                        )
+                                        .toList(),
+                                    onChanged: controller.onChanged,
+                                  ),
                                 ),
                               ),
                             ],

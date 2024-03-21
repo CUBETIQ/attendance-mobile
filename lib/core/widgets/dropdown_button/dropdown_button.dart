@@ -122,9 +122,11 @@ class MyDropDownButton<T> extends StatelessWidget {
               selectedItemBuilder: selectedItemBuilder,
               buttonStyleData: ButtonStyleData(
                 padding: buttonPadding ??
-                    EdgeInsets.symmetric(
-                      horizontal: SizeUtils.scale(24.0, size.width),
-                      vertical: SizeUtils.scale(10.0, size.width),
+                    EdgeInsets.only(
+                      top: SizeUtils.scale(5.0, size.width),
+                      bottom: SizeUtils.scale(5.0, size.width),
+                      left: SizeUtils.scale(5.0, size.width),
+                      right: SizeUtils.scale(12.0, size.width),
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
@@ -149,7 +151,6 @@ class MyDropDownButton<T> extends StatelessWidget {
               ),
               dropdownStyleData: DropdownStyleData(
                 maxHeight: dropdownHeight ?? 200,
-                width: width ?? SizeUtils.scale(120, size.width),
                 isOverButton: false,
                 useRootNavigator: false,
                 decoration: dropdownDecoration ??

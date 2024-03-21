@@ -51,10 +51,10 @@ class AddPositionController extends GetxController {
   }
 
   Future<void> addPosition() async {
-    validate();
     if (!MyTextFieldFormController.findController('Name').isValid) {
       return;
     }
+
     try {
       if (imageFile.value != null) {
         final metedata = FileMetadata(
@@ -88,10 +88,10 @@ class AddPositionController extends GetxController {
   }
 
   Future<void> updatePosition() async {
-    validate();
-    if (!MyTextFieldFormController.findController('name').isValid) {
+    if (!MyTextFieldFormController.findController('Name').isValid) {
       return;
     }
+
     try {
       if (imageFile.value != null) {
         final metedata = FileMetadata(
@@ -137,9 +137,5 @@ class AddPositionController extends GetxController {
       },
       avatarType: AvatarType.position,
     );
-  }
-
-  void validate() {
-    MyTextFieldFormController.findController('name').isValid;
   }
 }

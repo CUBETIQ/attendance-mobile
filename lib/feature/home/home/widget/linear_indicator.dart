@@ -32,6 +32,9 @@ class LinearIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    // FIXME: Please fix this. (0.28 is a constant)
+    final _p = (percent ?? 0) <= 0 ? 0 : (percent! - 0.28);
+
     return MyCard(
       width: size.width,
       borderRadius: BorderRadius.circular(
@@ -58,7 +61,7 @@ class LinearIndicator extends StatelessWidget {
             children: [
               SizedBox(
                 width: percent != null
-                    ? size.width * percent!
+                    ? size.width * _p
                     : SizeUtils.scale(0, size.width),
                 child: LinearPercentIndicator(
                   animation: true,
@@ -103,11 +106,12 @@ class LinearIndicator extends StatelessWidget {
             ],
           ),
           MyText(
-            text: '@employee out of @total employees are present'.trParams({
+            text: '@employee out of @total employees are @title.'.trParams({
               'employee': isCheckIn == true
                   ? '$checkInEmployees'
                   : '$checkOutEmployees',
               'total': '$totalEmployees',
+              'title': title?.toLowerCase() ?? "present",
             }),
             style: AppFonts.BodyXXSmall,
           ),

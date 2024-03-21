@@ -136,7 +136,7 @@ class MyTextFieldForm extends StatelessWidget {
                     : null,
                 hintText: hintText?.trString,
                 isDense: true,
-                hintStyle: hintStyle ?? AppFonts().LabelMedium,
+                hintStyle: hintStyle ?? AppFonts.LabelMedium,
                 filled: filled ?? false,
                 fillColor: filled == true
                     ? Theme.of(context).colorScheme.primary.withOpacity(0.095)

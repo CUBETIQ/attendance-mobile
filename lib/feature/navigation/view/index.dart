@@ -160,10 +160,16 @@ class MainScreen extends StatelessWidget {
             destinations: controller.items
                 .map(
                   (item) => NavigationDestination(
-                    icon:
-                        Icon(item.icon, size: SizeUtils.scale(22, size.width)),
-                    selectedIcon: Icon(item.selectedIcon,
-                        size: SizeUtils.scale(22, size.width)),
+                    icon: Icon(
+                      item.icon,
+                      size: SizeUtils.scale(22, size.width),
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                    selectedIcon: Icon(
+                      item.selectedIcon,
+                      size: SizeUtils.scale(22, size.width),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                     label: item.title.tr,
                   ),
                 )

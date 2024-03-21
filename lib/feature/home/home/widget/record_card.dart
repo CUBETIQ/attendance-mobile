@@ -112,7 +112,7 @@ class RecordCard extends StatelessWidget {
             onNullTitle: "Check out time",
             secondTitle: "Check out",
             icon: Icons.logout,
-            iconColor: const Color(MyColor.error),
+            iconColor: Theme.of(context).colorScheme.error,
             status: checkOutStatus,
           ),
         ],

@@ -1,5 +1,7 @@
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/icon.dart';
+import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/date_util.dart';
@@ -32,23 +34,16 @@ class DateDropDown extends StatelessWidget {
         height: height,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scale(
-            AppSize().paddingS5,
-            size.width,
-          ),
-          vertical: SizeUtils.scale(
-            AppSize().paddingS2,
-            size.width,
-          ),
+          horizontal: SizeUtils.scale(12, size.width),
+          vertical: SizeUtils.scale(10, size.width),
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            SizeUtils.scale(
-              AppSize().borderRadiusLarge,
-              size.width,
-            ),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primary,
           ),
-          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(
+            SizeUtils.scale(100, size.width),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -57,9 +52,9 @@ class DateDropDown extends StatelessWidget {
               text: isShowday == true
                   ? DateUtil.formatShortDate(date)
                   : DateUtil.formatShortDateWithoutDay(date),
-              style: AppFonts().bodySmall.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
+              style: AppFonts.TitleXSmall.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
             ),
             SizedBox(
               width: SizeUtils.scale(
@@ -67,10 +62,11 @@ class DateDropDown extends StatelessWidget {
                 size.width,
               ),
             ),
-            Icon(
-              Icons.arrow_drop_down,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
+            SvgIcon(
+                icon: IconAssets.arrowDown,
+                height: SizeUtils.scale(18, size.width),
+                width: SizeUtils.scale(18, size.width),
+                color: Theme.of(context).colorScheme.onBackground),
           ],
         ),
       ),

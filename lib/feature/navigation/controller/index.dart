@@ -4,6 +4,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/icon.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/model/department_model.dart';
@@ -78,7 +79,7 @@ class NavigationController extends GetxController {
             title: 'Home',
             icon: Icons.home_rounded,
             selectedIcon: Icons.home_rounded,
-            actionIcon: SvgAssets.scanQR,
+            actionIcon: IconAssets.scan,
             actionOnTap: () {
               Get.toNamed(Routes.SCAN_QR,
                   arguments: {"role": getUserRole.value});

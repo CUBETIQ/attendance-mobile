@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 
 class AttendanceInfoWidget extends StatelessWidget {
   final String title;
-  final int? value;
   final Color? color;
 
   const AttendanceInfoWidget({
     super.key,
     required this.title,
-    this.value,
     this.color,
   });
 
@@ -30,14 +28,10 @@ class AttendanceInfoWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: SizeUtils.scale(10, size.width)),
+        SizedBox(width: SizeUtils.scale(6, size.width)),
         MyText(
           text: title,
-          style: AppFonts().bodyMediumRegular,
-        ),
-        MyText(
-          text: "${value ?? 0}",
-          style: AppFonts().bodyMediumRegular,
+          style: AppFonts.LabelSmall,
         ),
       ],
     );

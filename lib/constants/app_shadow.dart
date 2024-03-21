@@ -9,7 +9,7 @@ class AppShadow {
       );
 
   static BoxShadow shadowWithoutColor = BoxShadow(
-    color: const Color(0xFF000000).withOpacity(0.8),
+    color: const Color(0xFF000000).withOpacity(0.08),
     blurRadius: 6,
     spreadRadius: 0,
     offset: const Offset(0, 4),

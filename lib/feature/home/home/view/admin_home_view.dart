@@ -255,7 +255,7 @@ class HomeAdminView extends StatelessWidget {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.only(
-                                bottom: SizeUtils.scale(20, size.width),
+                                bottom: SizeUtils.scale(14, size.width),
                               ),
                               separatorBuilder: (context, index) => SizedBox(
                                 height: SizeUtils.scale(10, size.width),

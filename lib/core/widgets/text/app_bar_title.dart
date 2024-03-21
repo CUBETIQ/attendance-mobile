@@ -12,7 +12,7 @@ class MyAppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title.tr,
-      style: style ?? AppFonts().bodyXXlargeMedium,
+      style: style ?? AppFonts.TitleMedium,
     );
   }
 }

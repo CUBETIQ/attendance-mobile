@@ -53,7 +53,8 @@ class SettingCardButton extends StatelessWidget {
                         text: description,
                         maxLines: 2,
                         style: AppFonts().bodySmallRegular.copyWith(
-                              color: Theme.of(context).colorScheme.outline,
+                              color:
+                                  Theme.of(context).colorScheme.outlineVariant,
                             ),
                       ),
                     ],
@@ -72,7 +73,12 @@ class SettingCardButton extends StatelessWidget {
               padding: EdgeInsets.only(
                 left: SizeUtils.scale(45, size.width),
               ),
-              child: const Divider(),
+              child: Divider(
+                color: Theme.of(context)
+                    .colorScheme
+                    .outlineVariant
+                    .withOpacity(0.5),
+              ),
             ),
           ],
         ),

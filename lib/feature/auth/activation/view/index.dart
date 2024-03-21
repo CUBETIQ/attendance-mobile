@@ -36,7 +36,7 @@ class ActivationView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: SizeUtils.scale(50, size.width)),
+                SizedBox(height: SizeUtils.scale(44, size.width)),
                 Center(
                   child: SizedBox(
                     width: SizeUtils.scale(
@@ -93,7 +93,7 @@ class ActivationView extends StatelessWidget {
             size.width,
           ),
           bottom: SizeUtils.scale(
-            AppSize().paddingHorizontalLarge,
+            55,
             size.width,
           ),
         ),

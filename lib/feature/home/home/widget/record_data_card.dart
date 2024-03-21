@@ -116,11 +116,11 @@ class RecordDataCard extends StatelessWidget {
                       Theme.of(context)
                           .colorScheme
                           .outlineVariant
-                          .withOpacity(0.25),
+                          .withOpacity(0.20),
                       Theme.of(context)
                           .colorScheme
                           .outlineVariant
-                          .withOpacity(0.25),
+                          .withOpacity(0.20),
                     ],
                   )),
           child: Row(

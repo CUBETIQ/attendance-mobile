@@ -1,4 +1,5 @@
 import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync/constants/font.dart';
@@ -82,9 +83,11 @@ class MyTextFieldForm extends StatelessWidget {
                     text: label,
                     style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
-            SizedBox(
-              height: SizeUtils.scale(AppSize().paddingS5, size.width),
-            ),
+            hasLabel == false
+                ? const SizedBox.shrink()
+                : SizedBox(
+                    height: SizeUtils.scale(AppSize().paddingS5, size.width),
+                  ),
             TextFormField(
               focusNode: focusNode,
               controller: textController,
@@ -96,13 +99,26 @@ class MyTextFieldForm extends StatelessWidget {
               onTap: onTap,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scale(AppSize().paddingS7, size.width),
+                  vertical: SizeUtils.scale(
+                    AppSpacing.paddingVerticalTextField,
+                    size.width,
+                  ),
                 ),
                 suffix: prefixIcon == null
                     ? Padding(
                         padding: EdgeInsets.only(
                           left: SizeUtils.scale(
-                            AppSize().paddingS17,
+                            AppSize().paddingHorizontalLarge,
+                            size.width,
+                          ),
+                        ),
+                      )
+                    : null,
+                prefix: prefixWidget == null
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: SizeUtils.scale(
+                            AppSize().paddingHorizontalLarge,
                             size.width,
                           ),
                         ),
@@ -146,7 +162,7 @@ class MyTextFieldForm extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                     SizeUtils.scale(
-                      borderRadius ?? AppSize().borderRadiusSmall,
+                      borderRadius ?? AppSpacing.M,
                       size.width,
                     ),
                   ),
@@ -158,7 +174,7 @@ class MyTextFieldForm extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                     SizeUtils.scale(
-                      borderRadius ?? AppSize().borderRadiusSmall,
+                      borderRadius ?? AppSpacing.M,
                       size.width,
                     ),
                   ),
@@ -170,7 +186,7 @@ class MyTextFieldForm extends StatelessWidget {
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                     SizeUtils.scale(
-                      borderRadius ?? AppSize().borderRadiusSmall,
+                      borderRadius ?? AppSpacing.M,
                       size.width,
                     ),
                   ),
@@ -182,7 +198,7 @@ class MyTextFieldForm extends StatelessWidget {
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                     SizeUtils.scale(
-                      borderRadius ?? AppSize().borderRadiusSmall,
+                      borderRadius ?? AppSpacing.M,
                       size.width,
                     ),
                   ),

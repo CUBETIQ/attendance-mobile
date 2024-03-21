@@ -41,7 +41,7 @@ class OnBoardView extends StatelessWidget {
             MediaQuery.of(context).size.width,
           ),
           bottom: SizeUtils.scale(
-            AppSize().paddingHorizontalLarge,
+            55,
             MediaQuery.of(context).size.width,
           ),
         ),

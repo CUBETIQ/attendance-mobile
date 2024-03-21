@@ -21,4 +21,7 @@ class AppSpacing {
   static const double XL3 = 32.0;
   static const double XL4 = 40.0;
   static const double XL5 = 46.0;
+
+  // padding textfield
+  static const double paddingVerticalTextField = 14.0;
 }

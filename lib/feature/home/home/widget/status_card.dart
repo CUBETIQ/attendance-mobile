@@ -40,7 +40,7 @@ class StatusCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: status != null
                       ? ColorUtil.getStatusColor(status)
-                      : Theme.of(context).colorScheme.outlineVariant,
+                      : Theme.of(context).colorScheme.outline.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(
                     AppSize().borderRadiusMedium * (size.width / 375.0),
                   ),
@@ -52,7 +52,7 @@ class StatusCard extends StatelessWidget {
                             ? status == AttendanceStatus.early
                                 ? Colors.white
                                 : Theme.of(context).colorScheme.onPrimary
-                            : Theme.of(context).colorScheme.onSurface,
+                            : Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
               );

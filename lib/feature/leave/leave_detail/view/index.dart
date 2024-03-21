@@ -6,6 +6,7 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/widgets/attachment/attachment_card.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/divider/dividers.dart';
 import 'package:timesync/core/widgets/progress_indicator/indicator_with_percentage.dart';
 import 'package:timesync/core/widgets/row/detail_row_data.dart';
 import 'package:timesync/core/widgets/row/detail_row_image.dart';
@@ -95,7 +96,7 @@ class LeaveDetailView extends StatelessWidget {
                       "${DateUtil.formatMillisecondsToDOB(controller.leave.value.from)} - ${DateUtil.formatMillisecondsToDOB(controller.leave.value.to)}",
                 ),
                 SizedBox(height: SizeUtils.scale(20, size.width)),
-                const Divider(thickness: 1.5),
+                const MyDivider(),
                 MyText(text: "Reason", style: AppFonts().bodyLargeMedium),
                 SizedBox(height: SizeUtils.scale(10, size.width)),
                 MyText(
@@ -107,10 +108,21 @@ class LeaveDetailView extends StatelessWidget {
                   maxLines: 20,
                 ),
                 SizedBox(height: SizeUtils.scale(20, size.width)),
-                const Divider(thickness: 1.5),
-                SizedBox(height: SizeUtils.scale(10, size.width)),
-                MyText(text: "Attachment", style: AppFonts().bodyLargeMedium),
-                SizedBox(height: SizeUtils.scale(10, size.width)),
+                controller.leave.value.attachment?.isEmpty == true
+                    ? const SizedBox.shrink()
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const MyDivider(),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: SizeUtils.scale(10, size.width)),
+                            child: MyText(
+                                text: "Attachment",
+                                style: AppFonts().bodyLargeMedium),
+                          ),
+                        ],
+                      ),
                 Obx(
                   () => ListView.builder(
                     shrinkWrap: true,

@@ -163,7 +163,7 @@ class MainScreen extends StatelessWidget {
                     icon: Icon(
                       item.icon,
                       size: SizeUtils.scale(22, size.width),
-                      color: Theme.of(context).colorScheme.outline,
+                      color: Theme.of(context).colorScheme.outlineVariant,
                     ),
                     selectedIcon: Icon(
                       item.selectedIcon,

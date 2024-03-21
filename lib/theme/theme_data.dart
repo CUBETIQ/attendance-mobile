@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/color.dart';
+import 'package:timesync/constants/font.dart';
 import 'package:timesync/utils/theme_utils.dart';
 
 // Light theme data
@@ -34,17 +35,6 @@ ThemeData lightThemeData() {
 // Dark theme data
 ThemeData darkThemeData() {
   return FlexThemeData.dark(
-    // user for override
-    // colors: const FlexSchemeColor(
-    //   primary: Color(0xff065808),
-    //   primaryContainer: Color(0xff9ee29f),
-    //   secondary: Color(0xff365b37),
-    //   secondaryContainer: Color(0xffaebdaf),
-    //   tertiary: Color(0xff2c7e2e),
-    //   tertiaryContainer: Color(0xffb8e6b9),
-    //   appBarColor: Color(0xffb8e6b9),
-    //   error: Color(0xffb00020),
-    // ),
     scheme: ThemeUtil.getFlexScheme(AppConfig.theme),
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     // scaffoldBackground: const Color(0xff121212),
@@ -69,11 +59,32 @@ ThemeData darkThemeData() {
 
 // Light theme
 ThemeData lightTheme =
-    ThemeData.from(colorScheme: flexSchemeLight, useMaterial3: true);
+    ThemeData.from(colorScheme: flexSchemeLight, useMaterial3: true).copyWith(
+  appBarTheme: const AppBarTheme(
+    backgroundColor: MyColor.scaffoldBackground,
+    elevation: 0,
+  ),
+  scaffoldBackgroundColor: MyColor.scaffoldBackground,
+  navigationBarTheme: NavigationBarThemeData(
+    backgroundColor: MyColor.scaffoldBackground,
+    elevation: 0,
+    labelTextStyle: MaterialStateProperty.resolveWith(
+      (state) {
+        if (state.contains(MaterialState.selected)) {
+          return AppFonts.TitleXXSmall.copyWith(color: flexSchemeLight.primary);
+        }
+        return AppFonts.TitleXXSmall.copyWith(
+          color: flexSchemeLight.outlineVariant,
+        );
+      },
+    ),
+  ),
+);
+
 const ColorScheme flexSchemeLight = ColorScheme(
   brightness: Brightness.light,
   primary: MyColor.primary,
-  onPrimary: Color(0xffffffff),
+  onPrimary: MyColor.onPrimary,
   primaryContainer: Color(0xffdee0ff),
   onPrimaryContainer: Color(0xff121314),
   secondary: Color(0xff3c64ae),
@@ -94,8 +105,8 @@ const ColorScheme flexSchemeLight = ColorScheme(
   onSurface: Color(0xff090909),
   surfaceVariant: Color(0xffe4e5eb),
   onSurfaceVariant: Color(0xff111112),
-  outline: Color(0xff7c7c7c),
-  outlineVariant: Color(0xffc8c8c8),
+  outline: Color(0xFF636363),
+  outlineVariant: Color(0xff7c7c7c),
   shadow: Color(0xff000000),
   scrim: Color(0xff000000),
   inverseSurface: Color(0xff121215),

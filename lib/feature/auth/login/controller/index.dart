@@ -123,8 +123,8 @@ class LoginController extends GetxController {
     await IsarService().saveLocalData(input: localStorageData);
   }
 
-  Future<void> onCheck(bool? value) async {
-    isRememberMe.value = value!;
+  void onCheckRememberMe() {
+    isRememberMe.value = !isRememberMe.value;
   }
 
   Future<void> fetchMe() async {

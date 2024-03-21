@@ -1,5 +1,7 @@
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/icon.dart';
+import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -94,14 +96,12 @@ class MyDropDownButton<T> extends StatelessWidget {
               ),
         const SizedBox(height: 8),
         SizedBox(
-          height: height ??
-              SizeUtils.scale(size.width < 600 ? 47.7 : 50, size.width),
           width: width ?? double.infinity,
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<T>(
               //To avoid long text overflowing.
               isExpanded: true,
-              isDense: true,
+              isDense: false,
               style: AppFonts.TitleXSmall.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
@@ -124,6 +124,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                 padding: buttonPadding ??
                     EdgeInsets.symmetric(
                       horizontal: SizeUtils.scale(24.0, size.width),
+                      vertical: SizeUtils.scale(10.0, size.width),
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
@@ -138,8 +139,11 @@ class MyDropDownButton<T> extends StatelessWidget {
                 elevation: buttonElevation,
               ),
               iconStyleData: IconStyleData(
-                icon: icon ?? const Icon(Icons.keyboard_arrow_down_rounded),
-                iconSize: SizeUtils.scale(iconSize ?? 18, size.width),
+                icon: icon ??
+                    SvgIcon(
+                      icon: IconAssets.arrowDown,
+                      height: SizeUtils.scale(iconSize ?? 18, size.width),
+                    ),
                 iconEnabledColor: iconEnabledColor,
                 iconDisabledColor: iconDisabledColor,
               ),

@@ -154,14 +154,13 @@ class HomeAdminView extends StatelessWidget {
                               Obx(
                                 () => MyDropDownButton<String>(
                                   width: SizeUtils.scale(130, size.width),
-                                  height: SizeUtils.scale(30, size.width),
                                   buttonPadding: EdgeInsets.symmetric(
                                     horizontal: SizeUtils.scale(12, size.width),
+                                    vertical: SizeUtils.scale(1, size.width),
                                   ),
                                   dropdownPadding: EdgeInsets.symmetric(
-                                    horizontal: SizeUtils.scale(10, size.width),
-                                    vertical: SizeUtils.scale(10, size.width),
-                                  ),
+                                      horizontal:
+                                          SizeUtils.scale(10, size.width)),
                                   borderRadius: SizeUtils.scale(24, size.width),
                                   label: "Type",
                                   hasLabel: false,

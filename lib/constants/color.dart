@@ -10,7 +10,6 @@ class MyColor {
 
   MyColor._internal();
 
-  static const int success = 0xFF198754;
   static const int darkSuccess = 0xFF1D6E20;
   static const int warning = 0xFFE0A800;
 
@@ -23,8 +22,12 @@ class MyColor {
   static const Color onBackground = Color(0xff24262B);
   static const Color primary = Color(0xff633FE8);
   static const Color onPrimary = Color(0xFFFFFFFF);
+  static const Color success = Color(0xff3BBA6A);
+  static const Color onSuccess = Color(0xFFFFFFFF);
   static const Color error = Color(0xffF75656);
   static const Color onError = Color(0xFFFFFFFF);
+  static const Color secondaryIndigo = Color(0xff48AFFA);
+  static const Color secondaryRed = Color(0xffD85681);
 
   // Theme Color Name
   static String get purple => "purpleM3";

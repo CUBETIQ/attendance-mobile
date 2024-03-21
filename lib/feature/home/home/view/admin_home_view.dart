@@ -1,5 +1,4 @@
 import 'package:timesync/constants/font.dart';
-import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/icon.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_model.dart';
@@ -111,7 +110,9 @@ class HomeAdminView extends StatelessWidget {
                               ButtonCard(
                                 svgIcon: IconAssets.document,
                                 title: "Leave",
-                                color: const Color(0xFFD85681),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 onTap: () => Get.toNamed(
                                   Routes.ADMIN_LEAVE_REQUEST,
                                   arguments: controller.staffs.value,
@@ -120,7 +121,7 @@ class HomeAdminView extends StatelessWidget {
                               ButtonCard(
                                 svgIcon: IconAssets.timeCircle,
                                 title: "Work Hour",
-                                color: const Color(0xFF48AFFA),
+                                color: Theme.of(context).colorScheme.secondary,
                                 onTap: () => Get.toNamed(
                                   Routes.WORKING_HOUR,
                                   arguments: {
@@ -193,7 +194,7 @@ class HomeAdminView extends StatelessWidget {
                             Obx(
                               () => LinearIndicator(
                                 title: "Early",
-                                color: MyColor.successColor,
+                                color: Theme.of(context).colorScheme.tertiary,
                                 percent: controller.earlyPercentage.value,
                                 totalEmployees: controller.totalStaffs.value,
                                 checkInEmployees:
@@ -206,7 +207,7 @@ class HomeAdminView extends StatelessWidget {
                             Obx(
                               () => LinearIndicator(
                                 title: "On Time",
-                                color: const Color(0xFF48AFFA),
+                                color: Theme.of(context).colorScheme.secondary,
                                 percent: controller.onTimePercentage.value,
                                 totalEmployees: controller.totalStaffs.value,
                                 checkInEmployees:
@@ -219,7 +220,9 @@ class HomeAdminView extends StatelessWidget {
                             Obx(
                               () => LinearIndicator(
                                 title: "Late",
-                                color: MyColor.errorColor,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 percent: controller.latePercentage.value,
                                 totalEmployees: controller.totalStaffs.value,
                                 checkInEmployees:

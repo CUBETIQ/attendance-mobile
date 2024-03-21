@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
@@ -43,10 +42,6 @@ class AttendancePieChartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final customChartRadius = SizeUtils.scale(34, size.width);
-
-    Color? presentColor = MyColor.successColor;
-    Color? absentColor = MyColor.errorColor;
-    Color? leaveColor = MyColor.pendingColor;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +90,7 @@ class AttendancePieChartCard extends StatelessWidget {
                       sections: [
                         PieChartSectionData(
                           showTitle: false,
-                          color: presentColor,
+                          color: Theme.of(context).colorScheme.primary,
                           value: presentPercentage ?? 0,
                           title: "Present",
                           radius: chartRadius ?? customChartRadius,
@@ -104,13 +99,13 @@ class AttendancePieChartCard extends StatelessWidget {
                           ),
                           badgeWidget: _Badge(
                             percentage: presentPercentage,
-                            color: presentColor,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                           badgePositionPercentageOffset: .98,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: leaveColor,
+                          color: Theme.of(context).colorScheme.secondary,
                           value: onLeavePercentage ?? 0,
                           title: "Leave",
                           radius: chartRadius ?? customChartRadius,
@@ -119,13 +114,14 @@ class AttendancePieChartCard extends StatelessWidget {
                           ),
                           badgeWidget: _Badge(
                             percentage: onLeavePercentage,
-                            color: leaveColor,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           badgePositionPercentageOffset: .98,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: absentColor,
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
                           value: absentPercentage ?? 0,
                           title: "Absent",
                           radius: chartRadius ?? customChartRadius,
@@ -134,7 +130,9 @@ class AttendancePieChartCard extends StatelessWidget {
                           ),
                           badgeWidget: _Badge(
                             percentage: absentPercentage,
-                            color: absentColor,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
                           ),
                           badgePositionPercentageOffset: .98,
                         ),
@@ -151,15 +149,15 @@ class AttendancePieChartCard extends StatelessWidget {
           children: [
             MyText(text: "Summary", style: AppFonts.TitleMedium),
             AttendanceInfoWidget(
-              color: presentColor,
+              color: Theme.of(context).colorScheme.primary,
               title: "Present",
             ),
             AttendanceInfoWidget(
-              color: leaveColor,
+              color: Theme.of(context).colorScheme.secondary,
               title: "Leave",
             ),
             AttendanceInfoWidget(
-              color: absentColor,
+              color: Theme.of(context).colorScheme.secondaryContainer,
               title: "Absent",
             ),
           ].withSpaceBetween(

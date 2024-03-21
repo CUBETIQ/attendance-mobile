@@ -37,7 +37,6 @@ class LoginView extends StatelessWidget {
               ),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
                   child: Column(
@@ -72,7 +71,7 @@ class LoginView extends StatelessWidget {
                               : Image.asset(ImageAssets.logotimesync),
                         ),
                       ),
-                      SizedBox(height: AppSize().paddingS6),
+                      SizedBox(height: SizeUtils.scale(16, size.width)),
                       Obx(
                         () => MyText(
                           text:
@@ -84,19 +83,20 @@ class LoginView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: size.height * 0.04),
+                SizedBox(height: SizeUtils.scale(65, size.width)),
                 MyText(
                   text: "Access your account",
-                  style: AppFonts().bodyXXlarge,
+                  style: AppFonts.TitleSmall,
+                  textAlign: TextAlign.center,
                 ),
+                SizedBox(height: SizeUtils.scale(7, size.width)),
                 MyText(
-                  text: "Please fill your detail to access your account.",
-                  maxLines: 2,
-                  style: AppFonts().bodyMediumRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
+                  text: "Enter your login details to access your account.",
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                  style: AppFonts.BodyXSmall,
                 ),
-                SizedBox(height: size.height * 0.05),
+                SizedBox(height: SizeUtils.scale(23, size.width)),
                 MyTextFieldForm(
                   hasLabel: false,
                   prefixWidget: SvgIcon(

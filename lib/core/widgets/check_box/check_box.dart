@@ -32,14 +32,16 @@ class MyCheckBox extends StatelessWidget {
             width: SizeUtils.scale(1.5, size.width),
             color: Theme.of(context).colorScheme.outlineVariant,
           ),
-          color: isChecked ? Colors.blue : Colors.transparent,
+          color: isChecked
+              ? Theme.of(context).colorScheme.primary
+              : Colors.transparent,
         ),
         child: isChecked
             ? Icon(
                 Icons.check,
                 size: SizeUtils.scale(
                     (boxSize != null ? (boxSize!) : (18.5 / 1.3)), size.width),
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
               )
             : null,
       ),

@@ -160,6 +160,7 @@ class MainScreen extends StatelessWidget {
           () => NavigationBar(
             onDestinationSelected: controller.onDestinationSelected,
             selectedIndex: controller.selectedIndex.value,
+            indicatorColor: Theme.of(context).colorScheme.inversePrimary,
             destinations: controller.items
                 .map(
                   (item) => NavigationDestination(

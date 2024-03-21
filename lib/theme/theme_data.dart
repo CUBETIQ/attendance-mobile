@@ -69,16 +69,7 @@ ThemeData darkThemeData() {
 
 // Light theme
 ThemeData lightTheme =
-    ThemeData.from(colorScheme: flexSchemeLight, useMaterial3: true).copyWith(
-  navigationBarTheme: NavigationBarThemeData(
-    labelTextStyle: MaterialStateProperty.resolveWith((state) {
-      if (state.contains(MaterialState.selected)) {
-        return const TextStyle(color: Colors.orange);
-      }
-      return const TextStyle(color: Colors.green);
-    }),
-  ),
-);
+    ThemeData.from(colorScheme: flexSchemeLight, useMaterial3: true);
 const ColorScheme flexSchemeLight = ColorScheme(
   brightness: Brightness.light,
   primary: MyColor.primary,

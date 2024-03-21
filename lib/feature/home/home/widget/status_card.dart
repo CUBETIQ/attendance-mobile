@@ -39,7 +39,7 @@ class StatusCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: status != null
-                      ? ColorUtil.getStatusColor(status)
+                      ? ColorUtil.getStatusColor(context, status)
                       : Theme.of(context).colorScheme.outline.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(
                     AppSize().borderRadiusMedium * (size.width / 375.0),

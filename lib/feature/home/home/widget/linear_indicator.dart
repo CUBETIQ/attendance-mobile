@@ -56,17 +56,37 @@ class LinearIndicator extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onBackground)),
           Row(
             children: [
-              Expanded(
+              SizedBox(
+                width: percent != null
+                    ? size.width * percent!
+                    : SizeUtils.scale(0, size.width),
                 child: LinearPercentIndicator(
                   animation: true,
-                  lineHeight: indicatorHeight ?? SizeUtils.scale(4, size.width),
+                  lineHeight: indicatorHeight ?? SizeUtils.scale(5, size.width),
                   animationDuration: 250,
                   padding: EdgeInsets.zero,
-                  percent: percent ?? 0,
+                  percent: 1,
                   barRadius: Radius.circular(
                     SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
                   ),
                   progressColor: color ?? Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              SizedBox(
+                  width: SizeUtils.scale(
+                      percent != null && percent == 0 ? 0 : 6, size.width)),
+              Expanded(
+                child: LinearPercentIndicator(
+                  animation: true,
+                  lineHeight: indicatorHeight ?? SizeUtils.scale(5, size.width),
+                  animationDuration: 250,
+                  padding: EdgeInsets.zero,
+                  percent: 0.02,
+                  barRadius: Radius.circular(
+                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
+                  ),
+                  progressColor: color ?? Theme.of(context).colorScheme.primary,
+                  isRTL: true,
                 ),
               ),
               Padding(

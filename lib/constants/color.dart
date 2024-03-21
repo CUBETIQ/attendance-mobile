@@ -28,6 +28,7 @@ class MyColor {
   static const Color onError = Color(0xFFFFFFFF);
   static const Color secondaryIndigo = Color(0xff48AFFA);
   static const Color secondaryRed = Color(0xffD85681);
+  static const Color primaryContainer = Color(0xffF1ECFF);
 
   // Theme Color Name
   static String get purple => "purpleM3";

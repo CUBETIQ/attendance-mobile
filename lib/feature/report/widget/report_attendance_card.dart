@@ -50,7 +50,7 @@ class ReportAttendanceCard extends StatelessWidget {
                   ),
                 ),
               ),
-              color: Colors.green,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           SizedBox(
@@ -122,7 +122,7 @@ class ReportAttendanceCard extends StatelessWidget {
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: attendance.checkInStatus != null
                                 ? ColorUtil.getStatusColor(
-                                    attendance.checkInStatus)
+                                    context, attendance.checkInStatus)
                                 : Theme.of(context).colorScheme.onBackground,
                           ),
                     ),
@@ -132,7 +132,8 @@ class ReportAttendanceCard extends StatelessWidget {
                       style: AppFonts().bodySmallRegular.copyWith(
                             color: attendance.checkOutStatus != null
                                 ? ColorUtil.getStatusColor(
-                                    attendance.checkOutStatus, isCheckOut: true)
+                                    context, attendance.checkOutStatus,
+                                    isCheckOut: true)
                                 : Theme.of(context).colorScheme.onBackground,
                           ),
                     ),

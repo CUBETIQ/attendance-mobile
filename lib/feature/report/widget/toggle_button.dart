@@ -51,7 +51,7 @@ class ToggleButton extends StatelessWidget {
         iconBuilder: (i) => Icon(icons[i],
             color: selectedIndex == i
                 ? Theme.of(context).colorScheme.onPrimary
-                : Theme.of(context).colorScheme.secondary,
+                : Theme.of(context).colorScheme.primary,
             size: SizeUtils.scale(
               22,
               size.width,
@@ -59,7 +59,7 @@ class ToggleButton extends StatelessWidget {
         iconOpacity: 0.8,
         iconAnimationType: AnimationType.onSelected,
         style: ToggleStyle(
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           borderColor: Colors.transparent,
           borderRadius: BorderRadius.circular(
             SizeUtils.scale(

@@ -6,6 +6,7 @@ import 'package:timesync/core/model/attendance_model.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/divider/dividers.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
@@ -79,7 +80,7 @@ class StaffAttendanceCard extends StatelessWidget {
               ],
             ),
           ),
-          Divider(height: SizeUtils.scale(1, size.width)),
+          const MyDivider(opacity: 0.25),
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: SizeUtils.scale(12, size.width)),
@@ -136,7 +137,8 @@ class StaffAttendanceCard extends StatelessWidget {
                           attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
                       style: AppFonts.LabelSmall.copyWith(
                         color: attendance.checkInStatus != null
-                            ? ColorUtil.getStatusColor(attendance.checkInStatus)
+                            ? ColorUtil.getStatusColor(
+                                context, attendance.checkInStatus)
                             : Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
@@ -146,7 +148,7 @@ class StaffAttendanceCard extends StatelessWidget {
                       style: AppFonts.LabelSmall.copyWith(
                         color: attendance.checkOutStatus != null
                             ? ColorUtil.getStatusColor(
-                                attendance.checkOutStatus!,
+                                context, attendance.checkOutStatus!,
                                 isCheckOut: true)
                             : Theme.of(context).colorScheme.onBackground,
                       ),

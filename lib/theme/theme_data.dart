@@ -85,7 +85,7 @@ const ColorScheme flexSchemeLight = ColorScheme(
   brightness: Brightness.light,
   primary: MyColor.primary,
   onPrimary: MyColor.onPrimary,
-  primaryContainer: Color(0xffdee0ff),
+  primaryContainer: MyColor.primaryContainer,
   onPrimaryContainer: Color(0xff121314),
   secondary: MyColor.secondaryIndigo,
   onSecondary: Color(0xffffffff),

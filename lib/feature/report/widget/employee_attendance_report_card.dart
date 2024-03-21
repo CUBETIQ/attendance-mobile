@@ -75,7 +75,8 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
               : "N/A",
           textColor:
               data.attendance != null && data.attendance?.checkInStatus != null
-                  ? ColorUtil.getStatusColor(data.attendance?.checkInStatus)
+                  ? ColorUtil.getStatusColor(
+                      context, data.attendance?.checkInStatus)
                   : Theme.of(context).colorScheme.onBackground,
         ),
         SizedBox(
@@ -115,7 +116,9 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
                 : "N/A",
             textColor: data.attendance != null &&
                     data.attendance?.checkOutStatus != null
-                ? ColorUtil.getStatusColor(data.attendance?.checkOutStatus, isCheckOut: true)
+                ? ColorUtil.getStatusColor(
+                    context, data.attendance?.checkOutStatus,
+                    isCheckOut: true)
                 : Theme.of(context).colorScheme.onBackground),
         SizedBox(
           height: SizeUtils.scale(data.attendance != null ? 2 : 0, size.width),

@@ -77,8 +77,7 @@ class NavigationController extends GetxController {
       [
         BottomBarModel(
             title: 'Home',
-            icon: Icons.home_rounded,
-            selectedIcon: Icons.home_rounded,
+            bottomIcon: IconAssets.home,
             actionIcon: IconAssets.scan,
             actionOnTap: () {
               Get.toNamed(Routes.SCAN_QR,
@@ -86,23 +85,19 @@ class NavigationController extends GetxController {
             }),
         BottomBarModel(
           title: 'Report',
-          icon: Icons.bar_chart_outlined,
-          selectedIcon: Icons.bar_chart_rounded,
+          bottomIcon: IconAssets.report,
         ),
         BottomBarModel(
           title: 'Task',
-          icon: Icons.task_rounded,
-          selectedIcon: Icons.task_rounded,
+          bottomIcon: IconAssets.task,
         ),
         BottomBarModel(
           title: 'Leave',
-          icon: Icons.work_off_rounded,
-          selectedIcon: Icons.work_off_rounded,
+          bottomIcon: IconAssets.calendar,
         ),
         BottomBarModel(
           title: 'Profile',
-          icon: Icons.person_rounded,
-          selectedIcon: Icons.person_rounded,
+          bottomIcon: IconAssets.profile,
           actionIcon: SvgAssets.coin,
           hasColor: true,
           actionHeight:

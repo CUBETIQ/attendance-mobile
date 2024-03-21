@@ -16,17 +16,17 @@ void getCheckInBottomSheet(BuildContext context,
     {bool? isDismissible, required String image}) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: size.height * 0.8,
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -82,17 +82,17 @@ void getCheckOutBottomSheet(BuildContext context,
     {bool? isDismissible, required String image}) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: size.height * 0.8,
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -157,17 +157,16 @@ void getConfirmCheckInOutBottomSheet({
   confirmCheckIn == true
       ? {
           Get.bottomSheet(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50 * (size.width / 375.0)),
-                topRight: Radius.circular(50 * (size.width / 375.0)),
-              ),
-            ),
             isDismissible: isDismissible ?? true,
             Container(
               width: size.width,
-              height: SizeUtils.scale(400, size.width),
-              color: Theme.of(context).colorScheme.surface,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50 * (size.width / 375.0)),
+                  topRight: Radius.circular(50 * (size.width / 375.0)),
+                ),
+              ),
               child: Padding(
                 padding: EdgeInsets.only(
                   left: SizeUtils.scale(
@@ -252,17 +251,17 @@ void getForgetCheckOutBottomSheet(BuildContext context,
     {bool? isDismissible, required String image, void Function()? onTap}) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: size.height * 0.8,
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -322,17 +321,17 @@ void getLogOutBottomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: size.height * 0.5,
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -409,17 +408,17 @@ void getConfirmBottomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: SizeUtils.scale(400, size.width),
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -496,17 +495,17 @@ void getEditAndDeleteBottomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: SizeUtils.scale(370, size.width),
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -561,17 +560,17 @@ void getEditDeleteViewBottomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: SizeUtils.scale(435, size.width),
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -636,17 +635,17 @@ void getPickImageButtomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: SizeUtils.scale(430, size.width),
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -732,17 +731,17 @@ void getPickIconButtomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: SizeUtils.scale(370, size.width),
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(
@@ -797,18 +796,18 @@ void getOptionsBottomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          color: Theme.of(context).colorScheme.surface,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50 * (size.width / 375.0)),
+              topRight: Radius.circular(50 * (size.width / 375.0)),
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.only(
               left: SizeUtils.scale(
@@ -884,17 +883,17 @@ void getPickAttachmentButtomSheet(
 }) {
   final size = MediaQuery.of(context).size;
   Get.bottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50 * (size.width / 375.0)),
-        topRight: Radius.circular(50 * (size.width / 375.0)),
-      ),
-    ),
     isDismissible: isDismissible ?? true,
     Container(
       width: size.width,
       height: SizeUtils.scale(430, size.width),
-      color: Theme.of(context).colorScheme.surface,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50 * (size.width / 375.0)),
+          topRight: Radius.circular(50 * (size.width / 375.0)),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           left: SizeUtils.scale(

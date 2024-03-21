@@ -160,19 +160,32 @@ class MainScreen extends StatelessWidget {
           () => NavigationBar(
             onDestinationSelected: controller.onDestinationSelected,
             selectedIndex: controller.selectedIndex.value,
-            indicatorColor: Theme.of(context).colorScheme.inversePrimary,
+            indicatorColor: Colors.transparent,
             destinations: controller.items
                 .map(
                   (item) => NavigationDestination(
-                    icon: Icon(
-                      item.icon,
-                      size: SizeUtils.scale(22, size.width),
-                      color: Theme.of(context).colorScheme.outlineVariant,
-                    ),
-                    selectedIcon: Icon(
-                      item.selectedIcon,
-                      size: SizeUtils.scale(22, size.width),
-                      color: Theme.of(context).colorScheme.primary,
+                    icon: SvgIcon(
+                        icon: item.bottomIcon,
+                        height: SizeUtils.scale(22, size.width),
+                        width: SizeUtils.scale(22, size.width),
+                        color: Theme.of(context).colorScheme.outlineVariant),
+                    selectedIcon: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        SvgIcon(
+                            icon: item.bottomIcon,
+                            height: SizeUtils.scale(22, size.width),
+                            width: SizeUtils.scale(22, size.width),
+                            color: Theme.of(context).colorScheme.primary),
+                        Transform.translate(
+                          offset: Offset(0, SizeUtils.scale(32, size.width)),
+                          child: Container(
+                            height: SizeUtils.scale(2, size.width),
+                            width: SizeUtils.scale(22 * 3, size.width),
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        )
+                      ],
                     ),
                     label: item.title.tr,
                   ),

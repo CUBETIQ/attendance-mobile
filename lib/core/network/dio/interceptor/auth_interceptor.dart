@@ -1,7 +1,6 @@
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:dio/dio.dart';
-import 'package:timesync/utils/logger.dart';
 
 class AuthInterceptor extends Interceptor {
   @override
@@ -26,7 +25,6 @@ class AuthInterceptor extends Interceptor {
             AppConfig.getLocalData?.organizationId ?? "default",
       });
     }
-    Logs.i(options.headers.toString());
     return super.onRequest(options, handler);
   }
 }

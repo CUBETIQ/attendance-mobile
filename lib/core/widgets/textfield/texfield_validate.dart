@@ -168,7 +168,7 @@ class MyTextFieldForm extends StatelessWidget {
                   ),
                   borderSide: BorderSide(
                     width: 1,
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(

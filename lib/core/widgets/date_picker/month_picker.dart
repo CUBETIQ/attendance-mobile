@@ -13,5 +13,12 @@ monthPicker({required BuildContext context, DateTime? initialDate}) {
     roundedCornersRadius: 24,
     animationMilliseconds: 0,
     dismissible: true,
+    selectedMonthTextColor: Theme.of(context).colorScheme.onPrimary,
+    selectedMonthBackgroundColor: Theme.of(context).colorScheme.primary,
+    currentMonthTextColor: Theme.of(context).colorScheme.primary,
+    unselectedMonthTextColor: Theme.of(context).colorScheme.onBackground,
+    backgroundColor: Theme.of(context).colorScheme.background,
+    headerColor: Theme.of(context).colorScheme.primary,
+    headerTextColor: Theme.of(context).colorScheme.onPrimary,
   );
 }

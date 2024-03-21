@@ -45,6 +45,7 @@ class MyDropDownButton<T> extends StatelessWidget {
     this.backgroundColor,
     this.hintStyle,
     this.dropDownBackgroundColor,
+    this.borderColor,
   });
 
   final String? hint;
@@ -81,6 +82,7 @@ class MyDropDownButton<T> extends StatelessWidget {
   final Color? backgroundColor;
   final Color? dropDownBackgroundColor;
   final TextStyle? hintStyle;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -123,21 +125,23 @@ class MyDropDownButton<T> extends StatelessWidget {
               buttonStyleData: ButtonStyleData(
                 padding: buttonPadding ??
                     EdgeInsets.only(
-                      top: SizeUtils.scale(5.0, size.width),
-                      bottom: SizeUtils.scale(5.0, size.width),
+                      top: SizeUtils.scale(4.5, size.width),
+                      bottom: SizeUtils.scale(4.5, size.width),
                       left: SizeUtils.scale(5.0, size.width),
                       right: SizeUtils.scale(12.0, size.width),
                     ),
                 decoration: buttonDecoration ??
                     BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(
-                          SizeUtils.scale(
-                              (borderRadius ?? AppSize().borderRadiusSmall),
-                              size.width),
-                        ),
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.primary)),
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(
+                        SizeUtils.scale(
+                            (borderRadius ?? AppSize().borderRadiusSmall),
+                            size.width),
+                      ),
+                      border: Border.all(
+                          color: borderColor ??
+                              Theme.of(context).colorScheme.onBackground),
+                    ),
                 elevation: buttonElevation,
               ),
               iconStyleData: IconStyleData(
@@ -157,7 +161,8 @@ class MyDropDownButton<T> extends StatelessWidget {
                     BoxDecoration(
                       color: Theme.of(context).colorScheme.background,
                       border: Border.all(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: borderColor ??
+                            Theme.of(context).colorScheme.onBackground,
                       ),
                       borderRadius: BorderRadius.circular(
                         SizeUtils.scale(

@@ -157,6 +157,8 @@ class HomeAdminView extends StatelessWidget {
                                 child: Obx(
                                   () => MyDropDownButton<String>(
                                     width: SizeUtils.scale(120, size.width),
+                                    borderColor:
+                                        Theme.of(context).colorScheme.primary,
                                     buttonPadding: EdgeInsets.only(
                                       left: SizeUtils.scale(0, size.width),
                                       right: SizeUtils.scale(10, size.width),
@@ -172,7 +174,7 @@ class HomeAdminView extends StatelessWidget {
                                     hasLabel: false,
                                     value:
                                         controller.selectedAttendanceType.value,
-                                    hint: "Choose role",
+                                    hint: "Choose Type",
                                     dropdownItems: controller.attendanceType
                                         .map(
                                           (e) => DropdownMenuItem<String>(
@@ -247,7 +249,7 @@ class HomeAdminView extends StatelessWidget {
                               top: SizeUtils.scale(16, size.width),
                               bottom: SizeUtils.scale(14, size.width)),
                           child: MyText(
-                            text: 'Employee Attendance'.trString,
+                            text: 'Attendance Log'.trString,
                             style: AppFonts.TitleSmall.copyWith(
                               color: Theme.of(context).colorScheme.onBackground,
                             ),

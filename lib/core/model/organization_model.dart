@@ -1,6 +1,5 @@
 import 'package:timesync/core/repositories/base_model.dart';
 import 'package:timesync/extensions/string.dart';
-import 'package:timesync/utils/logger.dart';
 
 class OrganizationModel extends BaseModel<OrganizationModel> {
   final String? id;
@@ -77,8 +76,6 @@ class OranizationLocationModel {
   OranizationLocationModel({this.lat, this.lng});
 
   OranizationLocationModel fromJson(Map<String, dynamic>? json) {
-    Logs.e([json?['lat'] is int, json?['lng'] is int]);
-
     if (json == null) {
       return OranizationLocationModel();
     }

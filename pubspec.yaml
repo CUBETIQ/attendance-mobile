@@ -98,6 +98,12 @@ flutter:
         - asset: assets/font/Inter-Medium.ttf
         - asset: assets/font/Inter-Regular.ttf
         - asset: assets/font/Inter-SemiBold.ttf
+    - family: PlusJakartaSans
+      fonts:
+        - asset: assets/font/PlusJakartaSans-Bold.ttf
+        - asset: assets/font/PlusJakartaSans-Medium.ttf
+        - asset: assets/font/PlusJakartaSans-Regular.ttf
+        - asset: assets/font/PlusJakartaSans-SemiBold.ttf
 
 flutter_native_splash:
   android: true

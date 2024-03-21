@@ -10,7 +10,7 @@ class AppFonts {
 
   AppFonts._internal();
 
-  static const String fontFamily = 'Inter';
+  static const String fontFamily = 'PlusJakartaSans'; // 'Inter';
 
   static double _calculateFontSize(BuildContext context, double baseSize) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -33,7 +33,7 @@ class AppFonts {
       fontFamily: fontFamily,
       fontWeight: fontWeight,
       fontSize: adjustedFontSize,
-      letterSpacing: 0.2,
+      letterSpacing: 0,
     );
   }
 

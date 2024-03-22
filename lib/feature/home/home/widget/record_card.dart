@@ -73,9 +73,8 @@ class RecordCard extends StatelessWidget {
                 ),
                 RecordDataCard(
                   time: null,
-                  timeString: NavigationController
-                          .to.organization.value.configs?.breakTime ??
-                      "00:00",
+                  timeString:
+                      "${NavigationController.to.organization.value.configs?.breakTime?.split("-")[0].trim() ?? "00:00"} AM",
                   svgIcon: IconAssets.noodle,
                   statusTitle: "Lunch Break",
                   onNullTitle: "Lunch Break",
@@ -85,8 +84,10 @@ class RecordCard extends StatelessWidget {
                   iconColor: Colors.white,
                   status: null,
                 ),
-                const RecordDataCard(
+                RecordDataCard(
                   time: null,
+                  timeString:
+                      "${NavigationController.to.organization.value.configs?.breakTime?.split("-")[1].trim() ?? "00:00"} PM",
                   svgIcon: IconAssets.charger,
                   statusTitle: "After Break",
                   onNullTitle: "After Break",

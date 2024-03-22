@@ -98,7 +98,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final latePercentage = 0.0.obs;
   final onTimePercentage = 0.0.obs;
   final earlyPercentage = 0.0.obs;
-  final disableButton = false.obs;
+  final isStartBreakTime = true.obs;
+  final isEndBreakTime = true.obs;
 
   Timer? timer;
   final workingHour = Rxn<String>();
@@ -113,43 +114,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     initDate();
     initAnimation();
     initTabWithRole();
-    checkBreakTime();
     getUsername();
     await getAttendance();
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();
-    // workingHourDuration();
   }
-
-  // Future<void> workingHourDuration() async {
-  //   if (checkInTime.value != null && checkOutTime.value == null) {
-  //     final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
-  //       attendanceList.last.checkInDateTime!,
-  //     );
-
-  //     // Update the working hour value every second
-  //     timer = Timer.periodic(
-  //       const Duration(seconds: 1),
-  //       (Timer timer) async {
-  //         var duration = await checkTime()
-  //             .then((value) => value.difference(checkInDateTime));
-  //         var hours = duration.inHours;
-  //         var minutes = duration.inMinutes.remainder(60);
-  //         var formattedMinutes = minutes.toString().padLeft(2, '0');
-  //         var seconds = duration.inSeconds.remainder(60);
-  //         var formattedSeconds = seconds.toString().padLeft(2, '0');
-
-  //         workingHour.value = "$hours:$formattedMinutes:$formattedSeconds";
-  //       },
-  //     );
-  //   }
-  // }
 
   void onRefresh() {
     NavigationController.to.getUserLocation();
     getAttendance();
-    checkBreakTime();
     getSummarizeAttendance();
   }
 
@@ -283,7 +257,28 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  Future<void> onTapBreak() async {
+    try {
+      final date = await checkTime();
+      final result = await HomeService().breakTime(date.millisecondsSinceEpoch);
+      if (result.breakTime?.start != null) {
+        isStartBreakTime.value = false;
+      } else if (result.breakTime?.end != null) {
+        isEndBreakTime.value = false;
+        isStartBreakTime.value = false;
+      } else {
+        isStartBreakTime.value = true;
+        isEndBreakTime.value = true;
+      }
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
+    }
+  }
+
   Future<void> checkIn() async {
+    isStartBreakTime.value = true;
+    isEndBreakTime.value = true;
     final checkLocation = await checkUserLocation();
     if (checkLocation == false) {
       return;
@@ -314,7 +309,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           checkInTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
           );
-          onDisableButton(checkIn.checkInDateTime ?? 0);
           await getAttendance();
           isCheckedIn.value = true;
           await getSummarizeAttendance();
@@ -423,7 +417,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
-          onDisableButton(attendanceList.last.checkInDateTime ?? 0);
         } else {
           timer?.cancel();
           checkOutTime.value = DateUtil.formatTime(
@@ -596,23 +589,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     currentDate.value = DateFormat('EEEE, dd MMMM yyyy').format(date);
   }
 
-  void checkBreakTime() {
-    final time = DateTime.now().hour;
-    final startBreakHour =
-        NavigationController.to.startBreakTime.split(":").first;
-    final endBreakHour = NavigationController.to.endBreakTime.split(":").first;
-    if (time >= int.parse(startBreakHour) && time < int.parse(endBreakHour)) {
-      isBreakTime.value = true;
-      breakTimeTitle.value = "Ongoing";
-    } else if (time >= int.parse(endBreakHour)) {
-      isBreakTime.value = true;
-      breakTimeTitle.value = "Finished";
-    } else {
-      isBreakTime.value = false;
-      breakTimeTitle.value = null;
-    }
-  }
-
   Future<bool> checkUserLocation() async {
     if (NavigationController.to.userLocation.value == null) {
       await NavigationController.to.getUserLocation();
@@ -660,20 +636,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
               totalCheckOutEarly.value, totalStaffs.value);
         }
       }
-    }
-  }
-
-  void onDisableButton(int dateTimeInMillis) {
-    disableButton.value = DateUtil.isWithinFiveMinutes(dateTimeInMillis);
-    if (disableButton.value == true) {
-      final duration = AppConfig.delayTimeInMinute -
-          DateUtil.calculateDurationInMinutes(
-              dateTimeInMillis, DateTime.now().millisecondsSinceEpoch);
-      final orinalDateTime =
-          DateTime.fromMillisecondsSinceEpoch(dateTimeInMillis);
-      DateUtil.scheduleTaskAfterFiveMinutes(orinalDateTime, duration, (value) {
-        disableButton.value = value;
-      });
     }
   }
 }

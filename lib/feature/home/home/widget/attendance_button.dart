@@ -23,7 +23,7 @@ class AttendanceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return InkWell(
+    return GestureDetector(
       onTap: onTap ?? () {},
       child: Container(
         decoration: BoxDecoration(

@@ -150,15 +150,15 @@ class HomeStaffView extends StatelessWidget {
                     vertical: SizeUtils.scale(20, size.width)),
                 child: Obx(
                   () => AttendanceCard(
-                    disableButton: controller.disableButton.value,
                     isInOfficeRange: NavigationController.to.isInRange.value,
                     scale: controller.scaleAnimation,
                     onCheckIn: controller.checkIn,
                     onCheckOut: controller.checkOut,
                     currentDate: controller.currentDate.value,
                     isCheckedIn: controller.isCheckedIn.value,
-                    isBreakTime: controller.isBreakTime.value,
-                    // hasNoLunchBreak: true,
+                    isStartBreakTime: controller.isStartBreakTime.value,
+                    isEndBreakTime: controller.isEndBreakTime.value,
+                    onTapBreakTime: controller.onTapBreak,
                   ),
                 ),
               ),
@@ -184,8 +184,9 @@ class HomeStaffView extends StatelessWidget {
                       itemCount: controller.attendanceList.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      separatorBuilder: (context, index) =>
-                          const SizedBox.shrink(),
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: SizeUtils.scale(10, size.width),
+                      ),
                       itemBuilder: (context, index) {
                         return Obx(
                           () => RecordCard(

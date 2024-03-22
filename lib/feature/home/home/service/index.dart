@@ -102,6 +102,19 @@ class HomeService {
     return checkIn;
   }
 
+  Future<AttendanceModel> breakTime(int date) async {
+    final AttendanceModel? attendance;
+
+    Response response = await dioInstance.dio
+        .post(Endpoints.instance.break_time, data: {"date": date});
+    if (response.statusCode == 200) {
+      attendance = AttendanceModel().fromJson(response.data["data"]);
+    } else {
+      throw Exception("Start/End break time failed");
+    }
+    return attendance;
+  }
+
   Future<List<AttendanceModel>> getAttendance(
       {int? startDate, int? endDate}) async {
     List<AttendanceModel>? attendanceList = [];

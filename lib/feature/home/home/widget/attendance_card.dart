@@ -1,11 +1,8 @@
 import 'dart:async';
-
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/app_shadow.dart';
 import 'package:timesync/constants/app_size.dart';
@@ -16,6 +13,7 @@ import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/widgets/icon/svg_icon.dart';
+import 'package:timesync/core/widgets/progress_indicator/linear_progress_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
@@ -36,9 +34,10 @@ class AttendanceCard extends StatelessWidget {
   final double? buttonSize;
   final double? iconSize;
   final bool isInOfficeRange;
-  final bool disableButton;
-  final bool? isBreakTime;
-  final bool? hasNoLunchBreak;
+  final bool? isStartBreakTime;
+  final bool? isEndBreakTime;
+  final double? workHourPercent;
+  final void Function()? onTapBreakTime;
 
   const AttendanceCard({
     super.key,
@@ -52,9 +51,10 @@ class AttendanceCard extends StatelessWidget {
     this.buttonSize,
     this.iconSize,
     this.isInOfficeRange = false,
-    this.disableButton = false,
-    this.isBreakTime,
-    this.hasNoLunchBreak = false,
+    this.isStartBreakTime,
+    this.isEndBreakTime = false,
+    this.workHourPercent,
+    this.onTapBreakTime,
   });
 
   @override
@@ -127,18 +127,8 @@ class AttendanceCard extends StatelessWidget {
                     vertical: SizeUtils.scale(20, size.width)),
                 child: Column(
                   children: [
-                    LinearPercentIndicator(
-                      animation: true,
-                      lineHeight: SizeUtils.scale(5, size.width),
-                      animationDuration: 250,
-                      padding: EdgeInsets.zero,
-                      percent: 0.02,
-                      barRadius: Radius.circular(
-                        SizeUtils.scale(
-                            AppSize().borderRadiusLarge, size.width),
-                      ),
-                      progressColor: Theme.of(context).colorScheme.primary,
-                      isRTL: true,
+                    MyLinearProgressIndicator(
+                      percent: workHourPercent ?? 0.0,
                     ),
                     Padding(
                       padding:
@@ -155,25 +145,27 @@ class AttendanceCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  hasNoLunchBreak == true
+                  isEndBreakTime == false
                       ? const SizedBox.shrink()
                       : Expanded(
-                          child: isBreakTime == true
+                          child: isStartBreakTime == false
                               ? AttendanceButton(
                                   label: 'Resume',
                                   color: Theme.of(context).colorScheme.primary,
                                   onlyBorder: true,
                                   svgIcon: IconAssets.task,
+                                  onTap: onTapBreakTime,
                                 )
                               : AttendanceButton(
                                   label: 'Lunch Break',
                                   color: Theme.of(context).colorScheme.primary,
                                   svgIcon: IconAssets.noodle,
+                                  onTap: onTapBreakTime,
                                 ),
                         ),
                   SizedBox(
                       width: SizeUtils.scale(
-                          hasNoLunchBreak == true ? 0 : 12, size.width)),
+                          isEndBreakTime == false ? 0 : 12, size.width)),
                   Expanded(
                     child: AttendanceButton(
                       onTap: () {
@@ -207,33 +199,31 @@ class AttendanceCard extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         vertical: SizeUtils.scale(12, size.width)),
                     child: GestureDetector(
-                      onTap: disableButton
+                      onTap: isDisableButton.value == true
                           ? null
-                          : isDisableButton.value == true
-                              ? null
-                              : isCheckedIn == true
-                                  ? () async {
-                                      try {
-                                        isDisableButton.value = true;
-                                        await onCheckOut();
-                                      } catch (e) {
-                                        Logs.e(e);
-                                        return;
-                                      } finally {
-                                        isDisableButton.value = false;
-                                      }
-                                    }
-                                  : () async {
-                                      try {
-                                        isDisableButton.value = true;
-                                        await onCheckIn();
-                                      } catch (e) {
-                                        Logs.e(e);
-                                        return;
-                                      } finally {
-                                        isDisableButton.value = false;
-                                      }
-                                    },
+                          : isCheckedIn == true
+                              ? () async {
+                                  try {
+                                    isDisableButton.value = true;
+                                    await onCheckOut();
+                                  } catch (e) {
+                                    Logs.e(e);
+                                    return;
+                                  } finally {
+                                    isDisableButton.value = false;
+                                  }
+                                }
+                              : () async {
+                                  try {
+                                    isDisableButton.value = true;
+                                    await onCheckIn();
+                                  } catch (e) {
+                                    Logs.e(e);
+                                    return;
+                                  } finally {
+                                    isDisableButton.value = false;
+                                  }
+                                },
                       child: ScaleTransition(
                         scale: scale,
                         child: AnimatedContainer(
@@ -247,47 +237,7 @@ class AttendanceCard extends StatelessWidget {
                               AppShadow.shadowWithColor(
                                   Theme.of(context).colorScheme.primary)
                             ],
-                            gradient: LinearGradient(
-                              colors: disableButton
-                                  ? [
-                                      Theme.of(context).colorScheme.outline,
-                                      Theme.of(context).colorScheme.outline,
-                                    ]
-                                  : isCheckedIn != null
-                                      ? isCheckedIn == true
-                                          ? [
-                                              const Color(0XFFe83371),
-                                              const Color(0XFF9b3092),
-                                            ]
-                                          : Get.isDarkMode
-                                              ? [
-                                                  Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                  Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary
-                                                      .darken(12),
-                                                ]
-                                              : [
-                                                  Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                  Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary
-                                                      .lighten(12),
-                                                ]
-                                      : [
-                                          const Color.fromARGB(
-                                              255, 122, 122, 122),
-                                          const Color.fromARGB(
-                                              255, 122, 122, 122),
-                                        ],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              tileMode: TileMode.mirror,
-                            ),
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

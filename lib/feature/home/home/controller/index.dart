@@ -12,6 +12,7 @@ import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/summary_attendance_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/home/home/model/check_in_model.dart';
 import 'package:timesync/feature/home/home/model/check_out_model.dart';
@@ -84,6 +85,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final onLeavePercentage = 0.0.obs;
   final totalStaff = 0.obs;
   final selectDate = DateTime.now().obs;
+  final selectMonth = DateTime.now().obs;
   final haveNoData = false.obs;
   final tabs = <String>[].obs;
   final staffs = <UserModel>[].obs;
@@ -168,6 +170,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       endOfDay.value = DateUtil.getEndOfDayInMilisecond(picked);
       getDashboardChart();
       getAllStaffAttendance();
+    }
+  }
+
+  Future<void> onTapMonth() async {
+    final DateTime? picked = await monthPicker(
+      context: Get.context!,
+      initialDate: selectMonth.value,
+    );
+    if (picked != null) {
+      selectMonth.value = picked;
+      startOfMonth.value = DateUtil.getStartOfMonthInMilliseconds(picked) ?? 0;
+      endOfMonth.value = DateUtil.getEndOfMonthInMilliseconds(picked) ?? 0;
+      getSummarizeAttendance();
     }
   }
 

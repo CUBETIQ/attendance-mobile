@@ -131,7 +131,8 @@ class HomeStaffView extends StatelessWidget {
                       () => DateDropDown(
                         date: controller.selectDate.value,
                         size: size,
-                        onTap: controller.onTapDate,
+                        isShowday: false,
+                        onTap: controller.onTapMonth,
                       ),
                     ),
                   ],

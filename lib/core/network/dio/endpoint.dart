@@ -24,6 +24,7 @@ class Endpoints {
   String get user_status => "/auth/user-status";
   String get check_in => "/app/attendances/checkin";
   String get check_out => "/app/attendances/checkout";
+  String get break_time => "/app/attendances/breaktime";
   String get scan_qr => "/app/attendances/qr";
   String get get_position => "/app/positions/";
   String get organization => "/app/organizations/";

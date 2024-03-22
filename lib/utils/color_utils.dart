@@ -56,7 +56,7 @@ class ColorUtil {
             ? Theme.of(context).colorScheme.tertiary
             : Theme.of(context).colorScheme.error;
       default:
-        return Colors.blue;
+        return Theme.of(context).colorScheme.primary;
     }
   }
 }

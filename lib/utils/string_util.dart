@@ -69,4 +69,62 @@ class StringUtil {
 
     return result;
   }
+
+  String? calculateDurationWithStatus(int? minutes, String? status) {
+    if (minutes == null || status == null) {
+      return null;
+    }
+
+    int hours = minutes ~/ 60;
+    int remainingMinutes = minutes % 60;
+
+    String timeString = '';
+    if (hours > 0) {
+      timeString += '$hours hr';
+      if (hours > 1) timeString += 's'; // pluralize 'hour' if needed
+      timeString += ' ';
+    }
+
+    if (remainingMinutes > 0) {
+      timeString += '$remainingMinutes min';
+      if (remainingMinutes > 1) {
+        timeString += 's'; // pluralize 'minute' if needed
+      }
+    }
+
+    if (status.toLowerCase() == 'late') {
+      return timeString.isEmpty ? 'Late' : '$timeString late';
+    } else if (status.toLowerCase() == 'early') {
+      return timeString.isEmpty ? 'Early' : '$timeString early';
+    } else if (status.toLowerCase() == 'ontime') {
+      return 'On time';
+    } else {
+      return 'Invalid status';
+    }
+  }
+
+  String? calculateDuration(int? minutes) {
+    if (minutes == null || minutes == 0) {
+      return "0 hr 0 min";
+    }
+
+    int hours = minutes ~/ 60;
+    int remainingMinutes = minutes % 60;
+
+    String timeString = '';
+    if (hours > 0) {
+      timeString += '$hours hr';
+      if (hours > 1) timeString += 's'; // pluralize 'hour' if needed
+      timeString += ' ';
+    }
+
+    if (remainingMinutes > 0) {
+      timeString += '0 hr $remainingMinutes min';
+      if (remainingMinutes > 1) {
+        timeString += 's'; // pluralize 'minute' if needed
+      }
+    }
+
+    return timeString;
+  }
 }

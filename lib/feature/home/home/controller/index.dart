@@ -27,6 +27,7 @@ import 'package:timesync/types/user_status.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/double_util.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -55,8 +56,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> scaleAnimation;
   final isInRange = false.obs;
-  final isBreakTime = false.obs;
-  final breakTimeTitle = Rxn<String>(null);
   final user = UserModel().obs;
   final summaryAttendance = <SummaryAttendanceModel>[].obs;
   final attendanceType = <String>[
@@ -100,6 +99,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final earlyPercentage = 0.0.obs;
   final isStartBreakTime = true.obs;
   final isEndBreakTime = true.obs;
+  final startBreakTime = Rxn<int>(null);
+  final endBreakTime = Rxn<int>(null);
+  final totalWorkHour = 0.obs;
 
   Timer? timer;
   final workingHour = Rxn<String>();
@@ -258,27 +260,46 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> onTapBreak() async {
-    try {
-      final date = await checkTime();
-      final result = await HomeService().breakTime(date.millisecondsSinceEpoch);
-      if (result.breakTime?.start != null) {
-        isStartBreakTime.value = false;
-      } else if (result.breakTime?.end != null) {
-        isEndBreakTime.value = false;
-        isStartBreakTime.value = false;
-      } else {
-        isStartBreakTime.value = true;
-        isEndBreakTime.value = true;
-      }
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
+    getConfirmBottomSheet(
+      Get.context!,
+      title: "Break Time",
+      description: attendanceList.last.breakTime?.start == null
+          ? "Are you sure that you want to take a break?"
+          : "Are you sure that you want to end your break?",
+      image: SvgAssets.option,
+      onTapConfirm: () async {
+        Get.back();
+        try {
+          final date = await checkTime();
+          final result =
+              await HomeService().breakTime(date.millisecondsSinceEpoch);
+          if (result.breakTime?.start != null &&
+              result.breakTime?.end == null) {
+            isStartBreakTime.value = false;
+            startBreakTime.value = result.breakTime?.start;
+          } else {
+            endBreakTime.value = result.breakTime?.end;
+            isStartBreakTime.value = false;
+            isEndBreakTime.value = false;
+          }
+          await getAttendance(validateBreakTime: false, noLoading: true);
+        } on DioException catch (e) {
+          showErrorSnackBar("Error", e.response?.data["message"]);
+          rethrow;
+        }
+      },
+    );
+  }
+
+  void clearBreakTime() {
+    isStartBreakTime.value = true;
+    isEndBreakTime.value = true;
+    startBreakTime.value = null;
+    endBreakTime.value = null;
   }
 
   Future<void> checkIn() async {
-    isStartBreakTime.value = true;
-    isEndBreakTime.value = true;
+    clearBreakTime();
     final checkLocation = await checkUserLocation();
     if (checkLocation == false) {
       return;
@@ -309,7 +330,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           checkInTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(checkIn.checkInDateTime!),
           );
-          await getAttendance();
+          await getAttendance(noLoading: true);
           isCheckedIn.value = true;
           await getSummarizeAttendance();
           if (Get.isRegistered<ProfileController>()) {
@@ -372,7 +393,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             DateTime.fromMillisecondsSinceEpoch(checkOut.checkOutDateTime!),
           );
           isCheckedIn.value = false;
-          await getAttendance();
+          await getAttendance(noLoading: true);
           cancelNotificationReminder(checkOut: true);
           getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
         } on DioException catch (e) {
@@ -396,8 +417,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  Future<void> getAttendance() async {
-    isLoadingList.value = true;
+  Future<void> getAttendance({bool? validateBreakTime, bool? noLoading}) async {
+    isLoadingList.value = noLoading == true ? false : true;
     try {
       attendanceList.value = await HomeService().getAttendance(
         startDate: startOfDay.value,
@@ -415,6 +436,17 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           ),
         );
 
+        if (validateBreakTime != false) {
+          if (attendanceList.last.breakTime?.start != null &&
+              attendanceList.last.breakTime?.end == null) {
+            isStartBreakTime.value = false;
+          } else if (attendanceList.last.breakTime?.start != null &&
+              attendanceList.last.breakTime?.end != null) {
+            isStartBreakTime.value = false;
+            isEndBreakTime.value = false;
+          }
+        }
+
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
         } else {
@@ -425,6 +457,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             ),
           );
           isCheckedIn.value = false;
+        }
+        for (var element in attendanceList) {
+          Logs.e("Duration: ${element.duration}");
+          totalWorkHour.value += element.duration ?? 0;
         }
       } else {
         checkInTime.value = null;

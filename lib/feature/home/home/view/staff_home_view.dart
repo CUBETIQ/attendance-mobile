@@ -174,10 +174,7 @@ class HomeStaffView extends StatelessWidget {
                     list: controller.attendanceList,
                     noDataWidget: RecordCard(
                       date: controller.date,
-                      checkInStatus: null,
-                      checkInTime: null,
-                      checkOutTime: null,
-                      checkOutStatus: null,
+                      data: null,
                       isBreakTime: false,
                     ),
                     builderWidget: ListView.separated(
@@ -191,16 +188,14 @@ class HomeStaffView extends StatelessWidget {
                         return Obx(
                           () => RecordCard(
                             date: controller.date,
-                            checkInStatus:
-                                controller.attendanceList[index].checkInStatus,
-                            checkInTime: controller
-                                .attendanceList[index].checkInDateTime,
-                            checkOutTime: controller
-                                .attendanceList[index].checkOutDateTime,
-                            checkOutStatus:
-                                controller.attendanceList[index].checkOutStatus,
-                            isBreakTime: controller.isBreakTime.value,
-                            breakTimeTitle: controller.breakTimeTitle.value,
+                            data: controller.attendanceList[index],
+                            isBreakTime: controller
+                                    .attendanceList[index].breakTime?.start !=
+                                null,
+                            endBreakTime:
+                                controller.attendanceList[index].breakTime?.end,
+                            startBreakTime: controller
+                                .attendanceList[index].breakTime?.start,
                           ),
                         );
                       },
@@ -211,7 +206,13 @@ class HomeStaffView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: SizeUtils.scale(20, size.width)),
-                child: const TotalHourWorkedCard(),
+                child: Obx(
+                  () => TotalHourWorkedCard(
+                    totalHourWorked: StringUtil().calculateDuration(
+                      controller.totalWorkHour.value,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

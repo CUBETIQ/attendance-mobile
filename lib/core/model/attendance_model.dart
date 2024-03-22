@@ -9,9 +9,13 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
   final int? checkInDateTime;
   final String? checkInStatus;
   final String? checkInType;
+  final int? checkInEarly;
+  final int? checkInLate;
   final List<dynamic>? trackTimelineId;
   final int? checkOutDateTime;
   final String? checkOutType;
+  final int? checkOutEarly;
+  final int? checkOutLate;
   final String? checkOutStatus;
   final BreakTimeModel? breakTime;
   final LocationModel? checkInLocation;
@@ -28,9 +32,13 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
     this.checkInDateTime,
     this.checkInStatus,
     this.checkInType,
+    this.checkInEarly,
+    this.checkInLate,
     this.trackTimelineId,
     this.checkOutDateTime,
     this.checkOutType,
+    this.checkOutEarly,
+    this.checkOutLate,
     this.checkOutStatus,
     this.checkInLocation,
     this.checkOutLocation,
@@ -53,9 +61,13 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
       checkInDateTime: json['checkInDateTime'],
       checkInStatus: json['checkInStatus'],
       checkInType: json['checkInType'],
+      checkInEarly: json['checkInEarly'],
+      checkInLate: json['checkInLate'],
       trackTimelineId: json['trackTimelineId'],
       checkOutDateTime: json['checkOutDateTime'],
       checkOutType: json['checkOutType'],
+      checkOutEarly: json['checkOutEarly'],
+      checkOutLate: json['checkOutLate'],
       checkOutStatus: json['checkOutStatus'],
       attachment: json['attachment'],
       breakTime: BreakTimeModel().fromJson(json['breakTime']),

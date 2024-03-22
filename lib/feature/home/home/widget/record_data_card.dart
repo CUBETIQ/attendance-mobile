@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
@@ -22,6 +23,7 @@ class RecordDataCard extends StatelessWidget {
   final bool? isBreakTime;
   final String? breakTimeTitle;
   final bool? isCheckOut;
+  final String? statusLabel;
 
   const RecordDataCard({
     super.key,
@@ -37,6 +39,7 @@ class RecordDataCard extends StatelessWidget {
     this.isBreakTime,
     this.breakTimeTitle,
     this.isCheckOut,
+    this.statusLabel,
   });
 
   @override
@@ -87,7 +90,9 @@ class RecordDataCard extends StatelessWidget {
           ],
         ),
         Container(
-          width: SizeUtils.scale(140, size.width),
+          constraints: BoxConstraints(
+            minWidth: SizeUtils.scale(145, size.width),
+          ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
@@ -119,7 +124,7 @@ class RecordDataCard extends StatelessWidget {
                     ),
                     StatusCard(
                       status: status,
-                      statusLabel: '5 min late',
+                      statusLabel: statusLabel,
                       isBreakTime: isBreakTime,
                       breakTimeTitle: breakTimeTitle,
                       isCheckOut: isCheckOut,
@@ -131,8 +136,12 @@ class RecordDataCard extends StatelessWidget {
                   height: SizeUtils.scale(24, size.width),
                   width: SizeUtils.scale(24, size.width),
                   color: isBreakTime == true
-                      ? Theme.of(context).colorScheme.onPrimary
-                      : Theme.of(context).colorScheme.onBackground,
+                      ? Get.isDarkMode
+                          ? Theme.of(context).colorScheme.onBackground
+                          : Theme.of(context).colorScheme.onPrimary
+                      : Get.isDarkMode
+                          ? Theme.of(context).colorScheme.onBackground
+                          : null,
                 )
               ],
             ),

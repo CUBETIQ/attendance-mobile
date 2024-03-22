@@ -2,35 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/icon.dart';
+import 'package:timesync/core/model/attendance_model.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/feature/home/home/widget/record_data_card.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
+import 'package:timesync/types/attendance_status.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
 
 class RecordCard extends StatelessWidget {
-  final int? checkInTime;
-  final String? checkInStatus;
-  final int? checkOutTime;
-  final String? checkOutStatus;
+  final AttendanceModel? data;
   final double? width;
   final double? height;
   final DateTime date;
   final bool? isBreakTime;
   final String? breakTimeTitle;
+  final int? startBreakTime;
+  final int? endBreakTime;
 
   const RecordCard({
     super.key,
     this.width,
     this.height,
-    this.checkInTime,
-    this.checkOutTime,
     required this.date,
-    this.checkInStatus,
-    this.checkOutStatus,
+    this.data,
     this.isBreakTime,
     this.breakTimeTitle,
+    this.startBreakTime,
+    this.endBreakTime,
   });
 
   @override
@@ -60,32 +61,38 @@ class RecordCard extends StatelessWidget {
             Column(
               children: [
                 RecordDataCard(
-                  time: checkInTime,
-                  timeString: NavigationController
-                          .to.organization.value.configs?.startHour ??
-                      "00:00",
+                  time: data?.checkInDateTime,
+                  timeString:
+                      "${NavigationController.to.organization.value.configs?.startHour ?? "00:00"} AM",
                   svgIcon: IconAssets.loginTwoTone,
                   statusTitle: "Check-In",
                   onNullTitle: "Check-in Schedule",
                   secondTitle: "Checked-in",
-                  status: checkInStatus,
+                  status: data?.checkInStatus,
+                  statusLabel: StringUtil().calculateDurationWithStatus(
+                      data?.checkInStatus == AttendanceStatus.late
+                          ? (data?.checkInLate ?? 1)
+                          : data?.checkInStatus == AttendanceStatus.early
+                              ? (data?.checkInEarly ?? 1)
+                              : 0,
+                      data?.checkInStatus),
                   iconColor: const Color(0xFF198754),
                 ),
                 RecordDataCard(
-                  time: null,
+                  time: startBreakTime,
                   timeString:
                       "${NavigationController.to.organization.value.configs?.breakTime?.split("-")[0].trim() ?? "00:00"} AM",
                   svgIcon: IconAssets.noodle,
                   statusTitle: "Lunch Break",
                   onNullTitle: "Lunch Break",
                   secondTitle: "Lunch Break",
-                  breakTimeTitle: breakTimeTitle,
+                  breakTimeTitle: endBreakTime != null ? "Finished" : "Ongoing",
                   isBreakTime: isBreakTime,
                   iconColor: Colors.white,
                   status: null,
                 ),
                 RecordDataCard(
-                  time: null,
+                  time: endBreakTime,
                   timeString:
                       "${NavigationController.to.organization.value.configs?.breakTime?.split("-")[1].trim() ?? "00:00"} PM",
                   svgIcon: IconAssets.charger,
@@ -94,15 +101,22 @@ class RecordCard extends StatelessWidget {
                   secondTitle: "After Break",
                 ),
                 RecordDataCard(
-                  time: checkOutTime,
-                  timeString: NavigationController
-                      .to.organization.value.configs?.endHour,
+                  time: data?.checkOutDateTime,
+                  timeString:
+                      "${NavigationController.to.organization.value.configs?.endHour ?? "00:00"} PM",
                   svgIcon: IconAssets.logoutTwoTone,
                   statusTitle: "Check-Out",
                   onNullTitle: "Check-out Schedule",
                   secondTitle: "Checked-out",
                   iconColor: Theme.of(context).colorScheme.error,
-                  status: checkOutStatus,
+                  status: data?.checkOutStatus,
+                  statusLabel: StringUtil().calculateDurationWithStatus(
+                      data?.checkOutStatus == AttendanceStatus.late
+                          ? (data?.checkOutLate ?? 1)
+                          : data?.checkOutStatus == AttendanceStatus.early
+                              ? (data?.checkOutEarly ?? 1)
+                              : 0,
+                      data?.checkOutStatus),
                   isCheckOut: true,
                 ),
               ].withSpaceBetween(height: SizeUtils.scale(10, size.width)),

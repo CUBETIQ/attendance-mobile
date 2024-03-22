@@ -1,5 +1,5 @@
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/app_shadow.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/attendance_model.dart';
@@ -10,6 +10,8 @@ import 'package:timesync/core/widgets/divider/dividers.dart';
 import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
+import 'package:timesync/extensions/string.dart';
+import 'package:timesync/feature/report/controller/index.dart';
 import 'package:timesync/utils/color_utils.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
@@ -84,82 +86,66 @@ class StaffAttendanceCard extends StatelessWidget {
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: SizeUtils.scale(12, size.width)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MyText(
-                      text: "Attendance",
-                      style: AppFonts.TitleXSmall,
-                    ),
-                    MyText(
-                      text: "Check-in",
-                      style: AppFonts.LabelSmall,
-                    ),
-                    MyText(
-                      text: "Check-out",
-                      style: AppFonts.LabelSmall,
-                    ),
-                  ].withSpaceBetween(height: SizeUtils.scale(4, size.width)),
+                buildAttendanceLogRow(
+                  context,
+                  label: 'Check in',
+                  value: DateUtil.formatTimeWithDate(
+                    attendance.checkInDateTime,
+                  ),
+                  color: attendance.checkInStatus != null
+                      ? ColorUtil.getStatusColor(
+                          context, attendance.checkInStatus)
+                      : Theme.of(context).colorScheme.onBackground,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MyText(
-                      text: "Time",
-                      style: AppFonts.TitleXSmall,
-                    ),
-                    MyText(
-                      text: DateUtil.formatTimeWithDate(
-                        attendance.checkInDateTime,
-                      ),
-                      style: AppFonts.LabelSmall,
-                    ),
-                    MyText(
-                      text: DateUtil.formatTimeWithDate(
-                        attendance.checkOutDateTime,
-                      ),
-                      style: AppFonts.LabelSmall,
-                    ),
-                  ].withSpaceBetween(height: SizeUtils.scale(4, size.width)),
+                buildAttendanceLogRow(
+                  context,
+                  label: 'Check out',
+                  value: DateUtil.formatTimeWithDate(
+                    attendance.checkOutDateTime,
+                  ),
+                  color: attendance.checkOutStatus != null
+                      ? ColorUtil.getStatusColor(
+                          context, attendance.checkOutStatus)
+                      : Theme.of(context).colorScheme.onBackground,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MyText(
-                      text: "Status",
-                      style: AppFonts.TitleXSmall,
-                    ),
-                    MyText(
-                      text:
-                          attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
-                      style: AppFonts.LabelSmall.copyWith(
-                        color: attendance.checkInStatus != null
-                            ? ColorUtil.getStatusColor(
-                                context, attendance.checkInStatus)
-                            : Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                    MyText(
-                      text: attendance.checkOutStatus.capitalizeMaybeNull ??
-                          "N/A",
-                      style: AppFonts.LabelSmall.copyWith(
-                        color: attendance.checkOutStatus != null
-                            ? ColorUtil.getStatusColor(
-                                context, attendance.checkOutStatus!,
-                                isCheckOut: true)
-                            : Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                  ].withSpaceBetween(height: SizeUtils.scale(4, size.width)),
+                buildAttendanceLogRow(
+                  context,
+                  label: 'Hours worked',
+                  value: DateUtil.getHourMinuteSecondFromMinute(
+                      attendance.duration),
                 ),
-              ],
+                buildAttendanceLogRow(
+                  context,
+                  label: 'Total Session',
+                  value:
+                      '${ReportController.to.staffReports.firstWhereOrNull((element) => element.username == staff.username)?.attendance?.totalSession ?? 0}',
+                ),
+              ].withSpaceBetween(height: SizeUtils.scale(4, size.width)),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildAttendanceLogRow(BuildContext context,
+      {String? label, String? value, Color? color}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        MyText(
+          text: '${label?.trString ?? ""}:',
+          style: AppFonts.LabelSmall,
+        ),
+        MyText(
+          text: value?.trString ?? "",
+          style: AppFonts.LabelSmall.copyWith(
+            color: color ?? Theme.of(context).colorScheme.onBackground,
+          ),
+        ),
+      ],
     );
   }
 }

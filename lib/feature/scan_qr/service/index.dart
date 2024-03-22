@@ -33,6 +33,7 @@ class QRService {
     double? lat;
     double? lng;
     if (!Validator.isValNull(deepLinkUrl.value)) {
+      
       final Uri uri = Uri.parse(deepLinkUrl.value ?? '');
       lat = double.tryParse(uri.queryParameters['lat'] ?? '');
       lng = double.tryParse(uri.queryParameters['long'] ?? '');

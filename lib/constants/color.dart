@@ -30,6 +30,13 @@ class MyColor {
   static const Color secondaryRed = Color(0xffD85681);
   static const Color primaryContainer = Color(0xffF1ECFF);
 
+  // App Gradient Color Scheme
+  static const LinearGradient gradient01 = LinearGradient(
+    colors: [Color(0xFFCE9FFC), Color(0xFF7367F0)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
   // Theme Color Name
   static String get purple => "purpleM3";
   static String get red => "redM3";

@@ -1,5 +1,4 @@
 import 'package:timesync/core/model/leave_model.dart';
-import 'package:timesync/core/model/summary_leave_model.dart';
 import 'package:timesync/core/network/dio/dio_util.dart';
 import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:dio/dio.dart';
@@ -54,26 +53,5 @@ class LeaveService {
     if (response.statusCode != 200) {
       throw Exception("Update leave status failed");
     }
-  }
-
-  Future<List<SummaryLeaveModel>> getUserLeavSummarize(
-      {int? startDate, int? endDate}) async {
-    final List<SummaryLeaveModel> summaryLeaves;
-
-    Map<String, dynamic> queryParameters = {
-      "startDate": startDate,
-      "endDate": endDate,
-    };
-
-    Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_user_leave_summarize,
-      queryParameters: queryParameters,
-    );
-    if (response.statusCode == 200) {
-      summaryLeaves = SummaryLeaveModel().fromListJson(response.data["data"]);
-    } else {
-      throw Exception("Get task failed");
-    }
-    return summaryLeaves;
   }
 }

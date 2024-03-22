@@ -6,6 +6,7 @@ class SummaryAttendanceModel extends BaseModel<SummaryAttendanceModel> {
   final int? totalAttendance;
   final int? totalAbsent;
   final int? totalLeave;
+  final int? totalLateDuration;
 
   SummaryAttendanceModel({
     this.id,
@@ -13,6 +14,7 @@ class SummaryAttendanceModel extends BaseModel<SummaryAttendanceModel> {
     this.totalAttendance,
     this.totalAbsent,
     this.totalLeave,
+    this.totalLateDuration,
   });
 
   @override
@@ -26,6 +28,7 @@ class SummaryAttendanceModel extends BaseModel<SummaryAttendanceModel> {
       totalAttendance: json['totalAttendance'],
       totalAbsent: json['totalAbsent'],
       totalLeave: json['totalLeave'],
+      totalLateDuration: json['totalLateDuration'],
     );
   }
 
@@ -48,3 +51,4 @@ class SummaryAttendanceModel extends BaseModel<SummaryAttendanceModel> {
     };
   }
 }
+    

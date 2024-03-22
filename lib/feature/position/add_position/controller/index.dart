@@ -54,7 +54,6 @@ class AddPositionController extends GetxController {
     if (!MyTextFieldFormController.findController('Name').isValid) {
       return;
     }
-
     try {
       if (imageFile.value != null) {
         final metedata = FileMetadata(

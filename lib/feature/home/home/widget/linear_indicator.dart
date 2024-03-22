@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/card/my_card.dart';
+import 'package:timesync/core/widgets/progress_indicator/linear_progress_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class LinearIndicator extends StatelessWidget {
   const LinearIndicator({
@@ -32,11 +31,9 @@ class LinearIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // FIXME: Please fix this. (0.28 is a constant)
-    final _p = (percent ?? 0) <= 0 ? 0 : (percent! - 0.28);
-
     return MyCard(
       width: size.width,
+      clip: Clip.antiAliasWithSaveLayer,
       borderRadius: BorderRadius.circular(
         SizeUtils.scale(14, size.width),
       ),
@@ -54,56 +51,25 @@ class LinearIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           MyText(
-              text: title ?? "Title",
-              style: AppFonts.TitleSmall.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground)),
-          Row(
-            children: [
-              SizedBox(
-                width: percent != null
-                    ? size.width * _p
-                    : SizeUtils.scale(0, size.width),
-                child: LinearPercentIndicator(
-                  animation: true,
-                  lineHeight: indicatorHeight ?? SizeUtils.scale(5, size.width),
-                  animationDuration: 250,
-                  padding: EdgeInsets.zero,
-                  percent: 1,
-                  barRadius: Radius.circular(
-                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
-                  ),
-                  progressColor: color ?? Theme.of(context).colorScheme.primary,
-                ),
+            text: title ?? "Title",
+            style: AppFonts.TitleSmall.copyWith(
+                color: Theme.of(context).colorScheme.onBackground),
+          ),
+          MyLinearProgressIndicator(
+            percent: percent,
+            color: color,
+            indicatorHeight: indicatorHeight,
+            trailing: Padding(
+              padding: EdgeInsets.only(left: SizeUtils.scale(6, size.width)),
+              child: MyText(
+                text: percent != null && percent?.isNaN == false
+                    ? '${(percent! * 100).toStringAsFixed(0)}%'
+                    : "0%",
+                style: AppFonts().bodySmall.copyWith(
+                      color: color ?? Theme.of(context).colorScheme.primary,
+                    ),
               ),
-              SizedBox(
-                  width: SizeUtils.scale(
-                      percent != null && percent == 0 ? 0 : 6, size.width)),
-              Expanded(
-                child: LinearPercentIndicator(
-                  animation: true,
-                  lineHeight: indicatorHeight ?? SizeUtils.scale(5, size.width),
-                  animationDuration: 250,
-                  padding: EdgeInsets.zero,
-                  percent: 0.02,
-                  barRadius: Radius.circular(
-                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
-                  ),
-                  progressColor: color ?? Theme.of(context).colorScheme.primary,
-                  isRTL: true,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: SizeUtils.scale(6, size.width)),
-                child: MyText(
-                  text: percent != null && percent?.isNaN == false
-                      ? '${(percent! * 100).toStringAsFixed(0)}%'
-                      : "0%",
-                  style: AppFonts().bodySmall.copyWith(
-                        color: color ?? Theme.of(context).colorScheme.primary,
-                      ),
-                ),
-              ),
-            ],
+            ),
           ),
           MyText(
             text: '@employee out of @total employees are @title.'.trParams({

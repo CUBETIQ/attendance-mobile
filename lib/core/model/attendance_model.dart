@@ -9,10 +9,15 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
   final int? checkInDateTime;
   final String? checkInStatus;
   final String? checkInType;
+  final int? checkInEarly;
+  final int? checkInLate;
   final List<dynamic>? trackTimelineId;
   final int? checkOutDateTime;
   final String? checkOutType;
+  final int? checkOutEarly;
+  final int? checkOutLate;
   final String? checkOutStatus;
+  final BreakTimeModel? breakTime;
   final LocationModel? checkInLocation;
   final LocationModel? checkOutLocation;
   final int? duration;
@@ -27,14 +32,19 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
     this.checkInDateTime,
     this.checkInStatus,
     this.checkInType,
+    this.checkInEarly,
+    this.checkInLate,
     this.trackTimelineId,
     this.checkOutDateTime,
     this.checkOutType,
+    this.checkOutEarly,
+    this.checkOutLate,
     this.checkOutStatus,
     this.checkInLocation,
     this.checkOutLocation,
     this.duration,
     this.attachment,
+    this.breakTime,
   });
 
   @override
@@ -51,11 +61,16 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
       checkInDateTime: json['checkInDateTime'],
       checkInStatus: json['checkInStatus'],
       checkInType: json['checkInType'],
+      checkInEarly: json['checkInEarly'],
+      checkInLate: json['checkInLate'],
       trackTimelineId: json['trackTimelineId'],
       checkOutDateTime: json['checkOutDateTime'],
       checkOutType: json['checkOutType'],
+      checkOutEarly: json['checkOutEarly'],
+      checkOutLate: json['checkOutLate'],
       checkOutStatus: json['checkOutStatus'],
       attachment: json['attachment'],
+      breakTime: BreakTimeModel().fromJson(json['breakTime']),
       checkInLocation: LocationModel().fromJson(json['checkInLocation']),
       checkOutLocation: LocationModel().fromJson(json['checkOutLocation']),
       duration: json['duration'],
@@ -88,6 +103,7 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
       'checkOutType': checkOutType,
       'checkOutStatus': checkOutStatus,
       'attachment': attachment,
+      'breakTime': breakTime?.toJson(),
       'checkInLocation': checkInLocation?.toJson(),
       'checkOutLocation': checkOutLocation?.toJson(),
       'duration': duration,
@@ -148,6 +164,49 @@ class LocationModel extends BaseModel<LocationModel> {
       'lat': lat,
       'lng': lng,
       'inOffice': inOffice,
+    };
+  }
+}
+
+class BreakTimeModel extends BaseModel<BreakTimeModel> {
+  final int? start;
+  final int? end;
+  final int? duration;
+
+  BreakTimeModel({
+    this.start,
+    this.end,
+    this.duration,
+  });
+
+  @override
+  BreakTimeModel fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return BreakTimeModel();
+    }
+    return BreakTimeModel(
+      start: json['start'],
+      end: json['end'],
+      duration: json['duration'],
+    );
+  }
+
+  @override
+  List<BreakTimeModel> fromListJson(List? listJson) {
+    if (listJson == null) {
+      return [];
+    }
+    return listJson
+        .map<BreakTimeModel>((e) => BreakTimeModel().fromJson(e))
+        .toList();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'start': start,
+      'end': end,
+      'duration': duration,
     };
   }
 }

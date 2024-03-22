@@ -17,6 +17,8 @@ class GenerateQRController extends GetxController {
   final color = Rxn<Color>(null);
   final savedColor = Rxn<Color>(null);
 
+  // String link =
+  //     "${DeepLink.app}/${toBase64('${OrganizationController.to.organization.value.name?.toLowerCase().replaceAll(' ', '_')}?lat=${OrganizationController.to.organization.value.location?.lat}&long=${OrganizationController.to.organization.value.location?.lng}')}";
   String link =
       "${DeepLink.app}/${OrganizationController.to.organization.value.name?.toLowerCase().replaceAll(' ', '_')}?lat=${OrganizationController.to.organization.value.location?.lat}&long=${OrganizationController.to.organization.value.location?.lng}";
 
@@ -25,12 +27,17 @@ class GenerateQRController extends GetxController {
   Future<void> onTapShare() async {
     if (isSharing.value == false) {
       isSharing.value = true;
+
       screenshotController.capture().then((value) async {
         if (value != null) {
           final file = await writeUint8ListToFile(
               value, "${AppConfig.appLocalPath}/image.png");
           onShare([XFile(file.path)]);
+        } else {
+          isSharing.value = false;
         }
+      }).catchError((e) {
+        isSharing.value = false;
       });
     }
   }
@@ -45,12 +52,15 @@ class GenerateQRController extends GetxController {
   void onShare(
     List<XFile> files,
   ) async {
-    final box = Get.context!.findRenderObject() as RenderBox?;
-    await Share.shareXFiles(files,
-        text:
-            'Hello, this QR code facilitates easy check-in and out for attendance purposes. Simply scan it to mark your presence. See you there!',
-        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
-    isSharing.value = false;
+    try {
+      final box = Get.context!.findRenderObject() as RenderBox?;
+      await Share.shareXFiles(files,
+          text:
+              'Hello, this QR code facilitates easy check-in and out for attendance purposes. Simply scan it to mark your presence. See you there!',
+          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+    } finally {
+      isSharing.value = false;
+    }
   }
 
   void onTapPickColor(BuildContext context) {

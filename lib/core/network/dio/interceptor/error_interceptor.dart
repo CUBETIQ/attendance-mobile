@@ -10,6 +10,7 @@ import 'package:timesync/core/widgets/dialog/dialog.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+import 'package:timesync/utils/logger.dart';
 
 class ErrorInterceptor extends dio.Interceptor {
   final dio.Dio _dio;
@@ -55,6 +56,8 @@ class ErrorInterceptor extends dio.Interceptor {
     if (err.response?.data["message"] == null) {
       Get.offNamed(Routes.ERROR);
     }
+
+    Logs.e(err);
 
     return super.onError(err, handler);
   }

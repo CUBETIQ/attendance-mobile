@@ -132,7 +132,6 @@ class AddLeaveController extends GetxController
         );
         await AddLeaveService().addLeave(input);
         await LeaveController.to.getUserLeave();
-        LeaveController.to.getUserSummarizeLeave();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);

@@ -86,7 +86,6 @@ class AddTaskController extends GetxController {
         );
         await AddTaskService().addTask(input);
         TaskController.to.getUserTasks();
-        TaskController.to.getUserSummarizeTask();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
@@ -118,7 +117,6 @@ class AddTaskController extends GetxController {
         );
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
-        TaskController.to.getUserSummarizeTask();
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);
@@ -223,7 +221,6 @@ class AddTaskController extends GetxController {
         onTapConfirm: () async {
           await TaskService().deleteTask(id);
           await TaskController.to.getUserTasks();
-          TaskController.to.getUserSummarizeTask();
           Navigator.of(Get.context!).popUntil((route) => route.isFirst);
         },
         image: SvgAssets.delete,

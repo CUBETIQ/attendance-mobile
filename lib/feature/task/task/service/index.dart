@@ -1,4 +1,3 @@
-import 'package:timesync/core/model/summary_task_model.dart';
 import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/network/dio/dio_util.dart';
 import 'package:timesync/core/network/dio/endpoint.dart';
@@ -34,27 +33,6 @@ class TaskService {
       throw Exception("Get task failed");
     }
     return tasks;
-  }
-
-  Future<List<SummaryTaskModel>> getUserTaskSummarize(
-      {int? startDate, int? endDate}) async {
-    final List<SummaryTaskModel> summaryTasks;
-
-    Map<String, dynamic> queryParameters = {
-      "startDate": startDate,
-      "endDate": endDate,
-    };
-
-    Response response = await dioInstance.dio.get(
-      Endpoints.instance.get_user_task_summarize,
-      queryParameters: queryParameters,
-    );
-    if (response.statusCode == 200) {
-      summaryTasks = SummaryTaskModel().fromListJson(response.data["data"]);
-    } else {
-      throw Exception("Get task failed");
-    }
-    return summaryTasks;
   }
 
   Future<void> completeTask(String id) async {

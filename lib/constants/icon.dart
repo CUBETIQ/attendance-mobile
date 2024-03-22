@@ -27,7 +27,7 @@ class IconAssets {
   static const String loginTwoTone = 'assets/icons/login_twotone.svg';
   static const String login = 'assets/icons/login.svg';
   static const String logout = 'assets/icons/logout.svg';
-  static const String logoutTwoToe = 'assets/icons/logout_twotone.svg';
+  static const String logoutTwoTone = 'assets/icons/logout_twotone.svg';
   static const String menu = 'assets/icons/menu.svg';
   static const String noodle = 'assets/icons/noodle.svg';
   static const String profile = 'assets/icons/profile.svg';

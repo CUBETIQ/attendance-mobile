@@ -21,25 +21,22 @@ extension ListSpaceBetweenExtension on List<Widget> {
     return result;
   }
 
-  List<Widget> withDivide(Color color, EdgeInsetsGeometry padding) => [
+  List<Widget> withDivide({
+    Widget? widget,
+    double? width,
+    double? height,
+    Color? color,
+  }) =>
+      [
         for (int i = 0; i < length; i++) ...[
-          Padding(
-            padding: padding,
-            child: Column(
-              children: [
-                this[i],
-                i == length - 1
-                    ? const SizedBox.shrink()
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 20, bottom: 20),
-                        child: Divider(
-                          color: color,
-                          height: 1.0,
-                        ),
-                      )
-              ],
-            ),
-          )
+          this[i],
+          if (i < length - 1) // Add the condition here
+            widget ??
+                Container(
+                  height: height,
+                  width: width,
+                  color: color,
+                )
         ],
       ];
 

@@ -3,20 +3,25 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/types/attendance_status.dart';
 import 'package:timesync/utils/color_utils.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class StatusCard extends StatelessWidget {
   final String? status;
+  final String? statusLabel;
   final String? breakTimeTitle;
   final bool? isBreakTime;
+  final bool? isCheckOut;
+  final String? checkOut;
 
   const StatusCard({
     super.key,
     this.status,
+    this.statusLabel,
     this.breakTimeTitle,
     this.isBreakTime = false,
+    this.isCheckOut = false,
+    this.checkOut,
   });
 
   @override
@@ -25,35 +30,35 @@ class StatusCard extends StatelessWidget {
     return isBreakTime == true
         ? MyText(
             text: breakTimeTitle ?? "Ongoing",
-            style: AppFonts().bodySmallMedium.copyWith(
-                  color: Colors.white,
-                ),
+            style: AppFonts.LabelXSmall.copyWith(color: Colors.white),
           )
-        : isBreakTime == false
-            ? const SizedBox.shrink()
+        : isBreakTime == false || status == null
+            ? MyText(
+                text: isCheckOut == true ? "-" : "Not Started",
+                style: AppFonts.LabelXSmall.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground),
+              )
             : Container(
-                height: SizeUtils.scale(25, size.width),
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSize().paddingS7,
-                ),
                 decoration: BoxDecoration(
                   color: status != null
-                      ? ColorUtil.getStatusColor(context, status)
+                      ? ColorUtil.getStatusColor(context, status,
+                          isCheckOut: isCheckOut)
                       : Theme.of(context).colorScheme.outline.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(
-                    AppSize().borderRadiusMedium * (size.width / 375.0),
+                    SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
                   ),
                 ),
-                child: MyText(
-                  text: (status ?? "No Status").capitalizeFirst,
-                  style: AppFonts().bodySmallMedium.copyWith(
-                        color: status != null
-                            ? status == AttendanceStatus.early
-                                ? Colors.white
-                                : Theme.of(context).colorScheme.onPrimary
-                            : Theme.of(context).colorScheme.onBackground,
-                      ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeUtils.scale(8, size.width),
+                      vertical: SizeUtils.scale(4, size.width)),
+                  child: MyText(
+                    text: (statusLabel ?? "Not Started").capitalizeFirst,
+                    style: AppFonts.LabelXSmall.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
                 ),
               );
   }

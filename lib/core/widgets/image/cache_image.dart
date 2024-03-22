@@ -62,14 +62,6 @@ class MyCacheImage extends StatelessWidget {
                       image: imageProvider,
                       fit: BoxFit.cover,
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 2,
-                        blurRadius: 3,
-                        offset: const Offset(0, 0),
-                      ),
-                    ],
                   ),
                 ),
                 placeholder: (context, url) => Container(

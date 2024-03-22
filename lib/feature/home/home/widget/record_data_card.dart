@@ -1,42 +1,42 @@
+import 'package:flutter/material.dart';
 import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/widgets/check_box/check_box.dart';
+import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/home/home/widget/status_card.dart';
 import 'package:timesync/utils/date_util.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class RecordDataCard extends StatelessWidget {
   final int? time;
   final String? timeString;
   final String svgIcon;
-  final String firstTitle;
+  final String statusTitle;
   final String onNullTitle;
   final String secondTitle;
   final String? status;
-  final IconData? icon;
   final Color? iconColor;
   final bool? noStatus;
-  final Gradient? gradient;
   final bool? isBreakTime;
   final String? breakTimeTitle;
+  final bool? isCheckOut;
 
   const RecordDataCard({
     super.key,
     this.time,
     required this.svgIcon,
-    required this.firstTitle,
+    required this.statusTitle,
     required this.onNullTitle,
     required this.secondTitle,
     this.status,
     this.timeString,
-    this.icon,
     this.iconColor,
     this.noStatus,
-    this.gradient,
     this.isBreakTime,
     this.breakTimeTitle,
+    this.isCheckOut,
   });
 
   @override
@@ -47,113 +47,95 @@ class RecordDataCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              width: SizeUtils.scale(20, size.width),
-              height: SizeUtils.scale(20, size.width),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.outlineVariant,
-                  width: 1,
-                ),
+            Padding(
+              padding: EdgeInsets.only(right: SizeUtils.scale(12, size.width)),
+              child: MyCheckBox(
+                hasNoBackground: true,
+                isChecked: time != null
+                    ? true
+                    : isBreakTime == true
+                        ? true
+                        : false,
               ),
-              child: time != null
-                  ? SvgPicture.asset(
-                      svgIcon,
-                      width: SizeUtils.scale(20, size.width),
-                      height: SizeUtils.scale(20, size.width),
-                    )
-                  : isBreakTime == true
-                      ? SvgPicture.asset(
-                          svgIcon,
-                          width: SizeUtils.scale(20, size.width),
-                          height: SizeUtils.scale(20, size.width),
-                        )
-                      : const SizedBox.shrink(),
             ),
-            SizedBox(width: SizeUtils.scale(AppSize().paddingS8, size.width)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MyText(
-                  text: time != null
-                      ? DateUtil.formatTimeNoTrailing(
-                          DateTime.fromMillisecondsSinceEpoch(
-                          time ?? 0,
-                        ))
-                      : timeString ?? "--:--",
-                  style: AppFonts().bodyMediumMedium.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                ),
-                SizedBox(
-                  height: SizeUtils.scale(AppSize().paddingS2, size.width),
+                Padding(
+                  padding:
+                      EdgeInsets.only(bottom: SizeUtils.scale(4, size.width)),
+                  child: MyText(
+                    text: time != null
+                        ? DateUtil.formatTimeNoTrailing(
+                            DateTime.fromMillisecondsSinceEpoch(
+                            time ?? 0,
+                          ))
+                        : timeString ?? "--:--",
+                    style: AppFonts.LabelMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
                 ),
                 MyText(
                   text: time != null ? secondTitle : onNullTitle,
-                  style: AppFonts().bodySmallRegular.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
+                  style: AppFonts.LabelXSmall.copyWith(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
                 ),
               ],
             ),
           ],
         ),
         Container(
-          width: SizeUtils.scale(160, size.width),
-          height: SizeUtils.scale(75, size.width),
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSize().paddingHorizontalMedium,
-          ),
+          width: SizeUtils.scale(140, size.width),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 SizeUtils.scale(AppSize().borderRadiusMedium, size.width),
               ),
-              gradient: gradient ??
-                  LinearGradient(
-                    colors: [
-                      Theme.of(context)
-                          .colorScheme
-                          .outlineVariant
-                          .withOpacity(0.20),
-                      Theme.of(context)
-                          .colorScheme
-                          .outlineVariant
-                          .withOpacity(0.20),
-                    ],
-                  )),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(
-                    text: secondTitle,
-                    style: AppFonts().bodyMediumMedium.copyWith(
-                          color: gradient != null
-                              ? Colors.white
-                              : Theme.of(context).colorScheme.onSurface,
+              color: isBreakTime == true
+                  ? null
+                  : Theme.of(context).colorScheme.background,
+              gradient: isBreakTime == true ? MyColor.gradient01 : null),
+          child: Padding(
+            padding: EdgeInsets.all(SizeUtils.scale(12, size.width)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          bottom: SizeUtils.scale(6, size.width)),
+                      child: MyText(
+                        text: statusTitle,
+                        style: AppFonts.LabelMedium.copyWith(
+                          color: isBreakTime == true
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.onBackground,
                         ),
-                  ),
-                  SizedBox(
-                    height: SizeUtils.scale(AppSize().paddingS1, size.width),
-                  ),
-                  StatusCard(
-                    status: status,
-                    isBreakTime: isBreakTime,
-                    breakTimeTitle: breakTimeTitle,
-                  ),
-                ],
-              ),
-              Icon(
-                icon,
-                size: SizeUtils.scale(20, size.width),
-                color: iconColor,
-              ),
-            ],
+                      ),
+                    ),
+                    StatusCard(
+                      status: status,
+                      statusLabel: '5 min late',
+                      isBreakTime: isBreakTime,
+                      breakTimeTitle: breakTimeTitle,
+                      isCheckOut: isCheckOut,
+                    ),
+                  ],
+                ),
+                SvgIcon(
+                  icon: svgIcon,
+                  height: SizeUtils.scale(24, size.width),
+                  width: SizeUtils.scale(24, size.width),
+                  color: isBreakTime == true
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : Theme.of(context).colorScheme.onBackground,
+                )
+              ],
+            ),
           ),
         ),
       ],

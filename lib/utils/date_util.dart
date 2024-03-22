@@ -42,7 +42,7 @@ class DateUtil {
   static String formatTime(DateTime dateTime) {
     // Define the desired time format
     final DateFormat formatter = DateFormat(
-      'h:mm a',
+      'hh:mm a',
     );
 
     // Format the DateTime

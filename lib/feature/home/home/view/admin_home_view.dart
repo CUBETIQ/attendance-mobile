@@ -105,7 +105,7 @@ class HomeAdminView extends StatelessWidget {
                           padding: EdgeInsets.only(
                               bottom: SizeUtils.scale(16, size.width)),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ButtonCard(
                                 svgIcon: IconAssets.document,
@@ -118,6 +118,7 @@ class HomeAdminView extends StatelessWidget {
                                   arguments: controller.staffs.value,
                                 ),
                               ),
+                              SizedBox(width: SizeUtils.scale(16, size.width)),
                               ButtonCard(
                                 svgIcon: IconAssets.timeCircle,
                                 title: "Work Hour",

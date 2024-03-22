@@ -99,6 +99,8 @@ class RecordCard extends StatelessWidget {
                   statusTitle: "After Break",
                   onNullTitle: "After Break",
                   secondTitle: "After Break",
+                  status: endBreakTime != null ? AttendanceStatus.onTime : null,
+                  statusLabel: "Finished",
                 ),
                 RecordDataCard(
                   time: data?.checkOutDateTime,

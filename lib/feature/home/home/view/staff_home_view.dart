@@ -143,7 +143,10 @@ class HomeStaffView extends StatelessWidget {
                   presence: controller.totalAttendance.value,
                   absence: controller.totalAbsent.value,
                   leave: controller.totalLeave.value,
-                  lateness: '0 hr',
+                  lateness: StringUtil().calculateDuration(
+                    controller.totalLateDuration.value,
+                    noMinutes: true,
+                  ),
                 ),
               ),
               Padding(

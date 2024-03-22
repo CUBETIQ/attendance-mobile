@@ -28,7 +28,6 @@ import 'package:timesync/types/user_status.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/double_util.dart';
-import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -75,6 +74,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final totalAttendance = Rxn<int>(null);
   final totalAbsent = Rxn<int>(null);
   final totalLeave = Rxn<int>(null);
+  final totalLateDuration = Rxn<int>(null);
   final attendanceChart = <AttendanceChartModel>[].obs;
   final totalChartPresent = 0.obs;
   final totalChartAbsent = 0.obs;
@@ -104,7 +104,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final startBreakTime = Rxn<int>(null);
   final endBreakTime = Rxn<int>(null);
   final totalWorkHour = 0.obs;
-
   Timer? timer;
   final workingHour = Rxn<String>();
 
@@ -433,6 +432,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> getAttendance({bool? validateBreakTime, bool? noLoading}) async {
+    totalWorkHour.value = 0;
     isLoadingList.value = noLoading == true ? false : true;
     try {
       attendanceList.value = await HomeService().getAttendance(
@@ -474,7 +474,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           isCheckedIn.value = false;
         }
         for (var element in attendanceList) {
-          Logs.e("Duration: ${element.duration}");
           totalWorkHour.value += element.duration ?? 0;
         }
       } else {
@@ -597,6 +596,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     totalAbsent.value = 0;
     totalLeave.value = 0;
     totalAttendance.value = 0;
+    totalLateDuration.value = 0;
     try {
       summaryAttendance.value = await HomeService().getSummrizeAttendance(
         startDate: startOfMonth.value,
@@ -610,6 +610,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             ((totalLeave.value ?? 0) + (element.totalLeave ?? 0));
         totalAttendance.value =
             ((totalAttendance.value ?? 0) + (element.totalAttendance ?? 0));
+        totalLateDuration.value =
+            ((totalLateDuration.value ?? 0) + (element.totalLateDuration ?? 0));
       }
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

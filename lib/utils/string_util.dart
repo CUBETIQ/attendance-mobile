@@ -1,3 +1,5 @@
+import 'package:timesync/types/attendance_status.dart';
+
 class StringUtil {
   static String getfullname(
       String? firstName, String? lastName, String? username) {
@@ -92,20 +94,20 @@ class StringUtil {
       }
     }
 
-    if (status.toLowerCase() == 'late') {
+    if (status == AttendanceStatus.late) {
       return timeString.isEmpty ? 'Late' : '$timeString late';
-    } else if (status.toLowerCase() == 'early') {
+    } else if (status == AttendanceStatus.early) {
       return timeString.isEmpty ? 'Early' : '$timeString early';
-    } else if (status.toLowerCase() == 'ontime') {
+    } else if (status == AttendanceStatus.onTime) {
       return 'On time';
     } else {
       return 'Invalid status';
     }
   }
 
-  String? calculateDuration(int? minutes) {
+  String? calculateDuration(int? minutes, {bool? noMinutes}) {
     if (minutes == null || minutes == 0) {
-      return "0 hr 0 min";
+      return "-";
     }
 
     int hours = minutes ~/ 60;
@@ -118,13 +120,40 @@ class StringUtil {
       timeString += ' ';
     }
 
-    if (remainingMinutes > 0) {
-      timeString += '0 hr $remainingMinutes min';
-      if (remainingMinutes > 1) {
-        timeString += 's'; // pluralize 'minute' if needed
+    if (noMinutes != true) {
+      if (remainingMinutes > 0) {
+        timeString += '$remainingMinutes min';
+        if (remainingMinutes > 1) {
+          timeString += 's'; // pluralize 'minute' if needed
+        }
       }
     }
 
     return timeString;
+  }
+
+  String? getStatusByCalculateBreakTime(int? date, String? endBreakTime) {
+    if (date == null || endBreakTime == null) {
+      return null;
+    }
+
+    int endBreakTimeHour = int.parse(endBreakTime.split(":")[0]);
+    int endBreakTimeMinute = int.parse(endBreakTime.split(":")[1]);
+
+    DateTime now = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      endBreakTimeHour,
+      endBreakTimeMinute,
+    );
+
+    DateTime breakTime = DateTime.fromMillisecondsSinceEpoch(date * 1000);
+
+    if (now.isAfter(breakTime)) {
+      return "Late";
+    } else {
+      return "On time";
+    }
   }
 }

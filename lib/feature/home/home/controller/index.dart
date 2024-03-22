@@ -119,32 +119,32 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     getSummarizeAttendance();
     checkTime();
     listenToDeepLink();
-    workingHourDuration();
+    // workingHourDuration();
   }
 
-  Future<void> workingHourDuration() async {
-    if (checkInTime.value != null && checkOutTime.value == null) {
-      final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
-        attendanceList.last.checkInDateTime!,
-      );
+  // Future<void> workingHourDuration() async {
+  //   if (checkInTime.value != null && checkOutTime.value == null) {
+  //     final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
+  //       attendanceList.last.checkInDateTime!,
+  //     );
 
-      // Update the working hour value every second
-      timer = Timer.periodic(
-        const Duration(seconds: 1),
-        (Timer timer) async {
-          var duration = await checkTime()
-              .then((value) => value.difference(checkInDateTime));
-          var hours = duration.inHours;
-          var minutes = duration.inMinutes.remainder(60);
-          var formattedMinutes = minutes.toString().padLeft(2, '0');
-          var seconds = duration.inSeconds.remainder(60);
-          var formattedSeconds = seconds.toString().padLeft(2, '0');
+  //     // Update the working hour value every second
+  //     timer = Timer.periodic(
+  //       const Duration(seconds: 1),
+  //       (Timer timer) async {
+  //         var duration = await checkTime()
+  //             .then((value) => value.difference(checkInDateTime));
+  //         var hours = duration.inHours;
+  //         var minutes = duration.inMinutes.remainder(60);
+  //         var formattedMinutes = minutes.toString().padLeft(2, '0');
+  //         var seconds = duration.inSeconds.remainder(60);
+  //         var formattedSeconds = seconds.toString().padLeft(2, '0');
 
-          workingHour.value = "$hours:$formattedMinutes:$formattedSeconds";
-        },
-      );
-    }
-  }
+  //         workingHour.value = "$hours:$formattedMinutes:$formattedSeconds";
+  //       },
+  //     );
+  //   }
+  // }
 
   void onRefresh() {
     NavigationController.to.getUserLocation();
@@ -321,7 +321,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           if (Get.isRegistered<ProfileController>()) {
             ProfileController.to.getSummarizeAttendance();
           }
-          workingHourDuration();
+          // workingHourDuration();
           cancelNotificationReminder();
           getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
         } on DioException catch (e) {
@@ -593,7 +593,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         NavigationController.to.organization.value.configs?.startHour ?? "8:00";
     endHour.value =
         NavigationController.to.organization.value.configs?.endHour ?? "17:00";
-    currentDate.value = DateFormat('E, MMM dd').format(date);
+    currentDate.value = DateFormat('EEEE, dd MMMM yyyy').format(date);
   }
 
   void checkBreakTime() {

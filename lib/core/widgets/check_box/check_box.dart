@@ -9,12 +9,14 @@ class MyCheckBox extends StatelessWidget {
     this.onTap,
     this.boxSize,
     this.borderRadius,
+    this.hasNoBackground,
   });
 
   final bool isChecked;
   final void Function()? onTap;
   final double? boxSize;
   final double? borderRadius;
+  final bool? hasNoBackground;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,14 @@ class MyCheckBox extends StatelessWidget {
               SizeUtils.scale(borderRadius ?? AppSpacing.XS, size.width)),
           border: Border.all(
             width: SizeUtils.scale(1.5, size.width),
-            color: Theme.of(context).colorScheme.outlineVariant,
+            color: hasNoBackground == true
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.outlineVariant,
           ),
           color: isChecked
-              ? Theme.of(context).colorScheme.primary
+              ? hasNoBackground == true
+                  ? Colors.transparent
+                  : Theme.of(context).colorScheme.primary
               : Colors.transparent,
         ),
         child: isChecked
@@ -41,7 +47,9 @@ class MyCheckBox extends StatelessWidget {
                 Icons.check,
                 size: SizeUtils.scale(
                     (boxSize != null ? (boxSize!) : (18.5 / 1.3)), size.width),
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: hasNoBackground == true
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onPrimary,
               )
             : null,
       ),

@@ -36,12 +36,10 @@ class LeaveController extends GetxController {
   Future<void> initFunction() async {
     initDate();
     await getUserLeave();
-    ;
   }
 
   Future<void> onRefresh() async {
     await getUserLeave();
-    ;
   }
 
   Future<void> getUserLeave() async {
@@ -52,28 +50,7 @@ class LeaveController extends GetxController {
         startDate: startDate.value,
         endDate: endDate.value,
       );
-      totalLeave.value = leaves.length;
-
-      totalPendingLeave.value = leaves
-          .where((element) => element.status == LeaveStatus.pending)
-          .length;
-      totalApprovedLeave.value = leaves
-          .where((element) => element.status == LeaveStatus.approved)
-          .length;
-      totalDeclinedLeave.value = leaves.where((element) {
-        return element.status == LeaveStatus.rejected ||
-            element.status == LeaveStatus.cancelled;
-      }).length;
-
-      percentagePendingLeave.value = totalPendingLeave.value == 0
-          ? 0
-          : (totalPendingLeave.value / totalLeave.value * 100) / 100;
-      percentageApprovedLeave.value = totalApprovedLeave.value == 0
-          ? 0
-          : (totalApprovedLeave.value / totalLeave.value * 100) / 100;
-      percentageDeclinedLeave.value = totalDeclinedLeave.value == 0
-          ? 0
-          : (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
+      calculateLeave();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -92,7 +69,7 @@ class LeaveController extends GetxController {
         onTapConfirm: () async {
           await LeaveService().deleteLeave(id);
           await getUserLeave();
-          ;
+
           Get.back();
         },
         image: SvgAssets.delete,
@@ -157,7 +134,6 @@ class LeaveController extends GetxController {
         onTapConfirm: () async {
           await LeaveService().cancelLeave(input: data, id: leave?.id ?? "");
           await getUserLeave();
-          ;
           Get.back();
         },
         image: SvgAssets.cancel,
@@ -180,7 +156,29 @@ class LeaveController extends GetxController {
       endDate.value =
           DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
       await getUserLeave();
-      ;
     }
+  }
+
+  void calculateLeave() {
+    totalLeave.value = leaves.length;
+    totalPendingLeave.value =
+        leaves.where((element) => element.status == LeaveStatus.pending).length;
+    totalApprovedLeave.value = leaves
+        .where((element) => element.status == LeaveStatus.approved)
+        .length;
+    totalDeclinedLeave.value = leaves.where((element) {
+      return element.status == LeaveStatus.rejected ||
+          element.status == LeaveStatus.cancelled;
+    }).length;
+
+    percentagePendingLeave.value = totalPendingLeave.value == 0
+        ? 0
+        : (totalPendingLeave.value / totalLeave.value * 100) / 100;
+    percentageApprovedLeave.value = totalApprovedLeave.value == 0
+        ? 0
+        : (totalApprovedLeave.value / totalLeave.value * 100) / 100;
+    percentageDeclinedLeave.value = totalDeclinedLeave.value == 0
+        ? 0
+        : (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
   }
 }

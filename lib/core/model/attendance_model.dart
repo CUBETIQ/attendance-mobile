@@ -13,6 +13,7 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
   final int? checkOutDateTime;
   final String? checkOutType;
   final String? checkOutStatus;
+  final BreakTimeModel? breakTime;
   final LocationModel? checkInLocation;
   final LocationModel? checkOutLocation;
   final int? duration;
@@ -35,6 +36,7 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
     this.checkOutLocation,
     this.duration,
     this.attachment,
+    this.breakTime,
   });
 
   @override
@@ -56,6 +58,7 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
       checkOutType: json['checkOutType'],
       checkOutStatus: json['checkOutStatus'],
       attachment: json['attachment'],
+      breakTime: BreakTimeModel().fromJson(json['breakTime']),
       checkInLocation: LocationModel().fromJson(json['checkInLocation']),
       checkOutLocation: LocationModel().fromJson(json['checkOutLocation']),
       duration: json['duration'],
@@ -88,6 +91,7 @@ class AttendanceModel extends BaseModel<AttendanceModel> {
       'checkOutType': checkOutType,
       'checkOutStatus': checkOutStatus,
       'attachment': attachment,
+      'breakTime': breakTime?.toJson(),
       'checkInLocation': checkInLocation?.toJson(),
       'checkOutLocation': checkOutLocation?.toJson(),
       'duration': duration,
@@ -148,6 +152,49 @@ class LocationModel extends BaseModel<LocationModel> {
       'lat': lat,
       'lng': lng,
       'inOffice': inOffice,
+    };
+  }
+}
+
+class BreakTimeModel extends BaseModel<BreakTimeModel> {
+  final int? start;
+  final int? end;
+  final int? duration;
+
+  BreakTimeModel({
+    this.start,
+    this.end,
+    this.duration,
+  });
+
+  @override
+  BreakTimeModel fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return BreakTimeModel();
+    }
+    return BreakTimeModel(
+      start: json['start'],
+      end: json['end'],
+      duration: json['duration'],
+    );
+  }
+
+  @override
+  List<BreakTimeModel> fromListJson(List? listJson) {
+    if (listJson == null) {
+      return [];
+    }
+    return listJson
+        .map<BreakTimeModel>((e) => BreakTimeModel().fromJson(e))
+        .toList();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'start': start,
+      'end': end,
+      'duration': duration,
     };
   }
 }

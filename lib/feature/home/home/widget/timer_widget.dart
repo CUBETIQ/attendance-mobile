@@ -13,6 +13,8 @@ class TimerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
+      alignment: Alignment.center,
+      constraints: BoxConstraints(minWidth: SizeUtils.scale(48, size.width)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize().borderRadiusSmall),
           border: Border.all(color: Theme.of(context).colorScheme.primary)),

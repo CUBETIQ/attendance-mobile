@@ -49,6 +49,9 @@ class AttendancePieChartCard extends StatelessWidget {
         color: Colors.transparent,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: size.width > 600
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.start,
           children: [
             Container(
               width: cardWidth ?? SizeUtils.scale(120, size.width),

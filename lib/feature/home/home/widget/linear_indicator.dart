@@ -32,11 +32,9 @@ class LinearIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // FIXME: Please fix this. (0.28 is a constant)
-    final _p = (percent ?? 0) <= 0 ? 0 : (percent! - 0.28);
-
     return MyCard(
       width: size.width,
+      clip: Clip.antiAliasWithSaveLayer,
       borderRadius: BorderRadius.circular(
         SizeUtils.scale(14, size.width),
       ),
@@ -59,39 +57,55 @@ class LinearIndicator extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onBackground)),
           Row(
             children: [
-              SizedBox(
-                width: percent != null
-                    ? size.width * _p
-                    : SizeUtils.scale(0, size.width),
-                child: LinearPercentIndicator(
-                  animation: true,
-                  lineHeight: indicatorHeight ?? SizeUtils.scale(5, size.width),
-                  animationDuration: 250,
-                  padding: EdgeInsets.zero,
-                  percent: 1,
-                  barRadius: Radius.circular(
-                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
-                  ),
-                  progressColor: color ?? Theme.of(context).colorScheme.primary,
-                ),
-              ),
+              percent != null && percent != 0
+                  ? Expanded(
+                      flex: percent != null && percent != 0
+                          ? (percent! * 100).toInt()
+                          : 1,
+                      child: LinearPercentIndicator(
+                        animation: true,
+                        lineHeight:
+                            indicatorHeight ?? SizeUtils.scale(5, size.width),
+                        animationDuration: 250,
+                        padding: EdgeInsets.zero,
+                        percent: 1,
+                        barRadius: Radius.circular(
+                          SizeUtils.scale(
+                              AppSize().borderRadiusLarge, size.width),
+                        ),
+                        progressColor:
+                            color ?? Theme.of(context).colorScheme.primary,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
               SizedBox(
                   width: SizeUtils.scale(
                       percent != null && percent == 0 ? 0 : 6, size.width)),
-              Expanded(
-                child: LinearPercentIndicator(
-                  animation: true,
-                  lineHeight: indicatorHeight ?? SizeUtils.scale(5, size.width),
-                  animationDuration: 250,
-                  padding: EdgeInsets.zero,
-                  percent: 0.02,
-                  barRadius: Radius.circular(
-                    SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
-                  ),
-                  progressColor: color ?? Theme.of(context).colorScheme.primary,
-                  isRTL: true,
-                ),
-              ),
+              percent != null && percent! < 1
+                  ? Expanded(
+                      flex: (percent != null && percent != 0
+                              ? (1 - percent!) * 100
+                              : 100)
+                          .toInt(),
+                      child: LinearPercentIndicator(
+                        animation: true,
+                        lineHeight:
+                            indicatorHeight ?? SizeUtils.scale(5, size.width),
+                        animationDuration: 250,
+                        padding: EdgeInsets.zero,
+                        percent: percent != null && percent != 0
+                            ? percent! / 15
+                            : 1 / 55,
+                        barRadius: Radius.circular(
+                          SizeUtils.scale(
+                              AppSize().borderRadiusLarge, size.width),
+                        ),
+                        progressColor:
+                            color ?? Theme.of(context).colorScheme.primary,
+                        isRTL: true,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
               Padding(
                 padding: EdgeInsets.only(left: SizeUtils.scale(6, size.width)),
                 child: MyText(

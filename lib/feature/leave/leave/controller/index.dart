@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/leave_model.dart';
-import 'package:timesync/core/model/summary_leave_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
@@ -16,7 +15,6 @@ import 'package:timesync/types/state.dart';
 class LeaveController extends GetxController {
   static LeaveController get to => Get.find();
   final leaves = <LeaveModel>[].obs;
-  final summarizeLeaves = <SummaryLeaveModel>[].obs;
   var isLoading = false.obs;
   final startDate = Rxn<int>(null);
   final endDate = Rxn<int>(null);
@@ -38,55 +36,49 @@ class LeaveController extends GetxController {
   Future<void> initFunction() async {
     initDate();
     await getUserLeave();
-    getUserSummarizeLeave();
+    ;
   }
 
   Future<void> onRefresh() async {
     await getUserLeave();
-    getUserSummarizeLeave();
+    ;
   }
 
   Future<void> getUserLeave() async {
     isLoading.value = true;
-    totalLeave.value = 0; 
+    totalLeave.value = 0;
     try {
       leaves.value = await LeaveService().getUserLeave(
         startDate: startDate.value,
         endDate: endDate.value,
       );
       totalLeave.value = leaves.length;
+
+      totalPendingLeave.value = leaves
+          .where((element) => element.status == LeaveStatus.pending)
+          .length;
+      totalApprovedLeave.value = leaves
+          .where((element) => element.status == LeaveStatus.approved)
+          .length;
+      totalDeclinedLeave.value = leaves.where((element) {
+        return element.status == LeaveStatus.rejected ||
+            element.status == LeaveStatus.cancelled;
+      }).length;
+
+      percentagePendingLeave.value = totalPendingLeave.value == 0
+          ? 0
+          : (totalPendingLeave.value / totalLeave.value * 100) / 100;
+      percentageApprovedLeave.value = totalApprovedLeave.value == 0
+          ? 0
+          : (totalApprovedLeave.value / totalLeave.value * 100) / 100;
+      percentageDeclinedLeave.value = totalDeclinedLeave.value == 0
+          ? 0
+          : (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     } finally {
       isLoading.value = false;
-    }
-  }
-
-  Future<void> getUserSummarizeLeave() async {
-    clearData();
-    try {
-      summarizeLeaves.value = await LeaveService().getUserLeavSummarize(
-        startDate: startDate.value,
-        endDate: endDate.value,
-      );
-
-      if (summarizeLeaves.isNotEmpty && totalLeave.value != 0) {
-        for (var element in summarizeLeaves) {
-          totalPendingLeave.value += element.totalPendingLeave!;
-          totalApprovedLeave.value += element.totalApprovedLeave!;
-          totalDeclinedLeave.value += element.totalRejectedLeave!;
-        }
-        percentageApprovedLeave.value =
-            (totalApprovedLeave.value / totalLeave.value * 100) / 100;
-        percentagePendingLeave.value =
-            (totalPendingLeave.value / totalLeave.value * 100) / 100;
-        percentageDeclinedLeave.value =
-            (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
-      }
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
     }
   }
 
@@ -100,7 +92,7 @@ class LeaveController extends GetxController {
         onTapConfirm: () async {
           await LeaveService().deleteLeave(id);
           await getUserLeave();
-          getUserSummarizeLeave();
+          ;
           Get.back();
         },
         image: SvgAssets.delete,
@@ -165,7 +157,7 @@ class LeaveController extends GetxController {
         onTapConfirm: () async {
           await LeaveService().cancelLeave(input: data, id: leave?.id ?? "");
           await getUserLeave();
-          getUserSummarizeLeave();
+          ;
           Get.back();
         },
         image: SvgAssets.cancel,
@@ -188,7 +180,7 @@ class LeaveController extends GetxController {
       endDate.value =
           DateTime(picked.year, picked.month + 1, 0).millisecondsSinceEpoch;
       await getUserLeave();
-      getUserSummarizeLeave();
+      ;
     }
   }
 }

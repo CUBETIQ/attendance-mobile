@@ -2,13 +2,18 @@
 
 [App Fixes]
 
-- a
-- b
+- Summary Task When Change To New Month If The Task Is Empty It Will Display 100% on Pending
+- Fetch Personal Attendance Attendance With Be Wrong If User Change Device Time Which Cause Override To Check In Again
+- Remove Capitalize Format From Task Title
+- Show Created Date In Task Detail
+- Encoded Organization QR
+- Added Upload QR button and function
+- Move Option Button for Check in/out confirmation dialog from Attendance screen to Setting
 
 [Backend - Fixes]
 
-- a
-- b
+- Fix Staff Can’t Cancel Leave Due To Permission Error
+
 
 ### 22/March/2024
 

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -62,6 +63,8 @@ class AppConfig {
 
   static PackageInfo? packageInfo;
 
+  static String? deviceInfo;
+
   static Future<void> initAppConfig() async {
     // init timezone
     tz.initializeTimeZones();
@@ -77,5 +80,23 @@ class AppConfig {
     appLocalPath = await FileUtil.getLocalPath();
     xApiHash =
         EncryptUtil.createHash(Key.vfsClientApiKey, Key.vfsClientPublicKey);
+
+    // get device info
+    DeviceInfoPlugin getDeviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      final androidInfo = await getDeviceInfo.androidInfo;
+      deviceInfo = {
+        "Model": androidInfo.id,
+        "Device": androidInfo.device,
+        "Version": androidInfo.version.release
+      }.toString();
+    } else if (Platform.isIOS) {
+      final iosInfo = await getDeviceInfo.iosInfo;
+      deviceInfo = {
+        "Model": iosInfo.identifierForVendor,
+        "Device": iosInfo.name,
+        "Version": iosInfo.systemVersion,
+      }.toString();
+    }
   }
 }

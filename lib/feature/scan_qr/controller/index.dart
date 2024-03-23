@@ -1,14 +1,19 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image/image.dart' as img;
+import 'package:image_picker/image_picker.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:timesync/constants/deepLink.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
+import 'package:timesync/utils/converter.dart';
 import 'package:timesync/utils/validator.dart';
+import 'package:zxing2/qrcode.dart';
 
 class ScanQRController extends GetxController {
   static ScanQRController get to => Get.find();
@@ -54,10 +59,11 @@ class ScanQRController extends GetxController {
                     ?.toLowerCase()
                     .replaceAll(' ', '_') ??
                 '';
+            String? decoded = fromBase64(scanData.code?.split('/').last);
 
             if (scanData.code?.contains(DeepLink.app) == true) {
-              if (scanData.code?.contains(orgName) == true) {
-                QRService().initDeepLink();
+              if (decoded?.contains(orgName) == true) {
+                QRService().uploadQR(scanData.code!);
               } else {
                 showWarningSnackBar('Invalid QR',
                     'The QR code you scanned does not belong to your organization. Please try again.');
@@ -84,8 +90,53 @@ class ScanQRController extends GetxController {
     }
   }
 
-  Future<void> pausedCamera(QRViewController controller) async {
+  Future<void> pausedCamera(QRViewController? controller) async {
     HapticFeedback.heavyImpact();
-    await controller.pauseCamera();
+    await controller?.pauseCamera();
+  }
+
+  Future<void> uploadQR() async {
+    final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (result != null) {
+      final file = File(result.path);
+      Uint8List bytes = file.readAsBytesSync();
+      final image = img.decodeImage(bytes);
+      if (image != null) {
+        LuminanceSource source = RGBLuminanceSource(
+            image.width,
+            image.height,
+            image
+                .convert(numChannels: 4)
+                .getBytes(order: img.ChannelOrder.rgba)
+                .buffer
+                .asInt32List());
+        final bitmap = BinaryBitmap(HybridBinarizer(source));
+        final reader = QRCodeReader();
+        final barcode = reader.decode(bitmap);
+        if (barcode.text.isNotEmpty) {
+          if (barcode.text.contains(DeepLink.app) == true) {
+            final orgName = NavigationController.to.organization.value.name
+                    ?.toLowerCase()
+                    .replaceAll(' ', '_') ??
+                '';
+            String? decoded = fromBase64(barcode.text.split('/').last);
+            if (decoded?.contains(orgName) == true) {
+              try {
+                await pausedCamera(qrController.value);
+                await QRService().uploadQR(barcode.text);
+              } finally {
+                qrController.value?.resumeCamera();
+              }
+            } else {
+              showWarningSnackBar('Invalid QR',
+                  'The QR code you scanned does not belong to your organization. Please try again.');
+            }
+          } else {
+            showWarningSnackBar('Invalid QR',
+                'You have scanned an invalid QR code that is not supported by TimeSync. Please try again.');
+          }
+        }
+      }
+    }
   }
 }

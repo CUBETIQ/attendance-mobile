@@ -104,8 +104,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final startBreakTime = Rxn<int>(null);
   final endBreakTime = Rxn<int>(null);
   final totalWorkHour = 0.obs;
-  Timer? timer;
-  final workingHour = Rxn<String>();
 
   @override
   void onInit() {
@@ -131,11 +129,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void listenToDeepLink() {
-    uriLinkStream.listen((Uri? uri) async {
-      if (uri != null) {
-        QRService().initDeepLink();
-      }
-    });
+    uriLinkStream.listen(
+      (Uri? uri) async {
+        if (uri != null) {
+          QRService().initDeepLink();
+        }
+      },
+    );
 
     if (!Validator.isValNull(QRService().deepLinkUrl.value)) {
       QRService()
@@ -465,7 +465,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
         } else {
-          timer?.cancel();
           checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
               attendanceList.last.checkOutDateTime!,
@@ -564,12 +563,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     /// Or you could get NTP current (It will call DateTime.now() and add NTP offset to it)
     myTime = DateTime.now().toLocal();
 
-    /// Or get NTP offset (in milliseconds) and add it yourself
-    final int offset =
-        await NTP.getNtpOffset(localTime: DateTime.now().toLocal());
-    ntpTime = myTime.add(Duration(milliseconds: offset));
-
-    result = ntpTime;
+    try {
+      /// Or get NTP offset (in milliseconds) and add it yourself
+      final int offset =
+          await NTP.getNtpOffset(localTime: DateTime.now().toLocal());
+      ntpTime = myTime.add(Duration(milliseconds: offset));
+      result = ntpTime;
+    } catch (e) {
+      result = DateTime.now();
+    }
 
     return result;
   }
@@ -626,7 +628,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  void initDate() {
+  Future<void> initDate() async {
+    final DateTime date = await checkTime();
     startOfDay.value = DateTime(date.year, date.month, date.day, 0, 0, 0)
         .millisecondsSinceEpoch;
     endOfDay.value = DateTime(date.year, date.month, date.day, 23, 59, 59)

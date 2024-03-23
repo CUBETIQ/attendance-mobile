@@ -72,7 +72,7 @@ class StringUtil {
     return result;
   }
 
-  String? calculateDurationWithStatus(int? minutes, String? status) {
+  static String? calculateDurationWithStatus(int? minutes, String? status) {
     if (minutes == null || status == null) {
       return null;
     }
@@ -105,7 +105,7 @@ class StringUtil {
     }
   }
 
-  String? calculateDuration(int? minutes, {bool? noMinutes}) {
+  static String? calculateDuration(int? minutes, {bool? noMinutes}) {
     if (minutes == null || minutes == 0) {
       return "-";
     }
@@ -130,13 +130,17 @@ class StringUtil {
     }
 
     return timeString;
-  }
+  } 
 
-  String? getStatusByCalculateBreakTime(int? date, String? endBreakTime) {
+  static String? getStatusByCalculateBreakTime(
+      int? date, String? endBreakTime) {
     if (date == null || endBreakTime == null) {
       return null;
     }
 
+    //
+
+    // End time = 13:00 (to_time('13:00', 'HH:mm'))
     int endBreakTimeHour = int.parse(endBreakTime.split(":")[0]);
     int endBreakTimeMinute = int.parse(endBreakTime.split(":")[1]);
 
@@ -148,12 +152,14 @@ class StringUtil {
       endBreakTimeMinute,
     );
 
-    DateTime breakTime = DateTime.fromMillisecondsSinceEpoch(date * 1000);
+    DateTime breakTime = DateTime.fromMillisecondsSinceEpoch(date);
 
     if (now.isAfter(breakTime)) {
-      return "Late";
+      return AttendanceStatus.late;
+    } else if (now.isBefore(breakTime)) {
+      return AttendanceStatus.early;
     } else {
-      return "On time";
+      return AttendanceStatus.onTime;
     }
   }
 }

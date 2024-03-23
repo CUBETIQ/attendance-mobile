@@ -13,6 +13,7 @@ import 'package:timesync/feature/organization/organiziation/widget/company_profi
 import 'package:timesync/feature/organization/organiziation/widget/info_data_column.dart';
 import 'package:timesync/feature/organization/organiziation/widget/overview_card.dart';
 import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class OrganizationView extends StatelessWidget {
@@ -162,9 +163,13 @@ class OrganizationView extends StatelessWidget {
                                               .colorScheme
                                               .primary,
                                           title: "Break Duration",
-                                          value: controller.organization.value
-                                                  .configs?.breakDuration ??
-                                              "00:00",
+                                          value: DateUtil.calculateDuration(
+                                              controller.organization.value
+                                                  .configs?.breakTime
+                                                  ?.split("-")[0],
+                                              controller.organization.value
+                                                  .configs?.breakTime
+                                                  ?.split("-")[1]),
                                         ),
                                       ],
                                     ),

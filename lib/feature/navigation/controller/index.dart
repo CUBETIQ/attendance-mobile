@@ -25,7 +25,6 @@ import 'package:timesync/types/role.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/location_util.dart';
-import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class NavigationController extends GetxController {
@@ -58,14 +57,16 @@ class NavigationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    user.value = Get.arguments["user"];
-    position.value = Get.arguments["position"];
-    department.value = Get.arguments["department"];
-    organization.value = Get.arguments["organization"];
-    userStatus.value = Get.arguments["userStatus"];
-    getUserRole.value = user.value.role ?? Role.staff;
-    fullname.value =
-        "${user.value.firstName ?? user.value.username!} ${user.value.lastName ?? ""}";
+    if (Get.arguments != null) {
+      user.value = Get.arguments["user"];
+      position.value = Get.arguments["position"];
+      department.value = Get.arguments["department"];
+      organization.value = Get.arguments["organization"];
+      userStatus.value = Get.arguments["userStatus"];
+      getUserRole.value = user.value.role ?? Role.staff;
+      fullname.value =
+          "${user.value.firstName ?? user.value.username!} ${user.value.lastName ?? ""}";
+    }
     initItems();
     getUserLocation();
     getOrganizationTotalWorkHour();
@@ -144,8 +145,6 @@ class NavigationController extends GetxController {
   void getOrganizationTotalWorkHour() {
     String startHour = organization.value.configs?.startHour ?? "08:00";
     String endHour = organization.value.configs?.endHour ?? "17:00";
-
-    Logs.e(organization.value);
 
     startBreakTime.value =
         organization.value.configs?.breakTime?.split("-")[0] ?? "12:00";

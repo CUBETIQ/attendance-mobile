@@ -1,4 +1,5 @@
 import 'package:timesync/config/app_config.dart';
+import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
@@ -6,8 +7,10 @@ import 'package:timesync/core/model/department_model.dart';
 import 'package:timesync/core/model/organization_model.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_status_model.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
+import 'package:timesync/feature/auth/activation/service/index.dart';
 import 'package:timesync/feature/auth/login/model/index.dart';
 import 'package:timesync/feature/auth/login/service/index.dart';
 import 'package:timesync/notification/notification_topic.dart';
@@ -88,8 +91,32 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> loginWithSSO() async {
-    showWarningSnackBar("Not Avaliable", "This feature is not available yet");
+  Future<void> deactivation(BuildContext context) async {
+    getConfirmBottomSheet(
+      context,
+      image: SvgAssets.leaving,
+      title: "Deactivate",
+      description:
+          "Are you sure you want to deactivate from your organization?",
+      onTapConfirm: () async {
+        try {
+          final result = await ActivationService().deactivate(
+            AppConfig.deviceInfo,
+          );
+          if (result == true) {
+            await IsarService().clearLocalData(
+              deleteOrganization: true,
+              deleteToken: true,
+              unactivate: true,
+            );
+            Get.offNamed(Routes.ACTIVATION);
+          }
+        } on DioException catch (e) {
+          showErrorSnackBar("Error", e.response?.data["message"]);
+          rethrow;
+        }
+      },
+    );
   }
 
   void handleNotification(bool isAdmin) {

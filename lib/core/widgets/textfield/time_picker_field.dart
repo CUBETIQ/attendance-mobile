@@ -66,13 +66,6 @@ class MyTimePickerField extends StatelessWidget {
                   context: context,
                   initialTime: TimeOfDay.now(),
                   initialEntryMode: TimePickerEntryMode.dial,
-                  builder: (BuildContext context, Widget? child) {
-                    return MediaQuery(
-                      data: MediaQuery.of(context)
-                          .copyWith(alwaysUse24HourFormat: true),
-                      child: child!,
-                    );
-                  },
                 );
                 if (picked != null) {
                   // Format hour and minute with leading zeros

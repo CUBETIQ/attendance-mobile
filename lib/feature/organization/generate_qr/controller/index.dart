@@ -9,6 +9,7 @@ import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/deepLink.dart';
 import 'package:timesync/core/widgets/color_picker/color_picker_dialog.dart';
 import 'package:timesync/feature/organization/organiziation/controller/index.dart';
+import 'package:timesync/utils/converter.dart';
 
 class GenerateQRController extends GetxController {
   static GenerateQRController get to => Get.find();
@@ -17,10 +18,10 @@ class GenerateQRController extends GetxController {
   final color = Rxn<Color>(null);
   final savedColor = Rxn<Color>(null);
 
-  // String link =
-  //     "${DeepLink.app}/${toBase64('${OrganizationController.to.organization.value.name?.toLowerCase().replaceAll(' ', '_')}?lat=${OrganizationController.to.organization.value.location?.lat}&long=${OrganizationController.to.organization.value.location?.lng}')}";
   String link =
-      "${DeepLink.app}/${OrganizationController.to.organization.value.name?.toLowerCase().replaceAll(' ', '_')}?lat=${OrganizationController.to.organization.value.location?.lat}&long=${OrganizationController.to.organization.value.location?.lng}";
+      "${DeepLink.app}/${toBase64('${OrganizationController.to.organization.value.name?.toLowerCase().replaceAll(' ', '_')}?lat=${OrganizationController.to.organization.value.location?.lat}&long=${OrganizationController.to.organization.value.location?.lng}')}";
+  // String link =
+  //     "${DeepLink.app}/${OrganizationController.to.organization.value.name?.toLowerCase().replaceAll(' ', '_')}?lat=${OrganizationController.to.organization.value.location?.lat}&long=${OrganizationController.to.organization.value.location?.lng}";
 
   ScreenshotController screenshotController = ScreenshotController();
 

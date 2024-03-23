@@ -11,6 +11,7 @@ import 'package:timesync/constants/deepLink.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
+import 'package:timesync/utils/converter.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:zxing2/qrcode.dart';
 
@@ -58,9 +59,10 @@ class ScanQRController extends GetxController {
                     ?.toLowerCase()
                     .replaceAll(' ', '_') ??
                 '';
+            String? decoded = fromBase64(scanData.code?.split('/').last);
 
             if (scanData.code?.contains(DeepLink.app) == true) {
-              if (scanData.code?.contains(orgName) == true) {
+              if (decoded?.contains(orgName) == true) {
                 QRService().uploadQR(scanData.code!);
               } else {
                 showWarningSnackBar('Invalid QR',
@@ -117,7 +119,8 @@ class ScanQRController extends GetxController {
                     ?.toLowerCase()
                     .replaceAll(' ', '_') ??
                 '';
-            if (barcode.text.contains(orgName) == true) {
+            String? decoded = fromBase64(barcode.text.split('/').last);
+            if (decoded?.contains(orgName) == true) {
               try {
                 await pausedCamera(qrController.value);
                 await QRService().uploadQR(barcode.text);

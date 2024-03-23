@@ -105,7 +105,7 @@ class AttendancePieChartCard extends StatelessWidget {
                               percentage: presentPercentage,
                               color: Theme.of(context).colorScheme.primary,
                             ),
-                            badgePositionPercentageOffset: .98,
+                            badgePositionPercentageOffset: .70,
                           ),
                           PieChartSectionData(
                             showTitle: false,
@@ -120,7 +120,7 @@ class AttendancePieChartCard extends StatelessWidget {
                               percentage: onLeavePercentage,
                               color: Theme.of(context).colorScheme.secondary,
                             ),
-                            badgePositionPercentageOffset: .98,
+                            badgePositionPercentageOffset: .70,
                           ),
                           PieChartSectionData(
                             showTitle: false,
@@ -139,7 +139,7 @@ class AttendancePieChartCard extends StatelessWidget {
                                   .colorScheme
                                   .secondaryContainer,
                             ),
-                            badgePositionPercentageOffset: .98,
+                            badgePositionPercentageOffset: .70,
                           ),
                         ],
                       ),

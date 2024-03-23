@@ -33,7 +33,9 @@ class MyCheckBox extends StatelessWidget {
           border: Border.all(
             width: SizeUtils.scale(1.5, size.width),
             color: hasNoBackground == true
-                ? Theme.of(context).colorScheme.primary
+                ? isChecked == true
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.outlineVariant
                 : Theme.of(context).colorScheme.outlineVariant,
           ),
           color: isChecked
@@ -48,7 +50,9 @@ class MyCheckBox extends StatelessWidget {
                 size: SizeUtils.scale(
                     (boxSize != null ? (boxSize!) : (18.5 / 1.3)), size.width),
                 color: hasNoBackground == true
-                    ? Theme.of(context).colorScheme.primary
+                    ? isChecked == true
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.outlineVariant
                     : Theme.of(context).colorScheme.onPrimary,
               )
             : null,

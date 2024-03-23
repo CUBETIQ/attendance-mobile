@@ -104,8 +104,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final startBreakTime = Rxn<int>(null);
   final endBreakTime = Rxn<int>(null);
   final totalWorkHour = 0.obs;
-  Timer? timer;
-  final workingHour = Rxn<String>();
 
   @override
   void onInit() {
@@ -467,7 +465,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         if (attendanceList.last.checkOutDateTime == null) {
           isCheckedIn.value = true;
         } else {
-          timer?.cancel();
           checkOutTime.value = DateUtil.formatTime(
             DateTime.fromMillisecondsSinceEpoch(
               attendanceList.last.checkOutDateTime!,

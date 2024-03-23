@@ -8,7 +8,6 @@ import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/types/task_status.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;
@@ -90,7 +89,7 @@ class TaskCard extends StatelessWidget {
                         maxWidth: size.width * 0.56,
                       ),
                       child: MyText(
-                        text: (task.name ?? "Task Name").capitalizeFirst,
+                        text: (task.name ?? "Task Name"),
                         maxLines: 2,
                         style: AppFonts().bodyLarge.copyWith(
                               color: Theme.of(context).colorScheme.outline,

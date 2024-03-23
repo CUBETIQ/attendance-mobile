@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:timesync/utils/logger.dart';
 
 class DateUtil {
   static String formatDateTime(DateTime dateTime) {
@@ -218,19 +219,24 @@ class DateUtil {
     return difference.inMinutes;
   }
 
-  static String calculateDuration(String startHour, String endHour) {
+  static String calculateDuration(String? startHour, String? endHour) {
+    // check if startHour or endHour is null
+    if (startHour == null || endHour == null) {
+      return "N/A";
+    }
+
+    Logs.i("startHour: $startHour");
+    Logs.i("endHour: $endHour");
+
     // Parse startHour and endHour strings into DateTime objects
-    DateTime startTime =
-        DateFormat('H:mm', Get.locale?.languageCode).parse(startHour);
-    DateTime endTime =
-        DateFormat('H:mm', Get.locale?.languageCode).parse(endHour);
+    DateTime startTime = DateFormat('hh:mm').parse(startHour);
+    DateTime endTime = DateFormat('hh:mm').parse(endHour);
 
     // Calculate the duration between startTime and endTime
-    Duration duration = endTime.difference(startTime);
+    int duration = endTime.difference(startTime).inMinutes;
 
     // Format the duration as "hh:mm"
-    String formattedDuration =
-        '${duration.inHours.toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}';
+    String formattedDuration = formatMinutes(duration);
 
     return formattedDuration;
   }

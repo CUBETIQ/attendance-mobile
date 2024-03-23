@@ -69,7 +69,7 @@ class RecordCard extends StatelessWidget {
                   onNullTitle: "Check-in Schedule",
                   secondTitle: "Checked-in",
                   status: data?.checkInStatus,
-                  statusLabel: StringUtil().calculateDurationWithStatus(
+                  statusLabel: StringUtil.calculateDurationWithStatus(
                       data?.checkInStatus == AttendanceStatus.late
                           ? (data?.checkInLate ?? 1)
                           : data?.checkInStatus == AttendanceStatus.early
@@ -99,7 +99,12 @@ class RecordCard extends StatelessWidget {
                   statusTitle: "After Break",
                   onNullTitle: "After Break",
                   secondTitle: "After Break",
-                  status: endBreakTime != null ? AttendanceStatus.onTime : null,
+                  status: StringUtil.getStatusByCalculateBreakTime(
+                      endBreakTime,
+                      NavigationController
+                          .to.organization.value.configs?.breakTime
+                          ?.split("-")[1]
+                          .trim()),
                   statusLabel: "Finished",
                 ),
                 RecordDataCard(
@@ -112,7 +117,7 @@ class RecordCard extends StatelessWidget {
                   secondTitle: "Checked-out",
                   iconColor: Theme.of(context).colorScheme.error,
                   status: data?.checkOutStatus,
-                  statusLabel: StringUtil().calculateDurationWithStatus(
+                  statusLabel: StringUtil.calculateDurationWithStatus(
                       data?.checkOutStatus == AttendanceStatus.late
                           ? (data?.checkOutLate ?? 1)
                           : data?.checkOutStatus == AttendanceStatus.early

@@ -24,6 +24,7 @@ class LoginView extends StatelessWidget {
       appBar: AppBar(
         actions: [
           GestureDetector(
+            onTap: () => controller.deactivation(context),
             child: Padding(
               padding: EdgeInsets.only(
                 right: SizeUtils.scale(

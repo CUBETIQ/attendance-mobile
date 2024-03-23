@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:timesync/config/app_config.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
@@ -24,7 +24,6 @@ class ActivationController extends GetxController {
   final activate = Rxn<ActivationModel>(null);
   final androidInfo = Rxn<AndroidDeviceInfo>(null);
   final iosInfo = Rxn<IosDeviceInfo>(null);
-  final device = Rxn<String>(null);
   final localDataService = LocalStorageController.getInstance();
   final localData = LocalStorage().obs;
   final organization = Rxn<OrganizationModel>(null);
@@ -33,7 +32,6 @@ class ActivationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    initDevice();
   }
 
   Future<void> activation() async {
@@ -43,7 +41,7 @@ class ActivationController extends GetxController {
       try {
         ActivateModel inputData = ActivateModel(
           code: activationController.text.toUpperCase(),
-          device: device.value,
+          device: AppConfig.deviceInfo,
         );
         activate.value = await ActivationService().activate(inputData);
         localStorageData = LocalStorageModel(
@@ -62,25 +60,6 @@ class ActivationController extends GetxController {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
       }
-    }
-  }
-
-  Future<void> initDevice() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (Platform.isAndroid) {
-      androidInfo.value = await deviceInfo.androidInfo;
-      device.value = {
-        "Model": androidInfo.value!.model,
-        "Device": androidInfo.value!.device,
-        "Version": androidInfo.value!.version.release
-      }.toString();
-    } else if (Platform.isIOS) {
-      iosInfo.value = await deviceInfo.iosInfo;
-      device.value = {
-        "Model": iosInfo.value!.model,
-        "Device": iosInfo.value!.name,
-        "Version": iosInfo.value!.systemVersion,
-      }.toString();
     }
   }
 

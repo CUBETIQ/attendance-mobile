@@ -12,6 +12,7 @@ import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/utils/attendance_util.dart';
+import 'package:timesync/utils/converter.dart';
 import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/validator.dart';
 
@@ -33,8 +34,8 @@ class QRService {
     double? lat;
     double? lng;
     if (!Validator.isValNull(deepLinkUrl.value)) {
-      
-      final Uri uri = Uri.parse(deepLinkUrl.value ?? '');
+      String? decoded = fromBase64(deepLinkUrl.value?.split('/').last);
+      final Uri uri = Uri.parse(decoded ?? '');
       lat = double.tryParse(uri.queryParameters['lat'] ?? '');
       lng = double.tryParse(uri.queryParameters['long'] ?? '');
     }
@@ -49,7 +50,7 @@ class QRService {
       if (NavigationController.to.getUserRole.value == Role.admin) {
         HomeController.to.tabController?.animateTo(1);
       }
-      QRService().scanQR(lat: lat, lng: lng).then((value) async {
+      QRService().postQR(lat: lat, lng: lng).then((value) async {
         if (value != null) {
           await HomeController.to.getAttendance();
           await HomeController.to.getSummarizeAttendance();
@@ -66,7 +67,43 @@ class QRService {
     }
   }
 
-  Future<AttendanceModel?> scanQR({double? lat, double? lng}) async {
+  Future<void> uploadQR(String? url) async {
+    double? lat;
+    double? lng;
+    if (!Validator.isValNull(url)) {
+      String? decoded = fromBase64(url?.split('/').last);
+      final Uri uri = Uri.parse(decoded ?? '');
+      lat = double.tryParse(uri.queryParameters['lat'] ?? '');
+      lng = double.tryParse(uri.queryParameters['long'] ?? '');
+    }
+
+    if (Get.isRegistered<NavigationController>()) {
+      Get.offNamed(Routes.NAVIGATION);
+
+      if (NavigationController.to.selectedIndex.value != 0) {
+        NavigationController.to.selectedIndex.value = 0;
+      }
+      if (NavigationController.to.getUserRole.value == Role.admin) {
+        HomeController.to.tabController?.animateTo(1);
+      }
+      QRService().postQR(lat: lat, lng: lng).then((value) async {
+        if (value != null) {
+          await HomeController.to.getAttendance();
+          await HomeController.to.getSummarizeAttendance();
+          if (Get.isRegistered<ProfileController>()) {
+            ProfileController.to.getSummarizeAttendance();
+          }
+          if (value.checkOutDateTime == null) {
+            getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
+          } else {
+            getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
+          }
+        }
+      });
+    }
+  }
+
+  Future<AttendanceModel?> postQR({double? lat, double? lng}) async {
     final AttendanceModel? result;
 
     DateTime now = await HomeController.to.checkTime();

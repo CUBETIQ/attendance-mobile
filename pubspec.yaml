@@ -15,6 +15,7 @@ dependencies:
     sdk: flutter
 
   path: any
+  image: any
   animated_text_kit: ^4.2.2
   animated_toggle_switch: ^0.8.1
   cached_network_image: ^3.3.0
@@ -70,6 +71,7 @@ dependencies:
   table_calendar: ^3.0.9
   uni_links: ^0.5.1
   flutter_image_compress: ^2.2.0
+  zxing2: ^0.2.3
 
 dev_dependencies:
   flutter_test:

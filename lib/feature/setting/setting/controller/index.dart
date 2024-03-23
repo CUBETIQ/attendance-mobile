@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/config/app_config.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
 import 'package:timesync/core/database/isar/service/isar_service.dart';
@@ -29,5 +30,11 @@ class SettingController extends GetxController {
       Get.changeThemeMode(ThemeMode.light);
     }
     await IsarService().saveLocalData(input: localStorageData);
+  }
+
+  Future<void> changeConfirmation(bool value) async {
+    await IsarService()
+        .saveLocalData(input: LocalStorageModel(confirmCheckIn: value));
+    AppConfig.confirmCheckIn.value = value;
   }
 }

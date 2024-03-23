@@ -81,6 +81,14 @@ class SettingView extends StatelessWidget {
                               "Set the notification of the application.",
                           onTap: () => Get.toNamed(Routes.NOTIFICATION_SETTING),
                         ),
+                        Obx(
+                          () => ThemeSwitchButton(
+                            title: "Check in/out Confirmation",
+                            description: "Enable to confirm check in/out.",
+                            value: AppConfig.confirmCheckIn.value,
+                            onChanged: controller.changeConfirmation,
+                          ),
+                        ),
                       ],
                     ),
                     Obx(() {

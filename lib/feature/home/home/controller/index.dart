@@ -28,6 +28,7 @@ import 'package:timesync/types/user_status.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/double_util.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/validator.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -514,6 +515,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         endDate: endOfDay.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
+
+      Logs.e(NavigationController.to.organization.value.id);
       if (attendanceChart.isNotEmpty) {
         totalStaff.value = attendanceChart.first.totalStaff ?? 0;
         haveNoData.value = false;

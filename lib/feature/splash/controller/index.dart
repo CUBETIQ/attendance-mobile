@@ -43,7 +43,7 @@ class SplashController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    // validateOrganization();
+    validateOrganization();
     initDeepLink();
     controller = AnimationController(
       vsync: this,
@@ -51,7 +51,6 @@ class SplashController extends GetxController
     );
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
     controller.forward();
-    initLocalDbAndRoutes();
   }
 
   @override
@@ -82,7 +81,6 @@ class SplashController extends GetxController
         await getDepartment();
       }
     }
-    await Future.delayed(const Duration(seconds: 2));
     initRoute();
   }
 
@@ -189,7 +187,7 @@ class SplashController extends GetxController
       }
       organization.value =
           await SplashService().validateOrganization(id: data!.organizationId!);
-      await initLocalDbAndRoutes();
+      initLocalDbAndRoutes();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       Get.offNamed(Routes.ACTIVATION);

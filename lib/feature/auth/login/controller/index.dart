@@ -104,7 +104,7 @@ class LoginController extends GetxController {
       onTapConfirm: () async {
         try {
           final result = await ActivationService().deactivate(
-            "AppConfig.deviceInfo",
+            AppConfig.getLocalData?.deviceHash ?? "",
           );
           if (result == true) {
             await IsarService().clearLocalData(

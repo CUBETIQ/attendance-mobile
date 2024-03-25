@@ -18,6 +18,7 @@ import 'package:timesync/feature/home/home/widget/pie_chart_card.dart';
 import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
 import 'package:timesync/feature/home/home/widget/tab_bar.dart';
 import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/attendance_status.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -199,10 +200,14 @@ class HomeAdminView extends StatelessWidget {
                           children: [
                             Obx(
                               () => LinearIndicator(
+                                onTap: () =>
+                                    controller.onTapAttendanceStatistic(
+                                  AttendanceStatus.early,
+                                ),
                                 title: "Early",
                                 color: Theme.of(context).colorScheme.tertiary,
                                 percent: controller.earlyPercentage.value,
-                                totalEmployees: controller.totalStaffs.value,
+                                totalEmployees: controller.totalStaff.value,
                                 checkInEmployees:
                                     controller.totalCheckInEarly.value,
                                 checkOutEmployees:
@@ -212,10 +217,14 @@ class HomeAdminView extends StatelessWidget {
                             ),
                             Obx(
                               () => LinearIndicator(
+                                onTap: () =>
+                                    controller.onTapAttendanceStatistic(
+                                  AttendanceStatus.onTime,
+                                ),
                                 title: "On Time",
                                 color: Theme.of(context).colorScheme.secondary,
                                 percent: controller.onTimePercentage.value,
-                                totalEmployees: controller.totalStaffs.value,
+                                totalEmployees: controller.totalStaff.value,
                                 checkInEmployees:
                                     controller.totalCheckInOnTime.value,
                                 checkOutEmployees:
@@ -225,12 +234,16 @@ class HomeAdminView extends StatelessWidget {
                             ),
                             Obx(
                               () => LinearIndicator(
+                                onTap: () =>
+                                    controller.onTapAttendanceStatistic(
+                                  AttendanceStatus.late,
+                                ),
                                 title: "Late",
                                 color: Theme.of(context)
                                     .colorScheme
                                     .secondaryContainer,
                                 percent: controller.latePercentage.value,
-                                totalEmployees: controller.totalStaffs.value,
+                                totalEmployees: controller.totalStaff.value,
                                 checkInEmployees:
                                     controller.totalCheckInLate.value,
                                 checkOutEmployees:

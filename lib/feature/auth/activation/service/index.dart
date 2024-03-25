@@ -47,10 +47,9 @@ class ActivationService {
     return deviceActivationModel;
   }
 
-  Future<bool> deactivate(String? device) async {
-    final response = await dioInstance.dio.post(
-      Endpoints.instance.deactivation,
-      data: {"device": device},
+  Future<bool> deactivate(String deviceHash) async {
+    final response = await dioInstance.dio.delete(
+      Endpoints.instance.deviceActivation + deviceHash,
     );
     if (response.statusCode != 200) {
       throw Exception("Activation failed");

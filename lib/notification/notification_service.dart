@@ -48,6 +48,12 @@ class NotificationIntegration {
         await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
   }
 
+  static Future<List<int>> getPendingNotificationId()async{
+    pendingNotificationRequests =
+        await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
+    return pendingNotificationRequests.map((e) => e.id).toList();
+  }
+
   static Future<InitializationSettings?> _initSettings() async {
     InitializationSettings? settings;
     if (Platform.isIOS) {

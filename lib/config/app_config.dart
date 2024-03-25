@@ -62,6 +62,8 @@ class AppConfig {
 
   static PackageInfo? packageInfo;
 
+    static tz.TZDateTime currentTime = tz.TZDateTime.now(tz.local);
+
   static Future<void> initAppConfig() async {
     // init timezone
     tz.initializeTimeZones();

@@ -348,8 +348,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           if (Get.isRegistered<ProfileController>()) {
             ProfileController.to.getSummarizeAttendance();
           }
-          // workingHourDuration();
+          // Set up check out reminder
+          NotificationSchedule.checkOutReminder(
+              time:
+                  NavigationController.to.organization.value.configs?.endHour);
+
+          // Cancel check in reminder if user check in early
           cancelNotificationReminder();
+
           getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
         } on DioException catch (e) {
           if (e.response?.data["message"]
@@ -406,7 +412,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           );
           isCheckedIn.value = false;
           await getAttendance(noLoading: true);
+
+          // Cancel check out reminder if user check out early
           cancelNotificationReminder(checkOut: true);
+
           getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
         } on DioException catch (e) {
           showErrorSnackBar("Error", e.response?.data["message"]);

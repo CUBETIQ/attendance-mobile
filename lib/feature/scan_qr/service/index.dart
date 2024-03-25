@@ -8,6 +8,7 @@ import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
+import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
@@ -58,10 +59,18 @@ class QRService {
             ProfileController.to.getSummarizeAttendance();
           }
           if (value.checkOutDateTime == null) {
+            // Set up check out reminder
+            NotificationSchedule.checkOutReminder(
+                time: NavigationController
+                    .to.organization.value.configs?.endHour);
+
             getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
           } else {
             getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
           }
+
+          // Cancel check in reminder if user check in early
+          HomeController.to.cancelNotificationReminder();
         }
       });
     }
@@ -94,10 +103,18 @@ class QRService {
             ProfileController.to.getSummarizeAttendance();
           }
           if (value.checkOutDateTime == null) {
+            // Set up check out reminder
+            NotificationSchedule.checkOutReminder(
+                time: NavigationController
+                    .to.organization.value.configs?.endHour);
+
             getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
           } else {
             getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
           }
+
+          // Cancel check in reminder if user check in early
+          HomeController.to.cancelNotificationReminder();
         }
       });
     }

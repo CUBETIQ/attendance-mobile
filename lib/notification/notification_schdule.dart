@@ -64,7 +64,7 @@ class NotificationSchedule {
         title: "Reminder",
         body: "You have not checked out yet, please check out now",
         scheduledNotificationDateTime: AppTime.scheduleTimeForCheckout(
-            hour: hour, min: min, toNextDay: true),
+            hour: hour, min: min, toNextDay: toNextDay),
         id: checkOutId,
         payLoad: jsonEncode(
           NotificationPayloadModel(

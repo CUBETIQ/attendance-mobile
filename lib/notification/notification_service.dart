@@ -192,6 +192,7 @@ class NotificationIntegration {
         payload: payLoad ?? 'payload',
         scheduledNotificationDateTime ??
             tz.TZDateTime.now(tz.local).add(const Duration(seconds: 1)),
+            
         NotificationDetails(
           // Android details
           android: AndroidNotificationDetails(
@@ -202,6 +203,7 @@ class NotificationIntegration {
           // iOS details
           iOS: const DarwinNotificationDetails(),
         ),
+      
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);

@@ -121,19 +121,11 @@ class NavigationController extends GetxController {
         .toList();
 
     bool containsCheckIn = ids.contains(NotificationSchedule.checkInId);
-    bool containsCheckOut = ids.contains(NotificationSchedule.checkOutId);
 
-    if (ids.isEmpty) {
+    // Check if the check-in reminder is already scheduled and do not set up check-out reminder as it is not needed until check-in is done
+    if (!containsCheckIn) {
       NotificationSchedule.checkInReminder(
           time: organization.value.configs?.startHour);
-      NotificationSchedule.checkOutReminder(
-          time: organization.value.configs?.endHour);
-    } else if (!containsCheckIn) {
-      NotificationSchedule.checkInReminder(
-          time: organization.value.configs?.startHour);
-    } else if (!containsCheckOut) {
-      NotificationSchedule.checkOutReminder(
-          time: organization.value.configs?.endHour);
     }
   }
 

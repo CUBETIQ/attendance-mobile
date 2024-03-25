@@ -2,8 +2,10 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timesync/utils/file_util.dart';
+import 'package:timesync/utils/image_cropper.dart';
 import 'package:timesync/utils/permission_handler.dart';
 
 class PickFileHandler {
@@ -18,7 +20,14 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.gallery);
         if (result != null) {
           file = File(result.path);
-          file = await compressedFile(file);
+
+          CroppedFile? croppedFile;
+          croppedFile = await MyImageCropper.cropImage(sourcePath: file.path);
+          if (croppedFile == null) {
+            return null;
+          }
+
+          file = await compressedFile(File(croppedFile.path));
 
           final validateFileSize = await FileUtil.validateFileSize(file);
           if (validateFileSize) {
@@ -46,7 +55,13 @@ class PickFileHandler {
             await ImagePicker().pickImage(source: ImageSource.camera);
         if (result != null) {
           file = File(result.path);
-          file = await compressedFile(file);
+          CroppedFile? croppedFile;
+          croppedFile = await MyImageCropper.cropImage(sourcePath: file.path);
+          if (croppedFile == null) {
+            return null;
+          }
+
+          file = await compressedFile(File(croppedFile.path));
 
           final validateFileSize = await FileUtil.validateFileSize(file);
           if (validateFileSize) {

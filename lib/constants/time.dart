@@ -12,8 +12,7 @@ class AppTime {
   static const int connectTimeout = 30;
   static const int receiveTimeout = 30;
 
-  static tz.TZDateTime scheduleTimeForCheckin(
-      {int? hour, int? min, bool? toNextDay}) {
+  static tz.TZDateTime? scheduleToday({int? hour, int? min}) {
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledTime = tz.TZDateTime(
       tz.local,
@@ -25,28 +24,20 @@ class AppTime {
       00,
     );
 
-    if (scheduledTime.isBefore(now) || toNextDay == true) {
-      scheduledTime = scheduledTime.add(const Duration(days: 1));
-    }
-
     return scheduledTime;
   }
 
-  static tz.TZDateTime scheduleTimeForCheckout(
-      {int? hour, int? min, bool? toNextDay}) {
-    tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+  static tz.TZDateTime? scheduleSpecificDay({required DateTime? date}) {
+    if (date == null) return null;
     tz.TZDateTime scheduledTime = tz.TZDateTime(
       tz.local,
-      now.year,
-      now.month,
-      now.day,
-      hour ?? 21,
-      min ?? 00,
+      date.year,
+      date.month,
+      date.day,
+      date.hour,
+      date.minute,
       00,
     );
-    if (scheduledTime.isBefore(now) || toNextDay == true) {
-      scheduledTime = scheduledTime.add(const Duration(days: 1));
-    }
 
     return scheduledTime;
   }

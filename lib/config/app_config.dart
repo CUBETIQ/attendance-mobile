@@ -67,6 +67,7 @@ class AppConfig {
   // Device Info
   static String? deviceId;
   static DeviceInfoModel? deviceInfo;
+  static tz.TZDateTime currentTime = tz.TZDateTime.now(tz.local);
 
   static Future<void> initAppConfig() async {
     // init timezone

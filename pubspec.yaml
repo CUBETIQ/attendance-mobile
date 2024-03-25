@@ -72,6 +72,7 @@ dependencies:
   uni_links: ^0.5.1
   flutter_image_compress: ^2.2.0
   zxing2: ^0.2.3
+  image_cropper: ^5.0.1
 
 dev_dependencies:
   flutter_test:

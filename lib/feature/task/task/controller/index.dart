@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/config/app_config.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:timesync/core/model/summary_task_model.dart';
 import 'package:timesync/core/model/task_model.dart';
@@ -8,8 +9,11 @@ import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/task/task/service/index.dart';
+import 'package:timesync/notification/notification_schdule.dart';
+import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/task_status.dart';
+import 'package:timesync/utils/converter.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
@@ -40,6 +44,26 @@ class TaskController extends GetxController {
       tasks.value
           .sort((a, b) => (b.startDate ?? 0).compareTo(a.startDate ?? 0));
       tasks.value.sort((a, b) => (b.status ?? "").compareTo(a.status ?? ""));
+
+      // Set notification for task reminder
+      final List<int> notificationIds =
+          await NotificationIntegration.getPendingNotificationId();
+
+      tasks.value
+          .where((element) => element.status != TaskStatus.done)
+          .forEach((element) {
+        if (element.endDate != null) {
+          DateTime time = DateTime.fromMillisecondsSinceEpoch(element.endDate!);
+          int? uniqueId = generateUniqueIntId(element.id ?? "");
+
+          if (!notificationIds.contains(uniqueId)) {
+            if (time.isAfter(AppConfig.currentTime)) {
+              NotificationSchedule.taskReminder(
+                  id: uniqueId, time: element.endDate, mongoId: element.id);
+            }
+          }
+        }
+      });
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -54,6 +78,8 @@ class TaskController extends GetxController {
         description: "Are you sure to complete this task?",
         onTapConfirm: () async {
           await TaskService().completeTask(id);
+          await NotificationSchedule.cancelSpecificReminder(
+              generateUniqueIntId(id));
           await getUserTasks();
           Get.back();
         },

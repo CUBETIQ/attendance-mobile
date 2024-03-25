@@ -15,9 +15,11 @@ import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
 import 'package:timesync/feature/task/add_task/service/index.dart';
 import 'package:timesync/feature/task/task/controller/index.dart';
 import 'package:timesync/feature/task/task/service/index.dart';
+import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/types/task_priority.dart';
 import 'package:timesync/types/task_status.dart';
+import 'package:timesync/utils/converter.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/upload_file_util.dart';
 
@@ -220,6 +222,8 @@ class AddTaskController extends GetxController {
         description: "Are you sure to delete this task?",
         onTapConfirm: () async {
           await TaskService().deleteTask(id);
+          await NotificationSchedule.cancelSpecificReminder(
+              generateUniqueIntId(id));
           await TaskController.to.getUserTasks();
           Navigator.of(Get.context!).popUntil((route) => route.isFirst);
         },

@@ -11,18 +11,15 @@ import 'package:timesync/utils/permission_handler.dart';
 class PickFileHandler {
   static Future<File?> openGallery() async {
     File? file;
-    final permission = Platform.isIOS
-        ? await PermissonHandler.requestPhotoPermission()
-        : await PermissonHandler.requestStoragePermission();
+    final permission =
+        Platform.isIOS ? await PermissonHandler.requestPhotoPermission() : true;
     if (permission) {
       try {
         final result =
             await ImagePicker().pickImage(source: ImageSource.gallery);
         if (result != null) {
-          file = File(result.path);
-
-          CroppedFile? croppedFile;
-          croppedFile = await MyImageCropper.cropImage(sourcePath: file.path);
+          CroppedFile? croppedFile =
+              await MyImageCropper.cropImage(sourcePath: result.path);
           if (croppedFile == null) {
             return null;
           }
@@ -54,9 +51,8 @@ class PickFileHandler {
         final result =
             await ImagePicker().pickImage(source: ImageSource.camera);
         if (result != null) {
-          file = File(result.path);
-          CroppedFile? croppedFile;
-          croppedFile = await MyImageCropper.cropImage(sourcePath: file.path);
+          CroppedFile? croppedFile =
+              await MyImageCropper.cropImage(sourcePath: result.path);
           if (croppedFile == null) {
             return null;
           }

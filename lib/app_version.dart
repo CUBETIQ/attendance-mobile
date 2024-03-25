@@ -1,6 +1,6 @@
 class AppVersion {
   // version format: {major}{minor}{patch}.{build}
-  static const double version = 100.6;
+  static const double version = 100.7;
 
   // static double? get iosVersion => AppConfig.metaData?.appAndroidVersion;
 

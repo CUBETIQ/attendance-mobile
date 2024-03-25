@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:timesync/constants/notification_type.dart';
+import 'package:timesync/feature/home/admin_leave_request/controller/index.dart';
+import 'package:timesync/feature/leave/leave/controller/index.dart';
+import 'package:timesync/types/notification_type.dart';
 import 'package:timesync/core/model/notification_model.dart';
 import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
@@ -49,6 +51,8 @@ class NotifyRoutePage {
       }
     } else if (type == NotificationType.task) {
       _handleTask(data);
+    } else if (type == NotificationType.leavePermission) {
+      _handleLeavePermission(data);
     }
   }
 
@@ -82,6 +86,50 @@ class NotifyRoutePage {
             .firstWhereOrNull((element) => element.id == id);
         if (task != null) {
           TaskController.to.onTapTask(task);
+        }
+      }
+    }
+  }
+
+  static void _handleLeavePermission(NotificationPayloadModel data) {
+    final subType = data.payload?.data?.subtype;
+    String? id = data.payload?.data?.prop?["id"];
+    if (id == null) return;
+
+    if (Get.isRegistered<NavigationController>()) {
+      Get.offNamed(Routes.NAVIGATION);
+
+      if (subType == NotificationSubType.leaveRequest) {
+        if (NavigationController.to.getUserRole.value == Role.admin) {
+          if (NavigationController.to.selectedIndex.value != 0) {
+            NavigationController.to.selectedIndex.value = 0;
+          }
+          if (Get.isRegistered<HomeController>()) {
+            HomeController.to.tabController?.animateTo(0);
+            Get.toNamed(
+              Routes.ADMIN_LEAVE_REQUEST,
+              arguments: HomeController.to.staffs.value,
+            );
+
+            if (Get.isRegistered<AdminLeaveRequestController>()) {
+              final index = AdminLeaveRequestController.to.leaveList.indexWhere(
+                (element) => element.id == id,
+              );
+              if (index == -1) return;
+              AdminLeaveRequestController.to.onTapView(index);
+            }
+          }
+        }
+      } else if (subType == NotificationSubType.leaveApproval) {
+        if (NavigationController.to.selectedIndex.value != 3) {
+          NavigationController.to.selectedIndex.value = 3;
+        }
+        if (Get.isRegistered<LeaveController>()) {
+          final index = LeaveController.to.leaves.indexWhere(
+            (element) => element.id == id,
+          );
+          if (index == -1) return;
+          LeaveController.to.onTapView(index);
         }
       }
     }

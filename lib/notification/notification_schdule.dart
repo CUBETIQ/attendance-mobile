@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:timesync/config/app_config.dart';
-import 'package:timesync/constants/notification_type.dart';
+import 'package:timesync/types/notification_type.dart';
 import 'package:timesync/constants/time.dart';
 import 'package:timesync/core/model/notification_model.dart';
 import 'package:timesync/notification/notification_service.dart';

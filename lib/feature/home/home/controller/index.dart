@@ -247,12 +247,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             // !Validator.isValNull(checkOutTime.value)
             isCheckedIn.value == false) {
           NotificationSchedule.cancelCheckOutReminder();
-
-          // Init check out reminder for next day
-          NotificationSchedule.checkOutReminder(
-              toNextDay: true,
-              time:
-                  NavigationController.to.organization.value.configs?.endHour);
         }
       } else {
         if (DateTime.now().hour <= hour &&

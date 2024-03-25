@@ -183,16 +183,17 @@ class NotificationIntegration {
       String? body,
       String? payLoad,
       TZDateTime? scheduledNotificationDateTime}) async {
+    if (scheduledNotificationDateTime == null) {
+      return;
+    }
     final timeZoneName = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
     return _flutterLocalNotificationsPlugin.zonedSchedule(
         id,
-        title ?? 'Timesync',
-        body ?? 'Body',
-        payload: payLoad ?? 'payload',
-        scheduledNotificationDateTime ??
-            tz.TZDateTime.now(tz.local).add(const Duration(seconds: 1)),
-            
+        title ?? AppConfig.appName,
+        body,
+        payload: payLoad,
+        scheduledNotificationDateTime,
         NotificationDetails(
           // Android details
           android: AndroidNotificationDetails(
@@ -203,7 +204,6 @@ class NotificationIntegration {
           // iOS details
           iOS: const DarwinNotificationDetails(),
         ),
-      
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);

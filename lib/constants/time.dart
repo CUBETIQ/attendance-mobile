@@ -12,8 +12,8 @@ class AppTime {
   static const int connectTimeout = 30;
   static const int receiveTimeout = 30;
 
-  static tz.TZDateTime? scheduleTimeForCheckin(
-      {int? hour, int? min, bool? toNextDay, bool? noAlertSunday}) {
+  static tz.TZDateTime schedule(
+      {int? hour, int? min}) {
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledTime = tz.TZDateTime(
       tz.local,
@@ -24,40 +24,6 @@ class AppTime {
       min ?? 00,
       00,
     );
-
-    // If it's Sunday, cancel the reminder
-    if (now.weekday == DateTime.sunday && noAlertSunday == true) {
-      return null;
-    }
-
-    if (scheduledTime.isBefore(now) || toNextDay == true) {
-      if (noAlertSunday == true && scheduledTime.weekday == DateTime.saturday) {
-        return null;
-      } else {
-        scheduledTime = scheduledTime.add(const Duration(days: 1));
-      }
-    }
-
-    return scheduledTime;
-  }
-
-  static tz.TZDateTime? scheduleTimeForCheckout(
-      {int? hour, int? min, bool? toNextDay, bool? noAlertSunday}) {
-    tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledTime = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      hour ?? 21,
-      min ?? 00,
-      00,
-    );
-
-    // If it's Sunday, cancel the reminder
-    if (now.weekday == DateTime.sunday && noAlertSunday == true) {
-      return null;
-    }
 
     return scheduledTime;
   }

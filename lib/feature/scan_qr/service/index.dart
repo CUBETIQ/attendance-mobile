@@ -31,52 +31,7 @@ class QRService {
 
   final deepLinkUrl = Rxn<String>(null);
 
-  Future<void> initDeepLink() async {
-    double? lat;
-    double? lng;
-    if (!Validator.isValNull(deepLinkUrl.value)) {
-      String? decoded = fromBase64(deepLinkUrl.value?.split('/').last);
-      final Uri uri = Uri.parse(decoded ?? '');
-      lat = double.tryParse(uri.queryParameters['lat'] ?? '');
-      lng = double.tryParse(uri.queryParameters['long'] ?? '');
-    }
-
-    if (Get.isRegistered<NavigationController>()) {
-      // Get.until((route) => Get.currentRoute == Routes.NAVIGATION);
-      Get.offNamed(Routes.NAVIGATION);
-
-      if (NavigationController.to.selectedIndex.value != 0) {
-        NavigationController.to.selectedIndex.value = 0;
-      }
-      if (NavigationController.to.getUserRole.value == Role.admin) {
-        HomeController.to.tabController?.animateTo(1);
-      }
-      QRService().postQR(lat: lat, lng: lng).then((value) async {
-        if (value != null) {
-          await HomeController.to.getAttendance();
-          await HomeController.to.getSummarizeAttendance();
-          if (Get.isRegistered<ProfileController>()) {
-            ProfileController.to.getSummarizeAttendance();
-          }
-          if (value.checkOutDateTime == null) {
-            // Set up check out reminder
-            NotificationSchedule.checkOutReminder(
-                time: NavigationController
-                    .to.organization.value.configs?.endHour);
-
-            getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
-          } else {
-            getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
-          }
-
-          // Cancel check in reminder if user check in early
-          HomeController.to.cancelNotificationReminder();
-        }
-      });
-    }
-  }
-
-  Future<void> uploadQR(String? url) async {
+  Future<void> processQR(String? url) async {
     double? lat;
     double? lng;
     if (!Validator.isValNull(url)) {
@@ -107,17 +62,27 @@ class QRService {
             NotificationSchedule.checkOutReminder(
                 time: NavigationController
                     .to.organization.value.configs?.endHour);
+            // Cancel check in reminder if user check in early
+            HomeController.to.cancelNotificationReminder();
 
             getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
           } else {
+            // Cancel check out reminder if user check out early
+            HomeController.to.cancelNotificationReminder(checkOut: true);
+
             getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
           }
-
-          // Cancel check in reminder if user check in early
-          HomeController.to.cancelNotificationReminder();
         }
       });
     }
+  }
+
+  Future<void> initDeepLink() async {
+    await processQR(deepLinkUrl.value);
+  }
+
+  Future<void> uploadQR(String? url) async {
+    await processQR(url);
   }
 
   Future<AttendanceModel?> postQR({double? lat, double? lng}) async {

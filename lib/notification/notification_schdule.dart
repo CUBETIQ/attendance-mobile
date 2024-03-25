@@ -5,6 +5,7 @@ import 'package:timesync/constants/time.dart';
 import 'package:timesync/core/model/notification_model.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/utils/logger.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationSchedule {
   static final NotificationSchedule _instance =
@@ -13,6 +14,8 @@ class NotificationSchedule {
   factory NotificationSchedule() => _instance;
 
   NotificationSchedule._internal();
+
+  static tz.TZDateTime now = tz.TZDateTime.now(tz.local);
 
   static const int checkInId = 100;
   static const int checkOutId = 101;
@@ -26,19 +29,31 @@ class NotificationSchedule {
 
     if (time != null) {
       final split = time.split(":");
-      hour = int.parse(split[0]);
-      min = int.parse(split[1]);
+      hour = int.tryParse(split[0]);
+      min = int.tryParse(split[1]);
+    }
+
+    tz.TZDateTime? scheduledTime = AppTime.schedule(hour: hour, min: min);
+
+    // If today is Sunday and noAlertSunday is true, then don't schedule the notification
+    if (now.weekday == DateTime.sunday && noAlertSunday == true) {
+      scheduledTime = null;
+
+      // If the scheduled time is before the current time, then schedule it for the next day
+    } else if (scheduledTime.isBefore(now) || toNextDay == true) {
+      // If today is Saturday and noAlertSunday is true, then schedule it for Monday
+      if (noAlertSunday == true && scheduledTime.weekday == DateTime.saturday) {
+        scheduledTime = scheduledTime.add(const Duration(days: 2));
+      } else {
+        scheduledTime = scheduledTime.add(const Duration(days: 1));
+      }
     }
 
     try {
       NotificationIntegration.scheduleNotification(
         title: "Reminder",
         body: "You have not checked in yet, please check in now",
-        scheduledNotificationDateTime: AppTime.scheduleTimeForCheckin(
-            hour: hour,
-            min: min,
-            toNextDay: toNextDay,
-            noAlertSunday: noAlertSunday),
+        scheduledNotificationDateTime: scheduledTime,
         id: id ?? checkInId,
         payLoad: jsonEncode(
           NotificationPayloadModel(
@@ -61,16 +76,17 @@ class NotificationSchedule {
 
     if (time != null) {
       final split = time.split(":");
-      hour = int.parse(split[0]);
-      min = int.parse(split[1]);
+      hour = int.tryParse(split[0]);
+      min = int.tryParse(split[1]);
     }
+
+    tz.TZDateTime? scheduledTime = AppTime.schedule(hour: hour, min: min);
 
     try {
       NotificationIntegration.scheduleNotification(
         title: "Reminder",
         body: "You have not checked out yet, please check out now",
-        scheduledNotificationDateTime: AppTime.scheduleTimeForCheckout(
-            hour: hour, min: min, noAlertSunday: noAlertSunday),
+        scheduledNotificationDateTime: scheduledTime,
         id: id ?? checkOutId,
         payLoad: jsonEncode(
           NotificationPayloadModel(

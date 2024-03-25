@@ -76,13 +76,16 @@ class LoginController extends GetxController {
           }
           final isAdmin = user.value.role == Role.admin ? true : false;
           handleNotification(isAdmin);
-          Get.offNamed(Routes.NAVIGATION, arguments: {
-            "user": user.value,
-            "position": position.value,
-            "department": department.value,
-            "organization": organization.value,
-            "userStatus": userStatus.value,
-          });
+          Get.offNamed(
+            Routes.NAVIGATION,
+            arguments: {
+              "user": user.value,
+              "position": position.value,
+              "department": department.value,
+              "organization": organization.value,
+              "userStatus": userStatus.value,
+            },
+          );
         }
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
@@ -101,7 +104,7 @@ class LoginController extends GetxController {
       onTapConfirm: () async {
         try {
           final result = await ActivationService().deactivate(
-            AppConfig.deviceInfo,
+            AppConfig.getLocalData?.deviceHash ?? "",
           );
           if (result == true) {
             await IsarService().clearLocalData(
@@ -203,7 +206,6 @@ class LoginController extends GetxController {
         localStorageData = LocalStorageModel(
           accessToken: accessToken.value,
           refreshToken: refreshToken.value,
-          organizationId: organization.value?.id,
         );
         await IsarService().saveLocalData(input: localStorageData);
       }

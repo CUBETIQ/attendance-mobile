@@ -8,6 +8,7 @@ import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
+import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
@@ -30,44 +31,7 @@ class QRService {
 
   final deepLinkUrl = Rxn<String>(null);
 
-  Future<void> initDeepLink() async {
-    double? lat;
-    double? lng;
-    if (!Validator.isValNull(deepLinkUrl.value)) {
-      String? decoded = fromBase64(deepLinkUrl.value?.split('/').last);
-      final Uri uri = Uri.parse(decoded ?? '');
-      lat = double.tryParse(uri.queryParameters['lat'] ?? '');
-      lng = double.tryParse(uri.queryParameters['long'] ?? '');
-    }
-
-    if (Get.isRegistered<NavigationController>()) {
-      // Get.until((route) => Get.currentRoute == Routes.NAVIGATION);
-      Get.offNamed(Routes.NAVIGATION);
-
-      if (NavigationController.to.selectedIndex.value != 0) {
-        NavigationController.to.selectedIndex.value = 0;
-      }
-      if (NavigationController.to.getUserRole.value == Role.admin) {
-        HomeController.to.tabController?.animateTo(1);
-      }
-      QRService().postQR(lat: lat, lng: lng).then((value) async {
-        if (value != null) {
-          await HomeController.to.getAttendance();
-          await HomeController.to.getSummarizeAttendance();
-          if (Get.isRegistered<ProfileController>()) {
-            ProfileController.to.getSummarizeAttendance();
-          }
-          if (value.checkOutDateTime == null) {
-            getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
-          } else {
-            getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
-          }
-        }
-      });
-    }
-  }
-
-  Future<void> uploadQR(String? url) async {
+  Future<void> processQR(String? url) async {
     double? lat;
     double? lng;
     if (!Validator.isValNull(url)) {
@@ -94,13 +58,31 @@ class QRService {
             ProfileController.to.getSummarizeAttendance();
           }
           if (value.checkOutDateTime == null) {
+            // Set up check out reminder
+            NotificationSchedule.checkOutReminder(
+                time: NavigationController
+                    .to.organization.value.configs?.endHour);
+            // Cancel check in reminder if user check in early
+            HomeController.to.cancelNotificationReminder();
+
             getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
           } else {
+            // Cancel check out reminder if user check out early
+            HomeController.to.cancelNotificationReminder(checkOut: true);
+
             getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
           }
         }
       });
     }
+  }
+
+  Future<void> initDeepLink() async {
+    await processQR(deepLinkUrl.value);
+  }
+
+  Future<void> uploadQR(String? url) async {
+    await processQR(url);
   }
 
   Future<AttendanceModel?> postQR({double? lat, double? lng}) async {

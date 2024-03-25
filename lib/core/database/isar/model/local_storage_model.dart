@@ -15,6 +15,7 @@ class LocalStorageModel {
   String? userRole;
   bool? isDevMode;
   bool? confirmCheckIn;
+  String? deviceHash;
 
   LocalStorageModel({
     this.userId,
@@ -33,5 +34,6 @@ class LocalStorageModel {
     this.userRole,
     this.isDevMode,
     this.confirmCheckIn,
+    this.deviceHash,
   });
 }

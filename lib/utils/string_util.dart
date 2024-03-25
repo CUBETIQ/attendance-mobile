@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:timesync/types/attendance_status.dart';
 
 class StringUtil {
@@ -130,7 +131,7 @@ class StringUtil {
     }
 
     return timeString;
-  } 
+  }
 
   static String? getStatusByCalculateBreakTime(
       int? date, String? endBreakTime) {
@@ -138,28 +139,64 @@ class StringUtil {
       return null;
     }
 
-    //
+    // End time = 13:00 (to_time('13:00', 'hh:mm'))
+    DateTime endBreakTimeHour = DateFormat("hh:mm").parse(endBreakTime);
 
-    // End time = 13:00 (to_time('13:00', 'HH:mm'))
-    int endBreakTimeHour = int.parse(endBreakTime.split(":")[0]);
-    int endBreakTimeMinute = int.parse(endBreakTime.split(":")[1]);
+    DateTime getbreakTime = DateTime.fromMillisecondsSinceEpoch(date);
 
-    DateTime now = DateTime(
-      DateTime.now().year,
-      DateTime.now().month,
-      DateTime.now().day,
-      endBreakTimeHour,
-      endBreakTimeMinute,
-    );
+    DateTime breakTime = DateFormat("hh:mm")
+        .parse("${getbreakTime.hour}:${getbreakTime.minute}");
 
-    DateTime breakTime = DateTime.fromMillisecondsSinceEpoch(date);
-
-    if (now.isAfter(breakTime)) {
+    if (endBreakTimeHour.isAfter(breakTime)) {
       return AttendanceStatus.late;
-    } else if (now.isBefore(breakTime)) {
+    } else if (endBreakTimeHour.isBefore(breakTime)) {
       return AttendanceStatus.early;
     } else {
       return AttendanceStatus.onTime;
+    }
+  }
+
+  static String? calculationDurationForBreakTime(
+      int? date, String? endBreak, String? status) {
+    if (date == null || endBreak == null || status == null) {
+      return null;
+    }
+
+    DateTime endBreakTime = DateFormat("hh:mm").parse(endBreak);
+
+    DateTime getbreakTime = DateTime.fromMillisecondsSinceEpoch(date);
+
+    DateTime breakTime = DateFormat("hh:mm")
+        .parse("${getbreakTime.hour}:${getbreakTime.minute}");
+
+    final minutes = endBreakTime.difference(breakTime).inMinutes;
+
+    int hours = minutes ~/ 60;
+    int remainingMinutes = minutes % 60;
+
+    String timeString = '';
+
+    if (hours > 0) {
+      timeString += '$hours hr';
+      if (hours > 1) timeString += 's'; // pluralize 'hour' if needed
+      timeString += ' ';
+    }
+
+    if (remainingMinutes > 0) {
+      timeString += '$remainingMinutes min';
+      if (remainingMinutes > 1) {
+        timeString += 's'; // pluralize 'minute' if needed
+      }
+    }
+
+    if (status == AttendanceStatus.late) {
+      return timeString.isEmpty ? 'Late' : '$timeString late';
+    } else if (status == AttendanceStatus.early) {
+      return timeString.isEmpty ? 'Early' : '$timeString early';
+    } else if (status == AttendanceStatus.onTime) {
+      return 'On time';
+    } else {
+      return 'Invalid status';
     }
   }
 }

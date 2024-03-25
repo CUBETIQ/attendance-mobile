@@ -40,6 +40,32 @@ class AdminLeaveRequestController extends GetxController {
       );
       leaveList.value
           .removeWhere((element) => element.status == LeaveStatus.cancelled);
+
+      // Sorting leave by date and status
+      leaveList.value.sort((a, b) {
+        return (a.from ?? 0).compareTo(b.from ?? 0);
+      });
+
+      int compareStatusOrder(String? statusA, String? statusB) {
+        int statusOrder(String? status) {
+          switch (status) {
+            case LeaveStatus.pending:
+              return 0;
+            case LeaveStatus.approved:
+              return 1;
+            case LeaveStatus.rejected:
+              return 2;
+            default:
+              return 3;
+          }
+        }
+
+        return statusOrder(statusA ?? '').compareTo(statusOrder(statusB ?? ''));
+      }
+
+      leaveList.sort((a, b) {
+        return compareStatusOrder(a.status, b.status);
+      });
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

@@ -15,8 +15,9 @@ class Endpoints {
 
   String get login => "/auth/login";
   String get refreshToken => "/auth/token";
-  String get activation => "/auth/activation/activate";
-  String get deactivation => "/auth/activation/deactivate";
+  String get deviceActivation => "/auth/activation2/";
+  String get activation => "/auth/activation2/activate";
+  String get deactivation => "/auth/activation2/deactivate";
   String get validate_organization => "/auth/organization/";
   String get get_user_profile => "/auth/profile/me";
   String get update_profile => "/auth/profile/update";

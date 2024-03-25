@@ -7,6 +7,7 @@ import 'package:timesync/app_version.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
 import 'package:timesync/config/key.dart';
+import 'package:timesync/feature/auth/activation/model/activation_model.dart';
 import 'package:timesync/utils/encrypt_util.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -14,13 +15,13 @@ import 'package:timezone/data/latest.dart' as tz;
 
 class AppConfig {
   // DEV
-  static const String baseUrl = "http://192.168.1.104:3000/api";
-  static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";
+  // static const String baseUrl = "http://192.168.1.104:3000/api";
+  // static const String uploadUrl = "https://vfs-server-dev-devx1.ctdn.dev";
 
   // PROD - UAT
-  // static const String baseUrl = "https://timesync-api-uat.ctdn.dev/api";
-  // static const String uploadUrl =
-  //     "https://timesync-usercontent-prod.cubetiq.app";
+  static const String baseUrl = "https://timesync-api-uat.ctdn.dev/api";
+  static const String uploadUrl =
+      "https://timesync-usercontent-prod.cubetiq.app";
 
   // FIREBASE
   static const String appName = "Timesync 365";
@@ -63,7 +64,9 @@ class AppConfig {
 
   static PackageInfo? packageInfo;
 
-  static String? deviceInfo;
+  // Device Info
+  static String? deviceId;
+  static DeviceInfoModel? deviceInfo;
 
   static Future<void> initAppConfig() async {
     // init timezone
@@ -85,18 +88,18 @@ class AppConfig {
     DeviceInfoPlugin getDeviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       final androidInfo = await getDeviceInfo.androidInfo;
-      deviceInfo = {
-        "Model": androidInfo.id,
-        "Device": androidInfo.device,
-        "Version": androidInfo.version.release
-      }.toString();
+      deviceId = androidInfo.id;
+      deviceInfo = DeviceInfoModel(
+        deviceName: androidInfo.model,
+        version: androidInfo.version.release,
+      );
     } else if (Platform.isIOS) {
       final iosInfo = await getDeviceInfo.iosInfo;
-      deviceInfo = {
-        "Model": iosInfo.identifierForVendor,
-        "Device": iosInfo.name,
-        "Version": iosInfo.systemVersion,
-      }.toString();
+      deviceId = iosInfo.identifierForVendor;
+      deviceInfo = DeviceInfoModel(
+        deviceName: iosInfo.model,
+        version: iosInfo.systemVersion,
+      );
     }
   }
 }

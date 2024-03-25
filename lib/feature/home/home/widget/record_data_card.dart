@@ -91,7 +91,7 @@ class RecordDataCard extends StatelessWidget {
         ),
         Container(
           constraints: BoxConstraints(
-            minWidth: SizeUtils.scale(145, size.width),
+            minWidth: SizeUtils.scale(150, size.width),
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(

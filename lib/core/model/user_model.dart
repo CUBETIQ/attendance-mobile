@@ -17,6 +17,8 @@ class UserModel extends BaseModel<UserModel> {
   final String? address;
   final String? image;
   final bool? enabled;
+  final int? lastPasswordChangedAt;
+  final int? lastLoginAt;
 
   UserModel({
     this.id,
@@ -35,6 +37,8 @@ class UserModel extends BaseModel<UserModel> {
     this.address,
     this.image,
     this.enabled,
+    this.lastPasswordChangedAt,
+    this.lastLoginAt,
   });
 
   @override
@@ -59,6 +63,8 @@ class UserModel extends BaseModel<UserModel> {
       enabled: json['enabled'],
       gender: json['gender'],
       email: json['email'],
+      lastPasswordChangedAt: json['lastPasswordChangedAt'],
+      lastLoginAt: json['lastLoginAt'],
     );
   }
 

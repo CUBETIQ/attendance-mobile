@@ -43,7 +43,7 @@ class SplashController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    validateOrganization();
+    // validateOrganization();
     initDeepLink();
     controller = AnimationController(
       vsync: this,
@@ -51,6 +51,7 @@ class SplashController extends GetxController
     );
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
     controller.forward();
+    initLocalDbAndRoutes();
   }
 
   @override
@@ -67,7 +68,9 @@ class SplashController extends GetxController
     }
   }
 
-  Future<void> initLocalDb() async {
+  Future<void> initLocalDbAndRoutes() async {
+    final data = await localDataService.get();
+    localData.value = data ?? LocalStorage();
     if (localData.value.accessToken != null &&
         localData.value.accessToken != "") {
       await fetchMe();
@@ -79,6 +82,7 @@ class SplashController extends GetxController
         await getDepartment();
       }
     }
+    await Future.delayed(const Duration(seconds: 2));
     initRoute();
   }
 
@@ -143,6 +147,7 @@ class SplashController extends GetxController
       await IsarService().saveLocalData(input: localStorageData);
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
+      Get.offNamed(Routes.LOGIN);
       rethrow;
     }
   }
@@ -184,7 +189,7 @@ class SplashController extends GetxController
       }
       organization.value =
           await SplashService().validateOrganization(id: data!.organizationId!);
-      await initLocalDb();
+      await initLocalDbAndRoutes();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       Get.offNamed(Routes.ACTIVATION);

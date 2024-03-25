@@ -8,6 +8,7 @@ import 'package:timesync/core/model/organization_model.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync/feature/auth/activation/model/activation_model.dart';
+import 'package:timesync/feature/auth/activation/model/device_activation_model.dart';
 import 'package:timesync/feature/auth/activation/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -26,13 +27,8 @@ class ActivationController extends GetxController {
   final iosInfo = Rxn<IosDeviceInfo>(null);
   final localDataService = LocalStorageController.getInstance();
   final localData = LocalStorage().obs;
-  final organization = Rxn<OrganizationModel>(null);
   LocalStorageModel? localStorageData;
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final activationDevice = Rxn<DeviceActivationModel>(null);
 
   Future<void> activation() async {
     validate();
@@ -40,26 +36,59 @@ class ActivationController extends GetxController {
     if (MyTextFieldFormController.findController('Activation').isValid) {
       try {
         ActivateModel inputData = ActivateModel(
-          code: activationController.text.toUpperCase(),
-          device: AppConfig.deviceInfo,
+          activationCode: activationController.text.toUpperCase(),
+          deviceId: AppConfig.deviceId,
+          deviceInfo: AppConfig.deviceInfo,
         );
         activate.value = await ActivationService().activate(inputData);
         localStorageData = LocalStorageModel(
           isActivated: true,
+          deviceHash: activate.value!.deviceHash,
           organizationId: activate.value!.organizationId,
         );
         await IsarService().saveLocalData(
           input: localStorageData,
         );
+        final activationDevice =
+            await getActivationDevice(activate.value!.deviceHash);
         if (data?.isFirstTime != false) {
-          Get.offNamed(Routes.ONBOARD);
+          Get.offNamed(
+            Routes.ONBOARD,
+            arguments: {
+              "organization": OrganizationModel(
+                name: activationDevice?.organization?.name,
+                image: activationDevice?.organization?.image,
+                id: activationDevice?.organization?.id,
+              ),
+            },
+          );
         } else {
-          Get.offNamed(Routes.LOGIN);
+          Get.offNamed(Routes.LOGIN, arguments: {
+            "organization": OrganizationModel(
+              name: activationDevice?.organization?.name,
+              image: activationDevice?.organization?.image,
+              id: activationDevice?.organization?.id,
+            ),
+          });
         }
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response?.data["message"]);
         rethrow;
       }
+    }
+  }
+
+  Future<DeviceActivationModel?> getActivationDevice(String? deviceHash) async {
+    try {
+      if (AppConfig.deviceId != null) {
+        final deviceActivation =
+            await ActivationService().getDeviceActivation(deviceHash ?? "");
+        activationDevice.value = deviceActivation;
+      }
+      return activationDevice.value;
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response?.data["message"]);
+      rethrow;
     }
   }
 

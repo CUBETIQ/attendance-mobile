@@ -1,18 +1,12 @@
 import 'package:timesync/core/repositories/base_model.dart';
 
 class ActivationModel extends BaseModel<ActivationModel> {
-  final String? id;
+  final String? deviceHash;
   final String? organizationId;
-  final String? activationCode;
-  final List<String>? device;
-  final int? limitActivation;
 
   ActivationModel({
-    this.id,
+    this.deviceHash,
     this.organizationId,
-    this.activationCode,
-    this.device,
-    this.limitActivation,
   });
 
   @override
@@ -21,13 +15,8 @@ class ActivationModel extends BaseModel<ActivationModel> {
       return ActivationModel();
     }
     return ActivationModel(
-      id: json['id'],
+      deviceHash: json['deviceHash'],
       organizationId: json['organizationId'],
-      activationCode: json['activationCode'],
-      device: json['device'] != null
-          ? List<String>.from(json['device'])
-          : <String>[],
-      limitActivation: json['limitActivation'],
     );
   }
 
@@ -42,11 +31,8 @@ class ActivationModel extends BaseModel<ActivationModel> {
   @override
   Map<String, dynamic> toJson() {
     return {
-      "id": id,
+      "deviceHash": deviceHash,
       "organizationId": organizationId,
-      "activationCode": activationCode,
-      "device": device,
-      "limitActivation": limitActivation,
     };
   }
 }

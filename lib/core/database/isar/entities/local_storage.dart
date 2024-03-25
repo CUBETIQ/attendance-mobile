@@ -21,4 +21,5 @@ class LocalStorage {
   String? userId;
   String? theme;
   String? userRole;
+  String? deviceHash;
 }

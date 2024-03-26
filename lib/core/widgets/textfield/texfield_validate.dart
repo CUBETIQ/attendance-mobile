@@ -157,7 +157,6 @@ class MyTextFieldForm extends StatelessWidget {
                 fillColor: filled == true
                     ? Theme.of(context).colorScheme.primary.withOpacity(0.095)
                     : null,
-                errorText: errorText,
                 errorMaxLines: 2,
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
@@ -216,7 +215,7 @@ class MyTextFieldForm extends StatelessWidget {
               },
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return '$label is required';
+                  return errorText ?? "$label is required";
                 }
                 return null;
               },

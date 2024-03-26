@@ -85,4 +85,25 @@ class WorkHourController extends GetxController {
     startOfDay.value = DateUtil.getStartOfDayInMilisecond(selectDate.value);
     endOfDay.value = DateUtil.getEndOfDayInMilisecond(selectDate.value);
   }
+
+  Map<String, dynamic> calculateWorkHourPercentage(List<AttendanceModel> data) {
+    int? totalWorkingMinute;
+    double? percentage;
+
+    if (data.isNotEmpty) {
+      for (var attendance in data) {
+        totalWorkingMinute = (totalWorkingMinute ?? 0) +
+            DateUtil.calculateDurationInMinutes(
+              attendance.checkInDateTime!,
+              attendance.checkOutDateTime,
+            );
+      }
+      percentage = (totalWorkingMinute ?? 0) /
+          NavigationController.to.totalWorkMinutes.value;
+    }
+    return {
+      "totalWorkingMinute": totalWorkingMinute,
+      "percentage": percentage,
+    };
+  }
 }

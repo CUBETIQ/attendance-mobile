@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pie_chart/pie_chart.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/task/task/controller/index.dart';
 import 'package:timesync/feature/task/task/widget/task_card.dart';
-import 'package:timesync/feature/task/task/widget/task_chart.dart';
+import 'package:timesync/types/task_filter.dart';
 import 'package:timesync/utils/size_util.dart';
-import 'package:timesync/utils/string_util.dart';
 
 class TaskView extends StatelessWidget {
   const TaskView({super.key});
@@ -38,14 +40,17 @@ class TaskView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height:
-                    SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
+                height: SizeUtils.scale(22, size.width),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MyText(
-                      text: "Task Summary", style: AppFonts().bodyLargeMedium),
+                    text: "Task Summary",
+                    style: AppFonts.TitleMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
                   Obx(
                     () => DateDropDown(
                       date: controller.selectDate.value,
@@ -56,82 +61,155 @@ class TaskView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: SizeUtils.scale(20, size.width),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Obx(
-                      () => TaskChart(
-                        title: "Pending",
-                        size: size,
-                        radius: size.width < 600 ? 60 : 65,
-                        centerWidget: MyText(
-                          text: StringUtil.doubleToPercentageString(
-                              controller.percentageUncompletedTask.value * 100),
-                          style: AppFonts().bodyMediumRegular,
-                        ),
-                        percent: controller.percentageUncompletedTask.value,
-                        textBelow:
-                            "${"Task:".trString} ${controller.totalUncompletedTask}/${controller.totalTask.value}",
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: size.width * 0.03),
-                  Expanded(
-                    child: Obx(
-                      () => TaskChart(
-                        title: "Completed",
-                        size: size,
-                        radius: size.width < 600 ? 60 : 65,
-                        centerWidget: MyText(
-                          text: StringUtil.doubleToPercentageString(
-                              controller.percentageCompletedTask.value * 100),
-                          style: AppFonts().bodyMediumRegular,
-                        ),
-                        percent: controller.percentageCompletedTask.value,
-                        textBelow:
-                            "${"Task:".trString} ${controller.totalCompletedTask}/${controller.totalTask.value}",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: AppSize().paddingS11),
-              MyText(text: "My Task", style: AppFonts().bodyLargeMedium),
-              SizedBox(height: AppSize().paddingS8),
-              Expanded(
-                child: Obx(
-                  () => MyAsyncWidget(
-                    isLoading: false,
-                    list: controller.tasks,
-                    noDataWidget: const MyNoData(),
-                    builderWidget: ListView.separated(
-                      itemCount: controller.tasks.length,
-                      physics: const BouncingScrollPhysics(),
-                      separatorBuilder: (context, index) => SizedBox(
-                        height: SizeUtils.scale(
-                          AppSize().paddingS6,
-                          size.width,
-                        ),
-                      ),
-                      itemBuilder: (context, index) {
-                        return TaskCard(
-                          color: controller.tasks[index].color,
-                          task: controller.tasks[index],
-                          onTap: () => controller.onTapTask(
-                            controller.tasks[index],
-                          ),
-                          onCheck: (value) => controller.completeTask(
-                            controller.tasks[index].id!,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
+              Obx(
+                () => MyPieChart(
+                  firstTitle: "To do",
+                  // secondTitle: "In_Progress",
+                  thirdTitle: "Completed",
+                  firstPercentage: controller.percentageTodoTask.value,
+                  // secondPercentage: controller.percentageProgressTask.value,
+                  thirdPercentage: controller.percentageCompletedTask.value,
+                  haveNoData: controller.haveNoData.value,
+                  firstColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                  thirdColor: Theme.of(context).colorScheme.primary,
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: SizeUtils.scale(20, size.width),
+                    bottom: SizeUtils.scale(12, size.width)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(
+                        text: "Tasks List",
+                        style: AppFonts.TitleMedium.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground)),
+                    Obx(
+                      () => MyDropDownButton<String>(
+                        width: SizeUtils.scale(130, size.width),
+                        borderColor: Theme.of(context).colorScheme.primary,
+                        buttonPadding: EdgeInsets.only(
+                          left: SizeUtils.scale(0, size.width),
+                          right: SizeUtils.scale(10, size.width),
+                          top: SizeUtils.scale(1, size.width),
+                          bottom: SizeUtils.scale(1, size.width),
+                        ),
+                        dropdownPadding: EdgeInsets.symmetric(
+                            horizontal: SizeUtils.scale(10, size.width)),
+                        borderRadius: SizeUtils.scale(24, size.width),
+                        label: "Type",
+                        hasLabel: false,
+                        value: controller.selectedTaskType.value,
+                        hint: "Choose Type",
+                        dropdownItems: controller.taskType
+                            .map(
+                              (e) => DropdownMenuItem<String>(
+                                value: e,
+                                child: MyText(
+                                  text: e.trString,
+                                  style: AppFonts.TitleXSmall.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: controller.onChangedTaskType,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Obx(() {
+                  List<TaskModel> tasks =
+                      controller.selectedTaskType.value == TaskFilter.pending
+                          ? controller.pendingTasks.value
+                          : controller.selectedTaskType.value ==
+                                  TaskFilter.completed
+                              ? controller.completedTasks.value
+                              : controller.allTasksNoComplete;
+                  return MyAsyncWidget(
+                    isLoading: false,
+                    list: tasks,
+                    noDataWidget: const MyNoData(),
+                    builderWidget: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ListView.separated(
+                            itemCount: tasks.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            separatorBuilder: (context, index) => SizedBox(
+                              height: SizeUtils.scale(8, size.width),
+                            ),
+                            itemBuilder: (context, index) {
+                              TaskModel? task = tasks[index];
+                              return TaskCard(
+                                task: task,
+                                onTap: () => controller.onTapTask(task),
+                                onCheck: () =>
+                                    controller.completeTask(task.id!),
+                              );
+                            },
+                          ),
+                          controller.selectedTaskType.value != TaskFilter.all
+                              ? const SizedBox.shrink()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical:
+                                              SizeUtils.scale(12, size.width)),
+                                      child: MyText(
+                                        text: 'Completed',
+                                        style: AppFonts.TitleMedium.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground),
+                                      ),
+                                    ),
+                                    ListView.separated(
+                                      itemCount:
+                                          controller.completedTasks.length,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      separatorBuilder: (context, index) =>
+                                          SizedBox(
+                                        height: SizeUtils.scale(
+                                          AppSize().paddingS6,
+                                          size.width,
+                                        ),
+                                      ),
+                                      itemBuilder: (context, index) {
+                                        return TaskCard(
+                                          task:
+                                              controller.completedTasks[index],
+                                          onTap: () => controller.onTapTask(
+                                            controller.completedTasks[index],
+                                          ),
+                                          onCheck: () =>
+                                              controller.completeTask(
+                                            controller
+                                                .completedTasks[index].id!,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
               ),
             ],
           ),

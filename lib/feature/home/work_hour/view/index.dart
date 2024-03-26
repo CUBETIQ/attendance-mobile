@@ -13,8 +13,6 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/home/work_hour/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/feature/home/work_hour/widget/working_hour_card.dart';
-import 'package:timesync/feature/navigation/controller/index.dart';
-import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class WorkingHourView extends StatelessWidget {
@@ -84,20 +82,12 @@ class WorkingHourView extends StatelessWidget {
                               controller.getAttendancesForStaff(staff);
                           final PositionModel position =
                               controller.getPositionForStaff(staff);
-                          int? totalWorkMinute;
-                          double? percentage;
-                          if (attendance.isNotEmpty) {
-                            totalWorkMinute = 0;
-                            for (var attendance in attendance) {
-                              totalWorkMinute = (totalWorkMinute ?? 0) +
-                                  DateUtil.calculateDurationInMinutes(
-                                    attendance.checkInDateTime!,
-                                    attendance.checkOutDateTime,
-                                  );
-                            }
-                            percentage = (totalWorkMinute ?? 0) /
-                                NavigationController.to.totalWorkMinutes.value;
-                          }
+                          int? totalWorkMinute =
+                              controller.calculateWorkHourPercentage(
+                                  attendance)['totalWorkingMinute'];
+                          double? percentage =
+                              controller.calculateWorkHourPercentage(
+                                  attendance)['percentage'];
                           return WorkHourCard(
                             staff: staff,
                             position: position,

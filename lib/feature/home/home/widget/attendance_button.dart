@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/text.dart';
@@ -27,19 +27,22 @@ class AttendanceButton extends StatelessWidget {
       onTap: onTap ?? () {},
       child: Container(
         decoration: BoxDecoration(
-            color: onlyBorder == true ? null : color,
-            border: Border.all(
-                color: color ?? Theme.of(context).colorScheme.primary),
-            borderRadius: BorderRadius.circular(AppSize().borderRadiusLarge)),
+          color: onlyBorder == true ? null : color,
+          border:
+              Border.all(color: color ?? Theme.of(context).colorScheme.primary),
+          borderRadius: BorderRadius.circular(
+            SizeUtils.scale(AppSpacing.L, size.width),
+          ),
+        ),
         child: Padding(
           padding: EdgeInsets.symmetric(
               vertical: SizeUtils.scale(22, size.width),
-              horizontal: SizeUtils.scale(25.75, size.width)),
+              horizontal: SizeUtils.scale(24, size.width)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(right: SizeUtils.scale(8, size.width)),
+                padding: EdgeInsets.only(right: SizeUtils.scale(7, size.width)),
                 child: SvgIcon(
                   icon: svgIcon ?? '',
                   color: onlyBorder == true

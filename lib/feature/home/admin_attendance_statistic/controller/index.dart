@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
 import 'package:timesync/core/model/attendance_model.dart';
 import 'package:timesync/core/model/user_model.dart';
-import 'package:timesync/utils/logger.dart';
 
 class AttendanceStatisticController extends GetxController {
   static AttendanceStatisticController get to => Get.find();
 
-  final appBarTitle = "Check in".obs;
+  final appBarTitle = "Check-out".obs;
   final staffs = <UserModel>[].obs;
-  final attendaces = <AttendanceModel>[].obs;
+  final attendances = <AttendanceModel>[].obs;
+  final backUpAttendaces = <AttendanceModel>[].obs;
 
   @override
   void onInit() {
@@ -16,13 +16,33 @@ class AttendanceStatisticController extends GetxController {
     initArguments();
   }
 
+  List<UserModel> getUser() {
+    List<UserModel> staff = [];
+    for (var element in backUpAttendaces) {
+      staff.add(staffs.firstWhere((staff) => staff.id == element.userId));
+    }
+    return staff;
+  }
+
+  List<AttendanceModel> removeDuplicateAttendances(
+      List<AttendanceModel> attendances) {
+    Set<String> userId = <String>{};
+    List<AttendanceModel> uniqueAttendances = [];
+
+    for (AttendanceModel attendance in attendances) {
+      if (userId.add(attendance.userId!)) {
+        uniqueAttendances.add(attendance);
+      }
+    }
+
+    return uniqueAttendances;
+  }
+
   void initArguments() {
     final data = Get.arguments;
+    backUpAttendaces.value = Get.arguments["attendance"];
     staffs.value = data['staffs'];
-    attendaces.value = data['attendance'];
+    attendances.value = removeDuplicateAttendances(backUpAttendaces.value);
     appBarTitle.value = data['title'];
-    Logs.e("staffs: ${staffs.length}");
-    Logs.e("attendance: ${attendaces.length}");
-    Logs.e("title: $appBarTitle");
   }
 }

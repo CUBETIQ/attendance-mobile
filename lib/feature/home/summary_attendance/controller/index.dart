@@ -96,7 +96,6 @@ class SummaryAttendanceController extends GetxController
 
     for (AttendanceModel attendance in attendances) {
       if (userId.add(attendance.userId!)) {
-        // userId is not present in the set, so this is a unique entry
         uniqueAttendances.add(attendance);
       }
     }

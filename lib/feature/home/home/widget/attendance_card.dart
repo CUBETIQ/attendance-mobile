@@ -16,6 +16,7 @@ import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
 import 'package:timesync/feature/home/home/widget/attendance_button.dart';
 import 'package:timesync/feature/home/home/widget/timer_widget.dart';
+import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
@@ -33,7 +34,6 @@ class AttendanceCard extends StatelessWidget {
   final bool isInOfficeRange;
   final bool? isStartBreakTime;
   final bool? isEndBreakTime;
-  final double? workHourPercent;
   final void Function()? onTapBreakTime;
 
   const AttendanceCard({
@@ -50,7 +50,6 @@ class AttendanceCard extends StatelessWidget {
     this.isInOfficeRange = false,
     this.isStartBreakTime,
     this.isEndBreakTime = false,
-    this.workHourPercent,
     this.onTapBreakTime,
   });
 
@@ -62,6 +61,7 @@ class AttendanceCard extends StatelessWidget {
     final workingHour = Rxn<String>();
     final workingMinute = Rxn<String>();
     final workingSecond = Rxn<String>();
+    final workingHourPercentage = 0.0.obs;
 
     Future<void> checkTimer() async {
       if (isCheckedIn == true) {
@@ -73,14 +73,26 @@ class AttendanceCard extends StatelessWidget {
           Timer.periodic(
             const Duration(seconds: 1),
             (Timer timer) async {
-              var duration = await HomeController.to
-                  .checkTime()
-                  .then((value) => value.difference(checkInDateTime));
+              var dateTime = await HomeController.to.checkTime();
+              var duration = dateTime.difference(checkInDateTime);
               workingHour.value = duration.inHours.toString().padLeft(2, '0');
               var minutes = duration.inMinutes.remainder(60);
               workingMinute.value = minutes.toString().padLeft(2, '0');
               var seconds = duration.inSeconds.remainder(60);
               workingSecond.value = seconds.toString().padLeft(2, '0');
+
+              if (workingHourPercentage.value <= 1) {
+                final currentWorkingMinute =
+                    DateUtil.calculateDurationInMinutes(
+                  HomeController.to.attendanceList.last.checkInDateTime!,
+                  dateTime.millisecondsSinceEpoch,
+                );
+
+                workingHourPercentage.value = currentWorkingMinute /
+                    NavigationController.to.totalWorkMinutes.value;
+
+                Logs.e('workingHourPercentage: $workingHourPercentage');
+              }
             },
           );
         }
@@ -123,8 +135,10 @@ class AttendanceCard extends StatelessWidget {
                     vertical: SizeUtils.scale(20, size.width)),
                 child: Column(
                   children: [
-                    MyLinearProgressIndicator(
-                      percent: workHourPercent ?? 0.0,
+                    Obx(
+                      () => MyLinearProgressIndicator(
+                        percent: workingHourPercentage.value,
+                      ),
                     ),
                     Padding(
                       padding:

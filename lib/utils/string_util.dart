@@ -147,9 +147,9 @@ class StringUtil {
     DateTime breakTime = DateFormat("hh:mm")
         .parse("${getbreakTime.hour}:${getbreakTime.minute}");
 
-    if (endBreakTimeHour.isAfter(breakTime)) {
+    if (endBreakTimeHour.isBefore(breakTime)) {
       return AttendanceStatus.late;
-    } else if (endBreakTimeHour.isBefore(breakTime)) {
+    } else if (endBreakTimeHour.isAfter(breakTime)) {
       return AttendanceStatus.early;
     } else {
       return AttendanceStatus.onTime;
@@ -162,16 +162,16 @@ class StringUtil {
       return null;
     }
 
-    DateTime endBreakTime = DateFormat("hh:mm").parse(endBreak);
+    DateTime endBreakTime = DateFormat("HH:mm").parse(endBreak);
 
     DateTime getbreakTime = DateTime.fromMillisecondsSinceEpoch(date);
 
-    DateTime breakTime = DateFormat("hh:mm")
+    DateTime breakTime = DateFormat("HH:mm")
         .parse("${getbreakTime.hour}:${getbreakTime.minute}");
 
     final minutes = endBreakTime.difference(breakTime).inMinutes;
 
-    int hours = minutes ~/ 60;
+    int hours = (minutes ~/ 60).abs();
     int remainingMinutes = minutes % 60;
 
     String timeString = '';

@@ -284,7 +284,8 @@ class HomeAdminView extends StatelessWidget {
                                     controller.filterStaffs.value[index];
                                 final attendance = controller
                                     .backUpStaffAttendanceList
-                                    .where((p0) => p0.userId == staff.id)
+                                    .where(
+                                        (element) => element.userId == staff.id)
                                     .toList();
                                 final position = controller.positionList
                                     .firstWhere(

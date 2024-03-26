@@ -167,17 +167,19 @@ class MyPieChart extends StatelessWidget {
                     color: firstColor ?? Theme.of(context).colorScheme.primary,
                     title: firstTitle ?? "Present",
                   ),
-                  AttendanceInfoWidget(
-                    color:
-                        secondColor ?? Theme.of(context).colorScheme.secondary,
-                    title: secondTitle ?? "Leave",
-                  ),
+                  secondTitle == null
+                      ? const SizedBox.shrink()
+                      : AttendanceInfoWidget(
+                          color: secondColor ??
+                              Theme.of(context).colorScheme.secondary,
+                          title: secondTitle ?? "Leave",
+                        ),
                   AttendanceInfoWidget(
                     color: thirdColor ??
                         Theme.of(context).colorScheme.secondaryContainer,
                     title: thirdTitle ?? "Absent",
                   ),
-                ].withSpaceBetween(
+                ].withSpaceBetweenNoSizedBox(
                   height: SizeUtils.scale(8, size.width),
                 ),
               ),

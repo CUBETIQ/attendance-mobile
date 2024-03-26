@@ -21,8 +21,7 @@ class TaskController extends GetxController {
   static TaskController get to => Get.find();
   final tasks = <TaskModel>[].obs;
   final allTasksNoComplete = <TaskModel>[].obs;
-  final todoTasks = <TaskModel>[].obs;
-  final inProgressTasks = <TaskModel>[].obs;
+  final pendingTasks = <TaskModel>[].obs;
   final completedTasks = <TaskModel>[].obs;
 
   final totalTask = 0.obs;
@@ -39,12 +38,8 @@ class TaskController extends GetxController {
   final haveNoData = false.obs;
 
   final selectedTaskType = TaskFilter.all.obs;
-  final taskType = <String>[
-    TaskFilter.all,
-    TaskFilter.todo,
-    TaskFilter.inProgress,
-    TaskFilter.completed
-  ].obs;
+  final taskType =
+      <String>[TaskFilter.all, TaskFilter.pending, TaskFilter.completed].obs;
 
   @override
   void onInit() {
@@ -63,13 +58,9 @@ class TaskController extends GetxController {
           .sort((a, b) => (b.startDate ?? 0).compareTo(a.startDate ?? 0));
       tasks.value.sort((a, b) => (b.status ?? "").compareTo(a.status ?? ""));
 
-      todoTasks.value = tasks.value
-          .where((element) => element.status == TaskStatus.todo)
-          .toList();
-      inProgressTasks.value = tasks.value
+      pendingTasks.value = tasks.value
           .where((element) => element.status == TaskStatus.progress)
           .toList();
-      Logs.e('Here ${inProgressTasks.value.map((e) => e.name).toList()}');
       completedTasks.value = tasks.value
           .where((element) => element.status == TaskStatus.done)
           .toList();
@@ -196,7 +187,9 @@ class TaskController extends GetxController {
           .where((element) => element.status == TaskStatus.done)
           .length;
       totalTodoTask.value = tasks.value
-          .where((element) => element.status == TaskStatus.todo)
+          .where((element) =>
+              element.status == TaskStatus.todo ||
+              element.status == TaskStatus.progress)
           .length;
       totalProgressTask.value = tasks.value
           .where((element) => element.status == TaskStatus.progress)

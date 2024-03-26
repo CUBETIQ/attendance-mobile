@@ -65,10 +65,10 @@ class TaskView extends StatelessWidget {
               Obx(
                 () => MyPieChart(
                   firstTitle: "Todo",
-                  secondTitle: "In_Progress",
+                  // secondTitle: "In_Progress",
                   thirdTitle: "Completed",
                   firstPercentage: controller.percentageTodoTask.value,
-                  secondPercentage: controller.percentageProgressTask.value,
+                  // secondPercentage: controller.percentageProgressTask.value,
                   thirdPercentage: controller.percentageCompletedTask.value,
                   haveNoData: controller.haveNoData.value,
                   firstColor: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -127,15 +127,12 @@ class TaskView extends StatelessWidget {
               Expanded(
                 child: Obx(() {
                   List<TaskModel> tasks =
-                      controller.selectedTaskType.value == TaskFilter.todo
-                          ? controller.todoTasks.value
+                      controller.selectedTaskType.value == TaskFilter.pending
+                          ? controller.pendingTasks.value
                           : controller.selectedTaskType.value ==
-                                  TaskFilter.inProgress
-                              ? controller.inProgressTasks.value
-                              : controller.selectedTaskType.value ==
-                                      TaskFilter.completed
-                                  ? controller.completedTasks.value
-                                  : controller.allTasksNoComplete;
+                                  TaskFilter.completed
+                              ? controller.completedTasks.value
+                              : controller.allTasksNoComplete;
                   return MyAsyncWidget(
                     isLoading: false,
                     list: tasks,

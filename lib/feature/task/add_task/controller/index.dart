@@ -119,6 +119,7 @@ class AddTaskController extends GetxController {
         );
         await AddTaskService().updateTask(task.value!.id!, input);
         TaskController.to.getUserTasks();
+        TaskController.to.setUpTasksNotification(updatedId: task.value!.id);
         Get.back();
       } on DioException catch (e) {
         showErrorSnackBar("Error", e.response!.data["message"]);

@@ -1,19 +1,17 @@
-import 'package:msh_checkbox/msh_checkbox.dart';
+import 'package:flutter/material.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/task_model.dart';
+import 'package:timesync/core/widgets/check_box/check_box.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/extensions/string.dart';
-import 'package:timesync/utils/size_util.dart';
-import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/types/task_status.dart';
-import 'package:flutter/material.dart';
+import 'package:timesync/utils/date_util.dart';
+import 'package:timesync/utils/size_util.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;
   final void Function()? onTap;
-  final void Function(bool) onCheck;
-  final String? color;
+  final void Function() onCheck;
   final String? icon;
 
   const TaskCard({
@@ -21,7 +19,6 @@ class TaskCard extends StatelessWidget {
     required this.task,
     this.onTap,
     required this.onCheck,
-    this.color,
     this.icon,
   });
 
@@ -31,106 +28,57 @@ class TaskCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: size.width,
-        padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.scale(
-            AppSize().paddingHorizontalLarge,
-            size.width,
-          ),
-          vertical: SizeUtils.scale(
-            AppSize().paddingS4,
-            size.width,
-          ),
-        ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            SizeUtils.scale(AppSize().borderRadiusLarge, size.width),
-          ),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
-          ),
-          color: color != null
-              ? Color(color!.toInt()).withOpacity(0.20)
-              : Theme.of(context).colorScheme.primary.withOpacity(0.20),
-        ),
-        child: IntrinsicHeight(
+            borderRadius: BorderRadius.circular(AppSize().borderRadiusLarge),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+            ),
+            color: Theme.of(context).colorScheme.background),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: SizeUtils.scale(16, size.width),
+              vertical: SizeUtils.scale(12, size.width)),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IgnorePointer(
-                ignoring: task.status == TaskStatus.done ? true : false,
-                child: MSHCheckbox(
-                  value: task.status == TaskStatus.done ? true : false,
-                  size: SizeUtils.scale(20, size.width),
-                  onChanged: onCheck,
-                  colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
-                    checkedColor: Theme.of(context).colorScheme.primary,
-                    uncheckedColor: Theme.of(context).colorScheme.outline,
-                  ),
-                  style: MSHCheckboxStyle.fillScaleColor,
-                ),
-              ),
-              SizedBox(
-                width: SizeUtils.scale(AppSize().paddingS8, size.width),
-              ),
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: SizeUtils.scale(260, size.width),
-                ),
-                padding: EdgeInsets.symmetric(
-                  vertical: SizeUtils.scale(AppSize().paddingS4, size.width),
-                ),
+              Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(width: AppSize().paddingS5),
-                    Container(
-                      constraints: BoxConstraints(
-                        maxWidth: size.width * 0.56,
-                      ),
-                      child: MyText(
-                        text: (task.name ?? "Task Name"),
-                        maxLines: 2,
-                        style: AppFonts().bodyLarge.copyWith(
-                              color: Theme.of(context).colorScheme.outline,
-                            ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: SizeUtils.scale(AppSize().paddingS1, size.width),
-                    ),
                     MyText(
-                      text: task.endDate != null
-                          ? "${"Due:".trString} ${DateUtil.formatMillisecondsToDOB(task.endDate!)}"
-                          : "Due: N/A",
-                      style: AppFonts().bodySmallRegular.copyWith(
-                            color: task.endDate == null
-                                ? Theme.of(context).colorScheme.outline
-                                : task.status == TaskStatus.done
-                                    ? Theme.of(context).colorScheme.outline
-                                    : Theme.of(context).colorScheme.error,
-                          ),
+                      text: task.name ?? "",
+                      maxLines: 2,
+                      style: AppFonts.TitleSmall.copyWith(
+                        decoration: task.status == TaskStatus.done
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: SizeUtils.scale(8, size.width)),
+                      child: MyText(
+                        text: task.endDate != null
+                            ? DateUtil.formatMillisecondsToDOB(task.endDate!)
+                            : "N/A",
+                        style: AppFonts.LabelSmall.copyWith(
+                          color: Theme.of(context).colorScheme.outlineVariant,
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              const Spacer(),
-              Container(
-                width: SizeUtils.scale(40, size.width),
-                height: SizeUtils.scale(40, size.width),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.outline,
-                ),
-                child: Icon(
-                  task.icon?.isEmpty == false || icon != null
-                      ? IconData(task.icon!.toInt(),
-                          fontFamily: 'MaterialIcons')
-                      : Icons.task,
-                  color: Colors.white,
-                  size: SizeUtils.scale(
-                    16,
-                    size.width,
+              Padding(
+                padding: EdgeInsets.only(left: SizeUtils.scale(12, size.width)),
+                child: IgnorePointer(
+                  ignoring: task.status == TaskStatus.done ? true : false,
+                  child: MyCheckBox(
+                    hasNoBackground: true,
+                    isChecked: task.status == TaskStatus.done ? true : false,
+                    onTap: onCheck,
                   ),
                 ),
               ),

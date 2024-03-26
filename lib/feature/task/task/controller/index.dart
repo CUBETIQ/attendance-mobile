@@ -12,6 +12,7 @@ import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/task_filter.dart';
 import 'package:timesync/types/task_status.dart';
 import 'package:timesync/utils/converter.dart';
 import 'package:timesync/utils/logger.dart';
@@ -19,6 +20,10 @@ import 'package:timesync/utils/logger.dart';
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
   final tasks = <TaskModel>[].obs;
+  final allTasksNoComplete = <TaskModel>[].obs;
+  final pendingTasks = <TaskModel>[].obs;
+  final completedTasks = <TaskModel>[].obs;
+
   final totalTask = 0.obs;
   final totalCompletedTask = 0.obs;
   final totalTodoTask = 0.obs;
@@ -31,6 +36,10 @@ class TaskController extends GetxController {
   final endDate = Rxn<int>();
   final selectDate = DateTime.now().obs;
   final haveNoData = false.obs;
+
+  final selectedTaskType = TaskFilter.all.obs;
+  final taskType =
+      <String>[TaskFilter.all, TaskFilter.pending, TaskFilter.completed].obs;
 
   @override
   void onInit() {
@@ -49,29 +58,47 @@ class TaskController extends GetxController {
           .sort((a, b) => (b.startDate ?? 0).compareTo(a.startDate ?? 0));
       tasks.value.sort((a, b) => (b.status ?? "").compareTo(a.status ?? ""));
 
-      // Set notification for task reminder
-      final List<int> notificationIds =
-          await NotificationIntegration.getPendingNotificationId();
-
-      tasks.value
+      pendingTasks.value = tasks.value
+          .where((element) => element.status == TaskStatus.progress)
+          .toList();
+      completedTasks.value = tasks.value
+          .where((element) => element.status == TaskStatus.done)
+          .toList();
+      allTasksNoComplete.value = tasks.value
           .where((element) => element.status != TaskStatus.done)
-          .forEach((element) {
-        if (element.endDate != null) {
-          DateTime time = DateTime.fromMillisecondsSinceEpoch(element.endDate!);
-          int? uniqueId = generateUniqueIntId(element.id ?? "");
+          .toList();
 
-          if (!notificationIds.contains(uniqueId)) {
-            if (time.isAfter(AppConfig.currentTime)) {
-              NotificationSchedule.taskReminder(
-                  id: uniqueId, time: element.endDate, mongoId: element.id);
-            }
-          }
-        }
-      });
+      // Set notification for task reminder
+      await setUpTasksNotification();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  Future<void> setUpTasksNotification({String? updatedId}) async {
+    final List<int> notificationIds =
+        await NotificationIntegration.getPendingNotificationId();
+
+    if (updatedId != null && notificationIds.isNotEmpty) {
+      int? uniqueId = generateUniqueIntId(updatedId);
+      await NotificationSchedule.cancelSpecificReminder(uniqueId);
+    }
+    tasks.value
+        .where((element) => element.status != TaskStatus.done)
+        .forEach((element) {
+      if (element.endDate != null) {
+        DateTime time = DateTime.fromMillisecondsSinceEpoch(element.endDate!);
+        int? uniqueId = generateUniqueIntId(element.id ?? "");
+
+        if (!notificationIds.contains(uniqueId)) {
+          if (time.isAfter(AppConfig.currentTime)) {
+            NotificationSchedule.taskReminder(
+                id: uniqueId, time: element.endDate, mongoId: element.id);
+          }
+        }
+      }
+    });
   }
 
   Future<void> completeTask(String id) async {
@@ -102,6 +129,12 @@ class TaskController extends GetxController {
 
   void onRefresh() {
     getUserTasks();
+  }
+
+  void onChangedTaskType(String? value) {
+    if (selectedTaskType.value != value) {
+      selectedTaskType.value = value!;
+    }
   }
 
   void onTapTask(TaskModel task) {
@@ -154,7 +187,9 @@ class TaskController extends GetxController {
           .where((element) => element.status == TaskStatus.done)
           .length;
       totalTodoTask.value = tasks.value
-          .where((element) => element.status == TaskStatus.todo)
+          .where((element) =>
+              element.status == TaskStatus.todo ||
+              element.status == TaskStatus.progress)
           .length;
       totalProgressTask.value = tasks.value
           .where((element) => element.status == TaskStatus.progress)

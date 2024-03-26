@@ -43,7 +43,7 @@ class AdminLeaveRequestController extends GetxController {
 
       // Sorting leave by date and status
       leaveList.value.sort((a, b) {
-        return (a.from ?? 0).compareTo(b.from ?? 0);
+        return (b.from ?? 0).compareTo(a.from ?? 0);
       });
 
       int compareStatusOrder(String? statusA, String? statusB) {

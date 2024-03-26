@@ -121,6 +121,7 @@ class LeaveView extends StatelessWidget {
                     builderWidget: ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.leaves.length,
+                      padding: EdgeInsets.all(SizeUtils.scale(1, size.width)),
                       itemBuilder: (context, index) {
                         return LeaveCard(
                           onTap: () => controller.onTapLeave(

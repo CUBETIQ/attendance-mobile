@@ -5,14 +5,12 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pie_chart/pie_chart.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/task/task/controller/index.dart';
 import 'package:timesync/feature/task/task/widget/task_card.dart';
-import 'package:timesync/feature/task/task/widget/task_chart.dart';
 import 'package:timesync/utils/size_util.dart';
-import 'package:timesync/utils/string_util.dart';
 
 class TaskView extends StatelessWidget {
   const TaskView({super.key});
@@ -38,14 +36,17 @@ class TaskView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height:
-                    SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
+                height: SizeUtils.scale(22, size.width),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MyText(
-                      text: "Task Summary", style: AppFonts().bodyLargeMedium),
+                    text: "Task Summary",
+                    style: AppFonts.TitleMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
                   Obx(
                     () => DateDropDown(
                       date: controller.selectDate.value,
@@ -56,51 +57,26 @@ class TaskView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: SizeUtils.scale(20, size.width),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
+              Obx(
+                () => MyPieChart(
+                  firstTitle: "Todo",
+                  secondTitle: "In_Progress",
+                  thirdTitle: "Completed",
+                  firstPercentage: controller.percentageTodoTask.value,
+                  secondPercentage: controller.percentageProgressTask.value,
+                  thirdPercentage: controller.percentageCompletedTask.value,
+                  haveNoData: controller.haveNoData.value,
+                  firstColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                  thirdColor: Theme.of(context).colorScheme.primary,
+                ),
               ),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Obx(
-                      () => TaskChart(
-                        title: "Pending",
-                        size: size,
-                        radius: size.width < 600 ? 60 : 65,
-                        centerWidget: MyText(
-                          text: StringUtil.doubleToPercentageString(
-                              controller.percentageUncompletedTask.value * 100),
-                          style: AppFonts().bodyMediumRegular,
-                        ),
-                        percent: controller.percentageUncompletedTask.value,
-                        textBelow:
-                            "${"Task:".trString} ${controller.totalUncompletedTask}/${controller.totalTask.value}",
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: size.width * 0.03),
-                  Expanded(
-                    child: Obx(
-                      () => TaskChart(
-                        title: "Completed",
-                        size: size,
-                        radius: size.width < 600 ? 60 : 65,
-                        centerWidget: MyText(
-                          text: StringUtil.doubleToPercentageString(
-                              controller.percentageCompletedTask.value * 100),
-                          style: AppFonts().bodyMediumRegular,
-                        ),
-                        percent: controller.percentageCompletedTask.value,
-                        textBelow:
-                            "${"Task:".trString} ${controller.totalCompletedTask}/${controller.totalTask.value}",
-                      ),
-                    ),
-                  ),
+                  MyText(text: "Tasks List", style: AppFonts().bodyLargeMedium),
                 ],
               ),
-              SizedBox(height: AppSize().paddingS11),
-              MyText(text: "My Task", style: AppFonts().bodyLargeMedium),
               SizedBox(height: AppSize().paddingS8),
               Expanded(
                 child: Obx(

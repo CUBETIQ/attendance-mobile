@@ -2,6 +2,21 @@
 
 We've squashed some bugs and made some improvements to make the app run smoother for you! Here's a quick rundown:
 
+### 25/March/2024 (1.0.0+6)
+
+**Improved App Functionality:**
+
+-   **Home Staff Record Card**: We've updated how break times are calculated and displayed on the home screen for staff record cards.
+-   **New Activation Process**: We've replaced the old activation process with a new and improved one.
+-   **Login Screen Updates**: When navigating from onboarding and activation, the login screen will now display your organization's image and name.
+-   **New Deactivation Process**: The old deactivation process has been replaced with a new and improved one.
+-   **Task Completion**: We fixed an issue where tasks with no progress might incorrectly show as 100% complete.
+
+**Backend Fix:**
+
+-   **Attendance Chart**: We resolved an error that caused attendance charts to display incorrect dates.
+-   **Leave Notification**: We've added additional information (payload) to leave notifications for improved functionality.
+
 ### 23/March/2024 (1.0.0+5)
 
 **Improved App Functionality:**

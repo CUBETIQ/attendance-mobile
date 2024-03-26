@@ -40,6 +40,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final isCheckedIn = false.obs;
   final checkInTime = Rxn<String>(null);
   final checkOutTime = Rxn<String>(null);
+  final checkInDateTime = Rxn<int>(null);
   final dateInMiliSecond = Rxn<int>(null);
   final startOfDay = Rxn<int>(null);
   final endOfDay = Rxn<int>(null);
@@ -449,6 +450,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             attendanceList.last.duration!,
           );
         }
+        checkInDateTime.value = attendanceList.last.checkInDateTime;
         checkInTime.value = DateUtil.formatTime(
           DateTime.fromMillisecondsSinceEpoch(
             attendanceList.last.checkInDateTime!,

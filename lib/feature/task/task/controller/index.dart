@@ -12,6 +12,7 @@ import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/routes/app_pages.dart';
+import 'package:timesync/types/task_filter.dart';
 import 'package:timesync/types/task_status.dart';
 import 'package:timesync/utils/converter.dart';
 import 'package:timesync/utils/logger.dart';
@@ -19,6 +20,11 @@ import 'package:timesync/utils/logger.dart';
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
   final tasks = <TaskModel>[].obs;
+  final allTasksNoComplete = <TaskModel>[].obs;
+  final todoTasks = <TaskModel>[].obs;
+  final inProgressTasks = <TaskModel>[].obs;
+  final completedTasks = <TaskModel>[].obs;
+
   final totalTask = 0.obs;
   final totalCompletedTask = 0.obs;
   final totalTodoTask = 0.obs;
@@ -31,6 +37,14 @@ class TaskController extends GetxController {
   final endDate = Rxn<int>();
   final selectDate = DateTime.now().obs;
   final haveNoData = false.obs;
+
+  final selectedTaskType = TaskFilter.all.obs;
+  final taskType = <String>[
+    TaskFilter.all,
+    TaskFilter.todo,
+    TaskFilter.inProgress,
+    TaskFilter.completed
+  ].obs;
 
   @override
   void onInit() {
@@ -48,6 +62,20 @@ class TaskController extends GetxController {
       tasks.value
           .sort((a, b) => (b.startDate ?? 0).compareTo(a.startDate ?? 0));
       tasks.value.sort((a, b) => (b.status ?? "").compareTo(a.status ?? ""));
+
+      todoTasks.value = tasks.value
+          .where((element) => element.status == TaskStatus.todo)
+          .toList();
+      inProgressTasks.value = tasks.value
+          .where((element) => element.status == TaskStatus.progress)
+          .toList();
+      Logs.e('Here ${inProgressTasks.value.map((e) => e.name).toList()}');
+      completedTasks.value = tasks.value
+          .where((element) => element.status == TaskStatus.done)
+          .toList();
+      allTasksNoComplete.value = tasks.value
+          .where((element) => element.status != TaskStatus.done)
+          .toList();
 
       // Set notification for task reminder
       await setUpTasksNotification();
@@ -110,6 +138,12 @@ class TaskController extends GetxController {
 
   void onRefresh() {
     getUserTasks();
+  }
+
+  void onChangedTaskType(String? value) {
+    if (selectedTaskType.value != value) {
+      selectedTaskType.value = value!;
+    }
   }
 
   void onTapTask(TaskModel task) {

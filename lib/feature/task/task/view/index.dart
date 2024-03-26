@@ -64,7 +64,7 @@ class TaskView extends StatelessWidget {
               SizedBox(height: SizeUtils.scale(20, size.width)),
               Obx(
                 () => MyPieChart(
-                  firstTitle: "Todo",
+                  firstTitle: "To do",
                   // secondTitle: "In_Progress",
                   thirdTitle: "Completed",
                   firstPercentage: controller.percentageTodoTask.value,

@@ -98,13 +98,11 @@ class ConfigsModel {
   final String? startHour;
   final String? endHour;
   final String? breakTime;
-  final String? breakDuration;
 
   ConfigsModel({
     this.startHour,
     this.endHour,
     this.breakTime,
-    this.breakDuration,
   });
 
   ConfigsModel fromJson(Map<String, dynamic>? json) {
@@ -115,7 +113,6 @@ class ConfigsModel {
       startHour: json['startHour'],
       endHour: json['endHour'],
       breakTime: json['breakTime'],
-      breakDuration: json['breakDuration'],
     );
   }
 
@@ -124,7 +121,6 @@ class ConfigsModel {
       "startHour": startHour,
       "endHour": endHour,
       "breakTime": breakTime,
-      "breakDuration": breakDuration,
     };
   }
 }

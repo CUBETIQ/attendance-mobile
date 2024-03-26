@@ -140,13 +140,17 @@ class TaskController extends GetxController {
   }
 
   void calculateTaskSummary() {
-    totalTask.value = tasks.value.length;
-    totalCompletedTask.value = tasks.value
-        .where((element) => element.status == TaskStatus.done)
-        .length;
-    totalUncompletedTask.value = totalTask.value - totalCompletedTask.value;
-    percentageCompletedTask.value =
-        totalTask.value == 0 ? 0 : totalCompletedTask.value / totalTask.value;
-    percentageUncompletedTask.value = 1 - percentageCompletedTask.value;
+    if (tasks.value.isNotEmpty) {
+      totalTask.value = tasks.value.length;
+      totalCompletedTask.value = tasks.value
+          .where((element) => element.status == TaskStatus.done)
+          .length;
+      totalUncompletedTask.value = totalTask.value - totalCompletedTask.value;
+      percentageCompletedTask.value =
+          totalTask.value == 0 ? 0 : totalCompletedTask.value / totalTask.value;
+      percentageUncompletedTask.value = 1 - percentageCompletedTask.value;
+    } else {
+      clearData();
+    }
   }
 }

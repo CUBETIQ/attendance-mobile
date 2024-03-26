@@ -143,7 +143,7 @@ class HomeStaffView extends StatelessWidget {
                   presence: controller.totalAttendance.value,
                   absence: controller.totalAbsent.value,
                   leave: controller.totalLeave.value,
-                  lateness: StringUtil().calculateDuration(
+                  lateness: StringUtil.calculateDuration(
                     controller.totalLateDuration.value,
                     noMinutes: true,
                   ),
@@ -212,7 +212,7 @@ class HomeStaffView extends StatelessWidget {
                     vertical: SizeUtils.scale(20, size.width)),
                 child: Obx(
                   () => TotalHourWorkedCard(
-                    totalHourWorked: StringUtil().calculateDuration(
+                    totalHourWorked: StringUtil.calculateDuration(
                       controller.totalWorkHour.value,
                     ),
                   ),

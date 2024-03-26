@@ -32,63 +32,68 @@ const LocalStorageSchema = CollectionSchema(
       name: r'darkTheme',
       type: IsarType.bool,
     ),
-    r'isActivated': PropertySchema(
+    r'deviceHash': PropertySchema(
       id: 3,
+      name: r'deviceHash',
+      type: IsarType.string,
+    ),
+    r'isActivated': PropertySchema(
+      id: 4,
       name: r'isActivated',
       type: IsarType.bool,
     ),
     r'isDevMode': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'isDevMode',
       type: IsarType.bool,
     ),
     r'isEnableNotification': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'isEnableNotification',
       type: IsarType.bool,
     ),
     r'isFirstTime': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'isFirstTime',
       type: IsarType.bool,
     ),
     r'isRememberMe': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'isRememberMe',
       type: IsarType.string,
     ),
     r'language': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'language',
       type: IsarType.string,
     ),
     r'organizationId': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'organizationId',
       type: IsarType.string,
     ),
     r'refreshToken': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'refreshToken',
       type: IsarType.string,
     ),
     r'theme': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'theme',
       type: IsarType.string,
     ),
     r'userId': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'userId',
       type: IsarType.string,
     ),
     r'userRole': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'userRole',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'username',
       type: IsarType.string,
     )
@@ -115,6 +120,12 @@ int _localStorageEstimateSize(
   var bytesCount = offsets.last;
   {
     final value = object.accessToken;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.deviceHash;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -179,18 +190,19 @@ void _localStorageSerialize(
   writer.writeString(offsets[0], object.accessToken);
   writer.writeBool(offsets[1], object.confirmCheckIn);
   writer.writeBool(offsets[2], object.darkTheme);
-  writer.writeBool(offsets[3], object.isActivated);
-  writer.writeBool(offsets[4], object.isDevMode);
-  writer.writeBool(offsets[5], object.isEnableNotification);
-  writer.writeBool(offsets[6], object.isFirstTime);
-  writer.writeString(offsets[7], object.isRememberMe);
-  writer.writeString(offsets[8], object.language);
-  writer.writeString(offsets[9], object.organizationId);
-  writer.writeString(offsets[10], object.refreshToken);
-  writer.writeString(offsets[11], object.theme);
-  writer.writeString(offsets[12], object.userId);
-  writer.writeString(offsets[13], object.userRole);
-  writer.writeString(offsets[14], object.username);
+  writer.writeString(offsets[3], object.deviceHash);
+  writer.writeBool(offsets[4], object.isActivated);
+  writer.writeBool(offsets[5], object.isDevMode);
+  writer.writeBool(offsets[6], object.isEnableNotification);
+  writer.writeBool(offsets[7], object.isFirstTime);
+  writer.writeString(offsets[8], object.isRememberMe);
+  writer.writeString(offsets[9], object.language);
+  writer.writeString(offsets[10], object.organizationId);
+  writer.writeString(offsets[11], object.refreshToken);
+  writer.writeString(offsets[12], object.theme);
+  writer.writeString(offsets[13], object.userId);
+  writer.writeString(offsets[14], object.userRole);
+  writer.writeString(offsets[15], object.username);
 }
 
 LocalStorage _localStorageDeserialize(
@@ -203,19 +215,20 @@ LocalStorage _localStorageDeserialize(
   object.accessToken = reader.readStringOrNull(offsets[0]);
   object.confirmCheckIn = reader.readBoolOrNull(offsets[1]);
   object.darkTheme = reader.readBoolOrNull(offsets[2]);
+  object.deviceHash = reader.readStringOrNull(offsets[3]);
   object.id = id;
-  object.isActivated = reader.readBoolOrNull(offsets[3]);
-  object.isDevMode = reader.readBoolOrNull(offsets[4]);
-  object.isEnableNotification = reader.readBoolOrNull(offsets[5]);
-  object.isFirstTime = reader.readBoolOrNull(offsets[6]);
-  object.isRememberMe = reader.readStringOrNull(offsets[7]);
-  object.language = reader.readStringOrNull(offsets[8]);
-  object.organizationId = reader.readStringOrNull(offsets[9]);
-  object.refreshToken = reader.readStringOrNull(offsets[10]);
-  object.theme = reader.readStringOrNull(offsets[11]);
-  object.userId = reader.readStringOrNull(offsets[12]);
-  object.userRole = reader.readStringOrNull(offsets[13]);
-  object.username = reader.readStringOrNull(offsets[14]);
+  object.isActivated = reader.readBoolOrNull(offsets[4]);
+  object.isDevMode = reader.readBoolOrNull(offsets[5]);
+  object.isEnableNotification = reader.readBoolOrNull(offsets[6]);
+  object.isFirstTime = reader.readBoolOrNull(offsets[7]);
+  object.isRememberMe = reader.readStringOrNull(offsets[8]);
+  object.language = reader.readStringOrNull(offsets[9]);
+  object.organizationId = reader.readStringOrNull(offsets[10]);
+  object.refreshToken = reader.readStringOrNull(offsets[11]);
+  object.theme = reader.readStringOrNull(offsets[12]);
+  object.userId = reader.readStringOrNull(offsets[13]);
+  object.userRole = reader.readStringOrNull(offsets[14]);
+  object.username = reader.readStringOrNull(offsets[15]);
   return object;
 }
 
@@ -233,7 +246,7 @@ P _localStorageDeserializeProp<P>(
     case 2:
       return (reader.readBoolOrNull(offset)) as P;
     case 3:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readBoolOrNull(offset)) as P;
     case 5:
@@ -241,7 +254,7 @@ P _localStorageDeserializeProp<P>(
     case 6:
       return (reader.readBoolOrNull(offset)) as P;
     case 7:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 8:
       return (reader.readStringOrNull(offset)) as P;
     case 9:
@@ -255,6 +268,8 @@ P _localStorageDeserializeProp<P>(
     case 13:
       return (reader.readStringOrNull(offset)) as P;
     case 14:
+      return (reader.readStringOrNull(offset)) as P;
+    case 15:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -561,6 +576,160 @@ extension LocalStorageQueryFilter
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'darkTheme',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'deviceHash',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'deviceHash',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deviceHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'deviceHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'deviceHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'deviceHash',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'deviceHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'deviceHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'deviceHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'deviceHash',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deviceHash',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterFilterCondition>
+      deviceHashIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'deviceHash',
+        value: '',
       ));
     });
   }
@@ -2024,6 +2193,19 @@ extension LocalStorageQuerySortBy
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByDeviceHash() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHash', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      sortByDeviceHashDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHash', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> sortByIsActivated() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isActivated', Sort.asc);
@@ -2218,6 +2400,19 @@ extension LocalStorageQuerySortThenBy
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenByDeviceHash() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHash', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy>
+      thenByDeviceHashDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deviceHash', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -2405,6 +2600,13 @@ extension LocalStorageQueryWhereDistinct
     });
   }
 
+  QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByDeviceHash(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'deviceHash', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<LocalStorage, LocalStorage, QDistinct> distinctByIsActivated() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isActivated');
@@ -2511,6 +2713,12 @@ extension LocalStorageQueryProperty
   QueryBuilder<LocalStorage, bool?, QQueryOperations> darkThemeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'darkTheme');
+    });
+  }
+
+  QueryBuilder<LocalStorage, String?, QQueryOperations> deviceHashProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'deviceHash');
     });
   }
 

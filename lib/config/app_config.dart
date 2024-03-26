@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -6,6 +7,7 @@ import 'package:timesync/app_version.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/entities/local_storage.dart';
 import 'package:timesync/config/key.dart';
+import 'package:timesync/feature/auth/activation/model/activation_model.dart';
 import 'package:timesync/utils/encrypt_util.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -62,7 +64,10 @@ class AppConfig {
 
   static PackageInfo? packageInfo;
 
-    static tz.TZDateTime currentTime = tz.TZDateTime.now(tz.local);
+  // Device Info
+  static String? deviceId;
+  static DeviceInfoModel? deviceInfo;
+  static tz.TZDateTime currentTime = tz.TZDateTime.now(tz.local);
 
   static Future<void> initAppConfig() async {
     // init timezone
@@ -79,5 +84,23 @@ class AppConfig {
     appLocalPath = await FileUtil.getLocalPath();
     xApiHash =
         EncryptUtil.createHash(Key.vfsClientApiKey, Key.vfsClientPublicKey);
+
+    // get device info
+    DeviceInfoPlugin getDeviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      final androidInfo = await getDeviceInfo.androidInfo;
+      deviceId = androidInfo.id;
+      deviceInfo = DeviceInfoModel(
+        deviceName: androidInfo.model,
+        version: androidInfo.version.release,
+      );
+    } else if (Platform.isIOS) {
+      final iosInfo = await getDeviceInfo.iosInfo;
+      deviceId = iosInfo.identifierForVendor;
+      deviceInfo = DeviceInfoModel(
+        deviceName: iosInfo.model,
+        version: iosInfo.systemVersion,
+      );
+    }
   }
 }

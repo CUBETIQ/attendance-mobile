@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
+import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/attendance_method.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/types/user_status.dart';
@@ -59,8 +61,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final user = UserModel().obs;
   final summaryAttendance = <SummaryAttendanceModel>[].obs;
   final attendanceType = <String>[
-    "Check In",
-    "Check Out",
+    "Check in",
+    "Check out",
   ].obs;
   final status = <String>[
     UserStatus.active,
@@ -68,7 +70,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     UserStatus.idle,
   ].obs;
   final selectedStatus = UserStatus.active.obs;
-  final selectedAttendanceType = "Check In".obs;
+  final selectedAttendanceType = "Check in".obs;
   final name = Rxn<String>(null);
   final isLoadingSummary = false.obs;
   final totalAttendance = Rxn<int>(null);
@@ -88,7 +90,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final haveNoData = false.obs;
   final tabs = <String>[].obs;
   final staffs = <UserModel>[].obs;
-  final totalStaffs = 0.obs;
   final totalCheckInLate = 0.obs;
   final totalCheckInOnTime = 0.obs;
   final totalCheckInEarly = 0.obs;
@@ -129,11 +130,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void listenToDeepLink() {
-    uriLinkStream.listen((Uri? uri) async {
-      if (uri != null) {
-        QRService().initDeepLink();
-      }
-    });
+    uriLinkStream.listen(
+      (Uri? uri) async {
+        if (uri != null) {
+          QRService().initDeepLink();
+        }
+      },
+    );
 
     if (!Validator.isValNull(QRService().deepLinkUrl.value)) {
       QRService()
@@ -216,7 +219,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     try {
       staffs.value = await HomeService().getAllStaffs(
           organizationId: NavigationController.to.organization.value.id ?? "");
-      totalStaffs.value = staffs.length;
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -564,12 +566,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     /// Or you could get NTP current (It will call DateTime.now() and add NTP offset to it)
     myTime = DateTime.now().toLocal();
 
-    /// Or get NTP offset (in milliseconds) and add it yourself
-    final int offset =
-        await NTP.getNtpOffset(localTime: DateTime.now().toLocal());
-    ntpTime = myTime.add(Duration(milliseconds: offset));
-
-    result = ntpTime;
+    try {
+      /// Or get NTP offset (in milliseconds) and add it yourself
+      final int offset =
+          await NTP.getNtpOffset(localTime: DateTime.now().toLocal());
+      ntpTime = myTime.add(Duration(milliseconds: offset));
+      result = ntpTime;
+    } catch (e) {
+      result = DateTime.now();
+    }
 
     return result;
   }
@@ -626,7 +631,25 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  void initDate() {
+  void onTapAttendanceStatistic(String status) {
+    Get.toNamed(
+      Routes.ATTENDANCE_STATISTIC,
+      arguments: {
+        "title": selectedAttendanceType.value,
+        "staffs": staffs,
+        "attendance": selectedAttendanceType.value == "Check in"
+            ? staffAttendanceList
+                .where((element) => element.checkInStatus == status)
+                .toList()
+            : staffAttendanceList
+                .where((element) => element.checkOutStatus == status)
+                .toList(),
+      },
+    );
+  }
+
+  Future<void> initDate() async {
+    final DateTime date = await checkTime();
     startOfDay.value = DateTime(date.year, date.month, date.day, 0, 0, 0)
         .millisecondsSinceEpoch;
     endOfDay.value = DateTime(date.year, date.month, date.day, 23, 59, 59)
@@ -682,11 +705,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
               totalCheckInEarly.value, totalStaff.value);
         } else {
           latePercentage.value = DoubleUtil.caculatePercentageForProgress(
-              totalCheckOutLate.value, totalStaffs.value);
+              totalCheckOutLate.value, totalStaff.value);
           onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
-              totalCheckOutOnTime.value, totalStaffs.value);
+              totalCheckOutOnTime.value, totalStaff.value);
           earlyPercentage.value = DoubleUtil.caculatePercentageForProgress(
-              totalCheckOutEarly.value, totalStaffs.value);
+              totalCheckOutEarly.value, totalStaff.value);
         }
       }
     }

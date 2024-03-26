@@ -65,8 +65,6 @@ class AttendanceCard extends StatelessWidget {
 
     Future<void> checkTimer() async {
       if (isCheckedIn == true) {
-        Logs.e(
-            '${HomeController.to.checkInTime.value} ${HomeController.to.checkOutTime.value}');
         if (HomeController.to.checkInTime.value != null) {
           final checkInDateTime = DateTime.fromMillisecondsSinceEpoch(
             HomeController.to.attendanceList.last.checkInDateTime!,

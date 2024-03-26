@@ -92,6 +92,13 @@ class TaskDetailView extends StatelessWidget {
               ),
               SizedBox(height: SizeUtils.scale(10, size.width)),
               DetailRowData(
+                title: "Start",
+                value: DateUtil.formatMillisecondsToDOB(
+                  controller.task.value?.startDate,
+                ),
+              ),
+              SizedBox(height: SizeUtils.scale(10, size.width)),
+              DetailRowData(
                 title: "Due",
                 value: DateUtil.formatMillisecondsToDOB(
                   controller.task.value?.endDate,

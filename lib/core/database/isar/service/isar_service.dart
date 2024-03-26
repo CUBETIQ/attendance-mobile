@@ -59,6 +59,7 @@ class IsarService extends GetxService {
       appConfig.isDevMode = input?.isDevMode ?? appConfig.isDevMode ?? false;
       appConfig.confirmCheckIn =
           input?.confirmCheckIn ?? appConfig.confirmCheckIn ?? true;
+      appConfig.deviceHash = input?.deviceHash ?? appConfig.deviceHash;
       AppConfig.setConfig(appConfig);
       await _localStorage.insert(appConfig);
     } catch (e) {
@@ -101,6 +102,7 @@ class IsarService extends GetxService {
       appConfig.username = appConfig.username;
       appConfig.userId = null;
       appConfig.userRole = null;
+      appConfig.deviceHash = unactivate == true ? null : appConfig.deviceHash;
       await _localStorage.insert(appConfig);
     } catch (e) {
       rethrow;

@@ -1,5 +1,6 @@
-import 'dart:io';
-
+import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:timesync/core/database/isar/controller/local_storage_controller.dart';
 import 'package:timesync/core/database/isar/model/local_storage_model.dart';
@@ -7,9 +8,8 @@ import 'package:timesync/core/database/isar/service/isar_service.dart';
 import 'package:timesync/core/network/dio/dio_util.dart';
 import 'package:timesync/core/network/dio/endpoint.dart';
 import 'package:timesync/core/widgets/dialog/dialog.dart';
+import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:dio/dio.dart' as dio;
-import 'package:get/get.dart';
 import 'package:timesync/utils/logger.dart';
 
 class ErrorInterceptor extends dio.Interceptor {
@@ -21,8 +21,12 @@ class ErrorInterceptor extends dio.Interceptor {
   @override
   Future onError(
       dio.DioException err, dio.ErrorInterceptorHandler handler) async {
-    if (err is SocketException) {
-      Get.offNamed(Routes.LOGIN);
+    if (err.type == DioExceptionType.connectionError) {
+      showErrorSnackBar("error", "No internet connection");
+      if (Get.currentRoute == Routes.SPLASH) {
+        Get.offNamed(Routes.ERROR);
+      }
+      return;
     }
 
     if (err.response != null &&

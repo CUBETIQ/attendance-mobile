@@ -49,4 +49,5 @@ abstract class Routes {
   static const APP_PERMISSION = '/app_permission';
   static const DEVICE_INFO = '/device_info';
   static const STORAGE_MANAGEMENT = '/storage_management';
+  static const ATTENDANCE_STATISTIC = '/attendance_statistic';
 }

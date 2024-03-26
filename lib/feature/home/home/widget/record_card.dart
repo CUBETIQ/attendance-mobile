@@ -36,7 +36,24 @@ class RecordCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Data
     final size = MediaQuery.of(context).size;
+    final endBreakStatus = StringUtil.getStatusByCalculateBreakTime(
+        endBreakTime,
+        NavigationController.to.organization.value.configs?.breakTime
+            ?.split("-")[1]
+            .trim());
+    final startBreak = NavigationController
+            .to.organization.value.configs?.breakTime
+            ?.split("-")[0]
+            .trim() ??
+        "00:00";
+    final endBreak = NavigationController
+            .to.organization.value.configs?.breakTime
+            ?.split("-")[1]
+            .trim() ??
+        "00:00";
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -69,7 +86,7 @@ class RecordCard extends StatelessWidget {
                   onNullTitle: "Check-in Schedule",
                   secondTitle: "Checked-in",
                   status: data?.checkInStatus,
-                  statusLabel: StringUtil().calculateDurationWithStatus(
+                  statusLabel: StringUtil.calculateDurationWithStatus(
                       data?.checkInStatus == AttendanceStatus.late
                           ? (data?.checkInLate ?? 1)
                           : data?.checkInStatus == AttendanceStatus.early
@@ -80,8 +97,7 @@ class RecordCard extends StatelessWidget {
                 ),
                 RecordDataCard(
                   time: startBreakTime,
-                  timeString:
-                      "${NavigationController.to.organization.value.configs?.breakTime?.split("-")[0].trim() ?? "00:00"} AM",
+                  timeString: "$startBreak AM",
                   svgIcon: IconAssets.noodle,
                   statusTitle: "Lunch Break",
                   onNullTitle: "Lunch Break",
@@ -93,14 +109,17 @@ class RecordCard extends StatelessWidget {
                 ),
                 RecordDataCard(
                   time: endBreakTime,
-                  timeString:
-                      "${NavigationController.to.organization.value.configs?.breakTime?.split("-")[1].trim() ?? "00:00"} PM",
+                  timeString: "$endBreak PM",
                   svgIcon: IconAssets.charger,
                   statusTitle: "After Break",
                   onNullTitle: "After Break",
                   secondTitle: "After Break",
-                  status: endBreakTime != null ? AttendanceStatus.onTime : null,
-                  statusLabel: "Finished",
+                  status: endBreakStatus,
+                  statusLabel: StringUtil.calculationDurationForBreakTime(
+                    endBreakTime,
+                    endBreak,
+                    endBreakStatus,
+                  ),
                 ),
                 RecordDataCard(
                   time: data?.checkOutDateTime,
@@ -112,7 +131,7 @@ class RecordCard extends StatelessWidget {
                   secondTitle: "Checked-out",
                   iconColor: Theme.of(context).colorScheme.error,
                   status: data?.checkOutStatus,
-                  statusLabel: StringUtil().calculateDurationWithStatus(
+                  statusLabel: StringUtil.calculateDurationWithStatus(
                       data?.checkOutStatus == AttendanceStatus.late
                           ? (data?.checkOutLate ?? 1)
                           : data?.checkOutStatus == AttendanceStatus.early

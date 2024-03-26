@@ -8,7 +8,6 @@ import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/organization/edit_organization/model/update_organization_model.dart';
 import 'package:timesync/feature/organization/edit_organization/service/index.dart';
 import 'package:timesync/types/avatar_type.dart';
-import 'package:timesync/utils/date_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,10 +79,6 @@ class EditOrganizationController extends GetxController {
         endHour: endHourController.text,
         breakTime:
             "${breakStartHourController.text}-${breakEndHourController.text}",
-        breakDuration: DateUtil.calculateDuration(
-          breakStartHourController.text,
-          breakEndHourController.text,
-        ),
       );
       UpdateOrganizationModel input = UpdateOrganizationModel(
         name: nameController.text,

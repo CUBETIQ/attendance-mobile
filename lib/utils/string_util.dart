@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:timesync/types/attendance_status.dart';
 
 class StringUtil {
@@ -72,7 +73,7 @@ class StringUtil {
     return result;
   }
 
-  String? calculateDurationWithStatus(int? minutes, String? status) {
+  static String? calculateDurationWithStatus(int? minutes, String? status) {
     if (minutes == null || status == null) {
       return null;
     }
@@ -105,7 +106,7 @@ class StringUtil {
     }
   }
 
-  String? calculateDuration(int? minutes, {bool? noMinutes}) {
+  static String? calculateDuration(int? minutes, {bool? noMinutes}) {
     if (minutes == null || minutes == 0) {
       return "-";
     }
@@ -132,28 +133,70 @@ class StringUtil {
     return timeString;
   }
 
-  String? getStatusByCalculateBreakTime(int? date, String? endBreakTime) {
+  static String? getStatusByCalculateBreakTime(
+      int? date, String? endBreakTime) {
     if (date == null || endBreakTime == null) {
       return null;
     }
 
-    int endBreakTimeHour = int.parse(endBreakTime.split(":")[0]);
-    int endBreakTimeMinute = int.parse(endBreakTime.split(":")[1]);
+    // End time = 13:00 (to_time('13:00', 'hh:mm'))
+    DateTime endBreakTimeHour = DateFormat("hh:mm").parse(endBreakTime);
 
-    DateTime now = DateTime(
-      DateTime.now().year,
-      DateTime.now().month,
-      DateTime.now().day,
-      endBreakTimeHour,
-      endBreakTimeMinute,
-    );
+    DateTime getbreakTime = DateTime.fromMillisecondsSinceEpoch(date);
 
-    DateTime breakTime = DateTime.fromMillisecondsSinceEpoch(date * 1000);
+    DateTime breakTime = DateFormat("hh:mm")
+        .parse("${getbreakTime.hour}:${getbreakTime.minute}");
 
-    if (now.isAfter(breakTime)) {
-      return "Late";
+    if (endBreakTimeHour.isAfter(breakTime)) {
+      return AttendanceStatus.late;
+    } else if (endBreakTimeHour.isBefore(breakTime)) {
+      return AttendanceStatus.early;
     } else {
-      return "On time";
+      return AttendanceStatus.onTime;
+    }
+  }
+
+  static String? calculationDurationForBreakTime(
+      int? date, String? endBreak, String? status) {
+    if (date == null || endBreak == null || status == null) {
+      return null;
+    }
+
+    DateTime endBreakTime = DateFormat("hh:mm").parse(endBreak);
+
+    DateTime getbreakTime = DateTime.fromMillisecondsSinceEpoch(date);
+
+    DateTime breakTime = DateFormat("hh:mm")
+        .parse("${getbreakTime.hour}:${getbreakTime.minute}");
+
+    final minutes = endBreakTime.difference(breakTime).inMinutes;
+
+    int hours = minutes ~/ 60;
+    int remainingMinutes = minutes % 60;
+
+    String timeString = '';
+
+    if (hours > 0) {
+      timeString += '$hours hr';
+      if (hours > 1) timeString += 's'; // pluralize 'hour' if needed
+      timeString += ' ';
+    }
+
+    if (remainingMinutes > 0) {
+      timeString += '$remainingMinutes min';
+      if (remainingMinutes > 1) {
+        timeString += 's'; // pluralize 'minute' if needed
+      }
+    }
+
+    if (status == AttendanceStatus.late) {
+      return timeString.isEmpty ? 'Late' : '$timeString late';
+    } else if (status == AttendanceStatus.early) {
+      return timeString.isEmpty ? 'Early' : '$timeString early';
+    } else if (status == AttendanceStatus.onTime) {
+      return 'On time';
+    } else {
+      return 'Invalid status';
     }
   }
 }

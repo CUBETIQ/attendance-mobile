@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:flutter/material.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class MyAsyncButton extends StatelessWidget {
@@ -37,7 +36,7 @@ class MyAsyncButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    RxBool isDisableButton = false.obs;
+    final isDisableButton = false.obs;
     return Obx(
       () => GestureDetector(
         onTap: isDisableButton.value == false
@@ -46,8 +45,7 @@ class MyAsyncButton extends StatelessWidget {
                   isDisableButton.value = true;
                   await onTap!();
                 } catch (e) {
-                  Logger().e(e);
-                  return;
+                  rethrow;
                 } finally {
                   isDisableButton.value = false;
                 }
@@ -82,10 +80,10 @@ class MyAsyncButton extends StatelessWidget {
                       text: title,
                       style: style ??
                           AppFonts.TitleSmall.copyWith(
-                                color: isDisableButton.value == true
-                                    ? Theme.of(context).colorScheme.outline
-                                    : Theme.of(context).colorScheme.onPrimary,
-                              ),
+                            color: isDisableButton.value == true
+                                ? Theme.of(context).colorScheme.outline
+                                : Theme.of(context).colorScheme.onPrimary,
+                          ),
                     ),
                   ],
                 )

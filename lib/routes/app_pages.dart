@@ -19,6 +19,8 @@ import 'package:timesync/feature/department/department/department_binding.dart';
 import 'package:timesync/feature/department/department/view/index.dart';
 import 'package:timesync/feature/department/department_detail/department_detail_binding.dart';
 import 'package:timesync/feature/department/department_detail/view/index.dart';
+import 'package:timesync/feature/home/admin_attendance_statistic/attendance_statistic_binding.dart';
+import 'package:timesync/feature/home/admin_attendance_statistic/view/index.dart';
 import 'package:timesync/feature/home/admin_leave_request/admin_leave_binding.dart';
 import 'package:timesync/feature/home/admin_leave_request/view/index.dart';
 import 'package:timesync/feature/home/home/home_binding.dart';
@@ -249,7 +251,7 @@ class AppPages {
       page: () => const ScanQRView(),
       binding: ScanQRBinding(),
     ),
-        GetPage(
+    GetPage(
       name: Routes.GENERATE_QR,
       page: () => const GenerateQRView(),
       binding: GenerateQRBinding(),
@@ -278,5 +280,9 @@ class AppPages {
         name: Routes.STORAGE_MANAGEMENT,
         page: () => const StorageManagementView(),
         binding: StorageMangementBinding()),
+    GetPage(
+        name: Routes.ATTENDANCE_STATISTIC,
+        page: () => const AttendanceStatisticView(),
+        binding: AttendanceStatisticBinding()),
   ];
 }

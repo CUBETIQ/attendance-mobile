@@ -46,28 +46,36 @@ class TaskController extends GetxController {
       tasks.value.sort((a, b) => (b.status ?? "").compareTo(a.status ?? ""));
 
       // Set notification for task reminder
-      final List<int> notificationIds =
-          await NotificationIntegration.getPendingNotificationId();
-
-      tasks.value
-          .where((element) => element.status != TaskStatus.done)
-          .forEach((element) {
-        if (element.endDate != null) {
-          DateTime time = DateTime.fromMillisecondsSinceEpoch(element.endDate!);
-          int? uniqueId = generateUniqueIntId(element.id ?? "");
-
-          if (!notificationIds.contains(uniqueId)) {
-            if (time.isAfter(AppConfig.currentTime)) {
-              NotificationSchedule.taskReminder(
-                  id: uniqueId, time: element.endDate, mongoId: element.id);
-            }
-          }
-        }
-      });
+      await setUpTasksNotification();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  Future<void> setUpTasksNotification({String? updatedId}) async {
+    final List<int> notificationIds =
+        await NotificationIntegration.getPendingNotificationId();
+
+    if (updatedId != null && notificationIds.isNotEmpty) {
+      int? uniqueId = generateUniqueIntId(updatedId);
+      await NotificationSchedule.cancelSpecificReminder(uniqueId);
+    }
+    tasks.value
+        .where((element) => element.status != TaskStatus.done)
+        .forEach((element) {
+      if (element.endDate != null) {
+        DateTime time = DateTime.fromMillisecondsSinceEpoch(element.endDate!);
+        int? uniqueId = generateUniqueIntId(element.id ?? "");
+
+        if (!notificationIds.contains(uniqueId)) {
+          if (time.isAfter(AppConfig.currentTime)) {
+            NotificationSchedule.taskReminder(
+                id: uniqueId, time: element.endDate, mongoId: element.id);
+          }
+        }
+      }
+    });
   }
 
   Future<void> completeTask(String id) async {

@@ -17,6 +17,12 @@ class MyColor {
   static const Color successColor = Color(0xFF08B80E);
   static const Color errorColor = Color(0xFFD72E08);
 
+  // Base Color
+  static const Color base = Color(0xFFFFFFFF);
+  static const Color base2 = Color(0xFFFAFBFC);
+  static const Color base3 = Color(0xFFEFF0F2);
+  static const Color base4 = Color(0xFFDCDEE3);
+
   // App Color Scheme
   static const Color scaffoldBackground = Color(0xFFFFFFFF);
   static const Color onBackground = Color(0xff24262B);

@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
@@ -51,7 +52,7 @@ class AttendancePieChartCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: size.width > 600
               ? MainAxisAlignment.center
-              : MainAxisAlignment.start,
+              : MainAxisAlignment.spaceBetween,
           children: [
             Container(
               width: cardWidth ?? SizeUtils.scale(120, size.width),
@@ -59,14 +60,6 @@ class AttendancePieChartCard extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.background,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 3,
-                    blurRadius: 2,
-                    offset: const Offset(0, 0),
-                  ),
-                ],
               ),
               child: PieChart(
                 haveNoData == true
@@ -75,7 +68,7 @@ class AttendancePieChartCard extends StatelessWidget {
                         sections: [
                           PieChartSectionData(
                             showTitle: false,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: MyColor.base4,
                             value: 100,
                             title: "No Data",
                             radius: chartRadius ?? customChartRadius,
@@ -147,25 +140,30 @@ class AttendancePieChartCard extends StatelessWidget {
                 swapAnimationCurve: Curves.linear,
               ),
             ),
-            SizedBox(width: SizeUtils.scale(28.5, size.width)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyText(text: "Summary", style: AppFonts.TitleMedium),
-                AttendanceInfoWidget(
-                  color: Theme.of(context).colorScheme.primary,
-                  title: "Present",
+            Padding(
+              padding: EdgeInsets.only(
+                left: size.width > 600 ? SizeUtils.scale(28.5, size.width) : 0,
+                right: SizeUtils.scale(36, size.width),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText(text: "Summary", style: AppFonts.TitleMedium),
+                  AttendanceInfoWidget(
+                    color: Theme.of(context).colorScheme.primary,
+                    title: "Present",
+                  ),
+                  AttendanceInfoWidget(
+                    color: Theme.of(context).colorScheme.secondary,
+                    title: "Leave",
+                  ),
+                  AttendanceInfoWidget(
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    title: "Absent",
+                  ),
+                ].withSpaceBetween(
+                  height: SizeUtils.scale(8, size.width),
                 ),
-                AttendanceInfoWidget(
-                  color: Theme.of(context).colorScheme.secondary,
-                  title: "Leave",
-                ),
-                AttendanceInfoWidget(
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                  title: "Absent",
-                ),
-              ].withSpaceBetween(
-                height: SizeUtils.scale(8, size.width),
               ),
             )
           ],

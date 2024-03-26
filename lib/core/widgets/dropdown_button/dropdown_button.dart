@@ -118,6 +118,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                       ),
                 ),
               ),
+
               value: value,
               items: dropdownItems,
               onChanged: onChanged,

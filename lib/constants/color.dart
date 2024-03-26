@@ -35,6 +35,7 @@ class MyColor {
   static const Color secondaryIndigo = Color(0xff48AFFA);
   static const Color secondaryRed = Color(0xffD85681);
   static const Color primaryContainer = Color(0xffF1ECFF);
+  static const Color onSurfaceVariant = Color(0xff6B7180);
 
   // App Gradient Color Scheme
   static const LinearGradient gradient01 = LinearGradient(

@@ -14,19 +14,23 @@ import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/task_status.dart';
 import 'package:timesync/utils/converter.dart';
+import 'package:timesync/utils/logger.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
   final tasks = <TaskModel>[].obs;
   final totalTask = 0.obs;
   final totalCompletedTask = 0.obs;
-  final totalUncompletedTask = 0.obs;
+  final totalTodoTask = 0.obs;
+  final totalProgressTask = 0.obs;
   final percentageCompletedTask = 0.0.obs;
-  final percentageUncompletedTask = 0.0.obs;
+  final percentageTodoTask = 0.0.obs;
+  final percentageProgressTask = 0.0.obs;
   final summarizeTasks = <SummaryTaskModel>[].obs;
   final startDate = Rxn<int>();
   final endDate = Rxn<int>();
   final selectDate = DateTime.now().obs;
+  final haveNoData = false.obs;
 
   @override
   void onInit() {
@@ -127,9 +131,12 @@ class TaskController extends GetxController {
   void clearData() {
     totalTask.value = 0;
     totalCompletedTask.value = 0;
-    totalUncompletedTask.value = 0;
+    totalTodoTask.value = 0;
+    totalProgressTask.value = 0;
     percentageCompletedTask.value = 0;
-    percentageUncompletedTask.value = 0;
+    percentageTodoTask.value = 0;
+    percentageProgressTask.value = 0;
+    haveNoData.value = true;
   }
 
   Future<void> onTapDate(BuildContext context) async {
@@ -149,14 +156,27 @@ class TaskController extends GetxController {
 
   void calculateTaskSummary() {
     if (tasks.value.isNotEmpty) {
+      haveNoData.value = false;
       totalTask.value = tasks.value.length;
       totalCompletedTask.value = tasks.value
           .where((element) => element.status == TaskStatus.done)
           .length;
-      totalUncompletedTask.value = totalTask.value - totalCompletedTask.value;
+      totalTodoTask.value = tasks.value
+          .where((element) => element.status == TaskStatus.todo)
+          .length;
+      totalProgressTask.value = tasks.value
+          .where((element) => element.status == TaskStatus.progress)
+          .length;
       percentageCompletedTask.value =
-          totalTask.value == 0 ? 0 : totalCompletedTask.value / totalTask.value;
-      percentageUncompletedTask.value = 1 - percentageCompletedTask.value;
+          (totalCompletedTask.value / totalTask.value) * 100;
+      percentageTodoTask.value = (totalTodoTask.value / totalTask.value) * 100;
+      percentageProgressTask.value =
+          (totalProgressTask.value / totalTask.value) * 100;
+
+      Logs.t(
+          "totalTask: $totalTask, totalCompletedTask: $totalCompletedTask, totalTodoTask: $totalTodoTask, totalProgressTask: $totalProgressTask");
+      Logs.t(
+          "percentageCompletedTask: $percentageCompletedTask, percentageTodoTask: $percentageTodoTask, percentageProgressTask: $percentageProgressTask");
     } else {
       clearData();
     }

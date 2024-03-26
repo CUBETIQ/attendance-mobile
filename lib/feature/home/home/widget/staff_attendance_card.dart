@@ -11,7 +11,6 @@ import 'package:timesync/core/widgets/image/cache_image.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
-import 'package:timesync/feature/report/controller/index.dart';
 import 'package:timesync/utils/color_utils.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
@@ -26,7 +25,7 @@ class StaffAttendanceCard extends StatelessWidget {
   });
 
   final UserModel staff;
-  final AttendanceModel attendance;
+  final List<AttendanceModel> attendance;
   final PositionModel position;
 
   @override
@@ -92,35 +91,44 @@ class StaffAttendanceCard extends StatelessWidget {
                   context,
                   label: 'Check in',
                   value: DateUtil.formatTimeWithDate(
-                    attendance.checkInDateTime,
+                    attendance.first.checkInDateTime,
                   ),
-                  color: attendance.checkInStatus != null
+                  color: attendance.first.checkInStatus != null
                       ? ColorUtil.getStatusColor(
-                          context, attendance.checkInStatus)
+                          context, attendance.first.checkInStatus)
                       : Theme.of(context).colorScheme.onBackground,
                 ),
                 buildAttendanceLogRow(
                   context,
                   label: 'Check out',
                   value: DateUtil.formatTimeWithDate(
-                    attendance.checkOutDateTime,
+                    attendance.length > 1
+                        ? attendance.lastOrNull?.checkOutDateTime
+                        : attendance.firstOrNull?.checkOutDateTime,
                   ),
-                  color: attendance.checkOutStatus != null
-                      ? ColorUtil.getStatusColor(
-                          context, attendance.checkOutStatus)
-                      : Theme.of(context).colorScheme.onBackground,
+                  color: attendance.length > 1
+                      ? attendance.lastOrNull?.checkOutDateTime != null
+                          ? ColorUtil.getStatusColor(
+                              context, attendance.lastOrNull?.checkOutStatus)
+                          : Theme.of(context).colorScheme.onBackground
+                      : attendance.firstOrNull?.checkOutDateTime != null
+                          ? ColorUtil.getStatusColor(
+                              context, attendance.firstOrNull?.checkOutStatus)
+                          : Theme.of(context).colorScheme.onBackground,
                 ),
                 buildAttendanceLogRow(
                   context,
                   label: 'Hours worked',
                   value: DateUtil.getHourMinuteSecondFromMinute(
-                      attendance.duration),
+                    attendance.length > 1
+                        ? attendance.lastOrNull?.duration
+                        : attendance.firstOrNull?.duration,
+                  ),
                 ),
                 buildAttendanceLogRow(
                   context,
                   label: 'Total Session',
-                  value:
-                      '${ReportController.to.staffReports.firstWhereOrNull((element) => element.username == staff.username)?.attendance?.totalSession ?? 0}',
+                  value: attendance.length > 1 ? '${attendance.length}' : '1',
                 ),
               ].withSpaceBetween(height: SizeUtils.scale(4, size.width)),
             ),

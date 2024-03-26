@@ -1,10 +1,10 @@
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/icon.dart';
 import 'package:timesync/core/model/position_model.dart';
-import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pie_chart/pie_chart.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
@@ -14,11 +14,11 @@ import 'package:timesync/feature/home/home/view/staff_home_view.dart';
 import 'package:timesync/feature/home/home/widget/button_card.dart';
 import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync/feature/home/home/widget/linear_indicator.dart';
-import 'package:timesync/feature/home/home/widget/pie_chart_card.dart';
 import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
 import 'package:timesync/feature/home/home/widget/tab_bar.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/attendance_status.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -78,7 +78,7 @@ class HomeAdminView extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: SizeUtils.scale(20, size.width)),
                           child: Obx(
-                            () => AttendancePieChartCard(
+                            () => MyPieChart(
                               onTap: () => Get.toNamed(
                                 Routes.ADMIN_SUMMARY_ATTENDANCE,
                                 arguments: {
@@ -89,15 +89,12 @@ class HomeAdminView extends StatelessWidget {
                                   "endDate": controller.endOfDay.value,
                                 },
                               ),
-                              presentPercentage:
+                              firstPercentage:
                                   controller.presentPercentage.value,
-                              absentPercentage:
-                                  controller.absentPercentage.value,
-                              onLeavePercentage:
+                              secondPercentage:
                                   controller.onLeavePercentage.value,
-                              totalPresent: controller.totalChartPresent.value,
-                              totalOnLeave: controller.totalChartLeave.value,
-                              totalAbsent: controller.totalChartAbsent.value,
+                              thirdPercentage:
+                                  controller.absentPercentage.value,
                               haveNoData: controller.haveNoData.value,
                             ),
                           ),
@@ -181,7 +178,8 @@ class HomeAdminView extends StatelessWidget {
                                           value: e,
                                           child: MyText(
                                             text: e.trString,
-                                            style: AppFonts.LabelSmall.copyWith(
+                                            style:
+                                                AppFonts.TitleXSmall.copyWith(
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .onBackground,
@@ -282,17 +280,18 @@ class HomeAdminView extends StatelessWidget {
                               itemCount:
                                   controller.staffAttendanceList.value.length,
                               itemBuilder: (context, index) {
-                                final attendance =
-                                    controller.staffAttendanceList.value[index];
-                                final staff = controller.staffs.firstWhere(
-                                    (element) =>
-                                        element.id == attendance.userId,
-                                    orElse: () => UserModel());
+                                final staff =
+                                    controller.filterStaffs.value[index];
+                                final attendance = controller
+                                    .backUpStaffAttendanceList
+                                    .where((p0) => p0.userId == staff.id)
+                                    .toList();
                                 final position = controller.positionList
                                     .firstWhere(
                                         (element) =>
                                             element.id == staff.positionId,
                                         orElse: () => PositionModel());
+                                Logs.i("staff: $staff");
                                 return StaffAttendanceCard(
                                   staff: staff,
                                   attendance: attendance,

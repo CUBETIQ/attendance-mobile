@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,6 +46,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final startOfMonth = 0.obs;
   final endOfMonth = 0.obs;
   final attendanceList = <AttendanceModel>[].obs;
+  final backUpStaffAttendanceList = <AttendanceModel>[].obs;
+  final filterStaffs = <UserModel>[].obs;
   final staffAttendanceList = <AttendanceModel>[].obs;
   final positionList = <PositionModel>[].obs;
   final isLoadingList = false.obs;
@@ -495,11 +496,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Future<void> getAllStaffAttendance() async {
     isLoadingStaffAttendance.value = true;
     try {
-      staffAttendanceList.value = await HomeService().getAllStaffAttendance(
+      backUpStaffAttendanceList.value =
+          await HomeService().getAllStaffAttendance(
         startDate: startOfDay.value,
         endDate: endOfDay.value,
         organizationId: NavigationController.to.organization.value.id ?? "",
       );
+      staffAttendanceList.value =
+          removeDuplicateAttendances(backUpStaffAttendanceList.value);
+      for (var element in staffAttendanceList) {
+        filterStaffs.value
+            .add(staffs.firstWhere((staff) => staff.id == element.userId));
+      }
     } on DioException catch (e) {
       isLoadingStaffAttendance.value = false;
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -556,6 +564,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  List<AttendanceModel> removeDuplicateAttendances(
+      List<AttendanceModel> attendances) {
+    Set<String> userId = <String>{};
+    List<AttendanceModel> uniqueAttendances = [];
+
+    for (AttendanceModel attendance in attendances) {
+      if (userId.add(attendance.userId!)) {
+        uniqueAttendances.add(attendance);
+      }
+    }
+
+    return uniqueAttendances;
   }
 
   Future<DateTime> checkTime() async {
@@ -696,7 +718,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       selectedAttendanceType.value = value!;
       isCheckIn.value = !isCheckIn.value;
       if (attendanceChart.isNotEmpty) {
-        if (selectedAttendanceType.value == "Check In") {
+        if (selectedAttendanceType.value == "Check in") {
           latePercentage.value = DoubleUtil.caculatePercentageForProgress(
               totalCheckInLate.value, totalStaff.value);
           onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(

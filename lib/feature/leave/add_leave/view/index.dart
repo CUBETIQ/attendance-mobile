@@ -140,6 +140,7 @@ class AddLeaveView extends StatelessWidget {
                 hintText: "Enter your reason",
                 textController: controller.reasonController,
                 maxlines: 5,
+                errorText: "You must enter your reason.",
               ),
               SizedBox(
                 height: SizeUtils.scale(AppSize().paddingS5, size.width),

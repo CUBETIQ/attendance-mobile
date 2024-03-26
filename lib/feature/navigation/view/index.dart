@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/constants/icon.dart';
 import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
@@ -144,14 +145,19 @@ class MainScreen extends StatelessWidget {
                     onPressed: controller.selectedIndex.value == 2
                         ? controller.onTapAddTask
                         : controller.onTapAddLeave,
-                    shape: const RoundedRectangleBorder(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(40),
+                        Radius.circular(
+                          SizeUtils.scale(AppSpacing.L, size.width),
+                        ),
                       ),
                     ),
                     child: Icon(
                       Icons.add_rounded,
                       size: SizeUtils.scale(24, size.width),
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
           ),

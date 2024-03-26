@@ -199,4 +199,20 @@ class StringUtil {
       return 'Invalid status';
     }
   }
+
+  static String attendanceStatusSimplify(String? status) {
+    if (status == null) {
+      return "N/A";
+    }
+
+    if (status == AttendanceStatus.late) {
+      return 'Late';
+    } else if (status == AttendanceStatus.early) {
+      return 'Early';
+    } else if (status == AttendanceStatus.onTime) {
+      return 'On time';
+    } else {
+      return 'Invalid status';
+    }
+  }
 }

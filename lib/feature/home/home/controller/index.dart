@@ -696,7 +696,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       selectedAttendanceType.value = value!;
       isCheckIn.value = !isCheckIn.value;
       if (attendanceChart.isNotEmpty) {
-        if (selectedAttendanceType.value == "Check In") {
+        if (selectedAttendanceType.value == "Check in") {
           latePercentage.value = DoubleUtil.caculatePercentageForProgress(
               totalCheckInLate.value, totalStaff.value);
           onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(

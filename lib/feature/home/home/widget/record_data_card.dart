@@ -133,8 +133,8 @@ class RecordDataCard extends StatelessWidget {
                 ),
                 SvgIcon(
                   icon: svgIcon,
-                  height: SizeUtils.scale(24, size.width),
-                  width: SizeUtils.scale(24, size.width),
+                  height: SizeUtils.scale(21, size.width),
+                  width: SizeUtils.scale(21, size.width),
                   color: isBreakTime == true
                       ? Get.isDarkMode
                           ? Theme.of(context).colorScheme.onBackground

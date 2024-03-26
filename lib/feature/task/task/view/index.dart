@@ -111,6 +111,7 @@ class TaskView extends StatelessWidget {
                     builderWidget: ListView.separated(
                       itemCount: controller.tasks.length,
                       physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
                       separatorBuilder: (context, index) => SizedBox(
                         height: SizeUtils.scale(
                           AppSize().paddingS6,

@@ -61,9 +61,9 @@ class AttendancePieChartCard extends StatelessWidget {
                 color: Theme.of(context).colorScheme.background,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 3,
-                    blurRadius: 2,
+                    color: Colors.grey.withOpacity(0.15),
+                    spreadRadius: 1,
+                    blurRadius: 1,
                     offset: const Offset(0, 0),
                   ),
                 ],
@@ -75,7 +75,7 @@ class AttendancePieChartCard extends StatelessWidget {
                         sections: [
                           PieChartSectionData(
                             showTitle: false,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: const Color(0xffDCDEE3),
                             value: 100,
                             title: "No Data",
                             radius: chartRadius ?? customChartRadius,
@@ -147,7 +147,7 @@ class AttendancePieChartCard extends StatelessWidget {
                 swapAnimationCurve: Curves.linear,
               ),
             ),
-            SizedBox(width: SizeUtils.scale(28.5, size.width)),
+            SizedBox(width: SizeUtils.scale(71, size.width)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

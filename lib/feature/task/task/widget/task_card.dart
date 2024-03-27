@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/widgets/check_box/check_box.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/types/task_status.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
+
+import '../../../../types/task.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;
@@ -73,13 +75,43 @@ class TaskCard extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: SizeUtils.scale(12, size.width)),
-                child: IgnorePointer(
-                  ignoring: task.status == TaskStatus.done ? true : false,
-                  child: MyCheckBox(
-                    hasNoBackground: true,
-                    isChecked: task.status == TaskStatus.done ? true : false,
-                    onTap: onCheck,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    task.priority == TaskPriority.urgent
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                bottom: SizeUtils.scale(8, size.width)),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSpacing.L),
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: SizeUtils.scale(4, size.width),
+                                      horizontal:
+                                          SizeUtils.scale(8, size.width)),
+                                  child: MyText(
+                                    text: "Urgent",
+                                    style: AppFonts.LabelSmall.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )),
+                          )
+                        : const SizedBox.shrink(),
+                    IgnorePointer(
+                      ignoring: task.status == TaskStatus.done ? true : false,
+                      child: MyCheckBox(
+                        hasNoBackground: true,
+                        isChecked:
+                            task.status == TaskStatus.done ? true : false,
+                        onTap: onCheck,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

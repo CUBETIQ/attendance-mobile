@@ -13,7 +13,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/task/task/controller/index.dart';
 import 'package:timesync/feature/task/task/widget/task_card.dart';
-import 'package:timesync/types/task_filter.dart';
+import 'package:timesync/types/task.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class TaskView extends StatelessWidget {
@@ -135,7 +135,12 @@ class TaskView extends StatelessWidget {
                               : controller.allTasksNoComplete;
                   return MyAsyncWidget(
                     isLoading: false,
-                    list: tasks,
+                    list: controller.selectedTaskType.value != TaskFilter.all
+                        ? tasks
+                        : [
+                            ...controller.allTasksNoComplete,
+                            ...controller.completedTasks
+                          ],
                     noDataWidget: const MyNoData(),
                     builderWidget: SingleChildScrollView(
                       child: Column(
@@ -160,51 +165,56 @@ class TaskView extends StatelessWidget {
                           ),
                           controller.selectedTaskType.value != TaskFilter.all
                               ? const SizedBox.shrink()
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical:
-                                              SizeUtils.scale(12, size.width)),
-                                      child: MyText(
-                                        text: 'Completed',
-                                        style: AppFonts.TitleMedium.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground),
-                                      ),
-                                    ),
-                                    ListView.separated(
-                                      itemCount:
-                                          controller.completedTasks.length,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      separatorBuilder: (context, index) =>
-                                          SizedBox(
-                                        height: SizeUtils.scale(
-                                          AppSize().paddingS6,
-                                          size.width,
+                              : controller.completedTasks.isEmpty
+                                  ? const SizedBox.shrink()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: SizeUtils.scale(
+                                                  12, size.width)),
+                                          child: MyText(
+                                            text: 'Completed',
+                                            style:
+                                                AppFonts.TitleMedium.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onBackground),
+                                          ),
                                         ),
-                                      ),
-                                      itemBuilder: (context, index) {
-                                        return TaskCard(
-                                          task:
-                                              controller.completedTasks[index],
-                                          onTap: () => controller.onTapTask(
-                                            controller.completedTasks[index],
+                                        ListView.separated(
+                                          itemCount:
+                                              controller.completedTasks.length,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          separatorBuilder: (context, index) =>
+                                              SizedBox(
+                                            height: SizeUtils.scale(
+                                              AppSize().paddingS6,
+                                              size.width,
+                                            ),
                                           ),
-                                          onCheck: () =>
-                                              controller.completeTask(
-                                            controller
-                                                .completedTasks[index].id!,
-                                          ),
-                                        );
-                                      },
+                                          itemBuilder: (context, index) {
+                                            return TaskCard(
+                                              task: controller
+                                                  .completedTasks[index],
+                                              onTap: () => controller.onTapTask(
+                                                controller
+                                                    .completedTasks[index],
+                                              ),
+                                              onCheck: () =>
+                                                  controller.completeTask(
+                                                controller
+                                                    .completedTasks[index].id!,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
                         ],
                       ),
                     ),

@@ -1,17 +1,19 @@
 import 'package:get/get.dart';
+import 'package:timesync/constants/app_shadow.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pie_chart/pie_chart.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/leave/leave/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/feature/leave/leave/widget/leave_card.dart';
-import 'package:timesync/feature/leave/leave/widget/leave_chart.dart';
 import 'package:timesync/utils/size_util.dart';
-import 'package:timesync/utils/string_util.dart';
 
 class LeaveView extends StatelessWidget {
   const LeaveView({super.key});
@@ -56,58 +58,69 @@ class LeaveView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: SizeUtils.scale(20, size.width)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: Obx(
-                      () => LeaveChart(
-                        title: "Pending",
-                        radius: size.width < 600 ? 40 : 60,
-                        centerText: StringUtil.doubleToPercentageString(
-                            controller.percentagePendingLeave.value * 100),
-                        percent: controller.percentagePendingLeave.value,
-                        textBelow: "${controller.totalPendingLeave.value}/"
-                            "${controller.totalLeave.value}",
-                      ),
+              Obx(
+                () => MyPieChart(
+                  firstPercentage: controller.percentagePendingLeave.value,
+                  secondPercentage: controller.percentageApprovedLeave.value,
+                  thirdPercentage: controller.percentageDeclinedLeave.value,
+                  haveNoData: controller.leaves.value.isEmpty,
+                  firstTitle: "Awaiting",
+                  secondTitle: "Approved",
+                  thirdTitle: "Declined",
+                  rightPadding: 60,
+                  firstColor: Theme.of(context).colorScheme.tertiaryContainer,
+                  secondColor: Theme.of(context).colorScheme.tertiary,
+                  thirdColor: Theme.of(context).colorScheme.error,
+                  pieChartShadow: [
+                    AppShadow.shadowWithColor(
+                      Theme.of(context).colorScheme.primary,
+                      blurRadius: 10,
                     ),
-                  ),
-                  SizedBox(width: SizeUtils.scale(8, size.width)),
-                  Expanded(
-                    child: Obx(
-                      () => LeaveChart(
-                        title: "Approved",
-                        radius: size.width < 600 ? 40 : 60,
-                        centerText: StringUtil.doubleToPercentageString(
-                            controller.percentageApprovedLeave.value * 100),
-                        percent: controller.percentageApprovedLeave.value,
-                        textBelow: "${controller.totalApprovedLeave.value}/"
-                            "${controller.totalLeave.value}",
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: SizeUtils.scale(8, size.width)),
-                  Expanded(
-                    child: Obx(
-                      () => LeaveChart(
-                        title: "Rejected",
-                        radius: size.width < 600 ? 40 : 60,
-                        centerText: StringUtil.doubleToPercentageString(
-                            controller.percentageDeclinedLeave.value * 100),
-                        percent: controller.percentageDeclinedLeave.value,
-                        textBelow: "${controller.totalDeclinedLeave.value}/"
-                            "${controller.totalLeave.value}",
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              SizedBox(height: AppSize().paddingS14),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MyText(
-                    text: "My Request",
-                    style: AppFonts().bodyLargeMedium,
+                    text: "My Leave Requests",
+                    style: AppFonts.TitleMedium,
+                  ),
+                  Obx(
+                    () => MyDropDownButton<String>(
+                      width: SizeUtils.scale(130, size.width),
+                      borderColor: Theme.of(context).colorScheme.primary,
+                      buttonPadding: EdgeInsets.only(
+                        left: SizeUtils.scale(0, size.width),
+                        right: SizeUtils.scale(10, size.width),
+                        top: SizeUtils.scale(1, size.width),
+                        bottom: SizeUtils.scale(1, size.width),
+                      ),
+                      dropdownPadding: EdgeInsets.symmetric(
+                          horizontal: SizeUtils.scale(10, size.width)),
+                      borderRadius: SizeUtils.scale(24, size.width),
+                      label: "Type",
+                      hasLabel: false,
+                      value: controller.selectedLeaveType.value,
+                      hint: "Choose Type",
+                      dropdownItems: controller.leaveType
+                          .map(
+                            (e) => DropdownMenuItem<String>(
+                              value: e,
+                              child: MyText(
+                                text: e.trString,
+                                style: AppFonts.TitleXSmall.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: controller.onChangedLeaveType,
+                    ),
                   ),
                 ],
               ),

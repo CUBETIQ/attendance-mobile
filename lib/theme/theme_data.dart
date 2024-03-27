@@ -38,8 +38,8 @@ const ColorScheme flexSchemeLight = ColorScheme(
   onSecondaryContainer: Color(0xff121314),
   tertiary: MyColor.success,
   onTertiary: MyColor.onSuccess,
-  tertiaryContainer: Color(0xffa9d4d6),
-  onTertiaryContainer: Color(0xff0e1212),
+  tertiaryContainer: MyColor.warning,
+  onTertiaryContainer: MyColor.onWarning,
   error: MyColor.error,
   onError: MyColor.onError,
   errorContainer: Color(0xffffdad6),
@@ -58,6 +58,7 @@ const ColorScheme flexSchemeLight = ColorScheme(
   onInverseSurface: Color(0xfff5f5f5),
   inversePrimary: Color.fromARGB(255, 218, 208, 255),
   surfaceTint: Color(0xff4355b9),
+  
 );
 
 // Dark theme

@@ -9,7 +9,7 @@ import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:timesync/feature/leave/leave/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave.dart';
 import 'package:timesync/types/state.dart';
 
 class LeaveController extends GetxController {
@@ -26,6 +26,14 @@ class LeaveController extends GetxController {
   final percentageApprovedLeave = 0.0.obs;
   final percentageDeclinedLeave = 0.0.obs;
   final selectDate = DateTime.now().obs;
+  final leaveType = <String>[
+    LeaveFilter.all,
+    LeaveFilter.pending,
+    LeaveFilter.approved,
+    LeaveFilter.rejected,
+    LeaveFilter.cancelled
+  ].obs;
+  final selectedLeaveType = LeaveFilter.all.obs;
 
   @override
   void onInit() {
@@ -173,12 +181,18 @@ class LeaveController extends GetxController {
 
     percentagePendingLeave.value = totalPendingLeave.value == 0
         ? 0
-        : (totalPendingLeave.value / totalLeave.value * 100) / 100;
+        : totalPendingLeave.value / totalLeave.value * 100;
     percentageApprovedLeave.value = totalApprovedLeave.value == 0
         ? 0
-        : (totalApprovedLeave.value / totalLeave.value * 100) / 100;
+        : totalApprovedLeave.value / totalLeave.value * 100;
     percentageDeclinedLeave.value = totalDeclinedLeave.value == 0
         ? 0
-        : (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
+        : totalDeclinedLeave.value / totalLeave.value * 100;
+  }
+
+  void onChangedLeaveType(String? value) {
+    if (selectedLeaveType.value != value) {
+      selectedLeaveType.value = value!;
+    }
   }
 }

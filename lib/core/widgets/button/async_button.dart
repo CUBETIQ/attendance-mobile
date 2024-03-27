@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/constants/app_shadow.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
@@ -17,6 +18,7 @@ class MyAsyncButton extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final IconData? icon;
   final double? iconSize;
+  final bool? hasShadow;
 
   const MyAsyncButton({
     super.key,
@@ -31,6 +33,7 @@ class MyAsyncButton extends StatelessWidget {
     this.margin,
     this.icon,
     this.iconSize,
+    this.hasShadow = false,
   });
 
   @override
@@ -58,14 +61,19 @@ class MyAsyncButton extends StatelessWidget {
           margin: margin,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              (borderRadius ?? AppSize().borderRadiusLarge) *
-                  (size.width / 375.0),
-            ),
-            color: isDisableButton.value == true
-                ? Theme.of(context).colorScheme.outline
-                : backgroundColor ?? Theme.of(context).colorScheme.primary,
-          ),
+              borderRadius: BorderRadius.circular(
+                (borderRadius ?? AppSize().borderRadiusLarge) *
+                    (size.width / 375.0),
+              ),
+              color: isDisableButton.value == true
+                  ? Theme.of(context).colorScheme.outline
+                  : backgroundColor ?? Theme.of(context).colorScheme.primary,
+              boxShadow: hasShadow == true
+                  ? [
+                      AppShadow.shadowWithColor(
+                          Theme.of(context).colorScheme.primary)
+                    ]
+                  : []),
           child: isIconButton == true
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,

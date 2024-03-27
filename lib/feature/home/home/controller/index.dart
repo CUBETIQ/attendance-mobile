@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/attendance_method.dart';
+import 'package:timesync/types/attendance.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/types/user_status.dart';
 import 'package:timesync/utils/attendance_util.dart';
@@ -358,7 +359,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         } on DioException catch (e) {
           if (e.response?.data["message"]
                   .toString()
-                  .contains("Please Check-out") ==
+                  .contains("Please check out") ==
               true) {
             getForgetCheckOutBottomSheet(
               Get.context!,
@@ -668,6 +669,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             : backUpStaffAttendanceList
                 .where((element) => element.checkOutStatus == status)
                 .toList(),
+        "positions": positionList.value,
       },
     );
   }

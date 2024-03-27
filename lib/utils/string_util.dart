@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:timesync/types/attendance_status.dart';
+import 'package:timesync/types/attendance.dart';
 
 class StringUtil {
   static String getfullname(
@@ -49,6 +49,8 @@ class StringUtil {
     /// remove quotes on object json string
     jsonString = jsonString.replaceAll('"{"', '{"');
     jsonString = jsonString.replaceAll('"}"', '"}');
+
+    jsonString = jsonString.replaceAll('}"', '}');
 
     /// remove quotes on array json string
     jsonString = jsonString.replaceAll('"[{', '[{');
@@ -162,11 +164,11 @@ class StringUtil {
       return null;
     }
 
-    DateTime endBreakTime = DateFormat("HH:mm").parse(endBreak);
+    DateTime endBreakTime = DateFormat("hh:mm").parse(endBreak);
 
     DateTime getbreakTime = DateTime.fromMillisecondsSinceEpoch(date);
 
-    DateTime breakTime = DateFormat("HH:mm")
+    DateTime breakTime = DateFormat("hh:mm")
         .parse("${getbreakTime.hour}:${getbreakTime.minute}");
 
     final minutes = endBreakTime.difference(breakTime).inMinutes;

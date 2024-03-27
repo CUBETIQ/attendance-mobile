@@ -67,7 +67,9 @@ class LinearIndicator extends StatelessWidget {
                 padding: EdgeInsets.only(left: SizeUtils.scale(6, size.width)),
                 child: MyText(
                   text: percent != null && percent?.isNaN == false
-                      ? '${(percent! * 100).toStringAsFixed(0)}%'
+                      ? percent! >= 0 && percent! <= 1
+                          ? '${(percent! * 100).toStringAsFixed(0)}%'
+                          : "100%"
                       : "0%",
                   style: AppFonts().bodySmall.copyWith(
                         color: color ?? Theme.of(context).colorScheme.primary,

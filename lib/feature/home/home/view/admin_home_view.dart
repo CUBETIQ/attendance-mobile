@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/icon.dart';
 import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
+import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
-import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/no_data/empty_state.dart';
 import 'package:timesync/core/widgets/pie_chart/pie_chart.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
@@ -12,16 +15,12 @@ import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/home/home/controller/index.dart';
 import 'package:timesync/feature/home/home/view/staff_home_view.dart';
 import 'package:timesync/feature/home/home/widget/button_card.dart';
-import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync/feature/home/home/widget/linear_indicator.dart';
 import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
 import 'package:timesync/feature/home/home/widget/tab_bar.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/attendance_status.dart';
-import 'package:timesync/utils/logger.dart';
+import 'package:timesync/types/attendance.dart';
 import 'package:timesync/utils/size_util.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomeAdminView extends StatelessWidget {
   const HomeAdminView({super.key});
@@ -96,6 +95,7 @@ class HomeAdminView extends StatelessWidget {
                               thirdPercentage:
                                   controller.absentPercentage.value,
                               haveNoData: controller.haveNoData.value,
+                              secondTitle: "Leave",
                             ),
                           ),
                         ),
@@ -267,7 +267,12 @@ class HomeAdminView extends StatelessWidget {
                           () => MyAsyncWidget(
                             isLoading: controller.isLoadingList.value,
                             list: controller.staffAttendanceList,
-                            noDataWidget: const MyNoData(),
+                            noDataWidget: Padding(
+                              padding: EdgeInsets.only(
+                                top: SizeUtils.scale(20, size.width),
+                              ),
+                              child: const MyEmptyState(),
+                            ),
                             builderWidget: ListView.separated(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -292,7 +297,6 @@ class HomeAdminView extends StatelessWidget {
                                         (element) =>
                                             element.id == staff.positionId,
                                         orElse: () => PositionModel());
-                                Logs.i("staff: $staff");
                                 return StaffAttendanceCard(
                                   staff: staff,
                                   attendance: attendance,

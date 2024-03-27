@@ -40,4 +40,5 @@ class IconAssets {
   static const String unlock = 'assets/icons/unlock.svg';
   static const String visible = 'assets/icons/visible.svg';
   static const String zap = 'assets/icons/zap.svg';
+  static const String xClose = 'assets/icons/x_close.svg';
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync/utils/logger.dart';
 
 class MyPopScope extends StatelessWidget {
   const MyPopScope({
@@ -21,7 +20,6 @@ class MyPopScope extends StatelessWidget {
     Future<bool> handlePop() async {
       DateTime initTime = DateTime.now();
       popped += 1;
-      Logs.e('popped: $popped');
       if (popped >= 2) {
         return true;
       } else {

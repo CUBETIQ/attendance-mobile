@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:timesync/utils/logger.dart';
 
 class DateUtil {
   static String formatDateTime(DateTime dateTime) {
@@ -65,12 +64,27 @@ class DateUtil {
     return formatter.format(date);
   }
 
-  static String formatTimeNoTrailing(DateTime dateTime) {
+  static String formatTimeNoTrailing(
+    DateTime dateTime,
+  ) {
     // Define the desired time format
-    final DateFormat formatter = DateFormat('h:mm a', Get.locale?.languageCode);
+    final DateFormat formatter =
+        DateFormat('hh:mm a', Get.locale?.languageCode);
 
     // Format the DateTime
     return formatter.format(dateTime);
+  }
+
+  static String formatTimeTo12Hour(String time, {bool? forceShowPM}) {
+    // Parse the time string into a DateTime object
+    DateTime dateTime = DateFormat('hh:mm').parse(time);
+
+    if (forceShowPM != null && forceShowPM) {
+      return "${DateFormat('hh:mm').format(dateTime)} PM";
+    } else {
+      // Format the DateTime object into a 12-hour time format
+      return DateFormat('hh:mm a').format(dateTime);
+    }
   }
 
   static String formatMinutesToDays(int minutes) {
@@ -224,9 +238,6 @@ class DateUtil {
     if (startHour == null || endHour == null) {
       return "N/A";
     }
-
-    Logs.i("startHour: $startHour");
-    Logs.i("endHour: $endHour");
 
     // Parse startHour and endHour strings into DateTime objects
     DateTime startTime = DateFormat('hh:mm').parse(startHour);

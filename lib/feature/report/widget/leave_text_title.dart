@@ -20,7 +20,7 @@ class LeaveTextTitle extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: SizeUtils.scale(12, size.width)),
               child: MyText(
-                text: 'On Leave',
+                text: 'Leave',
                 style: AppFonts.TitleMedium.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),

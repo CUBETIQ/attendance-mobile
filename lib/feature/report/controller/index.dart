@@ -8,7 +8,7 @@ import 'package:timesync/core/widgets/snackbar/snackbar.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/report/service/index.dart';
 import 'package:timesync/utils/date_util.dart';
-import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave.dart';
 import 'package:timesync/types/role.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

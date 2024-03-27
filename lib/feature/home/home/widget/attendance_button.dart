@@ -37,7 +37,7 @@ class AttendanceButton extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
               vertical: SizeUtils.scale(22, size.width),
-              horizontal: SizeUtils.scale(24, size.width)),
+              horizontal: SizeUtils.scale(22, size.width)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -8,14 +8,14 @@ import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
+import 'package:timesync/feature/task/add_task/service/index.dart';
 import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/task_filter.dart';
-import 'package:timesync/types/task_status.dart';
+import 'package:timesync/types/task.dart';
 import 'package:timesync/utils/converter.dart';
-import 'package:timesync/utils/logger.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
@@ -47,6 +47,39 @@ class TaskController extends GetxController {
     initFunction();
   }
 
+  Future<void> onAddTask(
+      {DateTimeRange? dateTimeRange,
+      TextEditingController? descriptionController,
+      bool? isUrgent,
+      String? selectedStatus,
+      TextEditingController? taskController}) async {
+    final status = selectedStatus == TaskFilter.completed
+        ? TaskStatus.done
+        : TaskStatus.progress;
+    final priority = isUrgent == true ? TaskPriority.urgent : TaskPriority.low;
+
+    try {
+      CreateTaskModel input = CreateTaskModel(
+        name: taskController?.text.trim(),
+        description: descriptionController?.text,
+        startDate: dateTimeRange?.start.millisecondsSinceEpoch ??
+            DateTime.now().millisecondsSinceEpoch,
+        endDate: dateTimeRange?.end.millisecondsSinceEpoch,
+        status: status,
+        priority: priority,
+        completedDate: status == TaskStatus.done
+            ? DateTime.now().millisecondsSinceEpoch
+            : null,
+      );
+      await AddTaskService().addTask(input);
+      TaskController.to.getUserTasks();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response!.data["message"]);
+      rethrow;
+    }
+  }
+
   Future<void> getUserTasks() async {
     try {
       tasks.value = await TaskService().getUserTasks(
@@ -68,12 +101,44 @@ class TaskController extends GetxController {
           .where((element) => element.status != TaskStatus.done)
           .toList();
 
+      sortTasksByPriorityAndDate(allTasksNoComplete);
+      sortTasksByPriorityAndDate(pendingTasks);
+      sortTasksByPriorityAndDate(completedTasks);
+
       // Set notification for task reminder
       await setUpTasksNotification();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  void sortTasksByPriorityAndDate(List<TaskModel> taskList) {
+    int compareTaskOrder(String? taskA, String? taskB) {
+      int taskOrder(String? task) {
+        switch (task) {
+          case TaskPriority.urgent:
+            return 0;
+          case TaskPriority.low:
+            return 1;
+          default:
+            return 2;
+        }
+      }
+
+      return taskOrder(taskA ?? '').compareTo(taskOrder(taskB ?? ''));
+    }
+
+    taskList.sort((a, b) {
+      int priorityComparison = compareTaskOrder(a.priority, b.priority);
+      if (priorityComparison != 0) {
+        return priorityComparison;
+      } else {
+        DateTime dateA = a.createdAt ?? DateTime.now();
+        DateTime dateB = b.createdAt ?? DateTime.now();
+        return dateB.compareTo(dateA);
+      }
+    });
   }
 
   Future<void> setUpTasksNotification({String? updatedId}) async {
@@ -199,11 +264,6 @@ class TaskController extends GetxController {
       percentageTodoTask.value = (totalTodoTask.value / totalTask.value) * 100;
       percentageProgressTask.value =
           (totalProgressTask.value / totalTask.value) * 100;
-
-      Logs.t(
-          "totalTask: $totalTask, totalCompletedTask: $totalCompletedTask, totalTodoTask: $totalTodoTask, totalProgressTask: $totalProgressTask");
-      Logs.t(
-          "percentageCompletedTask: $percentageCompletedTask, percentageTodoTask: $percentageTodoTask, percentageProgressTask: $percentageProgressTask");
     } else {
       clearData();
     }

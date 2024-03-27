@@ -186,20 +186,31 @@ class StaffReportViewMobile extends StatelessWidget {
                                     height: SizeUtils.scale(12, size.width),
                                   ),
                                   itemBuilder: (context, index) {
+                                    final startBreak = controller.attendanceList
+                                        .value[index].breakTime?.start;
+                                    final checkOut = controller.attendanceList
+                                        .value[index].checkOutDateTime;
                                     return Column(
                                       children: [
-                                        ReportAttendanceCard(
-                                          attendance: controller
-                                              .attendanceList.value[index],
-                                        ),
+                                        checkOut != null
+                                            ? ReportAttendanceCard(
+                                                attendance: controller
+                                                    .attendanceList
+                                                    .value[index],
+                                              )
+                                            : const SizedBox.shrink(),
                                         SizedBox(
-                                          height:
-                                              SizeUtils.scale(12, size.width),
+                                          height: startBreak != null
+                                              ? SizeUtils.scale(12, size.width)
+                                              : 0,
                                         ),
-                                        ReportBreakCard(
-                                          attendance: controller
-                                              .attendanceList.value[index],
-                                        ),
+                                        startBreak != null
+                                            ? ReportBreakCard(
+                                                attendance: controller
+                                                    .attendanceList
+                                                    .value[index],
+                                              )
+                                            : const SizedBox.shrink(),
                                       ],
                                     );
                                   },

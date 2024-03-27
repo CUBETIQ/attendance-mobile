@@ -46,12 +46,14 @@ class ColorUtil {
   }
 
   static Color getStatusColor(BuildContext context, String? status,
-      {isCheckOut}) {
+      {bool? isCheckOut, bool? noOnTimeColor}) {
     switch (status) {
       case AttendanceStatus.early:
         return Theme.of(context).colorScheme.tertiary;
       case AttendanceStatus.onTime:
-        return Theme.of(context).colorScheme.primary;
+        return noOnTimeColor == true
+            ? Theme.of(context).colorScheme.onPrimary
+            : Theme.of(context).colorScheme.primary;
       case AttendanceStatus.late:
         return isCheckOut == true
             ? Theme.of(context).colorScheme.tertiary

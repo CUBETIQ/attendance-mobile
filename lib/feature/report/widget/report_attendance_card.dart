@@ -1,6 +1,6 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/attendance_model.dart';
 import 'package:timesync/core/widgets/card/my_card.dart';
@@ -25,10 +25,9 @@ class ReportAttendanceCard extends StatelessWidget {
         horizontal: SizeUtils.scale(16, size.width),
       ),
       boxShadow: const [],
-      border: Border.all(
-        color: Theme.of(context).colorScheme.outlineVariant,
-      ),
-      borderRadius: BorderRadius.circular(AppSize().borderRadiusLarge),
+      border: Border.all(color: Theme.of(context).colorScheme.primary),
+      borderRadius:
+          BorderRadius.circular(SizeUtils.scale(AppSpacing.L, size.width)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

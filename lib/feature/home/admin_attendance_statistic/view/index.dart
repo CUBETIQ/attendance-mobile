@@ -6,7 +6,7 @@ import 'package:timesync/core/widgets/button/back_button.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/feature/home/admin_attendance_statistic/controller/index.dart';
-import 'package:timesync/feature/home/admin_attendance_statistic/widget/attendance_statistic_card.dart';
+import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class AttendanceStatisticView extends StatelessWidget {
@@ -20,7 +20,7 @@ class AttendanceStatisticView extends StatelessWidget {
       appBar: AppBar(
         title: Obx(
           () => MyAppBarTitle(
-            title: controller.appBarTitle.value,
+            title: controller.appBarTitle.value.replaceAll("-", " "),
           ),
         ),
         centerTitle: true,
@@ -34,10 +34,10 @@ class AttendanceStatisticView extends StatelessWidget {
         ),
         child: MyAsyncWidget(
           isLoading: false,
-          list: controller.attendaces.value,
+          list: controller.attendances.value,
           noDataWidget: const MyNoData(),
           builderWidget: ListView.separated(
-            itemCount: controller.attendaces.length,
+            itemCount: controller.attendances.length,
             padding: EdgeInsets.only(
               top: SizeUtils.scale(20, size.width),
             ),
@@ -46,16 +46,13 @@ class AttendanceStatisticView extends StatelessWidget {
               height: SizeUtils.scale(10, size.width),
             ),
             itemBuilder: (context, index) {
-              final attendance = controller.attendaces[index];
-              final staff = controller.getUser(attendance);
-              return Obx(
-                () => AttendanceStatisticCard(
-                  staff: staff,
-                  attendance: attendance,
-                  isCheckOut: controller.appBarTitle.value == "Check out"
-                      ? true
-                      : false,
-                ),
+              final staff = controller.getUser()[index];
+              final attendance = controller.backUpAttendaces
+                  .where((element) => element.userId == staff.id)
+                  .toList();
+              return StaffAttendanceCard(
+                staff: staff,
+                attendance: attendance,
               );
             },
           ),

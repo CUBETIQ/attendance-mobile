@@ -21,12 +21,12 @@ class StaffAttendanceCard extends StatelessWidget {
     super.key,
     required this.staff,
     required this.attendance,
-    required this.position,
+    this.position,
   });
 
   final UserModel staff;
   final List<AttendanceModel> attendance;
-  final PositionModel position;
+  final PositionModel? position;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class StaffAttendanceCard extends StatelessWidget {
                         ),
                       ),
                       MyText(
-                        text: position.name ?? "N/A",
+                        text: position?.name ?? "N/A",
                         style: AppFonts.LabelSmall,
                       ),
                     ],

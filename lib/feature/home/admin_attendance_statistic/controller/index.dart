@@ -5,9 +5,10 @@ import 'package:timesync/core/model/user_model.dart';
 class AttendanceStatisticController extends GetxController {
   static AttendanceStatisticController get to => Get.find();
 
-  final appBarTitle = "Check in".obs;
+  final appBarTitle = "Check-out".obs;
   final staffs = <UserModel>[].obs;
-  final attendaces = <AttendanceModel>[].obs;
+  final attendances = <AttendanceModel>[].obs;
+  final backUpAttendaces = <AttendanceModel>[].obs;
 
   @override
   void onInit() {
@@ -15,8 +16,12 @@ class AttendanceStatisticController extends GetxController {
     initArguments();
   }
 
-  UserModel getUser(AttendanceModel attendance) {
-    return staffs.firstWhere((element) => element.id == attendance.userId);
+  List<UserModel> getUser() {
+    List<UserModel> staff = [];
+    for (var element in backUpAttendaces) {
+      staff.add(staffs.firstWhere((staff) => staff.id == element.userId));
+    }
+    return staff;
   }
 
   List<AttendanceModel> removeDuplicateAttendances(
@@ -35,9 +40,9 @@ class AttendanceStatisticController extends GetxController {
 
   void initArguments() {
     final data = Get.arguments;
-    final List<AttendanceModel> allAttendances = Get.arguments["attendance"];
+    backUpAttendaces.value = Get.arguments["attendance"];
     staffs.value = data['staffs'];
-    attendaces.value = removeDuplicateAttendances(allAttendances);
+    attendances.value = removeDuplicateAttendances(backUpAttendaces.value);
     appBarTitle.value = data['title'];
   }
 }

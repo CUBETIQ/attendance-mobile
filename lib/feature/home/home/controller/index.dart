@@ -40,6 +40,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final isCheckedIn = false.obs;
   final checkInTime = Rxn<String>(null);
   final checkOutTime = Rxn<String>(null);
+  final checkInDateTime = Rxn<int>(null);
   final dateInMiliSecond = Rxn<int>(null);
   final startOfDay = Rxn<int>(null);
   final endOfDay = Rxn<int>(null);
@@ -62,8 +63,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final user = UserModel().obs;
   final summaryAttendance = <SummaryAttendanceModel>[].obs;
   final attendanceType = <String>[
-    "Check in",
-    "Check out",
+    "Check-in",
+    "Check-out",
   ].obs;
   final status = <String>[
     UserStatus.active,
@@ -71,7 +72,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     UserStatus.idle,
   ].obs;
   final selectedStatus = UserStatus.active.obs;
-  final selectedAttendanceType = "Check in".obs;
+  final selectedAttendanceType = "Check-in".obs;
   final name = Rxn<String>(null);
   final isLoadingSummary = false.obs;
   final totalAttendance = Rxn<int>(null);
@@ -226,7 +227,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  // This function is used to cancel the notification reminder when user check in/out early
+  // This function is used to cancel the notification reminder when user Check-in/out early
   void cancelNotificationReminder({bool? checkOut}) {
     if (NavigationController.to.organization.value.configs == null) return;
     String? time;
@@ -258,7 +259,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             isCheckedIn.value == true) {
           NotificationSchedule.cancelCheckInReminder();
 
-          // Init check in reminder for next day
+          // Init Check-in reminder for next day
           NotificationSchedule.checkInReminder(
               toNextDay: true,
               time: NavigationController
@@ -345,19 +346,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           if (Get.isRegistered<ProfileController>()) {
             ProfileController.to.getSummarizeAttendance();
           }
-          // Set up check out reminder
+          // Set up Check-out reminder
           NotificationSchedule.checkOutReminder(
               time:
                   NavigationController.to.organization.value.configs?.endHour);
 
-          // Cancel check in reminder if user check in early
+          // Cancel Check-in reminder if user Check-in early
           cancelNotificationReminder();
 
           getCheckInBottomSheet(Get.context!, image: SvgAssets.working);
         } on DioException catch (e) {
           if (e.response?.data["message"]
                   .toString()
-                  .contains("Please check out") ==
+                  .contains("Please Check-out") ==
               true) {
             getForgetCheckOutBottomSheet(
               Get.context!,
@@ -410,7 +411,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           isCheckedIn.value = false;
           await getAttendance(noLoading: true);
 
-          // Cancel check out reminder if user check out early
+          // Cancel Check-out reminder if user Check-out early
           cancelNotificationReminder(checkOut: true);
 
           getCheckOutBottomSheet(Get.context!, image: SvgAssets.leaving);
@@ -449,6 +450,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             attendanceList.last.duration!,
           );
         }
+        checkInDateTime.value = attendanceList.last.checkInDateTime;
         checkInTime.value = DateUtil.formatTime(
           DateTime.fromMillisecondsSinceEpoch(
             attendanceList.last.checkInDateTime!,
@@ -550,7 +552,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         onLeavePercentage.value = DoubleUtil.caculatePercentage(
             totalChartLeave.value, totalStaff.value);
 
-        // Percentage for check in and check out
+        // Percentage for Check-in and Check-out
         latePercentage.value = DoubleUtil.caculatePercentageForProgress(
             totalCheckInLate.value, totalStaff.value);
         onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(
@@ -659,11 +661,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       arguments: {
         "title": selectedAttendanceType.value,
         "staffs": staffs,
-        "attendance": selectedAttendanceType.value == "Check in"
-            ? staffAttendanceList
+        "attendance": selectedAttendanceType.value == "Check-in"
+            ? backUpStaffAttendanceList
                 .where((element) => element.checkInStatus == status)
                 .toList()
-            : staffAttendanceList
+            : backUpStaffAttendanceList
                 .where((element) => element.checkOutStatus == status)
                 .toList(),
       },
@@ -718,7 +720,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       selectedAttendanceType.value = value!;
       isCheckIn.value = !isCheckIn.value;
       if (attendanceChart.isNotEmpty) {
-        if (selectedAttendanceType.value == "Check in") {
+        if (selectedAttendanceType.value == "Check-in") {
           latePercentage.value = DoubleUtil.caculatePercentageForProgress(
               totalCheckInLate.value, totalStaff.value);
           onTimePercentage.value = DoubleUtil.caculatePercentageForProgress(

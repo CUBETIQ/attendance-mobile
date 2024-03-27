@@ -19,7 +19,7 @@ import 'package:timesync/feature/home/home/widget/linear_indicator.dart';
 import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
 import 'package:timesync/feature/home/home/widget/tab_bar.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/attendance_status.dart';
+import 'package:timesync/types/attendance.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class HomeAdminView extends StatelessWidget {

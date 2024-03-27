@@ -3,9 +3,9 @@ import 'package:timesync/constants/color.dart';
 import 'package:timesync/core/model/admin_task_report_model.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/string.dart';
+import 'package:timesync/types/task.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/date_util.dart';
-import 'package:timesync/types/task_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

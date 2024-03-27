@@ -21,7 +21,7 @@ import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/avatar_type.dart';
-import 'package:timesync/types/task_filter.dart';
+import 'package:timesync/types/task.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/pick_file_handler.dart';
 import 'package:timesync/utils/size_util.dart';

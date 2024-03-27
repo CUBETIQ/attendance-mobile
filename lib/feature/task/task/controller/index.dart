@@ -14,11 +14,8 @@ import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/task_filter.dart';
-import 'package:timesync/types/task_priority.dart';
-import 'package:timesync/types/task_status.dart';
+import 'package:timesync/types/task.dart';
 import 'package:timesync/utils/converter.dart';
-import 'package:timesync/utils/logger.dart';
 
 class TaskController extends GetxController {
   static TaskController get to => Get.find();
@@ -104,12 +101,44 @@ class TaskController extends GetxController {
           .where((element) => element.status != TaskStatus.done)
           .toList();
 
+      sortTasksByPriorityAndDate(allTasksNoComplete);
+      sortTasksByPriorityAndDate(pendingTasks);
+      sortTasksByPriorityAndDate(completedTasks);
+
       // Set notification for task reminder
       await setUpTasksNotification();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  void sortTasksByPriorityAndDate(List<TaskModel> taskList) {
+    int compareTaskOrder(String? taskA, String? taskB) {
+      int taskOrder(String? task) {
+        switch (task) {
+          case TaskPriority.urgent:
+            return 0;
+          case TaskPriority.low:
+            return 1;
+          default:
+            return 2;
+        }
+      }
+
+      return taskOrder(taskA ?? '').compareTo(taskOrder(taskB ?? ''));
+    }
+
+    taskList.sort((a, b) {
+      int priorityComparison = compareTaskOrder(a.priority, b.priority);
+      if (priorityComparison != 0) {
+        return priorityComparison;
+      } else {
+        DateTime dateA = a.createdAt ?? DateTime.now();
+        DateTime dateB = b.createdAt ?? DateTime.now();
+        return dateB.compareTo(dateA);
+      }
+    });
   }
 
   Future<void> setUpTasksNotification({String? updatedId}) async {
@@ -235,11 +264,6 @@ class TaskController extends GetxController {
       percentageTodoTask.value = (totalTodoTask.value / totalTask.value) * 100;
       percentageProgressTask.value =
           (totalProgressTask.value / totalTask.value) * 100;
-
-      Logs.t(
-          "totalTask: $totalTask, totalCompletedTask: $totalCompletedTask, totalTodoTask: $totalTodoTask, totalProgressTask: $totalProgressTask");
-      Logs.t(
-          "percentageCompletedTask: $percentageCompletedTask, percentageTodoTask: $percentageTodoTask, percentageProgressTask: $percentageProgressTask");
     } else {
       clearData();
     }

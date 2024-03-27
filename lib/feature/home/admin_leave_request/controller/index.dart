@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/core/model/leave_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
@@ -6,10 +9,7 @@ import 'package:timesync/feature/home/admin_leave_request/model/change_leave_sta
 import 'package:timesync/feature/home/admin_leave_request/service/index.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave.dart';
 
 class AdminLeaveRequestController extends GetxController {
   static AdminLeaveRequestController get to => Get.find();
@@ -43,7 +43,8 @@ class AdminLeaveRequestController extends GetxController {
 
       // Sorting leave by date and status
       leaveList.value.sort((a, b) {
-        return (b.from ?? 0).compareTo(a.from ?? 0);
+        return (b.createdAt ?? DateTime.now())
+            .compareTo(a.createdAt ?? DateTime.now());
       });
 
       int compareStatusOrder(String? statusA, String? statusB) {
@@ -64,7 +65,14 @@ class AdminLeaveRequestController extends GetxController {
       }
 
       leaveList.sort((a, b) {
-        return compareStatusOrder(a.status, b.status);
+        int priorityComparison = compareStatusOrder(a.status, b.status);
+        if (priorityComparison != 0) {
+          return priorityComparison;
+        } else {
+          DateTime dateA = a.createdAt ?? DateTime.now();
+          DateTime dateB = b.createdAt ?? DateTime.now();
+          return dateB.compareTo(dateA);
+        }
       });
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);

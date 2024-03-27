@@ -1,8 +1,8 @@
 import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/network/dio/dio_util.dart';
 import 'package:timesync/core/network/dio/endpoint.dart';
-import 'package:timesync/types/task_status.dart';
 import 'package:dio/dio.dart';
+import 'package:timesync/types/task.dart';
 import 'package:timesync/utils/logger.dart';
 
 class TaskService {

@@ -1,12 +1,15 @@
 import 'package:get/get.dart';
+import 'package:timesync/constants/app_shadow.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
+import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
 import 'package:timesync/core/widgets/pie_chart/pie_chart.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/leave/leave/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/feature/leave/leave/widget/leave_card.dart';
@@ -60,22 +63,64 @@ class LeaveView extends StatelessWidget {
                   firstPercentage: controller.percentagePendingLeave.value,
                   secondPercentage: controller.percentageApprovedLeave.value,
                   thirdPercentage: controller.percentageDeclinedLeave.value,
-                  haveNoData: false,
+                  haveNoData: controller.leaves.value.isEmpty,
                   firstTitle: "Awaiting",
                   secondTitle: "Approved",
                   thirdTitle: "Declined",
-                  rightPadding: 54,
+                  rightPadding: 60,
                   firstColor: Theme.of(context).colorScheme.tertiaryContainer,
                   secondColor: Theme.of(context).colorScheme.tertiary,
                   thirdColor: Theme.of(context).colorScheme.error,
+                  pieChartShadow: [
+                    AppShadow.shadowWithColor(
+                      Theme.of(context).colorScheme.primary,
+                      blurRadius: 10,
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: AppSize().paddingS14),
+              SizedBox(height: SizeUtils.scale(20, size.width)),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MyText(
-                    text: "My Request",
-                    style: AppFonts().bodyLargeMedium,
+                    text: "My Leave Requests",
+                    style: AppFonts.TitleMedium,
+                  ),
+                  Obx(
+                    () => MyDropDownButton<String>(
+                      width: SizeUtils.scale(130, size.width),
+                      borderColor: Theme.of(context).colorScheme.primary,
+                      buttonPadding: EdgeInsets.only(
+                        left: SizeUtils.scale(0, size.width),
+                        right: SizeUtils.scale(10, size.width),
+                        top: SizeUtils.scale(1, size.width),
+                        bottom: SizeUtils.scale(1, size.width),
+                      ),
+                      dropdownPadding: EdgeInsets.symmetric(
+                          horizontal: SizeUtils.scale(10, size.width)),
+                      borderRadius: SizeUtils.scale(24, size.width),
+                      label: "Type",
+                      hasLabel: false,
+                      value: controller.selectedLeaveType.value,
+                      hint: "Choose Type",
+                      dropdownItems: controller.leaveType
+                          .map(
+                            (e) => DropdownMenuItem<String>(
+                              value: e,
+                              child: MyText(
+                                text: e.trString,
+                                style: AppFonts.TitleXSmall.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: controller.onChangedLeaveType,
+                    ),
                   ),
                 ],
               ),

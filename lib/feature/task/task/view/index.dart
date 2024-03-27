@@ -13,7 +13,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/task/task/controller/index.dart';
 import 'package:timesync/feature/task/task/widget/task_card.dart';
-import 'package:timesync/types/task_filter.dart';
+import 'package:timesync/types/task.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class TaskView extends StatelessWidget {

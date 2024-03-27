@@ -24,7 +24,7 @@ import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:timesync/feature/scan_qr/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/attendance_method.dart';
+import 'package:timesync/types/attendance.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/types/user_status.dart';
 import 'package:timesync/utils/attendance_util.dart';

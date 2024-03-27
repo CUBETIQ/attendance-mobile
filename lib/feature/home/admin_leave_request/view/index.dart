@@ -11,7 +11,7 @@ import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/feature/home/admin_leave_request/widget/leave_request_card.dart';
-import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave.dart';
 import 'package:timesync/utils/size_util.dart';
 import '../controller/index.dart';
 

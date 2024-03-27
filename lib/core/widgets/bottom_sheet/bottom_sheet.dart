@@ -190,6 +190,7 @@ void getAddTaskBottomSheet(
                       onTap: () async {
                         final DateTimeRange? picked = await showDateRangePicker(
                           context: context,
+                          initialDateRange: dateTimeRange.value,
                           firstDate: DateTime(2015, 8),
                           lastDate: DateTime(2101),
                           locale: Get.locale,

@@ -250,7 +250,7 @@ class NavigationController extends GetxController {
                   ),
                 ]);
                 NotificationSchedule.cancelAllReminder();
-                Get.offNamed(
+                Get.offAllNamed(
                   Routes.LOGIN,
                   arguments: {"organization": organization.value},
                 );
@@ -291,7 +291,7 @@ class NavigationController extends GetxController {
                   ),
                 ]);
                 NotificationSchedule.cancelAllReminder();
-                Get.offNamed(
+                Get.offAllNamed(
                   Routes.LOGIN,
                   arguments: {"organization": organization.value},
                 );

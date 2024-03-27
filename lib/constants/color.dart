@@ -10,9 +10,6 @@ class MyColor {
 
   MyColor._internal();
 
-  static const int darkSuccess = 0xFF1D6E20;
-  static const int warning = 0xFFE0A800;
-
   static const Color pendingColor = Color(0XFFBF9705);
   static const Color successColor = Color(0xFF08B80E);
   static const Color errorColor = Color(0xFFD72E08);
@@ -32,6 +29,8 @@ class MyColor {
   static const Color onSuccess = Color(0xFFFFFFFF);
   static const Color error = Color(0xffF75656);
   static const Color onError = Color(0xFFFFFFFF);
+  static const Color warning = Color(0xffFFB945);
+  static const Color onWarning = Color(0xff24262B);
   static const Color secondaryIndigo = Color(0xff48AFFA);
   static const Color secondaryRed = Color(0xffD85681);
   static const Color primaryContainer = Color(0xffF1ECFF);

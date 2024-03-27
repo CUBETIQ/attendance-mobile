@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -358,7 +359,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         } on DioException catch (e) {
           if (e.response?.data["message"]
                   .toString()
-                  .contains("Please Check-out") ==
+                  .contains("Please check out") ==
               true) {
             getForgetCheckOutBottomSheet(
               Get.context!,

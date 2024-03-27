@@ -125,8 +125,6 @@ class NotifyRoutePage {
               final worker =
                   ever(AdminLeaveRequestController.to.leaveList, (value) {
                 if (value.isNotEmpty) {
-                  Logs.e('List ${value.map((e) => e.id).toList()}');
-                  Logs.e('Here $id');
                   final index = value.indexWhere((element) => element.id == id);
 
                   if (index == -1) return;

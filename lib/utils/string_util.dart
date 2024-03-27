@@ -50,6 +50,8 @@ class StringUtil {
     jsonString = jsonString.replaceAll('"{"', '{"');
     jsonString = jsonString.replaceAll('"}"', '"}');
 
+    jsonString = jsonString.replaceAll('}"', '}');
+
     /// remove quotes on array json string
     jsonString = jsonString.replaceAll('"[{', '[{');
     jsonString = jsonString.replaceAll('}]"', '}]');

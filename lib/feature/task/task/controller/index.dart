@@ -101,12 +101,44 @@ class TaskController extends GetxController {
           .where((element) => element.status != TaskStatus.done)
           .toList();
 
+      sortTasksByPriorityAndDate(allTasksNoComplete);
+      sortTasksByPriorityAndDate(pendingTasks);
+      sortTasksByPriorityAndDate(completedTasks);
+
       // Set notification for task reminder
       await setUpTasksNotification();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
     }
+  }
+
+  void sortTasksByPriorityAndDate(List<TaskModel> taskList) {
+    int compareTaskOrder(String? taskA, String? taskB) {
+      int taskOrder(String? task) {
+        switch (task) {
+          case TaskPriority.urgent:
+            return 0;
+          case TaskPriority.low:
+            return 1;
+          default:
+            return 2;
+        }
+      }
+
+      return taskOrder(taskA ?? '').compareTo(taskOrder(taskB ?? ''));
+    }
+
+    taskList.sort((a, b) {
+      int priorityComparison = compareTaskOrder(a.priority, b.priority);
+      if (priorityComparison != 0) {
+        return priorityComparison;
+      } else {
+        DateTime dateA = a.createdAt ?? DateTime.now();
+        DateTime dateB = b.createdAt ?? DateTime.now();
+        return dateB.compareTo(dateA);
+      }
+    });
   }
 
   Future<void> setUpTasksNotification({String? updatedId}) async {

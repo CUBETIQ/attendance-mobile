@@ -190,6 +190,7 @@ void getAddTaskBottomSheet(
                       onTap: () async {
                         final DateTimeRange? picked = await showDateRangePicker(
                           context: context,
+                          initialDateRange: dateTimeRange.value,
                           firstDate: DateTime(2015, 8),
                           lastDate: DateTime(2101),
                           locale: Get.locale,
@@ -222,27 +223,30 @@ void getAddTaskBottomSheet(
                           dateTimeRange.value = picked;
                         }
                       },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          SvgIcon(
-                              icon: IconAssets.calendar,
-                              height: SizeUtils.scale(24, size.width),
-                              width: SizeUtils.scale(24, size.width),
-                              color:
-                                  Theme.of(context).colorScheme.onBackground),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: SizeUtils.scale(8, size.width)),
-                            child: Obx(() => MyText(
-                                  text: dateLabel.value ?? 'Add Dates',
-                                  style: AppFonts.TitleSmall.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                                )),
-                          )
-                        ],
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SvgIcon(
+                                icon: IconAssets.calendar,
+                                height: SizeUtils.scale(24, size.width),
+                                width: SizeUtils.scale(24, size.width),
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: SizeUtils.scale(8, size.width)),
+                              child: Obx(() => MyText(
+                                    text: dateLabel.value ?? 'Add Dates',
+                                    style: AppFonts.TitleSmall.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground),
+                                  )),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Divider(
@@ -252,31 +256,38 @@ void getAddTaskBottomSheet(
                       onTap: () {
                         addDescription.value = true;
                       },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Obx(() {
-                            return addDescription.value == true
-                                ? const SizedBox.shrink()
-                                : Padding(
-                                    padding: EdgeInsets.only(
-                                        right: SizeUtils.scale(8, size.width)),
-                                    child: SvgIcon(
-                                        icon: IconAssets.document,
-                                        height: SizeUtils.scale(24, size.width),
-                                        width: SizeUtils.scale(24, size.width),
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onBackground),
-                                  );
-                          }),
-                          MyText(
-                            text: 'Add Description',
-                            style: AppFonts.TitleSmall.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground),
-                          )
-                        ],
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Obx(() {
+                              return addDescription.value == true
+                                  ? const SizedBox.shrink()
+                                  : Padding(
+                                      padding: EdgeInsets.only(
+                                          right:
+                                              SizeUtils.scale(8, size.width)),
+                                      child: SvgIcon(
+                                          icon: IconAssets.document,
+                                          height:
+                                              SizeUtils.scale(24, size.width),
+                                          width:
+                                              SizeUtils.scale(24, size.width),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground),
+                                    );
+                            }),
+                            MyText(
+                              text: 'Add Description',
+                              style: AppFonts.TitleSmall.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Obx(() {

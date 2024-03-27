@@ -135,7 +135,12 @@ class TaskView extends StatelessWidget {
                               : controller.allTasksNoComplete;
                   return MyAsyncWidget(
                     isLoading: false,
-                    list: tasks,
+                    list: controller.selectedTaskType.value != TaskFilter.all
+                        ? tasks
+                        : [
+                            ...controller.allTasksNoComplete,
+                            ...controller.completedTasks
+                          ],
                     noDataWidget: const MyNoData(),
                     builderWidget: SingleChildScrollView(
                       child: Column(

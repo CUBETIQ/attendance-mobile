@@ -7,7 +7,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/feature/home/home/widget/record_data_card.dart';
 import 'package:timesync/feature/navigation/controller/index.dart';
-import 'package:timesync/types/attendance_status.dart';
+import 'package:timesync/types/attendance.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
@@ -97,7 +97,10 @@ class RecordCard extends StatelessWidget {
                 ),
                 RecordDataCard(
                   time: startBreakTime,
-                  timeString: "$startBreak AM",
+                  timeString: DateUtil.formatTimeTo12Hour(
+                    startBreak,
+                    forceShowPM: true,
+                  ),
                   svgIcon: IconAssets.noodle,
                   statusTitle: "Lunch Break",
                   onNullTitle: "Lunch Break",
@@ -109,7 +112,7 @@ class RecordCard extends StatelessWidget {
                 ),
                 RecordDataCard(
                   time: endBreakTime,
-                  timeString: "$endBreak PM",
+                  timeString: DateUtil.formatTimeTo12Hour(endBreak),
                   svgIcon: IconAssets.charger,
                   statusTitle: "After Break",
                   onNullTitle: "After Break",

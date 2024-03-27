@@ -13,7 +13,7 @@ import 'package:timesync/core/widgets/row/detail_row_image.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/leave/leave_detail/controller/index.dart';
-import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/file_util.dart';
 import 'package:timesync/utils/size_util.dart';

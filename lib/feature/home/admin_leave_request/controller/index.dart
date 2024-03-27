@@ -9,7 +9,7 @@ import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timesync/types/leave_status.dart';
+import 'package:timesync/types/leave.dart';
 
 class AdminLeaveRequestController extends GetxController {
   static AdminLeaveRequestController get to => Get.find();

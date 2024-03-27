@@ -10,7 +10,7 @@ import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/profile/profile/controller/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/routes/app_pages.dart';
-import 'package:timesync/types/attendance_method.dart';
+import 'package:timesync/types/attendance.dart';
 import 'package:timesync/types/role.dart';
 import 'package:timesync/utils/attendance_util.dart';
 import 'package:timesync/utils/converter.dart';

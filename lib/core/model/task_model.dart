@@ -17,6 +17,8 @@ class TaskModel extends BaseModel<TaskModel> {
   final String? icon;
   final String? priority;
   final List<AttachmentModel>? attachment;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   TaskModel({
     this.id,
@@ -34,6 +36,8 @@ class TaskModel extends BaseModel<TaskModel> {
     this.color,
     this.icon,
     this.attachment,
+    this.createdAt,
+    this.updatedAt,
   });
 
   @override
@@ -41,6 +45,12 @@ class TaskModel extends BaseModel<TaskModel> {
     if (json == null) {
       return TaskModel();
     }
+
+    final createdDate =
+        json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null;
+    final updatedDate =
+        json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null;
+
     return TaskModel(
       id: json['id'],
       userId: json['userId'],
@@ -56,6 +66,8 @@ class TaskModel extends BaseModel<TaskModel> {
       endDate: json['endDate'],
       color: json['color'],
       icon: json['icon'],
+      createdAt: createdDate,
+      updatedAt: updatedDate,
       attachment: AttachmentModel().fromListJson(json['attachment']),
     );
   }

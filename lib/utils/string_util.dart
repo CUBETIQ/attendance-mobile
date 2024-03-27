@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:timesync/types/attendance_status.dart';
+import 'package:timesync/types/attendance.dart';
 
 class StringUtil {
   static String getfullname(

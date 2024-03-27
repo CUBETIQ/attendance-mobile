@@ -4,9 +4,10 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/widgets/check_box/check_box.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/types/task_status.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
+
+import '../../../../types/task.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;

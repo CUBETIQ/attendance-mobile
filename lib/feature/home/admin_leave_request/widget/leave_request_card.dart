@@ -8,8 +8,7 @@ import 'package:timesync/feature/home/admin_leave_request/widget/small_outline_b
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
 import 'package:timesync/utils/date_util.dart';
-import 'package:timesync/types/leave_status.dart';
-import 'package:timesync/types/leave_type.dart';
+import 'package:timesync/types/leave.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import '../../../../constants/app_size.dart';

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/constants/icon.dart';
+import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/feature/home/home/view/index.dart';
@@ -12,6 +13,7 @@ import 'package:timesync/feature/navigation/controller/index.dart';
 import 'package:timesync/feature/navigation/widget/side_drawer.dart';
 import 'package:timesync/feature/profile/profile/view/index.dart';
 import 'package:timesync/feature/report/view/index.dart';
+import 'package:timesync/feature/task/task/controller/index.dart';
 import 'package:timesync/feature/task/task/view/index.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/utils/size_util.dart';
@@ -143,7 +145,9 @@ class MainScreen extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : FloatingActionButton(
                     onPressed: controller.selectedIndex.value == 2
-                        ? controller.onTapAddTask
+                        ? () => getAddTaskBottomSheet(
+                            onAddTask: TaskController.to.onAddTask)
+                        // controller.onTapAddTask
                         : controller.onTapAddLeave,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     elevation: 2,

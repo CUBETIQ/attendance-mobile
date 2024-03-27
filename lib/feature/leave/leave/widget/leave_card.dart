@@ -5,8 +5,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:timesync/utils/string_util.dart';
 import 'package:timesync/utils/date_util.dart';
-import 'package:timesync/types/leave_status.dart';
-import 'package:timesync/types/leave_type.dart';
+import 'package:timesync/types/leave.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 

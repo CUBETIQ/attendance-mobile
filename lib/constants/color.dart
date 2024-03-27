@@ -19,6 +19,7 @@ class MyColor {
   static const Color base2 = Color(0xFFFAFBFC);
   static const Color base3 = Color(0xFFEFF0F2);
   static const Color base4 = Color(0xFFDCDEE3);
+  static const Color base5 = Color(0xFFC7CAD1);
 
   // App Color Scheme
   static const Color scaffoldBackground = Color(0xFFFFFFFF);

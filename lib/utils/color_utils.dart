@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:timesync/types/attendance_status.dart';
+import 'package:timesync/types/attendance.dart';
+import 'package:timesync/types/leave.dart';
 
 class ColorUtil {
   static bool isColorBright(Color color) {
@@ -55,6 +56,22 @@ class ColorUtil {
         return isCheckOut == true
             ? Theme.of(context).colorScheme.tertiary
             : Theme.of(context).colorScheme.error;
+      default:
+        return Theme.of(context).colorScheme.primary;
+    }
+  }
+
+  static Color getStatusColorByLeaveStatus(
+      BuildContext context, String? status) {
+    switch (status) {
+      case LeaveStatus.approved:
+        return Theme.of(context).colorScheme.tertiary;
+      case LeaveStatus.pending:
+        return Theme.of(context).colorScheme.tertiaryContainer;
+      case LeaveStatus.rejected:
+        return Theme.of(context).colorScheme.error;
+      case LeaveStatus.cancelled:
+        return Theme.of(context).colorScheme.error;
       default:
         return Theme.of(context).colorScheme.primary;
     }

@@ -17,6 +17,8 @@ class LeaveModel extends BaseModel<LeaveModel> {
   final double? duration;
   final UpdateByModel? updateBy;
   final List<AttachmentModel>? attachment;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   LeaveModel({
     this.id,
@@ -33,6 +35,8 @@ class LeaveModel extends BaseModel<LeaveModel> {
     this.durationType,
     this.duration,
     this.updateBy,
+    this.createdAt,
+    this.updatedAt,
   });
 
   @override
@@ -46,6 +50,12 @@ class LeaveModel extends BaseModel<LeaveModel> {
     } else {
       durations = json["duration"];
     }
+
+    final createdDate =
+        json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null;
+    final updatedDate =
+        json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null;
+
     return LeaveModel(
       id: json['id'],
       userId: json['userId'],
@@ -59,6 +69,8 @@ class LeaveModel extends BaseModel<LeaveModel> {
       status: json['status'],
       durationType: json['durationType'],
       duration: durations,
+      createdAt: createdDate,
+      updatedAt: updatedDate,
       updateBy: UpdateByModel().fromJson(json['updateBy']),
       attachment: AttachmentModel().fromListJson(json['attachment']),
     );

@@ -26,6 +26,8 @@ class MyPieChart extends StatelessWidget {
   final double? chartRadius;
   final bool haveNoData;
   final void Function()? onTap;
+  final List<BoxShadow>? pieChartShadow;
+  final double? rightPadding;
 
   const MyPieChart({
     super.key,
@@ -45,13 +47,14 @@ class MyPieChart extends StatelessWidget {
     this.chartRadius,
     this.onTap,
     this.haveNoData = true,
+    this.pieChartShadow,
+    this.rightPadding,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final customChartRadius = SizeUtils.scale(34, size.width);
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -68,6 +71,7 @@ class MyPieChart extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.background,
+                boxShadow: pieChartShadow,
               ),
               child: PieChart(
                 haveNoData == true
@@ -97,7 +101,10 @@ class MyPieChart extends StatelessWidget {
                             showTitle: false,
                             color: firstColor ??
                                 Theme.of(context).colorScheme.primary,
-                            value: firstPercentage ?? 0,
+                            value: (firstPercentage ?? 0) >= 0 &&
+                                    (firstPercentage ?? 0) <= 100
+                                ? firstPercentage ?? 0
+                                : 1,
                             title: firstTitle ?? "Present",
                             radius: chartRadius ?? customChartRadius,
                             titleStyle: AppFonts.TitleXXSmall.copyWith(
@@ -114,7 +121,10 @@ class MyPieChart extends StatelessWidget {
                             showTitle: false,
                             color: secondColor ??
                                 Theme.of(context).colorScheme.secondary,
-                            value: secondPercentage ?? 0,
+                            value: (secondPercentage ?? 0) >= 0 &&
+                                    (secondPercentage ?? 0) <= 100
+                                ? secondPercentage ?? 0
+                                : 1,
                             title: secondTitle ?? "Leave",
                             radius: chartRadius ?? customChartRadius,
                             titleStyle: AppFonts.TitleXXSmall.copyWith(
@@ -133,7 +143,10 @@ class MyPieChart extends StatelessWidget {
                                 Theme.of(context)
                                     .colorScheme
                                     .secondaryContainer,
-                            value: thirdPercentage ?? 0,
+                            value: (thirdPercentage ?? 0) >= 0 &&
+                                    (thirdPercentage ?? 0) <= 100
+                                ? thirdPercentage ?? 0
+                                : 1,
                             title: thirdTitle ?? "Absent",
                             radius: chartRadius ?? customChartRadius,
                             titleStyle: AppFonts.TitleXXSmall.copyWith(
@@ -157,7 +170,7 @@ class MyPieChart extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 left: size.width > 600 ? SizeUtils.scale(28.5, size.width) : 0,
-                right: SizeUtils.scale(36, size.width),
+                right: SizeUtils.scale(rightPadding ?? 36, size.width),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +193,7 @@ class MyPieChart extends StatelessWidget {
                     title: thirdTitle ?? "Absent",
                   ),
                 ].withSpaceBetweenNoSizedBox(
-                  height: SizeUtils.scale(8, size.width),
+                  height: SizeUtils.scale(6, size.width),
                 ),
               ),
             )

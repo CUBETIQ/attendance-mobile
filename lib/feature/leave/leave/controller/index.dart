@@ -173,12 +173,12 @@ class LeaveController extends GetxController {
 
     percentagePendingLeave.value = totalPendingLeave.value == 0
         ? 0
-        : (totalPendingLeave.value / totalLeave.value * 100) / 100;
+        : totalPendingLeave.value / totalLeave.value * 100;
     percentageApprovedLeave.value = totalApprovedLeave.value == 0
         ? 0
-        : (totalApprovedLeave.value / totalLeave.value * 100) / 100;
+        : totalApprovedLeave.value / totalLeave.value * 100;
     percentageDeclinedLeave.value = totalDeclinedLeave.value == 0
         ? 0
-        : (totalDeclinedLeave.value / totalLeave.value * 100) / 100;
+        : totalDeclinedLeave.value / totalLeave.value * 100;
   }
 }

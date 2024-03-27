@@ -4,14 +4,13 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/dropdown_button/date_dropdown.dart';
 import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/pie_chart/pie_chart.dart';
 import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/leave/leave/controller/index.dart';
 import 'package:flutter/material.dart';
 import 'package:timesync/feature/leave/leave/widget/leave_card.dart';
-import 'package:timesync/feature/leave/leave/widget/leave_chart.dart';
 import 'package:timesync/utils/size_util.dart';
-import 'package:timesync/utils/string_util.dart';
 
 class LeaveView extends StatelessWidget {
   const LeaveView({super.key});
@@ -56,51 +55,20 @@ class LeaveView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: SizeUtils.scale(20, size.width)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: Obx(
-                      () => LeaveChart(
-                        title: "Pending",
-                        radius: size.width < 600 ? 40 : 60,
-                        centerText: StringUtil.doubleToPercentageString(
-                            controller.percentagePendingLeave.value * 100),
-                        percent: controller.percentagePendingLeave.value,
-                        textBelow: "${controller.totalPendingLeave.value}/"
-                            "${controller.totalLeave.value}",
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: SizeUtils.scale(8, size.width)),
-                  Expanded(
-                    child: Obx(
-                      () => LeaveChart(
-                        title: "Approved",
-                        radius: size.width < 600 ? 40 : 60,
-                        centerText: StringUtil.doubleToPercentageString(
-                            controller.percentageApprovedLeave.value * 100),
-                        percent: controller.percentageApprovedLeave.value,
-                        textBelow: "${controller.totalApprovedLeave.value}/"
-                            "${controller.totalLeave.value}",
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: SizeUtils.scale(8, size.width)),
-                  Expanded(
-                    child: Obx(
-                      () => LeaveChart(
-                        title: "Rejected",
-                        radius: size.width < 600 ? 40 : 60,
-                        centerText: StringUtil.doubleToPercentageString(
-                            controller.percentageDeclinedLeave.value * 100),
-                        percent: controller.percentageDeclinedLeave.value,
-                        textBelow: "${controller.totalDeclinedLeave.value}/"
-                            "${controller.totalLeave.value}",
-                      ),
-                    ),
-                  ),
-                ],
+              Obx(
+                () => MyPieChart(
+                  firstPercentage: controller.percentagePendingLeave.value,
+                  secondPercentage: controller.percentageApprovedLeave.value,
+                  thirdPercentage: controller.percentageDeclinedLeave.value,
+                  haveNoData: false,
+                  firstTitle: "Awaiting",
+                  secondTitle: "Approved",
+                  thirdTitle: "Declined",
+                  rightPadding: 54,
+                  firstColor: Theme.of(context).colorScheme.tertiaryContainer,
+                  secondColor: Theme.of(context).colorScheme.tertiary,
+                  thirdColor: Theme.of(context).colorScheme.error,
+                ),
               ),
               SizedBox(height: AppSize().paddingS14),
               Row(

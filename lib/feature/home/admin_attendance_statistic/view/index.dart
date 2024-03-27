@@ -3,7 +3,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
-import 'package:timesync/core/widgets/no_data/no_data.dart';
+import 'package:timesync/core/widgets/no_data/empty_state.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/feature/home/admin_attendance_statistic/controller/index.dart';
 import 'package:timesync/feature/home/home/widget/staff_attendance_card.dart';
@@ -35,7 +35,7 @@ class AttendanceStatisticView extends StatelessWidget {
         child: MyAsyncWidget(
           isLoading: false,
           list: controller.attendances.value,
-          noDataWidget: const MyNoData(),
+          noDataWidget: const MyEmptyState(),
           builderWidget: ListView.separated(
             itemCount: controller.attendances.length,
             padding: EdgeInsets.only(

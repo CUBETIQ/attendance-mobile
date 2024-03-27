@@ -57,4 +57,5 @@ class SvgAssets {
       "assets/svgs/location_permission.svg";
   static const String notificationPermission =
       "assets/svgs/notification_permission.svg";
+  static const String emptyState = "assets/svgs/empty_state.svg";
 }

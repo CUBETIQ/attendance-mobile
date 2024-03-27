@@ -669,6 +669,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             : backUpStaffAttendanceList
                 .where((element) => element.checkOutStatus == status)
                 .toList(),
+        "positions": positionList.value,
       },
     );
   }

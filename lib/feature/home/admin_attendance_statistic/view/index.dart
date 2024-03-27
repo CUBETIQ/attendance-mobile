@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/core/widgets/async_widget/async_base_widget.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
@@ -57,7 +57,11 @@ class AttendanceStatisticView extends StatelessWidget {
                   final attendance = controller.backUpAttendaces
                       .where((element) => element.userId == staff.id)
                       .toList();
+                  final position = controller.positions.firstWhereOrNull(
+                    (element) => element.id == staff.positionId,
+                  );
                   return StaffAttendanceCard(
+                    position: position,
                     staff: staff,
                     attendance: attendance,
                   );

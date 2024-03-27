@@ -8,11 +8,14 @@ import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
+import 'package:timesync/feature/task/add_task/model/create_task_model.dart';
+import 'package:timesync/feature/task/add_task/service/index.dart';
 import 'package:timesync/feature/task/task/service/index.dart';
 import 'package:timesync/notification/notification_schdule.dart';
 import 'package:timesync/notification/notification_service.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/task_filter.dart';
+import 'package:timesync/types/task_priority.dart';
 import 'package:timesync/types/task_status.dart';
 import 'package:timesync/utils/converter.dart';
 import 'package:timesync/utils/logger.dart';
@@ -45,6 +48,39 @@ class TaskController extends GetxController {
   void onInit() {
     super.onInit();
     initFunction();
+  }
+
+  Future<void> onAddTask(
+      {DateTimeRange? dateTimeRange,
+      TextEditingController? descriptionController,
+      bool? isUrgent,
+      String? selectedStatus,
+      TextEditingController? taskController}) async {
+    final status = selectedStatus == TaskFilter.completed
+        ? TaskStatus.done
+        : TaskStatus.progress;
+    final priority = isUrgent == true ? TaskPriority.urgent : TaskPriority.low;
+
+    try {
+      CreateTaskModel input = CreateTaskModel(
+        name: taskController?.text.trim(),
+        description: descriptionController?.text,
+        startDate: dateTimeRange?.start.millisecondsSinceEpoch ??
+            DateTime.now().millisecondsSinceEpoch,
+        endDate: dateTimeRange?.end.millisecondsSinceEpoch,
+        status: status,
+        priority: priority,
+        completedDate: status == TaskStatus.done
+            ? DateTime.now().millisecondsSinceEpoch
+            : null,
+      );
+      await AddTaskService().addTask(input);
+      TaskController.to.getUserTasks();
+      Get.back();
+    } on DioException catch (e) {
+      showErrorSnackBar("Error", e.response!.data["message"]);
+      rethrow;
+    }
   }
 
   Future<void> getUserTasks() async {

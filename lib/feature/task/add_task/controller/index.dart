@@ -49,6 +49,7 @@ class AddTaskController extends GetxController {
     TaskPriority.low,
     TaskPriority.medium,
     TaskPriority.high,
+    TaskPriority.urgent
   ];
 
   final selectStatus = TaskStatus.todo.obs;

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/core/model/leave_model.dart';
+import 'package:timesync/core/model/position_model.dart';
 import 'package:timesync/core/model/user_model.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
@@ -18,14 +19,24 @@ class AdminLeaveRequestController extends GetxController {
   final endDate = Rxn<int>(null);
   final leaveList = <LeaveModel>[].obs;
   final staffList = <UserModel>[].obs;
+  final positions = <PositionModel>[].obs;
   final isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    staffList.value = Get.arguments;
+    staffList.value = Get.arguments["staffs"];
+    positions.value = Get.arguments["positions"];
     initDate();
     getAllLeave();
+  }
+
+  // Function to get position details for a staff member
+  PositionModel getPositionForStaff(UserModel staff) {
+    return positions.firstWhere(
+      (element) => element.id == staff.positionId,
+      orElse: () => PositionModel(),
+    );
   }
 
   Future<void> getAllLeave({bool haveLoading = true}) async {
@@ -93,6 +104,7 @@ class AdminLeaveRequestController extends GetxController {
         id: leave?.id ?? "",
       );
       await getAllLeave(haveLoading: false);
+      Get.back();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;
@@ -119,7 +131,11 @@ class AdminLeaveRequestController extends GetxController {
   }
 
   void onTapView(int index) {
-    Get.toNamed(Routes.LEAVE_DETAIL, arguments: leaveList[index]);
+    Get.toNamed(Routes.LEAVE_DETAIL, arguments: {
+      "leave": leaveList[index],
+      "hasButtons":
+          leaveList[index].status == LeaveStatus.pending ? true : false,
+    });
   }
 
   void initDate() {

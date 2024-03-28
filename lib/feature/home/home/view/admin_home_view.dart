@@ -112,9 +112,11 @@ class HomeAdminView extends StatelessWidget {
                                     .colorScheme
                                     .secondaryContainer,
                                 onTap: () => Get.toNamed(
-                                  Routes.ADMIN_LEAVE_REQUEST,
-                                  arguments: controller.staffs.value,
-                                ),
+                                    Routes.ADMIN_LEAVE_REQUEST,
+                                    arguments: {
+                                      "staffs": controller.staffs.value,
+                                      "positions": controller.positionList.value
+                                    }),
                               ),
                               SizedBox(width: SizeUtils.scale(16, size.width)),
                               ButtonCard(

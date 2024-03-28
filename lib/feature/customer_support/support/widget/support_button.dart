@@ -1,7 +1,7 @@
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/feature/customer_support/model/support_button.dart';
+import 'package:timesync/feature/customer_support/support/model/support_button.dart';
 import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 

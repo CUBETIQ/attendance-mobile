@@ -50,4 +50,5 @@ abstract class Routes {
   static const DEVICE_INFO = '/device_info';
   static const STORAGE_MANAGEMENT = '/storage_management';
   static const ATTENDANCE_STATISTIC = '/attendance_statistic';
+  static const LIVE_SUPPORT = '/live_support';
 }

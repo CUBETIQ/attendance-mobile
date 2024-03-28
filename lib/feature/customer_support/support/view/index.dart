@@ -6,8 +6,8 @@ import 'package:timesync/constants/lotties.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/text/text.dart';
-import 'package:timesync/feature/customer_support/controller/index.dart';
-import 'package:timesync/feature/customer_support/widget/support_button.dart';
+import 'package:timesync/feature/customer_support/support/controller/index.dart';
+import 'package:timesync/feature/customer_support/support/widget/support_button.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class CustomerSupportView extends StatelessWidget {
@@ -48,6 +48,7 @@ class CustomerSupportView extends StatelessWidget {
             ...List.generate(
               controller.buttons.length,
               (index) => SupportButton(
+                onTap: controller.buttons[index].onTap,
                 margin: EdgeInsets.only(
                   left: SizeUtils.scale(
                     AppSize().paddingHorizontalLarge,

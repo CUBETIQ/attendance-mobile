@@ -6,10 +6,13 @@ import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/core/widgets/attachment/upload_button.dart';
 import 'package:timesync/core/widgets/button/async_button.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/card/empty_card_with_height.dart';
 import 'package:timesync/core/widgets/dropdown_button/dropdown_button.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/textfield/date_picker_field.dart';
 import 'package:timesync/core/widgets/textfield/texfield_validate.dart';
+import 'package:timesync/core/widgets/textfield/time_picker_field.dart';
+import 'package:timesync/extensions/padding.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/leave/add_leave/controller/index.dart';
 import 'package:timesync/types/state.dart';
@@ -61,9 +64,6 @@ class AddLeaveView extends StatelessWidget {
                       controller.selectLeaveType.value = value!,
                 ),
               ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS5, size.width),
-              ),
               Row(
                 children: [
                   Expanded(
@@ -73,9 +73,24 @@ class AddLeaveView extends StatelessWidget {
                       hintText: "Enter your start date",
                       textController: controller.startDateController,
                       onDateResult: controller.getStartDateInMilliSecond,
+                      initialDate: DateTime.now(),
                     ),
                   ),
-                  SizedBox(width: size.width * 0.02),
+                  SizedBox(width: SizeUtils.scale(16, size.width)),
+                  Expanded(
+                    child: MyTimePickerField(
+                      label: "Time",
+                      hasLabel: true,
+                      textController: controller.startHourController,
+                      onDateResult: (value) {
+                        controller.startTime.value = value;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
                   Expanded(
                     child: Obx(
                       () => MyDatePickerField(
@@ -93,10 +108,18 @@ class AddLeaveView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(width: SizeUtils.scale(16, size.width)),
+                  Expanded(
+                    child: MyTimePickerField(
+                      label: "Time ",
+                      hasLabel: true,
+                      textController: controller.endHourController,
+                      onDateResult: (value) {
+                        controller.endTime.value = value;
+                      },
+                    ),
+                  ),
                 ],
-              ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS5, size.width),
               ),
               Obx(
                 () => TypeAheadField<String>(
@@ -131,9 +154,6 @@ class AddLeaveView extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS5, size.width),
-              ),
               MyTextFieldForm(
                 hasLabel: true,
                 label: "Reason",
@@ -142,22 +162,18 @@ class AddLeaveView extends StatelessWidget {
                 maxlines: 5,
                 errorText: "You must enter your reason.",
               ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS5, size.width),
-              ),
               UploadAttachmentButton(
                 files: controller.attachments,
               ),
-              SizedBox(
-                height: SizeUtils.scale(AppSize().paddingS10, size.width),
-              ),
+              const MyBottomPaddingCard(),
               MyAsyncButton(
                 title: "Save",
                 onTap: controller.appState.value == AppState.edit
                     ? controller.updateLeave
                     : controller.addLeave,
               ),
-            ],
+              const MyBottomPaddingCard(),
+            ].withSpaceBetween(height: SizeUtils.scale(16, size.width)),
           ),
         ),
       ),

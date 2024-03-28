@@ -123,7 +123,7 @@ class TaskDetailView extends StatelessWidget {
                 text: controller.task.value?.description != null &&
                         controller.task.value?.description?.isNotEmpty == true
                     ? controller.task.value!.description!
-                    : "N/A",
+                    : "-",
                 style: AppFonts().bodyMediumRegular,
                 maxLines: 20,
               ),

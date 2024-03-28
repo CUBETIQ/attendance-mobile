@@ -142,7 +142,7 @@ class OrganizationView extends StatelessWidget {
                                           title: "Company's Address",
                                           value: controller
                                                   .organization.value.address ??
-                                              "N/A",
+                                              "-",
                                         ),
                                       ],
                                     ),
@@ -191,7 +191,7 @@ class OrganizationView extends StatelessWidget {
                                 title: "Description",
                                 value:
                                     controller.organization.value.description ??
-                                        "N/A",
+                                        "-",
                               ),
                             ],
                           ),

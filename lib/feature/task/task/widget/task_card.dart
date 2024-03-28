@@ -33,7 +33,7 @@ class TaskCard extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize().borderRadiusLarge),
             border: Border.all(
-              color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.primary,
             ),
             color: Theme.of(context).colorScheme.background),
         child: Padding(
@@ -64,7 +64,7 @@ class TaskCard extends StatelessWidget {
                       child: MyText(
                         text: task.endDate != null
                             ? DateUtil.formatMillisecondsToDOB(task.endDate!)
-                            : "N/A",
+                            : "-",
                         style: AppFonts.LabelSmall.copyWith(
                           color: Theme.of(context).colorScheme.outlineVariant,
                         ),

@@ -72,7 +72,7 @@ class StaffAttendanceCard extends StatelessWidget {
                         ),
                       ),
                       MyText(
-                        text: position?.name ?? "N/A",
+                        text: position?.name ?? "-",
                         style: AppFonts.LabelSmall,
                       ),
                     ],

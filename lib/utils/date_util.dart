@@ -29,7 +29,7 @@ class DateUtil {
 
   static String formatShortDateWithMilisecond(int? dateTime) {
     if (dateTime == null || dateTime.toString().length < 5) {
-      return "N/A";
+      return "-";
     }
 
     // Cover milliseconds to DateTime
@@ -45,7 +45,7 @@ class DateUtil {
 
   static String formatFullDate(DateTime? dateTime) {
     if (dateTime == null) {
-      return "N/A";
+      return "-";
     }
 
     // Define the desired format
@@ -68,7 +68,7 @@ class DateUtil {
 
   static String formatTimeWithDate(int? dateTime) {
     if (dateTime == null || dateTime.toString().length < 5) {
-      return "N/A";
+      return "-";
     }
 
     // Cover milliseconds to DateTime
@@ -121,7 +121,7 @@ class DateUtil {
     // Calculate hours and remaining minutes
 
     if (minutes == 0) {
-      return "N/A";
+      return "-";
     }
 
     int hours = minutes ~/ 60;
@@ -136,7 +136,7 @@ class DateUtil {
 
   static String formatMillisecondsToDOB(int? milliseconds) {
     if (milliseconds == null || milliseconds.toString().length < 5) {
-      return "N/A";
+      return "-";
     }
     // Cover milliseconds to DateTime
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds);
@@ -162,7 +162,7 @@ class DateUtil {
 
   static String getHourMinuteSecondFromMinute(int? minutes) {
     if (minutes == null || minutes == 0) {
-      return "N/A";
+      return "-";
     }
 
     int hours = minutes ~/ 60; // Integer division to get hours
@@ -259,7 +259,7 @@ class DateUtil {
   static String calculateDuration(String? startHour, String? endHour) {
     // check if startHour or endHour is null
     if (startHour == null || endHour == null) {
-      return "N/A";
+      return "-";
     }
 
     // Parse startHour and endHour strings into DateTime objects

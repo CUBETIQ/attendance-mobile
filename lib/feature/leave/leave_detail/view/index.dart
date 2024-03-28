@@ -103,7 +103,7 @@ class LeaveDetailView extends StatelessWidget {
                   text: controller.leave.value.reason != null &&
                           controller.leave.value.reason?.isNotEmpty == true
                       ? controller.leave.value.reason!
-                      : "N/A",
+                      : "-",
                   style: AppFonts().bodyMediumRegular,
                   maxLines: 20,
                 ),

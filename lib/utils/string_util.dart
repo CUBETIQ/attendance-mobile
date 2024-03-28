@@ -15,7 +15,7 @@ class StringUtil {
         (lastName != null && lastName.isNotEmpty)) {
       return lastName;
     } else {
-      return username ?? "N/A";
+      return username ?? "-";
     }
   }
 
@@ -205,7 +205,7 @@ class StringUtil {
 
   static String attendanceStatusSimplify(String? status) {
     if (status == null) {
-      return "N/A";
+      return "-";
     }
 
     if (status == AttendanceStatus.late) {
@@ -221,7 +221,7 @@ class StringUtil {
 
   static String leaveStatusSimplify(String? status) {
     if (status == null) {
-      return "N/A";
+      return "-";
     }
 
     if (status == LeaveStatus.approved) {

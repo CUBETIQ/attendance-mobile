@@ -2,7 +2,7 @@ name: timesync
 description: "Mobile attendance made simple. Track, analyze, and optimize with TimeSync 360."
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+8
+version: 1.0.0+9
 
 environment:
   sdk: ">=3.2.0 <4.0.0"

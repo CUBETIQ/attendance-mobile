@@ -2,6 +2,27 @@
 
 We've squashed some bugs and made some improvements to make the app run smoother for you! Here's a quick rundown:
 
+### 27-28/March/2024 (1.0.0+8)
+
+**App Design Updates:**
+
+-   **Empty Screens**: We've added new screens to show you when there's no data available, so you'll always know what to expect.
+-   **Task Management**: We've improved the way completed and empty tasks are displayed for a cleaner look.
+-   **Attendance, Leave, Break Time**: Get ready for a fresh new design for how attendance, leave, and break time information is displayed in the app.
+-   **Charts**: We've added pie charts to the leave screen and implemented safeguards to prevent charts from overflowing with data.
+
+**New Features:**
+
+-   **Leave Management**: We've revamped how you request, view, and manage leave within the app, including a new leave request UI and filtering options.
+-   **Task Management**: You can now sort tasks by urgency, and add attachments when creating tasks.
+-   **Attendance Tracking**: We've added staff position details to attendance statistics and improved overall accuracy when calculating total working hours.
+-   **Live Support**: Need help? We've added a live support screen to connect you with assistance easily.
+-   **Notifications**: We've updated notification payloads to provide clearer information for leave requests, approvals, declines, and upcoming tasks.
+
+**Bug Fixes:**
+
+-   We've resolved several bugs related to check-in, calculating working hours, and displaying empty data.
+
 ### 26/March/2024 (1.0.0+7)
 
 **Improved App Functionality:**

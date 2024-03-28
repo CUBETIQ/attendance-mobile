@@ -2,10 +2,37 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:timesync/utils/logger.dart';
 
 class DateUtil {
   static String formatDateTime(DateTime dateTime) {
     return DateFormat('E, d MMMM y').format(dateTime);
+  }
+
+  String formatTotalWorkMinute(int totalWorkMinutes) {
+    int days = totalWorkMinutes ~/ (60 * 24);
+    int hours = (totalWorkMinutes % (60 * 24)) ~/ 60;
+    int minutes = totalWorkMinutes % 60;
+
+    String formattedDuration = '';
+
+    if (days == 1) {
+      formattedDuration += '${days.toString()} day ';
+    } else if (days > 1) {
+      formattedDuration += '${days.toString()} days ';
+    }
+
+    if (hours == 1) {
+      formattedDuration += '${hours.toString()} hr ';
+    } else if (hours > 1 || days == 0) {
+      formattedDuration += '${hours.toString()} hrs ';
+    }
+
+    if (minutes > 0 || (days == 0 && hours == 0)) {
+      formattedDuration += '${minutes.toString()} mn';
+    }
+
+    return formattedDuration.trim();
   }
 
   static String formatShortDate(DateTime dateTime) {
@@ -26,9 +53,25 @@ class DateUtil {
     return formatter.format(dateTime);
   }
 
+  static String formatShortDateWithMilisecond(int? dateTime) {
+    if (dateTime == null || dateTime.toString().length < 5) {
+      return "-";
+    }
+
+    // Cover milliseconds to DateTime
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(dateTime);
+
+    // Define the desired format
+    final DateFormat formatter =
+        DateFormat('EE, dd MMMM', Get.locale?.languageCode);
+
+    // Format the DateTime
+    return formatter.format(date);
+  }
+
   static String formatFullDate(DateTime? dateTime) {
     if (dateTime == null) {
-      return "N/A";
+      return "-";
     }
 
     // Define the desired format
@@ -51,7 +94,7 @@ class DateUtil {
 
   static String formatTimeWithDate(int? dateTime) {
     if (dateTime == null || dateTime.toString().length < 5) {
-      return "N/A";
+      return "-";
     }
 
     // Cover milliseconds to DateTime
@@ -75,12 +118,15 @@ class DateUtil {
     return formatter.format(dateTime);
   }
 
-  static String formatTimeTo12Hour(String time, {bool? forceShowPM}) {
+  static String formatTimeTo12Hour(String time,
+      {bool? forceShowPM, bool? dontShowAMPM}) {
     // Parse the time string into a DateTime object
     DateTime dateTime = DateFormat('hh:mm').parse(time);
 
     if (forceShowPM != null && forceShowPM) {
       return "${DateFormat('hh:mm').format(dateTime)} PM";
+    } else if (dontShowAMPM != null && dontShowAMPM) {
+      return DateFormat('hh:mm').format(dateTime);
     } else {
       // Format the DateTime object into a 12-hour time format
       return DateFormat('hh:mm a').format(dateTime);
@@ -101,7 +147,7 @@ class DateUtil {
     // Calculate hours and remaining minutes
 
     if (minutes == 0) {
-      return "N/A";
+      return "-";
     }
 
     int hours = minutes ~/ 60;
@@ -116,7 +162,7 @@ class DateUtil {
 
   static String formatMillisecondsToDOB(int? milliseconds) {
     if (milliseconds == null || milliseconds.toString().length < 5) {
-      return "N/A";
+      return "-";
     }
     // Cover milliseconds to DateTime
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds);
@@ -140,9 +186,29 @@ class DateUtil {
     return duration.inMinutes;
   }
 
+  static int calculateDurationInMinutesFromString(
+      String? startHour, String? endHour) {
+    // check if startHour or endHour is null
+    if (startHour == null || endHour == null) {
+      return 0;
+    }
+
+    Logs.i("startHour: $startHour");
+    Logs.i("endHour: $endHour");
+
+    // Parse startHour and endHour strings into DateTime objects
+    DateTime startTime = DateFormat('HH:mm').parse(startHour);
+    DateTime endTime = DateFormat('HH:mm').parse(endHour);
+
+    // Calculate the duration between startTime and endTime
+    int duration = endTime.difference(startTime).inMinutes;
+
+    return duration;
+  }
+
   static String getHourMinuteSecondFromMinute(int? minutes) {
     if (minutes == null || minutes == 0) {
-      return "N/A";
+      return "-";
     }
 
     int hours = minutes ~/ 60; // Integer division to get hours
@@ -230,18 +296,19 @@ class DateUtil {
         int.parse(endHour.split(":")[1]));
 
     Duration difference = endTime.difference(startTime);
+
     return difference.inMinutes;
   }
 
   static String calculateDuration(String? startHour, String? endHour) {
     // check if startHour or endHour is null
     if (startHour == null || endHour == null) {
-      return "N/A";
+      return "-";
     }
 
     // Parse startHour and endHour strings into DateTime objects
-    DateTime startTime = DateFormat('hh:mm').parse(startHour);
-    DateTime endTime = DateFormat('hh:mm').parse(endHour);
+    DateTime startTime = DateFormat('HH:mm').parse(startHour);
+    DateTime endTime = DateFormat('HH:mm').parse(endHour);
 
     // Calculate the duration between startTime and endTime
     int duration = endTime.difference(startTime).inMinutes;
@@ -293,6 +360,22 @@ class DateUtil {
       // Cancel the timer
       timer?.cancel();
     });
+  }
+
+  static String getApplicationDuration(double? input) {
+    if (input == null) {
+      return '0 day application';
+    }
+
+    if (input == 0.5) {
+      return 'Half Day Application';
+    } else if (input == 1) {
+      return 'Full Day Application';
+    } else if (input >= 2) {
+      return '${input.toStringAsFixed(0)} Days Application';
+    } else {
+      return 'Invalid input';
+    }
   }
 }
 

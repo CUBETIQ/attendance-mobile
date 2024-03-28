@@ -25,7 +25,8 @@ class LeaveView extends StatelessWidget {
       onRefresh: () async {
         controller.onRefresh();
       },
-      child: SizedBox(
+      child: Container(
+        color: Theme.of(context).colorScheme.inverseSurface,
         height: size.height,
         child: Padding(
           padding: EdgeInsets.only(
@@ -131,19 +132,19 @@ class LeaveView extends StatelessWidget {
                     isLoading: controller.isLoading.value,
                     list: controller.leaves,
                     noDataWidget: const MyNoData(),
-                    builderWidget: ListView.builder(
+                    builderWidget: ListView.separated(
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.leaves.length,
                       padding: EdgeInsets.all(SizeUtils.scale(1, size.width)),
+                      separatorBuilder: (context, index) {
+                        return SizedBox(
+                          height: SizeUtils.scale(12, size.width),
+                        );
+                      },
                       itemBuilder: (context, index) {
                         return LeaveCard(
-                          onTap: () => controller.onTapLeave(
-                            controller.leaves[index],
-                          ),
+                          onTap: () => controller.onTapView(index),
                           leave: controller.leaves[index],
-                          onTapView: () => controller.onTapView(index),
-                          onTapCancel: () =>
-                              controller.onTapCancel(controller.leaves[index]),
                         );
                       },
                     ),

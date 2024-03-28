@@ -88,7 +88,7 @@ class ReportAttendanceCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onBackground),
               ),
               MyText(
-                text: attendance.checkInStatus.capitalizeMaybeNull ?? "N/A",
+                text: attendance.checkInStatus.capitalizeMaybeNull ?? "-",
                 style: AppFonts.LabelSmall.copyWith(
                   color: attendance.checkInStatus != null
                       ? ColorUtil.getStatusColor(
@@ -97,7 +97,7 @@ class ReportAttendanceCard extends StatelessWidget {
                 ),
               ),
               MyText(
-                text: attendance.checkOutStatus?.capitalizeMaybeNull ?? "N/A",
+                text: attendance.checkOutStatus?.capitalizeMaybeNull ?? "-",
                 style: AppFonts.LabelSmall.copyWith(
                   color: attendance.checkOutStatus != null
                       ? ColorUtil.getStatusColor(

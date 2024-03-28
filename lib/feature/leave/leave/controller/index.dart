@@ -6,7 +6,6 @@ import 'package:timesync/core/model/leave_model.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
 import 'package:timesync/core/widgets/date_picker/month_picker.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
-import 'package:timesync/feature/home/admin_leave_request/model/change_leave_status.dart';
 import 'package:timesync/feature/leave/leave/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:timesync/types/leave.dart';
@@ -28,12 +27,12 @@ class LeaveController extends GetxController {
   final selectDate = DateTime.now().obs;
   final leaveType = <String>[
     LeaveFilter.all,
-    LeaveFilter.pending,
+    LeaveFilter.awaiting,
     LeaveFilter.approved,
-    LeaveFilter.rejected,
-    LeaveFilter.cancelled
+    LeaveFilter.declined,
   ].obs;
   final selectedLeaveType = LeaveFilter.all.obs;
+  final backupLeave = <LeaveModel>[].obs;
 
   @override
   void onInit() {
@@ -54,10 +53,11 @@ class LeaveController extends GetxController {
     isLoading.value = true;
     totalLeave.value = 0;
     try {
-      leaves.value = await LeaveService().getUserLeave(
+      backupLeave.value = await LeaveService().getUserLeave(
         startDate: startDate.value,
         endDate: endDate.value,
       );
+      leaves.value = backupLeave.value;
       calculateLeave();
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
@@ -125,31 +125,10 @@ class LeaveController extends GetxController {
   }
 
   void onTapView(int index) {
-    Get.toNamed(Routes.LEAVE_DETAIL, arguments: leaves[index]);
-  }
-
-  void onTapCancel(LeaveModel? leave) {
-    ChangeLeaveStatusModel data = ChangeLeaveStatusModel(
-      status: LeaveStatus.cancelled,
-      updatedDate: leave?.from ?? DateTime.now().millisecondsSinceEpoch,
-    );
-    try {
-      getConfirmBottomSheet(
-        Get.context!,
-        title: "Cancel Leave Request",
-        titleColor: Theme.of(Get.context!).colorScheme.error,
-        description: "Are you sure that you want to cancel this Leave Request?",
-        onTapConfirm: () async {
-          await LeaveService().cancelLeave(input: data, id: leave?.id ?? "");
-          await getUserLeave();
-          Get.back();
-        },
-        image: SvgAssets.cancel,
-      );
-    } on DioException catch (e) {
-      showErrorSnackBar("Error", e.response?.data["message"]);
-      rethrow;
-    }
+    Get.toNamed(Routes.LEAVE_DETAIL, arguments: {
+      "leave": leaves[index],
+      "hasButtons": false,
+    });
   }
 
   Future<void> onTapDate(BuildContext context) async {
@@ -168,13 +147,14 @@ class LeaveController extends GetxController {
   }
 
   void calculateLeave() {
-    totalLeave.value = leaves.length;
-    totalPendingLeave.value =
-        leaves.where((element) => element.status == LeaveStatus.pending).length;
-    totalApprovedLeave.value = leaves
+    totalLeave.value = backupLeave.length;
+    totalPendingLeave.value = backupLeave
+        .where((element) => element.status == LeaveStatus.pending)
+        .length;
+    totalApprovedLeave.value = backupLeave
         .where((element) => element.status == LeaveStatus.approved)
         .length;
-    totalDeclinedLeave.value = leaves.where((element) {
+    totalDeclinedLeave.value = backupLeave.where((element) {
       return element.status == LeaveStatus.rejected ||
           element.status == LeaveStatus.cancelled;
     }).length;
@@ -193,6 +173,23 @@ class LeaveController extends GetxController {
   void onChangedLeaveType(String? value) {
     if (selectedLeaveType.value != value) {
       selectedLeaveType.value = value!;
+      if (value == LeaveFilter.all) {
+        leaves.value = backupLeave.value;
+      } else if (selectedLeaveType.value == LeaveFilter.approved) {
+        leaves.value = backupLeave.value
+            .where((element) => element.status == LeaveStatus.approved)
+            .toList();
+      } else if (selectedLeaveType.value == LeaveFilter.declined) {
+        leaves.value = backupLeave.value
+            .where((element) =>
+                element.status == LeaveStatus.rejected ||
+                element.status == LeaveStatus.cancelled)
+            .toList();
+      } else {
+        leaves.value = backupLeave.value
+            .where((element) => element.status == LeaveStatus.pending)
+            .toList();
+      }
     }
   }
 }

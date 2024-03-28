@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/model/leave_model.dart';
 import 'package:timesync/core/widgets/snackbar/snackbar.dart';
@@ -13,6 +14,7 @@ import 'package:timesync/types/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/upload_file_util.dart';
 
 class AddLeaveController extends GetxController
@@ -42,6 +44,10 @@ class AddLeaveController extends GetxController
   final searchController = TextEditingController();
   FocusNode? durationFocusNode = FocusNode();
   final attachments = <AttachmentModel>[].obs;
+  final startHourController = TextEditingController();
+  final endHourController = TextEditingController();
+  final startTime = Rxn<String>(null);
+  final endTime = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -73,6 +79,28 @@ class AddLeaveController extends GetxController
         DateUtil.formatMillisecondsToDOB(endOfDay.millisecondsSinceEpoch);
     startDate.value = startOfDay.millisecondsSinceEpoch;
     endDate.value = endOfDay.millisecondsSinceEpoch;
+
+    startHourController.text = DateFormat.jm().format(
+      DateTime(startOfDay.year, startOfDay.month, startOfDay.day,
+          startOfDay.hour, startOfDay.minute),
+    );
+    endHourController.text = DateFormat.jm().format(
+      DateTime(endOfDay.year, endOfDay.month, endOfDay.day, endOfDay.hour,
+          endOfDay.minute),
+    );
+
+    startTime.value = DateFormat.Hm().format(
+      DateTime(startOfDay.year, startOfDay.month, startOfDay.day,
+          startOfDay.hour, startOfDay.minute),
+    );
+
+    endTime.value = DateFormat.Hm().format(
+      DateTime(endOfDay.year, endOfDay.month, endOfDay.day, endOfDay.hour,
+          endOfDay.minute),
+    );
+
+    Logs.i("Start Date: ${startTime.value}");
+    Logs.i("End Date: ${endTime.value}");
   }
 
   void getStartDateInMilliSecond(int? date) {

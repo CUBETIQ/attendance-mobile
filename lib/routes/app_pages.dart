@@ -12,8 +12,10 @@ import 'package:timesync/feature/category/category/category_binding.dart';
 import 'package:timesync/feature/category/category/view/index.dart';
 import 'package:timesync/feature/category/category_detail/category_binding.dart';
 import 'package:timesync/feature/category/category_detail/view/index.dart';
-import 'package:timesync/feature/customer_support/customer_support_binding.dart';
-import 'package:timesync/feature/customer_support/view/index.dart';
+import 'package:timesync/feature/customer_support/live_support/live_support_binding.dart';
+import 'package:timesync/feature/customer_support/live_support/view/index.dart';
+import 'package:timesync/feature/customer_support/support/customer_support_binding.dart';
+import 'package:timesync/feature/customer_support/support/view/index.dart';
 import 'package:timesync/feature/department/add_department/view/index.dart';
 import 'package:timesync/feature/department/department/department_binding.dart';
 import 'package:timesync/feature/department/department/view/index.dart';
@@ -284,5 +286,10 @@ class AppPages {
         name: Routes.ATTENDANCE_STATISTIC,
         page: () => const AttendanceStatisticView(),
         binding: AttendanceStatisticBinding()),
+    GetPage(
+      name: Routes.LIVE_SUPPORT,
+      page: () => const LiveSupportView(),
+      binding: LiveSupportBinding(),
+    ),
   ];
 }

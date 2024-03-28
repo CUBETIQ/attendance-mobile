@@ -1,6 +1,7 @@
-import 'package:timesync/feature/customer_support/model/support_button.dart';
+import 'package:timesync/feature/customer_support/support/model/support_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/routes/app_pages.dart';
 
 class CustomerSupportController extends GetxController {
   static CustomerSupportController get to => Get.find();
@@ -10,7 +11,9 @@ class CustomerSupportController extends GetxController {
       title: 'Contact Live Chat',
       leadingIcon: Icons.support_agent_rounded,
       trailingIcon: Icons.arrow_forward_ios_rounded,
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.LIVE_SUPPORT);
+      },
     ),
     SupportButtonModel(
       title: 'Send Us An Email',

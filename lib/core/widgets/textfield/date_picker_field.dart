@@ -65,7 +65,9 @@ class MyDatePickerField extends StatelessWidget {
                     text: label,
                     style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
-            const SizedBox(height: 8),
+            SizedBox(
+              height: SizeUtils.scale(hasLabel == false ? 0 : 6, size.width),
+            ),
             TextFormField(
               readOnly: true,
               onTap: () async {

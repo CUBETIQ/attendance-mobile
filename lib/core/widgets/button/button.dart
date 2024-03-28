@@ -59,9 +59,9 @@ class MyButton extends StatelessWidget {
                     MyText(
                       text: title,
                       style: style ??
-                          AppFonts().bodyLargeMedium.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
+                          AppFonts.TitleSmall.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
                     ),
                     Icon(
                       icon ?? Icons.check_circle_outline_rounded,
@@ -74,9 +74,9 @@ class MyButton extends StatelessWidget {
             : MyText(
                 text: title,
                 style: style ??
-                    AppFonts().bodyLargeMedium.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
+                    AppFonts.TitleSmall.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
               ),
       ),
     );

@@ -11,12 +11,14 @@ class SmallButton extends StatelessWidget {
     this.onTap,
     required this.size,
     required this.title,
+    this.textStyle,
     this.backgroundColor,
   });
 
   final void Function()? onTap;
   final Size size;
   final String title;
+  final TextStyle? textStyle;
   final Color? backgroundColor;
 
   @override
@@ -34,9 +36,10 @@ class SmallButton extends StatelessWidget {
         ),
         child: MyText(
           text: title,
-          style: AppFonts().bodySmallMedium.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
+          style: textStyle ??
+              AppFonts().bodySmallMedium.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
         ),
       ),
     );

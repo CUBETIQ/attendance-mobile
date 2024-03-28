@@ -23,6 +23,8 @@ class AppConfig {
   // static const String uploadUrl =
   //     "https://timesync-usercontent-prod.cubetiq.app";
 
+  static const liveSupportUrl = "https://livesupport.timesync360.app";
+
   // FIREBASE
   static const String appName = "Timesync 365";
 

@@ -45,8 +45,8 @@ class LabelDetailCard extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: MyText(
             text: value != null && value != ""
-                ? value.capitalizeMaybeNull ?? "N/A"
-                : "N/A",
+                ? value.capitalizeMaybeNull ?? "-"
+                : "-",
             style: AppFonts().bodyLargeRegular,
           ),
         ),

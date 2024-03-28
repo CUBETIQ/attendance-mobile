@@ -1,4 +1,5 @@
 import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/core/widgets/textfield/controller/textfield_controller.dart';
 import 'package:timesync/constants/font.dart';
@@ -27,7 +28,7 @@ class MyTimePickerField extends StatelessWidget {
     super.key,
     required this.label,
     required this.textController,
-    this.filled = true,
+    this.filled = false,
     this.borderRadius,
     this.style,
     this.errorStyle,
@@ -58,7 +59,9 @@ class MyTimePickerField extends StatelessWidget {
                     text: label,
                     style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
-            const SizedBox(height: 8),
+            SizedBox(
+              height: SizeUtils.scale(hasLabel == false ? 0 : 6, size.width),
+            ),
             TextFormField(
               readOnly: true,
               onTap: () async {
@@ -77,7 +80,13 @@ class MyTimePickerField extends StatelessWidget {
                   // Throw back the data through the function
                   onDateResult?.call(formattedTime);
 
-                  textController.text = formattedTime;
+                  // formate to diplay with am and pm
+                  String formattedTime12 = DateFormat.jm().format(
+                    DateTime(DateTime.now().year, DateTime.now().month,
+                        DateTime.now().day, picked.hour, picked.minute),
+                  );
+
+                  textController.text = formattedTime12;
                 }
               },
               controller: textController,
@@ -96,67 +105,51 @@ class MyTimePickerField extends StatelessWidget {
                     : null,
                 isDense: true,
                 errorMaxLines: 2,
-                focusedBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    SizeUtils.scale(
+                      borderRadius ?? AppSpacing.M,
+                      size.width,
                     ),
                   ),
                   borderSide: BorderSide(
-                    width: 1.5,
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
+                    width: 1,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                enabledBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    SizeUtils.scale(
+                      borderRadius ?? AppSpacing.M,
+                      size.width,
                     ),
                   ),
                   borderSide: BorderSide(
-                    width: 1.5,
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.9),
+                    width: 1,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
-                errorBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    SizeUtils.scale(
+                      borderRadius ?? AppSpacing.M,
+                      size.width,
                     ),
                   ),
                   borderSide: BorderSide(
+                    width: 1,
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
-                focusedErrorBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
-                    ),
-                    topRight: Radius.circular(
-                      (borderRadius ?? AppSize().borderRadiusSmall) *
-                          (size.width / 375.0),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    SizeUtils.scale(
+                      borderRadius ?? AppSpacing.M,
+                      size.width,
                     ),
                   ),
                   borderSide: BorderSide(
+                    width: 1,
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),

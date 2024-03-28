@@ -83,11 +83,9 @@ class MyTextFieldForm extends StatelessWidget {
                     text: label,
                     style: labelStyle ?? AppFonts().bodyMediumMedium,
                   ),
-            hasLabel == false
-                ? const SizedBox.shrink()
-                : SizedBox(
-                    height: SizeUtils.scale(AppSize().paddingS5, size.width),
-                  ),
+            SizedBox(
+              height: SizeUtils.scale(hasLabel == false ? 0 : 6, size.width),
+            ),
             TextFormField(
               focusNode: focusNode,
               controller: textController,

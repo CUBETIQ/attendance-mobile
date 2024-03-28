@@ -4,10 +4,11 @@ import 'package:timesync/utils/size_util.dart';
 import 'package:flutter/material.dart';
 
 class DetailRowData extends StatelessWidget {
-  const DetailRowData({super.key, this.title, this.value});
+  const DetailRowData({super.key, this.title, this.value, this.valueColor});
 
   final String? title;
   final String? value;
+  final Color? valueColor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,14 @@ class DetailRowData extends StatelessWidget {
           width: SizeUtils.scale(150, size.width),
           child: MyText(
             text: title ?? "status",
-            style: AppFonts().bodyMediumMedium.copyWith(
-                  color: Theme.of(context).colorScheme.outlineVariant,
-                ),
+            style: AppFonts.LabelMedium.copyWith(
+                color: Theme.of(context).colorScheme.onBackground),
           ),
         ),
         MyText(
           text: value ?? "Value",
-          style: AppFonts().bodyMediumMedium,
+          style: AppFonts.TitleSmall.copyWith(
+              color: valueColor ?? Theme.of(context).colorScheme.onBackground),
         ),
       ],
     );

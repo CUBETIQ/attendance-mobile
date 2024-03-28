@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -70,19 +69,6 @@ class AttendanceCard extends StatelessWidget {
             HomeController.to.attendanceList.last.checkInDateTime!,
           );
 
-          Timer.periodic(const Duration(minutes: 5), (Timer timer) async {
-            var dateTime = await HomeController.to.checkTime();
-            if (workingHourPercentage.value <= 1) {
-              final currentWorkingMinute = DateUtil.calculateDurationInMinutes(
-                HomeController.to.attendanceList.last.checkInDateTime!,
-                dateTime.millisecondsSinceEpoch,
-              );
-
-              workingHourPercentage.value = currentWorkingMinute /
-                  NavigationController.to.totalWorkMinutes.value;
-            }
-          });
-
           // Update the working hour value every second
           Timer.periodic(
             const Duration(seconds: 1),
@@ -94,6 +80,19 @@ class AttendanceCard extends StatelessWidget {
               workingMinute.value = minutes.toString().padLeft(2, '0');
               var seconds = duration.inSeconds.remainder(60);
               workingSecond.value = seconds.toString().padLeft(2, '0');
+
+              if (workingHourPercentage.value <= 1) {
+                final currentWorkingMinute =
+                    DateUtil.calculateDurationInMinutes(
+                  HomeController.to.attendanceList.last.checkInDateTime!,
+                  dateTime.millisecondsSinceEpoch,
+                );
+
+                workingHourPercentage.value = currentWorkingMinute /
+                    NavigationController.to.totalWorkMinutes.value;
+              } else {
+                timer.cancel();
+              }
             },
           );
         }

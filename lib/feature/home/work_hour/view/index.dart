@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/font.dart';
@@ -11,7 +12,6 @@ import 'package:timesync/core/widgets/pull_refresh/refresh_indicator.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/home/work_hour/controller/index.dart';
-import 'package:flutter/material.dart';
 import 'package:timesync/feature/home/work_hour/widget/working_hour_card.dart';
 import 'package:timesync/utils/size_util.dart';
 
@@ -37,45 +37,44 @@ class WorkingHourView extends StatelessWidget {
           height: size.height,
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
-                left: SizeUtils.scale(
-                  AppSize().paddingHorizontalLarge,
-                  MediaQuery.of(context).size.width,
-                ),
-                right: SizeUtils.scale(
-                  AppSize().paddingHorizontalLarge,
-                  MediaQuery.of(context).size.width,
-                ),
-                top:
-                    SizeUtils.scale(AppSize().paddingVerticalLarge, size.width),
-              ),
+              padding: EdgeInsets.symmetric(
+                  horizontal: SizeUtils.scale(20, size.width)),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MyText(
-                        text: "Work Overview",
-                        style: AppFonts().bodyXlargeMedium,
-                      ),
-                      Obx(
-                        () => DateDropDown(
-                          date: controller.selectDate.value,
-                          size: size,
-                          onTap: controller.onTapDate,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: SizeUtils.scale(12, size.width)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MyText(
+                          text: "Overview",
+                          style: AppFonts.TitleMedium.copyWith(
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
                         ),
-                      ),
-                    ],
+                        Obx(
+                          () => DateDropDown(
+                            date: controller.selectDate.value,
+                            size: size,
+                            onTap: controller.onTapDate,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: SizeUtils.scale(20, size.width)),
                   Obx(
                     () => MyAsyncWidget(
                       list: controller.staffs.value,
                       isLoading: controller.isLoading.value,
-                      builderWidget: ListView.builder(
+                      builderWidget: ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.staffs.length,
+                        separatorBuilder: (context, index) => SizedBox(
+                          height:
+                              SizeUtils.scale(AppSize().paddingS6, size.width),
+                        ),
                         itemBuilder: (context, index) {
                           final UserModel staff = controller.staffs[index];
                           final List<AttendanceModel> attendance =

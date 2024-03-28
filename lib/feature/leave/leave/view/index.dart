@@ -143,13 +143,8 @@ class LeaveView extends StatelessWidget {
                       },
                       itemBuilder: (context, index) {
                         return LeaveCard(
-                          onTap: () => controller.onTapLeave(
-                            controller.leaves[index],
-                          ),
+                          onTap: () => controller.onTapView(index),
                           leave: controller.leaves[index],
-                          // onTapView: () => controller.onTapView(index),
-                          // onTapCancel: () =>
-                          //     controller.onTapCancel(controller.leaves[index]),
                         );
                       },
                     ),

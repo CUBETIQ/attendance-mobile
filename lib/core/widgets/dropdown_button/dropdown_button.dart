@@ -172,7 +172,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                     ),
                 elevation: dropdownElevation ?? 2,
                 //Null or Offset(0, 0) will open just under the button. You can edit as you want.
-                offset: offset,
+                offset: const Offset(0, -6),
                 scrollbarTheme: ScrollbarThemeData(
                   radius: scrollbarRadius ?? const Radius.circular(40),
                   thickness: scrollbarThickness != null
@@ -182,7 +182,7 @@ class MyDropDownButton<T> extends StatelessWidget {
                       ? MaterialStateProperty.all<bool>(scrollbarAlwaysShow!)
                       : null,
                 ),
-              ),
+              ),  
               menuItemStyleData: MenuItemStyleData(
                 height: itemHeight ?? 40,
               ),

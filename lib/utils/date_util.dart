@@ -160,6 +160,26 @@ class DateUtil {
     return duration.inMinutes;
   }
 
+  static int calculateDurationInMinutesFromString(
+      String? startHour, String? endHour) {
+    // check if startHour or endHour is null
+    if (startHour == null || endHour == null) {
+      return 0;
+    }
+
+    Logs.i("startHour: $startHour");
+    Logs.i("endHour: $endHour");
+
+    // Parse startHour and endHour strings into DateTime objects
+    DateTime startTime = DateFormat('HH:mm').parse(startHour);
+    DateTime endTime = DateFormat('HH:mm').parse(endHour);
+
+    // Calculate the duration between startTime and endTime
+    int duration = endTime.difference(startTime).inMinutes;
+
+    return duration;
+  }
+
   static String getHourMinuteSecondFromMinute(int? minutes) {
     if (minutes == null || minutes == 0) {
       return "-";
@@ -251,8 +271,6 @@ class DateUtil {
 
     Duration difference = endTime.difference(startTime);
 
-    Logs.i("difference: $difference");
-
     return difference.inMinutes;
   }
 
@@ -266,13 +284,8 @@ class DateUtil {
     DateTime startTime = DateFormat('HH:mm').parse(startHour);
     DateTime endTime = DateFormat('HH:mm').parse(endHour);
 
-    Logs.i("startTime: $startTime");
-    Logs.i("endTime: $endTime");
-
     // Calculate the duration between startTime and endTime
     int duration = endTime.difference(startTime).inMinutes;
-
-    Logs.i("duration: $duration");
 
     // Format the duration as "hh:mm"
     String formattedDuration = formatMinutes(duration);

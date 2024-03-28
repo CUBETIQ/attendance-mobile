@@ -63,7 +63,9 @@ class EditOrganizationView extends StatelessWidget {
                       label: "Start Time",
                       hasLabel: true,
                       textController: controller.startHourController,
-                      onDateResult: (value) {},
+                      onDateResult: (value) {
+                        controller.startTime.value = value;
+                      },
                     ),
                   ),
                   SizedBox(
@@ -74,7 +76,9 @@ class EditOrganizationView extends StatelessWidget {
                       label: "End Time",
                       hasLabel: true,
                       textController: controller.endHourController,
-                      onDateResult: (value) {},
+                      onDateResult: (value) {
+                        controller.endTime.value = value;
+                      },
                     ),
                   ),
                 ],
@@ -94,7 +98,9 @@ class EditOrganizationView extends StatelessWidget {
                       label: "Start Break Time",
                       hasLabel: true,
                       textController: controller.breakStartHourController,
-                      onDateResult: (value) {},
+                      onDateResult: (value) {
+                        controller.breakStartTime.value = value;
+                      },
                     ),
                   ),
                   SizedBox(
@@ -105,7 +111,9 @@ class EditOrganizationView extends StatelessWidget {
                       label: "End Break Time",
                       hasLabel: true,
                       textController: controller.breakEndHourController,
-                      onDateResult: (value) {},
+                      onDateResult: (value) {
+                        controller.breakEndTime.value = value;
+                      },
                     ),
                   ),
                 ],

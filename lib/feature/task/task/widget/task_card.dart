@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timesync/constants/app_size.dart';
 import 'package:timesync/constants/app_spacing.dart';
+import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/task_model.dart';
 import 'package:timesync/core/widgets/check_box/check_box.dart';
@@ -33,7 +34,7 @@ class TaskCard extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize().borderRadiusLarge),
             border: Border.all(
-              color: Theme.of(context).colorScheme.primary,
+              color: MyColor.base4,
             ),
             color: Theme.of(context).colorScheme.background),
         child: Padding(

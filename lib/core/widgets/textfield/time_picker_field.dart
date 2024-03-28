@@ -77,7 +77,13 @@ class MyTimePickerField extends StatelessWidget {
                   // Throw back the data through the function
                   onDateResult?.call(formattedTime);
 
-                  textController.text = formattedTime;
+                  // formate to diplay with am and pm
+                  String formattedTime12 = DateFormat.jm().format(
+                    DateTime(DateTime.now().year, DateTime.now().month,
+                        DateTime.now().day, picked.hour, picked.minute),
+                  );
+
+                  textController.text = formattedTime12;
                 }
               },
               controller: textController,

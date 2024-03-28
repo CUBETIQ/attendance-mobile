@@ -27,8 +27,8 @@ class TaskView extends StatelessWidget {
       onRefresh: () async {
         controller.onRefresh();
       },
-      child: SizedBox(
-        height: size.height,
+      child: Container(
+        color: Theme.of(context).colorScheme.inverseSurface,
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtils.scale(

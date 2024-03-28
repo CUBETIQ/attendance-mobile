@@ -21,6 +21,9 @@ class MyColor {
   static const Color base4 = Color(0xFFDCDEE3);
   static const Color base5 = Color(0xFFC7CAD1);
 
+  // Text
+  static const Color secondaryText = Color(0xFF6B7180);
+
   // App Color Scheme
   static const Color scaffoldBackground = Color(0xFFFFFFFF);
   static const Color onBackground = Color(0xff24262B); // primary text color

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:timesync/constants/app_spacing.dart';
 import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/model/leave_model.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/feature/leave/leave/widget/leave_status_card.dart';
-import 'package:timesync/types/leave.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/size_util.dart';
 
@@ -27,7 +27,7 @@ class LeaveCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: leave.status != LeaveStatus.pending ? null : onTap,
+      onTap: onTap,
       child: Container(
         width: size.width,
         padding: EdgeInsets.all(
@@ -67,7 +67,7 @@ class LeaveCard extends StatelessWidget {
             ),
             SizedBox(height: SizeUtils.scale(4, size.width)),
             MyText(
-              text: DateUtil.formatShortDateWithMilisecond(leave.from),
+              text: "${leave.type?.capitalizeFirst} Leave",
               style: AppFonts.TitleXSmall.copyWith(
                 color: Theme.of(context).colorScheme.primary,
               ),

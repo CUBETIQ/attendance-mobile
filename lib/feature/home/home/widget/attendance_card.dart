@@ -81,9 +81,14 @@ class AttendanceCard extends StatelessWidget {
               workingHourPercentage.value = currentWorkingMinute /
                   NavigationController.to.totalWorkMinutes.value;
             }
-
-            Logs.e("Working Hour Percentage: ${workingHourPercentage.value}");
           });
+          final dateeee = await HomeController.to.checkTime();
+
+          Logs.i(
+              'Check In Time: ${NavigationController.to.totalWorkMinutes.value}  ${DateUtil.calculateDurationInMinutes(
+            HomeController.to.attendanceList.last.checkInDateTime!,
+            dateeee.millisecondsSinceEpoch,
+          )}');
 
           // Update the working hour value every second
           Timer.periodic(

@@ -24,6 +24,10 @@ class EditOrganizationController extends GetxController {
   final organization = OrganizationModel().obs;
   final imageFile = Rxn<File>(null);
   final image = Rxn<String>(null);
+  final startTime = Rxn<String>(null);
+  final endTime = Rxn<String>(null);
+  final breakStartTime = Rxn<String>(null);
+  final breakEndTime = Rxn<String>(null);
 
   @override
   void onInit() {
@@ -76,10 +80,9 @@ class EditOrganizationController extends GetxController {
         }
       }
       ConfigsModel configs = ConfigsModel(
-        startHour: startHourController.text,
-        endHour: endHourController.text,
-        breakTime:
-            "${breakStartHourController.text}-${breakEndHourController.text}",
+        startHour: startTime.value,
+        endHour: endTime.value,
+        breakTime: "${breakStartTime.value}-${breakEndTime.value}",
       );
 
       Logs.i("Configs: ${configs.toJson()}");

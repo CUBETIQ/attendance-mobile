@@ -17,8 +17,7 @@ class LeaveTypeDuration {
 
 class LeaveFilter {
   static const String all = "All";
-  static const String pending = "pending";
-  static const String rejected = "rejected";
-  static const String approved = "approved";
-  static const String cancelled = "cancelled";
+  static const String awaiting = "Awaiting";
+  static const String declined = "Declined";
+  static const String approved = "Approved";
 }

@@ -142,21 +142,18 @@ class NavigationController extends GetxController {
     startBreakTime.value =
         organization.value.configs?.breakTime?.split("-")[0] ?? "12:00";
     endBreakTime.value =
-        organization.value.configs?.breakTime?.split("-")[0] ?? "13:00";
+        organization.value.configs?.breakTime?.split("-")[1] ?? "13:00";
 
-    int totalMinuteBreakTime = DateUtil.calculateTotalMinutes(
-        startBreakTime.value, endBreakTime.value);
-
-    Logs.i("startHour: $startHour");
-    Logs.i("endHour: $endHour");
-
-    Logs.i("totalMinuteBreakTime: $totalMinuteBreakTime");
-
+    int totalMinuteBreakTime = DateUtil.calculateDurationInMinutesFromString(
+      startBreakTime.value,
+      endBreakTime.value,
+    );
     totalWorkMinutes.value =
         DateUtil.calculateTotalMinutes(startHour, endHour) -
             totalMinuteBreakTime;
 
-    Logs.i("totalWorkMinutes: ${totalWorkMinutes.value}");
+    Logs.i(
+        "totalWorkMinutes: ${totalWorkMinutes.value}  $totalMinuteBreakTime");
   }
 
   Future<void> getUserLocation() async {

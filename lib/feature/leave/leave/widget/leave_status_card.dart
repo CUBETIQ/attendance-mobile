@@ -4,6 +4,7 @@ import 'package:timesync/constants/font.dart';
 import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/utils/color_utils.dart';
 import 'package:timesync/utils/size_util.dart';
+import 'package:timesync/utils/string_util.dart';
 
 class LeaveStatusCard extends StatelessWidget {
   const LeaveStatusCard({super.key, this.status});
@@ -28,8 +29,13 @@ class LeaveStatusCard extends StatelessWidget {
         ),
       ),
       child: MyText(
-        text: "Pending",
-        style: AppFonts.LabelSmall,
+        text: StringUtil.leaveStatusSimplify(status),
+        style: AppFonts.LabelSmall.copyWith(
+          color: ColorUtil.getTextColorByLeaveStatus(
+            context,
+            status,
+          ),
+        ),
       ),
     );
   }

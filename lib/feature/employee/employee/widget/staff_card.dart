@@ -114,7 +114,7 @@ class StaffCard extends StatelessWidget {
                   ),
                   child: MyText(
                     maxLines: 2,
-                    text: position ?? "N/A",
+                    text: position ?? "-",
                     style: AppFonts().bodyMediumRegular,
                   ),
                 ),

@@ -62,7 +62,7 @@ class CategoryCard extends StatelessWidget {
             ),
             SizedBox(height: SizeUtils.scale(5, size.width)),
             MyText(
-              text: category.name ?? "N/A",
+              text: category.name ?? "-",
               maxLines: 2,
               style: AppFonts().bodyMediumRegular,
             ),

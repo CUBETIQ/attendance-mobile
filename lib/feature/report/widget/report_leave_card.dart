@@ -85,7 +85,7 @@ class ReportLeaveCard extends StatelessWidget {
                         color: Theme.of(context).colorScheme.onBackground),
                   ),
                   MyText(
-                    text: leave.status?.capitalizeFirst ?? "N/A",
+                    text: leave.status?.capitalizeFirst ?? "-",
                     style: AppFonts.LabelSmall.copyWith(
                       color: Colors.green,
                     ),

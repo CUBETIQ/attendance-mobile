@@ -125,9 +125,14 @@ class OrganizationView extends StatelessWidget {
                                               .colorScheme
                                               .primary,
                                           title: "Break Time",
-                                          value: controller.organization.value
-                                                  .configs?.breakTime ??
-                                              "00:00",
+                                          value:
+                                              "${controller.organization.value.configs?.breakTime?.split("-")[0]} - ${DateUtil.formatTimeTo12Hour(
+                                            controller.organization.value
+                                                    .configs?.breakTime
+                                                    ?.split("-")[1] ??
+                                                "00:00",
+                                            dontShowAMPM: true,
+                                          )}",
                                         ),
                                         InfoDataColumn(
                                           icon: Icons.location_on_rounded,
@@ -137,7 +142,7 @@ class OrganizationView extends StatelessWidget {
                                           title: "Company's Address",
                                           value: controller
                                                   .organization.value.address ??
-                                              "N/A",
+                                              "-",
                                         ),
                                       ],
                                     ),
@@ -153,9 +158,12 @@ class OrganizationView extends StatelessWidget {
                                               .colorScheme
                                               .error,
                                           title: "End Hour",
-                                          value: controller.organization.value
-                                                  .configs?.endHour ??
-                                              "00:00",
+                                          value: DateUtil.formatTimeTo12Hour(
+                                            controller.organization.value
+                                                    .configs?.endHour ??
+                                                "00:00",
+                                            dontShowAMPM: true,
+                                          ),
                                         ),
                                         InfoDataColumn(
                                           icon: Icons.timer_rounded,
@@ -183,7 +191,7 @@ class OrganizationView extends StatelessWidget {
                                 title: "Description",
                                 value:
                                     controller.organization.value.description ??
-                                        "N/A",
+                                        "-",
                               ),
                             ],
                           ),

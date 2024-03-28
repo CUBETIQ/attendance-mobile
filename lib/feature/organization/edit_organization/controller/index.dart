@@ -11,6 +11,7 @@ import 'package:timesync/types/avatar_type.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timesync/utils/logger.dart';
 
 class EditOrganizationController extends GetxController {
   final nameController = TextEditingController();
@@ -80,6 +81,8 @@ class EditOrganizationController extends GetxController {
         breakTime:
             "${breakStartHourController.text}-${breakEndHourController.text}",
       );
+
+      Logs.i("Configs: ${configs.toJson()}");
       UpdateOrganizationModel input = UpdateOrganizationModel(
         name: nameController.text,
         description: descriptionController.text,

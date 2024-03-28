@@ -31,8 +31,8 @@ class ProfileDetailRow extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: MyText(
               text: value != "" && value != null
-                  ? value.capitalizeMaybeNull ?? "N/A"
-                  : "N/A",
+                  ? value.capitalizeMaybeNull ?? "-"
+                  : "-",
               maxLines: maxline ?? 1,
               overflow: TextOverflow.ellipsis,
               style: AppFonts().bodyMediumRegular,

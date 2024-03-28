@@ -51,8 +51,8 @@ class LabelDescriptionCard extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: MyText(
             text: value != null && value != ""
-                ? value.capitalizeMaybeNull ?? "N/A"
-                : "N/A",
+                ? value.capitalizeMaybeNull ?? "-"
+                : "-",
             style: AppFonts().bodyLargeRegular,
             maxLines: 10,
             overflow: TextOverflow.ellipsis,

@@ -72,7 +72,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
           value: data.attendance.isBlank == false &&
                   data.attendance?.checkInStatus != null
               ? data.attendance?.checkInStatus!.capitalizeFirst
-              : "N/A",
+              : "-",
           textColor:
               data.attendance != null && data.attendance?.checkInStatus != null
                   ? ColorUtil.getStatusColor(
@@ -113,7 +113,7 @@ class EmployeeAttendanceReportCard extends StatelessWidget {
             value: data.attendance != null &&
                     data.attendance?.checkOutStatus != null
                 ? data.attendance?.checkOutStatus!.capitalizeFirst
-                : "N/A",
+                : "-",
             textColor: data.attendance != null &&
                     data.attendance?.checkOutStatus != null
                 ? ColorUtil.getStatusColor(

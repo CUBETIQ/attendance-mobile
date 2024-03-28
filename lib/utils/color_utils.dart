@@ -78,4 +78,19 @@ class ColorUtil {
         return Theme.of(context).colorScheme.primary;
     }
   }
+
+  static Color getTextColorByLeaveStatus(BuildContext context, String? status) {
+    switch (status) {
+      case LeaveStatus.approved:
+        return Theme.of(context).colorScheme.onTertiary;
+      case LeaveStatus.pending:
+        return Theme.of(context).colorScheme.onBackground;
+      case LeaveStatus.rejected:
+        return Theme.of(context).colorScheme.onError;
+      case LeaveStatus.cancelled:
+        return Theme.of(context).colorScheme.onError;
+      default:
+        return Theme.of(context).colorScheme.primary;
+    }
+  }
 }

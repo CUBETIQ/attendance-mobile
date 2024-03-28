@@ -73,6 +73,7 @@ dependencies:
   flutter_image_compress: ^2.2.0
   zxing2: ^0.2.3
   image_cropper: ^5.0.1
+  flutter_inappwebview: ^6.0.0
 
 dev_dependencies:
   flutter_test:

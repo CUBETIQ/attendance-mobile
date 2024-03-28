@@ -25,6 +25,7 @@ import 'package:timesync/types/role.dart';
 import 'package:timesync/types/state.dart';
 import 'package:timesync/utils/date_util.dart';
 import 'package:timesync/utils/location_util.dart';
+import 'package:timesync/utils/logger.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class NavigationController extends GetxController {
@@ -146,9 +147,16 @@ class NavigationController extends GetxController {
     int totalMinuteBreakTime = DateUtil.calculateTotalMinutes(
         startBreakTime.value, endBreakTime.value);
 
+    Logs.i("startHour: $startHour");
+    Logs.i("endHour: $endHour");
+
+    Logs.i("totalMinuteBreakTime: $totalMinuteBreakTime");
+
     totalWorkMinutes.value =
         DateUtil.calculateTotalMinutes(startHour, endHour) -
             totalMinuteBreakTime;
+
+    Logs.i("totalWorkMinutes: ${totalWorkMinutes.value}");
   }
 
   Future<void> getUserLocation() async {

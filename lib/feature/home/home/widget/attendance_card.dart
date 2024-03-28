@@ -81,6 +81,8 @@ class AttendanceCard extends StatelessWidget {
               workingHourPercentage.value = currentWorkingMinute /
                   NavigationController.to.totalWorkMinutes.value;
             }
+
+            Logs.e("Working Hour Percentage: ${workingHourPercentage.value}");
           });
 
           // Update the working hour value every second

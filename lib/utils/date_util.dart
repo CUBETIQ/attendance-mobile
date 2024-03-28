@@ -250,6 +250,9 @@ class DateUtil {
         int.parse(endHour.split(":")[1]));
 
     Duration difference = endTime.difference(startTime);
+
+    Logs.i("difference: $difference");
+
     return difference.inMinutes;
   }
 

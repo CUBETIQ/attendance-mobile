@@ -158,9 +158,12 @@ class OrganizationView extends StatelessWidget {
                                               .colorScheme
                                               .error,
                                           title: "End Hour",
-                                          value: controller.organization.value
-                                                  .configs?.endHour ??
-                                              "00:00",
+                                          value: DateUtil.formatTimeTo12Hour(
+                                            controller.organization.value
+                                                    .configs?.endHour ??
+                                                "00:00",
+                                            dontShowAMPM: true,
+                                          ),
                                         ),
                                         InfoDataColumn(
                                           icon: Icons.timer_rounded,

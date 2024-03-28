@@ -125,9 +125,14 @@ class OrganizationView extends StatelessWidget {
                                               .colorScheme
                                               .primary,
                                           title: "Break Time",
-                                          value: controller.organization.value
-                                                  .configs?.breakTime ??
-                                              "00:00",
+                                          value:
+                                              "${controller.organization.value.configs?.breakTime?.split("-")[0]} - ${DateUtil.formatTimeTo12Hour(
+                                            controller.organization.value
+                                                    .configs?.breakTime
+                                                    ?.split("-")[1] ??
+                                                "00:00",
+                                            dontShowAMPM: true,
+                                          )}",
                                         ),
                                         InfoDataColumn(
                                           icon: Icons.location_on_rounded,

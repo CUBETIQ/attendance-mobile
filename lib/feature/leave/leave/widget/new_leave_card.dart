@@ -44,6 +44,7 @@ class LeaveCard extends StatelessWidget {
           ),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,8 +55,22 @@ class LeaveCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
-                LeaveStatusCard(),
+                LeaveStatusCard(
+                  status: leave.status,
+                ),
               ],
+            ),
+            SizedBox(height: SizeUtils.scale(4, size.width)),
+            MyText(
+              text: DateUtil.formatShortDateWithMilisecond(leave.from),
+              style: AppFonts.LabelMedium,
+            ),
+            SizedBox(height: SizeUtils.scale(4, size.width)),
+            MyText(
+              text: DateUtil.formatShortDateWithMilisecond(leave.from),
+              style: AppFonts.TitleXSmall.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             )
           ],
         ),

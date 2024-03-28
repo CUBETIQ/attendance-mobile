@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:timesync/types/attendance.dart';
+import 'package:timesync/types/leave.dart';
 
 class StringUtil {
   static String getfullname(
@@ -213,6 +214,23 @@ class StringUtil {
       return 'Early';
     } else if (status == AttendanceStatus.onTime) {
       return 'On time';
+    } else {
+      return 'Invalid status';
+    }
+  }
+
+  static String leaveStatusSimplify(String? status) {
+    if (status == null) {
+      return "N/A";
+    }
+
+    if (status == LeaveStatus.approved) {
+      return 'Approved';
+    } else if (status == LeaveStatus.pending) {
+      return 'Awaiting';
+    } else if (status == LeaveStatus.rejected ||
+        status == LeaveStatus.cancelled) {
+      return 'Declined';
     } else {
       return 'Invalid status';
     }

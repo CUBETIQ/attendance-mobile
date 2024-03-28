@@ -8,6 +8,7 @@ import 'package:timesync/feature/organization/organiziation/service/index.dart';
 import 'package:timesync/routes/app_pages.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:timesync/utils/logger.dart';
 
 class OrganizationController extends GetxController {
   static OrganizationController get to => Get.find();
@@ -31,6 +32,7 @@ class OrganizationController extends GetxController {
         id: NavigationController.to.organization.value.id!,
       );
       NavigationController.to.organization.value = organization.value;
+      Logs.i("Organization: ${organization.value.toJson()}");
     } on DioException catch (e) {
       showErrorSnackBar("Error", e.response?.data["message"]);
       rethrow;

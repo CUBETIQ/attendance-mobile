@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:timesync/utils/logger.dart';
 
 class DateUtil {
   static String formatDateTime(DateTime dateTime) {
@@ -24,6 +25,22 @@ class DateUtil {
 
     // Format the DateTime
     return formatter.format(dateTime);
+  }
+
+  static String formatShortDateWithMilisecond(int? dateTime) {
+    if (dateTime == null || dateTime.toString().length < 5) {
+      return "N/A";
+    }
+
+    // Cover milliseconds to DateTime
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(dateTime);
+
+    // Define the desired format
+    final DateFormat formatter =
+        DateFormat('EE, dd MMMM', Get.locale?.languageCode);
+
+    // Format the DateTime
+    return formatter.format(date);
   }
 
   static String formatFullDate(DateTime? dateTime) {
@@ -75,12 +92,15 @@ class DateUtil {
     return formatter.format(dateTime);
   }
 
-  static String formatTimeTo12Hour(String time, {bool? forceShowPM}) {
+  static String formatTimeTo12Hour(String time,
+      {bool? forceShowPM, bool? dontShowAMPM}) {
     // Parse the time string into a DateTime object
     DateTime dateTime = DateFormat('hh:mm').parse(time);
 
     if (forceShowPM != null && forceShowPM) {
       return "${DateFormat('hh:mm').format(dateTime)} PM";
+    } else if (dontShowAMPM != null && dontShowAMPM) {
+      return DateFormat('hh:mm').format(dateTime);
     } else {
       // Format the DateTime object into a 12-hour time format
       return DateFormat('hh:mm a').format(dateTime);
@@ -240,11 +260,16 @@ class DateUtil {
     }
 
     // Parse startHour and endHour strings into DateTime objects
-    DateTime startTime = DateFormat('hh:mm').parse(startHour);
-    DateTime endTime = DateFormat('hh:mm').parse(endHour);
+    DateTime startTime = DateFormat('HH:mm').parse(startHour);
+    DateTime endTime = DateFormat('HH:mm').parse(endHour);
+
+    Logs.i("startTime: $startTime");
+    Logs.i("endTime: $endTime");
 
     // Calculate the duration between startTime and endTime
     int duration = endTime.difference(startTime).inMinutes;
+
+    Logs.i("duration: $duration");
 
     // Format the duration as "hh:mm"
     String formattedDuration = formatMinutes(duration);

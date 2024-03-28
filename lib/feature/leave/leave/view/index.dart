@@ -12,7 +12,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/leave/leave/controller/index.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync/feature/leave/leave/widget/new_leave_card.dart';
+import 'package:timesync/feature/leave/leave/widget/leave_card.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class LeaveView extends StatelessWidget {

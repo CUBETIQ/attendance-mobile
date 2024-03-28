@@ -54,7 +54,7 @@ class LeaveCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
-                LeaveStatusCard(),
+                const LeaveStatusCard(),
               ],
             )
           ],

@@ -135,8 +135,7 @@ class LeaveRequestCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MyText(
-                        text:
-                            " ${StringUtil.removeTrailingZeros(leave.duration)}  ${(leave.duration ?? 0) < 2 ? "Day" : "Days"}",
+                        text: DateUtil.getApplicationDuration(leave.duration),
                         style: AppFonts.TitleXSmall.copyWith(
                             color: Theme.of(context).colorScheme.onBackground)),
                     MyText(

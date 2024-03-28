@@ -9,6 +9,32 @@ class DateUtil {
     return DateFormat('E, d MMMM y').format(dateTime);
   }
 
+  String formatTotalWorkMinute(int totalWorkMinutes) {
+    int days = totalWorkMinutes ~/ (60 * 24);
+    int hours = (totalWorkMinutes % (60 * 24)) ~/ 60;
+    int minutes = totalWorkMinutes % 60;
+
+    String formattedDuration = '';
+
+    if (days == 1) {
+      formattedDuration += '${days.toString()} day ';
+    } else if (days > 1) {
+      formattedDuration += '${days.toString()} days ';
+    }
+
+    if (hours == 1) {
+      formattedDuration += '${hours.toString()} hr ';
+    } else if (hours > 1 || days == 0) {
+      formattedDuration += '${hours.toString()} hrs ';
+    }
+
+    if (minutes > 0 || (days == 0 && hours == 0)) {
+      formattedDuration += '${minutes.toString()} mn';
+    }
+
+    return formattedDuration.trim();
+  }
+
   static String formatShortDate(DateTime dateTime) {
     // Define the desired format
     final DateFormat formatter =

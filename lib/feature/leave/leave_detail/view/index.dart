@@ -86,7 +86,11 @@ class LeaveDetailView extends StatelessWidget {
                             value:
                                 " ${StringUtil.removeTrailingZeros(controller.leave.value.duration)}  ${(controller.leave.value.duration ?? 0) < 2 ? "Day" : "Days"}",
                           ),
-                          const MyDivider(),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                bottom: SizeUtils.scale(20, size.width)),
+                            child: const MyDivider(),
+                          ),
                         ].withSpaceBetween(
                             height: SizeUtils.scale(20, size.width)),
                       ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/icon.dart';
 import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/widgets/attachment/attachment_card.dart';
 import 'package:timesync/core/widgets/button/back_button.dart';
+import 'package:timesync/core/widgets/button/button.dart';
 import 'package:timesync/core/widgets/divider/dividers.dart';
+import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/progress_indicator/indicator_with_percentage.dart';
 import 'package:timesync/core/widgets/row/detail_row_data.dart';
 import 'package:timesync/core/widgets/text/app_bar_title.dart';
@@ -35,9 +38,23 @@ class LeaveDetailView extends StatelessWidget {
         centerTitle: true,
         leading: const MyBackButton(),
         automaticallyImplyLeading: false,
+        actions: controller.hasButtons.value
+            ? []
+            : [
+                Padding(
+                  padding:
+                      EdgeInsets.only(right: SizeUtils.scale(20, size.width)),
+                  child: SvgIcon(
+                    icon: IconAssets.edit,
+                    height: SizeUtils.scale(20, size.width),
+                    width: SizeUtils.scale(20, size.width),
+                  ),
+                ),
+              ],
       ),
-      body: SizedBox(
+      body: Container(
         height: size.height,
+        color: Theme.of(context).colorScheme.inverseSurface,
         child: Padding(
           padding: EdgeInsets.all(SizeUtils.scale(20, size.width)),
           child: Column(
@@ -68,7 +85,8 @@ class LeaveDetailView extends StatelessWidget {
                           ),
                           DetailRowData(
                             title: "Status",
-                            value: (controller.leave.value.status ?? "")
+                            value: StringUtil.leaveStatusSimplify(
+                                    controller.leave.value.status)
                                 .capitalizeFirst,
                           ),
                           controller.leave.value.status == LeaveStatus.pending
@@ -84,6 +102,8 @@ class LeaveDetailView extends StatelessWidget {
                                       controller.leave.value.updateBy?.lastName,
                                       controller
                                           .leave.value.updateBy?.username),
+                                  valueColor:
+                                      Theme.of(context).colorScheme.primary,
                                 ),
                           DetailRowData(
                             title: "From",
@@ -205,11 +225,8 @@ class LeaveDetailView extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(
                                 bottom: SizeUtils.scale(12, size.width)),
-                            child: SmallButton(
+                            child: MyButton(
                               title: "Approve",
-                              textStyle: AppFonts.TitleSmall.copyWith(
-                                  color: Colors.white),
-                              size: size,
                               onTap: () => AdminLeaveRequestController.to
                                   .changeLeaveStatus(
                                       leave: controller.leave.value,
@@ -218,11 +235,8 @@ class LeaveDetailView extends StatelessWidget {
                                   Theme.of(context).colorScheme.primary,
                             ),
                           ),
-                          SmallButton(
+                          MyButton(
                             title: "Decline",
-                            textStyle: AppFonts.TitleSmall.copyWith(
-                                color: Colors.white),
-                            size: size,
                             onTap: () => AdminLeaveRequestController.to
                                 .changeLeaveStatus(
                                     leave: controller.leave.value,

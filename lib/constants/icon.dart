@@ -18,6 +18,7 @@ class IconAssets {
   static const String document = 'assets/icons/document.svg';
   static const String dotsHorizontal = 'assets/icons/dots_horizontal.svg';
   static const String dotsVertical = 'assets/icons/dots_vertical.svg';
+  static const String delete = 'assets/icons/delete.svg';
   static const String edit = 'assets/icons/edit.svg';
   static const String heart = 'assets/icons/heart.svg';
   static const String home = 'assets/icons/home.svg';
@@ -41,4 +42,6 @@ class IconAssets {
   static const String visible = 'assets/icons/visible.svg';
   static const String zap = 'assets/icons/zap.svg';
   static const String xClose = 'assets/icons/x_close.svg';
+  static const String paperClip = 'assets/icons/paper_clip.svg';
+  static const String paperUpload = 'assets/icons/paper_upload.svg';
 }

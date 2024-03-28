@@ -20,6 +20,7 @@ class SvgUtil {
       'txt': SvgAssets.fileIconTxt,
       'xls': SvgAssets.fileIconXls,
       'heic': SvgAssets.fileIconJpg,
+      'jpg': SvgAssets.fileIconJpg,
     };
 
     final entry = svgMap.entries

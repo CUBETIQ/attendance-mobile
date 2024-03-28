@@ -137,8 +137,8 @@ class MainScreen extends StatelessWidget {
           ),
         ),
         floatingActionButton: SizedBox(
-          height: SizeUtils.scale(40, size.width),
-          width: SizeUtils.scale(40, size.width),
+          height: SizeUtils.scale(48, size.width),
+          width: SizeUtils.scale(48, size.width),
           child: Obx(
             () => controller.selectedIndex.value != 2 &&
                     controller.selectedIndex.value != 3

@@ -71,6 +71,20 @@ class LeaveDetailView extends StatelessWidget {
                             value: (controller.leave.value.status ?? "")
                                 .capitalizeFirst,
                           ),
+                          controller.leave.value.status == LeaveStatus.pending
+                              ? const SizedBox.shrink()
+                              : DetailRowData(
+                                  title: controller.leave.value.status ==
+                                          LeaveStatus.approved
+                                      ? "Approved By"
+                                      : "Declined By",
+                                  value: StringUtil.getfullname(
+                                      controller
+                                          .leave.value.updateBy?.firstName,
+                                      controller.leave.value.updateBy?.lastName,
+                                      controller
+                                          .leave.value.updateBy?.username),
+                                ),
                           DetailRowData(
                             title: "From",
                             value:
@@ -91,7 +105,7 @@ class LeaveDetailView extends StatelessWidget {
                                 bottom: SizeUtils.scale(20, size.width)),
                             child: const MyDivider(),
                           ),
-                        ].withSpaceBetween(
+                        ].withSpaceBetweenNoSizedBox(
                             height: SizeUtils.scale(20, size.width)),
                       ),
                       MyText(

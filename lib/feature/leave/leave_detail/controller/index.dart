@@ -12,6 +12,7 @@ class LeaveDetailController extends GetxController {
     super.onInit();
     leave.value = Get.arguments['leave'];
     hasButtons.value = Get.arguments['hasButtons'];
+
   }
 
   bool checkExistFile(int index) {

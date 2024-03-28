@@ -294,6 +294,22 @@ class DateUtil {
       timer?.cancel();
     });
   }
+
+  static String getApplicationDuration(double? input) {
+    if (input == null) {
+      return '0 day application';
+    }
+
+    if (input == 0.5) {
+      return 'Half Day Application';
+    } else if (input == 1) {
+      return 'Full Day Application';
+    } else if (input >= 2) {
+      return '${input.toStringAsFixed(0)} Days Application';
+    } else {
+      return 'Invalid input';
+    }
+  }
 }
 
 /////////////////////////////////

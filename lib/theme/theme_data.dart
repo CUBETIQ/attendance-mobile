@@ -54,11 +54,10 @@ const ColorScheme flexSchemeLight = ColorScheme(
   outlineVariant: Color(0xff7c7c7c),
   shadow: Color(0xff000000),
   scrim: Color(0xff000000),
-  inverseSurface: Color(0xff121215),
-  onInverseSurface: Color(0xfff5f5f5),
+  inverseSurface: MyColor.base2,
+  onInverseSurface: MyColor.onBackground,
   inversePrimary: Color.fromARGB(255, 218, 208, 255),
   surfaceTint: Color(0xff4355b9),
-  
 );
 
 // Dark theme

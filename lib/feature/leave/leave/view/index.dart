@@ -12,7 +12,7 @@ import 'package:timesync/core/widgets/text/text.dart';
 import 'package:timesync/extensions/string.dart';
 import 'package:timesync/feature/leave/leave/controller/index.dart';
 import 'package:flutter/material.dart';
-import 'package:timesync/feature/leave/leave/widget/leave_card.dart';
+import 'package:timesync/feature/leave/leave/widget/new_leave_card.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class LeaveView extends StatelessWidget {
@@ -25,7 +25,8 @@ class LeaveView extends StatelessWidget {
       onRefresh: () async {
         controller.onRefresh();
       },
-      child: SizedBox(
+      child: Container(
+        color: Theme.of(context).colorScheme.inverseSurface,
         height: size.height,
         child: Padding(
           padding: EdgeInsets.only(
@@ -141,9 +142,9 @@ class LeaveView extends StatelessWidget {
                             controller.leaves[index],
                           ),
                           leave: controller.leaves[index],
-                          onTapView: () => controller.onTapView(index),
-                          onTapCancel: () =>
-                              controller.onTapCancel(controller.leaves[index]),
+                          // onTapView: () => controller.onTapView(index),
+                          // onTapCancel: () =>
+                          //     controller.onTapCancel(controller.leaves[index]),
                         );
                       },
                     ),

@@ -23,7 +23,7 @@ class MyColor {
 
   // App Color Scheme
   static const Color scaffoldBackground = Color(0xFFFFFFFF);
-  static const Color onBackground = Color(0xff24262B);
+  static const Color onBackground = Color(0xff24262B); // primary text color
   static const Color primary = Color(0xff633FE8);
   static const Color onPrimary = Color(0xFFFFFFFF);
   static const Color success = Color(0xff3BBA6A);
@@ -35,13 +35,19 @@ class MyColor {
   static const Color secondaryIndigo = Color(0xff48AFFA);
   static const Color secondaryRed = Color(0xffD85681);
   static const Color primaryContainer = Color(0xffF1ECFF);
-  static const Color onSurfaceVariant = Color(0xff6B7180);
+  static const Color onSurfaceVariant =
+      Color(0xff6B7180); // secondary text color
 
   // App Gradient Color Scheme
   static const LinearGradient gradient01 = LinearGradient(
     colors: [Color(0xFFCE9FFC), Color(0xFF7367F0)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
+  );
+  static const LinearGradient gradient02 = LinearGradient(
+    colors: [Color(0xFF9796F0), Color(0xFFFBC7D4)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
   );
 
   // Theme Color Name

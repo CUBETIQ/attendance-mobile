@@ -1,8 +1,8 @@
+import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class MyCacheImage extends StatelessWidget {
@@ -37,7 +37,7 @@ class MyCacheImage extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   shape: isRounded ? BoxShape.circle : BoxShape.rectangle,
-                  color: Theme.of(Get.context!).colorScheme.primary,
+                  gradient: MyColor.gradient02,
                 ),
                 child: SizedBox(
                   width: imageWidth ?? width ?? SizeUtils.scale(55, getWidth),
@@ -56,8 +56,7 @@ class MyCacheImage extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     shape: isRounded ? BoxShape.circle : BoxShape.rectangle,
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                    gradient: MyColor.gradient02,
                     image: DecorationImage(
                       image: imageProvider,
                       fit: BoxFit.cover,
@@ -94,10 +93,9 @@ class MyCacheImage extends StatelessWidget {
                   height: height ?? 55,
                   clipBehavior: Clip.antiAlias,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                    gradient: MyColor.gradient02,
                   ),
                   child: SizedBox(
                     child: SvgPicture.asset(
@@ -111,9 +109,9 @@ class MyCacheImage extends StatelessWidget {
             height: height ?? 55,
             clipBehavior: Clip.antiAlias,
             alignment: Alignment.center,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+              gradient: MyColor.gradient02,
             ),
             child: SizedBox(
               width: imageWidth ?? width ?? 55,

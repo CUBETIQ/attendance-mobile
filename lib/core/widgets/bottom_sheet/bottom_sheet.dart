@@ -9,6 +9,8 @@ import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
 import 'package:timesync/constants/icon.dart';
 import 'package:timesync/constants/svg.dart';
+import 'package:timesync/core/model/attachment_model.dart';
+import 'package:timesync/core/widgets/attachment/upload_button.dart';
 import 'package:timesync/core/widgets/button/async_button.dart';
 import 'package:timesync/core/widgets/button/button.dart';
 import 'package:timesync/core/widgets/check_box/check_box.dart';
@@ -43,11 +45,14 @@ void getAddTaskBottomSheet(
   final status = [TaskFilter.pending, TaskFilter.completed];
 
   final addDescription = false.obs;
+  final addAttachment = false.obs;
   final isUrgent = false.obs;
 
   TextEditingController? taskController = TextEditingController();
   TextEditingController? descriptionController = TextEditingController();
   final dateTimeRange = Rxn<DateTimeRange>();
+
+  final files = RxList<AttachmentModel>([]);
 
   Get.bottomSheet(
       isDismissible: isDismissible ?? true,
@@ -65,264 +70,328 @@ void getAddTaskBottomSheet(
           padding: EdgeInsets.all(
             SizeUtils.scale(20, size.width),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: MyText(
-                        text: 'Add Task',
-                        style: AppFonts.TitleMedium.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground)),
-                  ),
-                  Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () => Get.back(),
-                        child: Container(
-                            height: SizeUtils.scale(48, size.width),
-                            width: SizeUtils.scale(48, size.width),
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                border: Border.all(color: MyColor.base5),
-                                borderRadius:
-                                    BorderRadius.circular(AppSpacing.L)),
-                            child: SvgIcon(
-                              icon: IconAssets.xClose,
-                              height: SizeUtils.scale(10.5, size.width),
-                              width: SizeUtils.scale(10.5, size.width),
-                              color: Theme.of(context).colorScheme.onBackground,
-                            )),
-                      ))
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: SizeUtils.scale(24, size.width)),
-                child: Column(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Stack(
+                  alignment: Alignment.center,
                   children: [
-                    MyTextFieldForm(
-                      label: 'Task',
-                      hintText: "Enter your task",
-                      textController: taskController,
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: MyText(
+                          text: 'Add Task',
+                          style: AppFonts.TitleMedium.copyWith(
+                              color:
+                                  Theme.of(context).colorScheme.onBackground)),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: SizeUtils.scale(24, size.width),
-                              width: SizeUtils.scale(24, size.width),
-                              child: Obx(() => MyCheckBox(
-                                    isChecked: isUrgent.value,
-                                    hasNoBackground: true,
-                                    onTap: () {
-                                      isUrgent.value = !isUrgent.value;
-                                    },
-                                  )),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: SizeUtils.scale(8, size.width)),
-                              child: MyText(
-                                  text: "Urgent",
-                                  style: AppFonts.TitleSmall.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            MyText(
-                              text: "Status",
-                              style: AppFonts.LabelMedium.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground),
-                            ),
-                            Obx(() => MyDropDownButton<String>(
-                                  width: SizeUtils.scale(120, size.width),
-                                  borderColor:
-                                      Theme.of(context).colorScheme.primary,
-                                  buttonPadding: EdgeInsets.only(
-                                      bottom: SizeUtils.scale(6, size.width)),
-                                  dropdownPadding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          SizeUtils.scale(10, size.width)),
-                                  buttonDecoration: const BoxDecoration(),
-                                  label: "Type",
-                                  hasLabel: false,
-                                  value: selectedStatus.value,
-                                  hint: "Choose Type",
-                                  dropdownItems: status
-                                      .map(
-                                        (e) => DropdownMenuItem<String>(
-                                          value: e,
-                                          child: MyText(
-                                            text: e.trString,
-                                            style: AppFonts.TitleSmall.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onBackground,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
-                                  onChanged: (value) {
-                                    selectedStatus.value = value!;
-                                  },
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Divider(
-                        height: SizeUtils.scale(1, size.width),
-                        color: MyColor.base4),
-                    GestureDetector(
-                      onTap: () async {
-                        final DateTimeRange? picked = await showDateRangePicker(
-                          context: context,
-                          initialDateRange: dateTimeRange.value,
-                          firstDate: DateTime(2015, 8),
-                          lastDate: DateTime(2101),
-                          locale: Get.locale,
-                          helpText: 'Depart - Return dates',
-                          cancelText: 'Cancel',
-                          confirmText: 'Ok',
-                          builder: (BuildContext context, Widget? child) {
-                            return Theme(
-                              data: ThemeData.light().copyWith(
-                                colorScheme: ColorScheme.light(
-                                  primary:
-                                      Theme.of(context).colorScheme.primary,
-                                  onPrimary:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  surface:
-                                      Theme.of(context).colorScheme.surface,
-                                  onSurface:
-                                      Theme.of(context).colorScheme.onSurface,
-                                ),
-                                dialogBackgroundColor:
-                                    Theme.of(context).colorScheme.surface,
-                              ),
-                              child: child!,
-                            );
-                          },
-                        );
-                        if (picked != null) {
-                          dateLabel.value =
-                              '${DateUtil.formatMillisecondsToDOB(picked.start.millisecondsSinceEpoch)} - ${DateUtil.formatMillisecondsToDOB(picked.end.millisecondsSinceEpoch)}';
-                          dateTimeRange.value = picked;
-                        }
-                      },
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            SvgIcon(
-                                icon: IconAssets.calendar,
+                    Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Container(
+                              height: SizeUtils.scale(48, size.width),
+                              width: SizeUtils.scale(48, size.width),
+                              decoration: BoxDecoration(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  border: Border.all(color: MyColor.base5),
+                                  borderRadius:
+                                      BorderRadius.circular(AppSpacing.L)),
+                              child: SvgIcon(
+                                icon: IconAssets.xClose,
+                                height: SizeUtils.scale(10.5, size.width),
+                                width: SizeUtils.scale(10.5, size.width),
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              )),
+                        ))
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: SizeUtils.scale(24, size.width)),
+                  child: Column(
+                    children: [
+                      MyTextFieldForm(
+                        label: 'Task',
+                        hintText: "Enter your task",
+                        textController: taskController,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(
                                 height: SizeUtils.scale(24, size.width),
                                 width: SizeUtils.scale(24, size.width),
-                                color:
-                                    Theme.of(context).colorScheme.onBackground),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: SizeUtils.scale(8, size.width)),
-                              child: Obx(() => MyText(
-                                    text: dateLabel.value ?? 'Add Dates',
+                                child: Obx(() => MyCheckBox(
+                                      isChecked: isUrgent.value,
+                                      hasNoBackground: true,
+                                      onTap: () {
+                                        isUrgent.value = !isUrgent.value;
+                                      },
+                                    )),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: SizeUtils.scale(8, size.width)),
+                                child: MyText(
+                                    text: "Urgent",
                                     style: AppFonts.TitleSmall.copyWith(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .onBackground),
+                                            .onBackground)),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              MyText(
+                                text: "Status",
+                                style: AppFonts.LabelMedium.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                              ),
+                              Obx(() => MyDropDownButton<String>(
+                                    width: SizeUtils.scale(120, size.width),
+                                    borderColor:
+                                        Theme.of(context).colorScheme.primary,
+                                    buttonPadding: EdgeInsets.only(
+                                        bottom: SizeUtils.scale(6, size.width)),
+                                    dropdownPadding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            SizeUtils.scale(10, size.width)),
+                                    buttonDecoration: const BoxDecoration(),
+                                    label: "Type",
+                                    hasLabel: false,
+                                    value: selectedStatus.value,
+                                    hint: "Choose Type",
+                                    dropdownItems: status
+                                        .map(
+                                          (e) => DropdownMenuItem<String>(
+                                            value: e,
+                                            child: MyText(
+                                              text: e.trString,
+                                              style:
+                                                  AppFonts.TitleSmall.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                    onChanged: (value) {
+                                      selectedStatus.value = value!;
+                                    },
                                   )),
-                            )
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ),
-                    Divider(
-                        height: SizeUtils.scale(1, size.width),
-                        color: MyColor.base4),
-                    GestureDetector(
-                      onTap: () {
-                        addDescription.value = true;
-                      },
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Obx(() {
-                              return addDescription.value == true
-                                  ? const SizedBox.shrink()
-                                  : Padding(
-                                      padding: EdgeInsets.only(
-                                          right:
-                                              SizeUtils.scale(8, size.width)),
-                                      child: SvgIcon(
-                                          icon: IconAssets.document,
-                                          height:
-                                              SizeUtils.scale(24, size.width),
-                                          width:
-                                              SizeUtils.scale(24, size.width),
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onBackground),
-                                    );
-                            }),
-                            MyText(
-                              text: 'Add Description',
-                              style: AppFonts.TitleSmall.copyWith(
+                      Divider(
+                          height: SizeUtils.scale(1, size.width),
+                          color: MyColor.base4),
+                      GestureDetector(
+                        onTap: () async {
+                          final DateTimeRange? picked =
+                              await showDateRangePicker(
+                            context: context,
+                            initialDateRange: dateTimeRange.value,
+                            firstDate: DateTime(2015, 8),
+                            lastDate: DateTime(2101),
+                            locale: Get.locale,
+                            helpText: 'Depart - Return dates',
+                            cancelText: 'Cancel',
+                            confirmText: 'Ok',
+                            builder: (BuildContext context, Widget? child) {
+                              return Theme(
+                                data: ThemeData.light().copyWith(
+                                  colorScheme: ColorScheme.light(
+                                    primary:
+                                        Theme.of(context).colorScheme.primary,
+                                    onPrimary:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    surface:
+                                        Theme.of(context).colorScheme.surface,
+                                    onSurface:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
+                                  dialogBackgroundColor:
+                                      Theme.of(context).colorScheme.surface,
+                                ),
+                                child: child!,
+                              );
+                            },
+                          );
+                          if (picked != null) {
+                            dateLabel.value =
+                                '${DateUtil.formatMillisecondsToDOB(picked.start.millisecondsSinceEpoch)} - ${DateUtil.formatMillisecondsToDOB(picked.end.millisecondsSinceEpoch)}';
+                            dateTimeRange.value = picked;
+                          }
+                        },
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SvgIcon(
+                                  icon: IconAssets.calendar,
+                                  height: SizeUtils.scale(24, size.width),
+                                  width: SizeUtils.scale(24, size.width),
                                   color: Theme.of(context)
                                       .colorScheme
                                       .onBackground),
-                            )
-                          ],
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: SizeUtils.scale(8, size.width)),
+                                child: Obx(() => MyText(
+                                      text: dateLabel.value ?? 'Add Dates',
+                                      style: AppFonts.TitleSmall.copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground),
+                                    )),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Obx(() {
-                      return addDescription.value == true
-                          ? MyTextFieldForm(
-                              label: "Description",
-                              hintText: "Enter your task description",
-                              textController: descriptionController,
-                              maxlines: 5,
-                            )
-                          : const SizedBox.shrink();
-                    }),
-                    MyAsyncButton(
-                      title: "Add Task",
-                      onTap: () {
-                        if (MyTextFieldFormController.findController('Task')
-                            .isValid) {
-                          return onAddTask(
-                              taskController: taskController,
-                              descriptionController: descriptionController,
-                              dateTimeRange: dateTimeRange.value,
-                              isUrgent: isUrgent.value,
-                              selectedStatus: selectedStatus.value);
-                        } else {
-                          return Future.value();
-                        }
-                      },
-                      hasShadow: true,
-                    ),
-                  ].withSpaceBetweenNoSizedBox(
-                    height: SizeUtils.scale(16, size.width),
+                      Divider(
+                          height: SizeUtils.scale(1, size.width),
+                          color: MyColor.base4),
+                      GestureDetector(
+                        onTap: () {
+                          addDescription.value = true;
+                        },
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Obx(() {
+                                return addDescription.value == true
+                                    ? const SizedBox.shrink()
+                                    : Padding(
+                                        padding: EdgeInsets.only(
+                                            right:
+                                                SizeUtils.scale(8, size.width)),
+                                        child: SvgIcon(
+                                            icon: IconAssets.document,
+                                            height:
+                                                SizeUtils.scale(24, size.width),
+                                            width:
+                                                SizeUtils.scale(24, size.width),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground),
+                                      );
+                              }),
+                              MyText(
+                                text: 'Add Description',
+                                style: AppFonts.TitleSmall.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        child: Obx(() {
+                          return addDescription.value == true
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: SizeUtils.scale(20, size.width)),
+                                  child: MyTextFieldForm(
+                                    label: "Description",
+                                    hintText: "Enter your task description",
+                                    textController: descriptionController,
+                                    maxlines: 5,
+                                  ),
+                                )
+                              : const SizedBox.shrink();
+                        }),
+                      ),
+                      Divider(
+                          height: SizeUtils.scale(1, size.width),
+                          color: MyColor.base4),
+                      GestureDetector(
+                        onTap: () {
+                          addAttachment.value = true;
+                        },
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Obx(() {
+                                return addAttachment.value == true
+                                    ? const SizedBox.shrink()
+                                    : Padding(
+                                        padding: EdgeInsets.only(
+                                            right:
+                                                SizeUtils.scale(8, size.width)),
+                                        child: SvgIcon(
+                                            icon: IconAssets.paperClip,
+                                            height:
+                                                SizeUtils.scale(24, size.width),
+                                            width:
+                                                SizeUtils.scale(24, size.width),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground),
+                                      );
+                              }),
+                              MyText(
+                                text: 'Attachments',
+                                style: AppFonts.TitleSmall.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        child: Obx(() {
+                          return addAttachment.value == false
+                              ? const SizedBox.shrink()
+                              : Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: SizeUtils.scale(24, size.width)),
+                                  child: UploadAttachmentButton(files: files));
+                        }),
+                      ),
+                      MyAsyncButton(
+                        title: "Add Task",
+                        onTap: () {
+                          if (MyTextFieldFormController.findController('Task')
+                              .isValid) {
+                            return onAddTask(
+                                taskController: taskController,
+                                descriptionController: descriptionController,
+                                dateTimeRange: dateTimeRange.value,
+                                isUrgent: isUrgent.value,
+                                selectedStatus: selectedStatus.value);
+                          } else {
+                            return Future.value();
+                          }
+                        },
+                        hasShadow: true,
+                      ),
+                    ].withSpaceBetweenNoSizedBox(
+                        height: SizeUtils.scale(16, size.width)),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ));

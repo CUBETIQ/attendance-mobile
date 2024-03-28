@@ -2,12 +2,15 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:timesync/constants/app_size.dart';
+import 'package:timesync/constants/color.dart';
 import 'package:timesync/constants/font.dart';
+import 'package:timesync/constants/icon.dart';
 import 'package:timesync/core/model/attachment_model.dart';
 import 'package:timesync/core/widgets/attachment/attachment_card.dart';
 import 'package:timesync/core/widgets/bottom_sheet/bottom_sheet.dart';
+import 'package:timesync/core/widgets/icon/svg_icon.dart';
 import 'package:timesync/core/widgets/text/text.dart';
+import 'package:timesync/extensions/string.dart';
 import 'package:timesync/utils/size_util.dart';
 
 class UploadAttachmentButton extends StatelessWidget {
@@ -39,94 +42,105 @@ class UploadAttachmentButton extends StatelessWidget {
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: files.length > 2
-                ? null
-                : () {
-                    getPickAttachmentButtomSheet(
-                      context,
-                      onTapGallery: (file) {
-                        AttachmentModel attachment =
-                            AttachmentModel(file: file);
-                        files.add(attachment);
-                      },
-                      onTapCamera: (file) {
-                        AttachmentModel attachment =
-                            AttachmentModel(file: file);
-                        files.add(attachment);
-                      },
-                      onTapFile: (file) {
-                        AttachmentModel attachment =
-                            AttachmentModel(file: file);
-                        files.add(attachment);
-                      },
-                    );
-                  },
-            child: DottedBorder(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-              strokeWidth: dotStrokeWidth ?? 3.5,
-              borderType: BorderType.RRect,
-              radius: dotRadius ??
-                  Radius.circular(
-                    SizeUtils.scale(
-                      AppSize().borderRadiusMedium,
-                      size.width,
+          Padding(
+            padding: EdgeInsets.only(bottom: SizeUtils.scale(12, size.width)),
+            child: GestureDetector(
+              onTap: files.length > 2
+                  ? null
+                  : () {
+                      getPickAttachmentButtomSheet(
+                        context,
+                        onTapGallery: (file) {
+                          AttachmentModel attachment =
+                              AttachmentModel(file: file);
+                          files.add(attachment);
+                        },
+                        onTapCamera: (file) {
+                          AttachmentModel attachment =
+                              AttachmentModel(file: file);
+                          files.add(attachment);
+                        },
+                        onTapFile: (file) {
+                          AttachmentModel attachment =
+                              AttachmentModel(file: file);
+                          files.add(attachment);
+                        },
+                      );
+                    },
+              child: DottedBorder(
+                color: Theme.of(context).colorScheme.primary,
+                strokeWidth: dotStrokeWidth ?? 2.5,
+                borderType: BorderType.RRect,
+                radius: Radius.circular(
+                  SizeUtils.scale(12, size.width),
+                ),
+                dashPattern: dashPattern ?? const [1, 8],
+                strokeCap: StrokeCap.square,
+                child: Container(
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    color: MyColor.base2,
+                    borderRadius: BorderRadius.circular(
+                      SizeUtils.scale(12, size.width),
                     ),
                   ),
-              dashPattern: dashPattern ?? const [1, 8],
-              strokeCap: StrokeCap.round,
-              child: Container(
-                width: width ?? size.width,
-                height: height ?? SizeUtils.scale(120, size.width),
-                decoration: BoxDecoration(
-                  color:
-                      Theme.of(context).colorScheme.primary.withOpacity(0.08),
-                  borderRadius: childBorderRadius ??
-                      BorderRadius.circular(
-                        SizeUtils.scale(
-                          AppSize().borderRadiusMedium,
-                          size.width,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: SizeUtils.scale(16, size.width),
+                        vertical: SizeUtils.scale(12, size.width)),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: SizeUtils.scale(8, size.width)),
+                          child: SvgIcon(
+                              icon: IconAssets.paperUpload,
+                              height: SizeUtils.scale(21.43, size.width),
+                              width: SizeUtils.scale(18.15, size.width),
+                              color: Theme.of(context).colorScheme.primary),
                         ),
-                      ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.upload_file,
-                      color: Theme.of(context).colorScheme.primary,
-                      size: iconSize ?? SizeUtils.scale(40, size.width),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                  text: "${"Browse".trString} ",
+                                  style: AppFonts.LabelMedium.copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "files to upload".trString,
+                                  style: AppFonts.LabelMedium.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
+                                ),
+                              ]),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: SizeUtils.scale(4, size.width)),
+                              child: MyText(
+                                text: "You can upload up to 3 files.",
+                                style: AppFonts.BodyXSmall.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    MyText(
-                      text: "Upload your files here",
-                      style: AppFonts().bodyMediumRegular.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                    ),
-                    MyText(
-                      text: "Browse",
-                      style: AppFonts().bodyLargeSemi.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                            decoration: TextDecoration.underline,
-                            decorationColor:
-                                Theme.of(context).colorScheme.primary,
-                          ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-          SizedBox(height: SizeUtils.scale(files.isEmpty ? 0 : 10, size.width)),
-          files.isEmpty
-              ? const SizedBox.shrink()
-              : MyText(
-                  text: "Max File: ${files.length}/3",
-                  style: AppFonts().bodyLarge.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                ),
-          SizedBox(height: SizeUtils.scale(10, size.width)),
           ...List.generate(
             files.value.length,
             (index) => AttachmentCard(

@@ -52,8 +52,8 @@ class LeaveDetailView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           MyText(
-                            text:
-                                "${controller.leave.value.duration} Application",
+                            text: DateUtil.getApplicationDuration(
+                                controller.leave.value.duration),
                             style: AppFonts.TitleMedium.copyWith(
                                 color:
                                     Theme.of(context).colorScheme.onBackground),
